@@ -236,7 +236,7 @@ def create_code_box(
                     demo_name,
                     span(
                         create_edit_link(
-                            python_module_path, __file__, ["/demos/ant_demo_extra.css"]
+                            module_path, __file__, css=["/demos/ant_demo_extra.css"]
                         ),
                         className="anticon anticon-edit",
                     ),
