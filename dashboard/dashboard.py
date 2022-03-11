@@ -3,13 +3,10 @@ from reflect_antd import Menu, Col, Row
 from reflect_html import div, img
 from reflect_rcdock import DockLayoutReflect
 
-from demos.stocks_history.stocks_history import (
-    DEFAULT_TICKER,
-    content as stock_history_content,
-)
-from demos.stock_prices.main import content as stock_content
-from demos.yahoofinancelive.main import content as yf_demo
-from demos.altair.car_data_set import content as altair_content
+from demos.stocks_history.stocks_history import App as StockHistoryApp
+from demos.stock_prices.main import App as StockApp
+from demos.yahoofinancelive.main import App as YahooFinanceApp
+from demos.altair.car_data_set import App as AltairApp
 
 TITLE = "Dashboard"
 DEFAULT_TICKERS = ["AMZN"]
@@ -35,7 +32,6 @@ DEFAULT_LIVE_FX_TICKERS = [
 
 class App:
     def __init__(self):
-        window = get_window()
         defaultLayout = {
             "dockbox": {
                 "mode": "horizontal",
@@ -44,20 +40,20 @@ class App:
                         "mode": "vertical",
                         "children": [
                             {
-                                "tabs": [stock_history_content(ticker, False)],
+                                "tabs": [StockHistoryApp(ticker, False)],
                             }
                             for ticker in DEFAULT_TICKERS
                         ]
                         + [
                             {
-                                "tabs": [altair_content()],
+                                "tabs": [AltairApp()],
                             }
                         ],
                     },
                     {
                         "tabs": [
                             # dict(title="Cars", content=altair_app()),
-                            stock_content("nyse"),
+                            StockApp("nyse"),
                         ],
                     },
                 ],
@@ -73,17 +69,11 @@ class App:
 
         async def create_stocks_callback(market):
             await self.dock_layout.insert_component(
-                settings_visible=False, **stock_content(market)
+                StockApp(market), settings_visible=False
             )
 
-        async def create_live_quotes_callback(tickers, title):
-            demo = yf_demo(window, tickers)
-            await self.dock_layout.insert_component(
-                title=title,
-                content=demo["content"],
-                settings=demo["settings"],
-                ok=demo["ok"],
-            )
+        async def create_live_quotes_callback(tickers):
+            await self.dock_layout.insert_component(YahooFinanceApp(tickers))
 
         menu = Menu(
             [
@@ -93,12 +83,12 @@ class App:
                             [
                                 Menu.Item(
                                     "Stock history",
-                                    onClick=self.add_stock_history_content,
+                                    onClick=self.add_StockHistoryApp,
                                 ),
                                 Menu.Item(
                                     "Altair car dataset",
                                     onClick=lambda: self.dock_layout.insert_component(
-                                        **altair_content(),
+                                        AltairApp(),
                                     ),
                                 ),
                             ],
@@ -124,7 +114,7 @@ class App:
                         Menu.Item(
                             "FX live quotes",
                             onClick=lambda: create_live_quotes_callback(
-                                DEFAULT_LIVE_FX_TICKERS, "Live quotes"
+                                DEFAULT_LIVE_FX_TICKERS
                             ),
                         ),
                     ],
@@ -164,9 +154,10 @@ class App:
             ),
         )
 
-    async def add_stock_history_content(self):
+    async def add_StockHistoryApp(self):
         await self.dock_layout.insert_component(
-            settings_visible=True, **stock_history_content("AAPL", False)
+            StockHistoryApp("AAPL", False),
+            settings_visible=True,
         )
 
 

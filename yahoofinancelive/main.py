@@ -1,4 +1,3 @@
-import asyncio
 import base64
 from json import dumps, loads
 from typing import Iterable, List
@@ -67,13 +66,12 @@ MENU_ITEMS = [
 class App:
     def __init__(
         self,
-        window: Window,
         initial_tickers: List[str],
     ) -> None:
         self.initial_tickers = initial_tickers
-        self.window = window
-        self.quote_manager = YFLiveQuoteManager(window)
-        self.grid = AgGridReact(
+        self.window = get_window()
+        self.quote_manager = YFLiveQuoteManager(self.window)
+        self.content = AgGridReact(
             [
                 AgGridColumn(field=field, **args)
                 for field, (_formatter, args) in COLUMNS
@@ -85,18 +83,20 @@ class App:
         )
         self.settings = Input(
             placeholder="Enter ticker here",
-            onPressEnter=self.onFinish,
+            onPressEnter=self.ok,
             style=dict(width=120),
         )
+        self.cancel = self.ok
+        self.title = "Yahoo live quotes"
 
-    async def onFinish(self):
+    async def ok(self):
         new_ticker = self.settings()
         if new_ticker:
             await self.add_tickers([new_ticker])
             self.settings.set("")
 
     async def add_tickers(self, tickers):
-        await self.grid.applyTransactionAsync(
+        await self.content.applyTransactionAsync(
             {"add": [{"id": ticker} for ticker in tickers]}
         )
         self.quote_manager.add_tickers(tickers)
@@ -106,13 +106,13 @@ class App:
             if code == "remove quote":
                 ticker = data[0]
                 await self.quote_manager.remove_ticker(ticker)
-                await self.grid.applyTransactionAsync({"remove": [{"id": ticker}]})
+                await self.content.applyTransactionAsync({"remove": [{"id": ticker}]})
 
     async def main(self):
         self.window.start_soon(self.process_messages_from_client)
         await self.add_tickers(self.initial_tickers)
         async for update in self.quote_manager.updates():
-            await self.grid.applyTransactionAsync(
+            await self.content.applyTransactionAsync(
                 {
                     "update": [
                         {
@@ -124,22 +124,11 @@ class App:
             )
 
 
-def content(window: Window, initial_tickers: List[str]):
-    application = App(window, initial_tickers[:])
-    return {
-        "content": application.grid,
-        "settings": application.settings,
-        "ok": application.onFinish,
-        "cancel": application.onFinish,
-    }
-
-
 def app():
-    window = get_window()
-    initial_tickers = loads(window.hash())
-    app = App(window, initial_tickers)
+    hash_argument = get_window().hash()
+    app = App(loads(hash_argument) if hash_argument else [])
     return div(
-        [app.settings, app.grid],
+        [app.settings, app.content],
         style=dict(height="calc(100% - 35px)"),  #  -> full screen
         # style=dict(height="400px")
     )

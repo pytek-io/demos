@@ -292,6 +292,8 @@ class App:
             [title, plot] if stand_alone else [plot],
             style={"height": "100%"},
         )
+        self.ok = self.controller.commit
+        self.cancel = self.controller.revert
 
     def settings(self):
         return Col(
@@ -303,12 +305,6 @@ class App:
                 self.signals_settings,
             ]
         )
-
-    def ok(self):
-        self.controller.commit()
-
-    def cancel(self):
-        self.controller.revert()
 
     def title(self):
         return self.ticker_autocomplete.evaluate() or DEFAULT_TICKER
