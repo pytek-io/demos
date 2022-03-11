@@ -1,10 +1,10 @@
-from reflect_html import *
+from reflect_html import div
 from reflect_antd import Avatar
 from reflect_ant_icons import UserOutlined
 
 
 def app():
-    return [
+    return div([
         div(
             [
                 Avatar(size=64, icon=UserOutlined([])),
@@ -21,4 +21,4 @@ def app():
                 Avatar(shape="square", size="small", icon=UserOutlined([])),
             ]
         ),
-    ]
+    ])

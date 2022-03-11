@@ -1,8 +1,6 @@
-from reflect_rcdock import DockLayoutReflect
+from reflect_rcdock import DockLayout
 from reflect_html import img
 from itertools import count
-
-CSS = ["static/antd.css"]
 
 
 def create_content(file_name):
@@ -47,7 +45,7 @@ def app():
             ],
         }
     }
-    return DockLayoutReflect(
+    return DockLayout(
         defaultLayout=defaultLayout,
         style={
             "width": "100%",
