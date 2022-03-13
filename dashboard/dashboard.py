@@ -1,8 +1,7 @@
-from reflect import get_window
-from reflect_antd import Menu, Col, Row
-from reflect_html import div, img
-from reflect_rcdock import DockLayoutReflect
-
+from reflect_antd import Menu
+from reflect_html import div
+from reflect_rcdock import DockLayoutReflect, LIGHT_GREY
+from reflect_utils import create_icon
 from demos.stocks_history.stocks_history import App as StockHistoryApp
 from demos.stock_prices.main import App as StockApp
 from demos.yahoofinancelive.main import App as YahooFinanceApp
@@ -28,6 +27,7 @@ DEFAULT_LIVE_FX_TICKERS = [
     "EURSEK=X",
     "EURJPY=X",
 ]
+MENU = "M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"
 
 
 class App:
@@ -119,22 +119,20 @@ class App:
                         ),
                     ],
                     key="SubMenu",
-                    icon=img(
-                        alt="pytek menu",
-                        src="website/static/menu-icon_grey.svg",
-                        style={
-                            "height": 30,
-                        },
+                    icon=create_icon(
+                        MENU,
+                        style={"height": 30, "color": LIGHT_GREY},
                     ),
                 )
             ],
             selectedKeys=lambda: [],
             mode="horizontal",
+            style={"height": "40px"},
         )
         self.root = div(
             [
                 div(
-                    Row(Col(menu), justify="end", align="middle"),
+                    menu,
                     style={"flexGrow": 1},
                 ),
                 div(
