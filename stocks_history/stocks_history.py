@@ -1,3 +1,4 @@
+"""Fetch historical data from yahoo in real time, plot time series and signals using plotly."""
 import io
 import json
 import pathlib
@@ -214,7 +215,6 @@ class App:
 
         autorun(fetch_data_async, controller=self.controller)
 
-        @memoize(controller=self.controller)
         def generate_signal(settings):
             df = yahoo_data()
             return {
@@ -226,10 +226,9 @@ class App:
             }
 
         signals = Mapping(
-            generate_signal, signal_definitions, controller=self.controller
+            generate_signal, signal_definitions
         )
 
-        @memoize()
         def data():
             df = yahoo_data()
             if not df.empty:
@@ -292,8 +291,6 @@ class App:
             [title, plot] if stand_alone else [plot],
             style={"height": "100%"},
         )
-        self.ok = self.controller.commit
-        self.cancel = self.controller.revert
 
     def settings(self):
         return Col(
@@ -305,6 +302,12 @@ class App:
                 self.signals_settings,
             ]
         )
+
+    def ok(self):
+        self.controller.commit()
+
+    def cancel(self):
+        self.controller.revert()
 
     def title(self):
         return self.ticker_autocomplete.evaluate() or DEFAULT_TICKER

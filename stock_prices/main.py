@@ -52,7 +52,7 @@ class App:
                 resizable=True, filter=True, cellStyle={"textAlign": "right"}
             ),
         )
-        self.title = self.settings().upper()
+        self.title = lambda: self.settings().upper()
         self.ok = controller.commit
         self.cancel = controller.revert
 
