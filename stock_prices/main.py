@@ -1,12 +1,10 @@
 import json
 import pathlib
 
-from reflect import Controller, get_window, memoize
+from reflect import Controller, memoize
 from reflect_aggrid import AgGridColumn, AgGridReact
-from reflect_antd import Col, Row, Select
-from reflect_antd.button import Button
+from reflect_antd import Select
 from reflect_html import div
-
 from .config import COLUMNS
 
 
@@ -43,45 +41,21 @@ class App:
                 for record in get_stocks_close()["table"]["rows"]
             ]
 
-        self.content = AgGridReact(
-            [AgGridColumn(field=name, **col) for name, (_formatter, col) in COLUMNS],
-            rowData=rowData,
-            rowHeight=24,
-            className="ag-theme-balham",
-            defaultColDef=dict(
-                resizable=True, filter=True, cellStyle={"textAlign": "right"}
+        self.content = div(
+            AgGridReact(
+                [
+                    AgGridColumn(field=name, **col)
+                    for name, (_formatter, col) in COLUMNS
+                ],
+                rowData=rowData,
+                rowHeight=24,
+                className="ag-theme-balham",
+                defaultColDef=dict(
+                    resizable=True, filter=True, cellStyle={"textAlign": "right"}
+                ),
             ),
+            style={"height": "100%", "width": "100%"},
         )
         self.title = lambda: self.settings().upper()
         self.ok = controller.commit
         self.cancel = controller.revert
-
-
-def app():
-    app = App()
-    get_window().set_title(app.title)
-    return div(
-        [
-            Row(
-                [
-                    Col(app.settings),
-                    Col(
-                        Button(
-                            ["Update"],
-                            type="primary",
-                            onClick=app.ok,
-                        )
-                    ),
-                ],
-                gutter=20,
-                style=dict(margin=10),
-            ),
-            div(
-                app.content,
-                style=dict(height="calc(100% - 50px)"),
-            ),
-        ],
-        style=dict(
-            height="100%",
-        ),
-    )
