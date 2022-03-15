@@ -54,17 +54,3 @@ class App:
             },
         )
         self.title = "Car data set"
-
-
-def app():
-    app = App()
-    return div(
-        [app.settings, app.content],
-        style=dict(
-            position="absolute",
-            height="98%",
-            width="100%",
-            display="flex",
-            flexFlow="column",
-        ),
-    )
