@@ -292,6 +292,12 @@ class App:
             style={"height": "100%"},
         )
 
+        @memoize(controller=self.controller)
+        def title():
+            return self.ticker_autocomplete.evaluate() or DEFAULT_TICKER
+
+        self.title = title
+
     def settings(self):
         return Col(
             [
@@ -309,8 +315,6 @@ class App:
     def cancel(self):
         self.controller.revert()
 
-    def title(self):
-        return self.ticker_autocomplete.evaluate() or DEFAULT_TICKER
 
 
 def content(ticker, stand_alone=True):
