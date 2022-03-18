@@ -1,4 +1,4 @@
-TITLE = "Spectacle presentation"
+TITLE = "Early adopters presentation"
 
 from reflect_html import img, div
 from reflect_spectacle import (
@@ -18,7 +18,7 @@ BACKGROUND_COLOR = "rgb" + str(BACKGROUND_COLOR)
 BODY_STYLE = {"backGroundColor": BACKGROUND_COLOR}
 
 
-def title(content, color=LIGHT_BLUE, fontSize="60px"):
+def title(content, color=LIGHT_BLUE, fontSize="50px"):
     return Heading(
         div(
             content,
@@ -58,7 +58,10 @@ content = [
         "Which industry would benefit most from Reflect?",
         "Finance is the most obvious, but no mean the only one, industry, services, etc. Any organization which need an efficient solution to build systems in Python.",
     ],
-    ["What is our goal?", "Expand our user community to the professional world. Gather users feedback while helping them to get a better understanding of their needs."],
+    [
+        "What is our goal?",
+        "Expand our user community to the professional world. Gather users feedback while helping them to get a better understanding of their needs.",
+    ],
     [
         "Which users are we targeting?",
         "Any startup, small company that has a business need for Reflect.",
@@ -103,7 +106,7 @@ def app():
         alt="pytek logo",
         src="website/static/cogs_pytek.svg",
         style={
-            "height": 200,
+            "height": 150,
         },
     )
 
@@ -119,17 +122,17 @@ def app():
                     title(pytek, fontSize="72px"),
                     title(SLOGAN, LIGHT_BLUE),
                     img(
-        alt="dashboard",
-        src="demos/dashboard/default.png",
-        style={
-            "height": 200,
-        },
-    ),
+                        alt="dashboard",
+                        src="demos/dashboard/default.png",
+                        style={
+                            "height": 200,
+                        },
+                    ),
                     div(
                         "Early adopters presentation",
                         style={
                             "fontFamily": FONT_FAMILY,
-                            "color":GREEN,
+                            "color": GREEN,
                             "fontSize": "50px",
                         },
                     ),
@@ -146,27 +149,24 @@ def app():
                 UnorderedList(
                     itertools.chain.from_iterable(
                         (
-                            ListItem(
-                                div(
-                                    question,
-                                    style={
-                                        "fontFamily": FONT_FAMILY,
-                                    },
-                                ),
-                                color=GREEN,
+                            div(
+                                question,
+                                style={
+                                    "fontFamily": FONT_FAMILY,
+                                    "color": GREEN,
+                                },
                             ),
-                            ListItem(
-                                div(
-                                    answer,
-                                    style={
-                                        "marginRight": "10px",
-                                        "fontSize": "30px",
-                                        "borderColor": GREEN,
-                                        "borderStyle": "dashed",
-                                        "padding": 10,
-                                        "display": "inline-block",
-                                    },
-                                ),
+                            div(
+                                answer,
+                                style={
+                                    "marginRight": "10px",
+                                    "marginBottom": "20px",
+                                    "fontSize": "30px",
+                                    "borderColor": GREEN,
+                                    "borderStyle": "dashed",
+                                    "padding": 10,
+                                    "display": "inline-block",
+                                },
                             ),
                         )
                         for question, answer in items
