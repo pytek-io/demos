@@ -1,6 +1,6 @@
 - - Who are we?
   - A startup building a Python enterprise framework called Reflect.
-  - Francois du Vignaud and a few of his friends amd ex-colleagues have embarked in the Pytek project in November 2021. They strongly believe that they can deliver next generation technical solutions through their technical expertise and their deep understanding of technology use in a the enterprise world.
+  - Francois du Vignaud and a few of his friends and ex-colleagues have embarked in the Pytek project in November 2021. They strongly believe that they can deliver next generation technical solutions through their technical expertise and their deep understanding of technology use in the enterprise world.
 
 - - What do we mean by Python enterprise framework?
   - A technology allowing to build web applications (aka web apps) all in Python.
@@ -11,7 +11,7 @@
   - More specifically it is a web page which content evolves with the current context, be it user inputs, external events, etc. Reflect provides powerful abstractions making it easy to define advanced dynamic behaviours, as well as external events support (aka asynchronous programming).
 
 - - What are Reflect's advantages over existing solutions?
-  - Web apps require complex infrastructure, various programming languages, tools, etc. With Reflect the only thing you need is write (short) Python scripts.
+  - Web apps require complex infrastructure, various programming languages, tools, etc. With Reflect the only thing you need is write high level Python code.
   - The equivalent solutions to Reflect are either NodeJS and MS Blazor which rely on JavaScript and .Net ecosystems respectively. Short of that, one has to setup a technical infrastructure which usually comprises a front end part written in JS and a back-end part written in the target language. Building this is a challenging engineering issue which is usually loosely correlated with the actual business.
 
 - - What are Reflect's drawbacks over existing solutions?
