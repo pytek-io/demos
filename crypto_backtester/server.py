@@ -2,6 +2,7 @@ import json
 import pickle
 from datetime import datetime
 from itertools import count
+from time import perf_counter
 
 import anyio
 from reflect import Window
@@ -49,6 +50,7 @@ class Server:
         self.window.start_soon(self.main)
 
     async def main(self):
+        last_connection_attempt = perf_counter()
         while True:
             try:
                 connection_manager = ws_connection_manager(
@@ -69,7 +71,10 @@ class Server:
                         else:
                             print(response)
             except ConnectionClosed as e:
+                if perf_counter() - last_connection_attempt < 1.:
+                    raise Exception("Connection with Derebit lost.") from e
                 print(f"Derebit connection has been closed: {e}, looping...")
+                last_connection_attempt = perf_counter()
 
     async def query_derebit(self, method, params={}):
         await self.connection_ready.wait()
