@@ -208,14 +208,15 @@ def create_page(items, default_detail_level_value):
 
 
 def app():
-    content = yaml.safe_load(
-        open("demos/presentations/early_adopters.yaml", "r").read()
-    )
     window = get_window()
+    print(window.hash())
+    file_name = window.hash().split("/")[0]
+    content = yaml.safe_load(
+        open(f"demos/presentations/{file_name}.yaml", "r").read()
+    )
     full_screen = make_observable(False)
     details_level = make_observable(0)
     resolution = window.width() * window.height() / 1000
-    print(resolution)
     values = (5, 3, 2)
     if resolution < 300.0:
         values = (3, 2, 1)
@@ -225,10 +226,11 @@ def app():
     NB_QUESTIONS_PER_PAGE = dict(enumerate(values))
 
     def page_index():
-        return min(int(window.hash()) if window.hash() else 0, len(slides()) - 1)
+        args = window.hash().split("/")
+        return min(int(args[1]) if len(args) > 1 else 0, len(slides()) - 1)
 
     def set_page_index(index):
-        window.hash.set(str(index))
+        window.hash.set(f"{file_name}/{index}")
 
     def safe_increment(increment):
         nonlocal page_index, set_page_index

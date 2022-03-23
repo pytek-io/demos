@@ -1,45 +1,35 @@
 - - Who are we?
   - A startup building a Python enterprise framework called Reflect.
-  - Francois du Vignaud and a few of his friends and ex-colleagues have embarked in the Pytek project in November 2021. They strongly believe that they can deliver next generation technical solutions through their technical expertise and their deep understanding of technology use in the enterprise world.
+  - Francois du Vignaud and a few of his friends and ex-colleagues have embarked in the Pytek project in November 2021. Their aim is to build the next generation software development tools for enterprise.
 
 - - What do we mean by Python enterprise framework?
-  - A technology allowing to build web applications (aka web apps) all in Python.
-  - Reflect provides a fully integrated infrastructure allowing to build web apps very easily. As a result developers can focus almost exclusively on business related issues taking advantage of a battle tested framework.
+  - This is a technology that allows for the build of web apps all in Python.
+  - Reflect is a complete technical infrastructure. It allows developers to focus fully on delivering business functionality using state of the art tools in a rock solid environment.
 
 - - What is a web app?
   - "A web page which allows for user interaction (eg: web mail, social network pages, etc)."
-  - More specifically it is a web page which content evolves with the current context, be it user inputs, external events, etc. Reflect provides powerful abstractions making it easy to define advanced dynamic behaviours, as well as external events support (aka asynchronous programming).
+  - More specifically is a web page which content heavily depends on the current context, be it user inputs, external events, etc. Reflect provides powerful abstractions making it easy to implement advanced dynamic behaviours, as well as external events processing (aka asynchronous programming).
 
 - - What are Reflect's advantages over existing solutions?
-  - Web apps require complex infrastructure, various programming languages, tools, etc. With Reflect the only thing you need is write high level Python code.
-  - The equivalent solutions to Reflect are either NodeJS and MS Blazor which rely on JavaScript and .Net ecosystems respectively. Short of that, one has to setup a technical infrastructure which usually comprises a front end part written in JS and a back-end part written in the target language. Building this is a challenging engineering issue which is usually loosely correlated with the actual business.
+  - Reflect can be setup in minutes, Python developers can build their first app in hours, blurring the boundaries between advanced end users and dedicated IT teams.
+  - "Equivalent technical infrastructures are not standardized. They comprise a JavaScript front end part in  and a back-end part written in the targeted language. These raise interesting technical challenges, although hardly relevant to the actual business needs... Comparable solutions exist in either other ecosystems (eg: NodeJS, MS Blazor, Shiny) or for specific use (eg: Plotly, Streamlit) in Python."
 
-- - What are Reflect's drawbacks over existing solutions?
-  - In order to respond Reflect web apps need to be connected to the server at all time. Also, even though they do work fine on mobiles they will take a bit of time to load initially. 
-  - You are probably better of using a more bespoke architecture if you are building a general public app meant to be used on an app.
+- - What are Reflect limitations compared to existing solutions?
+  - Reflect web apps work in connected mode and use React UI components only.
+  - "User experience might be significantly affected by unreliable or intermittent connections. React is the middle of the road option for building web applications unless you want to create a highly bespoke user experience (eg: game) or have already developed a significant amount of functionality in other technology."
 
-- - In which situation can you use Reflect?
-  - As of now Reflect is very well suited for building in house systems, and B2B portals, etc
-  - Given the architectural choices Reflect makes building such apps extremely easy. Any mildly experience Python can build a web app in a couple of hours. Deploying and maintaining is fully automated, making the overall development process perfectly seamless.
+- - Which applications is Reflect best suited to?
+  - Reflect is very well suited for building business apps. Those can range from single user apps, to large scale systems such as website back-ends, B2B portals, business intelligence/automation/monitoring/reporting tools, etc.
+  - Given it user-friendliness Reflect is very well suited for organizations with limited IT resources. Reflect allows any mildly Python experienced to build professional web apps.
 
-- - Are there any examples of apps build on top of Reflect?
-  - You can see a few in the website app demos section. Our website and even this presentation are build with Reflect (we eat our own dog food as they say in the Valley, and we love it!).
-  - We are building prototypes for a few startups already, some of them should be made public soon.
-- - Which industry would benefit most from Reflect?
-  - Finance is the most obvious, but by no mean the only one, industry, services, etc. Any organization which need an efficient solution to build systems in Python.
-  - ""
-- - What is our goal?
-  - Expand our user community to the professional world. Gather users feedback while helping them to get a better understanding of their needs.
-  - ""
-- - Which users are we targeting?
-  - Any startup, small company that has a business need for Reflect.
-  - ""
-- - How much does Reflect cost?
-  - Nothing, Reflect is free to use for the time being. Early adopters will have the right to use their copy indefinitely.
-  - ""
-- - How do you get started?
-  - You can download Reflect and start using it straightaway. Please feel to reach out to us we will be more than happy to guide your first steps!
-  - ""
-- - Anything else we want you to know?
-  - Reflect is in beta, meaning we won't change its interface. We are aiming for the prod release mid year. We are also working hard on improving the tutorial, demos, so stay tuned.
-  - ""
+- - Are there any examples of apps build on top of Reflect yet?
+  - You can see a few in the website app demos section, we will publish many more in the near future.
+  - Our website and even this very presentation are build with Reflect. We eat our own dog food as they say in the Valley, and we love it! We are also building prototypes for a few startups already, some of them should be made public soon.
+
+- - "What's in it for me?"
+  - Become a Strategic Partner if you have a project which is a good fit and are committed to it. We will help you to make it a common success story.
+  - Reflect is free to use for the time being. Strategic Partners (ie\:) will be able to keep using it for free indefinitely. Feel to reach out to us we will be more than happy to discuss with you whether Reflect is a good fit for your needs.
+
+- - Can I use Reflect now?
+  - You can play with the app demos on the website, download Reflect and start using it straightaway.
+  - "Reflect is in beta, meaning we won't change its interface. We are aiming for the prod release mid year. We are also working hard on improving the tutorial, demos, so stay tuned."
