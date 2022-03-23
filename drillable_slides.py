@@ -314,7 +314,7 @@ def app():
     )
 
     detail_level_icon = img(
-        src=lambda: f"reflect/static/menu-icon-{details_level() + 1}.svg",
+        src=lambda: f"demos/presentation/menu-icon-{details_level() + 1}.svg",
         style=dict(width="1.6vh", pointerEvents="all", cursor="pointer"),
         onClick=lambda: details_level.set((details_level() + 1) % 3),
     )
