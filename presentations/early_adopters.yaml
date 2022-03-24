@@ -8,7 +8,7 @@
 
 - - What is a web app?
   - "A web page which allows for user interaction (eg: web mail, social network pages, etc)."
-  - More specifically is a web page which content heavily depends on the current context, be it user inputs, external events, etc. Reflect provides powerful abstractions making it easy to implement advanced dynamic behaviours, as well as external events processing (aka asynchronous programming).
+  - More specifically it is a web page which content heavily depends on the current context, be it user inputs, external events, etc. Reflect provides powerful abstractions making it easy to implement advanced dynamic behaviours, as well as external events processing (aka asynchronous programming).
 
 - - What are Reflect's advantages over existing solutions?
   - Reflect can be setup in minutes, Python developers can build their first app in hours, blurring the boundaries between advanced end users and dedicated IT teams.

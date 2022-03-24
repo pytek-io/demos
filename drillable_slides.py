@@ -1,10 +1,18 @@
 import itertools
 import os
+import math
+import operator
 from functools import partial
 
 import yaml
-from reflect import ResponsiveValue, get_window, make_observable, CachedEvaluation
-from reflect_html import a, div, img, path, svg
+from reflect import (
+    ResponsiveValue,
+    get_window,
+    make_observable,
+    CachedEvaluation,
+    autorun,
+)
+from reflect_html import a, div, img, path, svg, style
 from reflect_swiper import Swiper, SwiperSlide
 from website.common import BACKGROUND_COLOR, FONT_FAMILY, GREEN, LIGHT_BLUE
 from website.home import SLOGAN
@@ -19,8 +27,16 @@ LEFT_ARROW = 37
 LOGO_HEIGHT = 52
 BOTTOM_HEIGHT = 52
 HOME_PAGE = "website.home"
-
-
+ANSWER_PADDING = 10
+# overall height of a title line wrt to the font size
+QUESTION_LINE_HEIGHT_RATIO = 70.45 / 48
+# overall height of a title line wrt to the font size
+ANSWER_LINE_HEIGHT_RATIO = 42 / 36
+QUESTION_REM = 2
+QUESTION_WIDTH_RATIO = 1234 / 47 / 48  # empirical width of a char wrt its height
+ANSWER_WIDTH_RATIO = 1454 / 101 / 36  # empirical width of a char wrt its height
+ANSWER_REM = 1.5
+MARGIN_TOP_LOGO = 1
 maximize = "M396.795 396.8H320V448h128V320h-51.205zM396.8 115.205V192H448V64H320v51.205zM115.205 115.2H192V64H64v128h51.205zM115.2 396.795V320H64v128h128v-51.205z"
 minimize = "M64 371.2h76.795V448H192V320H64v51.2zm76.795-230.4H64V192h128V64h-51.205v76.8zM320 448h51.2v-76.8H448V320H320v128zm51.2-307.2V64H320v128h128v-51.2h-76.8z"
 
@@ -59,16 +75,6 @@ def roman_numeral(number):
         return "IV"
     if number >= 5:
         return "V" + roman_numeral(number - 5)
-
-
-def grouper(n, iterable):
-    it = iter(iterable)
-    while True:
-        chunk = tuple(itertools.islice(it, n))
-        if not chunk:
-            return
-        yield chunk
-
 
 def create_icon(
     path_d, style={}, fill="currentColor", width=15, height=15, onClick=None
@@ -134,13 +140,13 @@ def create_answer_box(answer, details, detail_level):
             ]
         ),
         style={
-            "marginRight": "10px",
+            # "marginRight": "10px",
             "marginBottom": "20px",
-            "fontSize": "1.5rem",
+            "fontSize": f"{ANSWER_REM}rem",
             "color": LIGHT_BLUE,
             "borderColor": GREEN,
             "borderStyle": "dashed",
-            "padding": 10,
+            "padding": ANSWER_PADDING,
             "display": "inline-block",
             "pointerEvents": "all",
             "cursor": "pointer",
@@ -169,8 +175,10 @@ def create_question_and_answer(
                 style={
                     "fontFamily": FONT_FAMILY,
                     "color": GREEN,
-                    "fontSize": "2rem",
-                    "padding": 10,
+                    "fontSize": f"{QUESTION_REM}rem",
+                    # "padding": 10,
+                    "padding": 0,
+                    "margin": 0,
                     "pointerEvents": "all",
                     "cursor": "pointer",
                 },
@@ -207,23 +215,101 @@ def create_page(items, default_detail_level_value):
     )
 
 
+def nb_lines(content, line_length):
+    return math.ceil(len(content) / line_length)
+
+
 def app():
     window = get_window()
-    print(window.hash())
     file_name = window.hash().split("/")[0]
-    content = yaml.safe_load(
-        open(f"demos/presentations/{file_name}.yaml", "r").read()
-    )
+    content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
     full_screen = make_observable(False)
-    details_level = make_observable(0)
-    resolution = window.width() * window.height() / 1000
-    values = (5, 3, 2)
-    if resolution < 300.0:
-        values = (3, 2, 1)
-    elif resolution > 800:
-        window.update_tag_style([("font-size", "24px")], "html")
+    details_level = make_observable(1)
+    margin = ResponsiveValue(xs=10, sm=10, md=10, lg=15, xl=None, xxl=30)
+    image = Swiper(
+        [
+            SwiperSlide(
+                [
+                    img(
+                        dataSrc=select_file_extension(
+                            os.path.join(
+                                os.path.split(app_path.split("#")[0])[0], "default"
+                            )
+                        ),
+                        style={"width": "100%"},
+                        className="swiper-lazy",
+                    ),
+                    div(className="swiper-lazy-preloader-white"),
+                ]
+            )
+            for name, app_path in GALLERY_MENU[:-1]  # excluding presentation
+        ],
+        navigation=True,
+        style={"width": "50%"},
+    )
+    main_page = div(
+        [
+            title(SLOGAN, LIGHT_BLUE),
+            image,
+            title(
+                "Early adopters presentation",
+                color=GREEN,
+                fontSize="1.5rem",
+            ),
+        ],
+    )
 
-    NB_QUESTIONS_PER_PAGE = dict(enumerate(values))
+    def generate_slides():
+        resolution = window.width() * window.height() / 1000
+        font_size = 16
+        if resolution > 800:
+            font_size = 24
+        window.update_tag_style([(f"font-size", f"{font_size}px")], "html")
+        details_level_value, width_value, margin_value = (
+            details_level(),
+            window.width(),
+            margin(),
+        )
+        content_height, max_drill_down_height = 0, 0
+        actual_width = width_value * (1.0 - 2 * margin_value / 100)
+        nb_chars_title = actual_width / (
+            QUESTION_REM * font_size * QUESTION_WIDTH_RATIO
+        )
+        nb_chars_answer = (actual_width - 2 * ANSWER_PADDING) / (
+            QUESTION_REM * font_size * ANSWER_WIDTH_RATIO
+        )
+        page_height = window.height() - (
+            MARGIN_TOP_LOGO * font_size + LOGO_HEIGHT + BOTTOM_HEIGHT
+        )
+        slides, current_page, current_height = [], [], 0
+        question_line_height = QUESTION_LINE_HEIGHT_RATIO * QUESTION_REM * font_size
+        answer_line_height = ANSWER_LINE_HEIGHT_RATIO * ANSWER_REM * font_size
+        for question, answer, details in content:
+            drill_down_height = 0
+            content_height = question_line_height * nb_lines(question, nb_chars_title)
+            answer_height = answer_line_height * nb_lines(answer, nb_chars_answer)
+            details_height = answer_line_height * nb_lines(details, nb_chars_answer)
+            if details_level_value >= 1:
+                content_height += answer_height
+            else:
+                drill_down_height += answer_height
+            if details_level_value >= 2:
+                content_height += details_height
+            else:
+                drill_down_height += details_height
+            max_drill_down_height = max(drill_down_height, max_drill_down_height)
+            if current_height + content_height + max_drill_down_height > page_height:
+                current_height, max_drill_down_height, current_page, previous_page = (
+                    0,
+                    0,
+                    [],
+                    current_page,
+                )
+                slides.append(create_page(previous_page, details_level()))
+            current_page.append((question, answer, details))
+            current_height += content_height
+        slides.append(create_page(current_page, details_level()))
+        return [main_page] + slides
 
     def page_index():
         args = window.hash().split("/")
@@ -256,48 +342,6 @@ def app():
         "keyCode",
         lambda k: k in (RIGHT_ARROW, LEFT_ARROW) and safe_increment(k == RIGHT_ARROW),
     )
-    image = Swiper(
-        [
-            SwiperSlide(
-                [
-                    img(
-                        dataSrc=select_file_extension(
-                            os.path.join(
-                                os.path.split(app_path.split("#")[0])[0], "default"
-                            )
-                        ),
-                        style={"width": "100%"},
-                        className="swiper-lazy",
-                    ),
-                    div(className="swiper-lazy-preloader-white"),
-                ]
-            )
-            for name, app_path in GALLERY_MENU[:-1]  # excluding presentation
-        ],
-        navigation=True,
-        style={
-            "width": "50%",
-        },
-    )
-
-    main_page = div(
-        [
-            title(SLOGAN, LIGHT_BLUE),
-            image,
-            title(
-                "Early adopters presentation",
-                color=GREEN,
-                fontSize="1.5rem",
-            ),
-        ],
-    )
-
-    def generate_slides():
-        details_level_value = details_level()
-        return [main_page] + [
-            create_page(items, details_level_value)
-            for items in grouper(NB_QUESTIONS_PER_PAGE[details_level_value], content)
-        ]
 
     slides = CachedEvaluation(generate_slides)
 
@@ -320,15 +364,34 @@ def app():
     )
 
     def page_bullets():
+        style_ = {
+            "width": "10px",
+            "height": "10px",
+            "size": "10px",
+            # "display": "inline-block",
+            # # "border": "1px solid " + color,
+            # # "background": "transparent" if transparent else color,
+            # "margin": "3.33333px",
+            # "borderRadius": "50%",
+            # "pointerEvents": "all",
+            # "cursor": "pointer",
+            # "color": "white"
+            "position": "relative",
+        }
         page_index_value = page_index()
-        return [
-            create_bullet(
-                transparent=page_index_value != index,
-                color="white",
-                onClick=partial(set_page_index, index),
-            )
-            for index in range(len(slides()))
-        ]
+        return (
+            # [div(div(None, className="swiper-button-prev"), style=style_)]
+            # +
+            [
+                create_bullet(
+                    transparent=page_index_value != index,
+                    color="white",
+                    onClick=partial(set_page_index, index),
+                )
+                for index in range(len(slides()))
+            ]
+            # + [(div(">", style={"color": "white"}))]
+        )
 
     bottom = div(
         left_center_right(full_screen_icon, detail_level_icon, page_bullets),
@@ -343,13 +406,10 @@ def app():
     )
 
     def responsive_margins(content, style):
-        margin = ResponsiveValue(
-            xs=10, sm="10vh", md="10vh", lg=None, xl=None, xxl="30vh"
-        )
         return div(
             content,
             style=lambda: add_dicts(
-                style, {"marginLeft": margin(), "marginRight": margin()}
+                style, {"marginLeft": f"{margin()}vh", "marginRight": f"{margin()}vh"}
             ),
         )
 
@@ -363,13 +423,13 @@ def app():
                         style={
                             "height": LOGO_HEIGHT,
                             "marginLeft": "2rem",
-                            "marginTop": "1rem",
+                            "marginTop": f"{MARGIN_TOP_LOGO}rem",
                         },
                     ),
                     href="https://pytek.io",
                     target="_blank",
                 ),
-                style={"height": LOGO_HEIGHT},
+                style={"height": f"calc({LOGO_HEIGHT}px + {MARGIN_TOP_LOGO}rem"},
             ),
             responsive_margins(
                 div(
@@ -385,6 +445,7 @@ def app():
             ),
             # dummy bottom div to ensure the main one is centered
             div(None, style={"height": BOTTOM_HEIGHT}),
+            style("swiper-navigation-size: 10px;"),
             div(
                 bottom,
                 style={
