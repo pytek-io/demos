@@ -3,24 +3,25 @@
   - Francois du Vignaud and a few of his friends and ex-colleagues have embarked in the Pytek project in November 2021. Their aim is to build the next generation software development tools for enterprise.
 
 - - What do we mean by Python enterprise framework?
-  - This is a technology that allows for the build of web apps all in Python.
-  - Reflect is a complete technical infrastructure. It allows developers to focus fully on delivering business functionality using state of the art tools in a rock solid environment.
+  - A solution that allows you to build professional web applications (aka web app) all in Python.
+  - Reflect is a complete technical infrastructure which  allows developers to focus fully on delivering business functionality using state of the art tools in a rock solid environment.
 
 - - What is a web app?
   - "A web page which allows for user interaction (eg: web mail, social network pages, etc)."
   - More specifically it is a web page which content heavily depends on the current context, be it user inputs, external events, etc. Reflect provides powerful abstractions making it easy to implement advanced dynamic behaviours, as well as external events processing (aka asynchronous programming).
 
-- - What are Reflect's advantages over existing solutions?
-  - Reflect can be setup in minutes, Python developers can build their first app in hours, blurring the boundaries between advanced end users and dedicated IT teams.
-  - "Equivalent technical infrastructures are not standardized. They comprise a JavaScript front end part in  and a back-end part written in the targeted language. These raise interesting technical challenges, although hardly relevant to the actual business needs... Comparable solutions exist in either other ecosystems (eg: NodeJS, MS Blazor, Shiny) or for specific use (eg: Plotly, Streamlit) in Python."
-
-- - What are Reflect limitations compared to existing solutions?
-  - Reflect web apps work in connected mode and use React UI components only.
-  - "User experience might be significantly affected by unreliable or intermittent connections. React is the middle of the road option for building web applications unless you want to create a highly bespoke user experience (eg: game) or have already developed a significant amount of functionality in other technology."
-
 - - Which applications is Reflect best suited to?
   - Reflect is very well suited for building business apps. Those can range from single user apps, to large scale systems such as website back-ends, B2B portals, business intelligence, automation,monitoring, reporting tools, etc.
   - Given it user-friendliness Reflect is very well suited for organizations with limited IT resources. Reflect allows any mildly Python experienced to build professional web apps.
+
+- - What are Reflect's advantages over existing solutions?
+  - Reflect is a turn key solution ready to be used by a developers of all levels.
+  - "Equivalent technical infrastructures are not standardized. They usually comprise a JavaScript front end part and a back-end part written in a different language. Building and maintaining these such infrastructures is challenging and hardly relevant to the actual business needs. Comparable solutions exist on different platforms (eg: NodeJS, MS Blazor, Shiny). The ones available in Python have been build for rather specific use (eg: Plotly, Streamlit) "
+
+- - What are Reflect limitations compared to existing solutions?
+  - Reflect web apps work only in connected mode and use React UI components only.
+  - The connected mode restriction means that Reflect is not suitable for use with unreliable or intermittent connections. React is by far the most popular UI framework in use nowadays. The only domain for which React is not suitable is highly bespoke user experiences such as games.
+
 
 - - Are there any examples of apps build on top of Reflect yet?
   - You can see a few in the website app demos section, we will publish many more in the near future.
