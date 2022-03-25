@@ -1,7 +1,5 @@
-import itertools
 import os
 import math
-import operator
 from functools import partial
 
 import yaml
@@ -12,6 +10,7 @@ from reflect import (
     CachedEvaluation,
     autorun,
 )
+from reflect import print_debug
 from reflect_html import a, div, img, path, svg, style
 from reflect_swiper import Swiper, SwiperSlide
 from website.common import BACKGROUND_COLOR, FONT_FAMILY, GREEN, LIGHT_BLUE
@@ -76,6 +75,7 @@ def roman_numeral(number):
     if number >= 5:
         return "V" + roman_numeral(number - 5)
 
+
 def create_icon(
     path_d, style={}, fill="currentColor", width=15, height=15, onClick=None
 ):
@@ -97,14 +97,14 @@ STYLE = {
 
 
 def left_center_right(left, center, right):
-    return div(
-        [
-            div(left, style={"float": "left"}),
-            div(right, style={"float": "right"}),
-            div(center, style={"margin": "0 auto", "width": "fit-content"}),
-        ],
-        style={"width": "100%"},
-    )
+    content = []
+    if left:
+        content.append(div(left, style={"float": "left"}))
+    if right:
+        content.append(div(right, style={"float": "right"}))
+    if center:
+        content.append(div(center, style={"margin": "0 auto", "width": "fit-content"}))
+    return div(content, style={"width": "100%"})
 
 
 def create_bullet(color="white", transparent=True, onClick=None):
@@ -141,7 +141,7 @@ def create_answer_box(answer, details, detail_level):
         ),
         style={
             # "marginRight": "10px",
-            "marginBottom": "20px",
+            # "marginBottom": "20px",
             "fontSize": f"{ANSWER_REM}rem",
             "color": LIGHT_BLUE,
             "borderColor": GREEN,
@@ -155,77 +155,18 @@ def create_answer_box(answer, details, detail_level):
     )
 
 
-def create_question_and_answer(
-    default_detail_level_value, on_drill_down, question, answer, details
-):
-    detail_level = make_observable(default_detail_level_value)
-
-    def drill():
-        on_drill_down(detail_level)
-        detail_level.set(
-            default_detail_level_value
-            + (0 if detail_level() != default_detail_level_value else 1)
-        )
-
-    return div(
-        [
-            div(
-                question,
-                onClick=drill,
-                style={
-                    "fontFamily": FONT_FAMILY,
-                    "color": GREEN,
-                    "fontSize": f"{QUESTION_REM}rem",
-                    # "padding": 10,
-                    "padding": 0,
-                    "margin": 0,
-                    "pointerEvents": "all",
-                    "cursor": "pointer",
-                },
-            ),
-            lambda: create_answer_box(answer, details, detail_level)
-            if detail_level() > 0
-            else None,
-        ]
-    )
-
-
-def create_page(items, default_detail_level_value):
-    current_detail_level = None
-
-    def on_drill_down(new_detail_level):
-        nonlocal current_detail_level
-        if (
-            current_detail_level is not None
-            and current_detail_level is not new_detail_level
-        ):
-            current_detail_level.set(default_detail_level_value)
-        current_detail_level = new_detail_level
-
-    return div(
-        [
-            create_question_and_answer(default_detail_level_value, on_drill_down, *item)
-            for item in items
-        ],
-        style={
-            # "maxHeight": f"calc(100vh - {BOTTOM_HEIGHT + LOGO_HEIGHT}px)",
-            # "overflowY": "scroll",
-            "paddingTop": 10
-        },
-    )
-
-
 def nb_lines(content, line_length):
     return math.ceil(len(content) / line_length)
 
 
 def app():
     window = get_window()
+    is_touch_screen = window.is_touch_screen
     file_name = window.hash().split("/")[0]
     content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
     full_screen = make_observable(False)
     details_level = make_observable(1)
-    margin = ResponsiveValue(xs=10, sm=10, md=10, lg=15, xl=None, xxl=30)
+    margin = ResponsiveValue(xs=3, sm=10, md=10, lg=15, xl=None, xxl=30)
     image = Swiper(
         [
             SwiperSlide(
@@ -238,6 +179,7 @@ def app():
                         ),
                         style={"width": "100%"},
                         className="swiper-lazy",
+                        custom_attributes={"data-swipe-ignore": True},
                     ),
                     div(className="swiper-lazy-preloader-white"),
                 ]
@@ -245,12 +187,12 @@ def app():
             for name, app_path in GALLERY_MENU[:-1]  # excluding presentation
         ],
         navigation=True,
-        style={"width": "50%"},
+        style={"width": "100%"},
     )
     main_page = div(
         [
-            title(SLOGAN, LIGHT_BLUE),
-            image,
+            title(SLOGAN, LIGHT_BLUE, fontSize="2rem"),
+            div(image, custom_attributes={"data-swipe-ignore": True}),
             title(
                 "Early adopters presentation",
                 color=GREEN,
@@ -258,6 +200,66 @@ def app():
             ),
         ],
     )
+
+    def create_question_and_answer(
+        default_detail_level_value, on_drill_down, question, answer, details
+    ):
+        detail_level = make_observable(default_detail_level_value)
+
+        def drill():
+            on_drill_down(detail_level)
+            detail_level.set(
+                default_detail_level_value
+                + (0 if detail_level() != default_detail_level_value else 1)
+            )
+
+        return div(
+            [
+                div(
+                    question,
+                    onClick=drill,
+                    style={
+                        "fontFamily": FONT_FAMILY,
+                        "color": GREEN,
+                        "fontSize": f"{QUESTION_REM}rem",
+                        "padding": 0,
+                        "margin": 0,
+                        "pointerEvents": "all",
+                        "cursor": "pointer",
+                        "textAlign": "center" if is_touch_screen else None,
+                    },
+                ),
+                lambda: create_answer_box(answer, details, detail_level)
+                if detail_level() > 0
+                else None,
+            ]
+        )
+
+    def create_page(items, default_detail_level_value):
+        current_detail_level = None
+
+        def on_drill_down(new_detail_level):
+            nonlocal current_detail_level
+            if (
+                current_detail_level is not None
+                and current_detail_level is not new_detail_level
+            ):
+                current_detail_level.set(default_detail_level_value)
+            current_detail_level = new_detail_level
+
+        return div(
+            [
+                create_question_and_answer(
+                    default_detail_level_value, on_drill_down, *item
+                )
+                for item in items
+            ],
+            style={
+                # "maxHeight": f"calc(100vh - {BOTTOM_HEIGHT + LOGO_HEIGHT}px)",
+                "overflowY": "scroll",
+                "paddingTop": 10,
+            },
+        )
 
     def generate_slides():
         resolution = window.width() * window.height() / 1000
@@ -335,16 +337,16 @@ def app():
         method=lambda: full_screen.set(not full_screen()),
     )
     window.add_event_listener(
-        "swiped", "detail.dir", lambda d: safe_increment(d == "right")
+        "swiped",
+        "detail.dir",
+        lambda d: safe_increment(d == "left") if d in ["left", "right"] else None,
     )
     window.add_event_listener(
         "keydown",
         "keyCode",
         lambda k: k in (RIGHT_ARROW, LEFT_ARROW) and safe_increment(k == RIGHT_ARROW),
     )
-
     slides = CachedEvaluation(generate_slides)
-
     full_screen_icon = create_icon(
         lambda: minimize if full_screen() else maximize,
         fill="white",
@@ -356,7 +358,6 @@ def app():
         },
         onClick=lambda: window.update_full_screen(not full_screen()),
     )
-
     detail_level_icon = img(
         src=lambda: f"demos/presentation/menu-icon-{details_level() + 1}.svg",
         style=dict(width="1.6vh", pointerEvents="all", cursor="pointer"),
@@ -368,14 +369,6 @@ def app():
             "width": "10px",
             "height": "10px",
             "size": "10px",
-            # "display": "inline-block",
-            # # "border": "1px solid " + color,
-            # # "background": "transparent" if transparent else color,
-            # "margin": "3.33333px",
-            # "borderRadius": "50%",
-            # "pointerEvents": "all",
-            # "cursor": "pointer",
-            # "color": "white"
             "position": "relative",
         }
         page_index_value = page_index()
@@ -393,8 +386,12 @@ def app():
             # + [(div(">", style={"color": "white"}))]
         )
 
+    if is_touch_screen:
+        icons = left_center_right(detail_level_icon, None, page_bullets)
+    else:
+        icons = left_center_right(full_screen_icon, detail_level_icon, page_bullets)
     bottom = div(
-        left_center_right(full_screen_icon, detail_level_icon, page_bullets),
+        icons,
         style={
             "display": "flex",
             "flexDirection": "column",
@@ -409,9 +406,13 @@ def app():
         return div(
             content,
             style=lambda: add_dicts(
-                style, {"marginLeft": f"{margin()}vh", "marginRight": f"{margin()}vh"}
+                style, {"paddingLeft": f"{margin()}vh", "paddingRight": f"{margin()}vh"}
             ),
         )
+
+    logo_style = {"height": f"calc({LOGO_HEIGHT}px + {MARGIN_TOP_LOGO}rem"}
+    if is_touch_screen:
+        logo_style.update(marginLeft="auto", marginRight="auto")
 
     return div(
         [
@@ -429,7 +430,7 @@ def app():
                     href="https://pytek.io",
                     target="_blank",
                 ),
-                style={"height": f"calc({LOGO_HEIGHT}px + {MARGIN_TOP_LOGO}rem"},
+                style=logo_style,
             ),
             responsive_margins(
                 div(
@@ -441,7 +442,11 @@ def app():
                         "height": "100%",
                     },
                 ),
-                style={"flex": 1},
+                style={
+                    "flex": 1,
+                    "overflowY": "scroll",
+                    "maxHeight": f"calc(100vh - {LOGO_HEIGHT + BOTTOM_HEIGHT}px)",
+                },
             ),
             # dummy bottom div to ensure the main one is centered
             div(None, style={"height": BOTTOM_HEIGHT}),

@@ -19,7 +19,7 @@
   - "User experience might be significantly affected by unreliable or intermittent connections. React is the middle of the road option for building web applications unless you want to create a highly bespoke user experience (eg: game) or have already developed a significant amount of functionality in other technology."
 
 - - Which applications is Reflect best suited to?
-  - Reflect is very well suited for building business apps. Those can range from single user apps, to large scale systems such as website back-ends, B2B portals, business intelligence/automation/monitoring/reporting tools, etc.
+  - Reflect is very well suited for building business apps. Those can range from single user apps, to large scale systems such as website back-ends, B2B portals, business intelligence, automation,monitoring, reporting tools, etc.
   - Given it user-friendliness Reflect is very well suited for organizations with limited IT resources. Reflect allows any mildly Python experienced to build professional web apps.
 
 - - Are there any examples of apps build on top of Reflect yet?
