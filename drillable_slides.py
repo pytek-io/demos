@@ -10,7 +10,6 @@ from reflect import (
     CachedEvaluation,
     autorun,
 )
-from reflect import print_debug
 from reflect_html import a, div, img, path, svg, style
 from reflect_swiper import Swiper, SwiperSlide
 from website.common import BACKGROUND_COLOR, FONT_FAMILY, GREEN, LIGHT_BLUE
@@ -107,6 +106,16 @@ def left_center_right(left, center, right):
     return div(content, style={"width": "100%"})
 
 
+BULLET_STYLE = {
+    "width": "11px",
+    "height": "11px",
+    "display": "inline-block",
+    "marginRight": "3.33333px",
+    "pointerEvents": "all",
+    "cursor": "pointer",
+}
+
+
 def create_bullet(color="white", transparent=True, onClick=None):
     STYLE = {
         "width": "10px",
@@ -114,7 +123,7 @@ def create_bullet(color="white", transparent=True, onClick=None):
         "display": "inline-block",
         "border": "1px solid " + color,
         "background": "transparent" if transparent else color,
-        "margin": "3.33333px",
+        "marginRight": "3.33333px",
         "borderRadius": "50%",
         "pointerEvents": "all",
         "cursor": "pointer",
@@ -181,7 +190,7 @@ def app():
                         className="swiper-lazy",
                         custom_attributes={"data-swipe-ignore": True},
                     ),
-                    div(className="swiper-lazy-preloader-white"),
+                    # div(className="swiper-lazy-preloader"),
                 ]
             )
             for name, app_path in GALLERY_MENU[:-1]  # excluding presentation
@@ -365,17 +374,16 @@ def app():
     )
 
     def page_bullets():
-        style_ = {
-            "width": "10px",
-            "height": "10px",
-            "size": "10px",
-            "position": "relative",
-        }
         page_index_value = page_index()
         return (
-            # [div(div(None, className="swiper-button-prev"), style=style_)]
-            # +
             [
+                img(
+                    src="demos/left-chevron_white.svg",
+                    style=BULLET_STYLE,
+                    onClick=lambda : safe_increment(False)
+                )
+            ]
+            + [
                 create_bullet(
                     transparent=page_index_value != index,
                     color="white",
@@ -383,7 +391,13 @@ def app():
                 )
                 for index in range(len(slides()))
             ]
-            # + [(div(">", style={"color": "white"}))]
+            + [
+                img(
+                    src="demos/right-chevron_white.svg",
+                    style=BULLET_STYLE,
+                    onClick=lambda : safe_increment(True)
+                )
+            ]
         )
 
     if is_touch_screen:
