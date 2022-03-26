@@ -19,7 +19,7 @@ from website.reflect.gallery import MENU as GALLERY_MENU
 
 TITLE = "Early adopters presentation"
 BODY_STYLE = {"backgroundColor": "rgb" + str(BACKGROUND_COLOR), "fontSize": 10}
-CSS = ["test.css"]
+CSS = ["demos/presentation.css"]
 RIGHT_ARROW = 39
 LEFT_ARROW = 37
 LOGO_HEIGHT = 52

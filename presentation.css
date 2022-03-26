@@ -1,0 +1,69 @@
+
+
+body::-webkit-scrollbar {
+    width: 0.6em;
+  }
+   
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(15, 23, 36, 0.3);
+}
+  
+body::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+:root {
+  --swiper-theme-color: #000;
+}
+.swiper-button-next {
+  background-image: url(/data/demos/right-chevron.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+
+.swiper-button-next::after {
+  display: none;
+}
+
+.swiper-button-prev {
+  background-image: url(/data/demos/left-chevron.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+
+.swiper-button-prev::after {
+  display: none;
+}
+
+.swiper-button-next, .swiper-rtl .swiper-button-prev {
+    right: 10px;
+    left: auto;
+}
+.swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    width: calc(var(--swiper-navigation-size)/ 44 * 27);
+    height: var(--swiper-navigation-size);
+    margin-top: calc(0px - (var(--swiper-navigation-size)/ 2));
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
+    content: 'next';
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-family: swiper-icons;
+    font-size: var(--swiper-navigation-size);
+    text-transform: none!important;
+    letter-spacing: 0;
+    text-transform: none;
+    font-variant: initial;
+    line-height: 1;
+}
