@@ -8,7 +8,6 @@ from reflect import (
     get_window,
     make_observable,
     CachedEvaluation,
-    autorun,
 )
 from reflect_html import a, div, img, path, svg, style
 from reflect_swiper import Swiper, SwiperSlide
