@@ -148,8 +148,6 @@ def create_answer_box(answer, details, detail_level):
             ]
         ),
         style={
-            # "marginRight": "10px",
-            # "marginBottom": "20px",
             "fontSize": f"{ANSWER_REM}rem",
             "color": LIGHT_BLUE,
             "borderColor": GREEN,
@@ -158,7 +156,6 @@ def create_answer_box(answer, details, detail_level):
             "display": "inline-block",
             "pointerEvents": "all",
             "cursor": "pointer",
-            "textAlign": "justify",
         },
     )
 
@@ -189,7 +186,7 @@ def app():
                         className="swiper-lazy",
                         custom_attributes={"data-swipe-ignore": True},
                     ),
-                    # div(className="swiper-lazy-preloader"),
+                    div(className="swiper-lazy-preloader-white"),
                 ]
             )
             for name, app_path in GALLERY_MENU[:-1]  # excluding presentation
@@ -263,7 +260,6 @@ def app():
                 for item in items
             ],
             style={
-                # "maxHeight": f"calc(100vh - {BOTTOM_HEIGHT + LOGO_HEIGHT}px)",
                 "overflowY": "scroll",
                 "paddingTop": 10,
             },
@@ -379,7 +375,7 @@ def app():
                 img(
                     src="demos/left-chevron_white.svg",
                     style=BULLET_STYLE,
-                    onClick=lambda : safe_increment(False)
+                    onClick=lambda: safe_increment(False),
                 )
             ]
             + [
@@ -394,7 +390,7 @@ def app():
                 img(
                     src="demos/right-chevron_white.svg",
                     style=BULLET_STYLE,
-                    onClick=lambda : safe_increment(True)
+                    onClick=lambda: safe_increment(True),
                 )
             ]
         )

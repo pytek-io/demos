@@ -20,7 +20,7 @@
 
 - - What are Reflect limitations compared to existing solutions?
   - Reflect web apps work only in connected mode and use React UI components only.
-  - The connected mode restriction means that Reflect is not suitable for use with unreliable or intermittent connections. React is by far the most popular UI framework currently in use. The only domain for which React is not suitable is highly bespoke user experiences such as games.
+  - The connected mode restriction means that Reflect is not suitable for use with unreliable connections. React is by far the most popular UI framework currently in use. The only domain for which React is not suitable is highly bespoke user experiences such as games.
 
 
 - - Are there any examples of apps built on top of Reflect yet?
@@ -28,9 +28,9 @@
   - Even our website and this very presentation are build with Reflect. As they say in the Valley, we eat our own dog food, and we love it! We are also building prototypes for a few startups already - some of them should be made public soon.
 
 - - "What's in it for me?"
-  - Become a strategic partner if you have a project which is a good fit for Reflect. We will help you to make it a shared success story.
-  - Reflect is free to use at the moment. Strategic partners will be able to keep using it for free indefinitely. Please feel to reach out to us and we will be more than happy to discuss with you whether Reflect is a good fit for your needs.
+  - Become an Early Adopter if you have a project which is a good fit for Reflect. We will help you to make it a shared success story.
+  - Reflect is free to use at the moment. Early Adopters will be able to keep using it for free indefinitely. Please feel to reach out to us and we will be more than happy to discuss with you whether Reflect is a good fit for your needs.
 
 - - Can I use Reflect now?
-  - You can play with the app demos on the website, download Reflect and start using it immediately.
-  - "Reflect is in beta, meaning we won't change its interface. We are aiming for the prod release mid-year. We are also working hard on improving the tutorial and demos, so stay tuned."
+  - Absolutely! You can play with the app demos on the website, download Reflect and start using it immediately.
+  - "Reflect is in beta, meaning we won't change its interface. We are aiming for the first prod release mid-year. We are also working hard on improving the tutorial and demos, so stay tuned."
