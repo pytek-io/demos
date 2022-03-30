@@ -182,7 +182,7 @@ def app():
                                 os.path.split(app_path.split("#")[0])[0], "default"
                             )
                         ),
-                        style={"width": "100%"},
+                        style={"width": "calc(min(100%, 70vh))"},
                         className="swiper-lazy",
                         custom_attributes={"data-swipe-ignore": True},
                     ),
@@ -192,7 +192,7 @@ def app():
             for name, app_path in GALLERY_MENU[:-1]  # excluding presentation
         ],
         navigation=True,
-        style={"width": "100%"},
+        style={"width": "calc(min(100%, 70vh))", "margin": "0 auto"},
     )
     main_page = div(
         [
