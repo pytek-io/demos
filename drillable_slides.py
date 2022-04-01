@@ -21,6 +21,7 @@ BODY_STYLE = {"backgroundColor": "rgb" + str(BACKGROUND_COLOR), "fontSize": 10}
 CSS = ["demos/presentation.css"]
 RIGHT_ARROW = 39
 LEFT_ARROW = 37
+SPACE_BAR = 32
 LOGO_HEIGHT = 52
 BOTTOM_HEIGHT = 52
 HOME_PAGE = "website.home"
@@ -136,7 +137,7 @@ def create_answer_box(answer, details, detail_level):
         div(
             [
                 div(
-                    lambda: answer + ("" if detail_level() == 2 else ".."),
+                    lambda: answer + ("." if detail_level() == 2 else " ...see more"),
                     onClick=update_detail_level,
                 ),
                 lambda: div(
@@ -319,7 +320,7 @@ def app():
 
     def page_index():
         args = window.hash().split("/")
-        return min(int(args[1]) if len(args) > 1 else 0, len(slides()) - 1)
+        return min(int(args[1] if args[1] else 0) if len(args) > 1 else 0, len(slides()) - 1)
 
     def set_page_index(index):
         window.hash.set(f"{file_name}/{index}")
@@ -348,7 +349,7 @@ def app():
     window.add_event_listener(
         "keydown",
         "keyCode",
-        lambda k: k in (RIGHT_ARROW, LEFT_ARROW) and safe_increment(k == RIGHT_ARROW),
+        lambda k: k in (RIGHT_ARROW, LEFT_ARROW, SPACE_BAR) and safe_increment(k != LEFT_ARROW),
     )
     slides = CachedEvaluation(generate_slides)
     full_screen_icon = create_icon(
