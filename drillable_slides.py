@@ -12,13 +12,14 @@ from reflect import (
 from reflect_html import a, div, img, path, svg, style
 from reflect_swiper import Swiper, SwiperSlide
 from website.common import BACKGROUND_COLOR, FONT_FAMILY, GREEN, LIGHT_BLUE
-from website.home import SLOGAN
+from website.home import SLOGAN, HIDE_SCROLL_BAR_STYLE
 from website.main import HTML_LINKS
 from website.reflect.gallery import MENU as GALLERY_MENU
 
 TITLE = "Early adopters presentation"
 BODY_STYLE = {"backgroundColor": "rgb" + str(BACKGROUND_COLOR), "fontSize": 10}
-CSS = ["demos/presentation.css", "demos/almost_dark_scrollbars.css"]
+CSS = ["demos/presentation.css"]
+
 RIGHT_ARROW = 39
 LEFT_ARROW = 37
 SPACE_BAR = 32
@@ -262,6 +263,7 @@ def app():
             ],
             style={
                 "overflowY": "scroll",
+                "scrollbarWidth": "none",
                 "paddingTop": 10,
             },
         )
@@ -320,7 +322,9 @@ def app():
 
     def page_index():
         args = window.hash().split("/")
-        return min(int(args[1] if args[1] else 0) if len(args) > 1 else 0, len(slides()) - 1)
+        return min(
+            int(args[1] if args[1] else 0) if len(args) > 1 else 0, len(slides()) - 1
+        )
 
     def set_page_index(index):
         window.hash.set(f"{file_name}/{index}")
@@ -349,7 +353,8 @@ def app():
     window.add_event_listener(
         "keydown",
         "keyCode",
-        lambda k: k in (RIGHT_ARROW, LEFT_ARROW, SPACE_BAR) and safe_increment(k != LEFT_ARROW),
+        lambda k: k in (RIGHT_ARROW, LEFT_ARROW, SPACE_BAR)
+        and safe_increment(k != LEFT_ARROW),
     )
     slides = CachedEvaluation(generate_slides)
     full_screen_icon = create_icon(
@@ -424,6 +429,7 @@ def app():
 
     return div(
         [
+            style(HIDE_SCROLL_BAR_STYLE),
             div(
                 a(
                     img(
@@ -453,6 +459,7 @@ def app():
                 style={
                     "flex": 1,
                     "overflowY": "scroll",
+                    "scrollbarWidth": "none",
                     "maxHeight": f"calc(100vh - {LOGO_HEIGHT + BOTTOM_HEIGHT}px)",
                 },
             ),
