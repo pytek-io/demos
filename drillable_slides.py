@@ -18,7 +18,7 @@ from website.reflect.gallery import MENU as GALLERY_MENU
 
 TITLE = "Early adopters presentation"
 BODY_STYLE = {"backgroundColor": "rgb" + str(BACKGROUND_COLOR), "fontSize": 10}
-CSS = ["demos/presentation.css"]
+CSS = ["demos/presentation.css", "demos/almost_dark_scrollbars.css"]
 RIGHT_ARROW = 39
 LEFT_ARROW = 37
 SPACE_BAR = 32
@@ -458,7 +458,6 @@ def app():
             ),
             # dummy bottom div to ensure the main one is centered
             div(None, style={"height": BOTTOM_HEIGHT}),
-            style("swiper-navigation-size: 10px;"),
             div(
                 bottom,
                 style={
