@@ -355,8 +355,6 @@ def app():
     full_screen_icon = create_icon(
         lambda: minimize if full_screen() else maximize,
         fill="white",
-        width="2.5vh",
-        height="2.5vh",
         style={
             "pointerEvents": "all",
             "cursor": "pointer",

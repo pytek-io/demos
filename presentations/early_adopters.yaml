@@ -20,7 +20,7 @@
 
 - - What are Reflect limitations compared to existing solutions?
   - Reflect web apps work only in connected mode and use React UI components only
-  - The connected mode restriction means that Reflect is not suitable for use with unreliable connections. React is by far the most popular UI framework currently in use. The only domain for which React is not suitable is highly bespoke user experiences such as games.
+  - The connected mode restriction means that Reflect is not suitable for use with poor connections. React is by far the most popular UI framework currently in use. The only domain for which React is not suitable is highly bespoke user experiences such as games.
 
 
 - - Are there any examples of apps built on top of Reflect yet?
