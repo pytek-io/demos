@@ -19,8 +19,8 @@
   - "Equivalent technical infrastructures are not standardized. They usually comprise a JavaScript front-end part and a back-end part written in a different programming language. Building and maintaining these infrastructures is challenging and hardly relevant to the actual business needs. Comparable solutions exist on different platforms (eg: NodeJS, MS Blazor, Shiny). The ones available in Python have been built for rather specific use (eg: Plotly, Streamlit)"
 
 - - What are Reflect limitations compared to existing solutions?
-  - Reflect web apps work only in connected mode and use React UI components only
-  - The connected mode restriction means that Reflect is not suitable for use with poor connections. React is by far the most popular UI framework currently in use. The only domain for which React is not suitable is highly bespoke user experiences such as games.
+  - Reflect apps require a constant connection to the server and use React UI components exclusively.
+  - React is by far the most popular UI framework currently in use. The only domain for which it is not suitable is highly bespoke user experiences such as games.
 
 
 - - Are there any examples of apps built on top of Reflect yet?

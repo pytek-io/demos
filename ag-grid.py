@@ -1,3 +1,4 @@
+from itertools import count, islice
 import random
 from datetime import date, datetime
 
@@ -7,45 +8,71 @@ from reflect_aggrid import AgGridColumn, AgGridReact
 from reflect_html import div
 from reflect_utils.formatters import (
     boolToString,
-    replace_value,
     round_value_to_2_digits,
     toLocaleDateString,
-    toLocaleString,
     numeral,
 )
 
 TITLE = "AG Grid Example"
 FAVICON = "website/static/ag-grid_favicon.png"
-NB_ROWS = 10
-
-
-editable = {
-    "editable": True,
-    "enableCellChangeFlash": True,
-    "onCellValueChanged": Callback(
-        print, args=["data.str", "newValue"]
-    ),
-    "singleClickEdit": True,
-}
-
-
-def make_editable(definition):
-    return dict(definition.items(), **editable)
-
-
-details = dict(field="int", headerName="Integer", valueValueFormatter=numeral)
+NB_ROWS = 100
 
 
 def app():
+    def create_line():
+        index = count(0)
+        while True:
+            index_value = next(index)
+            even_row = index_value == 0
+            yield [
+                random.randrange(0, 100000),
+                random.randrange(0, 100000) if even_row else 0,
+                even_row,
+                random.uniform(0.0, 100.0),
+                next(lorem.word()),
+                date.today(),
+                datetime.now(),
+            ]
+
+    values = list(islice(create_line(), 0, NB_ROWS))
+    rowData = dict(
+        zip(
+            [
+                "id",
+                "int",
+                "int_blank",
+                "bool",
+                "float",
+                "str",
+                "date",
+                "datetime",
+            ],
+            zip(range(NB_ROWS), *values),
+        ),
+    )
+    editable = {
+        "editable": True,
+        "enableCellChangeFlash": True,
+        "onCellValueChanged": Callback(print, args=["data.int", "newValue"]),
+        "singleClickEdit": True,
+    }
+
+    def make_editable(definition):
+        return dict(definition.items(), **editable)
+
     cols = [
+        AgGridColumn(
+            **make_editable(
+                dict(field="id", headerName="id", visible=False)
+            )
+        ),
+        AgGridColumn(
+            **make_editable(
+                dict(field="int", headerName="Integer", valueValueFormatter=numeral)
+            )
+        ),
         AgGridColumn(field="str", headerName="String", cellStyle={"textAlign": "left"}),
         AgGridColumn(field="bool", headerName="Bool", valueValueFormatter=boolToString),
-        AgGridColumn(**make_editable(details)),
-        AgGridColumn(
-            field="int_blank",
-            headerName="Integer Blank Zeroes",
-            valueNumberFormatter=replace_value(toLocaleString, 0, "-"),
-        ),
         AgGridColumn(
             field="float",
             headerName="Float",
@@ -60,17 +87,6 @@ def app():
             valueValueFormatter=toLocaleDateString,
         ),
     ]
-    rowData = {
-        "bool": [i % 2 == 0 for i in range(NB_ROWS)],
-        "int": [random.randrange(0, 100000) for _ in range(NB_ROWS)],
-        "int_blank": [
-            random.randrange(0, 100000) if i % 2 == 0 else 0 for i in range(NB_ROWS)
-        ],
-        "float": [random.uniform(0.0, 100.0) for _ in range(NB_ROWS)],
-        "str": [next(lorem.word()) for _ in range(NB_ROWS)],
-        "date": [date.today() for _ in range(NB_ROWS)],
-        "datetime": [datetime.now() for _ in range(NB_ROWS)],
-    }
     grid = AgGridReact(
         cols,
         rowData=rowData,
@@ -83,5 +99,5 @@ def app():
 
     return div(
         grid,
-        style=dict(width="100%", height=f"{30 + 25 * NB_ROWS}px"),
+        style=dict(width="100%", height="100%"),
     )
