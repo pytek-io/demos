@@ -47,7 +47,7 @@ def app():
                 "date",
                 "datetime",
             ],
-            zip(range(NB_ROWS), *values),
+            [list(range(NB_ROWS))] + list(zip(*values)),
         ),
     )
     editable = {
@@ -56,22 +56,23 @@ def app():
         "onCellValueChanged": Callback(print, args=["data.int", "newValue"]),
         "singleClickEdit": True,
     }
-
-    def make_editable(definition):
-        return dict(definition.items(), **editable)
+    def update_values(update):
+        index, value = update
+        values[index][4] = value
 
     cols = [
+        AgGridColumn(field="id", headerName="id", hide=True),
+        AgGridColumn(field="int", headerName="Integer", valueValueFormatter=numeral),
         AgGridColumn(
-            **make_editable(
-                dict(field="id", headerName="id", visible=False)
-            )
+            field="str",
+            headerName="String",
+            cellStyle={"textAlign": "left"},
+            editable=True,
+            onCellValueChanged=Callback(
+                update_values, args=["data.id", "newValue"]
+            ),
+            singleClickEdit=True,
         ),
-        AgGridColumn(
-            **make_editable(
-                dict(field="int", headerName="Integer", valueValueFormatter=numeral)
-            )
-        ),
-        AgGridColumn(field="str", headerName="String", cellStyle={"textAlign": "left"}),
         AgGridColumn(field="bool", headerName="Bool", valueValueFormatter=boolToString),
         AgGridColumn(
             field="float",

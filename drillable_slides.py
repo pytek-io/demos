@@ -9,7 +9,7 @@ from reflect import (
     make_observable,
     CachedEvaluation,
 )
-from reflect_html import a, div, img, path, svg, style
+from reflect_html import a, div, img, path, svg, style, p, u
 from reflect_swiper import Swiper, SwiperSlide
 from website.common import BACKGROUND_COLOR, FONT_FAMILY, GREEN, LIGHT_BLUE
 from website.home import SLOGAN, HIDE_SCROLL_BAR_STYLE
@@ -137,16 +137,14 @@ def create_answer_box(answer, details, detail_level):
     return div(
         div(
             [
-                div(
-                    lambda: answer + ("." if detail_level() == 2 else " ...see more"),
+                p(
+                    lambda: [answer + "."] if detail_level() == 2 else [answer + ". ", u("...see more")],
                     onClick=update_detail_level,
                 ),
-                lambda: div(
-                    details,
+                p(
+                    details if detail_level() == 2 else None,
                     onClick=update_detail_level,
-                )
-                if detail_level() == 2
-                else None,
+                ),
             ]
         ),
         style={
@@ -426,7 +424,8 @@ def app():
     logo_style = {"height": f"calc({LOGO_HEIGHT}px + {MARGIN_TOP_LOGO}rem"}
     if is_touch_screen:
         logo_style.update(marginLeft="auto", marginRight="auto")
-
+    import inspect
+    print(inspect.getfile(u))
     return div(
         [
             style(HIDE_SCROLL_BAR_STYLE),
