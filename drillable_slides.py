@@ -199,7 +199,7 @@ def app():
     )
     main_page = div(
         [
-            title(SLOGAN, LIGHT_BLUE, fontSize="3rem"),
+            title(SLOGAN, LIGHT_BLUE, fontSize="2.5rem"),
             title(
                 "Early adopters presentation",
                 color=GREEN,
