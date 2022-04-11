@@ -138,7 +138,9 @@ def create_answer_box(answer, details, detail_level):
         div(
             [
                 p(
-                    lambda: [answer + "."] if detail_level() == 2 else [answer + ". ", u("...see more")],
+                    lambda: [answer + "."]
+                    if detail_level() == 2
+                    else [answer + ". ", u("...see more")],
                     onClick=update_detail_level,
                 ),
                 p(
@@ -172,7 +174,7 @@ def app():
     full_screen = make_observable(False)
     details_level = make_observable(1)
     margin = ResponsiveValue(xs=3, sm=10, md=10, lg=15, xl=None, xxl=30)
-    image = Swiper(
+    swiper = Swiper(
         [
             SwiperSlide(
                 [
@@ -196,12 +198,26 @@ def app():
     )
     main_page = div(
         [
-            title(SLOGAN, LIGHT_BLUE, fontSize="2rem"),
-            div(image, custom_attributes={"data-swipe-ignore": True}),
+            title(SLOGAN, LIGHT_BLUE, fontSize="3rem"),
             title(
                 "Early adopters presentation",
                 color=GREEN,
                 fontSize="1.5rem",
+            ),
+        ],
+    )
+
+    last_page = div(
+        [
+            title("A few examples", LIGHT_BLUE, fontSize="2rem"),
+            div(swiper, custom_attributes={"data-swipe-ignore": True}),
+            title(
+                a(
+                    "Go to main pytek.io website",
+                    href="https://pytek.io",
+                    target="_blank",
+                    style=dict(color=GREEN, fontSize="1.5rem"),
+                ),
             ),
         ],
     )
@@ -316,7 +332,7 @@ def app():
             current_page.append((question, answer, details))
             current_height += content_height
         slides.append(create_page(current_page, details_level()))
-        return [main_page] + slides
+        return [main_page] + slides + [last_page]
 
     def page_index():
         args = window.hash().split("/")
@@ -425,7 +441,7 @@ def app():
     if is_touch_screen:
         logo_style.update(marginLeft="auto", marginRight="auto")
     import inspect
-    print(inspect.getfile(u))
+
     return div(
         [
             style(HIDE_SCROLL_BAR_STYLE),
