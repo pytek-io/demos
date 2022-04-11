@@ -1,6 +1,7 @@
 import os
 import math
 from functools import partial
+from sys import builtin_module_names
 
 import yaml
 from reflect import (
@@ -206,18 +207,23 @@ def app():
             ),
         ],
     )
-
+    current_demo_name = lambda: GALLERY_MENU[swiper() or 0][0]
     last_page = div(
         [
-            title("A few examples", LIGHT_BLUE, fontSize="2rem"),
+            title("A few examples...", LIGHT_BLUE, fontSize="2rem"),
             div(swiper, custom_attributes={"data-swipe-ignore": True}),
             title(
+                current_demo_name,
+                color=GREEN,
+                fontSize="1.5rem",
+            ),
+            title(
                 a(
-                    "Go to main pytek.io website",
+                    "pytek.io",
                     href="https://pytek.io",
                     target="_blank",
-                    style=dict(color=GREEN, fontSize="1.5rem"),
-                ),
+                    style=dict(color=LIGHT_BLUE, fontSize="1.5rem"),
+                )
             ),
         ],
     )
