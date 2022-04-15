@@ -15,8 +15,8 @@ from reflect import (
     js,
     make_observable,
     memoize,
+    ResponsiveValue
 )
-from reflect.common import ResponsiveValue
 from reflect_antd import (
     AutoComplete,
     Button,
