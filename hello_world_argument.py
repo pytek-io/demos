@@ -1,4 +1,5 @@
 from reflect_html import h1
 
+
 def app():
-    return h1("Hello world!", style=dict(color="green", textAlign="center"))
+    return h1("Hello world!", style={"color": "green", "textAlign": "center"})
