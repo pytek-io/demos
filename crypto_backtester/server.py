@@ -88,7 +88,10 @@ class Server:
             )
         )
         pending_result = self.pending_queries[request_id] = PendingResult()
-        return await pending_result.wait()
+        try:
+            return await pending_result.wait()
+        except Exception as e:
+            raise Exception(f"An error has occurred while querying derebit {e}")
 
     async def get_currency_data(self, currency, start, end, resolution):
         return await self.query_derebit(
