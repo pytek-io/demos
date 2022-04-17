@@ -28,12 +28,14 @@ from reflect_utils.common import (
 )
 from reflect_utils.md_parsing import (
     extract_style_definitions,
-    is_header_two,
     render_node,
     replace_weird_escaped_pipes,
 )
 from reflect_utils.misc import get_module_name
 
+
+def is_header_two(token):
+    return isinstance(token, block_token.Heading) and token.level == 2
 
 def split_list(elements, size):
     # should simply be zip(*chunk(elements, size)), but for some reasons
@@ -365,7 +367,7 @@ def app():
                             **MAIN_COL_BREAK_POINTS,
                         ),
                     ],
-                    # gutter={"xs": 8, "sm": 16, "md": 24, "lg": 32},
+                    gutter={"xs": 8, "sm": 16, "md": 24, "lg": 32},
                 ),
                 className="main-wrapper",
             ),

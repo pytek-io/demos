@@ -17,3 +17,5 @@ pandas
 protobuf
 py_vollib
 py_vollib_vectorized
+SQLAlchemy
+matplotlib

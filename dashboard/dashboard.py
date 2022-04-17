@@ -5,7 +5,7 @@ from reflect_utils import create_icon
 from demos.stocks_history.stocks_history import App as StockHistoryApp
 from demos.stock_prices.main import App as StockApp
 from demos.yahoofinancelive.main import App as YahooFinanceApp
-from demos.altair.car_data_set import App as AltairApp
+from demos.charts.altair.car_data_set import App as AltairApp
 
 TITLE = "Dashboard"
 DEFAULT_TICKERS = ["AMZN"]

@@ -2,11 +2,11 @@ from reflect_bokeh import Figure
 from bokeh.plotting import figure
 import numpy as np
 
-from website.main import DESCRIPTION
 
 FAVICON = "https://static.bokeh.org/favicon/favicon-32x32.png"
 TITLE = "Bokeh example"
 DESCRIPTION = "Simple Bokeh plot"
+
 
 def app():
     # generate some data

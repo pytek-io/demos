@@ -169,7 +169,7 @@ def nb_lines(content, line_length):
 
 def app():
     window = get_window()
-    is_touch_screen = window.is_touch_screen
+    is_touch_screen = window.browser_details["is_touch_screen"]
     file_name = window.hash().split("/")[0]
     content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
     full_screen = make_observable(False)
