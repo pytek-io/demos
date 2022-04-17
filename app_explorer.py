@@ -11,7 +11,6 @@ from reflect_utils.md_parsing import parse_md_doc
 
 TITLE = "App explorer"
 ALMOST_BLACK = "#0f1724"
-KNOWN_FORMATS = ["py", "svg", "md", "css", "yaml", "json"]
 
 
 def app():
@@ -46,22 +45,23 @@ def app():
             else:
                 return div(None)
 
-    editor = div(
-        lambda: CodeEditor(
-            defaultValue=open(actual_path(), "r").read(),
-            options=dict(
-                minimap={"enabled": False},
-                lineNumbers=True,
-                glyphMargin=False,
-                wordWrap=True,
-                readOnly=True,
-            ),
-            defaultLanguage="python",
-            height=600,
-        )
-        if actual_path() and actual_path().rsplit(".", 1)[-1] in KNOWN_FORMATS
-        else None
-    )
+    def maybe_editor():
+        if actual_path():
+            try:
+                return CodeEditor(
+                defaultValue=open(actual_path(), "r").read(),
+                options=dict(
+                    minimap={"enabled": False},
+                    lineNumbers=True,
+                    glyphMargin=False,
+                    wordWrap=True,
+                    readOnly=True,
+                ),
+                defaultLanguage="python",
+                height=600,
+            )
+            except:
+                pass
     defaultLayout = {
         "dockbox": {
             "mode": "horizontal",
@@ -79,7 +79,7 @@ def app():
                             "tabs": [
                                 (
                                     relative_path,
-                                    editor,
+                                    div(maybe_editor),
                                 ),
                             ],
                         },
@@ -93,6 +93,7 @@ def app():
                                         style={
                                             "height": "inherit",
                                             "width": "inherit",
+                                            "padding": 20
                                         },
                                     ),
                                 )
