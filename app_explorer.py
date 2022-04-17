@@ -7,27 +7,18 @@ from reflect_html import a, div, img
 from reflect_monaco import Editor as CodeEditor
 from reflect_rcdock import DockLayoutReflect
 from reflect_utils import create_file_explorer, evaluate_demo_module, get_module_name
+from reflect_utils.md_parsing import parse_md_doc
 
 TITLE = "App explorer"
 ALMOST_BLACK = "#0f1724"
+KNOWN_FORMATS = ["py", "svg", "md", "css", "yaml", "json"]
 
 
 def app():
     base_path = get_window().hash()
-    counter = 0
-
-    def create_tab(title, application):
-        nonlocal counter
-        counter += 1
-        return {
-            "id": str(counter),
-            "title": div(title) if callable(title) else title,
-            "content": application,
-            "cached": True,
-        }
-
+    filter_method = lambda p: any(p.startswith(s) for s in ["__", "."])
     current_path, tree = create_file_explorer(
-        base_path, folder_filter=lambda p: p.startswith("__")
+        base_path, folder_filter=filter_method, file_filter=filter_method
     )
 
     def actual_path():
@@ -48,8 +39,10 @@ def app():
                 return (
                     component if isinstance(component, Component) else component.content
                 )
-            elif extension in ["svg"]:
+            elif extension in ["svg", "png", "gif"]:
                 return img(src=actual_path_value)
+            elif extension == "md":
+                return parse_md_doc(open(actual_path_value, "r").read())
             else:
                 return div(None)
 
@@ -66,7 +59,7 @@ def app():
             defaultLanguage="python",
             height=600,
         )
-        if actual_path()
+        if actual_path() and actual_path().rsplit(".", 1)[-1] in KNOWN_FORMATS
         else None
     )
     defaultLayout = {
@@ -100,7 +93,6 @@ def app():
                                         style={
                                             "height": "inherit",
                                             "width": "inherit",
-                                            "padding": 20,
                                         },
                                     ),
                                 )
@@ -127,7 +119,7 @@ def app():
                     div(
                         lambda: a(
                             "launch",
-                            href=lambda: "/app/" + actual_path()[:-3],
+                            href=lambda: "/app/" + actual_path()[:-3] if actual_path() else None,
                             target="_blank",
                             title=lambda: f"Launch {actual_path()}",
                         )
