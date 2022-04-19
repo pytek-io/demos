@@ -9,6 +9,12 @@ Reflect is a lower level framework in that it does not offer any pre-build funct
 
 # What problem are we solving?
 
+Developing a web application is hard work.
+
+1. Setup: Putting the right components/technologies together
+2. Develop: Develop functionalities on different ends (server vs client) in two different programming languages
+3. Operate: Ensure releases are delivered on a regular basis, provide failover mechanisms, transparent bug reporting, etc...
+
 We are making business apps development an order of magnitude easier. This makes possible 
 
 Except for software companies, software development is a powerful mean to an end. 
