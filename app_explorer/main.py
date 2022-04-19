@@ -2,7 +2,7 @@
 
 import os
 
-from reflect import get_window, Component, memoize
+from reflect import get_window, memoize
 from reflect_html import a, div, img
 from reflect_monaco import Editor as CodeEditor
 from reflect_rcdock import DockLayoutReflect
