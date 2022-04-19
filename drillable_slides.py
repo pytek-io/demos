@@ -169,8 +169,8 @@ def nb_lines(content, line_length):
 
 def app():
     window = get_window()
-    is_touch_screen = window.browser_details["is_touch_screen"]
-    file_name = window.hash().split("/")[0]
+    is_touch_device = window.browser_details["is_touch_device"]
+    file_name = (window.hash() or "early_adopters/0").split("/")[0]
     content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
     full_screen = make_observable(False)
     details_level = make_observable(1)
@@ -253,7 +253,7 @@ def app():
                         "margin": 0,
                         "pointerEvents": "all",
                         "cursor": "pointer",
-                        "textAlign": "center" if is_touch_screen else None,
+                        "textAlign": "center" if is_touch_device else None,
                     },
                 ),
                 lambda: create_answer_box(answer, details, detail_level)
@@ -419,7 +419,7 @@ def app():
             ]
         )
 
-    if is_touch_screen:
+    if is_touch_device:
         icons = left_center_right(detail_level_icon, None, page_bullets)
     else:
         icons = left_center_right(full_screen_icon, detail_level_icon, page_bullets)
@@ -444,7 +444,7 @@ def app():
         )
 
     logo_style = {"height": f"calc({LOGO_HEIGHT}px + {MARGIN_TOP_LOGO}rem"}
-    if is_touch_screen:
+    if is_touch_device:
         logo_style.update(marginLeft="auto", marginRight="auto")
     import inspect
 

@@ -1,8 +1,3 @@
-import pickle
-from datetime import datetime
-
-from reflect_altair import Chart
-from reflect_html import div
 import altair as alt
 import pandas as pd
 
@@ -100,27 +95,4 @@ def create_performance_chart(df: pd.DataFrame, strike):
                 [ivol_mid, volume],
             ]
         ],
-    )
-
-
-def app(instrument_name="BTC-24JUN22-30000-C"):
-    """ "Display data for instrument saved in main"""
-    df = pickle.loads(open(f"{instrument_name}.pick", "rb").read())
-    _, expiry, strike, option_type = instrument_name.split("-")
-    expiry, option_type = datetime.strptime(expiry, "%d%b%y"), option_type.lower()
-    return div(
-        Chart(
-            create_performance_chart(df, int(strike)),
-            style={
-                # magic numbers to get altair.vconcat to dimension charts correctly (responsiveness is broken as charts size incread by a factor of two...)
-                "height": "40%",
-                "width": "90%",
-            },
-        ),
-        style={
-            "position": "absolute",
-            "height": "95%",
-            "width": "95%",
-            "paddingTop": 20,
-        },
     )

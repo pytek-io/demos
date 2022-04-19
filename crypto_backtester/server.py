@@ -5,7 +5,7 @@ from itertools import count
 from time import perf_counter
 
 import anyio
-from reflect import Window
+from reflect import Window, get_window
 from reflect_utils.common import ws_connection_manager
 from websockets import ConnectionClosed
 
@@ -39,7 +39,7 @@ class PendingResult:
 
 class Server:
     def __init__(self, window: Window, debug=False):
-        self.window: Window = window
+        self.window: Window = get_window()
         self.request_id = count()
         self.pending_queries = {}
         self.connection_ready = anyio.Event()

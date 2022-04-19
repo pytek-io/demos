@@ -1,5 +1,7 @@
 # What functionality does Reflect provide?
-Reflect can be used to serve either stand alone web apps or dynamic content embedded in existing webpages. In both cases users load a generic JavaScript client app that will be driven from a Python process on the server side.
+Reflect can be used to build either stand alone web apps or dynamic content embedded in existing webpages. 
+
+In both cases users load a generic JavaScript client app that will be driven from a Python process on the server side.
 
 # How does Reflect relates to No/Low Code solutions?
 Low/No code solutions generally comes with a powerful UI allowing to extract and publish data and define actions either through a UI interface or short code.
@@ -7,7 +9,10 @@ Reflect is a lower level framework in that it does not offer any pre-build funct
 
 # What problem are we solving?
 
-Except for software companies, software development is a powerful mean to an end that is resource intensive to create and operate subsequently. Software development process can be trivially described as addressing business needs in a form that can be understood by a machine. Development processes have became increasingly more efficient mostly thanks to the Agile movement. The technical landscape has also undergone some radical changes over the last decade. In particular high level programming languages have became much more widespread allowing for massive productivity boost, although the most significant area of improvement is arguably the web technologies. Those have not only dramatically transformed user experience but transformed radically software deployment and operation to give rise to SASS. But as dramatic as those transformations have been, those have not fully had much effect on business apps development yet. This area did improve over the years but only marginally. We believe there is now a potential for significant improvement in this domain. 
+We are making business apps development an order of magnitude easier. This makes possible 
+
+Except for software companies, software development is a powerful mean to an end. 
+It is resource intensive to create and operate subsequently. Software development process can be trivially described as addressing business needs in a form that can be understood by a machine. Development processes have became increasingly more efficient mostly thanks to the Agile movement. The technical landscape has also undergone some radical changes over the last decade. In particular high level programming languages have became much more widespread allowing for massive productivity boost, although the most significant area of improvement is arguably the web technologies. Those have not only dramatically transformed user experience but transformed radically software deployment and operation to give rise to SASS. But as dramatic as those transformations have been, those have not fully had much effect on business apps development yet. This area did improve over the years but only marginally. We believe there is now a potential for significant improvement in this domain. 
 
 # Common business application development solutions
 

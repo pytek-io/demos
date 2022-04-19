@@ -2,7 +2,7 @@
 
 import os
 
-from reflect import get_window, Component
+from reflect import get_window, Component, memoize
 from reflect_html import a, div, img
 from reflect_monaco import Editor as CodeEditor
 from reflect_rcdock import DockLayoutReflect
@@ -11,6 +11,10 @@ from reflect_utils.md_parsing import parse_md_doc
 
 TITLE = "App explorer"
 ALMOST_BLACK = "#0f1724"
+
+
+def call_if_callable(maybe_callable):
+    return maybe_callable() if callable(maybe_callable) else maybe_callable
 
 
 def app():
@@ -27,7 +31,8 @@ def app():
 
     relative_path = lambda: actual_path() or "No app selected"
 
-    def component():
+    @memoize()
+    def component_and_settings():
         actual_path_value = actual_path()
         if actual_path_value:
             extension = actual_path_value.rsplit(".", 1)[-1]
@@ -35,9 +40,7 @@ def app():
                 _success, _css, _title, component = evaluate_demo_module(
                     get_module_name(actual_path()), {}
                 )
-                return (
-                    component if isinstance(component, Component) else component.content
-                )
+                return component
             elif extension in ["svg", "png", "gif"]:
                 return img(src=actual_path_value)
             elif extension == "md":
@@ -45,23 +48,40 @@ def app():
             else:
                 return div(None)
 
+    def component():
+        component_and_settings_value = component_and_settings()
+        return (
+            component_and_settings_value.content
+            if hasattr(component_and_settings_value, "content")
+            else component_and_settings_value
+        )
+
+    def settings():
+        component_and_settings_value = component_and_settings()
+        return (
+            call_if_callable(component_and_settings_value.settings)
+            if hasattr(component_and_settings_value, "settings")
+            else "No settings to show"
+        )
+
     def maybe_editor():
         if actual_path():
             try:
                 return CodeEditor(
-                defaultValue=open(actual_path(), "r").read(),
-                options=dict(
-                    minimap={"enabled": False},
-                    lineNumbers=True,
-                    glyphMargin=False,
-                    wordWrap=True,
-                    readOnly=True,
-                ),
-                defaultLanguage="python",
-                height=600,
-            )
+                    defaultValue=open(actual_path(), "r").read(),
+                    options=dict(
+                        minimap={"enabled": False},
+                        lineNumbers=True,
+                        glyphMargin=False,
+                        wordWrap=True,
+                        readOnly=True,
+                    ),
+                    defaultLanguage="python",
+                    height=600,
+                )
             except:
                 pass
+
     defaultLayout = {
         "dockbox": {
             "mode": "horizontal",
@@ -93,10 +113,21 @@ def app():
                                         style={
                                             "height": "inherit",
                                             "width": "inherit",
-                                            "padding": 20
+                                            "padding": 20,
                                         },
                                     ),
-                                )
+                                ),
+                                (
+                                    "Settings",
+                                    div(
+                                        settings,
+                                        style={
+                                            "height": "inherit",
+                                            "width": "inherit",
+                                            "padding": 20,
+                                        },
+                                    ),
+                                ),
                             ],
                         },
                     ],
@@ -120,7 +151,9 @@ def app():
                     div(
                         lambda: a(
                             "launch",
-                            href=lambda: "/app/" + actual_path()[:-3] if actual_path() else None,
+                            href=lambda: "/app/" + actual_path()[:-3]
+                            if actual_path()
+                            else None,
                             target="_blank",
                             title=lambda: f"Launch {actual_path()}",
                         )

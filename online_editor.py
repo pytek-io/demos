@@ -44,7 +44,7 @@ def create_editor(file, language, read_only):
 
 def app():
     window = get_window()
-    arguments = json.loads(window.hash())
+    arguments = json.loads(window.hash()) if window.hash() else {"main": "hello_world.py"}
     main, css = arguments["main"], arguments.get("css", [])
     window.add_css(css)
     main, kwargs = decode_url(main)
