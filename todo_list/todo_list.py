@@ -2,7 +2,7 @@
     Simple todo application based on https://github.com/leonardopliski/react-antd-todo
 """
 import json
-from os.path import split
+from os.path import split, join, dirname
 from itertools import count
 
 from reflect import Mapping, autorun, get_window, make_observable
@@ -52,7 +52,7 @@ def load_from_file(file):
     return json.loads(open(file, "r").read())
 
 
-class App:
+class Application:
     def __init__(self, file_path, update_title):
         todos = load_from_file(file_path)
         self.todo_item_counter = count(
@@ -67,7 +67,9 @@ class App:
         file_name = split(file_path)[1].split(".")[0]
 
         def on_change():
-            nb_completed = iterable_length(filter(lambda item: item["completed"](), self.todos()))
+            nb_completed = iterable_length(
+                filter(lambda item: item["completed"](), self.todos())
+            )
             update_title(f"({nb_completed}/{len(todos)}) {file_name}")
             save_to_file(file_path, todos)
 
@@ -185,4 +187,10 @@ class App:
 
 def app():
     window = get_window()
-    return div(lambda: App(window.hash(), window.update_title).root())
+
+    return div(
+        lambda: Application(
+            window.hash() or join(dirname(__file__), "default_todo_list.json"),
+            window.update_title,
+        ).root()
+    )
