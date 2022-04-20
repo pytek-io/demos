@@ -1,7 +1,6 @@
 import os
 import math
 from functools import partial
-from sys import builtin_module_names
 
 import yaml
 from reflect import (
@@ -167,14 +166,87 @@ def nb_lines(content, line_length):
     return math.ceil(len(content) / line_length)
 
 
-def app():
+def create_question_and_answer(
+    default_detail_level_value,
+    on_drill_down,
+    question,
+    answer,
+    details,
+    is_touch_device,
+):
+    detail_level = make_observable(default_detail_level_value)
+
+    def drill():
+        on_drill_down(detail_level)
+        detail_level.set(
+            default_detail_level_value
+            + (0 if detail_level() != default_detail_level_value else 1)
+        )
+
+    return div(
+        [
+            div(
+                question,
+                onClick=drill,
+                style={
+                    "fontFamily": FONT_FAMILY,
+                    "color": GREEN,
+                    "fontSize": f"{QUESTION_REM}rem",
+                    "padding": 0,
+                    "margin": 0,
+                    "pointerEvents": "all",
+                    "cursor": "pointer",
+                    "textAlign": "center" if is_touch_device else None,
+                },
+            ),
+            lambda: create_answer_box(answer, details, detail_level)
+            if detail_level() > 0
+            else None,
+        ]
+    )
+
+
+def create_page(items, default_detail_level_value, is_touch_device):
+    current_detail_level = None
+
+    def on_drill_down(new_detail_level):
+        nonlocal current_detail_level
+        if (
+            current_detail_level is not None
+            and current_detail_level is not new_detail_level
+        ):
+            current_detail_level.set(default_detail_level_value)
+        current_detail_level = new_detail_level
+
+    return div(
+        [
+            create_question_and_answer(
+                default_detail_level_value, on_drill_down, is_touch_device, *item
+            )
+            for item in items
+        ],
+        style={
+            "overflowY": "scroll",
+            "scrollbarWidth": "none",
+            "paddingTop": 10,
+        },
+    )
+
+
+def slides_and_left_icon(file_name, is_touch_device, margin):
     window = get_window()
-    is_touch_device = window.browser_details["is_touch_device"]
-    file_name = (window.hash() or "early_adopters/0").split("/")[0]
-    content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
-    full_screen = make_observable(False)
     details_level = make_observable(1)
-    margin = ResponsiveValue(xs=3, sm=10, md=10, lg=15, xl=None, xxl=30)
+    content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
+    main_page = div(
+        [
+            title(SLOGAN, LIGHT_BLUE, fontSize="2.5rem"),
+            title(
+                "Early adopters presentation",
+                color=GREEN,
+                fontSize="1.5rem",
+            ),
+        ],
+    )
     swiper = Swiper(
         [
             SwiperSlide(
@@ -197,16 +269,6 @@ def app():
         navigation=True,
         style={"width": "calc(min(100%, 70vh))", "margin": "0 auto"},
     )
-    main_page = div(
-        [
-            title(SLOGAN, LIGHT_BLUE, fontSize="2.5rem"),
-            title(
-                "Early adopters presentation",
-                color=GREEN,
-                fontSize="1.5rem",
-            ),
-        ],
-    )
     current_demo_name = lambda: GALLERY_MENU[swiper() or 0][0]
     last_page = div(
         [
@@ -227,66 +289,6 @@ def app():
             ),
         ],
     )
-
-    def create_question_and_answer(
-        default_detail_level_value, on_drill_down, question, answer, details
-    ):
-        detail_level = make_observable(default_detail_level_value)
-
-        def drill():
-            on_drill_down(detail_level)
-            detail_level.set(
-                default_detail_level_value
-                + (0 if detail_level() != default_detail_level_value else 1)
-            )
-
-        return div(
-            [
-                div(
-                    question,
-                    onClick=drill,
-                    style={
-                        "fontFamily": FONT_FAMILY,
-                        "color": GREEN,
-                        "fontSize": f"{QUESTION_REM}rem",
-                        "padding": 0,
-                        "margin": 0,
-                        "pointerEvents": "all",
-                        "cursor": "pointer",
-                        "textAlign": "center" if is_touch_device else None,
-                    },
-                ),
-                lambda: create_answer_box(answer, details, detail_level)
-                if detail_level() > 0
-                else None,
-            ]
-        )
-
-    def create_page(items, default_detail_level_value):
-        current_detail_level = None
-
-        def on_drill_down(new_detail_level):
-            nonlocal current_detail_level
-            if (
-                current_detail_level is not None
-                and current_detail_level is not new_detail_level
-            ):
-                current_detail_level.set(default_detail_level_value)
-            current_detail_level = new_detail_level
-
-        return div(
-            [
-                create_question_and_answer(
-                    default_detail_level_value, on_drill_down, *item
-                )
-                for item in items
-            ],
-            style={
-                "overflowY": "scroll",
-                "scrollbarWidth": "none",
-                "paddingTop": 10,
-            },
-        )
 
     def generate_slides():
         resolution = window.width() * window.height() / 1000
@@ -334,11 +336,28 @@ def app():
                     [],
                     current_page,
                 )
-                slides.append(create_page(previous_page, details_level()))
+                slides.append(
+                    create_page(previous_page, details_level(), is_touch_device)
+                )
             current_page.append((question, answer, details))
             current_height += content_height
-        slides.append(create_page(current_page, details_level()))
+        slides.append(create_page(current_page, details_level(), is_touch_device))
         return [main_page] + slides + [last_page]
+
+    detail_level_icon = img(
+        src=lambda: f"demos/presentations/menu-icon-{details_level() + 1}.svg",
+        style=dict(width="1.6vh", pointerEvents="all", cursor="pointer"),
+        onClick=lambda: details_level.set((details_level() + 1) % 3),
+    )
+    return generate_slides, detail_level_icon
+
+
+def app():
+    window = get_window()
+    file_name = (window.hash() or "early_adopters").split("/")[0]
+    is_touch_device = window.browser_details["is_touch_device"]
+    full_screen = make_observable(False)
+    margin = ResponsiveValue(xs=3, sm=10, md=10, lg=15, xl=None, xxl=30)
 
     def page_index():
         args = window.hash().split("/")
@@ -376,6 +395,9 @@ def app():
         lambda k: k in (RIGHT_ARROW, LEFT_ARROW, SPACE_BAR)
         and safe_increment(k != LEFT_ARROW),
     )
+    generate_slides, detail_level_icon = slides_and_left_icon(
+        file_name, is_touch_device, margin
+    )
     slides = CachedEvaluation(generate_slides)
     full_screen_icon = create_icon(
         lambda: minimize if full_screen() else maximize,
@@ -385,11 +407,6 @@ def app():
             "cursor": "pointer",
         },
         onClick=lambda: window.update_full_screen(not full_screen()),
-    )
-    detail_level_icon = img(
-        src=lambda: f"demos/presentation/menu-icon-{details_level() + 1}.svg",
-        style=dict(width="1.6vh", pointerEvents="all", cursor="pointer"),
-        onClick=lambda: details_level.set((details_level() + 1) % 3),
     )
 
     def page_bullets():
