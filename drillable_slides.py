@@ -169,10 +169,10 @@ def nb_lines(content, line_length):
 def create_question_and_answer(
     default_detail_level_value,
     on_drill_down,
+    is_touch_device,
     question,
     answer,
     details,
-    is_touch_device,
 ):
     detail_level = make_observable(default_detail_level_value)
 
