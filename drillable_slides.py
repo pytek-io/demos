@@ -138,9 +138,7 @@ def create_answer_box(answer, details, detail_level):
         div(
             [
                 p(
-                    lambda: [answer + "."]
-                    if detail_level() == 2
-                    else [answer + ". ", u("...see more")],
+                    lambda: [answer + ".", u(" ...see more") if detail_level() == 1 else None],
                     onClick=update_detail_level,
                 ),
                 p(
@@ -395,10 +393,10 @@ def app():
         lambda k: k in (RIGHT_ARROW, LEFT_ARROW, SPACE_BAR)
         and safe_increment(k != LEFT_ARROW),
     )
-    generate_slides, detail_level_icon = slides_and_left_icon(
+    slides, detail_level_icon = slides_and_left_icon(
         file_name, is_touch_device, margin
     )
-    slides = CachedEvaluation(generate_slides)
+    slides = CachedEvaluation(slides)
     full_screen_icon = create_icon(
         lambda: minimize if full_screen() else maximize,
         fill="white",
