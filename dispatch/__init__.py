@@ -127,7 +127,7 @@ def create_grid(
     return title_component, content, update_grid
 
 
-class App:
+class Application:
     def __init__(self, window: Window):
         self.window: Window = window
         self.counter = count()
@@ -299,9 +299,11 @@ class App:
 async def app():
     window = get_window()
     argument = window.hash()
-    argument = json.loads(argument) if argument else {}
-    uri, archive = argument.get("uri", None), argument.get("archive", None)
-    app = App(window=window)
+    # quick fix to get this demos working in app_explorer (should be fixed by a smarter hash implementation)
+    # argument = json.loads(argument) if argument else {}
+    argument = {}
+    uri, archive = argument.get("uri", None), argument.get("archive", "demos/dispatch/replay.pick")
+    app = Application(window=window)
     # server_connection_host, http_port = "0.0.0.0", 30000
     # uri = "ws://{}:{}/ws".format(server_connection_host, http_port)
     # uri = "wss://30000-beige-clam-nmcnkydt.ws-eu08.gitpod.io/ws"

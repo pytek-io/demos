@@ -2,9 +2,9 @@ from reflect_antd import Menu
 from reflect_html import div
 from reflect_rcdock import DockLayoutReflect, LIGHT_GREY
 from reflect_utils import create_icon
-from demos.stocks_history.stocks_history import App as StockHistoryApp
-from demos.stock_prices.main import App as StockApp
-from demos.yahoofinancelive.main import App as YahooFinanceApp
+from demos.stocks_history import App as StockHistoryApp
+from demos.stock_prices import App as StockApp
+from demos.yahoofinancelive import App as YahooFinanceApp
 from demos.charts.altair.car_data_set import App as AltairApp
 
 TITLE = "Dashboard"

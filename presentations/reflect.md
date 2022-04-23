@@ -5,7 +5,7 @@ In both cases users load a generic JavaScript client app that will be driven fro
 
 # How does Reflect relates to No/Low Code solutions?
 Low/No code solutions generally comes with a powerful UI allowing to extract and publish data and define actions either through a UI interface or short code.
-Reflect is a lower level framework in that it does not offer any pre-build functionality such database connectors, .
+Reflect offers level framework which requires to write short Python script.
 
 # What problem are we solving?
 

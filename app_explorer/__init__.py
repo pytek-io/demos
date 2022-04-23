@@ -150,7 +150,7 @@ def app():
                     ),
                     div(
                         lambda: a(
-                            "launch",
+                            "launch app",
                             href=lambda: "/app/" + actual_path()[:-3]
                             if actual_path()
                             else None,

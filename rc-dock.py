@@ -49,6 +49,6 @@ def app():
         defaultLayout=defaultLayout,
         style={
             "width": "100%",
-            "height": "50vh",
+            "height": "50vh", # this is needed to show up properly when embedded in md doc
         },
     )
