@@ -252,7 +252,7 @@ def slides_and_left_icon(file_name, is_touch_device, margin):
                     img(
                         dataSrc=select_file_extension(
                             os.path.join(
-                                os.path.split(app_path.split("#")[0])[0], "default"
+                                app_path.split("#")[0].replace(".", os.path.sep), "default"
                             )
                         ),
                         style={"width": "calc(min(100%, 70vh))"},
