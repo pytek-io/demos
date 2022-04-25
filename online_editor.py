@@ -19,7 +19,7 @@ from reflect_utils.md_parsing import (
     parse_md_doc,
 )
 
-from demos.ant.main import create_code_editor
+from demos.ant import create_code_editor
 
 TITLE = "Online Editor"
 BASE_PATH = "demos"
