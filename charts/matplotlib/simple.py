@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 TITLE = "Matplotlib"
 
 def expose_matplotlib(fig):
-    name = "test_matplotlib.svg"
+    name = "matplotlib.svg"
     fig.savefig(name)
     return img(src=name)
 
