@@ -19,7 +19,7 @@ def call_if_callable(maybe_callable):
 
 def app():
     base_path = get_window().hash()
-    filter_method = lambda p: any(p.startswith(s) for s in ["__", "."])
+    filter_method = lambda p: any(p.startswith(s) for s in ["__", "."]) and not p == "__init__.py"
     current_path, tree = create_file_explorer(
         base_path, folder_filter=filter_method, file_filter=filter_method
     )
@@ -38,7 +38,7 @@ def app():
             extension = actual_path_value.rsplit(".", 1)[-1]
             if extension == "py":
                 _success, _css, _title, component = evaluate_demo_module(
-                    get_module_name(actual_path()), {}
+                    get_module_name(actual_path()), ""
                 )
                 return component
             elif extension in ["svg", "png", "gif"]:
