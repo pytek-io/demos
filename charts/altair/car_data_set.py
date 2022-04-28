@@ -1,26 +1,21 @@
 from reflect_altair import Chart
 from reflect_antd import Col, Row, Select
 from reflect_html import div, label
-from vega_datasets import data as vega_data
-import pandas as pd
+from vega_datasets import data
 
 import altair as alt
 
 Option = Select.Option
 
-NAMES = ['Name', 'Learning curve steepness', "Versatility"]
-DEFAULT_VALUES = NAMES
-data = [['tom', 10, -2], ['nick', 15, 3], ['juli', 14, 12]]
-
+DEFAULT_VALUES = ["Horsepower", "Miles_per_Gallon", "Origin"]
 TITLE = "Altair chart"
 
 
 class App:
     def __init__(self):
-        
-        source = pd.DataFrame(data, columns = NAMES)
+        source = data.cars()
         options = [Option(name, value=name) for name in source.columns]
-        color, x, y = [
+        x, y, color = [
             Select(
                 options,
                 defaultValue=default_value,
@@ -49,7 +44,7 @@ class App:
 
         self.content = Chart(
             spec=lambda: alt.Chart(source)
-            .mark_circle(size=120)
+            .mark_circle(size=60)
             .encode(x=x(), y=y(), color=color(), tooltip=["Name", color(), x(), y()])
             .interactive()
             .properties(width="container", height="container"),
