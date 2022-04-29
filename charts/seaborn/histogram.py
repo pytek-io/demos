@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use("Agg")  # this is stop Python rocket from showing in Dock on Mac
+
 import matplotlib.pyplot as plt
 from reflect_html import div
 from demos.charts.utils import matplotlib_to_svg
