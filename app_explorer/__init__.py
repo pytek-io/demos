@@ -8,6 +8,7 @@ from reflect_monaco import Editor as CodeEditor
 from reflect_rcdock import DockLayoutReflect
 from reflect_utils import create_file_explorer, evaluate_demo_module, get_module_name
 from reflect_utils.md_parsing import parse_md_doc
+from pathlib import Path
 
 TITLE = "App explorer"
 ALMOST_BLACK = "#0f1724"
@@ -18,7 +19,7 @@ def call_if_callable(maybe_callable):
 
 
 def app():
-    base_path = get_window().hash()
+    base_path = get_window().hash() or str(Path(__file__).parent.parent)
     filter_method = lambda p: any(p.startswith(s) for s in ["__", "."]) and not p == "__init__.py"
     current_path, tree = create_file_explorer(
         base_path, folder_filter=filter_method, file_filter=filter_method
