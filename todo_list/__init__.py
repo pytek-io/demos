@@ -2,8 +2,8 @@
     Simple todo application based on https://github.com/leonardopliski/react-antd-todo
 """
 import json
-from os.path import split, join, dirname
 from itertools import count
+from os.path import basename, dirname, join
 
 from reflect import Mapping, autorun, get_window, make_observable
 from reflect_ant_icons import (
@@ -55,7 +55,7 @@ def load_from_file(file):
 class Application:
     def __init__(self, file_path, update_title):
         initial_items = load_from_file(file_path)
-        file_name = split(file_path)[1].split(".")[0]
+        file_name = basename(file_path).split(".")[0]
         self.todo_item_counter = count(
             (max(item["key"] for item in initial_items) + 1) if initial_items else 0
         )
