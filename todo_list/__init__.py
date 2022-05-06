@@ -54,29 +54,29 @@ def load_from_file(file):
 
 class Application:
     def __init__(self, file_path, update_title):
-        todos = load_from_file(file_path)
+        initial_items = load_from_file(file_path)
+        file_name = split(file_path)[1].split(".")[0]
         self.todo_item_counter = count(
-            (max(item["key"] for item in todos) + 1) if todos else 0
+            (max(item["key"] for item in initial_items) + 1) if initial_items else 0
         )
-        self.todos = make_observable(todos, depth=3, key="self.todos")
-        self.todo_items = Mapping(
+        self.items = make_observable(initial_items, depth=3, key="self.todos")
+        self.todo_item_rows = Mapping(
             self.create_todo_item_row,
-            self.todos,
+            self.items,
             key="self.todo_items",
         )
-        file_name = split(file_path)[1].split(".")[0]
 
         def on_change():
             nb_completed = iterable_length(
-                filter(lambda item: item["completed"](), self.todos())
+                filter(lambda item: item["completed"](), self.items())
             )
-            update_title(f"({nb_completed}/{len(todos)}) {file_name}")
-            save_to_file(file_path, todos)
+            update_title(f"({nb_completed}/{len(self.items())}) {file_name}")
+            save_to_file(file_path, initial_items)
 
         autorun(on_change)
         self.description = Input(
             placeholder="What needs to be done?",
-            onPressEnter=self.onFinish,
+            onPressEnter=self.add_new_item,
             key="self.description",
         )
         self.top_row = Row(
@@ -90,7 +90,7 @@ class Application:
                     Button(
                         [PlusCircleFilled(), "Add todo"],
                         type="primary",
-                        onClick=self.onFinish,
+                        onClick=self.add_new_item,
                         block=True,
                     ),
                     key="col2",
@@ -102,8 +102,8 @@ class Application:
         )
 
     def move_item(self, key, up_or_down):
-        self.todos.move(
-            find_index(self.todos(), lambda v: v["key"]() == key),
+        self.items.move(
+            find_index(self.items(), lambda v: v["key"]() == key),
             1 if up_or_down else -1,
         )
 
@@ -126,7 +126,7 @@ class Application:
                         "X", className="remove-todo-button", type="primary", danger=True
                     ),
                     title="Are you sure you want to delete this item?",
-                    onConfirm=lambda: self.todos.remove(item),
+                    onConfirm=lambda: self.items.remove(item),
                 ),
                 Tooltip(
                     Switch(
@@ -143,9 +143,9 @@ class Application:
             key=key,
         )
 
-    def onFinish(self):
+    def add_new_item(self):
         if self.description():
-            self.todos.append(
+            self.items.append(
                 dict(
                     description=self.description(),
                     completed=False,
@@ -166,8 +166,8 @@ class Application:
         todo_list = Card(
             List(
                 # the div is added as for some reasons ant List does not key its immedidate child (meaning the whole tree is rerenderd when the content is updated)
-                div(self.todo_items),
-                locale={"emptyText": "There's nothing to do :("},
+                div(self.todo_item_rows),
+                locale={"emptyText": "Nothing to do."},
             ),
             title="Items",
         )
