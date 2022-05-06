@@ -54,15 +54,20 @@ def load_from_file(file):
 
 class Application:
     def __init__(self, file_path, update_title):
+        todo_items = load_from_file(file_path)
         todo_items, self.todo_item_counter = load_from_file(file_path)
+        print(todo_items, self.todo_item_counter)
         file_name = basename(file_path).split(".")[0]
         self.items = make_observable(todo_items, depth=3, key="self.todos")
+        self.current_item = make_observable(self.create_new_item())
+        self.debug = autorun(lambda: print(self.current_item()))
         self.todo_item_rows = Mapping(
             self.create_todo_item_row,
             self.items,
             key="self.todo_items",
         )
-        self.description = Input(
+        self.description = lambda: Input(
+            value=self.current_item()["description"],
             placeholder="What needs to be done?",
             onPressEnter=self.add_new_item,
             key="self.description",
@@ -125,6 +130,12 @@ class Application:
                     title="Are you sure you want to delete this item?",
                     onConfirm=lambda: self.items.remove(item),
                 ),
+                Button(
+                    "...",
+                    className="remove-todo-button",
+                    type="primary",
+                    onClick=lambda: self.current_item.set(item),
+                ),
                 Tooltip(
                     Switch(
                         checkedChildren=CheckOutlined(),
@@ -140,17 +151,22 @@ class Application:
             key=key,
         )
 
+    def create_new_item(self):
+        result = make_observable(
+            {
+                "description": "",
+                "completed": False,
+                "key": self.todo_item_counter,
+            },
+            depth=2,
+        )
+        self.todo_item_counter += 1
+        return result
+
     def add_new_item(self):
         if self.description():
-            self.items.append(
-                {
-                    "description": self.description(),
-                    "completed": False,
-                    "key": self.todo_item_counter,
-                }
-            )
-            self.description.set("")
-            self.todo_item_counter += 1
+            self.items.append(self.current_item())
+            self.current_item.set(self.create_new_item())
 
     def root(self):
         title = PageHeader(
