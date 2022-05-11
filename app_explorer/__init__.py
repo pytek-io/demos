@@ -1,6 +1,7 @@
 """Allows to quickly navigate between apps displaying code and preview."""
 
 import os
+from pathlib import Path
 
 from reflect import get_window, memoize
 from reflect_html import a, div, img
@@ -8,7 +9,6 @@ from reflect_monaco import Editor as CodeEditor
 from reflect_rcdock import DockLayoutReflect
 from reflect_utils import create_file_explorer, evaluate_demo_module, get_module_name
 from reflect_utils.md_parsing import parse_md_doc
-from pathlib import Path
 
 TITLE = "App explorer"
 ALMOST_BLACK = "#0f1724"
@@ -19,8 +19,12 @@ def call_if_callable(maybe_callable):
 
 
 def app():
-    base_path = get_window().hash() or str(Path(__file__).parent.parent)
-    filter_method = lambda p: any(p.startswith(s) for s in ["__", "."]) and not p == "__init__.py"
+    base_path = get_window().hash() or str(
+        Path(__file__).parent.parent.relative_to(Path(os.getcwd()))
+    )
+    filter_method = (
+        lambda p: any(p.startswith(s) for s in ["__", "."]) and not p == "__init__.py"
+    )
     current_path, tree = create_file_explorer(
         base_path, folder_filter=filter_method, file_filter=filter_method
     )
@@ -151,7 +155,7 @@ def app():
                     ),
                     div(
                         lambda: a(
-                            "launch app",
+                            lambda: f"{actual_path()[:-3]}",
                             href=lambda: "/app/" + actual_path()[:-3]
                             if actual_path()
                             else None,
