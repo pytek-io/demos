@@ -138,7 +138,7 @@ def create_answer_box(answer, details, detail_level):
         div(
             [
                 p(
-                    lambda: [answer + ".", u(" ...see more") if detail_level() == 1 else None],
+                    lambda: [answer + ". ", u("...see more") if detail_level() == 1 else None],
                     onClick=update_detail_level,
                 ),
                 p(
