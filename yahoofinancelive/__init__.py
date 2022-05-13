@@ -66,7 +66,7 @@ MENU_ITEMS = [
 class App:
     def __init__(
         self,
-        initial_tickers: List[str],
+        initial_tickers: List[str] = [],
     ) -> None:
         self.initial_tickers = initial_tickers
         self.window = get_window()
