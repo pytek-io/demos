@@ -1,9 +1,8 @@
 """
     Simple todo application based on https://github.com/leonardopliski/react-antd-todo
 """
-import json
-from itertools import count
-from os.path import basename, dirname, join
+import pickle
+from os.path import basename, dirname, join, exists
 
 from reflect import Mapping, autorun, get_window, make_observable
 from reflect_ant_icons import (
@@ -45,22 +44,30 @@ def iterable_length(iterable):
 
 
 def save_to_file(file, data):
-    open(file, "w").write(json.dumps(data))
+    open(file, "wb").write(pickle.dumps(data))
 
 
 def load_from_file(file):
-    return json.loads(open(file, "r").read())
+    return pickle.loads(open(file, "rb").read())
 
 
 class Application:
     def __init__(self, file_path, update_title):
-        todo_items, self.todo_item_counter = load_from_file(file_path)
+        if not "." in basename(file_path):
+            file_path = file_path + ".pick"
+        if exists(file_path):
+            self.items, self.todo_item_counter = load_from_file(file_path)
+        else:
+            self.items, self.todo_item_counter = (
+                make_observable([], depth=3, key="self.todos"),
+                0,
+            )
         file_name = basename(file_path).split(".")[0]
-        self.items = make_observable(todo_items, depth=3, key="self.todos")
         self.todo_item_rows = Mapping(
             self.create_todo_item_row,
             self.items,
             key="self.todo_items",
+            evaluate_argument=False,
         )
         self.description = Input(
             placeholder="What needs to be done?",
@@ -94,7 +101,7 @@ class Application:
                 filter(lambda item: item["completed"](), self.items())
             )
             update_title(f"({nb_completed}/{len(self.items())}) {file_name}")
-            save_to_file(file_path, (todo_items, self.todo_item_counter))
+            save_to_file(file_path, (self.items, self.todo_item_counter))
 
         autorun(on_change)
 
@@ -188,7 +195,7 @@ def app():
 
     return div(
         lambda: Application(
-            window.hash() or join(dirname(__file__), "default_todo_list.json"),
+            window.hash() or join(dirname(__file__), "default_todo_list.pick"),
             window.update_title,
         ).root()
     )
