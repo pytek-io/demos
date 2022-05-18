@@ -133,13 +133,13 @@ def build_menu(rootdir):
         sub_menus.append(
             Menu.SubMenu(menuItems, title=nice_category_name, key=category)
         )
-    first_item_key = sub_menus[0].children[0].key
+    first_item_key = sub_menus[0].children[0]._key
     current_method = make_observable(first_item_key, key="first_item_key")
     return current_method, Menu(
         sub_menus,
         mode="inline",
         defaultSelectedKeys=[first_item_key],
-        defaultOpenKeys=[sub_menus[0].key],
+        defaultOpenKeys=[sub_menus[0]._key],
         onClick=Callback(current_method.set, args="key"),
     )
 
