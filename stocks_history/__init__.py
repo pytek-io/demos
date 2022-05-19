@@ -15,7 +15,7 @@ from reflect import (
     js,
     make_observable,
     memoize,
-    ResponsiveValue
+    ResponsiveValue,
 )
 from reflect_antd import (
     AutoComplete,
@@ -32,6 +32,7 @@ from reflect_antd import (
 )
 from reflect_html import div, label
 from reflect_plotly import Plot
+from reflect_utils.antd import create_form_row, LEFT_BREAK_POINTS, RIGHT_BREAK_POINTS
 
 DEFAULT_TICKER = "AAPL"
 CANDLE_STICK_NAME = "candlestick"
@@ -40,27 +41,7 @@ MESSAGE_KEY = "key"
 
 COLOR_WIDTH = 90
 NB_DAYS_WIDTH = 90
-LEFT_BREAK_POINTS = dict(xs=8, sm=6)
-RIGHT_BREAK_POINTS = dict(xs=16, sm=18)
 YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
-
-
-def create_form_item(label_tag, component):
-    return Row(
-        [
-            Col(
-                label(label_tag),
-                className="ant-form-item-label",
-                **LEFT_BREAK_POINTS,
-            ),
-            Col(
-                component,
-                className="ant-form-item-control-input-content",
-                **RIGHT_BREAK_POINTS,
-            ),
-        ],
-        style=dict(marginTop=10),
-    )
 
 
 def signal_name(settings):
@@ -105,12 +86,12 @@ class App:
         range_slider = Switch(defaultChecked=True)
         show_legends = Switch(defaultChecked=True)
         self.header = [
-            create_form_item("Ticker", self.ticker_autocomplete),
-            create_form_item("Start", start_date),
-            create_form_item("End", end_date),
-            create_form_item("Graph type", graph_type),
-            create_form_item("Range slider", range_slider),
-            create_form_item("Show legends", show_legends),
+            create_form_row("Ticker", self.ticker_autocomplete),
+            create_form_row("Start", start_date),
+            create_form_row("End", end_date),
+            create_form_row("Graph type", graph_type),
+            create_form_row("Range slider", range_slider),
+            create_form_row("Show legends", show_legends),
         ]
         signal_definitions = make_observable(
             [{"nb_days": 2, "color": "red"}],
@@ -225,9 +206,7 @@ class App:
                 "y": df.Close.rolling(settings["nb_days"]()).mean(),
             }
 
-        signals = Mapping(
-            generate_signal, signal_definitions
-        )
+        signals = Mapping(generate_signal, signal_definitions)
 
         def data():
             df = yahoo_data()
