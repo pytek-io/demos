@@ -20,3 +20,4 @@ py_vollib_vectorized
 SQLAlchemy
 matplotlib
 seaborn
+mplfinance
