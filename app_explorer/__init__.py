@@ -140,6 +140,15 @@ def app():
             ],
         }
     }
+
+    def nice_path():
+        result = (actual_path() or "").replace(os.sep, ".")
+        if result:
+            result = result[:-3]
+        if result.endswith("__init__"):
+            result = result[:-9]
+        return result
+
     return div(
         [
             div(
@@ -155,12 +164,10 @@ def app():
                     ),
                     div(
                         lambda: a(
-                            lambda: f"{actual_path()[:-3]}",
-                            href=lambda: "/app/" + actual_path()[:-3]
-                            if actual_path()
-                            else None,
+                            nice_path,
+                            href=lambda: "/app/" + nice_path(),
                             target="_blank",
-                            title=lambda: f"Launch {actual_path()}",
+                            title=lambda: f"Launch {nice_path()}",
                         )
                         if actual_path()
                         else None,
