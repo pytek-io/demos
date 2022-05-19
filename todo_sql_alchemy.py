@@ -77,7 +77,7 @@ def app():
             div([label("Todo Title"), title, br()], className="field"),
             Button("Add", className="ui blue button", onClick=add_todo),
             hr(),
-            div(Mapping(create_todo_row, todos)),
+            div(Mapping(create_todo_row, todos, evaluate_argument=False)),
         ],
         style={"marginTop": "50px"},
         className="ui container",
