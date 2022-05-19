@@ -1,8 +1,7 @@
-from operator import itemgetter
 from itertools import count
-import anyio
-import json
+from operator import itemgetter
 
+from anyio import Event
 from reflect import Window, get_window, js, make_observable
 from reflect.connection import record_connection
 from reflect.utils import anext
@@ -10,11 +9,7 @@ from reflect_aggrid import AgGridColumn, AgGridReact
 from reflect_antd import message
 from reflect_html import div
 from reflect_rcdock import DockLayout, DropDirection
-from reflect_utils.common import (
-    ws_connection_manager,
-    dummy_connection,
-    read_pickles,
-)
+from reflect_utils.common import dummy_connection, read_pickles, ws_connection_manager
 
 from .config import (
     CLIENT,
@@ -132,7 +127,7 @@ class Application:
         self.window: Window = window
         self.counter = count()
         self.nb_tabs_created = 0
-        self.grids_ready = anyio.Event()
+        self.grids_ready = Event()
         session_extra_arguments = dict(
             autoGroupColumnDef={
                 "headerName": "Priority Group / Session",
@@ -217,10 +212,10 @@ class Application:
         self.nb_tabs_created += 1
         return [self.create_tab(*self.main_grids[info_type], closable=False)]
 
-    async def process_server_messages(self, server_connection):
-        _, grid_name = await anext(server_connection)
+    async def process_server_messages(self):
+        _, grid_name = await anext(self.server_connection)
         self.window.update_title(f"{grid_name} grid")
-        async for msg in server_connection:
+        async for msg in self.server_connection:
             if len(msg) == 4:
                 msg_type, row_type, row_id, details = msg
                 if row_type in self.updaters:
@@ -237,15 +232,11 @@ class Application:
 
     async def main(self, connection_manager):
         await self.grids_ready.wait()
-        async with connection_manager as server_connection:
-            self.window.start_soon(
-                self.process_client_messages, server_connection
-            )
-            self.window.start_soon(
-                self.process_server_messages, server_connection
-            )
+        async with connection_manager as self.server_connection:
+            self.window.start_soon(self.process_client_messages)
+            self.window.start_soon(self.process_server_messages)
             for info_type in DEFINITIONS:
-                await server_connection.send(["UpdateSubscription", True, info_type])
+                await self.server_connection.send(["UpdateSubscription", True, info_type])
 
     async def insert_panel(self, title, component):
         # FIXME: use reflect_utils.common.create_tab_inserter instead
@@ -260,7 +251,7 @@ class Application:
             DropDirection.MIDDLE,
         )
 
-    async def process_client_messages(self, server_connection):
+    async def process_client_messages(self):
         async for code, args in self.window.client_connection:
             if code == "DisplayRunningTasks":
                 session_id = args[0]
@@ -293,7 +284,7 @@ class Application:
                     ]
                 else:
                     message = [code] + args
-                await server_connection.send(["RequestToMaster", 0, message])
+                await self.server_connection.send(["RequestToMaster", 0, message])
 
 
 async def app():
@@ -302,7 +293,9 @@ async def app():
     # quick fix to get this demos working in app_explorer (should be fixed by a smarter hash implementation)
     # argument = json.loads(argument) if argument else {}
     argument = {}
-    uri, archive = argument.get("uri", None), argument.get("archive", "demos/dispatch/replay.pick")
+    uri, archive = argument.get("uri", None), argument.get(
+        "archive", "demos/dispatch/replay.pick"
+    )
     app = Application(window=window)
     # server_connection_host, http_port = "0.0.0.0", 30000
     # uri = "ws://{}:{}/ws".format(server_connection_host, http_port)
@@ -315,5 +308,6 @@ async def app():
             connection = record_connection(connection, open(archive, "wb"))
     else:
         connection = dummy_connection(read_pickles(open(archive, "rb")))
+
     window.start_soon(app.main, connection)
     return app.dock_layout
