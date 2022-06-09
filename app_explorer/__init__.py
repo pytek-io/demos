@@ -119,6 +119,7 @@ def app():
                                             "height": "inherit",
                                             "width": "inherit",
                                             "padding": 20,
+                                            "overflow": "scroll",
                                         },
                                     ),
                                 ),
