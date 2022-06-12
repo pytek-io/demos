@@ -82,7 +82,7 @@ def app():
                         readOnly=True,
                     ),
                     defaultLanguage="python",
-                    height=600,
+                    height="100%",
                 )
             except:
                 pass
@@ -104,7 +104,7 @@ def app():
                             "tabs": [
                                 (
                                     relative_path,
-                                    div(maybe_editor),
+                                    div(maybe_editor, style={"height": "100%"}),
                                 ),
                             ],
                         },
