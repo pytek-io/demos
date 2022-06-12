@@ -107,22 +107,42 @@ def unprotect(content: str):
         result = content
     return result
 
+SKIP_FOLDERS = ["user_interfaces", "userdemo", "widgets", "event_handling", "units", "animation"]
+DESTINATION_FOLDER = "matplotlib_examples"
+SOURCE_FOLDER = "matplotlib/examples"
+import shutil
+import importlib
+
+def purge_folder(path):
+    if os.path.exists(path):
+        shutil.rmtree(path)
+        os.mkdir(path)
+
+from reflect.common import CURRENT_CONTROLLER
+from reflect.controller import DefaultController
 
 def main():
+    CURRENT_CONTROLLER.set(DefaultController())
+    purge_folder(DESTINATION_FOLDER)
     i = 0
-    for path, _dirs, files in os.walk("../matplotlib/examples"):
+    for path, _dirs, files in os.walk(SOURCE_FOLDER):
+        if os.path.split(path)[-1] in SKIP_FOLDERS:
+            continue
         for filename in files:
             if filename.endswith(".py"):
                 i += 1
-                dest = join(*(("../matplotlib_examples",) + split(path)[1:]))
+                dest = join(*((DESTINATION_FOLDER,) + split(path)[1:]))
                 if not exists(dest):
                     os.makedirs(dest)
                 print(i, join(path[3:], filename))
                 content = open(join(path, filename)).read()
                 origin = f"https://github.com/matplotlib/matplotlib/blob/main/{join(path[3:], filename)}"
                 new_content = unprotect(generate_demo(protect(content), origin))
-                open(join(dest, filename), "w").write(black(new_content))
-
-
+                file_path = join(dest, filename)
+                open(file_path, "w").write(black(new_content))
+                try:
+                    importlib.import_module(join(dest, filename).replace(os.sep, ".")[:-3]).app()
+                except:
+                    os.remove(file_path)
 main()
 
