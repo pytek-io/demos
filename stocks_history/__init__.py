@@ -8,9 +8,9 @@ import httpx
 import pandas
 from reflect import (
     Controller,
-    Mapping,
     WindowSize,
     autorun,
+    create_mapping,
     get_window,
     js,
     make_observable,
@@ -45,7 +45,7 @@ YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
 
 
 def signal_name(settings):
-    nb_days = settings["nb_days"]()
+    nb_days = settings["nb_days"]
     return "" if nb_days is None else f"MVA {settings['nb_days']()}"
 
 
@@ -139,10 +139,11 @@ class App:
                 style=dict(marginTop=10),
             )
 
-        self.signals_settings = Mapping(
+        self.signals_settings = create_mapping(
             create_signal_settings_component,
             signal_definitions,
             key="signals_settings",
+            controller=self.controller,
         )
         self.signal_setting_labels = Row(
             [
@@ -206,7 +207,7 @@ class App:
                 "y": df.Close.rolling(settings["nb_days"]()).mean(),
             }
 
-        signals = Mapping(generate_signal, signal_definitions)
+        signals = create_mapping(generate_signal, signal_definitions, "signal_definitions")
 
         def data():
             df = yahoo_data()
@@ -285,7 +286,8 @@ class App:
                 Divider("Signals"),
                 self.signal_setting_labels,
                 self.signals_settings,
-            ]
+            ], 
+            controller=self.controller
         )
 
     def ok(self):
