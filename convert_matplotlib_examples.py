@@ -109,7 +109,7 @@ def unprotect(content: str):
 
 SKIP_FOLDERS = ["user_interfaces", "userdemo", "widgets", "event_handling", "units", "animation"]
 DESTINATION_FOLDER = "matplotlib_examples"
-SOURCE_FOLDER = "matplotlib/examples"
+SOURCE_FOLDER = "../matplotlib/examples"
 import shutil
 import importlib
 

@@ -130,5 +130,4 @@ def app():
     return div(
         [app.settings, app.content],
         style=dict(height="calc(100% - 35px)"),  #  -> full screen
-        # style=dict(height="400px")
     )

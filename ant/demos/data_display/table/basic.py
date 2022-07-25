@@ -1,4 +1,3 @@
-from reflect_html import *
 from reflect_antd import Table
 from reflect import js
 
@@ -9,7 +8,7 @@ def app():
             "title": "Name",
             "dataIndex": "name",
             "key": "name",
-            "render": js("a"),
+            # "render": js("a"),
         },
         {
             "title": "Age",
@@ -25,12 +24,12 @@ def app():
             "title": "Tags",
             "key": "tags",
             "dataIndex": "tags",
-            "render": js("render_tags"),
+            # "render": js("render_tags"),
         },
         {
             "title": "Action",
             "key": "action",
-            "render": js("render_action"),
+            # "render": js("render_action"),
         },
     ]
 

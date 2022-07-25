@@ -4,7 +4,7 @@
 import pickle
 from os.path import basename, dirname, join, exists
 
-from reflect import Mapping, autorun, get_window, make_observable
+from reflect import create_mapping, autorun, get_window, make_observable
 from reflect_ant_icons import (
     CaretDownFilled,
     CaretUpFilled,
@@ -44,26 +44,28 @@ def iterable_length(iterable):
 
 
 def save_to_file(file, data):
-    open(file, "wb").write(pickle.dumps(data))
+    content = pickle.dumps(data)
+    open(file, "wb").write(content)
 
 
 def load_from_file(file):
-    return pickle.loads(open(file, "rb").read())
+    try:
+        return pickle.loads(open(file, "rb").read())
+    except Exception as e:
+        raise Exception(f"Failed to read {file}. {e}") from e
 
 
 class Application:
     def __init__(self, file_path, update_title):
         if not "." in basename(file_path):
-            file_path = file_path + ".pick"
+            file_path += ".pick"
         if exists(file_path):
-            self.items, self.todo_item_counter = load_from_file(file_path)
+            items, self.todo_item_counter = load_from_file(file_path)
         else:
-            self.items, self.todo_item_counter = (
-                make_observable([], depth=3, key="self.todos"),
-                0,
-            )
+            items, self.todo_item_counter = [], 0
         file_name = basename(file_path).split(".")[0]
-        self.todo_item_rows = Mapping(
+        self.items = make_observable(items, depth=3)
+        self.todo_item_rows = create_mapping(
             self.create_todo_item_row,
             self.items,
             key="self.todo_items",
@@ -98,10 +100,10 @@ class Application:
 
         def on_change():
             nb_completed = iterable_length(
-                filter(lambda item: item["completed"](), self.items())
+                filter(lambda item: item["completed"](), self.items.observables())
             )
-            update_title(f"({nb_completed}/{len(self.items())}) {file_name}")
-            save_to_file(file_path, (self.items, self.todo_item_counter))
+            update_title(f"({nb_completed}/{len(self.items.observables())}) {file_name}")
+            # save_to_file(file_path, (self.items, self.todo_item_counter))
 
         autorun(on_change)
 
@@ -192,7 +194,6 @@ class Application:
 
 def app():
     window = get_window()
-
     return div(
         lambda: Application(
             window.hash() or join(dirname(__file__), "default_todo_list.pick"),

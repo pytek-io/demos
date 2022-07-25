@@ -144,6 +144,7 @@ class App:
             signal_definitions,
             key="signals_settings",
             controller=self.controller,
+            evaluate_argument=False,
         )
         self.signal_setting_labels = Row(
             [
@@ -207,7 +208,12 @@ class App:
                 "y": df.Close.rolling(settings["nb_days"]()).mean(),
             }
 
-        signals = create_mapping(generate_signal, signal_definitions, "signal_definitions")
+        signals = create_mapping(
+            generate_signal,
+            signal_definitions,
+            "signal_definitions",
+            evaluate_argument=False,
+        )
 
         def data():
             df = yahoo_data()
@@ -286,8 +292,8 @@ class App:
                 Divider("Signals"),
                 self.signal_setting_labels,
                 self.signals_settings,
-            ], 
-            controller=self.controller
+            ],
+            controller=self.controller,
         )
 
     def ok(self):
@@ -295,7 +301,6 @@ class App:
 
     def cancel(self):
         self.controller.revert()
-
 
 
 def content(ticker, stand_alone=True):

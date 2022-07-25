@@ -41,13 +41,17 @@ class App:
             ],
             style={"marginLeft": 15, "flex": "0 1 auto"},
         )
-
+        brush = alt.selection_interval()  # selection of type "interval"
         self.content = Chart(
             spec=lambda: alt.Chart(source)
             .mark_circle(size=60)
-            .encode(x=x(), y=y(), color=color(), tooltip=["Name", color(), x(), y()])
-            .interactive()
-            .properties(width="container", height="container"),
+            .encode(
+                x=x(),
+                y=y(),
+                color=alt.condition(brush, "Origin:N", alt.value("lightgray")),
+                tooltip=["Name", color(), x(), y()],
+            )
+            .add_selection(brush).properties(width="container", height="container"),
             style={
                 "height": "100%",
                 "width": "100%",

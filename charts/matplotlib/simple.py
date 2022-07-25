@@ -2,24 +2,30 @@ import matplotlib
 
 matplotlib.use("Agg")  # this is stop Python rocket from showing in Dock on Mac
 from importlib import reload
+from io import StringIO
 
 import demos.charts.matplotlib.methods as methods
 import numpy as np
-from demos.charts.utils import matplotlib_to_svg
 from reflect import Controller
 from reflect_antd import Button, Slider
-from reflect_html import div
+from reflect_html import div, inline_svg
 
 import matplotlib.pyplot as plt
 
 TITLE = "Matplotlib"
 
 
+def matplotlib_to_svg(fig):
+    content = StringIO()
+    fig.savefig(content, format="svg")
+    return inline_svg(content.getvalue())
+
+
 def app():
     period = Slider(defaultValue=50, min=0, max=100)
 
     def content():
-        reload(methods)  # reloading code changes without restarting the process
+        reload(methods) # reloading code changes without restarting the process
         x = np.linspace(0, 2 * np.pi, 400)
         y = methods.method1(x**2, period())
         fig, axs = plt.subplots(2, 2)

@@ -2,16 +2,15 @@ import matplotlib
 matplotlib.use("Agg")  # this is stop Python rocket from showing in Dock on Mac
 
 import matplotlib.pyplot as plt
-from reflect_html import div
 from demos.charts.utils import matplotlib_to_svg
 import seaborn as sns
 sns.set()
 
 import numpy as np
-import pandas as pd
 
 
 def app():
+    plt.clf() # this clear any existing figure in memory
     rng = np.random.RandomState(0)
     x = np.linspace(0, 10, 500)
     y = np.cumsum(rng.randn(500, 6), 0)

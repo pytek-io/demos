@@ -4,7 +4,7 @@ from datetime import datetime
 from itertools import count
 from time import perf_counter
 
-import anyio
+from anyio import Event
 from reflect import Window, get_window
 from reflect_utils.common import ws_connection_manager
 from websockets import ConnectionClosed
@@ -21,7 +21,7 @@ CURRENCIES = [
 
 class PendingResult:
     def __init__(self) -> None:
-        self.ready = anyio.Event()
+        self.ready = Event()
         self.result = None
         self.is_error = True
 
@@ -42,7 +42,7 @@ class Server:
         self.window: Window = get_window()
         self.request_id = count()
         self.pending_queries = {}
-        self.connection_ready = anyio.Event()
+        self.connection_ready = Event()
         self.default_start_date = datetime(2015, 1, 1)
         self.default_end_date = datetime.today()
         self.default_resolution = "1D"
