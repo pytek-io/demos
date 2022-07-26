@@ -1,8 +1,8 @@
 """
     Simple todo application based on https://github.com/leonardopliski/react-antd-todo
 """
-import pickle
-from os.path import basename, dirname, join, exists
+import json
+from os.path import basename, dirname, join, exists, split
 
 from reflect import create_mapping, autorun, get_window, make_observable
 from reflect_ant_icons import (
@@ -44,13 +44,13 @@ def iterable_length(iterable):
 
 
 def save_to_file(file, data):
-    content = pickle.dumps(data)
-    open(file, "wb").write(content)
+    content = json.dumps(data)
+    open(file, "w").write(content)
 
 
 def load_from_file(file):
     try:
-        return pickle.loads(open(file, "rb").read())
+        return json.loads(open(file, "r").read())
     except Exception as e:
         raise Exception(f"Failed to read {file}. {e}") from e
 
@@ -58,7 +58,8 @@ def load_from_file(file):
 class Application:
     def __init__(self, file_path, update_title):
         if not "." in basename(file_path):
-            file_path += ".pick"
+            file_path += ".json"
+        file_path = join(split(__file__)[0], file_path)
         if exists(file_path):
             items, self.todo_item_counter = load_from_file(file_path)
         else:
@@ -196,7 +197,7 @@ def app():
     window = get_window()
     return div(
         lambda: Application(
-            window.hash() or join(dirname(__file__), "default_todo_list.pick"),
+            window.hash() or join(dirname(__file__), "default_todo_list.json"),
             window.update_title,
         ).root()
     )
