@@ -1,11 +1,11 @@
 from reflect_html import *
 from reflect_antd import Modal, Button
-from reflect import make_observable
+from reflect import create_observable
 
 
 def app():
-    modal1Visible = make_observable(False)
-    modal2Visible = make_observable(False)
+    modal1Visible = create_observable(False)
+    modal2Visible = create_observable(False)
     return [
         Button(
             "Display a modal dialog at 20px to Top",

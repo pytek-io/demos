@@ -1,12 +1,12 @@
 from reflect_html import *
 from reflect_antd import Popconfirm, Button
-from reflect import make_observable
+from reflect import create_observable
 from reflect import schedule_callback
 
 
 def app():
-    visible = make_observable(False)
-    confirmLoading = make_observable(False)
+    visible = create_observable(False)
+    confirmLoading = create_observable(False)
 
     def showPopconfirm():
         visible.set(True)

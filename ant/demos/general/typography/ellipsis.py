@@ -1,6 +1,6 @@
 from reflect_html import *
 from reflect_antd import Typography, Switch
-from reflect import make_observable
+from reflect import create_observable
 
 Paragraph, Text = Typography.Paragraph, Typography.Text
 

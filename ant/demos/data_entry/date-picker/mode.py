@@ -1,13 +1,13 @@
 from reflect_html import *
 from reflect_antd import DatePicker, Space
-from reflect import make_observable
+from reflect import create_observable
 from reflect import Callback
 
 RangePicker = DatePicker.RangePicker
 
 
 def controlled_date_picker():
-    mode = make_observable("time")
+    mode = create_observable("time")
 
     def onOpenChange(open_mode):
         if open_mode:

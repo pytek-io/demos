@@ -5,7 +5,7 @@ from os.path import join, split
 
 import yaml
 from mistletoe import Document, block_token, span_token
-from reflect import Callback, make_observable
+from reflect import Callback, create_observable
 from reflect_antd import Col, Menu, Row, Tabs
 from reflect_html import (
     article,
@@ -134,7 +134,7 @@ def build_menu(rootdir):
             Menu.SubMenu(menuItems, title=nice_category_name, key=category)
         )
     first_item_key = sub_menus[0].children[0]._key
-    current_method = make_observable(first_item_key, key="first_item_key")
+    current_method = create_observable(first_item_key, key="first_item_key")
     return current_method, Menu(
         sub_menus,
         mode="inline",
@@ -159,7 +159,7 @@ def format_md_text(md_text):
 
 
 def code_box_bottom(description, js, py):
-    show_code_editor = make_observable(True, key="show_code_editor")
+    show_code_editor = create_observable(True, key="show_code_editor")
 
     def result():
         result, add_code = [], False

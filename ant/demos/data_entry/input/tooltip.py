@@ -1,7 +1,7 @@
 from reflect_html import *
 from reflect_antd import Input, Tooltip
 from reflect import js
-from reflect import make_observable
+from reflect import create_observable
 
 value = e.value
 value, onBlur, onChange = this.value, this.onBlur, this.onChange
@@ -13,7 +13,7 @@ def format_number(value):
 
 
 def app():
-    value = make_observable(0)
+    value = create_observable(0)
 
     def result():
         if actual_value := value():

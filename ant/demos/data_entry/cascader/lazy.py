@@ -1,6 +1,6 @@
 from reflect_html import *
 from reflect_antd import Cascader
-from reflect import autorun, make_observable
+from reflect import autorun, create_observable
 from reflect import schedule_callback, Callback
 
 
@@ -19,7 +19,7 @@ optionLists = [
 
 
 def app():
-    options = make_observable(optionLists, key="optionLists")
+    options = create_observable(optionLists, key="optionLists")
 
     def load_data(selected_options):
         target_label = selected_options[-1]["label"]

@@ -1,12 +1,12 @@
 from reflect_html import *
 from reflect_antd import Button
 from reflect_ant_icons import PoweroffOutlined
-from reflect import make_observable
+from reflect import create_observable
 import asyncio
 
 
 def app():
-    loadings = [make_observable(False) for i in range(3)]
+    loadings = [create_observable(False) for i in range(3)]
 
     def enter_loading(loading):
         async def result():

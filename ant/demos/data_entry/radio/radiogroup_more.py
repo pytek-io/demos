@@ -1,6 +1,6 @@
 from reflect_html import *
 from reflect_antd import Radio, Input
-from reflect import make_observable
+from reflect import create_observable
 
 
 radioStyle = {
@@ -15,7 +15,7 @@ def onChange(value):
 
 
 def app():
-    value = make_observable(1)
+    value = create_observable(1)
     def result():
         return Radio.Group(
             [

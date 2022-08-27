@@ -1,12 +1,12 @@
 from reflect_html import *
 from reflect_antd import Steps, Divider
-from reflect import make_observable, Callback
+from reflect import create_observable, Callback
 
 Step = Steps.Step
 
 
 def app():
-    current = make_observable(0)
+    current = create_observable(0)
 
     def onChange(value):
         print("onChange:", current)

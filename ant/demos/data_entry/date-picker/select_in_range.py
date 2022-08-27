@@ -1,16 +1,16 @@
 from reflect_html import *
 from reflect_antd import DatePicker
 from reflect import Callback, js
-from reflect import make_observable, autorun
+from reflect import create_observable, autorun
 
 RangePicker = DatePicker.RangePicker
 
 
 def app():
     raise NotImplementedError("low level effect not supported")
-    value = make_observable()
-    dates = make_observable([])
-    hackValue = make_observable()
+    value = create_observable()
+    dates = create_observable([])
+    hackValue = create_observable()
 
     def result():
         #   const disabledDate = current => {

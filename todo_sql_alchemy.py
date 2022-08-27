@@ -7,7 +7,7 @@ with Reflect.
 """
 from reflect_html import div, h1, label, p, br, span, hr
 from reflect_antd import Input, Button
-from reflect import make_observable, Mapping
+from reflect import create_observable, Mapping
 from sqlalchemy import Boolean, Column, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base, Session
 
@@ -46,7 +46,7 @@ def app():
     title = Input(
         placeholder="Enter Todo...", onPressEnter=add_todo, style={"marginBottom": 12}
     )
-    todos = make_observable(session.query(Todo).all(), depth=3)
+    todos = create_observable(session.query(Todo).all(), depth=3)
 
     def create_todo_row(todo):
         return div(

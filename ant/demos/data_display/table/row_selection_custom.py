@@ -1,7 +1,7 @@
 from reflect_html import *
 from reflect_antd import Table
 from reflect import Callback
-from reflect import make_observable
+from reflect import create_observable
 
 columns = [
     {
@@ -35,7 +35,7 @@ def selectedRowKeys(keys):
 
 def app():
     raise Exception("this is crashing badly!")
-    selectedRowKeys = make_observable([])
+    selectedRowKeys = create_observable([])
 
     def onChange(newSelectedRowKeys):
         print(

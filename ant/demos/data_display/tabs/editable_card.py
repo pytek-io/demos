@@ -1,6 +1,6 @@
 from itertools import count
 
-from reflect import autorun, make_observable
+from reflect import autorun, create_observable
 from reflect import Callback
 from reflect.utils import find_index
 from reflect_antd import Tabs
@@ -27,8 +27,8 @@ initial_panes = [
 
 
 def app():
-    panes = make_observable(initial_panes, key="panes")
-    active_key = make_observable(0, key="active_key")
+    panes = create_observable(initial_panes, key="panes")
+    active_key = create_observable(0, key="active_key")
     autorun(lambda: print(active_key()))
     counter = count(len(panes()) + 1)
 

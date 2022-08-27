@@ -1,10 +1,10 @@
-from reflect import autorun, make_observable
+from reflect import autorun, create_observable
 from reflect_antd import Select, Space
 from reflect_html import *
 
 
 def app():
-    value = make_observable(["a10", "c12", "h17", "j19", "k20"])
+    value = create_observable(["a10", "c12", "h17", "j19", "k20"])
     autorun(lambda: print(value()))
     selectProps = {
         "mode": "multiple",

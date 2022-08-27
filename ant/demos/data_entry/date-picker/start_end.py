@@ -1,5 +1,5 @@
 from reflect_antd import DatePicker, Row, Col
-from reflect import make_observable
+from reflect import create_observable
 from reflect import JSMethod
 from datetime import datetime, timedelta
 
@@ -18,8 +18,8 @@ compare_dates = JSMethod(
 
 
 def app():
-    start_value = make_observable(datetime.now())
-    end_value = make_observable(datetime.now() + timedelta(days=15))
+    start_value = create_observable(datetime.now())
+    end_value = create_observable(datetime.now() + timedelta(days=15))
 
     return Row(
         [

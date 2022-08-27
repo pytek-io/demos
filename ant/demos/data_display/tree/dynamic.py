@@ -1,6 +1,6 @@
 from asyncio import sleep
 
-from reflect import Callback, make_observable
+from reflect import Callback, create_observable
 from reflect_antd import Tree
 
 
@@ -25,7 +25,7 @@ def app():
             node_id += 1
             yield data
 
-    treeData = make_observable(list(generate_nodes()))
+    treeData = create_observable(list(generate_nodes()))
 
     async def load_data(current_node_id):
         await sleep(0.5)

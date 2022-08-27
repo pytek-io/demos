@@ -1,13 +1,13 @@
 from reflect_html import *
 from reflect_antd import Menu, Dropdown
 from reflect_ant_icons import DownOutlined
-from reflect import make_observable
+from reflect import create_observable
 from reflect import Callback
 
 
 def app():
     raise NotImplementedError()
-    visible = make_observable(False)
+    visible = create_observable(False)
 
     def handleMenuClick(key):
         if key == "3":

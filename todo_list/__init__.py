@@ -4,7 +4,7 @@
 import json
 from os.path import basename, dirname, join, exists, split
 
-from reflect import create_mapping, autorun, get_window, make_observable
+from reflect import create_mapping, autorun, get_window, create_observable
 from reflect_ant_icons import (
     CaretDownFilled,
     CaretUpFilled,
@@ -65,7 +65,7 @@ class Application:
         else:
             items, self.todo_item_counter = [], 0
         file_name = basename(file_path).split(".")[0]
-        self.items = make_observable(items, depth=3)
+        self.items = create_observable(items, depth=3)
         self.todo_item_rows = create_mapping(
             self.create_todo_item_row,
             self.items,

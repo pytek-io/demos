@@ -2,13 +2,13 @@ from reflect_html import *
 from reflect_antd import Menu
 from reflect_ant_icons import MailOutlined, AppstoreOutlined, SettingOutlined
 from reflect import Callback
-from reflect import make_observable
+from reflect import create_observable
 
 SubMenu = Menu.SubMenu
 
 
 def app():
-    current = make_observable("mail")
+    current = create_observable("mail")
 
     def handleClick(value):
         print("click ", value)

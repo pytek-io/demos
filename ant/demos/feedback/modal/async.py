@@ -2,14 +2,14 @@ from asyncio import sleep
 
 
 from reflect_html import *
-from reflect import make_observable
+from reflect import create_observable
 from reflect_antd import Button, Modal
 
 
 def app():
-    visible = make_observable(False)
-    confirmLoading = make_observable(False)
-    modal_text = make_observable("Content of the modal")
+    visible = create_observable(False)
+    confirmLoading = create_observable(False)
+    modal_text = create_observable("Content of the modal")
 
     async def handleOk():
         modal_text.set("The modal will be closed after two seconds")

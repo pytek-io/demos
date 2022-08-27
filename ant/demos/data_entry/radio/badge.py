@@ -1,13 +1,13 @@
 from traceback import print_exc
 from reflect_html import *
 from reflect_antd import Radio, Badge
-from reflect import autorun, make_observable
+from reflect import autorun, create_observable
 
 
 
 def app():
     # note we need to define the state outside the method rendering the components otherwise it wouldn't be persisted between updates.
-    counters = [make_observable(value) for value in [1, 2]]
+    counters = [create_observable(value) for value in [1, 2]]
 
     def update_counters(value):
         counters[value] += 1

@@ -1,6 +1,6 @@
 from reflect_html import *
 from reflect_antd import Affix, Button
-from reflect import make_observable
+from reflect import create_observable
 
 
 def increment(value, increment):
@@ -12,8 +12,8 @@ def increment(value, increment):
 
 
 def app():
-    top = make_observable(10)
-    bottom = make_observable(10)
+    top = create_observable(10)
+    bottom = create_observable(10)
 
     return [
         Affix(

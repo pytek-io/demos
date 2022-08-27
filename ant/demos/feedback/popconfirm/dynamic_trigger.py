@@ -1,6 +1,6 @@
 from reflect_html import *
 from reflect_antd import Popconfirm, Switch, message
-from reflect import make_observable
+from reflect import create_observable
 
 def app():
     raise Exception("not supported")

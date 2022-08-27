@@ -1,14 +1,14 @@
 from reflect_html import *
 from reflect_antd import Steps, Button
-from reflect import make_observable, Callback
+from reflect import create_observable, Callback
 
 Step = Steps.Step
 
 
 def app():
-    percent = make_observable(0, key="percent")
-    current = make_observable(1, key="current")
-    status = make_observable("process", key="status")
+    percent = create_observable(0, key="percent")
+    current = create_observable(1, key="current")
+    status = create_observable("process", key="status")
 
     def increase():
         current.set((current() + 1))

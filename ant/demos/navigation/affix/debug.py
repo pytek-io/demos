@@ -1,10 +1,10 @@
 from reflect_html import *
 from reflect_antd import Affix, Button
-from reflect import make_observable
+from reflect import create_observable
 
 
 def app():
-    top = make_observable(10, key="test")
+    top = create_observable(10, key="test")
     return div(
         [
             div("Top"),

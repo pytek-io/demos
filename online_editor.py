@@ -1,7 +1,7 @@
 import json
 import os
 
-from reflect import get_window, make_observable
+from reflect import get_window, create_observable
 from reflect.utils import CatchError, decode_url, is_writable_file
 from reflect_ant_icons import CaretRightFilled, FolderOpenFilled
 from reflect_antd import Button, Input, Modal
@@ -119,7 +119,7 @@ def app():
         },
     )
     insert_tab = create_tab_inserter(dock_layout)
-    create_file_visible = make_observable(False, key="create_file_visible")
+    create_file_visible = create_observable(False, key="create_file_visible")
 
     async def open_file(file):
         if file:

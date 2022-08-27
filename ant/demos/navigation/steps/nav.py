@@ -1,14 +1,14 @@
 from reflect_html import *
 from reflect_antd import Steps
 from reflect import Callback
-from reflect import make_observable
+from reflect import create_observable
 
 Step = Steps.Step
 
 
 def app():
 
-    current = make_observable(0)
+    current = create_observable(0)
 
     def onChange(current_value):
         print("onChange:", current_value)

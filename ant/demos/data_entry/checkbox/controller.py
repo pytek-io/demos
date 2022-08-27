@@ -1,12 +1,12 @@
-from reflect import autorun, make_observable
+from reflect import autorun, create_observable
 from reflect_antd import Button, Checkbox
 from reflect_html import *
 from reflect_utils.common import toggle_observable
 
 
 def app():
-    disabled = make_observable(False)
-    checked = make_observable(True)
+    disabled = create_observable(False)
+    checked = create_observable(True)
     check_box = Checkbox(
         lambda: f"{'Checked' if checked() else  'Unchecked'} - {'Disabled' if disabled() else 'Enabled'}",
         checked=checked,

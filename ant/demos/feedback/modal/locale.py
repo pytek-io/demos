@@ -1,7 +1,7 @@
 from reflect_html import *
 from reflect_antd import Modal, Button, Space
 from reflect_ant_icons import ExclamationCircleOutlined
-from reflect import make_observable
+from reflect import create_observable
 
 
 def confirm():
@@ -17,7 +17,7 @@ def confirm():
 
 
 def app():
-    visible = make_observable(False)
+    visible = create_observable(False)
     return Space(
         [
             Button("Modal", type="primary", onClick=lambda: visible.set(True)),

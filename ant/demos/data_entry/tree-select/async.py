@@ -2,7 +2,7 @@ from asyncio import sleep
 from itertools import count
 
 from reflect import Callback
-from reflect import autorun, make_observable
+from reflect import autorun, create_observable
 from reflect_antd import TreeSelect
 
 initialTreeData = [
@@ -14,7 +14,7 @@ initialTreeData = [
 
 def app():
     counter = count(3)
-    treeData = make_observable(initialTreeData, key="initialTreeData")
+    treeData = create_observable(initialTreeData, key="initialTreeData")
     import pprint
 
     autorun(lambda: pprint.pprint((treeData())))

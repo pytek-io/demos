@@ -1,7 +1,7 @@
 from reflect_html import *
 from reflect_antd import Tabs
 from reflect import Callback
-from reflect import make_observable
+from reflect import create_observable
 
 TabPane = Tabs.TabPane
 

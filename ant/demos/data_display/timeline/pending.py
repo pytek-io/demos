@@ -1,11 +1,11 @@
-from reflect import make_observable
+from reflect import create_observable
 from reflect_antd import Button, Timeline
 from reflect_html import *
 from reflect_utils.common import toggle_observable
 
 
 def app():
-    reverse = make_observable(False)
+    reverse = create_observable(False)
     return div(
         [
             Timeline(

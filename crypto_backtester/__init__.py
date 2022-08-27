@@ -1,7 +1,7 @@
 from datetime import datetime
 
 import pandas as pd
-from reflect import get_window, autorun, make_observable
+from reflect import get_window, autorun, create_observable
 from reflect_altair import Chart
 from reflect_antd import Col, Select, Empty
 from reflect_html import div
@@ -119,7 +119,7 @@ class App(Server):
             strike,
             selected_instrument,
         ) = create_cascading_selects(instruments)
-        chart_data = make_observable(None)
+        chart_data = create_observable(None)
 
         async def update_chart_data():
             if selected_instrument():

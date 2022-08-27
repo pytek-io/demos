@@ -1,6 +1,6 @@
 from reflect_html import *
 from reflect_antd import AutoComplete, Input
-from reflect import make_observable, autorun
+from reflect import create_observable, autorun
 from reflect import Callback
 
 TextArea = Input.TextArea
@@ -8,7 +8,7 @@ TextArea = Input.TextArea
 
 def app():
 
-    options = make_observable([])
+    options = create_observable([])
 
     def handleSearch(value: str):
         options.extend(

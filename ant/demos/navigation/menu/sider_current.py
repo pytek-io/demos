@@ -1,14 +1,14 @@
 from reflect_html import *
 from reflect_antd import Menu
 from reflect_ant_icons import AppstoreOutlined, MailOutlined, SettingOutlined
-from reflect import make_observable, Callback
+from reflect import create_observable, Callback
 
 SubMenu = Menu.SubMenu
 
 
 def app():
     raise NotImplementedError()
-    openKeys = make_observable(["sub1"])
+    openKeys = create_observable(["sub1"])
 
     def onOpenChange(keys):
         latestOpenKey = next((key for key in keys if key not in openKeys), None)

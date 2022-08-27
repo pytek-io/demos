@@ -1,6 +1,6 @@
 import random
 
-from reflect import make_observable
+from reflect import create_observable
 from reflect_ant_icons import MinusOutlined, PlusOutlined, QuestionOutlined
 from reflect_antd import Badge, Button, Switch
 from reflect_html import *
@@ -11,7 +11,7 @@ MAX_VALUE = 1000
 
 
 def app():
-    count = make_observable(5)
+    count = create_observable(5)
     show = Switch(defaultChecked=True)
     return div(
         [

@@ -5,7 +5,7 @@ import json
 from itertools import count
 from os.path import basename, dirname, join
 
-from reflect import Mapping, autorun, get_window, make_observable
+from reflect import Mapping, autorun, get_window, create_observable
 from reflect_ant_icons import (
     CaretDownFilled,
     CaretUpFilled,
@@ -58,8 +58,8 @@ class Application:
         todo_items, self.todo_item_counter = load_from_file(file_path)
         print(todo_items, self.todo_item_counter)
         file_name = basename(file_path).split(".")[0]
-        self.items = make_observable(todo_items, depth=3, key="self.todos")
-        self.current_item = make_observable(self.create_new_item())
+        self.items = create_observable(todo_items, depth=3, key="self.todos")
+        self.current_item = create_observable(self.create_new_item())
         self.debug = autorun(lambda: print(self.current_item()))
         self.todo_item_rows = Mapping(
             self.create_todo_item_row,
@@ -152,7 +152,7 @@ class Application:
         )
 
     def create_new_item(self):
-        result = make_observable(
+        result = create_observable(
             {
                 "description": "",
                 "completed": False,

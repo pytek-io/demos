@@ -2,7 +2,7 @@ from itertools import count
 from operator import itemgetter
 
 from anyio import Event
-from reflect import Window, get_window, js, make_observable
+from reflect import Window, get_window, js, create_observable
 from reflect.connection import record_connection
 from reflect.utils import anext
 from reflect_aggrid import AgGridColumn, AgGridReact
@@ -83,7 +83,7 @@ def create_grid(
         column["field"] for column in definition["columns"]
     ]
     update_fields = definition.get("update_fields", static_fields)
-    title = make_observable(name, key="tab title")
+    title = create_observable(name, key="tab title")
 
     title_component = div([title])
     row_count = 0

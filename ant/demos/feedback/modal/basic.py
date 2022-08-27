@@ -1,10 +1,10 @@
 from reflect_html import *
 from reflect_antd import Modal, Button
-from reflect import make_observable
+from reflect import create_observable
 
 
 def app():
-    is_modal_visible = make_observable(False)
+    is_modal_visible = create_observable(False)
 
     return [
         Button(

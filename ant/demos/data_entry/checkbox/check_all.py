@@ -1,7 +1,7 @@
 from reflect_html import *
 from reflect_antd import Checkbox, Divider
 
-from reflect import make_observable, autorun
+from reflect import create_observable, autorun
 from typing import List
 
 

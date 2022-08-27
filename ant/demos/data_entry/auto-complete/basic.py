@@ -1,7 +1,7 @@
 from reflect_html import *
 from reflect_antd import AutoComplete
 from reflect import Callback
-from reflect import make_observable, autorun
+from reflect import create_observable, autorun
 from random import randrange
 
 
@@ -12,7 +12,7 @@ def mockVal(string: str):
 
 
 def app():
-    options = make_observable([])
+    options = create_observable([])
 
     def onSearch(searchText: str):
         options.extend(

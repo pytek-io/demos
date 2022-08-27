@@ -13,7 +13,7 @@ from reflect import (
     create_mapping,
     get_window,
     js,
-    make_observable,
+    create_observable,
     memoize,
     ResponsiveValue,
 )
@@ -93,7 +93,7 @@ class App:
             create_form_row("Range slider", range_slider),
             create_form_row("Show legends", show_legends),
         ]
-        signal_definitions = make_observable(
+        signal_definitions = create_observable(
             [{"nb_days": 2, "color": "red"}],
             depth=3,
             key="signal_definitions",
@@ -182,7 +182,7 @@ class App:
             ],
         )
 
-        yahoo_data = make_observable(pandas.DataFrame())
+        yahoo_data = create_observable(pandas.DataFrame())
 
         async def fetch_data_async():
             start, end = start_date(), end_date()

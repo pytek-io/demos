@@ -1,10 +1,10 @@
 from reflect_html import *
 from reflect_antd import Calendar, Alert
-from reflect import make_observable, Callback
+from reflect import create_observable, Callback
 
 
 def app():
-    selected_value = make_observable(None)
+    selected_value = create_observable(None)
 
     def selected_value_formatted():
         value = selected_value()

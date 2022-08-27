@@ -8,7 +8,7 @@ from reflect_ant_icons import (
     FileOutlined,
 )
 from reflect import Callback
-from reflect import make_observable
+from reflect import create_observable
 
 Header, Content, Footer, Sider = (
     Layout.Header,
@@ -20,7 +20,7 @@ SubMenu = Menu.SubMenu
 
 
 def app():
-    collapsed = make_observable(False)
+    collapsed = create_observable(False)
 
     def onCollapse(collapsed_value):
         print(collapsed_value)

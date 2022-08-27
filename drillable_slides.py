@@ -6,7 +6,7 @@ import yaml
 from reflect import (
     ResponsiveValue,
     get_window,
-    make_observable,
+    create_observable,
     CachedEvaluation,
 )
 from reflect_html import a, div, img, path, svg, style, p, u
@@ -172,7 +172,7 @@ def create_question_and_answer(
     answer,
     details,
 ):
-    detail_level = make_observable(default_detail_level_value)
+    detail_level = create_observable(default_detail_level_value)
 
     def drill():
         on_drill_down(detail_level)
@@ -233,7 +233,7 @@ def create_page(items, default_detail_level_value, is_touch_device):
 
 def slides_and_left_icon(file_name, is_touch_device, margin):
     window = get_window()
-    details_level = make_observable(1)
+    details_level = create_observable(1)
     content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
     main_page = div(
         [
@@ -354,7 +354,7 @@ def app():
     window = get_window()
     file_name = (window.hash() or "early_adopters").split("/")[0]
     is_touch_device = window.browser_details["is_touch_device"]
-    full_screen = make_observable(False)
+    full_screen = create_observable(False)
     margin = ResponsiveValue(xs=3, sm=10, md=10, lg=15, xl=None, xxl=30)
 
     def page_index():

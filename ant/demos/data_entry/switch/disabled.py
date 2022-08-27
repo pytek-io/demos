@@ -1,6 +1,6 @@
 from reflect_html import *
 from reflect_antd import Switch, Checkbox
-from reflect import make_observable
+from reflect import create_observable
 
 # rmk: using a CheckBox instead of a button and an observable as it is more
 # idiomatic in many respects
