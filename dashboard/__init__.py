@@ -1,11 +1,12 @@
-from reflect_antd import Menu
-from reflect_html import div
-from reflect_rcdock import DockLayoutReflect, LIGHT_GREY
-from reflect_utils import create_icon
-from demos.stocks_history import App as StockHistoryApp
-from demos.stock_prices import App as StockApp
-from demos.yahoofinancelive import App as YahooFinanceApp
+import reflect
+import reflect_antd as antd
+import reflect_html as html
+import reflect_rcdock as rcdock
 from demos.charts.altair.car_data_set import App as AltairApp
+from demos.stock_prices import App as StockApp
+from demos.stocks_history import App as StockHistoryApp
+from demos.yahoofinancelive import App as YahooFinanceApp
+from reflect_utils import create_icon
 
 TITLE = "Dashboard"
 DEFAULT_TICKERS = ["AMZN"]
@@ -40,7 +41,7 @@ class Application:
                         "mode": "vertical",
                         "children": [
                             {
-                                "tabs": [StockHistoryApp(ticker, False)],
+                                "tabs": [StockHistoryApp(reflect.create_observable(ticker), False)],
                             }
                             for ticker in DEFAULT_TICKERS
                         ]
@@ -59,7 +60,7 @@ class Application:
                 ],
             }
         }
-        self.dock_layout = DockLayoutReflect(
+        self.dock_layout = rcdock.DockLayoutReflect(
             defaultLayout=defaultLayout,
             style={
                 "height": "100%",
@@ -75,17 +76,17 @@ class Application:
         async def create_live_quotes_callback(tickers):
             await self.dock_layout.insert_component(YahooFinanceApp(tickers))
 
-        menu = Menu(
+        menu = antd.Menu(
             [
-                Menu.SubMenu(
+                antd.Menu.SubMenu(
                     [
-                        Menu.ItemGroup(
+                        antd.Menu.ItemGroup(
                             [
-                                Menu.Item(
+                                antd.Menu.Item(
                                     "Stock history",
                                     onClick=self.add_StockHistoryApp,
                                 ),
-                                Menu.Item(
+                                antd.Menu.Item(
                                     "Altair car dataset",
                                     onClick=lambda: self.dock_layout.insert_component(
                                         AltairApp(),
@@ -94,24 +95,24 @@ class Application:
                             ],
                             title="Plotting",
                         ),
-                        Menu.ItemGroup(
+                        antd.Menu.ItemGroup(
                             [
-                                Menu.Item(
+                                antd.Menu.Item(
                                     "NYSE",
                                     onClick=lambda: create_stocks_callback("nyse"),
                                 ),
-                                Menu.Item(
+                                antd.Menu.Item(
                                     "AMEX",
                                     onClick=lambda: create_stocks_callback("amex"),
                                 ),
-                                Menu.Item(
+                                antd.Menu.Item(
                                     "NASDAQ",
                                     onClick=lambda: create_stocks_callback("nasdaq"),
                                 ),
                             ],
                             title="Stocks",
                         ),
-                        Menu.Item(
+                        antd.Menu.Item(
                             "FX live quotes",
                             onClick=lambda: create_live_quotes_callback(
                                 DEFAULT_LIVE_FX_TICKERS
@@ -121,7 +122,7 @@ class Application:
                     key="SubMenu",
                     icon=create_icon(
                         MENU,
-                        style={"height": 30, "color": LIGHT_GREY},
+                        style={"height": 30, "color": rcdock.LIGHT_GREY},
                     ),
                 )
             ],
@@ -129,13 +130,13 @@ class Application:
             mode="horizontal",
             style={"height": "40px"},
         )
-        self.root = div(
+        self.root = html.div(
             [
-                div(
+                html.div(
                     menu,
                     style={"flexGrow": 1},
                 ),
-                div(
+                html.div(
                     self.dock_layout,
                     style={
                         "height": "100%",

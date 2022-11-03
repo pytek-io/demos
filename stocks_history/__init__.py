@@ -6,33 +6,13 @@ from datetime import datetime, timedelta
 
 import httpx
 import pandas
-from reflect import (
-    Controller,
-    WindowSize,
-    autorun,
-    create_mapping,
-    get_window,
-    js,
-    create_observable,
-    memoize,
-    ResponsiveValue,
-)
-from reflect_antd import (
-    AutoComplete,
-    Button,
-    Col,
-    DatePicker,
-    Divider,
-    InputNumber,
-    Row,
-    Select,
-    Space,
-    Switch,
-    Typography,
-)
-from reflect_html import div, label
-from reflect_plotly import Plot
-from reflect_utils.antd import create_form_row, LEFT_BREAK_POINTS, RIGHT_BREAK_POINTS
+import reflect_antd as antd
+from reflect import (Controller, ResponsiveValue, Window, WindowSize, autorun,
+                     create_mapping, create_observable, js, memoize)
+import reflect_html as html
+import reflect_plotly as plotly
+from reflect_utils.antd import (LEFT_BREAK_POINTS, RIGHT_BREAK_POINTS,
+                                create_form_row)
 
 DEFAULT_TICKER = "AAPL"
 CANDLE_STICK_NAME = "candlestick"
@@ -50,7 +30,9 @@ def signal_name(settings):
 
 
 class App:
-    def __init__(self, ticker=None, stand_alone=True):
+    def __init__(self, ticker, stand_alone=True):
+        if not ticker():
+            ticker.set(DEFAULT_TICKER)
         today = datetime.today()
         self.controller = Controller()
         records = json.loads(
@@ -62,9 +44,9 @@ class App:
             ).read()
         )["data"]["table"]["rows"]
         tickers = {record["symbol"]: record["name"] for record in records}
-        self.ticker_autocomplete = AutoComplete(
+        self.ticker_autocomplete = antd.AutoComplete(
             options=[{"value": name} for name in tickers],
-            defaultValue=ticker or DEFAULT_TICKER,
+            value=ticker,
             style=dict(textAlign="right", width=100),
             filterOption=js("autoCompleteFilterOption"),
             backfill=True,
@@ -73,9 +55,9 @@ class App:
         def full_name():
             return tickers.get(self.ticker_autocomplete(), "")
 
-        start_date = DatePicker(defaultValue=today - timedelta(days=365))
-        end_date = DatePicker(defaultValue=today)
-        graph_type = Select(
+        start_date = antd.DatePicker(defaultValue=today - timedelta(days=365))
+        end_date = antd.DatePicker(defaultValue=today)
+        graph_type = antd.Select(
             defaultValue=CANDLE_STICK_NAME,
             options=[
                 dict(label="Candles", value=CANDLE_STICK_NAME),
@@ -83,8 +65,8 @@ class App:
             ],
             style=dict(width=100),
         )
-        range_slider = Switch(defaultChecked=True)
-        show_legends = Switch(defaultChecked=True)
+        range_slider = antd.Switch(defaultChecked=True)
+        show_legends = antd.Switch(defaultChecked=True)
         self.header = [
             create_form_row("Ticker", self.ticker_autocomplete),
             create_form_row("Start", start_date),
@@ -101,32 +83,32 @@ class App:
         )
 
         def create_signal_settings_component(settings):
-            return Row(
+            return antd.Row(
                 [
-                    Col(
+                    antd.Col(
                         # we add a lambda to avoid recomputing the whole row when the number of days changes (this causes the focus to be lost on mobiles)
-                        label(lambda: signal_name(settings)),
-                        className="ant-form-item-label",
+                        html.label(lambda: signal_name(settings)),
+                        className="ant-form-item-html.label",
                         **LEFT_BREAK_POINTS,
                     ),
-                    Col(
-                        Space(
+                    antd.Col(
+                        antd.Space(
                             [
-                                InputNumber(
+                                antd.InputNumber(
                                     value=settings["nb_days"],
                                     style=dict(width=NB_DAYS_WIDTH),
                                 ),
-                                Select(
+                                antd.Select(
                                     [
-                                        Select.Option("Blue", value="blue"),
-                                        Select.Option("Red", value="red"),
-                                        Select.Option("Green", value="green"),
-                                        Select.Option("Yellow", value="yellow"),
+                                        antd.Select.Option("Blue", value="blue"),
+                                        antd.Select.Option("Red", value="red"),
+                                        antd.Select.Option("Green", value="green"),
+                                        antd.Select.Option("Yellow", value="yellow"),
                                     ],
                                     value=settings["color"],
                                     style=dict(width=COLOR_WIDTH, textAlign="right"),
                                 ),
-                                Button(
+                                antd.Button(
                                     "-",
                                     onClick=lambda: signal_definitions.remove(settings),
                                     style=dict(width=42),
@@ -146,27 +128,27 @@ class App:
             controller=self.controller,
             evaluate_argument=False,
         )
-        self.signal_setting_labels = Row(
+        self.signal_setting_labels = antd.Row(
             [
-                Col(**LEFT_BREAK_POINTS),
-                Col(
-                    Space(
+                antd.Col(**LEFT_BREAK_POINTS),
+                antd.Col(
+                    antd.Space(
                         [
-                            div(
+                            html.div(
                                 "days",
                                 style=dict(
                                     width=NB_DAYS_WIDTH,
                                     textAlign="center",
                                 ),
                             ),
-                            div(
+                            html.div(
                                 "color",
                                 style=dict(
                                     width=COLOR_WIDTH,
                                     textAlign="center",
                                 ),
                             ),
-                            Button(
+                            antd.Button(
                                 "+",
                                 onClick=lambda: signal_definitions.append(
                                     {"nb_days": 2, "color": "red"}
@@ -254,7 +236,7 @@ class App:
                 "autosize": True,
             }
 
-        plot = Plot(
+        plot = plotly.Plot(
             data=data,
             layout=layout,
             config=dict(responsive=True),
@@ -265,7 +247,7 @@ class App:
                 "marginRight": 60,  # the graph looks at the right location when the icons are hidden...
             },
         )
-        title = Typography.Title(
+        title = antd.Typography.Title(
             full_name,
             level=5,
             style=lambda: {
@@ -273,7 +255,7 @@ class App:
                 "margin": ResponsiveValue(0, md=16)(),
             },
         )
-        self.content = div(
+        self.content = html.div(
             [title, plot] if stand_alone else [plot],
             style={"height": "100%"},
         )
@@ -285,11 +267,11 @@ class App:
         self.title = title
 
     def settings(self):
-        return Col(
+        return antd.Col(
             [
-                Divider("Time series"),
+                antd.Divider("Time series"),
                 self.header,
-                Divider("Signals"),
+                antd.Divider("Signals"),
                 self.signal_setting_labels,
                 self.signals_settings,
             ],
@@ -311,26 +293,25 @@ def content(ticker, stand_alone=True):
     }
 
 
-def app(ticker=DEFAULT_TICKER):
-    app = App(ticker)
-    window = get_window()
+def app(window: Window):
+    app = App(window.hash)
     window.set_title(app.title)
-    return Row(
+    return antd.Row(
         [
-            Col(
+            antd.Col(
                 [
                     app.settings,
-                    Divider(),
-                    Row(
-                        Col(
-                            Space(
+                    antd.Divider(),
+                    antd.Row(
+                        antd.Col(
+                            antd.Space(
                                 [
-                                    Button(
+                                    antd.Button(
                                         "Revert",
                                         type="primary",
                                         onClick=app.cancel,
                                     ),
-                                    Button(
+                                    antd.Button(
                                         "Update",
                                         type="primary",
                                         onClick=app.ok,
@@ -349,7 +330,7 @@ def app(ticker=DEFAULT_TICKER):
                 xs=24,
                 md=12,
             ),
-            Col(app.content, xs=24, md=12),
+            antd.Col(app.content, xs=24, md=12),
         ],
         style=lambda: {"marginTop": "10vh" if window.size() >= WindowSize.md else None},
     )

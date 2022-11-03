@@ -103,11 +103,11 @@ def create_code_editor(
     )
 
 
-def build_menu(rootdir):
-    rootdir = rootdir + "/demos"
+def build_menu(root_directory):
+    root_directory = root_directory + "/demos"
     sub_menus = []
     for category in CATEGORIES:
-        category_folder = join(rootdir, category)
+        category_folder = join(root_directory, category)
         nice_category_name = pickle.loads(
             open(join(category_folder, "description.pick"), "rb").read()
         )
@@ -254,8 +254,8 @@ def create_code_box(
     )
 
 
-def demo_details(rootdir, category, component_name):
-    default_folder = join(rootdir, "demos", category, component_name)
+def demo_details(root_directory, category, component_name):
+    default_folder = join(root_directory, "demos", category, component_name)
     _nice_name, _nb_cols, demos = pickle.loads(
         open(os.path.join(default_folder, "summary.pick"), "rb").read()
     )
@@ -312,12 +312,12 @@ def generate_top_level_components(source, demos):
 
 
 def app():
-    rootdir, _ = split(__file__)
-    current_demo_path, menu = build_menu(rootdir)
+    root_directory, _ = split(__file__)
+    current_demo_path, menu = build_menu(root_directory)
 
     def page_display():
         category, component_name = current_demo_path().split("/")
-        demos = list(demo_details(rootdir, category, component_name))
+        demos = list(demo_details(root_directory, category, component_name))
         if COMPONENTS_PROPS[component_name] == 1:
             demos = Col(demos)
         else:

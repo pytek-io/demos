@@ -1,25 +1,20 @@
+import json
 from itertools import count
 from operator import itemgetter
 
+import reflect
+import reflect_aggrid as aggrid
+import reflect_antd as antd
+import reflect_html as html
+import reflect_rcdock as rcdock
 from anyio import Event
-from reflect import Window, get_window, js, create_observable
 from reflect.connection import record_connection
 from reflect.utils import anext
-from reflect_aggrid import AgGridColumn, AgGridReact
-from reflect_antd import message
-from reflect_html import div
-from reflect_rcdock import DockLayout, DropDirection
-from reflect_utils.common import dummy_connection, read_pickles, ws_connection_manager
+from reflect_utils.common import (dummy_connection, read_pickles,
+                                  ws_connection_manager)
 
-from .config import (
-    CLIENT,
-    DEFINITIONS,
-    DEPLOYMENT,
-    PRIORITY_GROUP,
-    RUNNING_TASKS_DEF,
-    SESSION,
-    WORKER,
-)
+from .config import (CLIENT, DEFINITIONS, DEPLOYMENT, PRIORITY_GROUP,
+                     RUNNING_TASKS_DEF, SESSION, WORKER)
 
 CSS = [
     "static/antd.css",  # tab names formatting
@@ -49,7 +44,7 @@ def create_column(definition):
             width = definition.get("width", None)
             if width is None:
                 raise Exception(f"Missing width in column definition: {definition}")
-    return AgGridColumn(**definition), width
+    return aggrid.AgGridColumn(**definition), width
 
 
 def create_columns(definitions):
@@ -69,11 +64,11 @@ def create_grid(
     columns, width = create_columns(definition["columns"])
     getContextMenuItems = definition.get("getContextMenuItems", None)
     if getContextMenuItems:
-        getContextMenuItems = js("createContextMenu", getContextMenuItems)
+        getContextMenuItems = reflect.js("createContextMenu", getContextMenuItems)
 
-    grid = AgGridReact(
+    grid = aggrid.AgGridReact(
         columns,
-        getRowNodeId=js("id"),
+        getRowNodeId=reflect.js("id"),
         defaultColDef=dict(resizable=True),
         getContextMenuItems=getContextMenuItems,
         className="ag-theme-balham",
@@ -83,9 +78,9 @@ def create_grid(
         column["field"] for column in definition["columns"]
     ]
     update_fields = definition.get("update_fields", static_fields)
-    title = create_observable(name, key="tab title")
+    title = reflect.create_observable(name, key="tab title")
 
-    title_component = div([title])
+    title_component = html.div([title])
     row_count = 0
     rows = {}
 
@@ -113,7 +108,7 @@ def create_grid(
         else:
             print("ignoring update", update)
 
-    content = div(
+    content = html.div(
         grid,
         style=dict(height=800, width=width + 200),
         componentDidMount=on_didmount,
@@ -123,8 +118,8 @@ def create_grid(
 
 
 class Application:
-    def __init__(self, window: Window):
-        self.window: Window = window
+    def __init__(self, window: reflect.Window):
+        self.window = window
         self.counter = count()
         self.nb_tabs_created = 0
         self.grids_ready = Event()
@@ -137,7 +132,7 @@ class Application:
                 "minWidth": 220,
             },
             groupDefaultExpanded=-1,  # expand all groups by default
-            getDataPath=js("fetch_attribute", "priority_group_path"),
+            getDataPath=reflect.js("fetch_attribute", "priority_group_path"),
             treeData=True,
         )
         self.updaters, self.main_grids = {}, {}
@@ -170,7 +165,7 @@ class Application:
                 ],
             }
         }
-        self.dock_layout = DockLayout(
+        self.dock_layout = rcdock.DockLayout(
             defaultLayout=defaultLayout,
             style={
                 "position": "absolute",
@@ -199,7 +194,6 @@ class Application:
 
     def create_mount_callback(self, session_id, subscribe):
         def result():
-            print("UpdateSubscription", subscribe, session_id)
             self.server_connection.send_nowait(
                 ["UpdateSubscription", subscribe, session_id]
             )
@@ -225,10 +219,9 @@ class Application:
             elif len(msg) == 3:
                 code, success, description = msg
                 if code == "R":
-                    print("calling message")
-                    (message.success if success else message.error)(description)
+                    (antd.message.success if success else antd.message.error)(description)
                 else:
-                    print("received", msg)
+                    print("ignoring", msg)
 
     async def main(self, connection_manager):
         await self.grids_ready.wait()
@@ -248,7 +241,7 @@ class Application:
                 closable=True,
             ),
             panel_id,
-            DropDirection.MIDDLE,
+            rcdock.DropDirection.MIDDLE,
         )
 
     async def process_client_messages(self):
@@ -287,27 +280,21 @@ class Application:
                 await self.server_connection.send(["RequestToMaster", 0, message])
 
 
-async def app():
-    window = get_window()
-    argument = window.hash()
-    # quick fix to get this demos working in app_explorer (should be fixed by a smarter hash implementation)
-    # argument = json.loads(argument) if argument else {}
-    argument = {}
-    uri, archive = argument.get("uri", None), argument.get(
-        "archive", "demos/dispatch/replay.pick"
-    )
-    app = Application(window=window)
-    # server_connection_host, http_port = "0.0.0.0", 30000
-    # uri = "ws://{}:{}/ws".format(server_connection_host, http_port)
-    # uri = "wss://30000-beige-clam-nmcnkydt.ws-eu08.gitpod.io/ws"
-    if uri:
+async def app(window: reflect.Window):
+    arguments = json.loads(window.hash()) if window.hash() else {}
+    archive = arguments.get("archive", None)
+    server_connection_host = arguments.get("server", None)
+    http_port = arguments.get("port", None)
+    if server_connection_host and http_port:
         connection = ws_connection_manager(
-            uri=uri, task_group=window.task_group, number_messages=True
+            uri=f"ws://{server_connection_host}:{http_port}/ws", 
+            task_group=window.task_group, 
+            number_messages=True
         )
         if archive:
             connection = record_connection(connection, open(archive, "wb"))
     else:
         connection = dummy_connection(read_pickles(open(archive, "rb")))
-
+    app = Application(window=window)
     window.start_soon(app.main, connection)
     return app.dock_layout
