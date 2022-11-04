@@ -1,18 +1,15 @@
 """Fetch historical data from yahoo in real time, plot time series and signals using plotly."""
+import datetime
 import io
 import json
 import pathlib
-from datetime import datetime, timedelta
 
 import httpx
-import pandas
+import pandas as pd
+import reflect as r
 import reflect_antd as antd
-from reflect import (Controller, ResponsiveValue, Window, WindowSize, autorun,
-                     create_mapping, create_observable, js, memoize)
 import reflect_html as html
 import reflect_plotly as plotly
-from reflect_utils.antd import (LEFT_BREAK_POINTS, RIGHT_BREAK_POINTS,
-                                create_form_row)
 
 DEFAULT_TICKER = "AAPL"
 CANDLE_STICK_NAME = "candlestick"
@@ -33,8 +30,9 @@ class App:
     def __init__(self, ticker, stand_alone=True):
         if not ticker():
             ticker.set(DEFAULT_TICKER)
-        today = datetime.today()
-        self.controller = Controller()
+        today = datetime.datetime.today()
+        self.title = ticker
+        self.controller = r.Controller()
         records = json.loads(
             open(
                 pathlib.Path(__file__)
@@ -48,14 +46,14 @@ class App:
             options=[{"value": name} for name in tickers],
             value=ticker,
             style=dict(textAlign="right", width=100),
-            filterOption=js("autoCompleteFilterOption"),
+            filterOption=r.js("autoCompleteFilterOption"),
             backfill=True,
         )
 
         def full_name():
             return tickers.get(self.ticker_autocomplete(), "")
 
-        start_date = antd.DatePicker(defaultValue=today - timedelta(days=365))
+        start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))
         end_date = antd.DatePicker(defaultValue=today)
         graph_type = antd.Select(
             defaultValue=CANDLE_STICK_NAME,
@@ -68,14 +66,17 @@ class App:
         range_slider = antd.Switch(defaultChecked=True)
         show_legends = antd.Switch(defaultChecked=True)
         self.header = [
-            create_form_row("Ticker", self.ticker_autocomplete),
-            create_form_row("Start", start_date),
-            create_form_row("End", end_date),
-            create_form_row("Graph type", graph_type),
-            create_form_row("Range slider", range_slider),
-            create_form_row("Show legends", show_legends),
+            (antd.create_form_row(label, component))
+            for label, component in [
+                ("Ticker", self.ticker_autocomplete),
+                ("Start", start_date),
+                ("End", end_date),
+                ("Graph type", graph_type),
+                ("Range slider", range_slider),
+                ("Show legends", show_legends),
+            ]
         ]
-        signal_definitions = create_observable(
+        signal_definitions = r.create_observable(
             [{"nb_days": 2, "color": "red"}],
             depth=3,
             key="signal_definitions",
@@ -89,7 +90,7 @@ class App:
                         # we add a lambda to avoid recomputing the whole row when the number of days changes (this causes the focus to be lost on mobiles)
                         html.label(lambda: signal_name(settings)),
                         className="ant-form-item-html.label",
-                        **LEFT_BREAK_POINTS,
+                        **antd.LEFT_BREAK_POINTS,
                     ),
                     antd.Col(
                         antd.Space(
@@ -115,13 +116,13 @@ class App:
                                 ),
                             ],
                         ),
-                        **RIGHT_BREAK_POINTS,
+                        **antd.RIGHT_BREAK_POINTS,
                     ),
                 ],
                 style=dict(marginTop=10),
             )
 
-        self.signals_settings = create_mapping(
+        self.signals_settings = r.create_mapping(
             create_signal_settings_component,
             signal_definitions,
             key="signals_settings",
@@ -130,7 +131,7 @@ class App:
         )
         self.signal_setting_labels = antd.Row(
             [
-                antd.Col(**LEFT_BREAK_POINTS),
+                antd.Col(**antd.LEFT_BREAK_POINTS),
                 antd.Col(
                     antd.Space(
                         [
@@ -159,12 +160,12 @@ class App:
                             ),
                         ],
                     ),
-                    **RIGHT_BREAK_POINTS,
+                    **antd.RIGHT_BREAK_POINTS,
                 ),
             ],
         )
 
-        yahoo_data = create_observable(pandas.DataFrame())
+        yahoo_data = r.create_observable(pd.DataFrame())
 
         async def fetch_data_async():
             start, end = start_date(), end_date()
@@ -176,9 +177,9 @@ class App:
                     raise RuntimeError(
                         f"Failed to retrieve data from yahoo: {exception}"
                     ) from exception
-                yahoo_data.set(pandas.read_csv(io.BytesIO(data.content)))
+                yahoo_data.set(pd.read_csv(io.BytesIO(data.content)))
 
-        autorun(fetch_data_async, controller=self.controller)
+        r.autorun(fetch_data_async)
 
         def generate_signal(settings):
             df = yahoo_data()
@@ -190,7 +191,7 @@ class App:
                 "y": df.Close.rolling(settings["nb_days"]()).mean(),
             }
 
-        signals = create_mapping(
+        signals = r.create_mapping(
             generate_signal,
             signal_definitions,
             "signal_definitions",
@@ -252,19 +253,13 @@ class App:
             level=5,
             style=lambda: {
                 "textAlign": "center",
-                "margin": ResponsiveValue(0, md=16)(),
+                "margin": r.ResponsiveValue(0, md=16)(),
             },
         )
         self.content = html.div(
             [title, plot] if stand_alone else [plot],
             style={"height": "100%"},
         )
-
-        @memoize(controller=self.controller)
-        def title():
-            return self.ticker_autocomplete.evaluate() or DEFAULT_TICKER
-
-        self.title = title
 
     def settings(self):
         return antd.Col(
@@ -293,7 +288,7 @@ def content(ticker, stand_alone=True):
     }
 
 
-def app(window: Window):
+def app(window: r.Window):
     app = App(window.hash)
     window.set_title(app.title)
     return antd.Row(
@@ -332,5 +327,7 @@ def app(window: Window):
             ),
             antd.Col(app.content, xs=24, md=12),
         ],
-        style=lambda: {"marginTop": "10vh" if window.size() >= WindowSize.md else None},
+        style=lambda: {
+            "marginTop": "10vh" if window.size() >= r.WindowSize.md else None
+        },
     )

@@ -16,7 +16,7 @@ def app():
     switch_theme = Switch("dark theme", defaultChecked=False)
     mode = lambda: "vertical" if switch_mode() else "inline"
     theme = lambda: "dark" if switch_theme() else "light"
-    return [
+    return div([
         switch_mode,
         Divider(type="vertical"),
         switch_theme,
@@ -71,4 +71,4 @@ def app():
             mode=mode,
             theme=theme,
         ),
-    ]
+    ])

@@ -1,7 +1,7 @@
 import json
 import pathlib
 
-from reflect import Controller, memoize
+from reflect import Controller
 from reflect_aggrid import AgGridColumn, AgGridReact
 from reflect_antd import Select
 from reflect_html import div
@@ -22,8 +22,6 @@ class App:
             controller=controller,
         )
 
-        # this method will be memoized and its update will be controlled by controller
-        @memoize(controller=controller)
         def get_stocks_close():
             # Downloaded from "https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=10000&exchange=nyse"
             # It would be more realistic to fetch those directly but NSADQ disabled programmatic access...

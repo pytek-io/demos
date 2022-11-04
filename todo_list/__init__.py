@@ -110,7 +110,7 @@ class Application:
 
     def move_item(self, key, up_or_down):
         self.items.move(
-            find_index(self.items(), lambda v: v["key"]() == key),
+            find_index(self.items(), lambda v: v["key"] == key),
             1 if up_or_down else -1,
         )
 

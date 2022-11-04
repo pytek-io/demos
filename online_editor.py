@@ -1,7 +1,7 @@
 import json
 import os
 
-from reflect import get_window, create_observable
+from reflect import Window, create_observable
 from reflect.utils import CatchError, decode_url, is_writable_file
 from reflect_ant_icons import CaretRightFilled, FolderOpenFilled
 from reflect_antd import Button, Input, Modal
@@ -42,8 +42,7 @@ def create_editor(file, language, read_only):
     )
 
 
-def app():
-    window = get_window()
+def app(window: Window):
     arguments = json.loads(window.hash()) if window.hash() else {"main": "hello_world.py"}
     main, css = arguments["main"], arguments.get("css", [])
     window.add_css(css)
@@ -133,8 +132,7 @@ def app():
     file_selection_window, show_file_selection_window = create_file_chooser(
         BASE_PATH, title="Select file to open", on_ok=open_file
     )
-
-    name, extension = file_name.rsplit(".", 1)
+    name, extension = file_name.rsplit(".", 1) if "." in file_name else file_name, ".py"
     default_new_file_name = f"{name}_test.{extension}"
     new_file_name_input = Input(defaultValue=default_new_file_name)
 

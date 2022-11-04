@@ -41,7 +41,7 @@ class Application:
                         "mode": "vertical",
                         "children": [
                             {
-                                "tabs": [StockHistoryApp(reflect.create_observable(ticker), False)],
+                                "tabs": [self.create_stock_history_app(ticker)],
                             }
                             for ticker in DEFAULT_TICKERS
                         ]
@@ -153,9 +153,12 @@ class Application:
             ),
         )
 
+    def create_stock_history_app(self, ticker: str):
+        return StockHistoryApp(reflect.create_observable(ticker), False)
+
     async def add_StockHistoryApp(self):
         await self.dock_layout.insert_component(
-            StockHistoryApp("AAPL", False),
+            self.create_stock_history_app("AAPL"),
             settings_visible=True,
         )
 

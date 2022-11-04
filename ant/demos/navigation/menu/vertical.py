@@ -3,17 +3,11 @@ from reflect_antd import Menu
 from reflect_ant_icons import MailOutlined, AppstoreOutlined, SettingOutlined
 from reflect import Callback
 
-SubMenu = Menu.SubMenu
-
-
-def handleClick(e):
-    print("click", e)
-
 
 def app():
     return Menu(
         [
-            SubMenu(
+            Menu.SubMenu(
                 [
                     Menu.ItemGroup(
                         [
@@ -27,18 +21,18 @@ def app():
                             Menu.Item("Option 3", key="3"),
                             Menu.Item("Option 4", key="4"),
                         ],
-                        title="Iteom 2",
+                        title="Item 2",
                     ),
                 ],
                 key="sub1",
-                icon=MailOutlined([]),
+                icon=MailOutlined(),
                 title="Navigation One",
             ),
-            SubMenu(
+            Menu.SubMenu(
                 [
                     Menu.Item("Option 5", key="5"),
                     Menu.Item("Option 6", key="6"),
-                    SubMenu(
+                    Menu.SubMenu(
                         [
                             Menu.Item("Option 7", key="7"),
                             Menu.Item("Option 8", key="8"),
@@ -48,10 +42,10 @@ def app():
                     ),
                 ],
                 key="sub2",
-                icon=AppstoreOutlined([]),
+                icon=AppstoreOutlined(),
                 title="Navigation Two",
             ),
-            SubMenu(
+            Menu.SubMenu(
                 [
                     Menu.Item("Option 9", key="9"),
                     Menu.Item("Option 10", key="10"),
@@ -59,11 +53,11 @@ def app():
                     Menu.Item("Option 12", key="12"),
                 ],
                 key="sub4",
-                icon=SettingOutlined([]),
+                icon=SettingOutlined(),
                 title="Navigation Three",
             ),
         ],
-        onClick=Callback(handleClick, "key"),
+        onClick=Callback(lambda key: print(f"clicked {key}"), args="key"),
         style=dict(width=256),
         mode="vertical",
     )
