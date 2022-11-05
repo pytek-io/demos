@@ -1,21 +1,23 @@
 import json
 import pathlib
 
-from reflect import Controller
-from reflect_aggrid import AgGridColumn, AgGridReact
-from reflect_antd import Select
-from reflect_html import div
+import reflect_aggrid as aggrid
+import reflect_antd as antd
+import reflect_html as html
+
+import reflect as r
+
 from .config import COLUMNS
 
 
 class App:
     def __init__(self, default="nasdaq"):
-        controller = Controller()
-        self.settings = Select(
+        controller = r.Controller()
+        self.settings = antd.Select(
             [
-                Select.Option("Nasdaq", value="nasdaq"),
-                Select.Option("Amex", value="amex"),
-                Select.Option("NYSE", value="nyse"),
+                antd.Select.Option("Nasdaq", value="nasdaq"),
+                antd.Select.Option("Amex", value="amex"),
+                antd.Select.Option("NYSE", value="nyse"),
             ],
             defaultValue=default,
             style=dict(width=120),
@@ -23,8 +25,6 @@ class App:
         )
 
         def get_stocks_close():
-            # Downloaded from "https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=10000&exchange=nyse"
-            # It would be more realistic to fetch those directly but NSADQ disabled programmatic access...
             file_path = (
                 pathlib.Path(__file__)
                 .parent.joinpath("nasdaq")
@@ -39,10 +39,10 @@ class App:
                 for record in get_stocks_close()["table"]["rows"]
             ]
 
-        self.content = div(
-            AgGridReact(
+        self.content = html.div(
+            aggrid.AgGridReact(
                 [
-                    AgGridColumn(field=name, **col)
+                    aggrid.AgGridColumn(field=name, **col)
                     for name, (_formatter, col) in COLUMNS
                 ],
                 rowData=rowData,

@@ -1,26 +1,22 @@
+import itertools
 import json
-from itertools import count
-from operator import itemgetter
+import operator
 
-import reflect
+import anyio
 import reflect_aggrid as aggrid
 import reflect_antd as antd
 import reflect_html as html
 import reflect_rcdock as rcdock
-from anyio import Event
-from reflect.connection import record_connection
-from reflect.utils import anext
-from reflect_utils.common import (dummy_connection, read_pickles,
-                                  ws_connection_manager)
+import reflect_utils as utils
+
+import reflect as r
 
 from .config import (CLIENT, DEFINITIONS, DEPLOYMENT, PRIORITY_GROUP,
                      RUNNING_TASKS_DEF, SESSION, WORKER)
+from .utils import anext, dummy_connection, read_pickles, record_connection
 
-CSS = [
-    "static/antd.css",  # tab names formatting
-]
+CSS = ["static/antd.css"]
 TITLE = "Dispatch"
-
 CREATION = "C"
 UPDATE = "U"
 DELETE = "D"
@@ -34,16 +30,14 @@ def create_column(definition):
     children = definition.get("children", None)
     if children:
         children, width = create_columns(children)
-        # avoiding to alter input so that we can reuse it...
         definition = definition.copy()
         definition["children"] = children
+    elif definition.get("hide", False):
+        width = 0
     else:
-        if definition.get("hide", False):
-            width = 0
-        else:
-            width = definition.get("width", None)
-            if width is None:
-                raise Exception(f"Missing width in column definition: {definition}")
+        width = definition.get("width", None)
+        if width is None:
+            raise Exception(f"Missing width in column definition: {definition}")
     return aggrid.AgGridColumn(**definition), width
 
 
@@ -53,22 +47,16 @@ def create_columns(definitions):
 
 
 def create_grid(
-    definition,
-    is_leaf,
-    extra_args,
-    name=None,
-    on_didmount=None,
-    on_unmount=None,
+    definition, is_leaf, extra_args, name=None, on_didmount=None, on_unmount=None
 ):
     name = name or definition["name"]
     columns, width = create_columns(definition["columns"])
     getContextMenuItems = definition.get("getContextMenuItems", None)
     if getContextMenuItems:
-        getContextMenuItems = reflect.js("createContextMenu", getContextMenuItems)
-
+        getContextMenuItems = r.js("createContextMenu", getContextMenuItems)
     grid = aggrid.AgGridReact(
         columns,
-        getRowNodeId=reflect.js("id"),
+        getRowNodeId=r.js("id"),
         defaultColDef=dict(resizable=True),
         getContextMenuItems=getContextMenuItems,
         className="ag-theme-balham",
@@ -78,8 +66,7 @@ def create_grid(
         column["field"] for column in definition["columns"]
     ]
     update_fields = definition.get("update_fields", static_fields)
-    title = reflect.create_observable(name, key="tab title")
-
+    title = r.create_observable(name, key="tab title")
     title_component = html.div([title])
     row_count = 0
     rows = {}
@@ -102,7 +89,7 @@ def create_grid(
                 row_count -= 1 if is_leaf is None or is_leaf(record) else 0
                 update = {"remove": [{"id": row_id}]}
         title.set(f"{name} ({row_count})")
-        title_component  # this needs to be kept alive in the closure
+        title_component
         if update:
             await grid.applyTransactionAsync(update)
         else:
@@ -118,28 +105,28 @@ def create_grid(
 
 
 class Application:
-    def __init__(self, window: reflect.Window):
+    def __init__(self, window: r.Window):
         self.window = window
-        self.counter = count()
+        self.counter = itertools.count()
         self.nb_tabs_created = 0
-        self.grids_ready = Event()
+        self.grids_ready = anyio.Event()
         session_extra_arguments = dict(
             autoGroupColumnDef={
                 "headerName": "Priority Group / Session",
-                "cellRendererParams": {
-                    "suppressCount": True,
-                },
+                "cellRendererParams": {"suppressCount": True},
                 "minWidth": 220,
             },
-            groupDefaultExpanded=-1,  # expand all groups by default
-            getDataPath=reflect.js("fetch_attribute", "priority_group_path"),
+            groupDefaultExpanded=-1,
+            getDataPath=r.js("fetch_attribute", "priority_group_path"),
             treeData=True,
         )
         self.updaters, self.main_grids = {}, {}
         for info_type, definition in DEFINITIONS.items():
             title, grid, updater = create_grid(
                 definition,
-                is_leaf=itemgetter("is_session") if info_type == SESSION else None,
+                is_leaf=operator.itemgetter("is_session")
+                if info_type == SESSION
+                else None,
                 extra_args=session_extra_arguments if info_type == SESSION else {},
                 on_didmount=self.on_grid_did_mount,
             )
@@ -151,9 +138,7 @@ class Application:
             "dockbox": {
                 "mode": "vertical",
                 "children": [
-                    {
-                        "tabs": self.create_main_tab(SESSION),
-                    },
+                    {"tabs": self.create_main_tab(SESSION)},
                     {
                         "mode": "horizontal",
                         "children": [
@@ -219,7 +204,9 @@ class Application:
             elif len(msg) == 3:
                 code, success, description = msg
                 if code == "R":
-                    (antd.message.success if success else antd.message.error)(description)
+                    (antd.message.success if success else antd.message.error)(
+                        description
+                    )
                 else:
                     print("ignoring", msg)
 
@@ -229,17 +216,14 @@ class Application:
             self.window.start_soon(self.process_client_messages)
             self.window.start_soon(self.process_server_messages)
             for info_type in DEFINITIONS:
-                await self.server_connection.send(["UpdateSubscription", True, info_type])
+                await self.server_connection.send(
+                    ["UpdateSubscription", True, info_type]
+                )
 
     async def insert_panel(self, title, component):
-        # FIXME: use reflect_utils.common.create_tab_inserter instead
         panel_id = (await self.dock_layout.saveLayout())["dockbox"]["children"][0]["id"]
         await self.dock_layout.dockMove(
-            self.create_tab(
-                title,
-                component,
-                closable=True,
-            ),
+            self.create_tab(title, component, closable=True),
             panel_id,
             rcdock.DropDirection.MIDDLE,
         )
@@ -249,7 +233,7 @@ class Application:
             if code == "DisplayRunningTasks":
                 session_id = args[0]
                 if session_id in self.updaters:
-                    continue  # we don't want to support multiple instances of the same session...
+                    continue
                 title, component, updater = create_grid(
                     RUNNING_TASKS_DEF,
                     is_leaf=None,
@@ -260,36 +244,29 @@ class Application:
                 )
                 self.updaters[session_id] = updater
                 await self.insert_panel(title, component)
-                del (
-                    title,
-                    component,
-                )  # making sure the frame does not keep a hard ref (this is to avoid spurious warnings when closing the last opened tab)
+                del (title, component)
             else:
                 if code == "UpdateAttribute":
                     is_session, rest = split_sequence(args, 1)
                     record_type = SESSION if is_session[0] else PRIORITY_GROUP
                     message = [code, record_type] + rest
                 elif code == "TerminateSession":
-                    message = [
-                        code,
-                        args[0],
-                        "Session terminated from web client",
-                    ]
+                    message = [code, args[0], "Session terminated from web client"]
                 else:
                     message = [code] + args
                 await self.server_connection.send(["RequestToMaster", 0, message])
 
 
-async def app(window: reflect.Window):
+async def app(window: r.Window):
     arguments = json.loads(window.hash()) if window.hash() else {}
     archive = arguments.get("archive", None)
     server_connection_host = arguments.get("server", None)
     http_port = arguments.get("port", None)
     if server_connection_host and http_port:
-        connection = ws_connection_manager(
-            uri=f"ws://{server_connection_host}:{http_port}/ws", 
-            task_group=window.task_group, 
-            number_messages=True
+        connection = utils.ws_connection_manager(
+            uri=f"ws://{server_connection_host}:{http_port}/ws",
+            task_group=window.task_group,
+            number_messages=True,
         )
         if archive:
             connection = record_connection(connection, open(archive, "wb"))

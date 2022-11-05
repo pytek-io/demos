@@ -1,25 +1,23 @@
-from datetime import datetime
+import datetime
 
 import pandas as pd
-from reflect import get_window, autorun, create_observable
-from reflect_altair import Chart
-from reflect_antd import Col, Select, Empty
-from reflect_html import div
+import reflect_altair as altair
+import reflect_antd as antd
+import reflect_html as html
+
+import reflect as r
 
 from .charts import create_performance_chart
-from .server import Server, CURRENCIES
+from .server import CURRENCIES, Server
 
-Option = Select.Option
-
-
+Option = antd.Select.Option
 TITLE = "Option backtester"
 
 
 def create_cascading_selects(instruments):
     instruments = pd.DataFrame(instruments)
     select_style = dict(width=120, paddingTop=10)
-
-    currency = Select(
+    currency = antd.Select(
         [Option(name, value=acronym) for name, acronym in CURRENCIES],
         defaultValue=CURRENCIES[0][1],
         style=select_style,
@@ -32,10 +30,10 @@ def create_cascading_selects(instruments):
         result = sorted(set(instrument_for_ccy()["expiration_timestamp"]), reverse=True)
         return result
 
-    expiry_timestamp_select = Select(
+    expiry_timestamp_select = antd.Select(
         lambda: [
             Option(
-                datetime.fromtimestamp(value / 1000).strftime("%d/%m/%y"),
+                datetime.datetime.fromtimestamp(value / 1000).strftime("%d/%m/%y"),
                 value=value,
             )
             for value in expiry_timestamp_values()
@@ -59,7 +57,7 @@ def create_cascading_selects(instruments):
     def option_types():
         return sorted(set(instruments_for_expiry()["option_type"]))
 
-    option_type = Select(
+    option_type = antd.Select(
         lambda: [
             Option(value[0].upper() + value[1:], value=value)
             for value in option_types()
@@ -80,7 +78,7 @@ def create_cascading_selects(instruments):
     def strikes():
         return sorted(set(instruments_for_expiry_and_type()["strike"]), reverse=True)
 
-    strike = Select(
+    strike = antd.Select(
         lambda: [Option(f"{value:,.0f}", value=value) for value in strikes()],
         style=select_style,
         defaultValue=strikes()[min(len(strikes()) - 1, int(len(strikes()) / 2) + 1)]
@@ -103,10 +101,10 @@ def create_cascading_selects(instruments):
                 )
             return selected_instruments.iloc[0]["instrument_name"]
 
-    autorun(reset_timestamp_value)
-    autorun(reset_option_type)
-    autorun(reset_strike)
-    return currency, expiry_timestamp_select, option_type, strike, selected_instrument
+    r.autorun(reset_timestamp_value)
+    r.autorun(reset_option_type)
+    r.autorun(reset_strike)
+    return (currency, expiry_timestamp_select, option_type, strike, selected_instrument)
 
 
 class App(Server):
@@ -119,7 +117,7 @@ class App(Server):
             strike,
             selected_instrument,
         ) = create_cascading_selects(instruments)
-        chart_data = create_observable(None)
+        chart_data = r.create_observable(None)
 
         async def update_chart_data():
             if selected_instrument():
@@ -131,32 +129,22 @@ class App(Server):
 
         def chart():
             data = chart_data()
-            return div(
-                Chart(
+            return html.div(
+                altair.Chart(
                     create_performance_chart(*data),
-                    style={
-                        # magic numbers to get altair.vconcat to dimension charts correctly (responsiveness is broken as charts size incread by a factor of two...)
-                        "height": "42.5%",
-                        "width": "95%",
-                    },
+                    style={"height": "42.5%", "width": "95%"},
                 )
                 if data
-                else Empty(description="Select an instrument"),
-                style={
-                    "height": "100%",
-                    "flexGrow": 1,
-                },
+                else antd.Empty(description="Select an instrument"),
+                style={"height": "100%", "flexGrow": 1},
             )
 
-        autorun(update_chart_data)
-        side_bar = Col(
+        r.autorun(update_chart_data)
+        side_bar = antd.Col(
             [currency, expiry_timestamp_select, option_type, strike],
-            style={
-                "width": 200,
-                "textAlign": "center",
-            },
+            style={"width": 200, "textAlign": "center"},
         )
-        self.root = div(
+        self.root = html.div(
             [chart, side_bar],
             style=dict(
                 position="absolute",
@@ -172,7 +160,7 @@ class App(Server):
 
 
 async def app():
-    window = get_window()
+    window = r.get_window()
     app = App(window)
     await app.async_init()
     return app.root
