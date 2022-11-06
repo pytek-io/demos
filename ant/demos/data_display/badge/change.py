@@ -4,7 +4,7 @@ from reflect import create_observable
 from reflect_ant_icons import MinusOutlined, PlusOutlined, QuestionOutlined
 from reflect_antd import Badge, Button, Switch
 from reflect_html import *
-from reflect_utils.misc import increment_observable_bounded
+from reflect_utils import increment_observable_bounded
 
 MIN_VALUE = 0
 MAX_VALUE = 1000

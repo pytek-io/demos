@@ -3,7 +3,6 @@ from reflect_antd import Upload, message
 from reflect_ant_icons import InboxOutlined
 
 Dragger = Upload.Dragger
-status = info.status
 
 
 def app():
@@ -16,5 +15,4 @@ def app():
                 className="ant-upload-hint",
             ),
         ],
-        "{...props}"=True,
     )

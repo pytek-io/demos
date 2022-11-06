@@ -1,5 +1,5 @@
 from reflect import js
-from reflect_utils.formatters import (
+from reflect_utils import (
     compose,
     durationFormatter,
     filesize,

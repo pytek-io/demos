@@ -6,7 +6,7 @@ from time import perf_counter
 
 from anyio import Event
 from reflect import Window, get_window
-from reflect_utils.common import ws_connection_manager
+from reflect_utils import ws_connection_manager
 from websockets import ConnectionClosed
 
 from .analytics import compute_implied_vols, merge_data

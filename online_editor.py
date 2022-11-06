@@ -6,14 +6,13 @@ from reflect.utils import CatchError, decode_url, is_writable_file
 from reflect_ant_icons import CaretRightFilled, FolderOpenFilled
 from reflect_antd import Button, Input, Modal
 from reflect_html import div, section
-from reflect_rcdock import DockLayout
-from reflect_utils.common import (
+from reflect_rcdock import create_tab_inserter, DockLayout, create_tab
+from reflect_utils import (
     create_file_chooser,
-    create_tab_inserter,
     evaluate_demo_module,
 )
-from reflect_utils.misc import get_module_name
-from reflect_utils.md_parsing import (
+from reflect_utils import get_module_name
+from reflect_utils import (
     extract_file_path_and_language,
     monaco_language_from_extension,
     parse_md_doc,
@@ -43,22 +42,10 @@ def create_editor(file, language, read_only):
 
 
 def app(window: Window):
-    arguments = json.loads(window.hash()) if window.hash() else {"main": "hello_world.py"}
+    arguments = json.loads(window.hash()) if window.hash() else {"main": "demos/hello_world.py"}
     main, css = arguments["main"], arguments.get("css", [])
     window.add_css(css)
     main, kwargs = decode_url(main)
-    counter = 0
-    # this is taken from dock_manager demo (should be factored out)
-    def create_tab(title, application):
-        nonlocal counter
-        counter += 1
-        return {
-            "id": str(counter),
-            "title": title,
-            "content": application,
-            "cached": True,
-        }
-
     actual_file_path, language = extract_file_path_and_language(main)
     editor = create_editor(actual_file_path, language, read_only=False)
 

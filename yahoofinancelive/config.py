@@ -1,5 +1,4 @@
-from reflect.utils import identity
-from reflect_utils.formatters import (
+from reflect_utils import (
     colorCellNumber,
     compose,
     maximumSignificantDigits,
@@ -9,6 +8,9 @@ from reflect_utils.formatters import (
     toLocaleTimeString,
 )
 from reflect import Callback
+
+def identity(x):
+    return x
 
 def decode_quote(code):
     return QUOTE_TYPES.get(code, "UNKNOWN")

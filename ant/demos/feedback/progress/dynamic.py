@@ -2,7 +2,7 @@ from reflect_html import *
 from reflect_antd import Progress, Button
 from reflect_ant_icons import MinusOutlined, PlusOutlined
 from reflect import create_observable, autorun
-from reflect_utils.misc import increment_observable_bounded
+from reflect_utils import increment_observable_bounded
 
 
 

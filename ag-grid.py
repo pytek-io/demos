@@ -6,7 +6,7 @@ import lorem
 from reflect import Callback
 from reflect_aggrid import AgGridColumn, AgGridReact
 from reflect_html import div
-from reflect_utils.formatters import (
+from reflect_utils import (
     boolToString,
     round_value_to_2_digits,
     toLocaleDateString,

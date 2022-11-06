@@ -1,14 +1,13 @@
 """Allows to quickly navigate between apps displaying code and preview."""
-
 import os
-from pathlib import Path
+import pathlib
 
-from reflect import get_window, memoize
-from reflect_html import a, div, img
-from reflect_monaco import Editor as CodeEditor
-from reflect_rcdock import DockLayoutReflect
-from reflect_utils import create_file_explorer, evaluate_demo_module, get_module_name
-from reflect_utils.md_parsing import parse_md_doc
+import reflect_html as html
+import reflect_monaco as monaco
+import reflect_rcdock as rcdock
+import reflect_utils
+
+import reflect as r
 
 TITLE = "App explorer"
 ALMOST_BLACK = "#0f1724"
@@ -19,13 +18,13 @@ def call_if_callable(maybe_callable):
 
 
 def app():
-    base_path = get_window().hash() or str(
-        Path(__file__).parent.parent.relative_to(Path(os.getcwd()))
+    base_path = r.get_window().hash() or str(
+        pathlib.Path(__file__).parent.parent.relative_to(pathlib.Path(os.getcwd()))
     )
     filter_method = (
         lambda p: any(p.startswith(s) for s in ["__", "."]) and not p == "__init__.py"
     )
-    current_path, tree = create_file_explorer(
+    current_path, tree = reflect_utils.create_file_explorer(
         base_path, folder_filter=filter_method, file_filter=filter_method
     )
 
@@ -36,22 +35,22 @@ def app():
 
     relative_path = lambda: actual_path() or "No app selected"
 
-    @memoize()
+    @r.memoize()
     def component_and_settings():
         actual_path_value = actual_path()
         if actual_path_value:
             extension = actual_path_value.rsplit(".", 1)[-1]
             if extension == "py":
-                _success, _css, _title, component = evaluate_demo_module(
-                    get_module_name(actual_path()), ""
+                _success, _css, _title, component = reflect_utils.evaluate_demo_module(
+                    reflect_utils.get_module_name(actual_path()), ""
                 )
                 return component
             elif extension in ["svg", "png", "gif"]:
-                return img(src=actual_path_value)
+                return html.img(src=actual_path_value)
             elif extension == "md":
-                return parse_md_doc(open(actual_path_value, "r").read())
+                return reflect_utils.parse_md_doc(open(actual_path_value, "r").read())
             else:
-                return div(None)
+                return html.div(None)
 
     def component():
         component_and_settings_value = component_and_settings()
@@ -72,7 +71,7 @@ def app():
     def maybe_editor():
         if actual_path():
             try:
-                return CodeEditor(
+                return monaco.Editor(
                     defaultValue=open(actual_path(), "r").read(),
                     options=dict(
                         minimap={"enabled": False},
@@ -91,10 +90,7 @@ def app():
         "dockbox": {
             "mode": "horizontal",
             "children": [
-                {
-                    "size": 1,
-                    "tabs": [("Apps", tree)],
-                },
+                {"size": 1, "tabs": [("Apps", tree)]},
                 {
                     "size": 3,
                     "mode": "vertical",
@@ -104,8 +100,8 @@ def app():
                             "tabs": [
                                 (
                                     relative_path,
-                                    div(maybe_editor, style={"height": "100%"}),
-                                ),
+                                    html.div(maybe_editor, style={"height": "100%"}),
+                                )
                             ],
                         },
                         {
@@ -113,7 +109,7 @@ def app():
                             "tabs": [
                                 (
                                     "Preview",
-                                    div(
+                                    html.div(
                                         component,
                                         style={
                                             "height": "inherit",
@@ -125,7 +121,7 @@ def app():
                                 ),
                                 (
                                     "Settings",
-                                    div(
+                                    html.div(
                                         settings,
                                         style={
                                             "height": "inherit",
@@ -150,11 +146,11 @@ def app():
             result = result[:-9]
         return result
 
-    return div(
+    return html.div(
         [
-            div(
+            html.div(
                 [
-                    div(
+                    html.div(
                         "App explorer",
                         style={
                             "padding": ".5rem",
@@ -163,8 +159,8 @@ def app():
                             "marginLeft": "2rem",
                         },
                     ),
-                    div(
-                        lambda: a(
+                    html.div(
+                        lambda: html.a(
                             nice_path,
                             href=lambda: "/app/" + nice_path(),
                             target="_blank",
@@ -187,14 +183,7 @@ def app():
                     "alignItems": "center",
                 },
             ),
-            DockLayoutReflect(
-                defaultLayout=defaultLayout,
-                style={"flex": 2},
-            ),
+            rcdock.DockLayoutReflect(defaultLayout=defaultLayout, style={"flex": 2}),
         ],
-        style={
-            "display": "flex",
-            "flexDirection": "column",
-            "minHeight": "100%",
-        },
+        style={"display": "flex", "flexDirection": "column", "minHeight": "100%"},
     )

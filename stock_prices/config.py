@@ -1,4 +1,4 @@
-from reflect_utils.formatters import round_value_to_2_digits_col, toLocaleString
+from reflect_utils import round_value_to_2_digits_col, toLocaleString
 
 
 def identity(value):

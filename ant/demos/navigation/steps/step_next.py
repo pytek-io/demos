@@ -1,7 +1,7 @@
 from reflect_html import *
 from reflect_antd import Steps, Button, Space
 from reflect import create_observable
-from reflect_utils.misc import increment_observable_bounded
+from reflect_utils import increment_observable_bounded
 
 
 Step = Steps.Step

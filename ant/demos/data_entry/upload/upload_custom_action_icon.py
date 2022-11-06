@@ -4,4 +4,4 @@ from reflect_ant_icons import UploadOutlined, StarOutlined
 
 
 def app():
-    return Upload(Button("Upload", icon=UploadOutlined([])), "{...props}"=True)
+    return Upload(Button("Upload", icon=UploadOutlined([])))

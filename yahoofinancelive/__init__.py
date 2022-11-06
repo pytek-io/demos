@@ -7,7 +7,7 @@ from reflect import Window, get_window, js
 from reflect_aggrid import AgGridColumn, AgGridReact
 from reflect_antd import Input
 from reflect_html import div
-from reflect_utils.common import ws_connection_manager
+from reflect_utils import ws_connection_manager
 
 from .config import COLUMNS, URI
 from .yaticker_pb2 import yaticker

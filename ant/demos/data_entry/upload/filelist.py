@@ -5,11 +5,7 @@ from reflect_ant_icons import UploadOutlined
 
 def app():
     return Upload(
-        Button("Upload", icon=UploadOutlined([])),
-        "{...props}"=True,
-        fileList=this.state.fileList,
+        Button("Upload", icon=UploadOutlined()),
+        # "{...props}"=True,
+        # fileList=this.state.fileList,
     )
-
-
-def app():
-    return MyUpload()
