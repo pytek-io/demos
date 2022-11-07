@@ -1,22 +1,13 @@
 import json
 import os
 
-from reflect import Window, create_observable
-from reflect.utils import CatchError, decode_url, is_writable_file
-from reflect_ant_icons import CaretRightFilled, FolderOpenFilled
-from reflect_antd import Button, Input, Modal
-from reflect_html import div, section
-from reflect_rcdock import create_tab_inserter, DockLayout, create_tab
-from reflect_utils import (
-    create_file_chooser,
-    evaluate_demo_module,
-)
-from reflect_utils import get_module_name
-from reflect_utils import (
-    extract_file_path_and_language,
-    monaco_language_from_extension,
-    parse_md_doc,
-)
+import reflect as r
+import reflect.utils as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
+import reflect_rcdock as rcdock
+import reflect_utils
 
 from demos.ant import create_code_editor
 
@@ -41,25 +32,29 @@ def create_editor(file, language, read_only):
     )
 
 
-def app(window: Window):
-    arguments = json.loads(window.hash()) if window.hash() else {"main": "demos/hello_world.py"}
+def app(window: r.Window):
+    arguments = (
+        json.loads(window.hash()) if window.hash() else {"main": "demos/hello_world.py"}
+    )
     main, css = arguments["main"], arguments.get("css", [])
     window.add_css(css)
-    main, kwargs = decode_url(main)
-    actual_file_path, language = extract_file_path_and_language(main)
+    main, kwargs = r.decode_url(main)
+    actual_file_path, language = reflect_utils.extract_file_path_and_language(main)
     editor = create_editor(actual_file_path, language, read_only=False)
 
     def delayed_component():
         window.hash()
         if language == "python":
-            _success, css, title, component = evaluate_demo_module(main, kwargs)
+            _success, css, title, component = reflect_utils.evaluate_demo_module(
+                main, kwargs
+            )
             if css:
                 window.add_css(css)
-            component = section(
+            component = html.section(
                 component, id="code-box-demo", className="code-box-demo"
             )
         else:
-            component = parse_md_doc(open(actual_file_path).read())
+            component = reflect_utils.parse_md_doc(open(actual_file_path).read())
         return component
 
     title = "Preview"
@@ -68,19 +63,12 @@ def app(window: Window):
         "dockbox": {
             "mode": "vertical",
             "children": [
+                {"tabs": [rcdock.create_tab(file_name, editor)]},
                 {
                     "tabs": [
-                        create_tab(
-                            file_name,
-                            editor,
-                        ),
-                    ],
-                },
-                {
-                    "tabs": [
-                        create_tab(
+                        rcdock.create_tab(
                             title or file_name.split(".")[0],
-                            div(
+                            html.div(
                                 delayed_component,
                                 style={
                                     "padding": 20,
@@ -89,42 +77,41 @@ def app(window: Window):
                                 },
                             ),
                         )
-                    ],
+                    ]
                 },
             ],
         }
     }
-    dock_layout = DockLayout(
+    dock_layout = rcdock.DockLayout(
         defaultLayout=defaultLayout,
-        style={
-            "position": "absolute",
-            "left": 0,
-            "top": 50,
-            "right": 0,
-            "bottom": 0,
-        },
+        style={"position": "absolute", "left": 0, "top": 50, "right": 0, "bottom": 0},
     )
-    insert_tab = create_tab_inserter(dock_layout)
-    create_file_visible = create_observable(False, key="create_file_visible")
+    insert_tab = rcdock.create_tab_inserter(dock_layout)
+    create_file_visible = r.create_observable(False, key="create_file_visible")
 
     async def open_file(file):
         if file:
             file = os.path.join(BASE_PATH, file)
             _folder_path, file_name = os.path.split(file)
             editor = create_editor(
-                file, monaco_language_from_extension(file_name), read_only=True
+                file,
+                reflect_utils.monaco_language_from_extension(file_name),
+                read_only=True,
             )
             await insert_tab(file_name, editor)
 
-    file_selection_window, show_file_selection_window = create_file_chooser(
+    (
+        file_selection_window,
+        show_file_selection_window,
+    ) = reflect_utils.create_file_chooser(
         BASE_PATH, title="Select file to open", on_ok=open_file
     )
     name, extension = file_name.rsplit(".", 1) if "." in file_name else file_name, ".py"
     default_new_file_name = f"{name}_test.{extension}"
-    new_file_name_input = Input(defaultValue=default_new_file_name)
+    new_file_name_input = antd.Input(defaultValue=default_new_file_name)
 
     async def reload():
-        if not is_writable_file(actual_file_path):
+        if not r.is_writable_file(actual_file_path):
             create_file_visible.set(True)
         else:
             if not os.path.exists("edits.log"):
@@ -134,38 +121,38 @@ def app(window: Window):
             window.hash.touch()
 
     async def create_file():
-        with CatchError():
+        with r.CatchError():
             new_file_path = os.path.join(BASE_PATH, new_file_name_input())
             try:
-                if os.path.exists(new_file_path) and not is_writable_file(
+                if os.path.exists(new_file_path) and not r.is_writable_file(
                     new_file_path
                 ):
                     raise Exception(f"{new_file_path} is not writable")
                 open(new_file_path, "w").write(await editor.getValue())
-                main = get_module_name(new_file_path)
+                main = reflect_utils.get_module_name(new_file_path)
                 dict(main=main, css=css)
                 if args:
                     main = f"{main}#{args}"
                 window.hash.set(json.dumps())
                 window.location_reload()
             except OSError as e:
-                Modal.error(
+                antd.Modal.error(
                     {"content": f"Failed to create {new_file_path}. {e.args[1]}."}
                 )
             except Exception as e:
-                Modal.error({"content": f"Failed to create {new_file_path}. {e}."})
+                antd.Modal.error({"content": f"Failed to create {new_file_path}. {e}."})
 
-    return div(
+    return html.div(
         [
-            div(
+            html.div(
                 [
-                    Button(
-                        CaretRightFilled(),
+                    antd.Button(
+                        ant_icons.CaretRightFilled(),
                         type="primary",
                         onClick=reload,
                         style=dict(margin=10),
                     ),
-                    Modal(
+                    antd.Modal(
                         [new_file_name_input],
                         title="Enter a file name",
                         visible=create_file_visible,
@@ -173,8 +160,8 @@ def app(window: Window):
                         onCancel=lambda: create_file_visible.set(False),
                         closable=True,
                     ),
-                    Button(
-                        FolderOpenFilled(),
+                    antd.Button(
+                        ant_icons.FolderOpenFilled(),
                         type="primary",
                         onClick=show_file_selection_window,
                     ),

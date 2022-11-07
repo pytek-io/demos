@@ -1,10 +1,10 @@
-from reflect_plotly import Graph
 import plotly.express as px
+import reflect_plotly as plotly
 
 
 def app():
     px.set_mapbox_access_token(open(".mapbox_token").read())
-    return Graph(
+    return plotly.Graph(
         px.scatter_mapbox(
             px.data.carshare(),
             lat="centroid_lat",

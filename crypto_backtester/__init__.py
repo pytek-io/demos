@@ -1,11 +1,10 @@
 import datetime
 
 import pandas as pd
+import reflect as r
 import reflect_altair as altair
 import reflect_antd as antd
 import reflect_html as html
-
-import reflect as r
 
 from .charts import create_performance_chart
 from .server import CURRENCIES, Server
@@ -159,8 +158,7 @@ class App(Server):
         )
 
 
-async def app():
-    window = r.get_window()
+async def app(window: r.Window):
     app = App(window)
     await app.async_init()
     return app.root

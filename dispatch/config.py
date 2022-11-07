@@ -1,18 +1,5 @@
-from reflect import js
-from reflect_utils import (
-    compose,
-    durationFormatter,
-    filesize,
-    hexadecimalFormatter,
-    numeral,
-    percentage,
-    pythonTimeStampToJSDate,
-    replace_value,
-    round_value,
-    toLocaleDateString,
-    toLocaleTimeString,
-    transform_if_number,
-)
+import reflect as r
+import reflect_utils
 
 CLIENT = 1
 WORKER = 2
@@ -20,11 +7,11 @@ PRIORITY_GROUP = 3
 DEPLOYMENT = 4
 SESSION = 5
 SAFE_MAX_INTEGER = 4503599627370495
-
-blank_zeros = replace_value(numeral)
-blank_infinity = replace_value(numeral, SAFE_MAX_INTEGER)
-pythonTimeStampFormatter = compose(pythonTimeStampToJSDate, toLocaleTimeString)
-
+blank_zeros = reflect_utils.replace_value(reflect_utils.numeral)
+blank_infinity = reflect_utils.replace_value(reflect_utils.numeral, SAFE_MAX_INTEGER)
+pythonTimeStampFormatter = reflect_utils.compose(
+    reflect_utils.pythonTimeStampToJSDate, reflect_utils.toLocaleTimeString
+)
 runningTasksColumnDefs = [
     {"headerName": "Uid", "field": "id", "width": 70, "sortable": True},
     {
@@ -32,7 +19,7 @@ runningTasksColumnDefs = [
         "field": "worker_id",
         "width": 70,
         "sortable": True,
-        "valueNumberFormatter": hexadecimalFormatter,
+        "valueNumberFormatter": reflect_utils.hexadecimalFormatter,
     },
     {
         "headerName": "Start Time",
@@ -47,14 +34,14 @@ runningTasksColumnDefs = [
         "width": 90,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": durationFormatter,
+        "valueValueFormatter": reflect_utils.durationFormatter,
     },
     {
         "headerName": "Overrun Tolerance (%)",
         "field": "overrun_tolerance",
         "width": 90,
         "cellStyle": {"textAlign": "right"},
-        "valueNumberFormatter": percentage,
+        "valueNumberFormatter": reflect_utils.percentage,
         "sortable": True,
     },
     {
@@ -62,7 +49,7 @@ runningTasksColumnDefs = [
         "field": "max_memory",
         "width": 90,
         "cellStyle": {"textAlign": "right"},
-        "valueNumberFormatter": filesize,
+        "valueNumberFormatter": reflect_utils.filesize,
         "sortable": True,
     },
     {
@@ -72,16 +59,13 @@ runningTasksColumnDefs = [
         "sortable": True,
     },
 ]
-
 session_menu_items = [
     dict(
         name="Cancel",
         confirmation="Are you sure you want to cancel this deployment?",
         action_tag="DeleteDeployment",
-    ),
+    )
 ]
-
-
 RUNNING_TASKS_DEF = {
     "name": "Sessions",
     "static_fields": [
@@ -97,19 +81,19 @@ RUNNING_TASKS_DEF = {
     "columns": runningTasksColumnDefs,
     "getContextMenuItems": session_menu_items,
 }
-
-
-round_value_to_two_digits = transform_if_number(round_value(2))
-
+round_value_to_two_digits = reflect_utils.transform_if_number(
+    reflect_utils.round_value(2)
+)
 creationDateTimeColumnDef = {
     "headerName": "Creation Date",
     "field": "creation_time",
-    "valueValueFormatter": compose(pythonTimeStampToJSDate, toLocaleDateString),
+    "valueValueFormatter": reflect_utils.compose(
+        reflect_utils.pythonTimeStampToJSDate, reflect_utils.toLocaleDateString
+    ),
     "width": 110,
     "sortable": True,
-    "aggFunc": js("constant", None),
+    "aggFunc": r.js("constant", None),
 }
-
 creationTimeColumnDef = {
     "headerName": "Creation Time",
     "field": "creation_time",
@@ -117,14 +101,13 @@ creationTimeColumnDef = {
     "width": 100,
     "sortable": True,
 }
-
 deployments_columns = [
     {
         "headerName": "Uid",
         "field": "id",
         "width": 90,
         "sortable": True,
-        "valueNumberFormatter": hexadecimalFormatter,
+        "valueNumberFormatter": reflect_utils.hexadecimalFormatter,
     },
     creationDateTimeColumnDef,
     {
@@ -133,7 +116,7 @@ deployments_columns = [
         "width": 80,
         "sortable": True,
         "cellStyle": {"textAlign": "right"},
-        "valueNumberFormatter": filesize,
+        "valueNumberFormatter": reflect_utils.filesize,
     },
     {"headerName": "Tags", "field": "tags", "width": 110, "sortable": True},
     {
@@ -143,13 +126,8 @@ deployments_columns = [
         "sortable": True,
     },
 ]
-
 worker_columns = [
-    {
-        "headerName": "Uid",
-        "field": "id",
-        "width": 70,
-    },
+    {"headerName": "Uid", "field": "id", "width": 70},
     {"headerName": "Host", "field": "host_name", "width": 200, "sortable": True},
     {"headerName": "Name", "field": "name", "width": 200, "sortable": True},
     {
@@ -210,13 +188,12 @@ worker_columns = [
         "sortable": True,
     },
 ]
-
 client_columns = [
     {
         "headerName": "Uid",
         "field": "id",
         "width": 70,
-        "valueNumberFormatter": hexadecimalFormatter,
+        "valueNumberFormatter": reflect_utils.hexadecimalFormatter,
     },
     {"headerName": "Host", "field": "host", "width": 200, "sortable": True},
     {"headerName": "User", "field": "user", "width": 200, "sortable": True},
@@ -234,11 +211,10 @@ client_columns = [
         "sortable": True,
     },
 ]
-
 editable = {
     "editable": True,
     "enableCellChangeFlash": True,
-    "onCellValueChanged": js("onDispatchCellValueChanged"),
+    "onCellValueChanged": r.js("onDispatchCellValueChanged"),
     "singleClickEdit": True,
 }
 
@@ -289,7 +265,6 @@ tasks_counts = [
         "aggFunc": "sum",
     },
 ]
-
 tasks_durations = [
     {
         "headerName": "Pending",
@@ -298,7 +273,7 @@ tasks_durations = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": durationFormatter,
+        "valueValueFormatter": reflect_utils.durationFormatter,
         "aggFunc": "sum",
     },
     {
@@ -308,7 +283,7 @@ tasks_durations = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": durationFormatter,
+        "valueValueFormatter": reflect_utils.durationFormatter,
         "aggFunc": "sum",
     },
     {
@@ -318,7 +293,7 @@ tasks_durations = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": durationFormatter,
+        "valueValueFormatter": reflect_utils.durationFormatter,
         "aggFunc": "sum",
     },
     {
@@ -328,22 +303,19 @@ tasks_durations = [
         "width": 90,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": durationFormatter,
+        "valueValueFormatter": reflect_utils.durationFormatter,
         "aggFunc": "sum",
     },
 ]
-
 dataSizeColumn = {
     "width": 120,
     "cellStyle": {"textAlign": "right"},
     "sortable": True,
     "aggFunc": "sum",
-    "valueValueFormatter": filesize,
+    "valueValueFormatter": reflect_utils.filesize,
 }
-
 input_size = dict(dataSizeColumn, headerName="Input", field="input_size")
 output_size = dict(dataSizeColumn, headerName="Output", field="output_size")
-
 session_columns = [
     make_editable(
         {
@@ -395,7 +367,7 @@ session_columns = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueNumberFormatter": filesize,
+        "valueNumberFormatter": reflect_utils.filesize,
     },
     {"headerName": "User", "field": "user", "width": 100, "sortable": True},
     {
@@ -410,7 +382,9 @@ session_columns = [
             {
                 "headerName": "Uid",
                 "field": "deployment_id",
-                "valueValueFormatter": replace_value(hexadecimalFormatter),
+                "valueValueFormatter": reflect_utils.replace_value(
+                    reflect_utils.hexadecimalFormatter
+                ),
                 "width": 110,
                 "sortable": True,
             },
@@ -419,7 +393,7 @@ session_columns = [
     {
         "headerName": "Client Uid",
         "field": "client_id",
-        "valueNumberFormatter": hexadecimalFormatter,
+        "valueNumberFormatter": reflect_utils.hexadecimalFormatter,
         "hide": True,
     },
     {
@@ -427,7 +401,9 @@ session_columns = [
         "field": "id",
         "width": 70,
         "hide": False,
-        "valueFormatter": replace_value(hexadecimalFormatter),
+        "valueFormatter": reflect_utils.replace_value(
+            reflect_utils.hexadecimalFormatter
+        ),
     },
     {
         "headerName": "Description",
@@ -436,32 +412,26 @@ session_columns = [
         "sortable": True,
     },
 ]
-
 WORKER_DEF = {
     "name": "Workers",
     "static_fields": ["nb_cores", "nb_slaves", "host_name", "name", "pid"],
     "update_fields": ["nb_tasks", "loadavg_1", "loadavg_5", "loadavg_15"],
     "columns": worker_columns,
 }
-
 CLIENT_DEF = {
     "name": "Clients",
     "static_fields": ["user", "host", "pid", "description"],
     "update_fields": [],
     "columns": client_columns,
 }
-
-# not sure why do we send deployment updates
 deployment_fields = ["description", "tags", "creation_time", "size"]
-
 deployment_menu_items = [
     dict(
         name="Delete",
         confirmation="Are you sure you want to delete this deployment?",
         action_tag="DeleteDeployment",
-    ),
+    )
 ]
-
 DEPLOYMENT_DEF = {
     "name": "Deployments",
     "static_fields": deployment_fields,
@@ -469,19 +439,14 @@ DEPLOYMENT_DEF = {
     "columns": deployments_columns,
     "getContextMenuItems": deployment_menu_items,
 }
-
 session_menu_items = [
     dict(
         name="Cancel",
         confirmation="Are you sure you want to cancel this session?",
         action_tag="TerminateSession",
     ),
-    dict(
-        name="Display running tasks",
-        action_tag="DisplayRunningTasks",
-    ),
+    dict(name="Display running tasks", action_tag="DisplayRunningTasks"),
 ]
-
 SESSION_DEF = {
     "name": "Sessions",
     "static_fields": [
@@ -514,7 +479,6 @@ SESSION_DEF = {
     "columns": session_columns,
     "getContextMenuItems": session_menu_items,
 }
-
 DEFINITIONS = {
     WORKER: WORKER_DEF,
     CLIENT: CLIENT_DEF,

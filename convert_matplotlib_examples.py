@@ -1,8 +1,8 @@
-from ast import ClassDef, parse, FunctionDef, Import, ImportFrom, If
-from astunparse import unparse
+import ast
 import os
-from os.path import join, split, exists
-from black import FileMode, format_str
+
+import astunparse
+import black
 
 
 def preamble(description):
@@ -21,24 +21,15 @@ app_template = """def app():
 
 def black(code):
     try:
-        return format_str(code, mode=FileMode())
+        return black.format_str(code, mode=black.FileMode())
     except:
-        # return code
         print(code)
         raise
 
 
-# matplotlib_examples.images_contours_and_fields.plot_streamplot
-# matplotlib_examples.lines_bars_and_markers.marker_reference
-# matplotlib_examples.lines_bars_and_markers.multivariate_marker_plot
-# matplotlib_examples.misc.custom_projection
-# matplotlib_examples.misc.demo_agg_filter
-# matplotlib_examples.misc.demo_ribbon_box
-
-
 def generate_demo(module_content, origin):
     lines = [line for line in module_content.split("\n") if "plt.show()" not in line]
-    module = parse("\n".join(lines))
+    module = ast.parse("\n".join(lines))
     description = (
         module.body[0].value.s + f"\nThis example has been taken from {origin}."
     )
@@ -46,28 +37,31 @@ def generate_demo(module_content, origin):
         (
             index
             for index, element in enumerate(reversed(module.body))
-            if isinstance(element, FunctionDef)
+            if isinstance(element, ast.FunctionDef)
         ),
         len(module.body) - 1,
     )
     app_body, body = [], module.body[1:last_method_index]
     for element in module.body[last_method_index:]:
-        if isinstance(element, If) and all(
-            x in unparse(element.test) for x in ["__name__", "==", "__main__"]
+        if isinstance(element, ast.If) and all(
+            x in astunparse.unparse(element.test)
+            for x in ["__name__", "==", "__main__"]
         ):
             app_body.extend(element.body)
         else:
             m = (
                 body
-                if isinstance(element, (FunctionDef, Import, ImportFrom, ClassDef))
+                if isinstance(
+                    element, (ast.FunctionDef, ast.Import, ast.ImportFrom, ast.ClassDef)
+                )
                 else app_body
             )
             m.append(element)
-    app = parse(app_template).body[0]
+    app = ast.parse(app_template).body[0]
     app.body = app_body + app.body
     body.append(app)
     module.body = body
-    return preamble(f'"""{description}\n"""') + unparse(module)
+    return preamble(f'"""{description}\n"""') + astunparse.unparse(module)
 
 
 def match_delimiters(content: str, delimiter: str):
@@ -102,27 +96,38 @@ def unprotect(content: str):
             comment = content[start:end].replace("\\n", "\n")
             result += prev + "'''" + comment + "'''"
             previous = end + 4
-        result += content[previous :]
+        result += content[previous:]
     else:
         result = content
     return result
 
-SKIP_FOLDERS = ["user_interfaces", "userdemo", "widgets", "event_handling", "units", "animation"]
+
+SKIP_FOLDERS = [
+    "user_interfaces",
+    "userdemo",
+    "widgets",
+    "event_handling",
+    "units",
+    "animation",
+]
 DESTINATION_FOLDER = "matplotlib_examples"
 SOURCE_FOLDER = "../matplotlib/examples"
-import shutil
 import importlib
+import shutil
+
 
 def purge_folder(path):
     if os.path.exists(path):
         shutil.rmtree(path)
         os.mkdir(path)
 
-from reflect.common import CURRENT_CONTROLLER
-from reflect.controller import DefaultController
+
+import reflect.common as r
+import reflect.controller as r
+
 
 def main():
-    CURRENT_CONTROLLER.set(DefaultController())
+    r.CURRENT_CONTROLLER.set(r.DefaultController())
     purge_folder(DESTINATION_FOLDER)
     i = 0
     for path, _dirs, files in os.walk(SOURCE_FOLDER):
@@ -131,18 +136,21 @@ def main():
         for filename in files:
             if filename.endswith(".py"):
                 i += 1
-                dest = join(*((DESTINATION_FOLDER,) + split(path)[1:]))
-                if not exists(dest):
+                dest = os.path.join(*((DESTINATION_FOLDER,) + os.path.split(path)[1:]))
+                if not os.path.exists(dest):
                     os.makedirs(dest)
-                print(i, join(path[3:], filename))
-                content = open(join(path, filename)).read()
-                origin = f"https://github.com/matplotlib/matplotlib/blob/main/{join(path[3:], filename)}"
+                print(i, os.path.join(path[3:], filename))
+                content = open(os.path.join(path, filename)).read()
+                origin = f"https://github.com/matplotlib/matplotlib/blob/main/{os.path.join(path[3:], filename)}"
                 new_content = unprotect(generate_demo(protect(content), origin))
-                file_path = join(dest, filename)
+                file_path = os.path.join(dest, filename)
                 open(file_path, "w").write(black(new_content))
                 try:
-                    importlib.import_module(join(dest, filename).replace(os.sep, ".")[:-3]).app()
+                    importlib.import_module(
+                        os.path.join(dest, filename).replace(os.sep, ".")[:-3]
+                    ).app()
                 except:
                     os.remove(file_path)
-main()
 
+
+main()

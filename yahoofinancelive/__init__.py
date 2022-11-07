@@ -1,13 +1,13 @@
 import base64
-from json import dumps, loads
-from typing import Iterable, List
+import json
+import typing
 
+import reflect as r
+import reflect_aggrid as aggrid
+import reflect_antd as antd
+import reflect_html as html
+import reflect_utils
 import websockets
-from reflect import Window, get_window, js
-from reflect_aggrid import AgGridColumn, AgGridReact
-from reflect_antd import Input
-from reflect_html import div
-from reflect_utils import ws_connection_manager
 
 from .config import COLUMNS, URI
 from .yaticker_pb2 import yaticker
@@ -22,12 +22,12 @@ def load_yahoo_update(message):
 
 
 class YFLiveQuoteManager:
-    def __init__(self, window: Window) -> None:
+    def __init__(self, window: r.Window) -> None:
         self.tickers = set([])
         self.yahoo_connection = None
         self.window = window
 
-    def add_tickers(self, tickers: Iterable[str]):
+    def add_tickers(self, tickers: typing.Iterable[str]):
         if self.yahoo_connection:
             self.yahoo_connection.send_nowait({"subscribe": list(tickers)})
         self.tickers.update(tickers)
@@ -38,11 +38,11 @@ class YFLiveQuoteManager:
 
     async def updates(self):
         while True:
-            connection_manager = ws_connection_manager(
+            connection_manager = reflect_utils.ws_connection_manager(
                 URI,
                 self.window.task_group,
                 number_messages=False,
-                dumps=dumps,
+                dumps=json.dumps,
                 loads=load_yahoo_update,
             )
             async with connection_manager as self.yahoo_connection:
@@ -55,36 +55,26 @@ class YFLiveQuoteManager:
                     print("Yahoo connection has been reset, looping...")
 
 
-MENU_ITEMS = [
-    dict(
-        name="Remove",
-        action_tag="remove quote",
-    ),
-]
+MENU_ITEMS = [dict(name="Remove", action_tag="remove quote")]
 
 
 class App:
-    def __init__(
-        self,
-        initial_tickers: List[str] = [],
-    ) -> None:
+    def __init__(self, initial_tickers: typing.List[str] = []) -> None:
         self.initial_tickers = initial_tickers
-        self.window = get_window()
+        self.window = r.get_window()
         self.quote_manager = YFLiveQuoteManager(self.window)
-        self.content = AgGridReact(
+        self.content = aggrid.AgGridReact(
             [
-                AgGridColumn(field=field, **args)
+                aggrid.AgGridColumn(field=field, **args)
                 for field, (_formatter, args) in COLUMNS
             ],
-            getRowNodeId=js("id"),
+            getRowNodeId=r.js("id"),
             defaultColDef=dict(resizable=True),
             componentDidMount=self.main,
-            getContextMenuItems=js("createContextMenu", MENU_ITEMS),
+            getContextMenuItems=r.js("createContextMenu", MENU_ITEMS),
         )
-        self.settings = Input(
-            placeholder="Enter ticker here",
-            onPressEnter=self.ok,
-            style=dict(width=120),
+        self.settings = antd.Input(
+            placeholder="Enter ticker here", onPressEnter=self.ok, style=dict(width=120)
         )
         self.cancel = self.ok
         self.title = "Yahoo live quotes"
@@ -125,9 +115,6 @@ class App:
 
 
 def app():
-    hash_argument = get_window().hash()
-    app = App(loads(hash_argument) if hash_argument else [])
-    return div(
-        [app.settings, app.content],
-        style=dict(height="calc(100% - 35px)"),  #  -> full screen
-    )
+    hash_argument = r.get_window().hash()
+    app = App(json.loads(hash_argument) if hash_argument else [])
+    return html.div([app.settings, app.content], style=dict(height="calc(100% - 35px)"))

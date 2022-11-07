@@ -1,8 +1,8 @@
-import pandas as pd
-from datetime import datetime
+import datetime
 
+import pandas as pd
+import py_vollib
 import py_vollib_vectorized
-from py_vollib.black_scholes.implied_volatility import implied_volatility
 
 
 def merge_data(instrument_data, currency_data):
@@ -27,7 +27,7 @@ def merge_data(instrument_data, currency_data):
     )
     currency_df = pd.DataFrame(
         {
-            f"{name}_spot" if name != "ticks" else name: currency_data[name]
+            (f"{name}_spot" if name != "ticks" else name): currency_data[name]
             for name in ["open", "close", "ticks"]
         }
     )
@@ -38,13 +38,13 @@ def merge_data(instrument_data, currency_data):
         on=["ticks"],
     )
     result["ticks"] = [
-        datetime.fromtimestamp(tick / 1000) for tick in instrument_df["ticks"]
+        datetime.datetime.fromtimestamp(tick / 1000) for tick in instrument_df["ticks"]
     ]
     return result
 
 
 def compute_implied_vols(df, strike, expiry, r, option_type):
-    return implied_volatility(
+    return py_vollib.black_scholes.implied_volatility.implied_volatility(
         df["close_option"] * df["close_spot"],
         df["close_spot"],
         strike,
@@ -63,11 +63,9 @@ def compute_pnl(data, strike):
     for i in range(l, len(data)):
         price = data["close_option"][i]
         tick = data["ticks"][i]
-        # Imply the volatility for the price on that date
         data["ivol_mid"][i] = iv(
             price, data["close_spot"][i], strike, (expiry - tick) / 365, r, flag
         )
-        # And then use it to calculate the delta_mid on that date
         data["delta_mid"][i] = delta(
             flag,
             data["close_spot"][i],
@@ -93,7 +91,10 @@ if __name__ == "__main__":
 
     df = pickle.loads(open(f"{instrument_name}.pick", "rb").read())
     _, expiry, strike, option_type = instrument_name.split("-")
-    expiry, option_type = datetime.strptime(expiry, "%d%b%y"), option_type.lower()
+    expiry, option_type = (
+        datetime.datetime.strptime(expiry, "%d%b%y"),
+        option_type.lower(),
+    )
     r = 0.01
     print(df.shape)
     print(compute_implied_vols(df, int(strike), expiry, r, option_type) * 100)

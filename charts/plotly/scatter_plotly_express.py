@@ -1,9 +1,9 @@
-from reflect_plotly import Graph
 import plotly.express as px
+import reflect_plotly as plotly
 
 
 def app():
-    return Graph(
+    return plotly.Graph(
         px.scatter(
             px.data.iris(),
             x="sepal_width",

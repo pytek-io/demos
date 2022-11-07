@@ -1,27 +1,24 @@
+import datetime
+import itertools
 import json
 import pickle
-from datetime import datetime
-from itertools import count
-from time import perf_counter
+import time
 
-from anyio import Event
-from reflect import Window, get_window
-from reflect_utils import ws_connection_manager
-from websockets import ConnectionClosed
+import anyio
+import reflect as r
+import reflect_utils
+import websockets
 
 from .analytics import compute_implied_vols, merge_data
 from .utils import to_timestamp
 
 URI = "wss://test.deribit.com/ws/api/v2"
-CURRENCIES = [
-    ("Bit Coin", "BTC"),
-    ("Etherum", "ETH"),
-]
+CURRENCIES = [("Bit Coin", "BTC"), ("Etherum", "ETH")]
 
 
 class PendingResult:
     def __init__(self) -> None:
-        self.ready = Event()
+        self.ready = anyio.Event()
         self.result = None
         self.is_error = True
 
@@ -38,22 +35,22 @@ class PendingResult:
 
 
 class Server:
-    def __init__(self, window: Window, debug=False):
-        self.window: Window = get_window()
-        self.request_id = count()
+    def __init__(self, window: r.Window, debug=False):
+        self.window: r.Window = r.get_window()
+        self.request_id = itertools.count()
         self.pending_queries = {}
-        self.connection_ready = Event()
-        self.default_start_date = datetime(2015, 1, 1)
-        self.default_end_date = datetime.today()
+        self.connection_ready = anyio.Event()
+        self.default_start_date = datetime.datetime(2015, 1, 1)
+        self.default_end_date = datetime.datetime.today()
         self.default_resolution = "1D"
         self.DEBUG = debug
         self.window.start_soon(self.main)
 
     async def main(self):
-        last_connection_attempt = perf_counter()
+        last_connection_attempt = time.perf_counter()
         while True:
             try:
-                connection_manager = ws_connection_manager(
+                connection_manager = reflect_utils.ws_connection_manager(
                     uri=URI,
                     task_group=self.window.task_group,
                     dumps=json.dumps,
@@ -70,22 +67,17 @@ class Server:
                             )
                         else:
                             print(response)
-            except ConnectionClosed as e:
-                if perf_counter() - last_connection_attempt < 1.:
+            except websockets.ConnectionClosed as e:
+                if time.perf_counter() - last_connection_attempt < 1.0:
                     raise Exception("Connection with Derebit lost.") from e
                 print(f"Derebit connection has been closed: {e}, looping...")
-                last_connection_attempt = perf_counter()
+                last_connection_attempt = time.perf_counter()
 
     async def query_derebit(self, method, params={}):
         await self.connection_ready.wait()
         request_id = next(self.request_id)
         await self.derebit_connection.send(
-            dict(
-                jsonrpc="2.0",
-                id=request_id,
-                method="public/" + method,
-                params=params,
-            )
+            dict(jsonrpc="2.0", id=request_id, method="public/" + method, params=params)
         )
         pending_result = self.pending_queries[request_id] = PendingResult()
         try:
@@ -104,7 +96,9 @@ class Server:
             },
         )
 
-    async def get_instrument_data(self, instrument_name, start=None, end=None, resolution=None):
+    async def get_instrument_data(
+        self, instrument_name, start=None, end=None, resolution=None
+    ):
         return await self.query_derebit(
             "get_tradingview_chart_data",
             {
@@ -130,7 +124,7 @@ class Server:
     async def create_perf_chart_data(self, instrument_name):
         _, expiry, strike, option_type = instrument_name.split("-")
         expiry, strike, option_type = (
-            datetime.strptime(expiry, "%d%b%y"),
+            datetime.datetime.strptime(expiry, "%d%b%y"),
             int(strike),
             option_type.lower(),
         )
@@ -147,18 +141,13 @@ class Server:
             self.default_resolution,
         )
         df = merge_data(instrument_data, currency_data)
-        # removing those data as they produce spurious candle sticks
-        # df = df[df["volume_option"] != 0.0]
-        df["ivol_mid"] = compute_implied_vols(
-            df, strike, expiry, r=0.01, option_type=option_type
-        ) * 100
-        # for i in range(df.shape[0]):
-        #     if df["volume_option"][i] == 0:
-        #         df["ivol_mid"][i] = None
+        df["ivol_mid"] = (
+            compute_implied_vols(df, strike, expiry, r=0.01, option_type=option_type)
+            * 100
+        )
         if self.DEBUG:
-            # converting to more recent version of pandas to avoid incompatibility issues
             import pandas as pd
+
             df = pd.DataFrame({name: df[name] for name in df.columns})
             open(f"{instrument_name}.pick", "wb").write(pickle.dumps(df))
-            
         return df, strike

@@ -1,12 +1,11 @@
 import matplotlib
 
-matplotlib.use("Agg")  # this is stop Python rocket from showing in Dock on Mac
-
-import pandas as pd
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import mplfinance as mpf
 import numpy as np
+import pandas as pd
+
+from demos.charts.utils import matplotlib_to_svg
 
 TITLE = "MPL Finance"
 
@@ -40,7 +39,7 @@ def app():
     df = pd.read_csv(file_name, index_col=0, parse_dates=True)
     low_signal = percentB_belowzero(df["PercentB"], df["Close"])
     high_signal = percentB_aboveone(df["PercentB"], df["Close"])
-    tcdf = df[['LowerB','UpperB']]
+    tcdf = df[["LowerB", "UpperB"]]
     fig, _axis_list = mpf.plot(
         df,
         volume=True,
@@ -50,7 +49,7 @@ def app():
             mpf.make_addplot(tcdf, linestyle="dashdot"),
             mpf.make_addplot(low_signal, type="scatter", markersize=200, marker="^"),
             mpf.make_addplot(high_signal, type="scatter", markersize=200, marker="v"),
-            mpf.make_addplot((df["PercentB"]), panel=1, color="g", linestyle="dotted"),
+            mpf.make_addplot(df["PercentB"], panel=1, color="g", linestyle="dotted"),
         ],
         returnfig=True,
     )

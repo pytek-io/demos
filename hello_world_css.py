@@ -1,6 +1,7 @@
-from reflect_html import h1
+import reflect_html as html
 
 CSS = ["demos/hello_world.css"]
 
+
 def app():
-    return h1("Hello world!", className="title")
+    return html.h1("Hello world!", className="title")

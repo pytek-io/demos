@@ -1,36 +1,26 @@
-from reflect_altair import Chart
-from vega_datasets import data
-
 import altair as alt
-
+import reflect_altair as altair
+import vega_datasets
 
 TITLE = "US airports"
 
 
 def app():
-    # Since these data are each more than 5,000 rows we'll import from the URLs
-    airports = data.airports.url
-    flights_airport = data.flights_airport.url
-
-    states = alt.topo_feature(data.us_10m.url, feature="states")
-
-    # Create mouseover selection
+    airports = vega_datasets.data.airports.url
+    flights_airport = vega_datasets.data.flights_airport.url
+    states = alt.topo_feature(vega_datasets.data.us_10m.url, feature="states")
     select_city = alt.selection_single(
         on="mouseover", nearest=True, fields=["origin"], empty="none"
     )
-
-    # Define which attributes to lookup from airports.csv
     lookup_data = alt.LookupData(
         airports, key="iata", fields=["state", "latitude", "longitude"]
     )
-
     background = (
         alt.Chart(states)
         .mark_geoshape(fill="lightgray", stroke="white")
         .properties(width=750, height=500)
         .project("albersUsa")
     )
-
     connections = (
         alt.Chart(flights_airport)
         .mark_rule(opacity=0.35)
@@ -46,7 +36,6 @@ def app():
         )
         .transform_filter(select_city)
     )
-
     points = (
         alt.Chart(flights_airport)
         .mark_circle()
@@ -62,11 +51,7 @@ def app():
         .transform_filter((alt.datum.state != "PR") & (alt.datum.state != "VI"))
         .add_selection(select_city)
     )
-
-    return Chart(
+    return altair.Chart(
         spec=background + connections + points,
-        style={
-            "height": "100%",
-            "width": "100%",
-        },
+        style={"height": "100%", "width": "100%"},
     )

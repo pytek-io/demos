@@ -1,19 +1,20 @@
 import matplotlib
-matplotlib.use("Agg")  # this is stop Python rocket from showing in Dock on Mac
 
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from demos.charts.utils import matplotlib_to_svg
 import seaborn as sns
-sns.set()
 
+from demos.charts.utils import matplotlib_to_svg
+
+sns.set()
 import numpy as np
 
 
 def app():
-    plt.clf() # this clear any existing figure in memory
+    plt.clf()
     rng = np.random.RandomState(0)
     x = np.linspace(0, 10, 500)
     y = np.cumsum(rng.randn(500, 6), 0)
     plt.plot(x, y)
-    plt.legend('ABCDEF', ncol=2, loc='upper left')
+    plt.legend("ABCDEF", ncol=2, loc="upper left")
     return matplotlib_to_svg(plt)

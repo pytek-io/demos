@@ -5,22 +5,21 @@ https://github.com/python-engineer/python-fun/tree/master/webapps). Note that th
 off as we use Ant components. It demonstrates how one can combine an ORM such as sql alchemy 
 with Reflect.
 """
-from reflect_html import div, h1, label, p, br, span, hr
-from reflect_antd import Input, Button
-from reflect import create_observable, Mapping
-from sqlalchemy import Boolean, Column, Integer, String, create_engine
-from sqlalchemy.orm import declarative_base, Session
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
+import sqlalchemy
 
 TITLE = "Todo App"
 CSS = ["https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"]
-Base = declarative_base()
+Base = sqlalchemy.orm.declarative_base()
 
 
 class Todo(Base):
     __tablename__ = "todo"
-    id = Column(Integer, primary_key=True)
-    title = Column(String(100))
-    complete = Column(Boolean)
+    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
+    title = sqlalchemy.Column(sqlalchemy.String(100))
+    complete = sqlalchemy.Column(sqlalchemy.Boolean)
 
 
 def app():
@@ -40,28 +39,28 @@ def app():
         todo.complete = not todo.complete()
         session.commit()
 
-    engine = create_engine("sqlite+pysqlite:///db.sqlite:", future=True)
+    engine = sqlalchemy.create_engine("sqlite+pysqlite:///db.sqlite:", future=True)
     Base.metadata.create_all(engine)
-    session = Session(engine).__enter__()
-    title = Input(
+    session = sqlalchemy.orm.Session(engine).__enter__()
+    title = antd.Input(
         placeholder="Enter Todo...", onPressEnter=add_todo, style={"marginBottom": 12}
     )
-    todos = create_observable(session.query(Todo).all(), depth=3)
+    todos = r.create_observable(session.query(Todo).all(), depth=3)
 
     def create_todo_row(todo):
-        return div(
+        return html.div(
             [
-                p(f"{todo.id()}|{todo.title()}", className="ui big header"),
-                br(),
-                lambda: span("Complete", className="ui green label")
+                html.p(f"{todo.id()}|{todo.title()}", className="ui big header"),
+                html.br(),
+                lambda: html.span("Complete", className="ui green label")
                 if todo.complete()
-                else span("Not Complete", className="ui gray label"),
-                Button(
+                else html.span("Not Complete", className="ui gray label"),
+                antd.Button(
                     "Update",
                     className="ui blue button",
                     onClick=lambda: update_todo(todo),
                 ),
-                Button(
+                antd.Button(
                     "Delete",
                     className="ui red button",
                     onClick=lambda: delete_todos(todo),
@@ -71,13 +70,13 @@ def app():
             className="ui segment",
         )
 
-    return div(
+    return html.div(
         [
-            h1("To Do App", className="ui center aligned header"),
-            div([label("Todo Title"), title, br()], className="field"),
-            Button("Add", className="ui blue button", onClick=add_todo),
-            hr(),
-            div(Mapping(create_todo_row, todos, evaluate_argument=False)),
+            html.h1("To Do App", className="ui center aligned header"),
+            html.div([html.label("Todo Title"), title, html.br()], className="field"),
+            antd.Button("Add", className="ui blue button", onClick=add_todo),
+            html.hr(),
+            html.div(r.Mapping(create_todo_row, todos, evaluate_argument=False)),
         ],
         style={"marginTop": "50px"},
         className="ui container",

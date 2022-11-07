@@ -2,11 +2,12 @@ import reflect
 import reflect_antd as antd
 import reflect_html as html
 import reflect_rcdock as rcdock
+import reflect_utils
+
 from demos.charts.altair.car_data_set import App as AltairApp
 from demos.stock_prices import App as StockApp
 from demos.stocks_history import App as StockHistoryApp
 from demos.yahoofinancelive import App as YahooFinanceApp
-from reflect_utils import create_icon
 
 TITLE = "Dashboard"
 DEFAULT_TICKERS = ["AMZN"]
@@ -40,32 +41,17 @@ class Application:
                     {
                         "mode": "vertical",
                         "children": [
-                            {
-                                "tabs": [self.create_stock_history_app(ticker)],
-                            }
+                            {"tabs": [self.create_stock_history_app(ticker)]}
                             for ticker in DEFAULT_TICKERS
                         ]
-                        + [
-                            {
-                                "tabs": [AltairApp()],
-                            }
-                        ],
+                        + [{"tabs": [AltairApp()]}],
                     },
-                    {
-                        "tabs": [
-                            # dict(title="Cars", content=altair_app()),
-                            StockApp("nyse"),
-                        ],
-                    },
+                    {"tabs": [StockApp("nyse")]},
                 ],
             }
         }
         self.dock_layout = rcdock.DockLayoutReflect(
-            defaultLayout=defaultLayout,
-            style={
-                "height": "100%",
-                "width": "100%",
-            },
+            defaultLayout=defaultLayout, style={"height": "100%", "width": "100%"}
         )
 
         async def create_stocks_callback(market):
@@ -83,13 +69,12 @@ class Application:
                         antd.Menu.ItemGroup(
                             [
                                 antd.Menu.Item(
-                                    "Stock history",
-                                    onClick=self.add_StockHistoryApp,
+                                    "Stock history", onClick=self.add_StockHistoryApp
                                 ),
                                 antd.Menu.Item(
                                     "Altair car dataset",
                                     onClick=lambda: self.dock_layout.insert_component(
-                                        AltairApp(),
+                                        AltairApp()
                                     ),
                                 ),
                             ],
@@ -120,9 +105,8 @@ class Application:
                         ),
                     ],
                     key="SubMenu",
-                    icon=create_icon(
-                        MENU,
-                        style={"height": 30, "color": rcdock.LIGHT_GREY},
+                    icon=reflect_utils.create_icon(
+                        MENU, style={"height": 30, "color": rcdock.LIGHT_GREY}
                     ),
                 )
             ],
@@ -132,17 +116,8 @@ class Application:
         )
         self.root = html.div(
             [
-                html.div(
-                    menu,
-                    style={"flexGrow": 1},
-                ),
-                html.div(
-                    self.dock_layout,
-                    style={
-                        "height": "100%",
-                        "width": "100%",
-                    },
-                ),
+                html.div(menu, style={"flexGrow": 1}),
+                html.div(self.dock_layout, style={"height": "100%", "width": "100%"}),
             ],
             style=dict(
                 position="absolute",
@@ -158,8 +133,7 @@ class Application:
 
     async def add_StockHistoryApp(self):
         await self.dock_layout.insert_component(
-            self.create_stock_history_app("AAPL"),
-            settings_visible=True,
+            self.create_stock_history_app("AAPL"), settings_visible=True
         )
 
 

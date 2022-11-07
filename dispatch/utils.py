@@ -1,7 +1,9 @@
-import pickle
-from time import time
-import anyio  # we leave this explicit import as it seems to have been captured inside the dummy connection saved messages
 import contextlib
+import pickle
+import time
+
+import anyio
+
 
 class ConnectionRecorder:
     def __init__(self, connection, archive):
@@ -9,9 +11,9 @@ class ConnectionRecorder:
         self.archive = archive
 
         async def wrapper():
-            previous_message = time()
+            previous_message = time.time()
             async for message in self.connection.messages:
-                now = time()
+                now = time.time()
                 yield message
                 self.archive.write(pickle.dumps([now - previous_message, message]))
                 previous_message = now
@@ -31,7 +33,6 @@ class ConnectionRecorder:
 
 def record_connection(connection, archive):
     return ConnectionRecorder(connection, archive)
-
 
 
 class ReplayConnection:
@@ -74,6 +75,7 @@ def read_pickles(archive):
             yield pickle.load(archive)
     except EOFError:
         pass
+
 
 async def anext(async_generator):
     """async next version"""

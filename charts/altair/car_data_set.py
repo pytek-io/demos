@@ -1,38 +1,36 @@
-from reflect_altair import Chart
-from reflect_antd import Col, Row, Select
-from reflect_html import div, label
-from vega_datasets import data
-
 import altair as alt
+import reflect_altair as altair
+import reflect_antd as antd
+import reflect_html as html
+import vega_datasets
 
-Option = Select.Option
-
+Option = antd.Select.Option
 DEFAULT_VALUES = ["Horsepower", "Miles_per_Gallon", "Origin"]
 TITLE = "Altair chart"
 
 
 class App:
     def __init__(self):
-        source = data.cars()
+        source = vega_datasets.data.cars()
         options = [Option(name, value=name) for name in source.columns]
         x, y, color = [
-            Select(
+            antd.Select(
                 options,
                 defaultValue=default_value,
                 style=dict(width=160, textAlign="right"),
             )
             for default_value in DEFAULT_VALUES
         ]
-        self.settings = div(
+        self.settings = html.div(
             [
-                Row(
+                antd.Row(
                     [
-                        Col(
-                            label(name),
+                        antd.Col(
+                            html.label(name),
                             style=dict(width=60),
                             className="ant-form-item-label",
                         ),
-                        Col(element),
+                        antd.Col(element),
                     ],
                     gutter=10,
                     style=dict(margin=10),
@@ -41,8 +39,8 @@ class App:
             ],
             style={"marginLeft": 15, "flex": "0 1 auto"},
         )
-        brush = alt.selection_interval()  # selection of type "interval"
-        self.content = Chart(
+        brush = alt.selection_interval()
+        self.content = altair.Chart(
             spec=lambda: alt.Chart(source)
             .mark_circle(size=60)
             .encode(
@@ -51,10 +49,8 @@ class App:
                 color=alt.condition(brush, "Origin:N", alt.value("lightgray")),
                 tooltip=["Name", color(), x(), y()],
             )
-            .add_selection(brush).properties(width="container", height="container"),
-            style={
-                "height": "100%",
-                "width": "100%",
-            },
+            .add_selection(brush)
+            .properties(width="container", height="container"),
+            style={"height": "100%", "width": "100%"},
         )
         self.title = "Car data set"

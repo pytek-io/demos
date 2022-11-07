@@ -10,9 +10,7 @@ ORANGE = "#FF6600"
 
 def create_candle_sticks(df, open_name, close_name, low_name, high_name):
     open_close_color = alt.condition(
-        f"datum.{open_name} <= datum.{close_name}",
-        alt.value(GREEN),
-        alt.value(RED),
+        f"datum.{open_name} <= datum.{close_name}", alt.value(GREEN), alt.value(RED)
     )
     ohlc_base = alt.Chart(df).encode(alt.X("ticks:T"), color=open_close_color)
     low_high = ohlc_base.mark_rule().encode(
@@ -90,9 +88,6 @@ def create_performance_chart(df: pd.DataFrame, strike):
             .resolve_scale(y="independent")
             .interactive()
             .properties(height="container", width="container")
-            for encodings in [
-                [close_spot, close_option],
-                [ivol_mid, volume],
-            ]
-        ],
+            for encodings in [[close_spot, close_option], [ivol_mid, volume]]
+        ]
     )

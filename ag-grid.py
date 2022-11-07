@@ -1,17 +1,12 @@
-from itertools import count, islice
+import datetime
+import itertools
 import random
-from datetime import date, datetime
 
 import lorem
-from reflect import Callback
-from reflect_aggrid import AgGridColumn, AgGridReact
-from reflect_html import div
-from reflect_utils import (
-    boolToString,
-    round_value_to_2_digits,
-    toLocaleDateString,
-    numeral,
-)
+import reflect as r
+import reflect_aggrid as aggrid
+import reflect_html as html
+import reflect_utils
 
 TITLE = "AG Grid Example"
 FAVICON = "website/static/ag-grid_favicon.png"
@@ -20,7 +15,7 @@ NB_ROWS = 100
 
 def app():
     def create_line():
-        index = count(0)
+        index = itertools.count(0)
         while True:
             index_value = next(index)
             even_row = index_value == 0
@@ -30,65 +25,63 @@ def app():
                 even_row,
                 random.uniform(0.0, 100.0),
                 next(lorem.word()),
-                date.today(),
-                datetime.now(),
+                datetime.date.today(),
+                datetime.datetime.now(),
             ]
 
-    values = list(islice(create_line(), 0, NB_ROWS))
+    values = list(itertools.islice(create_line(), 0, NB_ROWS))
     rowData = dict(
         zip(
-            [
-                "id",
-                "int",
-                "int_blank",
-                "bool",
-                "float",
-                "str",
-                "date",
-                "datetime",
-            ],
+            ["id", "int", "int_blank", "bool", "float", "str", "date", "datetime"],
             [list(range(NB_ROWS))] + list(zip(*values)),
-        ),
+        )
     )
     editable = {
         "editable": True,
         "enableCellChangeFlash": True,
-        "onCellValueChanged": Callback(print, args=["data.int", "newValue"]),
+        "onCellValueChanged": r.Callback(print, args=["data.int", "newValue"]),
         "singleClickEdit": True,
     }
+
     def update_values(update):
         index, value = update
         values[index][4] = value
 
     cols = [
-        AgGridColumn(field="id", headerName="id", hide=True),
-        AgGridColumn(field="int", headerName="Integer", valueValueFormatter=numeral),
-        AgGridColumn(
+        aggrid.AgGridColumn(field="id", headerName="id", hide=True),
+        aggrid.AgGridColumn(
+            field="int", headerName="Integer", valueValueFormatter=reflect_utils.numeral
+        ),
+        aggrid.AgGridColumn(
             field="str",
             headerName="String",
             cellStyle={"textAlign": "left"},
             editable=True,
-            onCellValueChanged=Callback(
-                update_values, args=["data.id", "newValue"]
-            ),
+            onCellValueChanged=r.Callback(update_values, args=["data.id", "newValue"]),
             singleClickEdit=True,
         ),
-        AgGridColumn(field="bool", headerName="Bool", valueValueFormatter=boolToString),
-        AgGridColumn(
+        aggrid.AgGridColumn(
+            field="bool",
+            headerName="Bool",
+            valueValueFormatter=reflect_utils.boolToString,
+        ),
+        aggrid.AgGridColumn(
             field="float",
             headerName="Float",
-            valueNumberFormatter=round_value_to_2_digits,
+            valueNumberFormatter=reflect_utils.round_value_to_2_digits,
         ),
-        AgGridColumn(
-            field="date", headerName="Date", valueValueFormatter=toLocaleDateString
+        aggrid.AgGridColumn(
+            field="date",
+            headerName="Date",
+            valueValueFormatter=reflect_utils.toLocaleDateString,
         ),
-        AgGridColumn(
+        aggrid.AgGridColumn(
             field="datetime",
             headerName="DateTime",
-            valueValueFormatter=toLocaleDateString,
+            valueValueFormatter=reflect_utils.toLocaleDateString,
         ),
     ]
-    grid = AgGridReact(
+    grid = aggrid.AgGridReact(
         cols,
         rowData=rowData,
         rowHeight=24,
@@ -97,8 +90,4 @@ def app():
         ),
         componentDidMount=lambda: grid.autoSizeColumns([col.field for col in cols]),
     )
-
-    return div(
-        grid,
-        style=dict(width="100%", height="50vh"),
-    )
+    return html.div(grid, style=dict(width="100%", height="50vh"))
