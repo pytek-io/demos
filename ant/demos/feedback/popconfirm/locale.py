@@ -1,6 +1,5 @@
-from reflect_html import *
-from reflect_antd import Popconfirm
-
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
@@ -10,8 +9,8 @@ def app():
     def handleCancel():
         print("Cancelled")
 
-    return Popconfirm(
-        a("Delete", href="#"),
+    return antd.Popconfirm(
+        html.a("Delete", href="#"),
         title="Are you sure？",
         okText="Yeah",
         cancelText="Neah",

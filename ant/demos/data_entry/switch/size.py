@@ -1,12 +1,12 @@
-from reflect_html import *
-from reflect_antd import Switch
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Switch(defaultChecked=True),
-            br(),
-            Switch(size="small", defaultChecked=True),
+            antd.Switch(defaultChecked=True),
+            html.br(),
+            antd.Switch(size="small", defaultChecked=True),
         ]
     )

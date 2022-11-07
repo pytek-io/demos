@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Rate
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Rate()
+    return antd.Rate()

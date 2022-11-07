@@ -1,18 +1,18 @@
-from reflect_html import *
-from reflect_antd import Popconfirm, message
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
     def confirm():
         print("confirmed")
-        message.success("Clicked on Yes")
+        antd.message.success("Clicked on Yes")
 
     def cancel():
         print("cancelled")
-        message.error("Clicked on No")
+        antd.message.error("Clicked on No")
 
-    return Popconfirm(
-        a("Delete", href="#"),
+    return antd.Popconfirm(
+        html.a("Delete", href="#"),
         title="Are you sure to delete this task?",
         onConfirm=confirm,
         onCancel=cancel,

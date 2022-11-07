@@ -1,15 +1,14 @@
-from reflect_html import *
-from reflect_antd import TreeSelect
-from reflect_ant_icons import SmileOutlined
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
-from reflect import autorun
-
-TreeNode = TreeSelect.TreeNode
+TreeNode = antd.TreeSelect.TreeNode
 
 
 def app():
-    icon = SmileOutlined()
-    tree_select = TreeSelect(
+    icon = ant_icons.SmileOutlined()
+    tree_select = antd.TreeSelect(
         TreeNode(
             [
                 TreeNode(
@@ -21,7 +20,11 @@ def app():
                     title="parent 1-0",
                 ),
                 TreeNode(
-                    [TreeNode(value="sss", title=b("sss", style={"color": "#08c"}))],
+                    [
+                        TreeNode(
+                            value="sss", title=html.b("sss", style={"color": "#08c"})
+                        )
+                    ],
                     value="parent 1-1",
                     title="parent 1-1",
                 ),
@@ -37,5 +40,5 @@ def app():
         allowClear=True,
         treeDefaultExpandAll=True,
     )
-    autorun(lambda: print("selected", tree_select()))
+    r.autorun(lambda: print("selected", tree_select()))
     return tree_select

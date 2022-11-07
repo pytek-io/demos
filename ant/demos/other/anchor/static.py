@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Anchor
+import reflect_antd as antd
+import reflect_html as html
 
-Link = Anchor.Link
+Link = antd.Anchor.Link
 
 
 def app():
-    return Anchor(
+    return antd.Anchor(
         [
             Link(href="#components-anchor-demo-basic", title="Basic demo"),
             Link(href="#components-anchor-demo-static", title="Static demo"),

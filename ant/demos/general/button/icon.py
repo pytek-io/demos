@@ -1,24 +1,36 @@
-from reflect_html import *
-from reflect_antd import Button, Tooltip
-from reflect_ant_icons import SearchOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div([
-        Tooltip(
-            Button(type="primary", shape="circle", icon=SearchOutlined([])),
-            title="search",
-        ),
-        Button("A", type="primary", shape="circle"),
-        Button("Search", type="primary", icon=SearchOutlined([])),
-        Tooltip(Button(shape="circle", icon=SearchOutlined([])), title="search"),
-        Button("Search", icon=SearchOutlined([])),
-        br(),
-        Tooltip(Button(shape="circle", icon=SearchOutlined([])), title="search"),
-        Button("Search", icon=SearchOutlined([])),
-        Tooltip(
-            Button(type="dashed", shape="circle", icon=SearchOutlined([])),
-            title="search",
-        ),
-        Button("Search", type="dashed", icon=SearchOutlined([])),
-    ])
+    return html.div(
+        [
+            antd.Tooltip(
+                antd.Button(
+                    type="primary", shape="circle", icon=ant_icons.SearchOutlined([])
+                ),
+                title="search",
+            ),
+            antd.Button("A", type="primary", shape="circle"),
+            antd.Button("Search", type="primary", icon=ant_icons.SearchOutlined([])),
+            antd.Tooltip(
+                antd.Button(shape="circle", icon=ant_icons.SearchOutlined([])),
+                title="search",
+            ),
+            antd.Button("Search", icon=ant_icons.SearchOutlined([])),
+            html.br(),
+            antd.Tooltip(
+                antd.Button(shape="circle", icon=ant_icons.SearchOutlined([])),
+                title="search",
+            ),
+            antd.Button("Search", icon=ant_icons.SearchOutlined([])),
+            antd.Tooltip(
+                antd.Button(
+                    type="dashed", shape="circle", icon=ant_icons.SearchOutlined([])
+                ),
+                title="search",
+            ),
+            antd.Button("Search", type="dashed", icon=ant_icons.SearchOutlined([])),
+        ]
+    )

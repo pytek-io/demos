@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Affix, Button
-from reflect import create_observable
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def increment(value, increment):
@@ -12,21 +12,18 @@ def increment(value, increment):
 
 
 def app():
-    top = create_observable(10)
-    bottom = create_observable(10)
-
-    return div(
+    top = r.create_observable(10)
+    bottom = r.create_observable(10)
+    return html.div(
         [
-            Affix(
-                Button("Affix top", type="primary", onClick=increment(top, 10)),
+            antd.Affix(
+                antd.Button("Affix top", type="primary", onClick=increment(top, 10)),
                 offsetTop=top,
             ),
-            br(),
-            Affix(
-                Button(
-                    "Affix bottom",
-                    type="primary",
-                    onClick=increment(bottom, 10),
+            html.br(),
+            antd.Affix(
+                antd.Button(
+                    "Affix bottom", type="primary", onClick=increment(bottom, 10)
                 ),
                 offsetBottom=bottom,
             ),

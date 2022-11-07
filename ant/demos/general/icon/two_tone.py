@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_ant_icons import SmileTwoTone, HeartTwoTone, CheckCircleTwoTone
+import reflect_ant_icons as ant_icons
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            SmileTwoTone(),
-            HeartTwoTone(twoToneColor="#eb2f96"),
-            CheckCircleTwoTone(twoToneColor="#52c41a"),
+            ant_icons.SmileTwoTone(),
+            ant_icons.HeartTwoTone(twoToneColor="#eb2f96"),
+            ant_icons.CheckCircleTwoTone(twoToneColor="#52c41a"),
         ],
         className="icons-list",
     )

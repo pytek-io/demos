@@ -1,20 +1,19 @@
-from asyncio import sleep
+import asyncio
 
-
-from reflect_html import *
-from reflect import create_observable
-from reflect_antd import Button, Modal
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    visible = create_observable(False)
-    confirmLoading = create_observable(False)
-    modal_text = create_observable("Content of the modal")
+    visible = r.create_observable(False)
+    confirmLoading = r.create_observable(False)
+    modal_text = r.create_observable("Content of the modal")
 
     async def handleOk():
         modal_text.set("The modal will be closed after two seconds")
         confirmLoading.set(True)
-        await sleep(2)
+        await asyncio.sleep(2)
         visible.set(False)
         confirmLoading.set(False)
 
@@ -22,15 +21,15 @@ def app():
         print("Clicked cancel button")
         visible.set(False)
 
-    return div(
+    return html.div(
         [
-            Button(
+            antd.Button(
                 "Open Modal with async logic",
                 type="primary",
                 onClick=lambda: visible.set(True),
             ),
-            Modal(
-                p(modal_text),
+            antd.Modal(
+                html.p(modal_text),
                 title="Title",
                 visible=visible,
                 onOk=handleOk,

@@ -1,10 +1,9 @@
-from reflect_antd import DatePicker, Row, Col
-from reflect import create_observable
-from reflect import JSMethod
-from datetime import datetime, timedelta
+import datetime
 
+import reflect as r
+import reflect_antd as antd
 
-compare_dates = JSMethod(
+compare_dates = r.JSMethod(
     "compare_dates",
     """{
         console.log(date1, date2)
@@ -18,21 +17,22 @@ compare_dates = JSMethod(
 
 
 def app():
-    start_value = create_observable(datetime.now())
-    end_value = create_observable(datetime.now() + timedelta(days=15))
-
-    return Row(
+    start_value = r.create_observable(datetime.datetime.now())
+    end_value = r.create_observable(
+        datetime.datetime.now() + datetime.timedelta(days=15)
+    )
+    return antd.Row(
         [
-            Col(
-                DatePicker(
+            antd.Col(
+                antd.DatePicker(
                     disabledDate=compare_dates(end_value(), True),
                     format="YYYY-MM-DD",
                     value=start_value,
                     placeholder="Start",
                 )
             ),
-            Col(
-                DatePicker(
+            antd.Col(
+                antd.DatePicker(
                     disabledDate=compare_dates(start_value(), False),
                     format="YYYY-MM-DD",
                     value=end_value,

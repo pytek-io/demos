@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Skeleton
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Skeleton(avatar=True, paragraph=dict(rows=4))
+    return antd.Skeleton(avatar=True, paragraph=dict(rows=4))

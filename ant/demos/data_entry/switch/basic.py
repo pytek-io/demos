@@ -1,9 +1,9 @@
-from reflect_html import *
-from reflect_antd import Switch
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-from reflect import autorun
 
 def app():
-    switch = Switch(defaultChecked=True)
-    autorun(lambda: print(f"switched to {switch()}"))
+    switch = antd.Switch(defaultChecked=True)
+    r.autorun(lambda: print(f"switched to {switch()}"))
     return switch

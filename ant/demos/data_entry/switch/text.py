@@ -1,18 +1,20 @@
-from reflect_html import *
-from reflect_antd import Switch
-from reflect_ant_icons import CloseOutlined, CheckOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Switch(checkedChildren="开启", unCheckedChildren="关闭", defaultChecked=True),
-            br(),
-            Switch(checkedChildren="1", unCheckedChildren="0"),
-            br(),
-            Switch(
-                checkedChildren=CheckOutlined([]),
-                unCheckedChildren=CloseOutlined([]),
+            antd.Switch(
+                checkedChildren="开启", unCheckedChildren="关闭", defaultChecked=True
+            ),
+            html.br(),
+            antd.Switch(checkedChildren="1", unCheckedChildren="0"),
+            html.br(),
+            antd.Switch(
+                checkedChildren=ant_icons.CheckOutlined([]),
+                unCheckedChildren=ant_icons.CloseOutlined([]),
                 defaultChecked=True,
             ),
         ]

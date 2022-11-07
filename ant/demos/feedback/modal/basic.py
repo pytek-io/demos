@@ -1,18 +1,21 @@
-from reflect_html import *
-from reflect_antd import Modal, Button
-from reflect import create_observable
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    is_modal_visible = create_observable(False)
-
-    return div(
+    is_modal_visible = r.create_observable(False)
+    return html.div(
         [
-            Button(
+            antd.Button(
                 "Open Modal", type="primary", onClick=lambda: is_modal_visible.set(True)
             ),
-            Modal(
-                [p("Some contents..."), p("Some contents..."), p("Some contents...")],
+            antd.Modal(
+                [
+                    html.p("Some contents..."),
+                    html.p("Some contents..."),
+                    html.p("Some contents..."),
+                ],
                 title="Basic Modal",
                 visible=is_modal_visible,
                 onOk=lambda: is_modal_visible.set(False),

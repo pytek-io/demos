@@ -1,19 +1,25 @@
-from reflect_html import *
-from reflect_antd import Row, Col
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Row(Col("col", span=24)),
-            Row([Col("col-12", span=12), Col("col-12", span=12)]),
-            Row([Col("col-8", span=8), Col("col-8", span=8), Col("col-8", span=8)]),
-            Row(
+            antd.Row(antd.Col("col", span=24)),
+            antd.Row([antd.Col("col-12", span=12), antd.Col("col-12", span=12)]),
+            antd.Row(
                 [
-                    Col("col-6", span=6),
-                    Col("col-6", span=6),
-                    Col("col-6", span=6),
-                    Col("col-6", span=6),
+                    antd.Col("col-8", span=8),
+                    antd.Col("col-8", span=8),
+                    antd.Col("col-8", span=8),
+                ]
+            ),
+            antd.Row(
+                [
+                    antd.Col("col-6", span=6),
+                    antd.Col("col-6", span=6),
+                    antd.Col("col-6", span=6),
+                    antd.Col("col-6", span=6),
                 ]
             ),
         ]

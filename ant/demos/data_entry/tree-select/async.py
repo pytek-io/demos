@@ -1,9 +1,8 @@
-from asyncio import sleep
-from itertools import count
+import asyncio
+import itertools
 
-from reflect import Callback
-from reflect import autorun, create_observable
-from reflect_antd import TreeSelect
+import reflect as r
+import reflect_antd as antd
 
 initialTreeData = [
     {"id": 0, "pId": 0, "value": 0, "key": 0, "title": "Expand to load"},
@@ -13,14 +12,14 @@ initialTreeData = [
 
 
 def app():
-    counter = count(3)
-    treeData = create_observable(initialTreeData, key="initialTreeData")
+    counter = itertools.count(3)
+    treeData = r.create_observable(initialTreeData, key="initialTreeData")
     import pprint
 
-    autorun(lambda: pprint.pprint((treeData())))
+    r.autorun(lambda: pprint.pprint(treeData()))
 
     async def onLoadData(node_index):
-        await sleep(0.5)
+        await asyncio.sleep(0.5)
         value = next(counter)
         treeData()[node_index]["children"] = [
             {
@@ -34,10 +33,10 @@ def app():
         ]
         treeData.touch()
 
-    return TreeSelect(
+    return antd.TreeSelect(
         style=dict(width="100%"),
         dropdownStyle=dict(maxHeight=400, overflow="auto"),
         placeholder="Please select",
-        loadData=Callback(onLoadData, "id", is_promise=True),
+        loadData=r.Callback(onLoadData, "id", is_promise=True),
         treeData=treeData,
     )

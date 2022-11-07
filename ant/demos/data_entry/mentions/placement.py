@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Mentions
+import reflect_antd as antd
+import reflect_html as html
 
-Option = Mentions.Option
+Option = antd.Mentions.Option
 
 
 def app():
-    return Mentions(
+    return antd.Mentions(
         [
             Option("afc163", value="afc163"),
             Option("zombieJ", value="zombieJ"),

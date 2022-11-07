@@ -1,28 +1,30 @@
-from reflect_html import *
-from reflect_antd import Radio
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div([
-        Radio.Group(
-            [
-                Radio.Button("Hangzhou", value="a"),
-                Radio.Button("Shanghai", value="b"),
-                Radio.Button("Beijing", value="c"),
-                Radio.Button("Chengdu", value="d"),
-            ],
-            defaultValue="a",
-            buttonStyle="solid",
-        ),
-        Radio.Group(
-            [
-                Radio.Button("Hangzhou", value="a"),
-                Radio.Button("Shanghai", value="b", disabled=True),
-                Radio.Button("Beijing", value="c"),
-                Radio.Button("Chengdu", value="d"),
-            ],
-            defaultValue="c",
-            buttonStyle="solid",
-            style=dict(marginTop=16),
-        ),
-    ])
+    return html.div(
+        [
+            antd.Radio.Group(
+                [
+                    antd.Radio.Button("Hangzhou", value="a"),
+                    antd.Radio.Button("Shanghai", value="b"),
+                    antd.Radio.Button("Beijing", value="c"),
+                    antd.Radio.Button("Chengdu", value="d"),
+                ],
+                defaultValue="a",
+                buttonStyle="solid",
+            ),
+            antd.Radio.Group(
+                [
+                    antd.Radio.Button("Hangzhou", value="a"),
+                    antd.Radio.Button("Shanghai", value="b", disabled=True),
+                    antd.Radio.Button("Beijing", value="c"),
+                    antd.Radio.Button("Chengdu", value="d"),
+                ],
+                defaultValue="c",
+                buttonStyle="solid",
+                style=dict(marginTop=16),
+            ),
+        ]
+    )

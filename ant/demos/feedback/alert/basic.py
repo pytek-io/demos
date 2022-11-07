@@ -1,7 +1,6 @@
-from reflect_html import *
-
-from reflect_antd import Alert
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Alert(message="Success!!!", type="success")
+    return antd.Alert(message="Success!!!", type="success")

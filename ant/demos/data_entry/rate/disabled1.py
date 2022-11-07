@@ -1,5 +1,6 @@
-from reflect_html import *
-from reflect_antd import Rate
+import reflect_antd as antd
+import reflect_html as html
+
 
 def app():
-    return div([Rate(disabled=True, defaultValue=2)])
+    return html.div([antd.Rate(disabled=True, defaultValue=2)])

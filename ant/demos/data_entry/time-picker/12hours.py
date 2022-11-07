@@ -1,23 +1,25 @@
-from reflect_html import *
-from reflect_antd import TimePicker
+import datetime
 
-from reflect import autorun
-from datetime import datetime
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    time_picker1 = TimePicker(use12Hours=True, defaultValue=datetime.now())
-    time_picker2 = TimePicker(
+    time_picker1 = antd.TimePicker(
+        use12Hours=True, defaultValue=datetime.datetime.now()
+    )
+    time_picker2 = antd.TimePicker(
         use12Hours=True,
         format="h:mm:ss A",
-        defaultValue=datetime.now(),
+        defaultValue=datetime.datetime.now(),
         style=dict(width=140),
     )
-    time_picker3 = TimePicker(
-        use12Hours=True, defaultValue=datetime.now(), format="h:mm a"
+    time_picker3 = antd.TimePicker(
+        use12Hours=True, defaultValue=datetime.datetime.now(), format="h:mm a"
     )
-    autorun(lambda: print("changed", time_picker1()))
-    autorun(lambda: print("changed", time_picker1()))
-    autorun(lambda: print("changed", time_picker2()))
-    autorun(lambda: print("changed", time_picker3()))
-    return div([time_picker1, time_picker2, time_picker3])
+    r.autorun(lambda: print("changed", time_picker1()))
+    r.autorun(lambda: print("changed", time_picker1()))
+    r.autorun(lambda: print("changed", time_picker2()))
+    r.autorun(lambda: print("changed", time_picker3()))
+    return html.div([time_picker1, time_picker2, time_picker3])

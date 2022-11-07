@@ -1,16 +1,25 @@
-from reflect_html import *
-from reflect_antd import Input
-from reflect_ant_icons import UserOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div([
-        Input(size="large", placeholder="large size", prefix=UserOutlined([])),
-        br(),
-        br(),
-        Input(placeholder="default size", prefix=UserOutlined([])),
-        br(),
-        br(),
-        Input(size="small", placeholder="small size", prefix=UserOutlined([])),
-    ]
-)
+    return html.div(
+        [
+            antd.Input(
+                size="large",
+                placeholder="large size",
+                prefix=ant_icons.UserOutlined([]),
+            ),
+            html.br(),
+            html.br(),
+            antd.Input(placeholder="default size", prefix=ant_icons.UserOutlined([])),
+            html.br(),
+            html.br(),
+            antd.Input(
+                size="small",
+                placeholder="small size",
+                prefix=ant_icons.UserOutlined([]),
+            ),
+        ]
+    )

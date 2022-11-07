@@ -1,23 +1,23 @@
-from reflect_html import *
-from reflect_antd import Divider
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            p(
+            html.p(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
             ),
-            Divider("Text", plain=True),
-            p(
+            antd.Divider("Text", plain=True),
+            html.p(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
             ),
-            Divider("Left Text", orientation="left", plain=True),
-            p(
+            antd.Divider("Left Text", orientation="left", plain=True),
+            html.p(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
             ),
-            Divider("Right Text", orientation="right", plain=True),
-            p(
+            antd.Divider("Right Text", orientation="right", plain=True),
+            html.p(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
             ),
         ]

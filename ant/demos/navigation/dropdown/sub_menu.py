@@ -1,19 +1,20 @@
-from reflect_html import *
-from reflect_antd import Menu, Dropdown
-from reflect_ant_icons import DownOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
-SubMenu = Menu.SubMenu
-menu = Menu(
+SubMenu = antd.Menu.SubMenu
+menu = antd.Menu(
     [
-        Menu.ItemGroup(
-            [Menu.Item("1st menu item"), Menu.Item("2nd menu item")],
+        antd.Menu.ItemGroup(
+            [antd.Menu.Item("1st menu item"), antd.Menu.Item("2nd menu item")],
             title="Group title",
         ),
         SubMenu(
-            [Menu.Item("3rd menu item"), Menu.Item("4th menu item")], title="sub menu"
+            [antd.Menu.Item("3rd menu item"), antd.Menu.Item("4th menu item")],
+            title="sub menu",
         ),
         SubMenu(
-            [Menu.Item("5d menu item"), Menu.Item("6th menu item")],
+            [antd.Menu.Item("5d menu item"), antd.Menu.Item("6th menu item")],
             title="disabled sub menu",
             disabled=True,
         ),
@@ -22,9 +23,9 @@ menu = Menu(
 
 
 def app():
-    return Dropdown(
-        a(
-            ["Cascading menu", DownOutlined()],
+    return antd.Dropdown(
+        html.a(
+            ["Cascading menu", ant_icons.DownOutlined()],
             className="ant-dropdown-link",
             onClick=lambda e: e.preventDefault(),
         ),

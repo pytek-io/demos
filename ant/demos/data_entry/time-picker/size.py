@@ -1,13 +1,14 @@
-from reflect_html import *
-from reflect_antd import TimePicker
-from datetime import time
+import datetime
+
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            TimePicker(defaultValue=time(12, 8, 23), size="large"),
-            TimePicker(defaultValue=time(12, 8, 23)),
-            TimePicker(defaultValue=time(12, 8, 23), size="small"),
+            antd.TimePicker(defaultValue=datetime.time(12, 8, 23), size="large"),
+            antd.TimePicker(defaultValue=datetime.time(12, 8, 23)),
+            antd.TimePicker(defaultValue=datetime.time(12, 8, 23), size="small"),
         ]
     )

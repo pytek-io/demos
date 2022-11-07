@@ -1,60 +1,59 @@
-from reflect_html import *
-from reflect_antd import Layout, Menu, Breadcrumb
-from reflect_ant_icons import (
-    PieChartOutlined,
-    DesktopOutlined,
-    UserOutlined,
-    TeamOutlined,
-    FileOutlined,
-)
-from reflect import Callback
-from reflect import create_observable
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 Header, Content, Footer, Sider = (
-    Layout.Header,
-    Layout.Content,
-    Layout.Footer,
-    Layout.Sider,
+    antd.Layout.Header,
+    antd.Layout.Content,
+    antd.Layout.Footer,
+    antd.Layout.Sider,
 )
-SubMenu = Menu.SubMenu
+SubMenu = antd.Menu.SubMenu
 
 
 def app():
-    collapsed = create_observable(False)
+    collapsed = r.create_observable(False)
 
     def onCollapse(collapsed_value):
         print(collapsed_value)
         collapsed.set(collapsed_value)
 
-    return Layout(
+    return antd.Layout(
         [
             Sider(
                 [
-                    div(className="logo"),
-                    Menu(
+                    html.div(className="logo"),
+                    antd.Menu(
                         [
-                            Menu.Item("Option 1", key="1", icon=PieChartOutlined([])),
-                            Menu.Item("Option 2", key="2", icon=DesktopOutlined([])),
+                            antd.Menu.Item(
+                                "Option 1", key="1", icon=ant_icons.PieChartOutlined([])
+                            ),
+                            antd.Menu.Item(
+                                "Option 2", key="2", icon=ant_icons.DesktopOutlined([])
+                            ),
                             SubMenu(
                                 [
-                                    Menu.Item("Tom", key="3"),
-                                    Menu.Item("Bill", key="4"),
-                                    Menu.Item("Alex", key="5"),
+                                    antd.Menu.Item("Tom", key="3"),
+                                    antd.Menu.Item("Bill", key="4"),
+                                    antd.Menu.Item("Alex", key="5"),
                                 ],
                                 key="sub1",
-                                icon=UserOutlined([]),
+                                icon=ant_icons.UserOutlined([]),
                                 title="User",
                             ),
                             SubMenu(
                                 [
-                                    Menu.Item("Team 1", key="6"),
-                                    Menu.Item("Team 2", key="8"),
+                                    antd.Menu.Item("Team 1", key="6"),
+                                    antd.Menu.Item("Team 2", key="8"),
                                 ],
                                 key="sub2",
-                                icon=TeamOutlined([]),
+                                icon=ant_icons.TeamOutlined([]),
                                 title="Team",
                             ),
-                            Menu.Item("Files", key="9", icon=FileOutlined([])),
+                            antd.Menu.Item(
+                                "Files", key="9", icon=ant_icons.FileOutlined([])
+                            ),
                         ],
                         theme="dark",
                         defaultSelectedKeys=["1"],
@@ -63,18 +62,21 @@ def app():
                 ],
                 collapsible=True,
                 collapsed=collapsed,
-                onCollapse=Callback(onCollapse),
+                onCollapse=r.Callback(onCollapse),
             ),
-            Layout(
+            antd.Layout(
                 [
                     Header(className="site-layout-background", style=dict(padding=0)),
                     Content(
                         [
-                            Breadcrumb(
-                                [Breadcrumb.Item("User"), Breadcrumb.Item("Bill")],
+                            antd.Breadcrumb(
+                                [
+                                    antd.Breadcrumb.Item("User"),
+                                    antd.Breadcrumb.Item("Bill"),
+                                ],
                                 style=dict(margin="16px 0"),
                             ),
-                            div(
+                            html.div(
                                 "Bill is a cat.",
                                 className="site-layout-background",
                                 style=dict(padding=24, minHeight=360),

@@ -1,49 +1,49 @@
-from reflect_html import *
-from reflect_antd import Space, Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            div(
-                Space(
+            html.div(
+                antd.Space(
                     [
                         "center",
-                        Button("Primary", type="primary"),
-                        span("Block", className="mock-block"),
+                        antd.Button("Primary", type="primary"),
+                        html.span("Block", className="mock-block"),
                     ],
                     align="center",
                 ),
                 className="space-align-block",
             ),
-            div(
-                Space(
+            html.div(
+                antd.Space(
                     [
                         "start",
-                        Button("Primary", type="primary"),
-                        span("Block", className="mock-block"),
+                        antd.Button("Primary", type="primary"),
+                        html.span("Block", className="mock-block"),
                     ],
                     align="start",
                 ),
                 className="space-align-block",
             ),
-            div(
-                Space(
+            html.div(
+                antd.Space(
                     [
                         "end",
-                        Button("Primary", type="primary"),
-                        span("Block", className="mock-block"),
+                        antd.Button("Primary", type="primary"),
+                        html.span("Block", className="mock-block"),
                     ],
                     align="end",
                 ),
                 className="space-align-block",
             ),
-            div(
-                Space(
+            html.div(
+                antd.Space(
                     [
                         "baseline",
-                        Button("Primary", type="primary"),
-                        span("Block", className="mock-block"),
+                        antd.Button("Primary", type="primary"),
+                        html.span("Block", className="mock-block"),
                     ],
                     align="baseline",
                 ),

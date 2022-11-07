@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Popconfirm
-from reflect_ant_icons import QuestionCircleOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Popconfirm(
-        a("Delete", href="#"),
+    return antd.Popconfirm(
+        html.a("Delete", href="#"),
         title="Are you sure？",
-        icon=QuestionCircleOutlined(style={"color": "red"}),
+        icon=ant_icons.QuestionCircleOutlined(style={"color": "red"}),
     )

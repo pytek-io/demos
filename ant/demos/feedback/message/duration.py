@@ -1,12 +1,12 @@
-from reflect_html import *
-from reflect_antd import message, Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def success():
-    message.success(
+    antd.message.success(
         "This is a prompt message for success, and it will disappear in 10 seconds", 10
     )
 
 
 def app():
-    return Button("Customized display duration", onClick=success)
+    return antd.Button("Customized display duration", onClick=success)

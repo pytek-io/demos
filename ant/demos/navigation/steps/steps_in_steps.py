@@ -1,18 +1,18 @@
-from reflect_html import *
-from reflect_antd import Steps, Radio, Card
+import reflect_antd as antd
+import reflect_html as html
 
-Step = Steps.Step
+Step = antd.Steps.Step
 
 
 def app():
-    size = Radio.Group(
-        [Radio("Small", value="small"), Radio("Default", value="default")],
+    size = antd.Radio.Group(
+        [antd.Radio("Small", value="small"), antd.Radio("Default", value="default")],
         style=dict(marginBottom=16),
     )
 
     def horizontalSteps():
-        Card(
-            Steps(
+        antd.Card(
+            antd.Steps(
                 [
                     Step(title="Finished", description="This is a description."),
                     Step(title="In Progress", description="This is a description."),
@@ -22,10 +22,10 @@ def app():
             )
         )
 
-    return div(
+    return html.div(
         [
             size,
-            Steps(
+            antd.Steps(
                 [
                     Step(title="Finished", description=horizontalSteps),
                     Step(title="In Progress", description="This is a description."),

@@ -1,10 +1,9 @@
-from reflect_html import *
-from reflect_antd import Pagination
-
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    pagination = Pagination(defaultCurrent=3, total=50)
-    autorun(lambda: print(pagination()))
+    pagination = antd.Pagination(defaultCurrent=3, total=50)
+    r.autorun(lambda: print(pagination()))
     return pagination

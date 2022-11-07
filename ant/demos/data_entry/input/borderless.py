@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Input
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Input(placeholder="Borderless", bordered=False)
+    return antd.Input(placeholder="Borderless", bordered=False)

@@ -1,28 +1,27 @@
-from reflect_html import *
-from reflect_antd import Space, Radio, Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-
-    size = Radio.Group(
+    size = antd.Radio.Group(
         [
-            Radio("Small", value="small"),
-            Radio("Middle", value="middle"),
-            Radio("Large", value="large"),
+            antd.Radio("Small", value="small"),
+            antd.Radio("Middle", value="middle"),
+            antd.Radio("Large", value="large"),
         ],
         defaultValue="small",
     )
-    return div(
+    return html.div(
         [
             size,
-            br(),
-            br(),
-            Space(
+            html.br(),
+            html.br(),
+            antd.Space(
                 [
-                    Button("Primary", type="primary"),
-                    Button("Default"),
-                    Button("Dashed", type="dashed"),
-                    Button("Link", type="link"),
+                    antd.Button("Primary", type="primary"),
+                    antd.Button("Default"),
+                    antd.Button("Dashed", type="dashed"),
+                    antd.Button("Link", type="link"),
                 ],
                 size=size,
             ),

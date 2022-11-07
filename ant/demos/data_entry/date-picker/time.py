@@ -1,9 +1,8 @@
-from reflect_html import *
-from reflect_antd import DatePicker, Space
-from reflect import Callback
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-RangePicker = DatePicker.RangePicker
+RangePicker = antd.DatePicker.RangePicker
 
 
 def app():
@@ -17,21 +16,13 @@ def app():
             [value.strftime("%Y-%M-%D %H:%m") for value in values],
         )
 
-    date_picker = DatePicker(
-        showTime=True,
-        onOk=Callback(onOk),
-    )
+    date_picker = antd.DatePicker(showTime=True, onOk=r.Callback(onOk))
     range_picker = RangePicker(
         showTime=dict(format="HH:mm"),
         format="YYYY-MM-DD HH:mm",
         onChange=onChange,
-        onOk=Callback(onOk),
+        onOk=r.Callback(onOk),
     )
-
-    autorun(lambda: print("date picker", date_picker()))
-    autorun(lambda: print("range picker", range_picker()))
-    return Space(
-        [date_picker, range_picker],
-        direction="vertical",
-        size=12,
-    )
+    r.autorun(lambda: print("date picker", date_picker()))
+    r.autorun(lambda: print("range picker", range_picker()))
+    return antd.Space([date_picker, range_picker], direction="vertical", size=12)

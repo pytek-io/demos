@@ -1,27 +1,25 @@
-from reflect_html import *
-from reflect_antd import Tabs, Button, Divider, CheckboxGroup
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-TabPane = Tabs.TabPane
+TabPane = antd.Tabs.TabPane
 
 
 def app():
-
     OperationsSlot = {
-        "left": Button("Left Extra Action", className="tabs-extra-demo-button"),
-        "right": Button("Right Extra Action"),
+        "left": antd.Button("Left Extra Action", className="tabs-extra-demo-button"),
+        "right": antd.Button("Right Extra Action"),
     }
-
-    operations = Button("Extra Action")
+    operations = antd.Button("Extra Action")
     options = ["left", "right"]
-    position = CheckboxGroup(options=options, defaultValue=options)
+    position = antd.CheckboxGroup(options=options, defaultValue=options)
 
     def slot():
         return {direction: OperationsSlot[direction] for direction in position()} or []
 
-    return div(
+    return html.div(
         [
-            Tabs(
+            antd.Tabs(
                 [
                     TabPane("Content of tab 1", tab="Tab 1", key="1"),
                     TabPane("Content of tab 2", tab="Tab 2", key="2"),
@@ -29,15 +27,15 @@ def app():
                 ],
                 tabBarExtraContent=operations,
             ),
-            br(),
-            br(),
-            br(),
-            div("You can also specify its direction or both side"),
-            Divider(),
+            html.br(),
+            html.br(),
+            html.br(),
+            html.div("You can also specify its direction or both side"),
+            antd.Divider(),
             position,
-            br(),
-            br(),
-            Tabs(
+            html.br(),
+            html.br(),
+            antd.Tabs(
                 [
                     TabPane("Content of tab 1", tab="Tab 1", key="1"),
                     TabPane("Content of tab 2", tab="Tab 2", key="2"),

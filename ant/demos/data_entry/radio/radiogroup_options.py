@@ -1,8 +1,6 @@
-from reflect_html import *
-from reflect_antd import Radio
-from reflect import Callback
-from reflect import autorun
-
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 plain_options = ["Apple", "Pear", "Orange"]
 options = [
@@ -18,39 +16,31 @@ options_with_disabled = [
 
 
 def app():
-    radio_group1 = Radio.Group(
-        options=plain_options,
-        defaultValue="Apple",
+    radio_group1 = antd.Radio.Group(options=plain_options, defaultValue="Apple")
+    radio_group2 = antd.Radio.Group(options=options_with_disabled, defaultValue="Apple")
+    radio_group3 = antd.Radio.Group(
+        options=options, defaultValue="Apple", optionType="button"
     )
-    radio_group2 = Radio.Group(
-        options=options_with_disabled,
-        defaultValue="Apple",
-    )
-    radio_group3 = Radio.Group(
-        options=options,
-        defaultValue="Apple",
-        optionType="button",
-    )
-    radio_group4 = Radio.Group(
+    radio_group4 = antd.Radio.Group(
         options=options_with_disabled,
         defaultValue="Apple",
         optionType="button",
         buttonStyle="solid",
     )
-    autorun(lambda: print("radio1 checked", radio_group1()))
-    autorun(lambda: print("radio2 checked", radio_group2()))
-    autorun(lambda: print("radio3 checked", radio_group3()))
-    autorun(lambda: print("radio4 checked", radio_group4()))
-    return div(
+    r.autorun(lambda: print("radio1 checked", radio_group1()))
+    r.autorun(lambda: print("radio2 checked", radio_group2()))
+    r.autorun(lambda: print("radio3 checked", radio_group3()))
+    r.autorun(lambda: print("radio4 checked", radio_group4()))
+    return html.div(
         [
             radio_group1,
-            br(),
+            html.br(),
             radio_group2,
-            br(),
-            br(),
+            html.br(),
+            html.br(),
             radio_group3,
-            br(),
-            br(),
+            html.br(),
+            html.br(),
             radio_group4,
         ]
     )

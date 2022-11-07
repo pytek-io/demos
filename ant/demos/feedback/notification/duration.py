@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Button, notification
-from reflect import schedule_callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
     def onClick():
-        notification.open(
+        antd.notification.open(
             {
                 "message": "Notification Title",
                 "description": "I will never close automatically. This is a purposely very very long description that has many many characters and words.",
@@ -13,4 +13,4 @@ def app():
             }
         )
 
-    return Button("Open the notification box", type="primary", onClick=onClick)
+    return antd.Button("Open the notification box", type="primary", onClick=onClick)

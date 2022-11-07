@@ -1,7 +1,6 @@
-from reflect_html import *
-from reflect_antd import Checkbox
-
-from reflect import create_observable, autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 PLAIN_OPTIONS = ["Apple", "Pear", "Orange"]
 OPTIONS = [
@@ -17,23 +16,14 @@ OPTIONS_WITH_DISABLED = [
 
 
 def app():
-    check_box1 = Checkbox.Group(options=PLAIN_OPTIONS, defaultValue=["Apple"])
-    check_box2 = Checkbox.Group(options=OPTIONS, defaultValue=["Pear"])
-    check_box3 = Checkbox.Group(
+    check_box1 = antd.Checkbox.Group(options=PLAIN_OPTIONS, defaultValue=["Apple"])
+    check_box2 = antd.Checkbox.Group(options=OPTIONS, defaultValue=["Pear"])
+    check_box3 = antd.Checkbox.Group(
         options=OPTIONS_WITH_DISABLED, disabled=True, defaultValue=["Apple"]
     )
-    autorun(lambda: print("checked values", check_box1()))
-    autorun(lambda: print("checked values", check_box2()))
-    autorun(lambda: print("checked values", check_box3()))
-
-    return div(
-        [
-            check_box1,
-            br(),
-            br(),
-            check_box2,
-            br(),
-            br(),
-            check_box3,
-        ]
+    r.autorun(lambda: print("checked values", check_box1()))
+    r.autorun(lambda: print("checked values", check_box2()))
+    r.autorun(lambda: print("checked values", check_box3()))
+    return html.div(
+        [check_box1, html.br(), html.br(), check_box2, html.br(), html.br(), check_box3]
     )

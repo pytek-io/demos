@@ -1,41 +1,40 @@
-from reflect_html import *
-from reflect_antd import Select
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-from reflect import autorun
-
-Option = Select.Option
+Option = antd.Select.Option
 
 
 def app():
-    select = Select(
+    select = antd.Select(
         [
             Option(
-                div(
-                    [span("🇨🇳", role="img", ariaLabel="China"), "China (中国)"],
+                html.div(
+                    [html.span("🇨🇳", role="img", ariaLabel="China"), "China (中国)"],
                     className="demo-option-label-item",
                 ),
                 value="china",
                 label="China",
             ),
             Option(
-                div(
-                    [span("🇺🇸", role="img", ariaLabel="USA"), "USA (美国)"],
+                html.div(
+                    [html.span("🇺🇸", role="img", ariaLabel="USA"), "USA (美国)"],
                     className="demo-option-label-item",
                 ),
                 value="usa",
                 label="USA",
             ),
             Option(
-                div(
-                    [span("🇯🇵", role="img", ariaLabel="Japan"), "Japan (日本)"],
+                html.div(
+                    [html.span("🇯🇵", role="img", ariaLabel="Japan"), "Japan (日本)"],
                     className="demo-option-label-item",
                 ),
                 value="japan",
                 label="Japan",
             ),
             Option(
-                div(
-                    [span("🇰🇷", role="img", ariaLabel="Korea"), "Korea (韩国)"],
+                html.div(
+                    [html.span("🇰🇷", role="img", ariaLabel="Korea"), "Korea (韩国)"],
                     className="demo-option-label-item",
                 ),
                 value="korea",
@@ -48,5 +47,5 @@ def app():
         defaultValue=["china"],
         optionLabelProp="label",
     )
-    autorun(lambda: print(select()))
+    r.autorun(lambda: print(select()))
     return select

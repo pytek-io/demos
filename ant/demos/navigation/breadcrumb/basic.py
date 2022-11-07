@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_antd import Breadcrumb
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Breadcrumb(
+    return antd.Breadcrumb(
         [
-            Breadcrumb.Item("Home"),
-            Breadcrumb.Item(a("Application Center", href="")),
-            Breadcrumb.Item(a("Application List", href="")),
-            Breadcrumb.Item("An Application"),
+            antd.Breadcrumb.Item("Home"),
+            antd.Breadcrumb.Item(html.a("Application Center", href="")),
+            antd.Breadcrumb.Item(html.a("Application List", href="")),
+            antd.Breadcrumb.Item("An Application"),
         ]
     )

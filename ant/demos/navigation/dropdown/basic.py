@@ -1,42 +1,42 @@
-from reflect_html import *
-from reflect_antd import Menu, Dropdown
-from reflect_ant_icons import DownOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
-menu = Menu(
+menu = antd.Menu(
     [
-        Menu.Item(
-            a(
+        antd.Menu.Item(
+            html.a(
                 "1st menu item",
                 target="_blank",
                 rel="noopener noreferrer",
                 href="http://www.google.com/",
             )
         ),
-        Menu.Item(
-            a(
+        antd.Menu.Item(
+            html.a(
                 "2nd menu item",
                 target="_blank",
                 rel="noopener noreferrer",
                 href="http://www.google.com/",
             )
         ),
-        Menu.Item(
-            a(
+        antd.Menu.Item(
+            html.a(
                 "3rd menu item",
                 target="_blank",
                 rel="noopener noreferrer",
                 href="http://www.google.com/",
             )
         ),
-        Menu.Item("a danger item", danger=True),
+        antd.Menu.Item("a danger item", danger=True),
     ]
 )
 
 
 def app():
-    return Dropdown(
-        a(
-            ["Hover me", DownOutlined()],
+    return antd.Dropdown(
+        html.a(
+            ["Hover me", ant_icons.DownOutlined()],
             className="ant-dropdown-link",
             onClick=lambda e: e.preventDefault(),
         ),

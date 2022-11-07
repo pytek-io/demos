@@ -1,31 +1,27 @@
-from reflect_html import *
-from reflect_antd import Layout, Menu, Breadcrumb
-from reflect_ant_icons import (
-    UserOutlined,
-    LaptopOutlined,
-    NotificationOutlined,
-)
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
-SubMenu = Menu.SubMenu
+SubMenu = antd.Menu.SubMenu
 Header, Content, Footer, Sider = (
-    Layout.Header,
-    Layout.Content,
-    Layout.Footer,
-    Layout.Sider,
+    antd.Layout.Header,
+    antd.Layout.Content,
+    antd.Layout.Footer,
+    antd.Layout.Sider,
 )
 
 
 def app():
-    return Layout(
+    return antd.Layout(
         [
             Header(
                 [
-                    div(className="logo"),
-                    Menu(
+                    html.div(className="logo"),
+                    antd.Menu(
                         [
-                            Menu.Item("nav 1", key="1"),
-                            Menu.Item("nav 2", key="2"),
-                            Menu.Item("nav 3", key="3"),
+                            antd.Menu.Item("nav 1", key="1"),
+                            antd.Menu.Item("nav 2", key="2"),
+                            antd.Menu.Item("nav 3", key="3"),
                         ],
                         theme="dark",
                         mode="horizontal",
@@ -36,50 +32,50 @@ def app():
             ),
             Content(
                 [
-                    Breadcrumb(
+                    antd.Breadcrumb(
                         [
-                            Breadcrumb.Item("Home"),
-                            Breadcrumb.Item("List"),
-                            Breadcrumb.Item("App"),
+                            antd.Breadcrumb.Item("Home"),
+                            antd.Breadcrumb.Item("List"),
+                            antd.Breadcrumb.Item("App"),
                         ],
                         style=dict(margin="16px 0"),
                     ),
-                    Layout(
+                    antd.Layout(
                         [
                             Sider(
-                                Menu(
+                                antd.Menu(
                                     [
                                         SubMenu(
                                             [
-                                                Menu.Item("option1", key="1"),
-                                                Menu.Item("option2", key="2"),
-                                                Menu.Item("option3", key="3"),
-                                                Menu.Item("option4", key="4"),
+                                                antd.Menu.Item("option1", key="1"),
+                                                antd.Menu.Item("option2", key="2"),
+                                                antd.Menu.Item("option3", key="3"),
+                                                antd.Menu.Item("option4", key="4"),
                                             ],
                                             key="sub1",
-                                            icon=UserOutlined([]),
+                                            icon=ant_icons.UserOutlined([]),
                                             title="subnav 1",
                                         ),
                                         SubMenu(
                                             [
-                                                Menu.Item("option5", key="5"),
-                                                Menu.Item("option6", key="6"),
-                                                Menu.Item("option7", key="7"),
-                                                Menu.Item("option8", key="8"),
+                                                antd.Menu.Item("option5", key="5"),
+                                                antd.Menu.Item("option6", key="6"),
+                                                antd.Menu.Item("option7", key="7"),
+                                                antd.Menu.Item("option8", key="8"),
                                             ],
                                             key="sub2",
-                                            icon=LaptopOutlined([]),
+                                            icon=ant_icons.LaptopOutlined([]),
                                             title="subnav 2",
                                         ),
                                         SubMenu(
                                             [
-                                                Menu.Item("option9", key="9"),
-                                                Menu.Item("option10", key="10"),
-                                                Menu.Item("option11", key="11"),
-                                                Menu.Item("option12", key="12"),
+                                                antd.Menu.Item("option9", key="9"),
+                                                antd.Menu.Item("option10", key="10"),
+                                                antd.Menu.Item("option11", key="11"),
+                                                antd.Menu.Item("option12", key="12"),
                                             ],
                                             key="sub3",
-                                            icon=NotificationOutlined([]),
+                                            icon=ant_icons.NotificationOutlined([]),
                                             title="subnav 3",
                                         ),
                                     ],

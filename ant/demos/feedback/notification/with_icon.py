@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Button, notification, Space, notification
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
@@ -9,13 +9,13 @@ def app():
     }
 
     def openNotificationWithIcon(notification_type):
-        return lambda: getattr(notification, notification_type)(args)
+        return lambda: getattr(antd.notification, notification_type)(args)
 
-    return Space(
+    return antd.Space(
         [
-            Button("Success", onClick=openNotificationWithIcon("success")),
-            Button("Info", onClick=openNotificationWithIcon("info")),
-            Button("Warning", onClick=openNotificationWithIcon("warning")),
-            Button("Error", onClick=openNotificationWithIcon("error")),
+            antd.Button("Success", onClick=openNotificationWithIcon("success")),
+            antd.Button("Info", onClick=openNotificationWithIcon("info")),
+            antd.Button("Warning", onClick=openNotificationWithIcon("warning")),
+            antd.Button("Error", onClick=openNotificationWithIcon("error")),
         ]
     )

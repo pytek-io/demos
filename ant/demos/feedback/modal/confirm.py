@@ -1,11 +1,10 @@
-from asyncio import sleep
+import asyncio
 
-from reflect_ant_icons import ExclamationCircleOutlined
-from reflect_antd import Button, Modal, Space
-from reflect_html import *
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
-confirm = Modal.confirm
-
+confirm = antd.Modal.confirm
 JS_MODULES = ["ant_demo", "ant-icons"]
 
 
@@ -21,7 +20,7 @@ def showConfirm():
     confirm(
         dict(
             title="Do you want to delete these items?",
-            icon=ExclamationCircleOutlined(),
+            icon=ant_icons.ExclamationCircleOutlined(),
             content="Some descriptions",
             onOk=on_ok,
             onCancel=on_cancel,
@@ -30,8 +29,7 @@ def showConfirm():
 
 
 async def async_ok(argument):
-    await sleep(1.0)
-    # the exception message should appear in the web client console
+    await asyncio.sleep(1.0)
     raise Exception("Oops something went wrong")
 
 
@@ -39,7 +37,7 @@ def showPromiseConfirm():
     confirm(
         dict(
             title="Do you want to delete these items?",
-            icon=ExclamationCircleOutlined(),
+            icon=ant_icons.ExclamationCircleOutlined(),
             content="When clicked the OK button, this dialog will be closed after 1 second",
             onOk=async_ok,
         )
@@ -50,7 +48,7 @@ def showDeleteConfirm():
     confirm(
         dict(
             title="Are you sure you want to delete this task?",
-            icon=ExclamationCircleOutlined(),
+            icon=ant_icons.ExclamationCircleOutlined(),
             content="Some descriptions",
             okText="Yes",
             okType="danger",
@@ -65,13 +63,11 @@ def showPropsConfirm():
     confirm(
         dict(
             title="Are you sure you want to delete this task?",
-            icon=ExclamationCircleOutlined(),
+            icon=ant_icons.ExclamationCircleOutlined(),
             content="Some descriptions",
             okText="Yes",
             okType="danger",
-            okButtonProps={
-                "disabled": True,
-            },
+            okButtonProps={"disabled": True},
             cancelText="No",
             onOk=on_ok,
             onCancel=on_cancel,
@@ -80,11 +76,11 @@ def showPropsConfirm():
 
 
 def app():
-    return Space(
+    return antd.Space(
         [
-            Button("Confirm", onClick=showConfirm),
-            Button("With promise", onClick=showPromiseConfirm),
-            Button("Delete", onClick=showDeleteConfirm, type="dashed"),
-            Button("With extra props", onClick=showPropsConfirm, type="dashed"),
+            antd.Button("Confirm", onClick=showConfirm),
+            antd.Button("With promise", onClick=showPromiseConfirm),
+            antd.Button("Delete", onClick=showDeleteConfirm, type="dashed"),
+            antd.Button("With extra props", onClick=showPropsConfirm, type="dashed"),
         ]
     )

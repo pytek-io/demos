@@ -1,20 +1,22 @@
-from reflect_html import *
-from reflect_antd import Alert
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Alert(message="Warning text", banner=True),
-            br(),
-            Alert(
+            antd.Alert(message="Warning text", banner=True),
+            html.br(),
+            antd.Alert(
                 message="Very long warning text warning text text text text text text text",
                 banner=True,
                 closable=True,
             ),
-            br(),
-            Alert(showIcon=False, message="Warning text without icon", banner=True),
-            br(),
-            Alert(type="error", message="Error text", banner=True),
+            html.br(),
+            antd.Alert(
+                showIcon=False, message="Warning text without icon", banner=True
+            ),
+            html.br(),
+            antd.Alert(type="error", message="Error text", banner=True),
         ]
     )

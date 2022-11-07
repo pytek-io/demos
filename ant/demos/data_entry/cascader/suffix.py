@@ -1,8 +1,7 @@
-from reflect_html import *
-from reflect_antd import Cascader
-from reflect_ant_icons import SmileOutlined
-
-from reflect import autorun
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 options = [
     {
@@ -31,41 +30,37 @@ options = [
 
 
 def app():
-    cascader1 = Cascader(
-        suffixIcon=SmileOutlined([]),
+    cascader1 = antd.Cascader(
+        suffixIcon=ant_icons.SmileOutlined([]),
         options=options,
         placeholder="Please select",
     )
-    cascader2 = Cascader(
-        suffixIcon="ab",
+    cascader2 = antd.Cascader(
+        suffixIcon="ab", options=options, placeholder="Please select"
+    )
+    cascader3 = antd.Cascader(
+        expandIcon=ant_icons.SmileOutlined([]),
         options=options,
         placeholder="Please select",
     )
-    cascader3 = Cascader(
-        expandIcon=SmileOutlined([]),
-        options=options,
-        placeholder="Please select",
+    cascader4 = antd.Cascader(
+        expandIcon="ab", options=options, placeholder="Please select"
     )
-    cascader4 = Cascader(
-        expandIcon="ab",
-        options=options,
-        placeholder="Please select",
-    )
-    autorun(lambda: print("changed", cascader1()))
-    autorun(lambda: print("changed", cascader2()))
-    autorun(lambda: print("changed", cascader3()))
-    autorun(lambda: print("changed", cascader4()))
-    return div(
+    r.autorun(lambda: print("changed", cascader1()))
+    r.autorun(lambda: print("changed", cascader2()))
+    r.autorun(lambda: print("changed", cascader3()))
+    r.autorun(lambda: print("changed", cascader4()))
+    return html.div(
         [
             cascader1,
-            br(),
-            br(),
+            html.br(),
+            html.br(),
             cascader2,
-            br(),
-            br(),
+            html.br(),
+            html.br(),
             cascader3,
-            br(),
-            br(),
+            html.br(),
+            html.br(),
             cascader4,
         ]
     )

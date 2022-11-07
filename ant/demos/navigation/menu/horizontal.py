@@ -1,28 +1,32 @@
-from reflect_html import *
-from reflect_antd import Menu
-from reflect_ant_icons import MailOutlined, AppstoreOutlined, SettingOutlined
-from reflect import Callback, create_observable
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
-SubMenu = Menu.SubMenu
+SubMenu = antd.Menu.SubMenu
 
 
 def app():
-    current = create_observable("mail")
+    current = r.create_observable("mail")
 
     def handleClick(value):
         print(f"clicked {value}")
         current.set(value)
 
-    return div(
+    return html.div(
         [
-            Menu(
+            antd.Menu(
                 [
-                    Menu.Item("Mail", key="mail", icon=MailOutlined()),
-                    Menu.Item("AppStore", key="app_store", icon=AppstoreOutlined()),
-                    Menu.Item("Settings", key="settings", icon=SettingOutlined()),
+                    antd.Menu.Item("Mail", key="mail", icon=ant_icons.MailOutlined()),
+                    antd.Menu.Item(
+                        "AppStore", key="app_store", icon=ant_icons.AppstoreOutlined()
+                    ),
+                    antd.Menu.Item(
+                        "Settings", key="settings", icon=ant_icons.SettingOutlined()
+                    ),
                 ],
-                onClick=Callback(handleClick, args="key"),
+                onClick=r.Callback(handleClick, args="key"),
             ),
-            div(current),
+            html.div(current),
         ]
     )

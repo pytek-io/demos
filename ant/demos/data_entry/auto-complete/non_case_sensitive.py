@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import AutoComplete
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 options = [
     {"value": "Burns Bay Road"},
@@ -10,9 +10,9 @@ options = [
 
 
 def app():
-    return AutoComplete(
+    return antd.AutoComplete(
         style=dict(width=200),
         options=options,
         placeholder="try to type `b`",
-        filterOption=js("autoCompleteFilterOption"),
+        filterOption=r.js("autoCompleteFilterOption"),
     )

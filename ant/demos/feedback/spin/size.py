@@ -1,6 +1,8 @@
-from reflect_html import *
-from reflect_antd import Spin, Space
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Space([Spin(size="small"), Spin(), Spin(size="large")], size="middle")
+    return antd.Space(
+        [antd.Spin(size="small"), antd.Spin(), antd.Spin(size="large")], size="middle"
+    )

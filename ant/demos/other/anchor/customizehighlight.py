@@ -1,12 +1,12 @@
-from reflect_html import *
-from reflect_antd import Anchor
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-Link = Anchor.Link
+Link = antd.Anchor.Link
 
 
 def app():
-    return Anchor(
+    return antd.Anchor(
         [
             Link(href="#components-anchor-demo-basic", title="Basic demo"),
             Link(href="#components-anchor-demo-static", title="Static demo"),
@@ -20,5 +20,5 @@ def app():
             ),
         ],
         affix=False,
-        getCurrentAnchor=js("constant", "#components-anchor-demo-static"),
+        getCurrentAnchor=r.js("constant", "#components-anchor-demo-static"),
     )

@@ -1,18 +1,17 @@
-from reflect_html import *
-from reflect_antd import Typography, Divider
+import reflect_antd as antd
+import reflect_html as html
 
 Title, Paragraph, Text, Link = (
-    Typography.Title,
-    Typography.Paragraph,
-    Typography.Text,
-    Typography.Link,
+    antd.Typography.Title,
+    antd.Typography.Paragraph,
+    antd.Typography.Text,
+    antd.Typography.Link,
 )
-
 blockContent = "AntV 是蚂蚁金服全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠、不限可能的数据可视化最佳实践。得益于丰富的业务场景和用户需求挑战，AntV 经历多年积累与不断打磨，已支撑整个阿里集团内外 20000+ 业务系统，通过了日均千万级 UV 产品的严苛考验。 我们正在基础图表，图分析，图编辑，地理空间可视化，智能可视化等各个可视化的领域耕耘，欢迎同路人一起前行"
 
 
 def app():
-    return Typography(
+    return antd.Typography(
         [
             Title("Introduction"),
             Paragraph(
@@ -39,22 +38,16 @@ def app():
                 ]
             ),
             Paragraph(
-                ul(
+                html.ul(
                     [
-                        li(Link("Principles", href="/docs/spec/proximity")),
-                        li(Link("Patterns", href="/docs/spec/overview")),
-                        li(Link("Resource Download", href="/docs/resources")),
+                        html.li(Link("Principles", href="/docs/spec/proximity")),
+                        html.li(Link("Patterns", href="/docs/spec/overview")),
+                        html.li(Link("Resource Download", href="/docs/resources")),
                     ]
                 )
             ),
-            Paragraph(
-                [
-                    "Press",
-                    Text("Esc", keyboard=True),
-                    "to exit...",
-                ]
-            ),
-            Divider(),
+            Paragraph(["Press", Text("Esc", keyboard=True), "to exit..."]),
+            antd.Divider(),
             Title("介绍"),
             Paragraph(
                 "蚂蚁的企业级产品是一个庞大且复杂的体系。这类产品不仅量级巨大且功能复杂，而且变动和并发频繁，常常需要设计与开发能够快速的做出响应。同时这类产品中有存在很多类似的页面以及组件，可以通过抽象得到一些稳定且高复用性的内容。"
@@ -79,15 +72,15 @@ def app():
                 ]
             ),
             Paragraph(
-                ul(
+                html.ul(
                     [
-                        li(Link("设计原则", href="/docs/spec/proximity-cn")),
-                        li(Link("设计模式", href="/docs/spec/overview-cn")),
-                        li(Link("设计资源", href="/docs/resources-cn")),
+                        html.li(Link("设计原则", href="/docs/spec/proximity-cn")),
+                        html.li(Link("设计模式", href="/docs/spec/overview-cn")),
+                        html.li(Link("设计资源", href="/docs/resources-cn")),
                     ]
                 )
             ),
-            Paragraph([blockquote(blockContent), pre(blockContent)]),
+            Paragraph([html.blockquote(blockContent), html.pre(blockContent)]),
             Paragraph(["按", Text("Esc", keyboard=True), "键退出阅读……"]),
         ]
     )

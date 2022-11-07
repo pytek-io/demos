@@ -1,7 +1,7 @@
-from reflect_html import *
-from reflect_antd import TimePicker
+import reflect_antd as antd
+import reflect_html as html
 
-RangePicker = TimePicker.RangePicker
+RangePicker = antd.TimePicker.RangePicker
 
 
 def app():

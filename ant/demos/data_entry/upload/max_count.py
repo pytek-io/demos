@@ -1,19 +1,19 @@
-from reflect_html import *
-from reflect_antd import Upload, Button, Space
-from reflect_ant_icons import UploadOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Space(
+    return antd.Space(
         [
-            Upload(
-                Button("Upload (Max: 1)", icon=UploadOutlined([])),
+            antd.Upload(
+                antd.Button("Upload (Max: 1)", icon=ant_icons.UploadOutlined([])),
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76",
                 listType="picture",
                 maxCount=1,
             ),
-            Upload(
-                Button("Upload (Max: 3)", icon=UploadOutlined([])),
+            antd.Upload(
+                antd.Button("Upload (Max: 3)", icon=ant_icons.UploadOutlined([])),
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76",
                 listType="picture",
                 maxCount=3,

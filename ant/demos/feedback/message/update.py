@@ -1,15 +1,16 @@
-from reflect_html import *
-from reflect_antd import Button, message
-from reflect import schedule_callback
-from asyncio import sleep
+import asyncio
+
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 async def openMessage():
     key = "something unique"
-    message.loading({"content": "Loading...", "key": key})
-    await sleep(1)
-    message.success({"content": "Loaded!", "key": key, "duration": 2})
+    antd.message.loading({"content": "Loading...", "key": key})
+    await asyncio.sleep(1)
+    antd.message.success({"content": "Loaded!", "key": key, "duration": 2})
 
 
 def app():
-    return Button("Open the message box", type="primary", onClick=openMessage)
+    return antd.Button("Open the message box", type="primary", onClick=openMessage)

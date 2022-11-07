@@ -1,14 +1,14 @@
-from reflect_html import *
-from reflect_antd import Modal, Button, Space
-from reflect_ant_icons import ExclamationCircleOutlined
-from reflect import create_observable
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def confirm():
-    Modal.confirm(
+    antd.Modal.confirm(
         {
             "title": "Confirm",
-            "icon": ExclamationCircleOutlined(),
+            "icon": ant_icons.ExclamationCircleOutlined(),
             "content": "Bla bla ...",
             "okText": "确认",
             "cancelText": "取消",
@@ -17,12 +17,12 @@ def confirm():
 
 
 def app():
-    visible = create_observable(False)
-    return Space(
+    visible = r.create_observable(False)
+    return antd.Space(
         [
-            Button("Modal", type="primary", onClick=lambda: visible.set(True)),
-            Modal(
-                [p("Bla bla ..."), p("Bla bla ..."), p("Bla bla ...")],
+            antd.Button("Modal", type="primary", onClick=lambda: visible.set(True)),
+            antd.Modal(
+                [html.p("Bla bla ..."), html.p("Bla bla ..."), html.p("Bla bla ...")],
                 title="Modal",
                 visible=visible,
                 onOk=lambda: visible.set(False),
@@ -30,6 +30,6 @@ def app():
                 okText="确认",
                 cancelText="取消",
             ),
-            Button("Confirm", onClick=confirm),
+            antd.Button("Confirm", onClick=confirm),
         ]
     )

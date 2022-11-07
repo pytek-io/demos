@@ -1,13 +1,12 @@
-from reflect_html import *
-from reflect_antd import Select
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-from reflect import autorun
-
-Option, OptGroup = Select.Option, Select.OptGroup
+Option, OptGroup = antd.Select.Option, antd.Select.OptGroup
 
 
 def app():
-    select = Select(
+    select = antd.Select(
         [
             OptGroup(
                 [Option("Jack", value="jack"), Option("Lucy", value="lucy")],
@@ -18,5 +17,5 @@ def app():
         defaultValue="lucy",
         style=dict(width=200),
     )
-    autorun(lambda: print(select()))
+    r.autorun(lambda: print(select()))
     return select

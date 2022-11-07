@@ -1,25 +1,23 @@
-from reflect_html import *
-from reflect_antd import Affix, Button
-from reflect import create_observable
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    top = create_observable(10, key="test")
-    return div(
+    top = r.create_observable(10, key="test")
+    return html.div(
         [
-            div("Top"),
-            Affix(
-                div(
-                    Button(
-                        "Affix top",
-                        type="primary",
-                        onClick=lambda: top.set(top() + 10),
+            html.div("Top"),
+            antd.Affix(
+                html.div(
+                    antd.Button(
+                        "Affix top", type="primary", onClick=lambda: top.set(top() + 10)
                     ),
                     style=dict(background="red"),
                 ),
                 offsetTop=top,
             ),
-            div("Bottom"),
+            html.div("Bottom"),
         ],
         style=dict(height=10000),
     )

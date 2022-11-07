@@ -1,23 +1,24 @@
-from reflect_html import *
-from reflect_antd import Divider
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div([
-        p(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
-        ),
-        Divider("Text"),
-        p(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
-        ),
-        Divider("Left Text", orientation="left"),
-        p(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
-        ),
-        Divider("Right Text", orientation="right"),
-        p(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
-        ),
-    ]
-)
+    return html.div(
+        [
+            html.p(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
+            ),
+            antd.Divider("Text"),
+            html.p(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
+            ),
+            antd.Divider("Left Text", orientation="left"),
+            html.p(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
+            ),
+            antd.Divider("Right Text", orientation="right"),
+            html.p(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista       probare, quae sunt a te dicta? Refert tamen, quo modo."
+            ),
+        ]
+    )

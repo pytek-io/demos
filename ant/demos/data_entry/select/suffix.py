@@ -1,16 +1,15 @@
-from reflect_html import *
-from reflect_antd import Select
-from reflect_ant_icons import SmileOutlined, MehOutlined
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
-from reflect import autorun
-
-Option = Select.Option
+Option = antd.Select.Option
 
 
 def app():
-    smileIcon = SmileOutlined()
-    mehIcon = MehOutlined()
-    select = Select(
+    smileIcon = ant_icons.SmileOutlined()
+    mehIcon = ant_icons.MehOutlined()
+    select = antd.Select(
         [
             Option("Jack", value="jack"),
             Option("Lucy", value="lucy"),
@@ -21,11 +20,11 @@ def app():
         defaultValue="lucy",
         style=dict(width=120),
     )
-    autorun(lambda: print("selected", select()))
-    return div(
+    r.autorun(lambda: print("selected", select()))
+    return html.div(
         [
             select,
-            Select(
+            antd.Select(
                 Option("Lucy", value="lucy"),
                 suffixIcon=mehIcon,
                 defaultValue="lucy",

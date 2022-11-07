@@ -1,10 +1,10 @@
-from reflect_html import *
-from reflect_antd import Modal, Button, Space
+import reflect_antd as antd
+import reflect_html as html
 
 
 def info():
     print("calling info")
-    Modal.info(
+    antd.Modal.info(
         {
             "title": "This is a notification message",
             "content": div(
@@ -18,15 +18,11 @@ def info():
 
 
 def success():
-    Modal.success(
-        {
-            "content": "some messages...some messages...",
-        }
-    )
+    antd.Modal.success({"content": "some messages...some messages..."})
 
 
 def error():
-    Modal.error(
+    antd.Modal.error(
         {
             "title": "This is an error message",
             "content": "some messages...some messages...",
@@ -35,7 +31,7 @@ def error():
 
 
 def warning():
-    Modal.warning(
+    antd.Modal.warning(
         {
             "title": "This is a warning message",
             "content": "some messages...some messages...",
@@ -44,11 +40,11 @@ def warning():
 
 
 def app():
-    return Space(
+    return antd.Space(
         [
-            Button("Info", onClick=info),
-            Button("Success", onClick=success),
-            Button("Error", onClick=error),
-            Button("Warning", onClick=warning),
+            antd.Button("Info", onClick=info),
+            antd.Button("Success", onClick=success),
+            antd.Button("Error", onClick=error),
+            antd.Button("Warning", onClick=warning),
         ]
     )

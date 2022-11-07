@@ -1,34 +1,24 @@
-from reflect_html import *
-from reflect_antd import TreeSelect
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-from reflect import autorun
-
-TreeNode = TreeSelect.TreeNode
+TreeNode = antd.TreeSelect.TreeNode
 
 
 def app():
-    tree_select = TreeSelect(
+    tree_select = antd.TreeSelect(
         TreeNode(
             [
                 TreeNode(
                     [
-                        TreeNode(
-                            value="leaf1", 
-                            title="my leaf"),
-                        TreeNode(
-                            value="leaf2", 
-                        title="your leaf"),
+                        TreeNode(value="leaf1", title="my leaf"),
+                        TreeNode(value="leaf2", title="your leaf"),
                     ],
                     value="parent 1-0",
                     title="parent 1-0",
                 ),
                 TreeNode(
-                    [
-                        TreeNode(
-                            value="sss",
-                            title="sss",
-                        )
-                    ],
+                    [TreeNode(value="sss", title="sss")],
                     value="parent 1-1",
                     title="parent 1-1",
                 ),
@@ -43,5 +33,5 @@ def app():
         allowClear=True,
         treeDefaultExpandAll=True,
     )
-    autorun(lambda: print("selected", tree_select()))
+    r.autorun(lambda: print("selected", tree_select()))
     return tree_select

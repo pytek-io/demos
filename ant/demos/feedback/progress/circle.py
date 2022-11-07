@@ -1,12 +1,12 @@
-from reflect_html import *
-from reflect_antd import Progress
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Progress(type="circle", percent=75),
-            Progress(type="circle", percent=70, status="exception"),
-            Progress(type="circle", percent=100),
+            antd.Progress(type="circle", percent=75),
+            antd.Progress(type="circle", percent=70, status="exception"),
+            antd.Progress(type="circle", percent=100),
         ]
     )

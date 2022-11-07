@@ -1,13 +1,15 @@
-from reflect_html import *
-from reflect_antd import Breadcrumb
-from reflect_ant_icons import HomeOutlined, UserOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Breadcrumb(
+    return antd.Breadcrumb(
         [
-            Breadcrumb.Item(HomeOutlined(), href=""),
-            Breadcrumb.Item([UserOutlined(), span("Application List")], href=""),
-            Breadcrumb.Item("Application"),
+            antd.Breadcrumb.Item(ant_icons.HomeOutlined(), href=""),
+            antd.Breadcrumb.Item(
+                [ant_icons.UserOutlined(), html.span("Application List")], href=""
+            ),
+            antd.Breadcrumb.Item("Application"),
         ]
     )

@@ -1,26 +1,25 @@
-from traceback import print_exc
-from reflect_html import *
-from reflect_antd import Radio, Badge
-from reflect import autorun, create_observable
+import traceback
 
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    # note we need to define the state outside the method rendering the components otherwise it wouldn't be persisted between updates.
-    counters = [create_observable(value) for value in [1, 2]]
+    counters = [r.create_observable(value) for value in [1, 2]]
 
     def update_counters(value):
         counters[value] += 1
-        # FIXME: this crashes the application
-        # raise Exception("kaboom")
 
-    result = Radio.Group(
+    result = antd.Radio.Group(
         [
-            Badge(Radio.Button("Click Me", value=0), count=lambda: counters[0]),
-            Badge(Radio.Button("Not Me", value=1), count=lambda: counters[1]),
+            antd.Badge(
+                antd.Radio.Button("Click Me", value=0), count=lambda: counters[0]
+            ),
+            antd.Badge(antd.Radio.Button("Not Me", value=1), count=lambda: counters[1]),
         ],
         buttonStyle="solid",
         onChange=update_counters,
     )
-    autorun(lambda: print(result()))
+    r.autorun(lambda: print(result()))
     return result

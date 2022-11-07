@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Slider
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Slider(defaultValue=30, tooltipVisible=True)
+    return antd.Slider(defaultValue=30, tooltipVisible=True)

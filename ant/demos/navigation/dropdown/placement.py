@@ -1,26 +1,26 @@
-from reflect_html import *
-from reflect_antd import Menu, Dropdown, Button, Space
+import reflect_antd as antd
+import reflect_html as html
 
-menu = Menu(
+menu = antd.Menu(
     [
-        Menu.Item(
-            a(
+        antd.Menu.Item(
+            html.a(
                 "1st menu item",
                 target="_blank",
                 rel="noopener noreferrer",
                 href="http://www.alipay.com/",
             )
         ),
-        Menu.Item(
-            a(
+        antd.Menu.Item(
+            html.a(
                 "2nd menu item",
                 target="_blank",
                 rel="noopener noreferrer",
                 href="http://www.taobao.com/",
             )
         ),
-        Menu.Item(
-            a(
+        antd.Menu.Item(
+            html.a(
                 "3rd menu item",
                 target="_blank",
                 rel="noopener noreferrer",
@@ -32,27 +32,37 @@ menu = Menu(
 
 
 def app():
-    return Space(
+    return antd.Space(
         [
-            Space(
+            antd.Space(
                 [
-                    Dropdown(
-                        Button("bottomLeft"), overlay=menu, placement="bottomLeft"
+                    antd.Dropdown(
+                        antd.Button("bottomLeft"), overlay=menu, placement="bottomLeft"
                     ),
-                    Dropdown(
-                        Button("bottomCenter"), overlay=menu, placement="bottomCenter"
+                    antd.Dropdown(
+                        antd.Button("bottomCenter"),
+                        overlay=menu,
+                        placement="bottomCenter",
                     ),
-                    Dropdown(
-                        Button("bottomRight"), overlay=menu, placement="bottomRight"
+                    antd.Dropdown(
+                        antd.Button("bottomRight"),
+                        overlay=menu,
+                        placement="bottomRight",
                     ),
                 ],
                 wrap=True,
             ),
-            Space(
+            antd.Space(
                 [
-                    Dropdown(Button("topLeft"), overlay=menu, placement="topLeft"),
-                    Dropdown(Button("topCenter"), overlay=menu, placement="topCenter"),
-                    Dropdown(Button("topRight"), overlay=menu, placement="topRight"),
+                    antd.Dropdown(
+                        antd.Button("topLeft"), overlay=menu, placement="topLeft"
+                    ),
+                    antd.Dropdown(
+                        antd.Button("topCenter"), overlay=menu, placement="topCenter"
+                    ),
+                    antd.Dropdown(
+                        antd.Button("topRight"), overlay=menu, placement="topRight"
+                    ),
                 ],
                 wrap=True,
             ),

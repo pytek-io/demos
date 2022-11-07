@@ -1,8 +1,8 @@
-from reflect_html import *
-from reflect_antd import Anchor
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-Link = Anchor.Link
+Link = antd.Anchor.Link
 
 
 def onChange(link):
@@ -10,7 +10,7 @@ def onChange(link):
 
 
 def app():
-    return Anchor(
+    return antd.Anchor(
         [
             Link(href="#components-anchor-demo-basic", title="Basic demo"),
             Link(href="#components-anchor-demo-static", title="Static demo"),
@@ -24,5 +24,5 @@ def app():
             ),
         ],
         affix=False,
-        onChange=Callback(onChange),
+        onChange=r.Callback(onChange),
     )

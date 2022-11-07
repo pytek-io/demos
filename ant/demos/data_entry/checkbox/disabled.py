@@ -1,12 +1,12 @@
-from reflect_html import *
-from reflect_antd import Checkbox
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Checkbox(defaultChecked=False, disabled=True),
-            br(),
-            Checkbox(defaultChecked=True, disabled=True),
+            antd.Checkbox(defaultChecked=False, disabled=True),
+            html.br(),
+            antd.Checkbox(defaultChecked=True, disabled=True),
         ]
     )

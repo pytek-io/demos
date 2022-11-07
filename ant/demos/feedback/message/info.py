@@ -1,10 +1,10 @@
-from reflect_html import *
-from reflect_antd import message, Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def info():
-    message.info("This is a normal message")
+    antd.message.info("This is a normal message")
 
 
 def app():
-    return Button("Display normal message", type="primary", onClick=info)
+    return antd.Button("Display normal message", type="primary", onClick=info)

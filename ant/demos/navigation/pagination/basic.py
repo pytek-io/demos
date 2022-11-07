@@ -1,5 +1,6 @@
-from reflect_html import *
-from reflect_antd import Pagination
+import reflect_antd as antd
+import reflect_html as html
+
 
 def app():
-    return div([Pagination(defaultCurrent=1, total=50)])
+    return html.div([antd.Pagination(defaultCurrent=1, total=50)])

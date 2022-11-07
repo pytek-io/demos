@@ -1,15 +1,15 @@
-from reflect_html import *
-from reflect_antd import Result, Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Result(
+    return antd.Result(
         "Go Console",
         status="success",
         title="Successfully Purchased Cloud Server ECS!",
         subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.",
         extra=[
-            Button(type="primary", key="console"),
-            Button("Buy Again", key="buy"),
+            antd.Button(type="primary", key="console"),
+            antd.Button("Buy Again", key="buy"),
         ],
     )

@@ -1,28 +1,26 @@
-from reflect_html import *
-from reflect_antd import Button, notification
-from reflect import schedule_callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def openNotification():
     key = "updatable"
-    notification.open(
+    antd.notification.open(
         {
             "key": key,
             "message": "Notification Title",
             "description": "This description will update in one second.",
         }
     )
-    schedule_callback(
+    r.schedule_callback(
         1,
-        lambda: notification.open(
-            {
-                "key": key,
-                "message": "New Title",
-                "description": "New description",
-            }
+        lambda: antd.notification.open(
+            {"key": key, "message": "New Title", "description": "New description"}
         ),
     )
 
 
 def app():
-    return Button("Open the notification box", type="primary", onClick=openNotification)
+    return antd.Button(
+        "Open the notification box", type="primary", onClick=openNotification
+    )

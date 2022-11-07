@@ -1,25 +1,15 @@
-from reflect_html import *
-from reflect_antd import Cascader
-from reflect import autorun, create_observable
-from reflect import schedule_callback, Callback
-
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 optionLists = [
-    {
-        "value": "zhejiang",
-        "label": "Zhejiang",
-        "isLeaf": False,
-    },
-    {
-        "value": "jiangsu",
-        "label": "Jiangsu",
-        "isLeaf": False,
-    },
+    {"value": "zhejiang", "label": "Zhejiang", "isLeaf": False},
+    {"value": "jiangsu", "label": "Jiangsu", "isLeaf": False},
 ]
 
 
 def app():
-    options = create_observable(optionLists, key="optionLists")
+    options = r.create_observable(optionLists, key="optionLists")
 
     def load_data(selected_options):
         target_label = selected_options[-1]["label"]
@@ -33,23 +23,15 @@ def app():
             print("updated tree values")
             target_option["loading"] = False
             target_option["children"] = [
-                {
-                    "label": f"{target_option['label']} Dynamic 1",
-                    "value": "dynamic1",
-                },
-                {
-                    "label": f"{target_option['label']} Dynamic 2",
-                    "value": "dynamic2",
-                },
+                {"label": f"{target_option['label']} Dynamic 1", "value": "dynamic1"},
+                {"label": f"{target_option['label']} Dynamic 2", "value": "dynamic2"},
             ]
             options.touch()
 
-        schedule_callback(1.0, update)
+        r.schedule_callback(1.0, update)
 
-    cascader = Cascader(
-        options=options,
-        changeOnSelect=True,
-        loadData=Callback(load_data),
+    cascader = antd.Cascader(
+        options=options, changeOnSelect=True, loadData=r.Callback(load_data)
     )
-    autorun(lambda: print("changed", cascader()))
+    r.autorun(lambda: print("changed", cascader()))
     return cascader

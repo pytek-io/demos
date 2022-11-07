@@ -1,26 +1,26 @@
-from reflect_html import *
-from reflect_antd import Alert
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Alert(
+            antd.Alert(
                 message="Success Text",
                 description="Success Description Success Description Success Description",
                 type="success",
             ),
-            Alert(
+            antd.Alert(
                 message="Info Text",
                 description="Info Description Info Description Info Description Info Description",
                 type="info",
             ),
-            Alert(
+            antd.Alert(
                 message="Warning Text",
                 description="Warning Description Warning Description Warning Description Warning Description",
                 type="warning",
             ),
-            Alert(
+            antd.Alert(
                 message="Error Text",
                 description="Error Description Error Description Error Description Error Description",
                 type="error",

@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Cascader
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 options = [
     {
@@ -29,8 +29,8 @@ options = [
 
 
 def app():
-    return Cascader(
+    return antd.Cascader(
         options=options,
-        dropdownRender=js("cascaderDropdownRender"),
+        dropdownRender=r.js("cascaderDropdownRender"),
         placeholder="Please select",
     )

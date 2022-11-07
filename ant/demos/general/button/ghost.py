@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_antd import Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Button("Primary", type="primary", ghost=True),
-            Button("Default", ghost=True),
-            Button("Dashed", type="dashed", ghost=True),
+            antd.Button("Primary", type="primary", ghost=True),
+            antd.Button("Default", ghost=True),
+            antd.Button("Dashed", type="dashed", ghost=True),
         ],
         className="site-button-ghost-wrapper",
     )

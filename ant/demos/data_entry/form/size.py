@@ -1,17 +1,6 @@
-from reflect_html import *
-from reflect_antd import (
-    Form,
-    Input,
-    Button,
-    Cascader,
-    Switch,
-    Select,
-    Radio,
-    Space,
-    TreeSelect,
-    DatePicker,
-    InputNumber,
-)
+import reflect_antd as antd
+import reflect_html as html
+
 
 def app():
     treeData = [
@@ -28,33 +17,37 @@ def app():
             "children": [{"value": "hangzhou", "label": "Hangzhou"}],
         }
     ]
-    componentSize = Radio.Group(
+    componentSize = antd.Radio.Group(
         [
-            Radio.Button("Small", value="small"),
-            Radio.Button("Default", value="default"),
-            Radio.Button("Large", value="large"),
+            antd.Radio.Button("Small", value="small"),
+            antd.Radio.Button("Default", value="default"),
+            antd.Radio.Button("Large", value="large"),
         ]
     )
-    return Space(
+    return antd.Space(
         [
             componentSize,
-            Form(
+            antd.Form(
                 [
-                    Form.Item(Input(), label="Input"),
-                    Form.Item(
-                        Select(Select.Option("Demo", value="demo")), label="Select"
+                    antd.Form.Item(antd.Input(), label="Input"),
+                    antd.Form.Item(
+                        antd.Select(antd.Select.Option("Demo", value="demo")),
+                        label="Select",
                     ),
-                    Form.Item(TreeSelect(treeData=treeData), label="TreeSelect"),
-                    Form.Item(Cascader(options=options), label="Cascader"),
-                    Form.Item(DatePicker(), label="DatePicker"),
-                    Form.Item(InputNumber(), label="InputNumber"),
-                    Form.Item(Switch(), label="Switch"),
-                    Form.Item(Button("Button"), label="Button"),
+                    antd.Form.Item(
+                        antd.TreeSelect(treeData=treeData), label="TreeSelect"
+                    ),
+                    antd.Form.Item(antd.Cascader(options=options), label="Cascader"),
+                    antd.Form.Item(antd.DatePicker(), label="DatePicker"),
+                    antd.Form.Item(antd.InputNumber(), label="InputNumber"),
+                    antd.Form.Item(antd.Switch(), label="Switch"),
+                    antd.Form.Item(antd.Button("Button"), label="Button"),
                 ],
                 labelCol=dict(span=4),
                 wrapperCol=dict(span=14),
                 layout="horizontal",
                 size=componentSize,
             ),
-        ], direction="vertical"
+        ],
+        direction="vertical",
     )

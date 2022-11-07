@@ -1,40 +1,47 @@
-from reflect_html import *
-from reflect_antd import Layout, Menu
-from reflect_ant_icons import (
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-    BarChartOutlined,
-    CloudOutlined,
-    AppstoreOutlined,
-    TeamOutlined,
-    ShopOutlined,
-)
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 Header, Content, Footer, Sider = (
-    Layout.Header,
-    Layout.Content,
-    Layout.Footer,
-    Layout.Sider,
+    antd.Layout.Header,
+    antd.Layout.Content,
+    antd.Layout.Footer,
+    antd.Layout.Sider,
 )
 
 
 def app():
-    return Layout(
+    return antd.Layout(
         [
             Sider(
                 [
-                    div(className="logo"),
-                    Menu(
+                    html.div(className="logo"),
+                    antd.Menu(
                         [
-                            Menu.Item("nav 1", key="1", icon=UserOutlined([])),
-                            Menu.Item("nav 2", key="2", icon=VideoCameraOutlined([])),
-                            Menu.Item("nav 3", key="3", icon=UploadOutlined([])),
-                            Menu.Item("nav 4", key="4", icon=BarChartOutlined([])),
-                            Menu.Item("nav 5", key="5", icon=CloudOutlined([])),
-                            Menu.Item("nav 6", key="6", icon=AppstoreOutlined([])),
-                            Menu.Item("nav 7", key="7", icon=TeamOutlined([])),
-                            Menu.Item("nav 8", key="8", icon=ShopOutlined([])),
+                            antd.Menu.Item(
+                                "nav 1", key="1", icon=ant_icons.UserOutlined([])
+                            ),
+                            antd.Menu.Item(
+                                "nav 2", key="2", icon=ant_icons.VideoCameraOutlined([])
+                            ),
+                            antd.Menu.Item(
+                                "nav 3", key="3", icon=ant_icons.UploadOutlined([])
+                            ),
+                            antd.Menu.Item(
+                                "nav 4", key="4", icon=ant_icons.BarChartOutlined([])
+                            ),
+                            antd.Menu.Item(
+                                "nav 5", key="5", icon=ant_icons.CloudOutlined([])
+                            ),
+                            antd.Menu.Item(
+                                "nav 6", key="6", icon=ant_icons.AppstoreOutlined([])
+                            ),
+                            antd.Menu.Item(
+                                "nav 7", key="7", icon=ant_icons.TeamOutlined([])
+                            ),
+                            antd.Menu.Item(
+                                "nav 8", key="8", icon=ant_icons.ShopOutlined([])
+                            ),
                         ],
                         theme="dark",
                         mode="inline",
@@ -43,106 +50,106 @@ def app():
                 ],
                 style=dict(overflow="auto", height="100vh", position="fixed", left=0),
             ),
-            Layout(
+            antd.Layout(
                 [
                     Header(className="site-layout-background", style=dict(padding=0)),
                     Content(
-                        div(
+                        html.div(
                             [
                                 "...",
-                                br(),
+                                html.br(),
                                 "Really",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "long",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "...",
-                                br(),
+                                html.br(),
                                 "content",
                             ],
                             className="site-layout-background",

@@ -1,17 +1,7 @@
-from reflect_html import *
-from reflect_antd import (
-    Input,
-    Col,
-    Row,
-    Select,
-    InputNumber,
-    DatePicker,
-    AutoComplete,
-    Cascader,
-)
+import reflect_antd as antd
+import reflect_html as html
 
-Option = Select.Option
-
+Option = antd.Select.Option
 options = [
     {
         "value": "zhejiang",
@@ -37,48 +27,49 @@ options = [
     },
 ]
 
+
 def app():
-    return div(
+    return html.div(
         [
-            Input.Group(
-                Row(
+            antd.Input.Group(
+                antd.Row(
                     [
-                        Col(Input(defaultValue="0571"), span=5),
-                        Col(Input(defaultValue="26888888"), span=8),
+                        antd.Col(antd.Input(defaultValue="0571"), span=5),
+                        antd.Col(antd.Input(defaultValue="26888888"), span=8),
                     ],
                     gutter=8,
                 ),
                 size="large",
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Input(style=dict(width="20%"), defaultValue="0571"),
-                    Input(style=dict(width="30%"), defaultValue="26888888"),
+                    antd.Input(style=dict(width="20%"), defaultValue="0571"),
+                    antd.Input(style=dict(width="30%"), defaultValue="26888888"),
                 ],
                 compact=True,
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Select(
+                    antd.Select(
                         [
                             Option("Zhejiang", value="Zhejiang"),
                             Option("Jiangsu", value="Jiangsu"),
                         ],
                         defaultValue="Zhejiang",
                     ),
-                    Input(
+                    antd.Input(
                         style=dict(width="50%"), defaultValue="Xihu District, Hangzhou"
                     ),
                 ],
                 compact=True,
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Input.Search(style=dict(width="40%"), defaultValue="0571"),
-                    Input.Search(
+                    antd.Input.Search(style=dict(width="40%"), defaultValue="0571"),
+                    antd.Input.Search(
                         allowClear=True,
                         style=dict(width="40%"),
                         defaultValue="26888888",
@@ -86,13 +77,13 @@ def app():
                 ],
                 compact=True,
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Input.Search(
+                    antd.Input.Search(
                         allowClear=True, style=dict(width="40%"), defaultValue="0571"
                     ),
-                    Input.Search(
+                    antd.Input.Search(
                         allowClear=True,
                         style=dict(width="40%"),
                         defaultValue="26888888",
@@ -100,48 +91,48 @@ def app():
                 ],
                 compact=True,
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Select(
+                    antd.Select(
                         [
                             Option("Option1", value="Option1"),
                             Option("Option2", value="Option2"),
                         ],
                         defaultValue="Option1",
                     ),
-                    Input(style=dict(width="50%"), defaultValue="input content"),
-                    InputNumber(),
+                    antd.Input(style=dict(width="50%"), defaultValue="input content"),
+                    antd.InputNumber(),
                 ],
                 compact=True,
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Input(style=dict(width="50%"), defaultValue="input content"),
-                    DatePicker(style=dict(width="50%")),
+                    antd.Input(style=dict(width="50%"), defaultValue="input content"),
+                    antd.DatePicker(style=dict(width="50%")),
                 ],
                 compact=True,
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Input(style=dict(width="30%"), defaultValue="input content"),
-                    DatePicker.RangePicker(style=dict(width="70%")),
+                    antd.Input(style=dict(width="30%"), defaultValue="input content"),
+                    antd.DatePicker.RangePicker(style=dict(width="70%")),
                 ],
                 compact=True,
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Select(
+                    antd.Select(
                         [
                             Option("Option1-1", value="Option1-1"),
                             Option("Option1-2", value="Option1-2"),
                         ],
                         defaultValue="Option1-1",
                     ),
-                    Select(
+                    antd.Select(
                         [
                             Option("Option2-1", value="Option2-1"),
                             Option("Option2-2", value="Option2-2"),
@@ -151,17 +142,17 @@ def app():
                 ],
                 compact=True,
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Select(
+                    antd.Select(
                         [Option("Between", value="1"), Option("Except", value="2")],
                         defaultValue="1",
                     ),
-                    Input(
+                    antd.Input(
                         style=dict(width=100, textAlign="center"), placeholder="Minimum"
                     ),
-                    Input(
+                    antd.Input(
                         className="site-input-split",
                         style=dict(
                             width=30, borderLeft=0, borderRight=0, pointerEvents="none"
@@ -169,7 +160,7 @@ def app():
                         placeholder="~",
                         disabled=True,
                     ),
-                    Input(
+                    antd.Input(
                         className="site-input-right",
                         style=dict(width=100, textAlign="center"),
                         placeholder="Maximum",
@@ -177,10 +168,10 @@ def app():
                 ],
                 compact=True,
             ),
-            br(),
-            Input.Group(
+            html.br(),
+            antd.Input.Group(
                 [
-                    Select(
+                    antd.Select(
                         [
                             Option("Sign Up", value="Sign Up"),
                             Option("Sign In", value="Sign In"),
@@ -188,16 +179,16 @@ def app():
                         defaultValue="Sign Up",
                         style=dict(width="30%"),
                     ),
-                    AutoComplete(
+                    antd.AutoComplete(
                         style=dict(width="70%"),
                         placeholder="Email",
                         options=[{"value": "text 1"}, {"value": "text 2"}],
                         compact=True,
                     ),
-                    br(),
-                    Input.Group(
+                    html.br(),
+                    antd.Input.Group(
                         [
-                            Select(
+                            antd.Select(
                                 [
                                     Option("Home", value="Home"),
                                     Option("Company", value="Company"),
@@ -205,7 +196,7 @@ def app():
                                 style=dict(width="30%"),
                                 defaultValue="Home",
                             ),
-                            Cascader(
+                            antd.Cascader(
                                 style=dict(width="70%"),
                                 options=options,
                                 placeholder="Select Address",

@@ -1,36 +1,32 @@
-from reflect_html import *
-from reflect_antd import Form, Input, Button, Checkbox
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Form(
+    return antd.Form(
         [
-            Form.Item(
-                Input(),
+            antd.Form.Item(
+                antd.Input(),
                 label="Username",
                 name="username",
                 rules=[dict(required=True, message="Please input your username")],
             ),
-            Form.Item(
-                Input.Password(),
+            antd.Form.Item(
+                antd.Input.Password(),
                 label="Password",
                 name="password",
                 rules=[dict(required=True, message="Please input your password!")],
             ),
-            Form.Item(
-                Checkbox("Remember me"), name="remember", valuePropName="checked"
+            antd.Form.Item(
+                antd.Checkbox("Remember me"), name="remember", valuePropName="checked"
             ),
-            Form.Item(Button("Submit", type="primary", htmlType="submit")),
+            antd.Form.Item(antd.Button("Submit", type="primary", htmlType="submit")),
         ],
         name="basic",
         initialValues=dict(remember=True),
         labelCol=dict(span=8),
         wrapperCol=dict(span=16),
-        onFinish=Callback(
-            lambda values: print("Success", values)
-        ),
-        onFinishFailed=Callback(
-            lambda values: print("Failed", values)
-        ),
+        onFinish=r.Callback(lambda values: print("Success", values)),
+        onFinishFailed=r.Callback(lambda values: print("Failed", values)),
     )

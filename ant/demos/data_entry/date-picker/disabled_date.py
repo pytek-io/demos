@@ -1,24 +1,26 @@
-from reflect_html import *
-from reflect_antd import DatePicker, Space
-from reflect import js
-from datetime import datetime, timedelta
-RangePicker = DatePicker.RangePicker
+import datetime
 
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
+
+RangePicker = antd.DatePicker.RangePicker
 JS_MODULES = ["ant_demo"]
 
+
 def app():
-    disabledDate = js("datePickerDisableDate")
-    disabledDateTime = js("datePickerDisableDateTime")
-    disabledRangeTime = js("datePickerDisableRangeTime")
-    return Space(
+    disabledDate = r.js("datePickerDisableDate")
+    disabledDateTime = r.js("datePickerDisableDateTime")
+    disabledRangeTime = r.js("datePickerDisableRangeTime")
+    return antd.Space(
         [
-            DatePicker(
+            antd.DatePicker(
                 format="YYYY-MM-DD HH:mm:ss",
                 disabledDate=disabledDate,
                 disabledTime=disabledDateTime,
-                showTime=dict(defaultValue=datetime.now()),
+                showTime=dict(defaultValue=datetime.datetime.now()),
             ),
-            DatePicker(picker="month", disabledDate=disabledDate),
+            antd.DatePicker(picker="month", disabledDate=disabledDate),
             RangePicker(disabledDate=disabledDate),
             RangePicker(
                 disabledDate=disabledDate,
@@ -26,8 +28,8 @@ def app():
                 showTime=dict(
                     hideDisabledOptions=True,
                     defaultValue=[
-                        datetime.now(),
-                        datetime.now() + timedelta(hours=12),
+                        datetime.datetime.now(),
+                        datetime.datetime.now() + datetime.timedelta(hours=12),
                     ],
                 ),
                 format="YYYY-MM-DD HH:mm:ss",

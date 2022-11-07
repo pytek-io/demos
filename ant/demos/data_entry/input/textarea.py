@@ -1,7 +1,7 @@
-from reflect_html import *
-from reflect_antd import Input
+import reflect_antd as antd
+import reflect_html as html
 
-TextArea = Input.TextArea
+TextArea = antd.Input.TextArea
 
 
 def app():

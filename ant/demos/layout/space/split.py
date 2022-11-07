@@ -1,9 +1,13 @@
-from reflect_html import *
-from reflect_antd import Space, Typography, Divider
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Space(
-        [Typography.Link("Link"), Typography.Link("Link"), Typography.Link("Link")],
-        split=Divider(type="vertical"),
+    return antd.Space(
+        [
+            antd.Typography.Link("Link"),
+            antd.Typography.Link("Link"),
+            antd.Typography.Link("Link"),
+        ],
+        split=antd.Divider(type="vertical"),
     )

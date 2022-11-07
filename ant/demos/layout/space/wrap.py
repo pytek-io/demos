@@ -1,11 +1,10 @@
-from reflect_html import *
-from reflect_antd import Space, Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Space(
-        # eslint-disable-next-line react/no-array-index-key"
-        [Button("Button", key=index) for index in range(20)],
+    return antd.Space(
+        [antd.Button("Button", key=index) for index in range(20)],
         size=[8, 16],
         wrap=True,
     )

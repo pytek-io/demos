@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Slider
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Slider(range=dict(draggableTrack=True), defaultValue=[20, 50])
+    return antd.Slider(range=dict(draggableTrack=True), defaultValue=[20, 50])

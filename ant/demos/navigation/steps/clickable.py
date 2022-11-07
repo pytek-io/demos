@@ -1,37 +1,37 @@
-from reflect_html import *
-from reflect_antd import Steps, Divider
-from reflect import create_observable, Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-Step = Steps.Step
+Step = antd.Steps.Step
 
 
 def app():
-    current = create_observable(0)
+    current = r.create_observable(0)
 
     def onChange(value):
         print("onChange:", current)
         current.set(value)
 
-    return div(
+    return html.div(
         [
-            Steps(
+            antd.Steps(
                 [
                     Step(title="Step 1", description="This is a description."),
                     Step(title="Step 2", description="This is a description."),
                     Step(title="Step 3", description="This is a description."),
                 ],
                 current=current,
-                onChange=Callback(onChange),
+                onChange=r.Callback(onChange),
             ),
-            Divider(),
-            Steps(
+            antd.Divider(),
+            antd.Steps(
                 [
                     Step(title="Step 1", description="This is a description."),
                     Step(title="Step 2", description="This is a description."),
                     Step(title="Step 3", description="This is a description."),
                 ],
                 current=current,
-                onChange=Callback(onChange),
+                onChange=r.Callback(onChange),
                 direction="vertical",
             ),
         ]

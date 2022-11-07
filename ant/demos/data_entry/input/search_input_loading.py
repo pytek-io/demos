@@ -1,25 +1,27 @@
-from reflect_html import *
-from reflect_antd import Input
+import reflect_antd as antd
+import reflect_html as html
 
-Search = Input.Search
+Search = antd.Input.Search
 
 
 def app():
-    return div([
-        Search(placeholder="input search loading default", loading=True),
-        br(),
-        br(),
-        Search(
-            placeholder="input search loading with enterButton",
-            loading=True,
-            enterButton=True,
-        ),
-        br(),
-        br(),
-        Search(
-            placeholder="input search text",
-            enterButton="Search",
-            size="large",
-            loading=True,
-        ),
-    ])
+    return html.div(
+        [
+            Search(placeholder="input search loading default", loading=True),
+            html.br(),
+            html.br(),
+            Search(
+                placeholder="input search loading with enterButton",
+                loading=True,
+                enterButton=True,
+            ),
+            html.br(),
+            html.br(),
+            Search(
+                placeholder="input search text",
+                enterButton="Search",
+                size="large",
+                loading=True,
+            ),
+        ]
+    )

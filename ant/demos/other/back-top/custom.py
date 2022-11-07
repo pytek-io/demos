@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import BackTop
+import reflect_antd as antd
+import reflect_html as html
 
 style = dict(
     height=40,
@@ -14,16 +14,16 @@ style = dict(
 
 
 def app():
-    return div(
+    return html.div(
         [
-            div("Scroll to bottom"),
-            div("Scroll to bottom"),
-            div("Scroll to bottom"),
-            div("Scroll to bottom"),
-            div("Scroll to bottom"),
-            div("Scroll to bottom"),
-            div("Scroll to bottom"),
-            BackTop(div("UP", style=style)),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            antd.BackTop(html.div("UP", style=style)),
         ],
         style=dict(height="600vh", padding=8),
     )

@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import InputNumber
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return InputNumber(min=1, max=10, defaultValue=3, bordered=False)
+    return antd.InputNumber(min=1, max=10, defaultValue=3, bordered=False)

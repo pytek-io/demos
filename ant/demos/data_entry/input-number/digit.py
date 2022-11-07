@@ -1,10 +1,9 @@
-from reflect_html import *
-from reflect_antd import InputNumber
-
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    result = InputNumber(min=0, max=10, step=0.1)
-    autorun(lambda: print("changed", result()))
+    result = antd.InputNumber(min=0, max=10, step=0.1)
+    r.autorun(lambda: print("changed", result()))
     return result

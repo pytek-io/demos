@@ -1,7 +1,6 @@
-from reflect_html import *
-from reflect_antd import Cascader
-from reflect import autorun
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 options = [
     {
@@ -30,10 +29,10 @@ options = [
 
 
 def app():
-    cascader = Cascader(
+    cascader = antd.Cascader(
         options=options,
         placeholder="Please select",
-        showSearch=js("filterCascaderSearch"),
+        showSearch=r.js("filterCascaderSearch"),
     )
-    autorun(lambda: print(cascader()))
+    r.autorun(lambda: print(cascader()))
     return cascader

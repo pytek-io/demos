@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Progress
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Progress(type="dashboard", percent=75),
-            Progress(type="dashboard", percent=75, gapDegree=30),
+            antd.Progress(type="dashboard", percent=75),
+            antd.Progress(type="dashboard", percent=75, gapDegree=30),
         ]
     )

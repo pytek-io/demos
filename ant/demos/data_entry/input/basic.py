@@ -1,9 +1,9 @@
-from reflect_html import *
-from reflect_antd import Input
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-from reflect import autorun
 
 def app():
-    text_input =  Input(placeholder="Basic usage")
-    autorun(lambda : print(text_input()))
+    text_input = antd.Input(placeholder="Basic usage")
+    r.autorun(lambda: print(text_input()))
     return text_input

@@ -1,13 +1,11 @@
-from reflect_html import *
-from reflect_antd import TimePicker
+import datetime
 
-from reflect import autorun
-from datetime import time
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    time_picker = TimePicker(
-        defaultValue=time(0, 0, 0),
-    )
-    autorun(lambda: print(time_picker()))
+    time_picker = antd.TimePicker(defaultValue=datetime.time(0, 0, 0))
+    r.autorun(lambda: print(time_picker()))
     return time_picker

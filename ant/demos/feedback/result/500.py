@@ -1,12 +1,12 @@
-from reflect_html import *
-from reflect_antd import Result, Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Result(
+    return antd.Result(
         "Back Home",
         status="500",
         title="500",
         subTitle="Sorry, something went wrong.",
-        extra=Button(type="primary"),
+        extra=antd.Button(type="primary"),
     )

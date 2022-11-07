@@ -1,6 +1,8 @@
-from reflect_html import *
-from reflect_antd import BackTop
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div([BackTop(), strong("gray", className="site-back-top-basic")])
+    return html.div(
+        [antd.BackTop(), html.strong("gray", className="site-back-top-basic")]
+    )

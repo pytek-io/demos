@@ -1,29 +1,24 @@
-from reflect_html import *
-from reflect_antd import DatePicker, Space
+import datetime
 
-from datetime import datetime, timedelta
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    date_picker1 = DatePicker(defaultValue=datetime.now() + timedelta(days=7))
-    date_picker2 = DatePicker(picker="week")
-    date_picker3 = DatePicker(picker="month")
-    date_picker4 = DatePicker(picker="quarter")
-    date_picker5 = DatePicker(picker="year")
-    autorun(lambda: print("selected", date_picker1()))
-    autorun(lambda: print("selected", date_picker2()))
-    autorun(lambda: print("selected", date_picker3()))
-    autorun(lambda: print("selected", date_picker4()))
-    autorun(lambda: print("selected", date_picker5()))
-
-    return Space(
-        [
-            date_picker1,
-            date_picker2,
-            date_picker3,
-            date_picker4,
-            date_picker5,
-        ],
+    date_picker1 = antd.DatePicker(
+        defaultValue=datetime.datetime.now() + datetime.timedelta(days=7)
+    )
+    date_picker2 = antd.DatePicker(picker="week")
+    date_picker3 = antd.DatePicker(picker="month")
+    date_picker4 = antd.DatePicker(picker="quarter")
+    date_picker5 = antd.DatePicker(picker="year")
+    r.autorun(lambda: print("selected", date_picker1()))
+    r.autorun(lambda: print("selected", date_picker2()))
+    r.autorun(lambda: print("selected", date_picker3()))
+    r.autorun(lambda: print("selected", date_picker4()))
+    r.autorun(lambda: print("selected", date_picker5()))
+    return antd.Space(
+        [date_picker1, date_picker2, date_picker3, date_picker4, date_picker5],
         direction="vertical",
     )

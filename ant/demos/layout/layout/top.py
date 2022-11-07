@@ -1,20 +1,20 @@
-from reflect_html import *
-from reflect_antd import Layout, Menu, Breadcrumb
+import reflect_antd as antd
+import reflect_html as html
 
-Header, Content, Footer = Layout.Header, Layout.Content, Layout.Footer
+Header, Content, Footer = (antd.Layout.Header, antd.Layout.Content, antd.Layout.Footer)
 
 
 def app():
-    return Layout(
+    return antd.Layout(
         [
             Header(
                 [
-                    div(className="logo"),
-                    Menu(
+                    html.div(className="logo"),
+                    antd.Menu(
                         [
-                            Menu.Item("nav 1", key="1"),
-                            Menu.Item("nav 2", key="2"),
-                            Menu.Item("nav 3", key="3"),
+                            antd.Menu.Item("nav 1", key="1"),
+                            antd.Menu.Item("nav 2", key="2"),
+                            antd.Menu.Item("nav 3", key="3"),
                         ],
                         theme="dark",
                         mode="horizontal",
@@ -24,15 +24,15 @@ def app():
             ),
             Content(
                 [
-                    Breadcrumb(
+                    antd.Breadcrumb(
                         [
-                            Breadcrumb.Item("Home"),
-                            Breadcrumb.Item("List"),
-                            Breadcrumb.Item("App"),
+                            antd.Breadcrumb.Item("Home"),
+                            antd.Breadcrumb.Item("List"),
+                            antd.Breadcrumb.Item("App"),
                         ],
                         style=dict(margin="16px 0"),
                     ),
-                    div("Content", className="site-layout-content"),
+                    html.div("Content", className="site-layout-content"),
                 ],
                 style=dict(padding="0 50px"),
             ),

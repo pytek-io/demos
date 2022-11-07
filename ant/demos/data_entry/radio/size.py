@@ -1,36 +1,36 @@
-from reflect_html import *
-from reflect_antd import Radio
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Radio.Group(
+            antd.Radio.Group(
                 [
-                    Radio.Button("Hangzhou", value="a"),
-                    Radio.Button("Shanghai", value="b"),
-                    Radio.Button("Beijing", value="c"),
-                    Radio.Button("Chengdu", value="d"),
+                    antd.Radio.Button("Hangzhou", value="a"),
+                    antd.Radio.Button("Shanghai", value="b"),
+                    antd.Radio.Button("Beijing", value="c"),
+                    antd.Radio.Button("Chengdu", value="d"),
                 ],
                 defaultValue="a",
                 size="large",
             ),
-            Radio.Group(
+            antd.Radio.Group(
                 [
-                    Radio.Button("Hangzhou", value="a"),
-                    Radio.Button("Shanghai", value="b"),
-                    Radio.Button("Beijing", value="c"),
-                    Radio.Button("Chengdu", value="d"),
+                    antd.Radio.Button("Hangzhou", value="a"),
+                    antd.Radio.Button("Shanghai", value="b"),
+                    antd.Radio.Button("Beijing", value="c"),
+                    antd.Radio.Button("Chengdu", value="d"),
                 ],
                 defaultValue="a",
                 style=dict(marginTop=16),
             ),
-            Radio.Group(
+            antd.Radio.Group(
                 [
-                    Radio.Button("Hangzhou", value="a"),
-                    Radio.Button("Shanghai", value="b"),
-                    Radio.Button("Beijing", value="c"),
-                    Radio.Button("Chengdu", value="d"),
+                    antd.Radio.Button("Hangzhou", value="a"),
+                    antd.Radio.Button("Shanghai", value="b"),
+                    antd.Radio.Button("Beijing", value="c"),
+                    antd.Radio.Button("Chengdu", value="d"),
                 ],
                 defaultValue="a",
                 size="small",

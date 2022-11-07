@@ -1,16 +1,16 @@
-from reflect_html import *
-from reflect_antd import Button, notification
-from reflect_ant_icons import SmileOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
     def onClick():
-        notification.open(
+        antd.notification.open(
             {
                 "message": "Notification Title",
                 "description": "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
-                "icon": SmileOutlined(style={"color": "#108ee9"}),
+                "icon": ant_icons.SmileOutlined(style={"color": "#108ee9"}),
             }
         )
 
-    return Button("Open the notification box", type="primary", onClick=onClick)
+    return antd.Button("Open the notification box", type="primary", onClick=onClick)

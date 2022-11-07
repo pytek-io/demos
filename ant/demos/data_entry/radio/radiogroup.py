@@ -1,19 +1,17 @@
-from reflect_html import *
-from reflect_antd import Radio
-
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-
-    result = Radio.Group(
+    result = antd.Radio.Group(
         [
-            Radio("A", value=1),
-            Radio("B", value=2),
-            Radio("C", value=3),
-            Radio("D", value=4),
+            antd.Radio("A", value=1),
+            antd.Radio("B", value=2),
+            antd.Radio("C", value=3),
+            antd.Radio("D", value=4),
         ],
         defaultValue=1,
     )
-    autorun(lambda: print("radio checked", result()))
+    r.autorun(lambda: print("radio checked", result()))
     return result

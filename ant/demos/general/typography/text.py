@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Typography, Space
+import reflect_antd as antd
+import reflect_html as html
 
-Text, Link = Typography.Text, Typography.Link
+Text, Link = antd.Typography.Text, antd.Typography.Link
 
 
 def app():
-    return Space(
+    return antd.Space(
         [
             Text("Ant Design (default)"),
             Text("Ant Design (secondary)", type="secondary"),

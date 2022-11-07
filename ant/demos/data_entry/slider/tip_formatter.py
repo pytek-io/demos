@@ -1,10 +1,11 @@
-from reflect_html import *
-from reflect_antd import Slider
-from reflect import JSMethod
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-
-percent_formatter = JSMethod("percent_formatter", "return `${value}%`", "value")
+percent_formatter = r.JSMethod("percent_formatter", "return `${value}%`", "value")
 
 
 def app():
-    return div([Slider(tipFormatter=percent_formatter, defaultValue=0), Slider()])
+    return html.div(
+        [antd.Slider(tipFormatter=percent_formatter, defaultValue=0), antd.Slider()]
+    )

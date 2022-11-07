@@ -1,47 +1,46 @@
-from reflect_html import *
-from reflect_antd import Row, Col, Divider
+import reflect_antd as antd
+import reflect_html as html
 
 
-class DemoBox(p):
+class DemoBox(html.p):
     JSXName = "p"
 
     def __init__(self, children, value: int, *arg):
-        # kwargs["className"] = f"height-{value}"
         super().__init__(children, *arg)
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Divider("Align Top", orientation="left"),
-            Row(
+            antd.Divider("Align Top", orientation="left"),
+            antd.Row(
                 [
-                    Col(DemoBox("col-4", value=100), span=4),
-                    Col(DemoBox("col-4", value=50), span=4),
-                    Col(DemoBox("col-4", value=120), span=4),
-                    Col(DemoBox("col-4", value=80), span=4),
+                    antd.Col(DemoBox("col-4", value=100), span=4),
+                    antd.Col(DemoBox("col-4", value=50), span=4),
+                    antd.Col(DemoBox("col-4", value=120), span=4),
+                    antd.Col(DemoBox("col-4", value=80), span=4),
                 ],
                 justify="center",
                 align="top",
             ),
-            Divider("Align Middle", orientation="left"),
-            Row(
+            antd.Divider("Align Middle", orientation="left"),
+            antd.Row(
                 [
-                    Col(DemoBox("col-4", value=100), span=4),
-                    Col(DemoBox("col-4", value=50), span=4),
-                    Col(DemoBox("col-4", value=120), span=4),
-                    Col(DemoBox("col-4", value=80), span=4),
+                    antd.Col(DemoBox("col-4", value=100), span=4),
+                    antd.Col(DemoBox("col-4", value=50), span=4),
+                    antd.Col(DemoBox("col-4", value=120), span=4),
+                    antd.Col(DemoBox("col-4", value=80), span=4),
                 ],
                 justify="space-around",
                 align="middle",
             ),
-            Divider("Align Bottom", orientation="left"),
-            Row(
+            antd.Divider("Align Bottom", orientation="left"),
+            antd.Row(
                 [
-                    Col(DemoBox("col-4", value=100), span=4),
-                    Col(DemoBox("col-4", value=50), span=4),
-                    Col(DemoBox("col-4", value=120), span=4),
-                    Col(DemoBox("col-4", value=80), span=4),
+                    antd.Col(DemoBox("col-4", value=100), span=4),
+                    antd.Col(DemoBox("col-4", value=50), span=4),
+                    antd.Col(DemoBox("col-4", value=120), span=4),
+                    antd.Col(DemoBox("col-4", value=80), span=4),
                 ],
                 justify="space-between",
                 align="bottom",

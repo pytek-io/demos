@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Row, Col
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Row(
+    return antd.Row(
         [
-            Col("col-18 col-push-6", span=18, push=6),
-            Col("col-6 col-pull-18", span=6, pull=18),
+            antd.Col("col-18 col-push-6", span=18, push=6),
+            antd.Col("col-6 col-pull-18", span=6, pull=18),
         ]
     )

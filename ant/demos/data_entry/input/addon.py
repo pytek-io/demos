@@ -1,14 +1,14 @@
-from reflect_html import *
-from reflect_antd import Input, Select
-from reflect_ant_icons import SettingOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
-Option = Select.Option
-selectBefore = Select(
+Option = antd.Select.Option
+selectBefore = antd.Select(
     [Option("http://", value="http://"), Option("https://", value="https://")],
     defaultValue="http://",
     className="select-before",
 )
-selectAfter = Select(
+selectAfter = antd.Select(
     [
         Option(".com", value=".com"),
         Option(".jp", value=".jp"),
@@ -21,24 +21,31 @@ selectAfter = Select(
 
 
 def app():
-    return div([
-        div(
-            Input(addonBefore="http://", addonAfter=".com", defaultValue="mysite"),
-            style=dict(marginBottom=16),
-        ),
-        div(
-            Input(
-                addonBefore=selectBefore, addonAfter=selectAfter, defaultValue="mysite"
+    return html.div(
+        [
+            html.div(
+                antd.Input(
+                    addonBefore="http://", addonAfter=".com", defaultValue="mysite"
+                ),
+                style=dict(marginBottom=16),
             ),
-            style=dict(marginBottom=16),
-        ),
-        div(
-            Input(addonAfter=SettingOutlined([]), defaultValue="mysite"),
-            style=dict(marginBottom=16),
-        ),
-        div(
-            Input(addonBefore="http://", suffix=".com", defaultValue="mysite"),
-            style=dict(marginBottom=16),
-        ),
-    ]
-)
+            html.div(
+                antd.Input(
+                    addonBefore=selectBefore,
+                    addonAfter=selectAfter,
+                    defaultValue="mysite",
+                ),
+                style=dict(marginBottom=16),
+            ),
+            html.div(
+                antd.Input(
+                    addonAfter=ant_icons.SettingOutlined([]), defaultValue="mysite"
+                ),
+                style=dict(marginBottom=16),
+            ),
+            html.div(
+                antd.Input(addonBefore="http://", suffix=".com", defaultValue="mysite"),
+                style=dict(marginBottom=16),
+            ),
+        ]
+    )

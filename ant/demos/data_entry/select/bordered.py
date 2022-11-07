@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_antd import Select
+import reflect_antd as antd
+import reflect_html as html
 
-Option = Select.Option
+Option = antd.Select.Option
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Select(
+            antd.Select(
                 [
                     Option("Jack", value="jack"),
                     Option("Lucy", value="lucy"),
@@ -17,7 +17,7 @@ def app():
                 style=dict(width=120),
                 bordered=False,
             ),
-            Select(
+            antd.Select(
                 Option("Lucy", value="lucy"),
                 defaultValue="lucy",
                 style=dict(width=120),

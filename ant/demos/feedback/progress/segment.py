@@ -1,20 +1,20 @@
-from reflect_html import *
-from reflect_antd import Tooltip, Progress
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Tooltip(
-                Progress(percent=60, success=dict(percent=30)),
+            antd.Tooltip(
+                antd.Progress(percent=60, success=dict(percent=30)),
                 title="3 done / 3 in progress / 4 to do",
             ),
-            Tooltip(
-                Progress(percent=60, success=dict(percent=30), type="circle"),
+            antd.Tooltip(
+                antd.Progress(percent=60, success=dict(percent=30), type="circle"),
                 title="3 done / 3 in progress / 4 to do",
             ),
-            Tooltip(
-                Progress(percent=60, success=dict(percent=30), type="dashboard"),
+            antd.Tooltip(
+                antd.Progress(percent=60, success=dict(percent=30), type="dashboard"),
                 title="3 done / 3 in progress / 4 to do",
             ),
         ]

@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_antd import Typography, Switch
-from reflect import create_observable
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-Paragraph, Text = Typography.Paragraph, Typography.Text
+Paragraph, Text = antd.Typography.Paragraph, antd.Typography.Text
 
 
 def app():
-    ellipsis = Switch(defaultChecked=True)
-    return div(
+    ellipsis = antd.Switch(defaultChecked=True)
+    return html.div(
         [
             ellipsis,
             Paragraph(
@@ -16,11 +16,9 @@ def app():
             ),
             Paragraph(
                 "Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team.",
-                ellipsis=lambda: (
-                    {"rows": 2, "expandable": True, "symbol": "more"}
-                    if ellipsis()
-                    else False
-                ),
+                ellipsis=lambda: {"rows": 2, "expandable": True, "symbol": "more"}
+                if ellipsis()
+                else False,
             ),
             Text(
                 "Ant Design, a design language for background applications, is refined by Ant UED Team.",

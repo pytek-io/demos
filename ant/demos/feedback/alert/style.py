@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_antd import Alert
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Alert(message="Success Text", type="success"),
-            Alert(message="Info Text", type="info"),
-            Alert(message="Warning Text", type="warning"),
-            Alert(message="Error Text", type="error"),
+            antd.Alert(message="Success Text", type="success"),
+            antd.Alert(message="Info Text", type="info"),
+            antd.Alert(message="Warning Text", type="warning"),
+            antd.Alert(message="Error Text", type="error"),
         ]
     )

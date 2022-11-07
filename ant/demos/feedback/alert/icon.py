@@ -1,34 +1,34 @@
-from reflect_html import *
-from reflect_antd import Alert
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Alert(message="Success Tips", type="success", showIcon=True),
-            Alert(message="Informational Notes", type="info", showIcon=True),
-            Alert(message="Warning", type="warning", showIcon=True, closable=True),
-            Alert(message="Error", type="error", showIcon=True),
-            Alert(
+            antd.Alert(message="Success Tips", type="success", showIcon=True),
+            antd.Alert(message="Informational Notes", type="info", showIcon=True),
+            antd.Alert(message="Warning", type="warning", showIcon=True, closable=True),
+            antd.Alert(message="Error", type="error", showIcon=True),
+            antd.Alert(
                 message="Success Tips",
                 description="Detailed description and advice about successful copywriting.",
                 type="success",
                 showIcon=True,
             ),
-            Alert(
+            antd.Alert(
                 message="Informational Notes",
                 description="Additional description and information about copywriting.",
                 type="info",
                 showIcon=True,
             ),
-            Alert(
+            antd.Alert(
                 message="Warning",
                 description="This is a warning notice about copywriting.",
                 type="warning",
                 showIcon=True,
                 closable=True,
             ),
-            Alert(
+            antd.Alert(
                 message="Error",
                 description="This is an error message about copywriting.",
                 type="error",

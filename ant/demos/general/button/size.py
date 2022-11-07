@@ -1,18 +1,17 @@
-from reflect_html import *
-from reflect_antd import Button, Radio
-from reflect_ant_icons import DownloadOutlined
-from reflect import autorun
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-
-    size = Radio.Group(
+    size = antd.Radio.Group(
         [
-            Radio.Button("Large", value="large"),
-            Radio.Button("Default", value="default"),
-            Radio.Button("Small", value="small"),
+            antd.Radio.Button("Large", value="large"),
+            antd.Radio.Button("Default", value="default"),
+            antd.Radio.Button("Small", value="small"),
         ],
         defaultValue="small",
     )
-    autorun(lambda: print(size()))
-    return div([size, Button("Primary", type="primary", size=size)])
+    r.autorun(lambda: print(size()))
+    return html.div([size, antd.Button("Primary", type="primary", size=size)])

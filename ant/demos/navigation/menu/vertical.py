@@ -1,63 +1,63 @@
-from reflect_html import *
-from reflect_antd import Menu
-from reflect_ant_icons import MailOutlined, AppstoreOutlined, SettingOutlined
-from reflect import Callback
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Menu(
+    return antd.Menu(
         [
-            Menu.SubMenu(
+            antd.Menu.SubMenu(
                 [
-                    Menu.ItemGroup(
+                    antd.Menu.ItemGroup(
                         [
-                            Menu.Item("Option 1", key="1"),
-                            Menu.Item("Option 2", key="2"),
+                            antd.Menu.Item("Option 1", key="1"),
+                            antd.Menu.Item("Option 2", key="2"),
                         ],
                         title="Item 1",
                     ),
-                    Menu.ItemGroup(
+                    antd.Menu.ItemGroup(
                         [
-                            Menu.Item("Option 3", key="3"),
-                            Menu.Item("Option 4", key="4"),
+                            antd.Menu.Item("Option 3", key="3"),
+                            antd.Menu.Item("Option 4", key="4"),
                         ],
                         title="Item 2",
                     ),
                 ],
                 key="sub1",
-                icon=MailOutlined(),
+                icon=ant_icons.MailOutlined(),
                 title="Navigation One",
             ),
-            Menu.SubMenu(
+            antd.Menu.SubMenu(
                 [
-                    Menu.Item("Option 5", key="5"),
-                    Menu.Item("Option 6", key="6"),
-                    Menu.SubMenu(
+                    antd.Menu.Item("Option 5", key="5"),
+                    antd.Menu.Item("Option 6", key="6"),
+                    antd.Menu.SubMenu(
                         [
-                            Menu.Item("Option 7", key="7"),
-                            Menu.Item("Option 8", key="8"),
+                            antd.Menu.Item("Option 7", key="7"),
+                            antd.Menu.Item("Option 8", key="8"),
                         ],
                         key="sub3",
                         title="Submenu",
                     ),
                 ],
                 key="sub2",
-                icon=AppstoreOutlined(),
+                icon=ant_icons.AppstoreOutlined(),
                 title="Navigation Two",
             ),
-            Menu.SubMenu(
+            antd.Menu.SubMenu(
                 [
-                    Menu.Item("Option 9", key="9"),
-                    Menu.Item("Option 10", key="10"),
-                    Menu.Item("Option 11", key="11"),
-                    Menu.Item("Option 12", key="12"),
+                    antd.Menu.Item("Option 9", key="9"),
+                    antd.Menu.Item("Option 10", key="10"),
+                    antd.Menu.Item("Option 11", key="11"),
+                    antd.Menu.Item("Option 12", key="12"),
                 ],
                 key="sub4",
-                icon=SettingOutlined(),
+                icon=ant_icons.SettingOutlined(),
                 title="Navigation Three",
             ),
         ],
-        onClick=Callback(lambda key: print(f"clicked {key}"), args="key"),
+        onClick=r.Callback(lambda key: print(f"clicked {key}"), args="key"),
         style=dict(width=256),
         mode="vertical",
     )

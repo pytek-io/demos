@@ -1,14 +1,12 @@
-from reflect_html import *
-from reflect_antd import AutoComplete, Input
-from reflect import create_observable, autorun
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-TextArea = Input.TextArea
+TextArea = antd.Input.TextArea
 
 
 def app():
-
-    options = create_observable([])
+    options = r.create_observable([])
 
     def handleSearch(value: str):
         options.extend(
@@ -33,12 +31,12 @@ def app():
         style=dict(height=50),
         onKeyPress=handleKeyPress,
     )
-    result = AutoComplete(
+    result = antd.AutoComplete(
         text_area,
         options=options,
         style=dict(width=200),
-        onSelect=Callback(onSelect),
-        onSearch=Callback(handleSearch),
+        onSelect=r.Callback(onSelect),
+        onSearch=r.Callback(handleSearch),
     )
-    autorun(lambda: print(result()))
+    r.autorun(lambda: print(result()))
     return result

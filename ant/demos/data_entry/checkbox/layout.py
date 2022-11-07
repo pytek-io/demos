@@ -1,22 +1,20 @@
-from reflect_html import *
-from reflect_antd import Checkbox, Row, Col
-
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-
-    check_box_group = Checkbox.Group(
-        Row(
+    check_box_group = antd.Checkbox.Group(
+        antd.Row(
             [
-                Col(Checkbox("A", key="A"), span=8),
-                Col(Checkbox("B", key="B"), span=8),
-                Col(Checkbox("C", key="C"), span=8),
-                Col(Checkbox("D", key="D"), span=8),
-                Col(Checkbox("E", key="E"), span=8),
+                antd.Col(antd.Checkbox("A", key="A"), span=8),
+                antd.Col(antd.Checkbox("B", key="B"), span=8),
+                antd.Col(antd.Checkbox("C", key="C"), span=8),
+                antd.Col(antd.Checkbox("D", key="D"), span=8),
+                antd.Col(antd.Checkbox("E", key="E"), span=8),
             ]
         ),
         style=dict(width="100%"),
     )
-    autorun(lambda: print("checked = ", check_box_group()))
+    r.autorun(lambda: print("checked = ", check_box_group()))
     return check_box_group

@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_antd import Slider, Switch
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    reverse_switch = Switch(size="small")
-    return div(
+    reverse_switch = antd.Switch(size="small")
+    return html.div(
         [
-            Slider(defaultValue=30, reverse=reverse_switch),
-            Slider(range=True, defaultValue=[20, 50], reverse=reverse_switch),
+            antd.Slider(defaultValue=30, reverse=reverse_switch),
+            antd.Slider(range=True, defaultValue=[20, 50], reverse=reverse_switch),
             "Reversed: ",
             reverse_switch,
         ]

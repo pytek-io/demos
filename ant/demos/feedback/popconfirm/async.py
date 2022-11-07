@@ -1,12 +1,11 @@
-from reflect_html import *
-from reflect_antd import Popconfirm, Button
-from reflect import create_observable
-from reflect import schedule_callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    visible = create_observable(False)
-    confirmLoading = create_observable(False)
+    visible = r.create_observable(False)
+    confirmLoading = r.create_observable(False)
 
     def showPopconfirm():
         visible.set(True)
@@ -17,14 +16,14 @@ def app():
 
     def handleOk():
         confirmLoading.set(True)
-        schedule_callback(2, deferred)
+        r.schedule_callback(2, deferred)
 
     def handleCancel():
         print("Clicked cancel button")
         visible.set(False)
 
-    return Popconfirm(
-        Button(
+    return antd.Popconfirm(
+        antd.Button(
             "Open Popconfirm with async logic", type="primary", onClick=showPopconfirm
         ),
         title="Title",

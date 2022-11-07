@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_antd import Divider
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Divider(type="vertical"),
-            a("Link", href="#"),
-            Divider(type="vertical"),
-            a("Link", href="#"),
+            antd.Divider(type="vertical"),
+            html.a("Link", href="#"),
+            antd.Divider(type="vertical"),
+            html.a("Link", href="#"),
         ]
     )

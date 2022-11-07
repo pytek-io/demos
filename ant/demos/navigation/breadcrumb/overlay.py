@@ -1,26 +1,26 @@
-from reflect_html import *
-from reflect_antd import Breadcrumb, Menu
+import reflect_antd as antd
+import reflect_html as html
 
-menu = Menu(
+menu = antd.Menu(
     [
-        Menu.Item(
-            a(
+        antd.Menu.Item(
+            html.a(
                 "General",
                 target="_blank",
                 rel="noopener noreferrer",
                 href="http://www.alipay.com/",
             )
         ),
-        Menu.Item(
-            a(
+        antd.Menu.Item(
+            html.a(
                 "Layout",
                 target="_blank",
                 rel="noopener noreferrer",
                 href="http://www.taobao.com/",
             )
         ),
-        Menu.Item(
-            a(
+        antd.Menu.Item(
+            html.a(
                 "Navigation",
                 target="_blank",
                 rel="noopener noreferrer",
@@ -32,11 +32,11 @@ menu = Menu(
 
 
 def app():
-    return Breadcrumb(
+    return antd.Breadcrumb(
         [
-            Breadcrumb.Item("Ant Design"),
-            Breadcrumb.Item(a("Component", href="")),
-            Breadcrumb.Item(a("General", href=""), overlay=menu),
-            Breadcrumb.Item("Button"),
+            antd.Breadcrumb.Item("Ant Design"),
+            antd.Breadcrumb.Item(html.a("Component", href="")),
+            antd.Breadcrumb.Item(html.a("General", href=""), overlay=menu),
+            antd.Breadcrumb.Item("Button"),
         ]
     )

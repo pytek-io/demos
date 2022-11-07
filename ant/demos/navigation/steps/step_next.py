@@ -1,53 +1,42 @@
-from reflect_html import *
-from reflect_antd import Steps, Button, Space
-from reflect import create_observable
-from reflect_utils import increment_observable_bounded
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
+import reflect_utils
 
-
-Step = Steps.Step
-
+Step = antd.Steps.Step
 steps = [
-    {
-        "title": "First",
-        "content": "First-content",
-    },
-    {
-        "title": "Second",
-        "content": "Second-content",
-    },
-    {
-        "title": "Last",
-        "content": "Last-content",
-    },
+    {"title": "First", "content": "First-content"},
+    {"title": "Second", "content": "Second-content"},
+    {"title": "Last", "content": "Last-content"},
 ]
 
 
 def app():
-    current = create_observable(0)
-    return Space(
+    current = r.create_observable(0)
+    return antd.Space(
         [
-            Steps(
+            antd.Steps(
                 [Step(key=item["title"], title=item["title"]) for item in steps],
                 current=current,
             ),
-            # rmk: notice how we differ content evaluation to avoid recomputing the whole method
-            div(
-                lambda: steps[current()]["content"],
-                className="steps-content",
-            ),
-            Space(
+            html.div(lambda: steps[current()]["content"], className="steps-content"),
+            antd.Space(
                 [
-                    Button(
+                    antd.Button(
                         "Previous",
                         type="primary",
-                        onClick=increment_observable_bounded(current, 0, len(steps) - 1, -1),
+                        onClick=reflect_utils.increment_observable_bounded(
+                            current, 0, len(steps) - 1, -1
+                        ),
                     ),
-                    Button(
+                    antd.Button(
                         "Next",
                         type="primary",
-                        onClick=increment_observable_bounded(current, 0, len(steps) - 1, 1),
+                        onClick=reflect_utils.increment_observable_bounded(
+                            current, 0, len(steps) - 1, 1
+                        ),
                     ),
-                    Button(
+                    antd.Button(
                         "Done",
                         type="primary",
                         onClick=lambda: print("Processing complete!"),
@@ -58,5 +47,4 @@ def app():
         ],
         direction="vertical",
     )
-
     return result

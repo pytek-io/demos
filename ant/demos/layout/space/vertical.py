@@ -1,20 +1,20 @@
-from reflect_html import *
-from reflect_antd import Space, Card
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return  Space(
-            [
-                Card(
-                    [p("Card content"), p("Card content")],
-                    title="Card",
-                    style=dict(width=300),
-                ),
-                Card(
-                    [p("Card content"), p("Card content")],
-                    title="Card",
-                    style=dict(width=300),
-                ),
-            ],
-            direction="vertical",
-        )
+    return antd.Space(
+        [
+            antd.Card(
+                [html.p("Card content"), html.p("Card content")],
+                title="Card",
+                style=dict(width=300),
+            ),
+            antd.Card(
+                [html.p("Card content"), html.p("Card content")],
+                title="Card",
+                style=dict(width=300),
+            ),
+        ],
+        direction="vertical",
+    )

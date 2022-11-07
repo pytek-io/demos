@@ -1,7 +1,6 @@
-from reflect_html import *
-from reflect_antd import Cascader
-
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 options = [
     {
@@ -30,6 +29,6 @@ options = [
 
 
 def app():
-    result = Cascader(options=options, placeholder="Please select")
-    autorun(lambda: print("changed", result()))
+    result = antd.Cascader(options=options, placeholder="Please select")
+    r.autorun(lambda: print("changed", result()))
     return result

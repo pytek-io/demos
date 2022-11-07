@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Pagination
+import reflect_antd as antd
+import reflect_html as html
 
 
 def showTotal():
@@ -7,22 +7,17 @@ def showTotal():
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Pagination(size="small", total=50),
-            Pagination(
+            antd.Pagination(size="small", total=50),
+            antd.Pagination(
                 size="small", total=50, showSizeChanger=True, showQuickJumper=True
             ),
-            Pagination(
-                size="small",
-                total=50,
-                # showTotal=showTotal
-            ),
-            Pagination(
+            antd.Pagination(size="small", total=50),
+            antd.Pagination(
                 size="small",
                 total=50,
                 disabled=True,
-                # showTotal=showTotal,
                 showSizeChanger=True,
                 showQuickJumper=True,
             ),

@@ -1,41 +1,31 @@
-from reflect_html import *
-from reflect_antd import DatePicker, Space
-from reflect_ant_icons import SmileOutlined
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
-from reflect import autorun
-
-RangePicker = DatePicker.RangePicker
+RangePicker = antd.DatePicker.RangePicker
 
 
 def app():
-    smileIcon = SmileOutlined()
-    picker1 = DatePicker(suffixIcon=smileIcon)
-    picker2 = DatePicker(suffixIcon=smileIcon, picker="month")
+    smileIcon = ant_icons.SmileOutlined()
+    picker1 = antd.DatePicker(suffixIcon=smileIcon)
+    picker2 = antd.DatePicker(suffixIcon=smileIcon, picker="month")
     picker3 = RangePicker(suffixIcon=smileIcon)
-    picker4 = DatePicker(suffixIcon=smileIcon, picker="week")
-    picker5 = DatePicker(suffixIcon="ab")
-    picker6 = DatePicker(suffixIcon="ab", picker="month")
-    picker7 = DatePicker(suffixIcon="ab")
-    picker8 = DatePicker(suffixIcon="ab", picker="week")
-    autorun(lambda: print("date picker1", picker1()))
-    autorun(lambda: print("date picker2", picker2()))
-    autorun(lambda: print("date picker3", picker3()))
-    autorun(lambda: print("date picker4", picker4()))
-    autorun(lambda: print("date picker5", picker5()))
-    autorun(lambda: print("date picker6", picker6()))
-    autorun(lambda: print("date picker7", picker7()))
-    autorun(lambda: print("date picker8", picker8()))
-    return Space(
-        [
-            picker1,
-            picker2,
-            picker3,
-            picker4,
-            picker5,
-            picker6,
-            picker7,
-            picker8,
-        ],
+    picker4 = antd.DatePicker(suffixIcon=smileIcon, picker="week")
+    picker5 = antd.DatePicker(suffixIcon="ab")
+    picker6 = antd.DatePicker(suffixIcon="ab", picker="month")
+    picker7 = antd.DatePicker(suffixIcon="ab")
+    picker8 = antd.DatePicker(suffixIcon="ab", picker="week")
+    r.autorun(lambda: print("date picker1", picker1()))
+    r.autorun(lambda: print("date picker2", picker2()))
+    r.autorun(lambda: print("date picker3", picker3()))
+    r.autorun(lambda: print("date picker4", picker4()))
+    r.autorun(lambda: print("date picker5", picker5()))
+    r.autorun(lambda: print("date picker6", picker6()))
+    r.autorun(lambda: print("date picker7", picker7()))
+    r.autorun(lambda: print("date picker8", picker8()))
+    return antd.Space(
+        [picker1, picker2, picker3, picker4, picker5, picker6, picker7, picker8],
         direction="vertical",
         size=12,
     )

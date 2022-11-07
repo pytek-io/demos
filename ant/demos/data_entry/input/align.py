@@ -1,24 +1,9 @@
-from reflect_html import *
-from reflect_antd import (
-    Typography,
-    Button,
-    Input,
-    Select,
-    Cascader,
-    TreeSelect,
-    DatePicker,
-    TimePicker,
-    InputNumber,
-    Radio,
-    AutoComplete,
-    Mentions,
-)
+import reflect_antd as antd
+import reflect_html as html
 
-Text = Typography.Text
-Option = Select.Option
-RangePicker = DatePicker.RangePicker
-
-
+Text = antd.Typography.Text
+Option = antd.Select.Option
+RangePicker = antd.DatePicker.RangePicker
 options = [
     {
         "value": "zhejiang",
@@ -43,26 +28,23 @@ options = [
         ],
     },
 ]
-
-narrowStyle = {
-    "width": 50,
-}
+narrowStyle = {"width": 50}
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Mentions(style=dict(width=100), rows=1),
-            Input.TextArea(rows=1, style=dict(width=100)),
-            Button("Button", type="primary"),
-            Input(style=dict(width=100)),
+            antd.Mentions(style=dict(width=100), rows=1),
+            antd.Input.TextArea(rows=1, style=dict(width=100)),
+            antd.Button("Button", type="primary"),
+            antd.Input(style=dict(width=100)),
             Text("Ant Design", copyable=True),
-            Input(prefix="1", suffix="2", style=dict(width=100)),
-            Input(addonBefore="1", addonAfter="2", style=dict(width=100)),
-            InputNumber(style=dict(width=100)),
-            DatePicker(style=dict(width=100)),
-            TimePicker(style=dict(width=100)),
-            Select(
+            antd.Input(prefix="1", suffix="2", style=dict(width=100)),
+            antd.Input(addonBefore="1", addonAfter="2", style=dict(width=100)),
+            antd.InputNumber(style=dict(width=100)),
+            antd.DatePicker(style=dict(width=100)),
+            antd.TimePicker(style=dict(width=100)),
+            antd.Select(
                 [
                     Option("Jack", value="jack"),
                     Option("Lucy", value="lucy"),
@@ -72,27 +54,29 @@ def app():
                 style=dict(width=100),
                 defaultValue="jack",
             ),
-            TreeSelect(style=dict(width=100)),
-            Cascader(defaultValue=["zhejiang", "hangzhou", "xihu"], options=options),
+            antd.TreeSelect(style=dict(width=100)),
+            antd.Cascader(
+                defaultValue=["zhejiang", "hangzhou", "xihu"], options=options
+            ),
             RangePicker(),
-            DatePicker(picker="month"),
-            Radio.Group(
+            antd.DatePicker(picker="month"),
+            antd.Radio.Group(
                 [
-                    Radio.Button("Hangzhou", value="a"),
-                    Radio.Button("Shanghai", value="b"),
+                    antd.Radio.Button("Hangzhou", value="a"),
+                    antd.Radio.Button("Shanghai", value="b"),
                 ],
                 defaultValue="a",
             ),
-            AutoComplete(style=dict(width=100), placeholder="input here"),
-            br(),
-            Input(
+            antd.AutoComplete(style=dict(width=100), placeholder="input here"),
+            html.br(),
+            antd.Input(
                 prefix="$",
                 addonBefore="Http://",
                 addonAfter=".com",
                 defaultValue="mysite",
             ),
-            Input(style=narrowStyle, suffix="Y"),
-            Input(style=narrowStyle),
-            Input(style=narrowStyle, defaultValue="1", suffix="Y"),
+            antd.Input(style=narrowStyle, suffix="Y"),
+            antd.Input(style=narrowStyle),
+            antd.Input(style=narrowStyle, defaultValue="1", suffix="Y"),
         ]
     )

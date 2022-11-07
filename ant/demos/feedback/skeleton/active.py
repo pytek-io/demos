@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Skeleton
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Skeleton(active=True)
+    return antd.Skeleton(active=True)

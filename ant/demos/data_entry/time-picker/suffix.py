@@ -1,15 +1,14 @@
-from reflect_html import *
-from reflect_antd import TimePicker
-from reflect_ant_icons import SmileOutlined
+import datetime
 
-from reflect import autorun
-from datetime import time
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    time_picker = TimePicker(
-        suffixIcon=SmileOutlined([]),
-        defaultValue=time(0, 0, 0),
+    time_picker = antd.TimePicker(
+        suffixIcon=ant_icons.SmileOutlined([]), defaultValue=datetime.time(0, 0, 0)
     )
-    autorun(lambda: print(time_picker()))
+    r.autorun(lambda: print(time_picker()))
     return time_picker

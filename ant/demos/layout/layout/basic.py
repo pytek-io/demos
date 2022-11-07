@@ -1,36 +1,38 @@
-from reflect_antd import Layout
-from reflect_html import div
+import reflect_antd as antd
+import reflect_html as html
 
 Header, Footer, Sider, Content = (
-    Layout.Header,
-    Layout.Footer,
-    Layout.Sider,
-    Layout.Content,
+    antd.Layout.Header,
+    antd.Layout.Footer,
+    antd.Layout.Sider,
+    antd.Layout.Content,
 )
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Layout([Header("Header"), Content("Content"), Footer("Footer")]),
-            Layout(
+            antd.Layout([Header("Header"), Content("Content"), Footer("Footer")]),
+            antd.Layout(
                 [
                     Header("Header"),
-                    Layout([Sider("Sider"), Content("Content")]),
+                    antd.Layout([Sider("Sider"), Content("Content")]),
                     Footer("Footer"),
                 ]
             ),
-            Layout(
+            antd.Layout(
                 [
                     Header("Header"),
-                    Layout([Content("Content"), Sider("Sider")]),
+                    antd.Layout([Content("Content"), Sider("Sider")]),
                     Footer("Footer"),
                 ]
             ),
-            Layout(
+            antd.Layout(
                 [
                     Sider("Sider"),
-                    Layout([Header("Header"), Content("Content"), Footer("Footer")]),
+                    antd.Layout(
+                        [Header("Header"), Content("Content"), Footer("Footer")]
+                    ),
                 ]
             ),
         ]

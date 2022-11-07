@@ -1,25 +1,29 @@
-from reflect_html import *
-from reflect_antd import Progress, Button
-from reflect_ant_icons import MinusOutlined, PlusOutlined
-from reflect import create_observable, autorun
-from reflect_utils import increment_observable_bounded
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
+import reflect_utils
 
 
 def app():
-    percent = create_observable(0)
-    autorun(lambda: print("percent", percent()))
-    return div(
+    percent = r.create_observable(0)
+    r.autorun(lambda: print("percent", percent()))
+    return html.div(
         [
-            Progress(type="circle", percent=percent),
-            Button.Group(
+            antd.Progress(type="circle", percent=percent),
+            antd.Button.Group(
                 [
-                    Button(
-                        onClick=increment_observable_bounded(percent, 0, 100, -10),
-                        icon=MinusOutlined([]),
+                    antd.Button(
+                        onClick=reflect_utils.increment_observable_bounded(
+                            percent, 0, 100, -10
+                        ),
+                        icon=ant_icons.MinusOutlined([]),
                     ),
-                    Button(
-                        onClick=increment_observable_bounded(percent, 0, 100, 10),
-                        icon=PlusOutlined([]),
+                    antd.Button(
+                        onClick=reflect_utils.increment_observable_bounded(
+                            percent, 0, 100, 10
+                        ),
+                        icon=ant_icons.PlusOutlined([]),
                     ),
                 ]
             ),

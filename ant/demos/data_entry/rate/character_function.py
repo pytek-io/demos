@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_antd import Rate
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Rate(defaultValue=2, character=js("index_plus_one")),
-            br(),
-            Rate(defaultValue=3, character=js("custom_icons")),
+            antd.Rate(defaultValue=2, character=r.js("index_plus_one")),
+            html.br(),
+            antd.Rate(defaultValue=3, character=r.js("custom_icons")),
         ]
     )

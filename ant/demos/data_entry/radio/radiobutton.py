@@ -1,6 +1,5 @@
-from reflect_html import *
-from reflect_antd import Radio
-
+import reflect_antd as antd
+import reflect_html as html
 
 
 def onChange(value):
@@ -8,39 +7,40 @@ def onChange(value):
 
 
 def app():
-    return div([
-        Radio.Group(
-            [
-                Radio.Button("Hangzhou", value="a"),
-                Radio.Button("Shanghai", value="b"),
-                Radio.Button("Beijing", value="c"),
-                Radio.Button("Chengdu", value="d"),
-            ],
-            onChange=onChange,
-            defaultValue="a",
-        ),
-        Radio.Group(
-            [
-                Radio.Button("Hangzhou", value="a"),
-                Radio.Button("Shanghai", value="b", disabled=True),
-                Radio.Button("Beijing", value="c"),
-                Radio.Button("Chengdu", value="d"),
-            ],
-            onChange=onChange,
-            defaultValue="a",
-            style=dict(marginTop=16),
-        ),
-        Radio.Group(
-            [
-                Radio.Button("Hangzhou", value="a"),
-                Radio.Button("Shanghai", value="b"),
-                Radio.Button("Beijing", value="c"),
-                Radio.Button("Chengdu", value="d"),
-            ],
-            disabled=True,
-            onChange=onChange,
-            defaultValue="a",
-            style=dict(marginTop=16),
-        ),
-    ]
-)
+    return html.div(
+        [
+            antd.Radio.Group(
+                [
+                    antd.Radio.Button("Hangzhou", value="a"),
+                    antd.Radio.Button("Shanghai", value="b"),
+                    antd.Radio.Button("Beijing", value="c"),
+                    antd.Radio.Button("Chengdu", value="d"),
+                ],
+                onChange=onChange,
+                defaultValue="a",
+            ),
+            antd.Radio.Group(
+                [
+                    antd.Radio.Button("Hangzhou", value="a"),
+                    antd.Radio.Button("Shanghai", value="b", disabled=True),
+                    antd.Radio.Button("Beijing", value="c"),
+                    antd.Radio.Button("Chengdu", value="d"),
+                ],
+                onChange=onChange,
+                defaultValue="a",
+                style=dict(marginTop=16),
+            ),
+            antd.Radio.Group(
+                [
+                    antd.Radio.Button("Hangzhou", value="a"),
+                    antd.Radio.Button("Shanghai", value="b"),
+                    antd.Radio.Button("Beijing", value="c"),
+                    antd.Radio.Button("Chengdu", value="d"),
+                ],
+                disabled=True,
+                onChange=onChange,
+                defaultValue="a",
+                style=dict(marginTop=16),
+            ),
+        ]
+    )

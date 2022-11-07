@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import DatePicker, Space
+import reflect_antd as antd
+import reflect_html as html
 
-RangePicker = DatePicker.RangePicker
+RangePicker = antd.DatePicker.RangePicker
 
 
 def app():
-    return Space(
+    return antd.Space(
         [
             RangePicker(),
             RangePicker(showTime=True),

@@ -1,10 +1,9 @@
-from reflect_html import *
-from reflect_antd import Checkbox
-
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    check_box = Checkbox("Check me!", defaultChecked=True)
-    autorun(lambda: print(f"checked {check_box()}"))
+    check_box = antd.Checkbox("Check me!", defaultChecked=True)
+    r.autorun(lambda: print(f"checked {check_box()}"))
     return check_box

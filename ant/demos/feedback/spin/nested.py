@@ -1,25 +1,20 @@
-from reflect_html import *
-from reflect_antd import Spin, Switch, Alert
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
+
 
 def app():
-    loading = Switch(defaultChecked=False)
-    return div(
+    loading = antd.Switch(defaultChecked=False)
+    return html.div(
         [
-            Spin(
-                Alert(
+            antd.Spin(
+                antd.Alert(
                     message="Alert message title",
                     description="Further details about the context of this alert.",
                     type="info",
                 ),
                 spinning=loading,
             ),
-            div(
-                [
-                    "Loading state：",
-                    loading,
-                ],
-                style=dict(marginTop=16),
-            ),
+            html.div(["Loading state：", loading], style=dict(marginTop=16)),
         ]
     )

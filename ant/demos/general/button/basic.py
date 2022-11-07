@@ -1,13 +1,15 @@
-from reflect_html import div, br
-from reflect_antd import Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div([
-        Button("Primary Button", type="primary"),
-        Button("Default Button"),
-        Button("Dashed Button", type="dashed"),
-        br(),
-        Button("Text Button", type="text"),
-        Button("Link Button", type="link"),
-    ])
+    return html.div(
+        [
+            antd.Button("Primary Button", type="primary"),
+            antd.Button("Default Button"),
+            antd.Button("Dashed Button", type="dashed"),
+            html.br(),
+            antd.Button("Text Button", type="text"),
+            antd.Button("Link Button", type="link"),
+        ]
+    )

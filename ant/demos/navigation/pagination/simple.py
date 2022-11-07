@@ -1,10 +1,12 @@
-from reflect_html import *
-from reflect_antd import Pagination
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div([
-        Pagination(simple=True, defaultCurrent=2, total=50),
-        br(),
-        Pagination(disabled=True, simple=True, defaultCurrent=2, total=50),
-    ])
+    return html.div(
+        [
+            antd.Pagination(simple=True, defaultCurrent=2, total=50),
+            html.br(),
+            antd.Pagination(disabled=True, simple=True, defaultCurrent=2, total=50),
+        ]
+    )

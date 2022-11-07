@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Steps
+import reflect_antd as antd
+import reflect_html as html
 
-Step = Steps.Step
+Step = antd.Steps.Step
 
 
 def app():
-    return Steps(
+    return antd.Steps(
         [
             Step(title="Finished", description="This is a description."),
             Step(title="In Progress", description="This is a description."),

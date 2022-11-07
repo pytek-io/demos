@@ -1,7 +1,7 @@
-from reflect_html import *
-from reflect_antd import Spin
-from reflect_ant_icons import LoadingOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Spin(indicator=LoadingOutlined(style={"fontSize": 24}))
+    return antd.Spin(indicator=ant_icons.LoadingOutlined(style={"fontSize": 24}))

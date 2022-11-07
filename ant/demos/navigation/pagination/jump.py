@@ -1,7 +1,6 @@
-from reflect_html import *
-from reflect_antd import Pagination
-
-from reflect import autorun
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def onChange(pageNumber):
@@ -9,13 +8,10 @@ def onChange(pageNumber):
 
 
 def app():
-    pagination1 = Pagination(showQuickJumper=True, defaultCurrent=2, total=500)
-    autorun(lambda: print("Page: ", pagination1()))
-    pagination2 = Pagination(
-        showQuickJumper=True,
-        defaultCurrent=2,
-        total=500,
-        disabled=True,
+    pagination1 = antd.Pagination(showQuickJumper=True, defaultCurrent=2, total=500)
+    r.autorun(lambda: print("Page: ", pagination1()))
+    pagination2 = antd.Pagination(
+        showQuickJumper=True, defaultCurrent=2, total=500, disabled=True
     )
-    autorun(lambda: print("Page: ", pagination2()))
-    return div([pagination1, br(), pagination2])
+    r.autorun(lambda: print("Page: ", pagination2()))
+    return html.div([pagination1, html.br(), pagination2])

@@ -1,9 +1,9 @@
-from reflect_html import *
-from reflect_antd import PageHeader
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return PageHeader(
+    return antd.PageHeader(
         className="site-page-header",
         onBack=lambda: None,
         title="Title",

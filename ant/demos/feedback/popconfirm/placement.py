@@ -1,35 +1,35 @@
-from reflect_html import *
-from reflect_antd import Popconfirm, message, Button
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
     text = "Are you sure to delete this task?"
 
     def confirm():
-        message.info("Clicked on Yes.")
+        antd.message.info("Clicked on Yes.")
 
-    return div(
+    return html.div(
         [
-            div(
+            html.div(
                 [
-                    Popconfirm(
-                        Button("TL"),
+                    antd.Popconfirm(
+                        antd.Button("TL"),
                         placement="topLeft",
                         title=text,
                         onConfirm=confirm,
                         okText="Yes",
                         cancelText="No",
                     ),
-                    Popconfirm(
-                        Button("Top"),
+                    antd.Popconfirm(
+                        antd.Button("Top"),
                         placement="top",
                         title=text,
                         onConfirm=confirm,
                         okText="Yes",
                         cancelText="No",
                     ),
-                    Popconfirm(
-                        Button("TR"),
+                    antd.Popconfirm(
+                        antd.Button("TR"),
                         placement="topRight",
                         title=text,
                         onConfirm=confirm,
@@ -39,26 +39,26 @@ def app():
                 ],
                 style=dict(marginLeft=70, whiteSpace="nowrap"),
             ),
-            div(
+            html.div(
                 [
-                    Popconfirm(
-                        Button("LT"),
+                    antd.Popconfirm(
+                        antd.Button("LT"),
                         placement="leftTop",
                         title=text,
                         onConfirm=confirm,
                         okText="Yes",
                         cancelText="No",
                     ),
-                    Popconfirm(
-                        Button("Left"),
+                    antd.Popconfirm(
+                        antd.Button("Left"),
                         placement="left",
                         title=text,
                         onConfirm=confirm,
                         okText="Yes",
                         cancelText="No",
                     ),
-                    Popconfirm(
-                        Button("LB"),
+                    antd.Popconfirm(
+                        antd.Button("LB"),
                         placement="leftBottom",
                         title=text,
                         onConfirm=confirm,
@@ -68,26 +68,26 @@ def app():
                 ],
                 style=dict(width=70, float="left"),
             ),
-            div(
+            html.div(
                 [
-                    Popconfirm(
-                        Button("RT"),
+                    antd.Popconfirm(
+                        antd.Button("RT"),
                         placement="rightTop",
                         title=text,
                         onConfirm=confirm,
                         okText="Yes",
                         cancelText="No",
                     ),
-                    Popconfirm(
-                        Button("Right"),
+                    antd.Popconfirm(
+                        antd.Button("Right"),
                         placement="right",
                         title=text,
                         onConfirm=confirm,
                         okText="Yes",
                         cancelText="No",
                     ),
-                    Popconfirm(
-                        Button("RB"),
+                    antd.Popconfirm(
+                        antd.Button("RB"),
                         placement="rightBottom",
                         title=text,
                         onConfirm=confirm,
@@ -97,26 +97,26 @@ def app():
                 ],
                 style=dict(width=70, marginLeft=304),
             ),
-            div(
+            html.div(
                 [
-                    Popconfirm(
-                        Button("BL"),
+                    antd.Popconfirm(
+                        antd.Button("BL"),
                         placement="bottomLeft",
                         title=text,
                         onConfirm=confirm,
                         okText="Yes",
                         cancelText="No",
                     ),
-                    Popconfirm(
-                        Button("Bottom"),
+                    antd.Popconfirm(
+                        antd.Button("Bottom"),
                         placement="bottom",
                         title=text,
                         onConfirm=confirm,
                         okText="Yes",
                         cancelText="No",
                     ),
-                    Popconfirm(
-                        Button("BR"),
+                    antd.Popconfirm(
+                        antd.Button("BR"),
                         placement="bottomRight",
                         title=text,
                         onConfirm=confirm,

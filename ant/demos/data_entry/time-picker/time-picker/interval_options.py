@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import TimePicker
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return TimePicker(minuteStep=15, secondStep=10)
+    return antd.TimePicker(minuteStep=15, secondStep=10)

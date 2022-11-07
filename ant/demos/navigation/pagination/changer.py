@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Pagination
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def onShowSizeChange(current, pageSize):
@@ -8,18 +8,18 @@ def onShowSizeChange(current, pageSize):
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Pagination(
+            antd.Pagination(
                 showSizeChanger=True,
-                onShowSizeChange=Callback(onShowSizeChange),
+                onShowSizeChange=r.Callback(onShowSizeChange),
                 defaultCurrent=3,
                 total=500,
             ),
-            br(),
-            Pagination(
+            html.br(),
+            antd.Pagination(
                 showSizeChanger=True,
-                onShowSizeChange=Callback(onShowSizeChange),
+                onShowSizeChange=r.Callback(onShowSizeChange),
                 defaultCurrent=3,
                 total=500,
                 disabled=True,

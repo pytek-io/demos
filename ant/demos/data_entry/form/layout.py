@@ -1,53 +1,44 @@
-from reflect_html import *
-from reflect_antd import Form, Input, Button, Radio, Space
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    # def formItemLayout():
-    #     return (
-    #         {
-    #             "labelCol": {"span": 4},
-    #             "wrapperCol": {"span": 14},
-    #         }
-    #         if formLayout() == "horizontal"
-    #         else {}
-    #     )
-    formLayout = Radio.Group(
+    formLayout = antd.Radio.Group(
         [
-            Radio.Button("Horizontal", value="horizontal"),
-            Radio.Button("Vertical", value="vertical"),
-            Radio.Button("Inline", value="inline"),
-        ],
+            antd.Radio.Button("Horizontal", value="horizontal"),
+            antd.Radio.Button("Vertical", value="vertical"),
+            antd.Radio.Button("Inline", value="inline"),
+        ]
     )
 
     def wrapperCol():
         return {"span": 14, "offset": 4} if formLayout() == "horizontal" else None
 
     initialValues = {"a": "A.", "b": "B."}
-    return Space(
+    return antd.Space(
         [
             formLayout,
-            Form(
+            antd.Form(
                 [
-                    Form.Item(
-                        Input(placeholder="input placeholder"),
+                    antd.Form.Item(
+                        antd.Input(placeholder="input placeholder"),
                         label="Field A",
                         name="a",
                     ),
-                    Form.Item(
-                        Input(placeholder="input placeholder"),
+                    antd.Form.Item(
+                        antd.Input(placeholder="input placeholder"),
                         label="Field B",
                         name="b",
                     ),
-                    Form.Item(
-                        Button("Submit", type="primary", htmlType="submit"),
+                    antd.Form.Item(
+                        antd.Button("Submit", type="primary", htmlType="submit"),
                         wrapperCol=wrapperCol,
                     ),
                 ],
                 initialValues=initialValues,
                 layout=formLayout,
-                onValuesChange=Callback(
+                onValuesChange=r.Callback(
                     lambda values: print("values changed to", values)
                 ),
             ),
