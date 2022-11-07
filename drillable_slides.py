@@ -13,7 +13,6 @@ from reflect_html import a, div, img, path, svg, style, p, u
 from reflect_swiper import Swiper, SwiperSlide
 from website.common import BACKGROUND_COLOR, FONT_FAMILY, GREEN, LIGHT_BLUE
 from website.home import SLOGAN, HIDE_SCROLL_BAR_STYLE
-from website.main import HTML_LINKS
 from website.reflect.gallery import MENU as GALLERY_MENU
 
 TITLE = "Early adopters presentation"
