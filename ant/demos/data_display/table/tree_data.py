@@ -71,7 +71,7 @@ data = [
 
 
 def onChange(selectedRowKeys):
-    print(f"selectedRowKeys: {selectedRowKeys}") #, "selectedRows: ", selectedRows)
+    print(f"selectedRowKeys: {selectedRowKeys}")  # , "selectedRows: ", selectedRows)
 
 
 def onSelect(key):
@@ -84,29 +84,25 @@ def onSelectAll(selected, selectedRows, changeRows):
 
 def app():
     checkStrictly = Switch(defaultChecked=False)
-    return [
-        Space(
-            [
-                "CheckStrictly:",
-                checkStrictly,
-            ],
-            align="center",
-            style=dict(marginBottom=16),
-        ),
-        Table(
-            columns=columns,
-            rowSelection=dict(
-                checkStrictly=checkStrictly,
-                onChange=Callback(
-                    onChange
-                ),
-                onSelect=Callback(
-                    onSelect, args="key"
-                ),
-                onSelectAll=Callback(
-                    onSelectAll
-                ),
+    return div(
+        [
+            Space(
+                [
+                    "CheckStrictly:",
+                    checkStrictly,
+                ],
+                align="center",
+                style=dict(marginBottom=16),
             ),
-            dataSource=data,
-        ),
-    ]
+            Table(
+                columns=columns,
+                rowSelection=dict(
+                    checkStrictly=checkStrictly,
+                    onChange=Callback(onChange),
+                    onSelect=Callback(onSelect, args="key"),
+                    onSelectAll=Callback(onSelectAll),
+                ),
+                dataSource=data,
+            ),
+        ]
+    )

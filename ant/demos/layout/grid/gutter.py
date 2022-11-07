@@ -5,7 +5,7 @@ style = dict(background="#0092ff", padding="8px 0")
 
 
 def app():
-    return [
+    return div([
         Divider("Horizontal", orientation="left"),
         Row(
             [
@@ -41,3 +41,4 @@ def app():
             gutter=[16, 24],
         ),
     ]
+)

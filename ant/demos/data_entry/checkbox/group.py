@@ -26,12 +26,14 @@ def app():
     autorun(lambda: print("checked values", check_box2()))
     autorun(lambda: print("checked values", check_box3()))
 
-    return [
-        check_box1,
-        br(),
-        br(),
-        check_box2,
-        br(),
-        br(),
-        check_box3,
-    ]
+    return div(
+        [
+            check_box1,
+            br(),
+            br(),
+            check_box2,
+            br(),
+            br(),
+            check_box3,
+        ]
+    )

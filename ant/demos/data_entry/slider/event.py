@@ -9,9 +9,7 @@ def onAfterChange(value):
 
 
 def app():
-    slider1 = Slider(
-        defaultValue=30, onAfterChange=Callback(onAfterChange)
-    )
+    slider1 = Slider(defaultValue=30, onAfterChange=Callback(onAfterChange))
     autorun(lambda: print("onChange", slider1()))
     slider2 = Slider(
         range=True,
@@ -20,7 +18,4 @@ def app():
         onAfterChange=Callback(onAfterChange),
     )
     autorun(lambda: print("onChange", slider2()))
-    return [
-        slider1,
-        slider2,
-    ]
+    return div([slider1, slider2])

@@ -12,19 +12,21 @@ def app():
         defaultValue="left",
         style=dict(marginBottom=20),
     )
-    return [
-        mode,
-        Timeline(
-            [
-                Timeline.Item("Create a services", label="2015-09-01"),
-                Timeline.Item(
-                    "Solve initial network problems", label="2015-09-01 09:12:11"
-                ),
-                Timeline.Item("Technical testing"),
-                Timeline.Item(
-                    "Network problems being solved", label="2015-09-01 09:12:11"
-                ),
-            ],
-            mode=mode,
-        ),
-    ]
+    return div(
+        [
+            mode,
+            Timeline(
+                [
+                    Timeline.Item("Create a services", label="2015-09-01"),
+                    Timeline.Item(
+                        "Solve initial network problems", label="2015-09-01 09:12:11"
+                    ),
+                    Timeline.Item("Technical testing"),
+                    Timeline.Item(
+                        "Network problems being solved", label="2015-09-01 09:12:11"
+                    ),
+                ],
+                mode=mode,
+            ),
+        ]
+    )

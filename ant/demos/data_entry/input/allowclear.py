@@ -11,4 +11,4 @@ def app():
     text_area = TextArea(placeholder="textarea with clear icon", allowClear=True)
     autorun(lambda: print(input_()))
     autorun(lambda: print(text_area()))
-    return [input_, br(), br(), text_area]
+    return div([input_, br(), br(), text_area])

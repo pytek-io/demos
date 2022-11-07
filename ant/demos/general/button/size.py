@@ -3,6 +3,7 @@ from reflect_antd import Button, Radio
 from reflect_ant_icons import DownloadOutlined
 from reflect import autorun
 
+
 def app():
 
     size = Radio.Group(
@@ -14,7 +15,4 @@ def app():
         defaultValue="small",
     )
     autorun(lambda: print(size()))
-    return [
-        size,
-        Button("Primary", type="primary", size=size),
-    ]
+    return div([size, Button("Primary", type="primary", size=size)])

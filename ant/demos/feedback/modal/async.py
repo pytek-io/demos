@@ -22,18 +22,20 @@ def app():
         print("Clicked cancel button")
         visible.set(False)
 
-    return [
-        Button(
-            "Open Modal with async logic",
-            type="primary",
-            onClick=lambda: visible.set(True),
-        ),
-        Modal(
-            p(modal_text),
-            title="Title",
-            visible=visible,
-            onOk=handleOk,
-            confirmLoading=confirmLoading,
-            onCancel=handleCancel,
-        ),
-    ]
+    return div(
+        [
+            Button(
+                "Open Modal with async logic",
+                type="primary",
+                onClick=lambda: visible.set(True),
+            ),
+            Modal(
+                p(modal_text),
+                title="Title",
+                visible=visible,
+                onOk=handleOk,
+                confirmLoading=confirmLoading,
+                onCancel=handleCancel,
+            ),
+        ]
+    )

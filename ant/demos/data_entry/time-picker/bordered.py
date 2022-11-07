@@ -5,7 +5,9 @@ RangePicker = TimePicker.RangePicker
 
 
 def app():
-    return [
-        TimePicker(bordered=False),
-        RangePicker(bordered=False),
-    ]
+    return div(
+        [
+            TimePicker(bordered=False),
+            RangePicker(bordered=False),
+        ]
+    )

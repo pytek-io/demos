@@ -14,9 +14,8 @@ def itemRender(*args):
 
 
 def app():
-    return [
-        Pagination(
-            total=500,
-            # itemRender=Callback(itemRender),
-        )
-    ]
+    raise NotImplementedError()
+    return Pagination(
+        total=500,
+        # itemRender=Callback(itemRender),
+    )

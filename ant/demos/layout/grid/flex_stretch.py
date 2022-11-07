@@ -3,7 +3,7 @@ from reflect_antd import Row, Col, Divider
 
 
 def app():
-    return [
+    return div([
         Divider("Percentage columns", orientation="left"),
         Row([Col("2 / 5", flex=2), Col("3 / 5", flex=3)]),
         Divider("Fill rest", orientation="left"),
@@ -18,3 +18,4 @@ def app():
             wrap=False,
         ),
     ]
+)

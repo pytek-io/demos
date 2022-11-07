@@ -31,4 +31,4 @@ def app():
     )
     autorun(lambda: print(select1()))
     autorun(lambda: print(select2()))
-    return select1, br(), select2
+    return div([select1, br(), select2])

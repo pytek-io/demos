@@ -18,8 +18,4 @@ def app():
         disabled=True,
     )
     autorun(lambda: print("Page: ", pagination2()))
-    return [
-        pagination1,
-        br(),
-        pagination2,
-    ]
+    return div([pagination1, br(), pagination2])

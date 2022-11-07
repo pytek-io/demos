@@ -4,7 +4,7 @@ from reflect_ant_icons import SearchOutlined
 
 
 def app():
-    return [
+    return div([
         Tooltip(
             Button(type="primary", shape="circle", icon=SearchOutlined([])),
             title="search",
@@ -21,4 +21,4 @@ def app():
             title="search",
         ),
         Button("Search", type="dashed", icon=SearchOutlined([])),
-    ]
+    ])

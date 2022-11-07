@@ -3,4 +3,4 @@ from reflect_antd import Pagination
 
 
 def app():
-    return [Pagination(defaultCurrent=6, total=500)]
+    return div([Pagination(defaultCurrent=6, total=500)])

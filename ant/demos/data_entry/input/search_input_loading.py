@@ -5,7 +5,7 @@ Search = Input.Search
 
 
 def app():
-    return [
+    return div([
         Search(placeholder="input search loading default", loading=True),
         br(),
         br(),
@@ -22,4 +22,4 @@ def app():
             size="large",
             loading=True,
         ),
-    ]
+    ])

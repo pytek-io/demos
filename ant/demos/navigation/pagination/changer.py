@@ -8,19 +8,21 @@ def onShowSizeChange(current, pageSize):
 
 
 def app():
-    return [
-        Pagination(
-            showSizeChanger=True,
-            onShowSizeChange=Callback(onShowSizeChange),
-            defaultCurrent=3,
-            total=500,
-        ),
-        br(),
-        Pagination(
-            showSizeChanger=True,
-            onShowSizeChange=Callback(onShowSizeChange),
-            defaultCurrent=3,
-            total=500,
-            disabled=True,
-        ),
-    ]
+    return div(
+        [
+            Pagination(
+                showSizeChanger=True,
+                onShowSizeChange=Callback(onShowSizeChange),
+                defaultCurrent=3,
+                total=500,
+            ),
+            br(),
+            Pagination(
+                showSizeChanger=True,
+                onShowSizeChange=Callback(onShowSizeChange),
+                defaultCurrent=3,
+                total=500,
+                disabled=True,
+            ),
+        ]
+    )

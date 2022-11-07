@@ -3,10 +3,12 @@ from reflect_antd import Rate
 
 
 def app():
-    return [
-        Rate(defaultValue=3),
-        span("allowClear: true", className="ant-rate-text"),
-        br(),
-        Rate(allowClear=False, defaultValue=3),
-        span("allowClear: false", className="ant-rate-text"),
-    ]
+    return div(
+        [
+            Rate(defaultValue=3),
+            span("allowClear: true", className="ant-rate-text"),
+            br(),
+            Rate(allowClear=False, defaultValue=3),
+            span("allowClear: false", className="ant-rate-text"),
+        ]
+    )

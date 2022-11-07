@@ -14,7 +14,7 @@ def app():
         print("onChange:", current_value)
         current.set(current_value)
 
-    return [
+    return div([
         Steps(
             [
                 Step(
@@ -68,3 +68,4 @@ def app():
             className="site-navigation-steps",
         ),
     ]
+)

@@ -41,14 +41,16 @@ def app():
     autorun(lambda: print("radio2 checked", radio_group2()))
     autorun(lambda: print("radio3 checked", radio_group3()))
     autorun(lambda: print("radio4 checked", radio_group4()))
-    return [
-        radio_group1,
-        br(),
-        radio_group2,
-        br(),
-        br(),
-        radio_group3,
-        br(),
-        br(),
-        radio_group4,
-    ]
+    return div(
+        [
+            radio_group1,
+            br(),
+            radio_group2,
+            br(),
+            br(),
+            radio_group3,
+            br(),
+            br(),
+            radio_group4,
+        ]
+    )

@@ -3,7 +3,4 @@ from reflect_antd import BackTop
 
 
 def app():
-    return [
-        BackTop(),
-        strong("gray", className="site-back-top-basic"),
-    ]
+    return div([BackTop(), strong("gray", className="site-back-top-basic")])

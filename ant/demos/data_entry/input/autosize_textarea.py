@@ -12,7 +12,7 @@ def app():
         autoSize=dict(minRows=3, maxRows=5),
     )
     autorun(lambda: print("text area value", text_area()))
-    return [
+    return div([
         TextArea(placeholder="Autosize height based on content lines", autoSize=True),
         div(style=dict(margin="24px 0")),
         TextArea(
@@ -21,4 +21,4 @@ def app():
         ),
         div(style=dict(margin="24px 0")),
         text_area,
-    ]
+    ])

@@ -4,7 +4,9 @@ from reflect_ant_icons import CloseCircleOutlined
 
 
 def app():
-    return [
-        Tag("Tag1", closable=True, closeIcon="关 闭"),
-        Tag("Tag2", closable=True, closeIcon=CloseCircleOutlined([])),
-    ]
+    return div(
+        [
+            Tag("Tag1", closable=True, closeIcon="关 闭"),
+            Tag("Tag2", closable=True, closeIcon=CloseCircleOutlined([])),
+        ]
+    )

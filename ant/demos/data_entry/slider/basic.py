@@ -10,9 +10,4 @@ def app():
     slider2 = Slider(range=True, defaultValue=[20, 50], disabled=disable_switch)
     autorun(lambda: print(slider1()))
     autorun(lambda: print(slider2()))
-    return [
-        slider1,
-        slider2,
-        "Disabled: ",
-        disable_switch,
-    ]
+    return div([slider1, slider2, "Disabled: ", disable_switch])

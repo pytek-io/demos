@@ -4,4 +4,5 @@ from reflect_antd import Breadcrumb, Alert
 
 
 def app():
-    return []
+    raise NotImplementedError()
+    return ([])

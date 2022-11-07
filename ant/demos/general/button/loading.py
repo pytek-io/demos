@@ -16,28 +16,30 @@ def app():
 
         return result
 
-    return [
-        Button("Loading", type="primary", loading=True),
-        Button("Loading", type="primary", size="small", loading=True),
-        Button(type="primary", icon=PoweroffOutlined(), loading=True),
-        br(),
-        Button(
-            "Click me!",
-            type="primary",
-            loading=loadings[0],
-            onClick=enter_loading(loadings[0]),
-        ),
-        Button(
-            "Click me!",
-            type="primary",
-            icon=PoweroffOutlined(),
-            loading=loadings[1],
-            onClick=enter_loading(loadings[1]),
-        ),
-        Button(
-            type="primary",
-            icon=PoweroffOutlined(),
-            loading=loadings[2],
-            onClick=enter_loading(loadings[2]),
-        ),
-    ]
+    return div(
+        [
+            Button("Loading", type="primary", loading=True),
+            Button("Loading", type="primary", size="small", loading=True),
+            Button(type="primary", icon=PoweroffOutlined(), loading=True),
+            br(),
+            Button(
+                "Click me!",
+                type="primary",
+                loading=loadings[0],
+                onClick=enter_loading(loadings[0]),
+            ),
+            Button(
+                "Click me!",
+                type="primary",
+                icon=PoweroffOutlined(),
+                loading=loadings[1],
+                onClick=enter_loading(loadings[1]),
+            ),
+            Button(
+                type="primary",
+                icon=PoweroffOutlined(),
+                loading=loadings[2],
+                onClick=enter_loading(loadings[2]),
+            ),
+        ]
+    )

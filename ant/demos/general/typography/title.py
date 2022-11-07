@@ -5,10 +5,10 @@ Title = Typography.Title
 
 
 def app():
-    return [
+    return div([
         Title("h1. Ant Design"),
         Title("h2. Ant Design", level=2),
         Title("h3. Ant Design", level=3),
         Title("h4. Ant Design", level=4),
         Title("h5. Ant Design", level=5),
-    ]
+    ])

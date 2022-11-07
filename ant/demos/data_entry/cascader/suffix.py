@@ -55,15 +55,17 @@ def app():
     autorun(lambda: print("changed", cascader2()))
     autorun(lambda: print("changed", cascader3()))
     autorun(lambda: print("changed", cascader4()))
-    return [
-        cascader1,
-        br(),
-        br(),
-        cascader2,
-        br(),
-        br(),
-        cascader3,
-        br(),
-        br(),
-        cascader4,
-    ]
+    return div(
+        [
+            cascader1,
+            br(),
+            br(),
+            cascader2,
+            br(),
+            br(),
+            cascader3,
+            br(),
+            br(),
+            cascader4,
+        ]
+    )

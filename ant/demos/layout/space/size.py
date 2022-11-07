@@ -12,17 +12,19 @@ def app():
         ],
         defaultValue="small",
     )
-    return [
-        size,
-        br(),
-        br(),
-        Space(
-            [
-                Button("Primary", type="primary"),
-                Button("Default"),
-                Button("Dashed", type="dashed"),
-                Button("Link", type="link"),
-            ],
-            size=size,
-        ),
-    ]
+    return div(
+        [
+            size,
+            br(),
+            br(),
+            Space(
+                [
+                    Button("Primary", type="primary"),
+                    Button("Default"),
+                    Button("Dashed", type="dashed"),
+                    Button("Link", type="link"),
+                ],
+                size=size,
+            ),
+        ]
+    )

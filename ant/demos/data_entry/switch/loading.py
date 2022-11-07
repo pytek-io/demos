@@ -3,8 +3,10 @@ from reflect_antd import Switch
 
 
 def app():
-    return [
-        Switch(loading=True, defaultChecked=True),
-        br(),
-        Switch(size="small", loading=True),
-    ]
+    return div(
+        [
+            Switch(loading=True, defaultChecked=True),
+            br(),
+            Switch(size="small", loading=True),
+        ]
+    )

@@ -11,7 +11,7 @@ data = [
 
 
 def app():
-    return [
+    return div([
         Divider("Default Size", orientation="left"),
         List(
             header=div("Header"),
@@ -39,3 +39,4 @@ def app():
             renderItem=js("simple_list_renderer_2"),
         ),
     ]
+)

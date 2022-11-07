@@ -3,7 +3,7 @@ from reflect_antd import Row, Col, Divider
 
 
 def app():
-    return [
+    return div([
         Divider("sub-element align left", orientation="left"),
         Row(
             [
@@ -55,3 +55,4 @@ def app():
             justify="space-around",
         ),
     ]
+)

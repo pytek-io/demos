@@ -4,66 +4,71 @@ from reflect_ant_icons import UserOutlined, AntDesignOutlined
 
 
 def app():
-    return [
-        Avatar.Group(
-            [
-                Avatar(
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                ),
-                Avatar("K", style=dict(backgroundColor="#f56a00")),
-                Tooltip(
+    return div(
+        [
+            Avatar.Group(
+                [
                     Avatar(
-                        style=dict(backgroundColor="#87d068"), icon=UserOutlined([])
+                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                     ),
-                    title="Ant User",
-                    placement="top",
-                ),
-                Avatar(
-                    style=dict(backgroundColor="#1890ff"), icon=AntDesignOutlined([])
-                ),
-            ]
-        ),
-        Divider(),
-        Avatar.Group(
-            [
-                Avatar(
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                ),
-                Avatar("K", style=dict(backgroundColor="#f56a00")),
-                Tooltip(
+                    Avatar("K", style=dict(backgroundColor="#f56a00")),
+                    Tooltip(
+                        Avatar(
+                            style=dict(backgroundColor="#87d068"), icon=UserOutlined([])
+                        ),
+                        title="Ant User",
+                        placement="top",
+                    ),
                     Avatar(
-                        style=dict(backgroundColor="#87d068"), icon=UserOutlined([])
+                        style=dict(backgroundColor="#1890ff"),
+                        icon=AntDesignOutlined([]),
                     ),
-                    title="Ant User",
-                    placement="top",
-                ),
-                Avatar(
-                    style=dict(backgroundColor="#1890ff"), icon=AntDesignOutlined([])
-                ),
-            ],
-            maxCount=2,
-            maxStyle=dict(color="#f56a00", backgroundColor="#fde3cf"),
-        ),
-        Divider(),
-        Avatar.Group(
-            [
-                Avatar(
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                ),
-                Avatar("K", style=dict(backgroundColor="#f56a00")),
-                Tooltip(
+                ]
+            ),
+            Divider(),
+            Avatar.Group(
+                [
                     Avatar(
-                        style=dict(backgroundColor="#87d068"), icon=UserOutlined([])
+                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                     ),
-                    title="Ant User",
-                    placement="top",
-                ),
-                Avatar(
-                    style=dict(backgroundColor="#1890ff"), icon=AntDesignOutlined([])
-                ),
-            ],
-            maxCount=2,
-            size="large",
-            maxStyle=dict(color="#f56a00", backgroundColor="#fde3cf"),
-        ),
-    ]
+                    Avatar("K", style=dict(backgroundColor="#f56a00")),
+                    Tooltip(
+                        Avatar(
+                            style=dict(backgroundColor="#87d068"), icon=UserOutlined([])
+                        ),
+                        title="Ant User",
+                        placement="top",
+                    ),
+                    Avatar(
+                        style=dict(backgroundColor="#1890ff"),
+                        icon=AntDesignOutlined([]),
+                    ),
+                ],
+                maxCount=2,
+                maxStyle=dict(color="#f56a00", backgroundColor="#fde3cf"),
+            ),
+            Divider(),
+            Avatar.Group(
+                [
+                    Avatar(
+                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                    ),
+                    Avatar("K", style=dict(backgroundColor="#f56a00")),
+                    Tooltip(
+                        Avatar(
+                            style=dict(backgroundColor="#87d068"), icon=UserOutlined([])
+                        ),
+                        title="Ant User",
+                        placement="top",
+                    ),
+                    Avatar(
+                        style=dict(backgroundColor="#1890ff"),
+                        icon=AntDesignOutlined([]),
+                    ),
+                ],
+                maxCount=2,
+                size="large",
+                maxStyle=dict(color="#f56a00", backgroundColor="#fde3cf"),
+            ),
+        ]
+    )

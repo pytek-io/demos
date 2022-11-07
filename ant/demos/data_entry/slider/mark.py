@@ -15,14 +15,16 @@ marks = {
 
 
 def app():
-    return [
-        h4("included=true"),
-        Slider(marks=marks, defaultValue=37),
-        Slider(range=True, marks=marks, defaultValue=[26, 37]),
-        h4("included=false"),
-        Slider(marks=marks, included=False, defaultValue=37),
-        h4("marks & step"),
-        Slider(marks=marks, step=10, defaultValue=37),
-        h4("step=null"),
-        Slider(marks=marks, step=None, defaultValue=37),
-    ]
+    return div(
+        [
+            h4("included=true"),
+            Slider(marks=marks, defaultValue=37),
+            Slider(range=True, marks=marks, defaultValue=[26, 37]),
+            h4("included=false"),
+            Slider(marks=marks, included=False, defaultValue=37),
+            h4("marks & step"),
+            Slider(marks=marks, step=10, defaultValue=37),
+            h4("step=null"),
+            Slider(marks=marks, step=None, defaultValue=37),
+        ]
+    )

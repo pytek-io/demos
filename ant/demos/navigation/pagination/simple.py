@@ -3,8 +3,8 @@ from reflect_antd import Pagination
 
 
 def app():
-    return [
+    return div([
         Pagination(simple=True, defaultCurrent=2, total=50),
         br(),
         Pagination(disabled=True, simple=True, defaultCurrent=2, total=50),
-    ]
+    ])

@@ -22,15 +22,17 @@ def app():
             )
         )
 
-    return [
-        size,
-        Steps(
-            [
-                Step(title="Finished", description=horizontalSteps),
-                Step(title="In Progress", description="This is a description."),
-                Step(title="Waiting", description="This is a description."),
-            ],
-            size=size,
-            direction="vertical",
-        ),
-    ]
+    return div(
+        [
+            size,
+            Steps(
+                [
+                    Step(title="Finished", description=horizontalSteps),
+                    Step(title="In Progress", description="This is a description."),
+                    Step(title="Waiting", description="This is a description."),
+                ],
+                size=size,
+                direction="vertical",
+            ),
+        ]
+    )

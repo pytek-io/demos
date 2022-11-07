@@ -8,7 +8,7 @@ def onChange(value):
 
 
 def app():
-    return [
+    return div([
         Radio.Group(
             [
                 Radio.Button("Hangzhou", value="a"),
@@ -43,3 +43,4 @@ def app():
             style=dict(marginTop=16),
         ),
     ]
+)

@@ -32,7 +32,7 @@ menu = Menu(
 
 
 def app():
-    return [
+    return div([
         Dropdown(
             Button("bottomLeft"), overlay=menu, placement="bottomLeft", arrow=True
         ),
@@ -46,4 +46,4 @@ def app():
         Dropdown(Button("topLeft"), overlay=menu, placement="topLeft", arrow=True),
         Dropdown(Button("topCenter"), overlay=menu, placement="topCenter", arrow=True),
         Dropdown(Button("topRight"), overlay=menu, placement="topRight", arrow=True),
-    ]
+    ])

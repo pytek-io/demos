@@ -21,15 +21,16 @@ def app():
         defaultValue="lucy",
         style=dict(width=120),
     )
-    result = [
-        select,
-        Select(
-            Option("Lucy", value="lucy"),
-            suffixIcon=mehIcon,
-            defaultValue="lucy",
-            style=dict(width=120),
-            disabled=True,
-        ),
-    ]
     autorun(lambda: print("selected", select()))
-    return result
+    return div(
+        [
+            select,
+            Select(
+                Option("Lucy", value="lucy"),
+                suffixIcon=mehIcon,
+                defaultValue="lucy",
+                style=dict(width=120),
+                disabled=True,
+            ),
+        ]
+    )

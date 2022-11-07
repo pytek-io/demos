@@ -21,7 +21,7 @@ selectAfter = Select(
 
 
 def app():
-    return [
+    return div([
         div(
             Input(addonBefore="http://", addonAfter=".com", defaultValue="mysite"),
             style=dict(marginBottom=16),
@@ -41,3 +41,4 @@ def app():
             style=dict(marginBottom=16),
         ),
     ]
+)

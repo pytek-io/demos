@@ -14,20 +14,22 @@ def app():
         ],
         defaultValue="left",
     )
-    return [
-        Space(
-            [
-                "Tab position:",
-                tabPosition,
-            ],
-            style=dict(marginBottom=24),
-        ),
-        Tabs(
-            [
-                TabPane("Content of Tab 1", tab="Tab 1", key="1"),
-                TabPane("Content of Tab 2", tab="Tab 2", key="2"),
-                TabPane("Content of Tab 3", tab="Tab 3", key="3"),
-            ],
-            tabPosition=tabPosition,
-        ),
-    ]
+    return div(
+        [
+            Space(
+                [
+                    "Tab position:",
+                    tabPosition,
+                ],
+                style=dict(marginBottom=24),
+            ),
+            Tabs(
+                [
+                    TabPane("Content of Tab 1", tab="Tab 1", key="1"),
+                    TabPane("Content of Tab 2", tab="Tab 2", key="2"),
+                    TabPane("Content of Tab 3", tab="Tab 3", key="3"),
+                ],
+                tabPosition=tabPosition,
+            ),
+        ]
+    )

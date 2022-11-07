@@ -3,7 +3,7 @@ from reflect_antd import Radio
 
 
 def app():
-    return [
+    return div([
         Radio.Group(
             [
                 Radio.Button("Hangzhou", value="a"),
@@ -25,4 +25,4 @@ def app():
             buttonStyle="solid",
             style=dict(marginTop=16),
         ),
-    ]
+    ])

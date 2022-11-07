@@ -18,13 +18,11 @@ def app():
         ],
         onClick=Callback(onClick, "key"),
     )
-    return [
-        Dropdown(
-            a(
-                ["Hover me, Click menu item", DownOutlined()],
-                className="ant-dropdown-link",
-                onClick=lambda e: e.preventDefault(),
-            ),
-            overlay=menu,
+    return Dropdown(
+        a(
+            ["Hover me, Click menu item", DownOutlined()],
+            className="ant-dropdown-link",
+            onClick=lambda e: e.preventDefault(),
         ),
-    ]
+        overlay=menu,
+    )

@@ -4,7 +4,7 @@ from reflect_ant_icons import UserOutlined
 
 
 def app():
-    return [
+    return div([
         Input(size="large", placeholder="large size", prefix=UserOutlined([])),
         br(),
         br(),
@@ -13,3 +13,4 @@ def app():
         br(),
         Input(size="small", placeholder="small size", prefix=UserOutlined([])),
     ]
+)

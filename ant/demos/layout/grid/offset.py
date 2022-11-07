@@ -3,7 +3,7 @@ from reflect_antd import Row, Col
 
 
 def app():
-    return [
+    return div([
         Row([Col("col-8", span=8), Col("col-8", span=8, offset=8)]),
         Row(
             [
@@ -12,4 +12,4 @@ def app():
             ]
         ),
         Row(Col("col-12 col-offset-6", span=12, offset=6)),
-    ]
+    ])

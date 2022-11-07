@@ -20,15 +20,17 @@ def app():
         ],
         style=dict(marginBottom=8),
     )
-    return [
-        dotPosition,
-        Carousel(
-            [
-                div(h3("1", style=contentStyle)),
-                div(h3("2", style=contentStyle)),
-                div(h3("3", style=contentStyle)),
-                div(h3("4", style=contentStyle)),
-            ],
-            dotPosition=dotPosition,
-        ),
-    ]
+    return div(
+        [
+            dotPosition,
+            Carousel(
+                [
+                    div(h3("1", style=contentStyle)),
+                    div(h3("2", style=contentStyle)),
+                    div(h3("3", style=contentStyle)),
+                    div(h3("4", style=contentStyle)),
+                ],
+                dotPosition=dotPosition,
+            ),
+        ]
+    )

@@ -6,7 +6,7 @@ from reflect import create_observable
 def app():
     modal1Visible = create_observable(False)
     modal2Visible = create_observable(False)
-    return [
+    return div([
         Button(
             "Display a modal dialog at 20px to Top",
             type="primary",
@@ -36,3 +36,4 @@ def app():
             onCancel=lambda: modal2Visible.set(False),
         ),
     ]
+)
