@@ -2,7 +2,7 @@
     Simple todo application based on https://github.com/leonardopliski/react-antd-todo
 """
 import json
-import os
+import pathlib
 
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
@@ -27,8 +27,7 @@ def iterable_length(iterable):
 
 
 def save_to_file(file, data):
-    content = json.dumps(data)
-    open(file, "w").write(content)
+    open(file, "w").write(json.dumps(data))
 
 
 def load_from_file(file):
@@ -40,14 +39,14 @@ def load_from_file(file):
 
 class Application:
     def __init__(self, file_path, update_title):
-        if not "." in os.path.basename(file_path):
-            file_path += ".json"
-        file_path = os.path.join(os.path.split(__file__)[0], file_path)
-        if os.path.exists(file_path):
+        file_path = pathlib.Path(__file__).parent / file_path
+        if not "." in file_path.name:
+            file_path = file_path.with_name(file_path + ".json")
+        if file_path.exists():
             items, self.todo_item_counter = load_from_file(file_path)
         else:
             items, self.todo_item_counter = [], 0
-        file_name = os.path.basename(file_path).split(".")[0]
+        file_name = file_path.name.split(".")[0]
         self.items = r.create_observable(items, depth=3)
         self.todo_item_rows = r.create_mapping(
             self.create_todo_item_row,
@@ -85,6 +84,7 @@ class Application:
             update_title(
                 f"({nb_completed}/{len(self.items.observables())}) {file_name}"
             )
+            save_to_file(file_path, (self.items.actual_data, self.todo_item_counter))
 
         r.autorun(on_change)
 
@@ -170,12 +170,11 @@ class Application:
         )
 
 
-def app():
-    window = r.get_window()
+def app(window: r.Window):
+    # rmk: we define the whole content as a hash dependency
     return html.div(
         lambda: Application(
-            window.hash()
-            or os.path.join(os.path.dirname(__file__), "default_todo_list.json"),
+            window.hash() or "default_todo_list",
             window.update_title,
         ).root()
     )
