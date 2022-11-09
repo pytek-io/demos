@@ -1,8 +1,9 @@
 import json
 import os
+import stat
 
 import reflect as r
-import reflect.utils as r
+from reflect.utils import decode_url
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
@@ -13,6 +14,11 @@ from demos.ant import create_code_editor
 
 TITLE = "Online Editor"
 BASE_PATH = "demos"
+
+
+def is_writable_file(file_path):
+    """works even with sudo rights..."""
+    return "w" in stat.filemode(os.lstat(file_path).st_mode)
 
 
 def robust_open_file(file):
@@ -36,9 +42,14 @@ def app(window: r.Window):
     arguments = (
         json.loads(window.hash()) if window.hash() else {"main": "demos/hello_world.py"}
     )
-    main, css = arguments["main"], arguments.get("css", [])
+    main, css, kwargs = arguments["main"], arguments.get("css", []), {}
     window.add_css(css)
-    main, kwargs = r.decode_url(main)
+    main, kwargs = decode_url(main)
+    # if "#" in main:
+    #     main, kwargs = main.split("#")
+    #     kwargs = json.loads(kwargs)
+    #     kwargs = {}
+    # return html.div([window.hash(), main, kwargs])
     actual_file_path, language = reflect_utils.extract_file_path_and_language(main)
     editor = create_editor(actual_file_path, language, read_only=False)
 
@@ -111,7 +122,7 @@ def app(window: r.Window):
     new_file_name_input = antd.Input(defaultValue=default_new_file_name)
 
     async def reload():
-        if not r.is_writable_file(actual_file_path):
+        if not is_writable_file(actual_file_path):
             create_file_visible.set(True)
         else:
             if not os.path.exists("edits.log"):
@@ -121,26 +132,22 @@ def app(window: r.Window):
             window.hash.touch()
 
     async def create_file():
-        with r.CatchError():
-            new_file_path = os.path.join(BASE_PATH, new_file_name_input())
-            try:
-                if os.path.exists(new_file_path) and not r.is_writable_file(
-                    new_file_path
-                ):
-                    raise Exception(f"{new_file_path} is not writable")
-                open(new_file_path, "w").write(await editor.getValue())
-                main = reflect_utils.get_module_name(new_file_path)
-                dict(main=main, css=css)
-                if args:
-                    main = f"{main}#{args}"
-                window.hash.set(json.dumps())
-                window.location_reload()
-            except OSError as e:
-                antd.Modal.error(
-                    {"content": f"Failed to create {new_file_path}. {e.args[1]}."}
-                )
-            except Exception as e:
-                antd.Modal.error({"content": f"Failed to create {new_file_path}. {e}."})
+        new_file_path = os.path.join(BASE_PATH, new_file_name_input())
+        try:
+            if os.path.exists(new_file_path) and not is_writable_file(new_file_path):
+                raise Exception(f"{new_file_path} is not writable")
+            open(new_file_path, "w").write(await editor.getValue())
+            main = reflect_utils.get_module_name(new_file_path)
+            if args:
+                main = f"{main}#{args}"
+            window.hash.set(json.dumps())
+            window.location_reload()
+        except OSError as e:
+            antd.Modal.error(
+                {"content": f"Failed to create {new_file_path}. {e.args[1]}."}
+            )
+        except Exception as e:
+            antd.Modal.error({"content": f"Failed to create {new_file_path}. {e}."})
 
     return html.div(
         [
