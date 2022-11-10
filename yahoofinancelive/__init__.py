@@ -59,9 +59,9 @@ MENU_ITEMS = [dict(name="Remove", action_tag="remove quote")]
 
 
 class App:
-    def __init__(self, initial_tickers: typing.List[str] = []) -> None:
+    def __init__(self, window: r.Window, initial_tickers: typing.List[str] = []) -> None:
         self.initial_tickers = initial_tickers
-        self.window = r.get_window()
+        self.window = window
         self.quote_manager = YFLiveQuoteManager(self.window)
         self.content = aggrid.AgGridReact(
             [
@@ -114,7 +114,7 @@ class App:
             )
 
 
-def app():
-    hash_argument = r.get_window().hash()
-    app = App(json.loads(hash_argument) if hash_argument else [])
+def app(window: r.Window):
+    hash_argument = window.hash()
+    app = App(window, json.loads(hash_argument) if hash_argument else [])
     return html.div([app.settings, app.content], style=dict(height="calc(100% - 35px)"))

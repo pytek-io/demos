@@ -17,8 +17,8 @@ def call_if_callable(maybe_callable):
     return maybe_callable() if callable(maybe_callable) else maybe_callable
 
 
-def app():
-    base_path = r.get_window().hash() or str(
+def app(window: r.Window):
+    base_path = window.hash() or str(
         pathlib.Path(__file__).parent.parent.relative_to(pathlib.Path(os.getcwd()))
     )
     filter_method = (

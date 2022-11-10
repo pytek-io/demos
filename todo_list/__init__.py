@@ -16,11 +16,6 @@ SECOND_COL_BREAK_POINTS = dict(xs=24, sm=24, md=7, lg=5, xl=4)
 DEFAULT_FILE_NAME = "default_todo_list.json"
 
 
-def find_index(values, match):
-    for index, value in enumerate(values):
-        if match(value):
-            return index
-
 
 def iterable_length(iterable):
     return sum(1 for _ in iterable)
@@ -41,7 +36,7 @@ class Application:
     def __init__(self, file_path, update_title):
         file_path = pathlib.Path(__file__).parent / file_path
         if not "." in file_path.name:
-            file_path = file_path.with_name(file_path + ".json")
+            file_path = file_path.with_name(file_path.name + ".json")
         if file_path.exists():
             items, self.todo_item_counter = load_from_file(file_path)
         else:
@@ -88,11 +83,6 @@ class Application:
 
         r.autorun(on_change)
 
-    def move_item(self, key, up_or_down):
-        self.items.move(
-            find_index(self.items(), lambda v: v["key"] == key), 1 if up_or_down else -1
-        )
-
     def create_todo_item_row(self, item):
         key = item["key"]()
         return antd.List.Item(
@@ -105,14 +95,6 @@ class Application:
                 className="todo-item",
             ),
             actions=[
-                antd.Button(
-                    ant_icons.CaretUpFilled(),
-                    onClick=lambda: self.move_item(key, False),
-                ),
-                antd.Button(
-                    ant_icons.CaretDownFilled(),
-                    onClick=lambda: self.move_item(key, True),
-                ),
                 antd.Popconfirm(
                     antd.Button(
                         "X", className="remove-todo-button", type="primary", danger=True

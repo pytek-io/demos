@@ -220,8 +220,7 @@ def create_page(items, default_detail_level_value, is_touch_device):
     )
 
 
-def slides_and_left_icon(file_name, is_touch_device, margin):
-    window = r.get_window()
+def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
     details_level = r.create_observable(1)
     content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
     main_page = html.div(
@@ -332,8 +331,7 @@ def slides_and_left_icon(file_name, is_touch_device, margin):
     return generate_slides, detail_level_icon
 
 
-def app():
-    window = r.get_window()
+def app(window: r.Window):
     file_name = (window.hash() or "early_adopters").split("/")[0]
     is_touch_device = window.browser_details["is_touch_device"]
     full_screen = r.create_observable(False)
@@ -374,7 +372,9 @@ def app():
         lambda k: k in (RIGHT_ARROW, LEFT_ARROW, SPACE_BAR)
         and safe_increment(k != LEFT_ARROW),
     )
-    slides, detail_level_icon = slides_and_left_icon(file_name, is_touch_device, margin)
+    slides, detail_level_icon = slides_and_left_icon(
+        window, file_name, is_touch_device, margin
+    )
     slides = r.CachedEvaluation(slides)
     full_screen_icon = create_icon(
         lambda: minimize if full_screen() else maximize,

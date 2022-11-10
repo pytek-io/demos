@@ -36,7 +36,7 @@ class PendingResult:
 
 class Server:
     def __init__(self, window: r.Window, debug=False):
-        self.window: r.Window = r.get_window()
+        self.window = window
         self.request_id = itertools.count()
         self.pending_queries = {}
         self.connection_ready = anyio.Event()

@@ -62,7 +62,7 @@ def app(window: r.Window):
             if css:
                 window.add_css(css)
             component = html.section(
-                component, id="code-box-demo", className="code-box-demo"
+                component, id="code-box-demo", className="code-box-demo", style={"height": "100%"}
             )
         else:
             component = reflect_utils.parse_md_doc(open(actual_file_path).read())
