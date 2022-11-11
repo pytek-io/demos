@@ -36,12 +36,7 @@ def app():
             [list(range(NB_ROWS))] + list(zip(*values)),
         )
     )
-    editable = {
-        "editable": True,
-        "enableCellChangeFlash": True,
-        "onCellValueChanged": r.Callback(print, args=["data.int", "newValue"]),
-        "singleClickEdit": True,
-    }
+
 
     def update_values(update):
         index, value = update
@@ -88,6 +83,6 @@ def app():
         defaultColDef=dict(
             resizable=True, filter=True, cellStyle={"textAlign": "right"}
         ),
-        componentDidMount=lambda: grid.autoSizeColumns([col.field for col in cols]),
+        onGridReady=lambda: grid.autoSizeColumns([col.field for col in cols]),
     )
     return html.div(grid, style=dict(width="100%", height="50vh"))
