@@ -24,10 +24,10 @@ def app(window: r.Window):
     filter_method = (
         lambda p: any(p.startswith(s) for s in ["__", "."]) and not p == "__init__.py"
     )
-    current_path, tree = reflect_utils.create_file_explorer(
+    current_path, file_explorer = reflect_utils.create_file_explorer(
         base_path, folder_filter=filter_method, file_filter=filter_method
     )
-
+    file_explorer.style.update({"paddingTop": 7, "paddingLeft": 10})
     def actual_path():
         if current_path():
             result = os.path.join(base_path, current_path())
@@ -90,7 +90,12 @@ def app(window: r.Window):
         "dockbox": {
             "mode": "horizontal",
             "children": [
-                {"size": 1, "tabs": [("Apps", tree)]},
+                {
+                    "size": 1,
+                    "tabs": [
+                        ({"title": base_path, "content": file_explorer, "closable": False})
+                    ],
+                },
                 {
                     "size": 3,
                     "mode": "vertical",
