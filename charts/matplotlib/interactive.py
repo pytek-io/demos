@@ -2,7 +2,6 @@ import matplotlib
 
 matplotlib.use("Agg")
 import importlib
-import io
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,18 +10,15 @@ import reflect_antd as antd
 import reflect_html as html
 
 import demos.charts.matplotlib.methods as methods
+from demos.charts.utils import matplotlib_to_svg
 
 TITLE = "Matplotlib"
 
 
-def matplotlib_to_svg(fig):
-    content = io.StringIO()
-    fig.savefig(content, format="svg")
-    return html.inline_svg(content.getvalue())
-
 
 def app():
-    period = antd.Slider(defaultValue=50, min=0, max=100)
+    with r.Controller() as controller:
+        period = antd.Slider(defaultValue=50, min=0, max=100)
 
     def content():
         importlib.reload(methods)
@@ -39,19 +35,17 @@ def app():
         axs[1, 1].set_title("Axis [1, 1]")
         for ax in axs.flat:
             ax.set(xlabel="x-label", ylabel="y-label")
-        for ax in axs.flat:
             ax.label_outer()
         return matplotlib_to_svg(fig)
 
-    with r.Controller() as controller:
-        return html.div(
-            [
-                content,
-                period,
-                html.div(
-                    [antd.Button("Update", onClick=controller.commit)],
-                    style={"margin": "auto"},
-                ),
-            ],
-            style={"width": "100%", "display": "grid", "justify-content": "center"},
-        )
+    return html.div(
+        [
+            content,
+            period,
+            html.div(
+                [antd.Button("Update", onClick=controller.commit)],
+                style={"margin": "auto"},
+            ),
+        ],
+        style={"width": "100%", "display": "grid", "justify-content": "center"},
+    )

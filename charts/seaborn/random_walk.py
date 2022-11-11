@@ -2,11 +2,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import seaborn as sns
-
 from demos.charts.utils import matplotlib_to_svg
-
-sns.set()
 import numpy as np
 
 
