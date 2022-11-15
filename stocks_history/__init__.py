@@ -327,7 +327,7 @@ def app(window: r.Window):
             ),
             antd.Col(app.content, xs=24, md=12),
         ],
-        style=lambda: {
-            "marginTop": "10vh" if window.size() >= r.WindowSize.md else None
-        },
+        style=lambda: {"marginTop": "10vh", "padding": "5vw"}
+        if window.size() >= r.WindowSize.md
+        else None,
     )
