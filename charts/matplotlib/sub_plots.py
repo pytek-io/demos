@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
-# this is to avid Python icon showing in the icon tray on Mac
+# this is to avoid Python icon showing in the icon tray on Mac
 matplotlib.use("Agg")
 
 

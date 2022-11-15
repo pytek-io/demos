@@ -1,5 +1,17 @@
 {
   "python.formatting.provider": "black",
   "python.analysis.extraPaths": [".", "..", "../reflect/reflect"],
-  "cSpell.words": ["anticon", "Setext", "dragmode"]
+  "cSpell.words": [
+    "anticon",
+    "derebit",
+    "dragmode",
+    "linspace",
+    "matplotlib",
+    "Popconfirm",
+    "pyplot",
+    "Setext",
+    "uncomplete",
+    "xlabel",
+    "ylabel"
+  ]
 }
