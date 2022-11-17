@@ -1,6 +1,7 @@
 """
     Simple todo application based on https://github.com/leonardopliski/react-antd-todo
 """
+import os
 import json
 import pathlib
 
@@ -14,7 +15,6 @@ CSS = ["demos/todo_list.css"]
 FIRST_COL_BREAK_POINTS = dict(xs=24, sm=24, md=17, lg=19, xl=20)
 SECOND_COL_BREAK_POINTS = dict(xs=24, sm=24, md=7, lg=5, xl=4)
 DEFAULT_FILE_NAME = "default_todo_list.json"
-
 
 
 def iterable_length(iterable):
@@ -34,7 +34,7 @@ def load_from_file(file):
 
 class Application:
     def __init__(self, file_path, update_title):
-        file_path = pathlib.Path(__file__).parent / file_path
+        file_path = pathlib.Path(os.getcwd(), file_path)
         if not "." in file_path.name:
             file_path = file_path.with_name(file_path.name + ".json")
         if file_path.exists():
