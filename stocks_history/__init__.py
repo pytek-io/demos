@@ -91,7 +91,7 @@ class App:
             return create_row_settings(
                 [
                     # we add a lambda to avoid recomputing the whole row when the number of days changes (this causes the focus to be lost on mobiles)
-                    html.label(lambda: signal_name(settings)),
+                    html.label(lambda: signal_name(settings), style={"textAlign": "right"}),
                     antd.InputNumber(
                         value=settings["nb_days"],
                         style={"width": "100%"},
