@@ -11,63 +11,67 @@ import reflect_antd as antd
 import reflect_html as html
 import reflect_plotly as plotly
 
-DEFAULT_TICKER = "AAPL"
 CANDLE_STICK_NAME = "candlestick"
 OHLC_NAME = "ohlc"
 MESSAGE_KEY = "key"
 
-COLOR_WIDTH = 90
-NB_DAYS_WIDTH = 90
 YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
+TICKERS_PATH = "stock_prices/nasdaq/nasdaq.json"
 
 
 def signal_name(settings):
     nb_days = settings["nb_days"]
-    return "" if nb_days is None else f"MVA {settings['nb_days']()}"
+    return "" if nb_days is None else f'MVA {settings["nb_days"]()}'
+
+
+def create_row_settings(elements):
+    return antd.Row(
+        [
+            antd.Col(element, span=span)
+            for element, span in zip(
+                elements,
+                [5, 4, 10, 5],
+            )
+        ],
+        align="middle",
+        style={"height": "100%", "marginTop": 10},
+        gutter={"xs": 8, "sm": 16, "md": 24, "lg": 32},
+    )
 
 
 class App:
     def __init__(self, ticker, stand_alone=True):
-        if not ticker():
-            ticker.set(DEFAULT_TICKER)
         today = datetime.datetime.today()
         self.title = ticker
         self.controller = r.Controller()
-        records = json.loads(
-            open(
-                pathlib.Path(__file__)
-                .parent.parent.joinpath("stock_prices/nasdaq/nasdaq.json")
-                .resolve(),
-                "r",
-            ).read()
-        )["data"]["table"]["rows"]
-        tickers = {record["symbol"]: record["name"] for record in records}
+        tickers = {
+            record["symbol"]: record["name"]
+            for record in json.loads(
+                pathlib.Path(__file__).parent.parent.joinpath(TICKERS_PATH).read_text()
+            )["data"]["table"]["rows"]
+        }
         self.ticker_autocomplete = antd.AutoComplete(
             options=[{"value": name} for name in tickers],
             value=ticker,
-            style=dict(textAlign="right", width=100),
+            style={"textAlign": "right", "width": 100},
             filterOption=r.js("autoCompleteFilterOption"),
             backfill=True,
         )
-
-        def full_name():
-            return tickers.get(self.ticker_autocomplete(), "")
 
         start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))
         end_date = antd.DatePicker(defaultValue=today)
         graph_type = antd.Select(
             defaultValue=CANDLE_STICK_NAME,
             options=[
-                dict(label="Candles", value=CANDLE_STICK_NAME),
-                dict(label="OHLC", value=OHLC_NAME),
+                {"label": "Candles", "value": CANDLE_STICK_NAME},
+                {"label": "OHLC", "value": OHLC_NAME},
             ],
-            style=dict(width=100),
+            style={"width": 100},
         )
         range_slider = antd.Switch(defaultChecked=True)
         show_legends = antd.Switch(defaultChecked=True)
-        self.header = [
-            (antd.create_form_row(label, component))
-            for label, component in [
+        self.header = antd.create_form_layout(
+            [
                 ("Ticker", self.ticker_autocomplete),
                 ("Start", start_date),
                 ("End", end_date),
@@ -75,7 +79,7 @@ class App:
                 ("Range slider", range_slider),
                 ("Show legends", show_legends),
             ]
-        ]
+        )
         signal_definitions = r.create_observable(
             [{"nb_days": 2, "color": "red"}],
             depth=3,
@@ -84,42 +88,30 @@ class App:
         )
 
         def create_signal_settings_component(settings):
-            return antd.Row(
+            return create_row_settings(
                 [
-                    antd.Col(
-                        # we add a lambda to avoid recomputing the whole row when the number of days changes (this causes the focus to be lost on mobiles)
-                        html.label(lambda: signal_name(settings)),
-                        className="ant-form-item-html.label",
-                        **antd.LEFT_BREAK_POINTS,
+                    # we add a lambda to avoid recomputing the whole row when the number of days changes (this causes the focus to be lost on mobiles)
+                    html.label(lambda: signal_name(settings)),
+                    antd.InputNumber(
+                        value=settings["nb_days"],
+                        style={"width": "100%"},
                     ),
-                    antd.Col(
-                        antd.Space(
-                            [
-                                antd.InputNumber(
-                                    value=settings["nb_days"],
-                                    style=dict(width=NB_DAYS_WIDTH),
-                                ),
-                                antd.Select(
-                                    [
-                                        antd.Select.Option("Blue", value="blue"),
-                                        antd.Select.Option("Red", value="red"),
-                                        antd.Select.Option("Green", value="green"),
-                                        antd.Select.Option("Yellow", value="yellow"),
-                                    ],
-                                    value=settings["color"],
-                                    style=dict(width=COLOR_WIDTH, textAlign="right"),
-                                ),
-                                antd.Button(
-                                    "-",
-                                    onClick=lambda: signal_definitions.remove(settings),
-                                    style=dict(width=42),
-                                ),
-                            ],
-                        ),
-                        **antd.RIGHT_BREAK_POINTS,
+                    antd.Select(
+                        [
+                            antd.Select.Option("Blue", value="blue"),
+                            antd.Select.Option("Red", value="red"),
+                            antd.Select.Option("Green", value="green"),
+                            antd.Select.Option("Yellow", value="yellow"),
+                        ],
+                        value=settings["color"],
+                        style={"width": "100%", "textAlign": "right", "maxWidth": 80},
                     ),
-                ],
-                style=dict(marginTop=10),
+                    antd.Button(
+                        "-",
+                        onClick=lambda: signal_definitions.remove(settings),
+                        style={"width": 42},
+                    ),
+                ]
             )
 
         self.signals_settings = r.create_mapping(
@@ -129,38 +121,16 @@ class App:
             controller=self.controller,
             evaluate_argument=False,
         )
-        self.signal_setting_labels = antd.Row(
+        self.signal_setting_labels = create_row_settings(
             [
-                antd.Col(**antd.LEFT_BREAK_POINTS),
-                antd.Col(
-                    antd.Space(
-                        [
-                            html.div(
-                                "days",
-                                style=dict(
-                                    width=NB_DAYS_WIDTH,
-                                    textAlign="center",
-                                ),
-                            ),
-                            html.div(
-                                "color",
-                                style=dict(
-                                    width=COLOR_WIDTH,
-                                    textAlign="center",
-                                ),
-                            ),
-                            antd.Button(
-                                "+",
-                                onClick=lambda: signal_definitions.append(
-                                    {"nb_days": 2, "color": "red"}
-                                ),
-                                style=dict(
-                                    width=42, textAlign="center", marginRight=10
-                                ),
-                            ),
-                        ],
+                None,
+                html.label("days"),
+                html.label("color"),
+                antd.Button(
+                    "+",
+                    onClick=lambda: signal_definitions.append(
+                        {"nb_days": 2, "color": "red"}
                     ),
-                    **antd.RIGHT_BREAK_POINTS,
                 ),
             ],
         )
@@ -168,6 +138,8 @@ class App:
         yahoo_data = r.create_observable(pd.DataFrame())
 
         async def fetch_data_async():
+            if not self.ticker_autocomplete():
+                return
             start, end = start_date(), end_date()
             url = f"{YAHOO_URL}{self.ticker_autocomplete()}?period1={int(start.timestamp())}&period2={int(end.timestamp())}&interval=1d&events=history"
             async with httpx.AsyncClient() as client:
@@ -240,7 +212,7 @@ class App:
         plot = plotly.Plot(
             data=data,
             layout=layout,
-            config=dict(responsive=True),
+            config={"responsive": True},
             useResizeHandler=True,
             style={
                 "height": "var(min(100%, 0.5 * vh))" if stand_alone else "100%",
@@ -249,7 +221,7 @@ class App:
             },
         )
         title = antd.Typography.Title(
-            full_name,
+            lambda: tickers.get(self.ticker_autocomplete(), ""),
             level=5,
             style=lambda: {
                 "textAlign": "center",
