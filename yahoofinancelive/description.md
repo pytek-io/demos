@@ -5,5 +5,5 @@ Please note for this application to show something you need to select tickers wh
 
 - Use external [AG Grid](https://www.ag-grid.com/) library
 
-- Edit a list of data using a input component and a right click menu
+- Edit right click menu
 - Automatic updates on asynchronous events

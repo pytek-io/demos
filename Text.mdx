@@ -1,0 +1,129 @@
+---
+group: 'mantine-core'
+package: '@mantine/core'
+title: Text
+order: 1
+polymorphic: true
+slug: /core/text/
+category: 'typography'
+description: 'Display text and links with theme styles'
+props: ['Text']
+import: "import { Text } from '@mantine/core';"
+source: 'mantine-core/src/Text/Text.tsx'
+docs: 'core/Text.mdx'
+---
+
+import { TextDemos } from '@mantine/demos';
+
+## Usage
+
+Use Text component to display text and links with theme styles. Control Text styles with props:
+
+- **size** – font-size from `theme.fontSizes` – xs, sm, md, lg, xl
+- **color** – color from `theme.colors` – red, green, blue, etc.
+- **weight** – font-weight property – 500, 700, bold, semibold, etc.
+- **underline** - underline text
+- **transform** – text-transform property – uppercase, lowercase, capitalize
+- **align** – text-align property
+- **variant** – text or link predefined styles
+
+<Demo data={TextDemos.usage} />
+
+## Dimmed
+
+Text supports special `dimmed` value in `color` prop. It sets color to `theme.colors.dark[2]` in dark theme and to `theme.colors.gray[6]` in light:
+
+<Demo data={TextDemos.dimmed} />
+
+## Gradient variant
+
+To use gradient as Text color:
+
+- set `variant` to `gradient`
+- set `gradient` to `{ from: 'color-from', to: 'color-to', deg: 135 }`, where
+  - `color-from` and `color-to` are color from `theme.colors`
+  - `deg` is linear gradient deg
+
+<Demo data={TextDemos.gradient} />
+
+## Line clamp
+
+Specify maximum amount of lines with `lineClamp` prop. This option uses [-webkit-line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp)
+CSS property ([caniuse](https://caniuse.com/css-line-clamp)). Note that `padding-bottom` cannot be set on text element:
+
+<Demo data={TextDemos.linesConfigurator} />
+
+Line clamp can also be used with any children (not only strings), for example with [TypographyStylesProvider](/core/typography-styles-provider/):
+
+<Demo data={TextDemos.lineClamp} />
+
+## Inherit styles
+
+Text always applies font-size, font-family and line-height styles,
+but in some cases this is not a desired behavior. To force Text to inherit parent
+styles set `inherit` prop. For example, highlight part of [Title](/core/title/):
+
+<Demo data={TextDemos.inherit} />
+
+## Polymorphic component
+
+Text is a [polymorphic component](/guides/polymorphic/), you can change root element:
+
+```tsx
+import { Text } from '@mantine/core';
+
+function Demo() {
+  return (
+    <Text component="a" href="https://mantine.dev/core/">
+      Anchor element
+    </Text>
+  );
+}
+```
+
+### span prop
+
+Use `span` prop as a shorthand for `component="span"`:
+
+```tsx
+import { Text } from '@mantine/core';
+
+function Demo() {
+  return (
+    <>
+      <Text span>Same as below</Text>
+      <Text component="span">Same as above</Text>
+    </>
+  );
+}
+```
+
+### Usage with react-router
+
+```tsx
+import { Link } from 'react-router-dom';
+import { Text } from '@mantine/core';
+
+function Demo() {
+  return (
+    <Text component={Link} to="/react-router">
+      React router link
+    </Text>
+  );
+}
+```
+
+### Usage with Next.js
+
+```tsx
+import Link from 'next/link';
+import { Text } from '@mantine/core';
+
+function Demo() {
+  return (
+    <Link href="/hello" passHref>
+      <Text component="a">Next link</Text>
+    </Link>
+  );
+}
+```

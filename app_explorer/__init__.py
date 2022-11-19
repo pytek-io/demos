@@ -47,7 +47,7 @@ def app(window: r.Window):
                 return component
             elif extension in ["svg", "png", "gif"]:
                 return html.img(src=actual_path_value)
-            elif extension == "md":
+            elif extension in ["md", "mdx"]:
                 return reflect_utils.parse_md_doc(open(actual_path_value, "r").read())
             else:
                 return html.div(None)
