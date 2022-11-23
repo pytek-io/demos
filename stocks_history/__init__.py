@@ -17,11 +17,12 @@ MESSAGE_KEY = "key"
 
 YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
 TICKERS_PATH = "stock_prices/nasdaq/nasdaq.json"
+DEFAULT_SIGNAL_DEFINITION = {"nb_days": 2, "color": "red"}
 
 
-def signal_name(settings):
-    nb_days = settings["nb_days"]
-    return "" if nb_days is None else f'MVA {settings["nb_days"]()}'
+def signal_name(settings_obs):
+    nb_days = settings_obs["nb_days"]
+    return "" if nb_days is None else f"MVA {nb_days()}"
 
 
 def create_row_settings(elements):
@@ -80,20 +81,26 @@ class App:
                 ("Show legends", show_legends),
             ]
         )
-        signal_definitions = r.create_observable(
-            [{"nb_days": 2, "color": "red"}],
-            depth=3,
-            key="signal_definitions",
+        signal_definitions = [DEFAULT_SIGNAL_DEFINITION.copy()]
+        signal_definitions_obs = r.ObservableList(
+            signal_definitions,
+            key="signal_definitions_obs",
             controller=self.controller,
         )
+        signal_definitions_obs_obs = r.Mapping(
+            r.DictOfObservables, signal_definitions_obs
+        )
 
-        def create_signal_settings_component(settings):
+        def create_signal_settings_row(settings):
+            settings_obs = r.DictOfObservables(settings)
             return create_row_settings(
                 [
                     # we add a lambda to avoid recomputing the whole row when the number of days changes (this causes the focus to be lost on mobiles)
-                    html.label(lambda: signal_name(settings), style={"textAlign": "right"}),
+                    html.label(
+                        lambda: signal_name(settings_obs), style={"textAlign": "right"}
+                    ),
                     antd.InputNumber(
-                        value=settings["nb_days"],
+                        value=settings_obs["nb_days"],
                         style={"width": "100%"},
                     ),
                     antd.Select(
@@ -103,20 +110,20 @@ class App:
                             antd.Select.Option("Green", value="green"),
                             antd.Select.Option("Yellow", value="yellow"),
                         ],
-                        value=settings["color"],
+                        value=settings_obs["color"],
                         style={"width": "100%", "textAlign": "right", "maxWidth": 80},
                     ),
                     antd.Button(
                         "-",
-                        onClick=lambda: signal_definitions.remove(settings),
+                        onClick=lambda: signal_definitions_obs.remove(settings),
                         style={"width": 42},
                     ),
                 ]
             )
 
-        self.signals_settings = r.create_mapping(
-            create_signal_settings_component,
-            signal_definitions,
+        self.signals_settings = r.Mapping(
+            create_signal_settings_row,
+            signal_definitions_obs,
             key="signals_settings",
             controller=self.controller,
             evaluate_argument=False,
@@ -128,16 +135,16 @@ class App:
                 html.label("color"),
                 antd.Button(
                     "+",
-                    onClick=lambda: signal_definitions.append(
-                        {"nb_days": 2, "color": "red"}
+                    onClick=lambda: signal_definitions_obs.append(
+                        DEFAULT_SIGNAL_DEFINITION.copy()
                     ),
                 ),
             ],
         )
 
-        yahoo_data = r.create_observable(pd.DataFrame())
+        yahoo_data = r.ObservableValue(pd.DataFrame())
 
-        async def fetch_data_async():
+        async def update_yahoo_data_async():
             if not self.ticker_autocomplete():
                 return
             start, end = start_date(), end_date()
@@ -151,7 +158,7 @@ class App:
                     ) from exception
                 yahoo_data.set(pd.read_csv(io.BytesIO(data.content)))
 
-        r.autorun(fetch_data_async)
+        r.autorun(update_yahoo_data_async)
 
         def generate_signal(settings):
             df = yahoo_data()
@@ -163,32 +170,30 @@ class App:
                 "y": df.Close.rolling(settings["nb_days"]()).mean(),
             }
 
-        signals = r.create_mapping(
+        signals_obs = r.Mapping(
             generate_signal,
-            signal_definitions,
-            "signal_definitions",
-            evaluate_argument=False,
+            signal_definitions_obs_obs,
+            key="signal_definitions",
+            evaluate_argument=True,
         )
 
         def data():
             df = yahoo_data()
-            if not df.empty:
-                history = {
-                    "x": df.Date,
-                    "decreasing": {"line": {"color": "cyan"}},
-                    "increasing": {"line": {"color": "gray"}},
-                    "type": graph_type(),
-                    "xaxis": "x",
-                    "yaxis": "y",
-                    "name": "Daily changes",
-                }
-                history.update(
-                    {
-                        name.lower(): df[name]
-                        for name in ["Open", "Close", "Low", "High"]
-                    }
-                )
-                return [history] + list(signals())
+            if df.empty:
+                return
+            history = {
+                "x": df.Date,
+                "decreasing": {"line": {"color": "cyan"}},
+                "increasing": {"line": {"color": "gray"}},
+                "type": graph_type(),
+                "xaxis": "x",
+                "yaxis": "y",
+                "name": "Daily changes",
+            }
+            history.update(
+                {name.lower(): df[name] for name in ["Open", "Close", "Low", "High"]}
+            )
+            return [history] + list(signals_obs())
 
         def layout():
             return {
@@ -296,10 +301,10 @@ def app(window: r.Window):
                 key="settings",
                 xs=24,
                 md=12,
+                style={"maxWidth": 500}
             ),
-            antd.Col(app.content, xs=24, md=12),
+            antd.Col(app.content, xs=24, md=12, style={"maxWidth": 500}),
         ],
-        style=lambda: {"marginTop": "10vh", "padding": "5vw"}
-        if window.size() >= r.WindowSize.md
-        else None,
+        justify="center",
+        style={"padding": 5, "width": "100%"},
     )

@@ -38,15 +38,14 @@ class Application:
         if not "." in file_path.name:
             file_path = file_path.with_name(file_path.name + ".json")
         if file_path.exists():
-            items, self.todo_item_counter = load_from_file(file_path)
+            self.items, self.todo_item_counter = load_from_file(file_path)
         else:
-            items, self.todo_item_counter = [], 0
-        file_name = file_path.name.split(".")[0]
-        self.items = r.create_observable(items, depth=3)
-        self.todo_item_rows = r.create_mapping(
+            self.items, self.todo_item_counter = [], 0
+        self.items_obs = r.ObservableList(self.items, key="self.items_obs")
+        self.todo_item_rows = r.Mapping(
             self.create_todo_item_row,
-            self.items,
-            key="self.todo_items",
+            self.items_obs,
+            key="self.todo_item_rows",
             evaluate_argument=False,
         )
         self.description = antd.Input(
@@ -71,25 +70,26 @@ class Application:
             key="row1",
             gutter=20,
         )
-
+        file_name = file_path.name.split(".", 1)[0]
         def on_change():
             nb_completed = iterable_length(
-                filter(lambda item: item["completed"](), self.items.observables())
+                filter(lambda item: item["completed"], self.items_obs)
             )
             update_title(
-                f"({nb_completed}/{len(self.items.observables())}) {file_name}"
+                f"({nb_completed}/{len(self.items_obs)}) {file_name}"
             )
-            save_to_file(file_path, (self.items.actual_data, self.todo_item_counter))
+            save_to_file(file_path, (self.items, self.todo_item_counter))
 
         r.autorun(on_change)
 
     def create_todo_item_row(self, item):
-        key = item["key"]()
+        key = item_obs["key"]
+        item_obs = r.DictOfObservables(item)
         return antd.List.Item(
             html.div(
                 antd.Tag(
-                    item["description"],
-                    color=lambda: "cyan" if item["completed"]() else "red",
+                    item_obs["description"],
+                    color=lambda: "cyan" if item_obs["completed"]() else "red",
                     className="todo-tag",
                 ),
                 className="todo-item",
@@ -100,16 +100,16 @@ class Application:
                         "X", className="remove-todo-button", type="primary", danger=True
                     ),
                     title="Are you sure you want to delete this item?",
-                    onConfirm=lambda: self.items.remove(item),
+                    onConfirm=lambda: self.items_obs.remove(item),
                 ),
                 antd.Tooltip(
                     antd.Switch(
                         checkedChildren=ant_icons.CheckOutlined(),
                         unCheckedChildren=ant_icons.CloseOutlined(),
-                        checked=item["completed"],
+                        checked=item_obs["completed"],
                     ),
                     title=lambda: "Mark as uncomplete"
-                    if item["completed"]()
+                    if item_obs["completed"]()
                     else "Mark as completed",
                 ),
             ],
@@ -119,7 +119,7 @@ class Application:
 
     def add_new_item(self):
         if self.description():
-            self.items.append(
+            self.items_obs.append(
                 {
                     "description": self.description(),
                     "completed": False,

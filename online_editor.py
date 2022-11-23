@@ -98,7 +98,7 @@ def app(window: r.Window):
         style={"position": "absolute", "left": 0, "top": 50, "right": 0, "bottom": 0},
     )
     insert_tab = rcdock.create_tab_inserter(dock_layout)
-    create_file_visible = r.create_observable(False, key="create_file_visible")
+    create_file_visible = r.ObservableValue(False, key="create_file_visible")
 
     async def open_file(file):
         if file:

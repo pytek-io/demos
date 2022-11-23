@@ -65,7 +65,7 @@ def create_grid(
         column["field"] for column in definition["columns"]
     ]
     update_fields = definition.get("update_fields", static_fields)
-    title = r.create_observable(name, key="tab title")
+    title = r.ObservableValue(name, key="tab title")
     title_component = html.div([title])
     row_count = 0
     rows = {}

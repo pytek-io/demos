@@ -165,7 +165,7 @@ def create_question_and_answer(
     answer,
     details,
 ):
-    detail_level = r.create_observable(default_detail_level_value)
+    detail_level = r.ObservableValue(default_detail_level_value)
 
     def drill():
         on_drill_down(detail_level)
@@ -221,7 +221,7 @@ def create_page(items, default_detail_level_value, is_touch_device):
 
 
 def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
-    details_level = r.create_observable(1)
+    details_level = r.ObservableValue(1)
     content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
     main_page = html.div(
         [
@@ -334,7 +334,7 @@ def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
 def app(window: r.Window):
     file_name = (window.hash() or "early_adopters").split("/")[0]
     is_touch_device = window.browser_details["is_touch_device"]
-    full_screen = r.create_observable(False)
+    full_screen = r.ObservableValue(False)
     margin = r.ResponsiveValue(xs=3, sm=10, md=10, lg=15, xl=None, xxl=30)
 
     def page_index():

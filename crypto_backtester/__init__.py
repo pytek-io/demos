@@ -116,7 +116,7 @@ class App(Server):
             strike,
             selected_instrument,
         ) = create_cascading_selects(instruments)
-        chart_data = r.create_observable(None)
+        chart_data = r.ObservableValue()
 
         async def update_chart_data():
             if selected_instrument():
