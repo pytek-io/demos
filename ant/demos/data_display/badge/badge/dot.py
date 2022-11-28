@@ -1,13 +1,13 @@
-from reflect_html import *
-from reflect_antd import Badge
-from reflect_ant_icons import NotificationOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Badge(NotificationOutlined(), dot=True),
-            Badge(NotificationOutlined(), count=0, dot=True),
-            Badge(a("Link something", href="#"), dot=True),
+            antd.Badge(ant_icons.NotificationOutlined(), dot=True),
+            antd.Badge(ant_icons.NotificationOutlined(), count=0, dot=True),
+            antd.Badge(html.a("Link something", href="#"), dot=True),
         ]
     )

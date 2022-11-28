@@ -1,69 +1,72 @@
-from reflect_html import *
-from reflect_antd import Avatar, Divider, Tooltip
-from reflect_ant_icons import UserOutlined, AntDesignOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Avatar.Group(
+            antd.Avatar.Group(
                 [
-                    Avatar(
+                    antd.Avatar(
                         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                     ),
-                    Avatar("K", style=dict(backgroundColor="#f56a00")),
-                    Tooltip(
-                        Avatar(
-                            style=dict(backgroundColor="#87d068"), icon=UserOutlined([])
+                    antd.Avatar("K", style=dict(backgroundColor="#f56a00")),
+                    antd.Tooltip(
+                        antd.Avatar(
+                            style=dict(backgroundColor="#87d068"),
+                            icon=ant_icons.UserOutlined([]),
                         ),
                         title="Ant User",
                         placement="top",
                     ),
-                    Avatar(
+                    antd.Avatar(
                         style=dict(backgroundColor="#1890ff"),
-                        icon=AntDesignOutlined([]),
+                        icon=ant_icons.AntDesignOutlined([]),
                     ),
                 ]
             ),
-            Divider(),
-            Avatar.Group(
+            antd.Divider(),
+            antd.Avatar.Group(
                 [
-                    Avatar(
+                    antd.Avatar(
                         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                     ),
-                    Avatar("K", style=dict(backgroundColor="#f56a00")),
-                    Tooltip(
-                        Avatar(
-                            style=dict(backgroundColor="#87d068"), icon=UserOutlined([])
+                    antd.Avatar("K", style=dict(backgroundColor="#f56a00")),
+                    antd.Tooltip(
+                        antd.Avatar(
+                            style=dict(backgroundColor="#87d068"),
+                            icon=ant_icons.UserOutlined([]),
                         ),
                         title="Ant User",
                         placement="top",
                     ),
-                    Avatar(
+                    antd.Avatar(
                         style=dict(backgroundColor="#1890ff"),
-                        icon=AntDesignOutlined([]),
+                        icon=ant_icons.AntDesignOutlined([]),
                     ),
                 ],
                 maxCount=2,
                 maxStyle=dict(color="#f56a00", backgroundColor="#fde3cf"),
             ),
-            Divider(),
-            Avatar.Group(
+            antd.Divider(),
+            antd.Avatar.Group(
                 [
-                    Avatar(
+                    antd.Avatar(
                         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                     ),
-                    Avatar("K", style=dict(backgroundColor="#f56a00")),
-                    Tooltip(
-                        Avatar(
-                            style=dict(backgroundColor="#87d068"), icon=UserOutlined([])
+                    antd.Avatar("K", style=dict(backgroundColor="#f56a00")),
+                    antd.Tooltip(
+                        antd.Avatar(
+                            style=dict(backgroundColor="#87d068"),
+                            icon=ant_icons.UserOutlined([]),
                         ),
                         title="Ant User",
                         placement="top",
                     ),
-                    Avatar(
+                    antd.Avatar(
                         style=dict(backgroundColor="#1890ff"),
-                        icon=AntDesignOutlined([]),
+                        icon=ant_icons.AntDesignOutlined([]),
                     ),
                 ],
                 maxCount=2,

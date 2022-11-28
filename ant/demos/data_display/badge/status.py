@@ -1,24 +1,24 @@
-from reflect_html import *
-from reflect_antd import Badge
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Badge(status="success"),
-            Badge(status="error"),
-            Badge(status="default"),
-            Badge(status="processing"),
-            Badge(status="warning"),
-            br(),
-            Badge(status="success", text="Success"),
-            br(),
-            Badge(status="error", text="Error"),
-            br(),
-            Badge(status="default", text="Default"),
-            br(),
-            Badge(status="processing", text="Processing"),
-            br(),
-            Badge(status="warning", text="Warning"),
+            antd.Badge(status="success"),
+            antd.Badge(status="error"),
+            antd.Badge(status="default"),
+            antd.Badge(status="processing"),
+            antd.Badge(status="warning"),
+            html.br(),
+            antd.Badge(status="success", text="Success"),
+            html.br(),
+            antd.Badge(status="error", text="Error"),
+            html.br(),
+            antd.Badge(status="default", text="Default"),
+            html.br(),
+            antd.Badge(status="processing", text="Processing"),
+            html.br(),
+            antd.Badge(status="warning", text="Warning"),
         ]
     )

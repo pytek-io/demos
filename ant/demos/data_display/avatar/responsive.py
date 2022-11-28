@@ -1,10 +1,10 @@
-from reflect_html import *
-from reflect_antd import Avatar
-from reflect_ant_icons import AntDesignOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Avatar(
+    return antd.Avatar(
         size=dict(xs=24, sm=32, md=40, lg=64, xl=80, xxl=100),
-        icon=AntDesignOutlined([]),
+        icon=ant_icons.AntDesignOutlined([]),
     )

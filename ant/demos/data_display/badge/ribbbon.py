@@ -1,6 +1,7 @@
-from reflect_html import *
-from reflect_antd import Badge, Card
+import reflect_antd as antd
 
 
 def app():
-    return Badge.Ribbon(Card("And raises the spyglass."), text="Pushes open the window")
+    return antd.Badge.Ribbon(
+        antd.Card("And raises the spyglass."), text="Pushes open the window"
+    )

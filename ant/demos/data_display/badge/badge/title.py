@@ -1,15 +1,17 @@
-from reflect_html import *
-from reflect_antd import Badge
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Badge(
-                a(href="#", className="head-example"),
+            antd.Badge(
+                html.a(href="#", className="head-example"),
                 count=5,
                 title="Custom hover text",
             ),
-            Badge(a(href="#", className="head-example"), count=-5, title="Negative"),
+            antd.Badge(
+                html.a(href="#", className="head-example"), count=-5, title="Negative"
+            ),
         ]
     )

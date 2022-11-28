@@ -1,53 +1,50 @@
 import random
 
-from reflect import create_observable
-from reflect_ant_icons import MinusOutlined, PlusOutlined, QuestionOutlined
-from reflect_antd import Badge, Button, Switch
-from reflect_html import *
-from reflect_utils import increment_observable_bounded
+import reflect as r
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
+import reflect_utils
 
 MIN_VALUE = 0
 MAX_VALUE = 1000
 
 
 def app():
-    count = create_observable(5)
-    show = Switch(defaultChecked=True)
-    return div(
+    count = r.create_observable(5)
+    show = antd.Switch(defaultChecked=True)
+    return html.div(
         [
-            div(
+            html.div(
                 [
-                    Badge(a(href="#", className="head-example"), count=count),
-                    Button.Group(
+                    antd.Badge(html.a(href="#", className="head-example"), count=count),
+                    antd.Button.Group(
                         [
-                            Button(
-                                MinusOutlined(),
-                                onClick=increment_observable_bounded(
+                            antd.Button(
+                                ant_icons.MinusOutlined(),
+                                onClick=reflect_utils.increment_observable_bounded(
                                     count, MIN_VALUE, MAX_VALUE, -1
                                 ),
                             ),
-                            Button(
-                                PlusOutlined(),
-                                onClick=increment_observable_bounded(
+                            antd.Button(
+                                ant_icons.PlusOutlined(),
+                                onClick=reflect_utils.increment_observable_bounded(
                                     count, MIN_VALUE, MAX_VALUE, 1
                                 ),
                             ),
-                            Button(
-                                QuestionOutlined(),
+                            antd.Button(
+                                ant_icons.QuestionOutlined(),
                                 onClick=lambda: count.set(
                                     random.randint(MIN_VALUE, MAX_VALUE)
                                 ),
                             ),
                         ]
                     ),
-                ],
+                ]
             ),
-            br(),
-            div(
-                [
-                    Badge(a(href="#", className="head-example"), dot=show),
-                    show,
-                ],
+            html.br(),
+            html.div(
+                [antd.Badge(html.a(href="#", className="head-example"), dot=show), show]
             ),
-        ],
+        ]
     )

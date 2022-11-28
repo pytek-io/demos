@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Badge, Divider
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
@@ -18,20 +18,25 @@ def app():
         "gold",
         "lime",
     ]
-    return div(
+    return html.div(
         [
-            Divider("Presets", orientation="left"),
-            div([div(Badge(color=color, text=color, key=color)) for color in colors]),
-            Divider("Custom", orientation="left"),
-            div(
+            antd.Divider("Presets", orientation="left"),
+            html.div(
                 [
-                    Badge(color="#f50", text="#f50"),
-                    br(),
-                    Badge(color="#2db7f5", text="#2db7f5"),
-                    br(),
-                    Badge(color="#87d068", text="#87d068"),
-                    br(),
-                    Badge(color="#108ee9", text="#108ee9"),
+                    html.div(antd.Badge(color=color, text=color, key=color))
+                    for color in colors
+                ]
+            ),
+            antd.Divider("Custom", orientation="left"),
+            html.div(
+                [
+                    antd.Badge(color="#f50", text="#f50"),
+                    html.br(),
+                    antd.Badge(color="#2db7f5", text="#2db7f5"),
+                    html.br(),
+                    antd.Badge(color="#87d068", text="#87d068"),
+                    html.br(),
+                    antd.Badge(color="#108ee9", text="#108ee9"),
                 ]
             ),
         ]

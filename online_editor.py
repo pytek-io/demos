@@ -3,7 +3,6 @@ import os
 import stat
 
 import reflect as r
-from reflect.utils import decode_url
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
@@ -44,7 +43,7 @@ def app(window: r.Window):
     )
     main, css, kwargs = arguments["main"], arguments.get("css", []), {}
     window.add_css(css)
-    main, kwargs = decode_url(main)
+    main, kwargs = reflect_utils.decode_url(main)
     # if "#" in main:
     #     main, kwargs = main.split("#")
     #     kwargs = json.loads(kwargs)

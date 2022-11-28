@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Avatar
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Avatar("A", shape="circle", src="http://abc.com/not-exist.jpg"),
-            Avatar("ABC", shape="circle", src="http://abc.com/not-exist.jpg"),
+            antd.Avatar("A", shape="circle", src="http://abc.com/not-exist.jpg"),
+            antd.Avatar("ABC", shape="circle", src="http://abc.com/not-exist.jpg"),
         ]
     )

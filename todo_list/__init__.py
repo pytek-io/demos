@@ -10,6 +10,7 @@ import reflect_antd as antd
 import reflect_html as html
 
 import reflect as r
+from typing import Dict, Any
 
 CSS = ["demos/todo_list.css"]
 FIRST_COL_BREAK_POINTS = dict(xs=24, sm=24, md=17, lg=19, xl=20)
@@ -22,12 +23,12 @@ def iterable_length(iterable):
 
 
 def save_to_file(file, data):
-    open(file, "w").write(json.dumps(data))
+    pathlib.Path(file).write_text(json.dumps(data))
 
 
 def load_from_file(file):
     try:
-        return json.loads(open(file, "r").read())
+        return json.loads( pathlib.Path(file).read_text())
     except Exception as e:
         raise Exception(f"Failed to read {file}. {e}") from e
 
@@ -82,7 +83,7 @@ class Application:
 
         r.autorun(on_change)
 
-    def create_todo_item_row(self, item):
+    def create_todo_item_row(self, item: Dict[str, Any]):
         key = item_obs["key"]
         item_obs = r.DictOfObservables(item)
         return antd.List.Item(

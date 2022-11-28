@@ -3,13 +3,12 @@ import pickle
 import re
 
 import mistletoe
+import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 import reflect_monaco as monaco
 import reflect_utils
 import yaml
-
-import reflect as r
 
 
 def is_header_two(token):

@@ -1,24 +1,32 @@
-from reflect_html import div
-from reflect_antd import Avatar
-from reflect_ant_icons import UserOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div([
-        div(
-            [
-                Avatar(size=64, icon=UserOutlined([])),
-                Avatar(size="large", icon=UserOutlined([])),
-                Avatar(icon=UserOutlined([])),
-                Avatar(size="small", icon=UserOutlined([])),
-            ]
-        ),
-        div(
-            [
-                Avatar(shape="square", size=64, icon=UserOutlined([])),
-                Avatar(shape="square", size="large", icon=UserOutlined([])),
-                Avatar(shape="square", icon=UserOutlined([])),
-                Avatar(shape="square", size="small", icon=UserOutlined([])),
-            ]
-        ),
-    ])
+    return html.div(
+        [
+            html.div(
+                [
+                    antd.Avatar(size=64, icon=ant_icons.UserOutlined([])),
+                    antd.Avatar(size="large", icon=ant_icons.UserOutlined([])),
+                    antd.Avatar(icon=ant_icons.UserOutlined([])),
+                    antd.Avatar(size="small", icon=ant_icons.UserOutlined([])),
+                ]
+            ),
+            html.div(
+                [
+                    antd.Avatar(
+                        shape="square", size=64, icon=ant_icons.UserOutlined([])
+                    ),
+                    antd.Avatar(
+                        shape="square", size="large", icon=ant_icons.UserOutlined([])
+                    ),
+                    antd.Avatar(shape="square", icon=ant_icons.UserOutlined([])),
+                    antd.Avatar(
+                        shape="square", size="small", icon=ant_icons.UserOutlined([])
+                    ),
+                ]
+            ),
+        ]
+    )

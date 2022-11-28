@@ -1,6 +1,8 @@
-from reflect_html import *
-from reflect_antd import Badge
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Badge(a(href="#", className="head-example"), count=5, offset=[10, 10])
+    return antd.Badge(
+        html.a(href="#", className="head-example"), count=5, offset=[10, 10]
+    )

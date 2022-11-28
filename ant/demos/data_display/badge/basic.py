@@ -1,16 +1,18 @@
-from reflect_html import *
-from reflect_antd import Badge
-from reflect_ant_icons import ClockCircleOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Badge(a(href="#", className="head-example"), count=5),
-            Badge(a(href="#", className="head-example"), count=0, showZero=True),
-            Badge(
-                a(href="#", className="head-example"),
-                count=ClockCircleOutlined(style=dict(color="#f5222d")),
+            antd.Badge(html.a(href="#", className="head-example"), count=5),
+            antd.Badge(
+                html.a(href="#", className="head-example"), count=0, showZero=True
+            ),
+            antd.Badge(
+                html.a(href="#", className="head-example"),
+                count=ant_icons.ClockCircleOutlined(style=dict(color="#f5222d")),
             ),
         ]
     )
