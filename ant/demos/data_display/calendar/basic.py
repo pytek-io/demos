@@ -1,7 +1,6 @@
-from reflect_html import *
-from reflect_antd import Calendar
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+
 
 def app():
-    return Calendar(
-        onPanelChange=Callback(print))
+    return antd.Calendar(onPanelChange=r.Callback(print))

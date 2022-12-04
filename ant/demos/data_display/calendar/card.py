@@ -1,10 +1,10 @@
-from reflect_html import *
-from reflect_antd import Calendar
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
-        Calendar(fullscreen=False, onPanelChange=Callback(print)),
+    return html.div(
+        antd.Calendar(fullscreen=False, onPanelChange=r.Callback(print)),
         className="site-calendar-demo-card",
     )

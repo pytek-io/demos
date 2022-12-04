@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 columns = [
     {
@@ -10,7 +10,7 @@ columns = [
         "width": 100,
         "fixed": "left",
         "filters": [{"text": "Joe", "value": "Joe"}, {"text": "John", "value": "John"}],
-        "onFilter": js("column_filter"),
+        "onFilter": r.js("column_filter"),
     },
     {
         "title": "Other",
@@ -20,7 +20,7 @@ columns = [
                 "dataIndex": "age",
                 "key": "age",
                 "width": 150,
-                "sorter": js("substract_attributes", "age"),
+                "sorter": r.js("substract_attributes", "age"),
             },
             {
                 "title": "Address",
@@ -72,7 +72,6 @@ columns = [
         "fixed": "right",
     },
 ]
-
 data = [
     {
         "key": i,
@@ -90,7 +89,7 @@ data = [
 
 
 def app():
-    return Table(
+    return antd.Table(
         columns=columns,
         dataSource=data,
         bordered=True,

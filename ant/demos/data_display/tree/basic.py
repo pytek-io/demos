@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Tree
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
@@ -23,7 +23,7 @@ def app():
                     "key": "0-0-1",
                     "children": [
                         {
-                            "title": span("sss", style={"color": "#1890ff"}),
+                            "title": html.span("sss", style={"color": "#1890ff"}),
                             "key": "0-0-1-0",
                         }
                     ],
@@ -31,17 +31,12 @@ def app():
             ],
         }
     ]
-
-    return Tree(
+    return antd.Tree(
         checkable=True,
         defaultExpandedKeys=["0-0-0", "0-0-1"],
         defaultSelectedKeys=["0-0-0", "0-0-1"],
         defaultCheckedKeys=["0-0-0", "0-0-1"],
-        onSelect=Callback(
-            lambda keys: print("selected", keys)
-        ),
-        onCheck=Callback(
-            lambda keys: print("checked", keys)
-        ),
+        onSelect=r.Callback(lambda keys: print("selected", keys)),
+        onCheck=r.Callback(lambda keys: print("checked", keys)),
         treeData=treeData,
     )

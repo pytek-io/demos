@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Carousel, Radio
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
@@ -10,25 +10,24 @@ def app():
         "textAlign": "center",
         "background": "#364d79",
     }
-
-    dotPosition = Radio.Group(
+    dotPosition = antd.Radio.Group(
         [
-            Radio.Button("Top", value="top"),
-            Radio.Button("Bottom", value="bottom"),
-            Radio.Button("Left", value="left"),
-            Radio.Button("Right", value="right"),
+            antd.Radio.Button("Top", value="top"),
+            antd.Radio.Button("Bottom", value="bottom"),
+            antd.Radio.Button("Left", value="left"),
+            antd.Radio.Button("Right", value="right"),
         ],
         style=dict(marginBottom=8),
     )
-    return div(
+    return html.div(
         [
             dotPosition,
-            Carousel(
+            antd.Carousel(
                 [
-                    div(h3("1", style=contentStyle)),
-                    div(h3("2", style=contentStyle)),
-                    div(h3("3", style=contentStyle)),
-                    div(h3("4", style=contentStyle)),
+                    html.div(html.h3("1", style=contentStyle)),
+                    html.div(html.h3("2", style=contentStyle)),
+                    html.div(html.h3("3", style=contentStyle)),
+                    html.div(html.h3("4", style=contentStyle)),
                 ],
                 dotPosition=dotPosition,
             ),

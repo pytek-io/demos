@@ -1,8 +1,9 @@
-from reflect_html import *
-from reflect_antd import Card
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Card(
-        [p("Card content"), p("Card content"), p("Card content")], style=dict(width=300)
+    return antd.Card(
+        [html.p("Card content"), html.p("Card content"), html.p("Card content")],
+        style=dict(width=300),
     )

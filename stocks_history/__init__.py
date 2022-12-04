@@ -52,11 +52,11 @@ class App:
             )["data"]["table"]["rows"]
         }
         self.ticker_autocomplete = antd.AutoComplete(
-            options=[{"value": name} for name in tickers],
+            options=[{"value": ticker} for ticker in tickers],
             value=ticker,
             style={"textAlign": "right", "width": 100},
             filterOption=r.js("autoCompleteFilterOption"),
-            backfill=True,
+            allowClear=True,
         )
 
         start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))

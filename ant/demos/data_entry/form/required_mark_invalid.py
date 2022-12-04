@@ -10,7 +10,7 @@ def app():
                 Radio.Group(
                     [
                         Radio.Button("Optional", value="optional"),
-                        Radio.Button("Required", value=true),
+                        Radio.Button("Required", value=True),
                         Radio.Button("Hidden", value=False),
                     ]
                 ),

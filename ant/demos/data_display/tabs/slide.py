@@ -1,22 +1,22 @@
-from reflect_html import *
-from reflect_antd import Tabs, Radio
+import reflect_antd as antd
+import reflect_html as html
 
-TabPane = Tabs.TabPane
+TabPane = antd.Tabs.TabPane
 
 
 def app():
-    mode = Radio.Group(
+    mode = antd.Radio.Group(
         [
-            Radio.Button("Horizontal", value="top"),
-            Radio.Button("Vertical", value="left"),
+            antd.Radio.Button("Horizontal", value="top"),
+            antd.Radio.Button("Vertical", value="left"),
         ],
         defaultValue="top",
         style=dict(marginBottom=8),
     )
-    return div(
+    return html.div(
         [
             mode,
-            Tabs(
+            antd.Tabs(
                 [
                     TabPane(
                         f"Content of tab {i}", tab=f"Tab-{i}", key=i, disabled=i == 28

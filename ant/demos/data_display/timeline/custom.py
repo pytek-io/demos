@@ -1,18 +1,18 @@
-from reflect_html import *
-from reflect_antd import Timeline
-from reflect_ant_icons import ClockCircleOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Timeline(
+    return antd.Timeline(
         [
-            Timeline.Item("Create a services site 2015-09-01"),
-            Timeline.Item("Solve initial network problems 2015-09-01"),
-            Timeline.Item(
+            antd.Timeline.Item("Create a services site 2015-09-01"),
+            antd.Timeline.Item("Solve initial network problems 2015-09-01"),
+            antd.Timeline.Item(
                 "Technical testing 2015-09-01",
-                dot=ClockCircleOutlined(className="timeline-clock-icon"),
+                dot=ant_icons.ClockCircleOutlined(className="timeline-clock-icon"),
                 color="red",
             ),
-            Timeline.Item("Network problems being solved 2015-09-01"),
+            antd.Timeline.Item("Network problems being solved 2015-09-01"),
         ]
     )

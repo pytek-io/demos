@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 columns = [
     {
@@ -8,7 +8,7 @@ columns = [
         "dataIndex": "name",
         "key": "name",
         "width": 150,
-        "render": js("a"),
+        "render": r.js("a"),
     },
     {"title": "Age", "dataIndex": "age", "key": "age", "width": 80},
     {"title": "Address", "dataIndex": "address", "key": "address 1", "ellipsis": True},
@@ -31,7 +31,6 @@ columns = [
         "ellipsis": True,
     },
 ]
-
 data = [
     {
         "key": "1",
@@ -58,4 +57,4 @@ data = [
 
 
 def app():
-    return Table(columns=columns, dataSource=data)
+    return antd.Table(columns=columns, dataSource=data)

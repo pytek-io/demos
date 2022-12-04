@@ -1,20 +1,20 @@
-from reflect_html import *
-from reflect_antd import Popover, Button
+import reflect_antd as antd
+import reflect_html as html
 
-content = div([p("Content"), p("Content")])
+content = html.div([html.p("Content"), html.p("Content")])
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Popover(
-                Button("Hover me"), content=content, title="Title", trigger="hover"
+            antd.Popover(
+                antd.Button("Hover me"), content=content, title="Title", trigger="hover"
             ),
-            Popover(
-                Button("Focus me"), content=content, title="Title", trigger="focus"
+            antd.Popover(
+                antd.Button("Focus me"), content=content, title="Title", trigger="focus"
             ),
-            Popover(
-                Button("Click me"), content=content, title="Title", trigger="click"
+            antd.Popover(
+                antd.Button("Click me"), content=content, title="Title", trigger="click"
             ),
         ]
     )

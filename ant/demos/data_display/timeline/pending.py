@@ -1,27 +1,27 @@
-from reflect import create_observable
-from reflect_antd import Button, Timeline
-from reflect_html import *
-from reflect_utils import toggle_observable
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
+import reflect_utils
 
 
 def app():
-    reverse = create_observable(False)
-    return div(
+    reverse = r.create_observable(False)
+    return html.div(
         [
-            Timeline(
+            antd.Timeline(
                 [
-                    Timeline.Item("Create a services site 2015-09-01"),
-                    Timeline.Item("Solve initial network problems 2015-09-01"),
-                    Timeline.Item("Technical testing 2015-09-01"),
+                    antd.Timeline.Item("Create a services site 2015-09-01"),
+                    antd.Timeline.Item("Solve initial network problems 2015-09-01"),
+                    antd.Timeline.Item("Technical testing 2015-09-01"),
                 ],
                 pending="Recording...",
                 reverse=reverse,
             ),
-            Button(
+            antd.Button(
                 "Toggle Reverse",
                 type="primary",
                 style=dict(marginTop=16),
-                onClick=toggle_observable(reverse),
+                onClick=reflect_utils.toggle_observable(reverse),
             ),
         ]
     )

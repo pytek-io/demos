@@ -1,9 +1,9 @@
-from reflect_html import *
-from reflect_antd import Image
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Image(
+    return antd.Image(
         width=200,
         src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     )

@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table, Tooltip
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 columns = [
     {
@@ -8,7 +8,7 @@ columns = [
         "dataIndex": "name",
         "key": "name",
         "width": 150,
-        "render": js("a"),
+        "render": r.js("a"),
     },
     {"title": "Age", "dataIndex": "age", "key": "age", "width": 80},
     {
@@ -16,31 +16,30 @@ columns = [
         "dataIndex": "address",
         "key": "address 1",
         "ellipsis": {"showTitle": False},
-        "render": js("render_address"),
+        "render": r.js("render_address"),
     },
     {
         "title": "Long Column Long Column Long Column",
         "dataIndex": "address",
         "key": "address 2",
         "ellipsis": {"showTitle": False},
-        "render": js("render_address"),
+        "render": r.js("render_address"),
     },
     {
         "title": "Long Column Long Column",
         "dataIndex": "address",
         "key": "address 3",
         "ellipsis": {"showTitle": False},
-        "render": js("render_address"),
+        "render": r.js("render_address"),
     },
     {
         "title": "Long Column",
         "dataIndex": "address",
         "key": "address 4",
         "ellipsis": {"showTitle": False},
-        "render": js("render_address"),
+        "render": r.js("render_address"),
     },
 ]
-
 data = [
     {
         "key": "1",
@@ -64,4 +63,4 @@ data = [
 
 
 def app():
-    return Table(columns=columns, dataSource=data)
+    return antd.Table(columns=columns, dataSource=data)

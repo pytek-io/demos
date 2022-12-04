@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Carousel
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
@@ -10,13 +10,12 @@ def app():
         "textAlign": "center",
         "background": "#364d79",
     }
-
-    return Carousel(
+    return antd.Carousel(
         [
-            div(h3("1", style=contentStyle)),
-            div(h3("2", style=contentStyle)),
-            div(h3("3", style=contentStyle)),
-            div(h3("4", style=contentStyle)),
+            html.div(html.h3("1", style=contentStyle)),
+            html.div(html.h3("2", style=contentStyle)),
+            html.div(html.h3("3", style=contentStyle)),
+            html.div(html.h3("4", style=contentStyle)),
         ],
         autoplay=True,
     )

@@ -1,24 +1,23 @@
-from reflect_html import *
-from reflect_antd import Tabs, Radio
+import reflect_antd as antd
+import reflect_html as html
 
-TabPane = Tabs.TabPane
+TabPane = antd.Tabs.TabPane
 
 
 def app():
-
-    size  = Radio.Group(
-                [
-                    Radio.Button("Small", value="small"),
-                    Radio.Button("Default", value="default"),
-                    Radio.Button("Large", value="large"),
-                ],
-                defaultValue="small",
-                style=dict(marginBottom=16),
-            )
-    return div(
+    size = antd.Radio.Group(
+        [
+            antd.Radio.Button("Small", value="small"),
+            antd.Radio.Button("Default", value="default"),
+            antd.Radio.Button("Large", value="large"),
+        ],
+        defaultValue="small",
+        style=dict(marginBottom=16),
+    )
+    return html.div(
         [
             size,
-            Tabs(
+            antd.Tabs(
                 [
                     TabPane("Content of tab 1", tab="Tab 1", key="1"),
                     TabPane("Content of tab 2", tab="Tab 2", key="2"),
@@ -28,7 +27,7 @@ def app():
                 size=size,
                 style=dict(marginBottom=32),
             ),
-            Tabs(
+            antd.Tabs(
                 [
                     TabPane("Content of card tab 1", tab="Card Tab 1", key="1"),
                     TabPane("Content of card tab 2", tab="Card Tab 2", key="2"),

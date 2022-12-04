@@ -1,36 +1,36 @@
-from reflect_html import *
-from reflect_antd import Tabs
+import reflect_antd as antd
+import reflect_html as html
 
-TabPane = Tabs.TabPane
+TabPane = antd.Tabs.TabPane
 
 
 def app():
-    return div(
-        Tabs(
+    return html.div(
+        antd.Tabs(
             [
                 TabPane(
                     [
-                        p("Content of Tab Pane 1"),
-                        p("Content of Tab Pane 1"),
-                        p("Content of Tab Pane 1"),
+                        html.p("Content of Tab Pane 1"),
+                        html.p("Content of Tab Pane 1"),
+                        html.p("Content of Tab Pane 1"),
                     ],
                     tab="Tab Title 1",
                     key="1",
                 ),
                 TabPane(
                     [
-                        p("Content of Tab Pane 2"),
-                        p("Content of Tab Pane 2"),
-                        p("Content of Tab Pane 2"),
+                        html.p("Content of Tab Pane 2"),
+                        html.p("Content of Tab Pane 2"),
+                        html.p("Content of Tab Pane 2"),
                     ],
                     tab="Tab Title 2",
                     key="2",
                 ),
                 TabPane(
                     [
-                        p("Content of Tab Pane 3"),
-                        p("Content of Tab Pane 3"),
-                        p("Content of Tab Pane 3"),
+                        html.p("Content of Tab Pane 3"),
+                        html.p("Content of Tab Pane 3"),
+                        html.p("Content of Tab Pane 3"),
                     ],
                     tab="Tab Title 3",
                     key="3",

@@ -1,6 +1,8 @@
-from reflect_html import *
-from reflect_antd import Tooltip
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Tooltip(span("Tooltip will show on mouse enter."), title="prompt text")
+    return antd.Tooltip(
+        html.span("Tooltip will show on mouse enter."), title="prompt text"
+    )

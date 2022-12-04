@@ -1,28 +1,28 @@
-from reflect_html import *
-from reflect_antd import Timeline, Radio
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    mode = Radio.Group(
+    mode = antd.Radio.Group(
         [
-            Radio("Left", value="left"),
-            Radio("Right", value="right"),
-            Radio("Alternate", value="alternate"),
+            antd.Radio("Left", value="left"),
+            antd.Radio("Right", value="right"),
+            antd.Radio("Alternate", value="alternate"),
         ],
         defaultValue="left",
         style=dict(marginBottom=20),
     )
-    return div(
+    return html.div(
         [
             mode,
-            Timeline(
+            antd.Timeline(
                 [
-                    Timeline.Item("Create a services", label="2015-09-01"),
-                    Timeline.Item(
+                    antd.Timeline.Item("Create a services", label="2015-09-01"),
+                    antd.Timeline.Item(
                         "Solve initial network problems", label="2015-09-01 09:12:11"
                     ),
-                    Timeline.Item("Technical testing"),
-                    Timeline.Item(
+                    antd.Timeline.Item("Technical testing"),
+                    antd.Timeline.Item(
                         "Network problems being solved", label="2015-09-01 09:12:11"
                     ),
                 ],

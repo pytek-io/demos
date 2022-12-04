@@ -3,7 +3,7 @@ from reflect_antd import Popconfirm, Switch, message
 from reflect import create_observable
 
 def app():
-    raise Exception("not supported")
+    raise NotImplementedError("not supported")
 #     changeCondition = value => {
 #     this.setState({ condition: value });
 #   };

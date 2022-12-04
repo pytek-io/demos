@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Tree
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
@@ -13,7 +13,6 @@ def app():
         nonlocal gData
         preKey = _preKey or 0
         tns = gData if _tns is None else _tns
-
         children = []
         for i in range(x):
             key = f"{preKey}-{i}"
@@ -28,12 +27,12 @@ def app():
             generateData(level, key, tns[index]["children"])
 
     generateData(z)
-    return Tree(
+    return antd.Tree(
         className="draggable-tree",
         defaultExpandedKeys=["0-0", "0-0-0", "0-0-0-0"],
         draggable=True,
         blockNode=True,
-        onDragEnter=Callback(lambda x: print("enter", x), args="node.key"),
-        onDrop=Callback(lambda x: print("drop", x), args="node.key"),
+        onDragEnter=r.Callback(lambda x: print("enter", x), args="node.key"),
+        onDrop=r.Callback(lambda x: print("drop", x), args="node.key"),
         treeData=gData,
     )

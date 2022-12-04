@@ -1,10 +1,10 @@
-from reflect_html import *
-from reflect_antd import Tooltip
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Tooltip(
-        span("Tooltip will destroy when hidden."),
+    return antd.Tooltip(
+        html.span("Tooltip will destroy when hidden."),
         destroyTooltipOnHide=dict(keepParent=False),
         title="prompt text",
     )

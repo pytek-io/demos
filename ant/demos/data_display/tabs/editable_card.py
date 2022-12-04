@@ -1,9 +1,10 @@
 import itertools
 
 import reflect as r
-import reflect.utils as reflect_utils
 import reflect_antd as antd
-import reflect_html as html
+
+from demos.ant.demos.utils import find_index
+
 JS_MODULES = ["ant_demo"]
 TabPane = antd.Tabs.TabPane
 initial_panes = [
@@ -21,9 +22,7 @@ def app():
 
     def onEdit(action, maybe_key):
         if action == "remove":
-            index = reflect_utils.find_index(
-                panes, lambda pane: pane[0]["key"] == maybe_key
-            )
+            index = find_index(panes, lambda pane: pane[0]["key"] == maybe_key)
             panes.pop(index)
         else:
             assert action == "add"

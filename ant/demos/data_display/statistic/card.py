@@ -1,33 +1,33 @@
-from reflect_html import *
-from reflect_antd import Statistic, Card, Row, Col
-from reflect_ant_icons import ArrowUpOutlined, ArrowDownOutlined
+import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
-        Row(
+    return html.div(
+        antd.Row(
             [
-                Col(
-                    Card(
-                        Statistic(
+                antd.Col(
+                    antd.Card(
+                        antd.Statistic(
                             title="Active",
                             value=11.28,
                             precision=2,
                             valueStyle=dict(color="#3f8600"),
-                            prefix=ArrowUpOutlined([]),
+                            prefix=ant_icons.ArrowUpOutlined([]),
                             suffix="%",
                         )
                     ),
                     span=12,
                 ),
-                Col(
-                    Card(
-                        Statistic(
+                antd.Col(
+                    antd.Card(
+                        antd.Statistic(
                             title="Idle",
                             value=9.3,
                             precision=2,
                             valueStyle=dict(color="#cf1322"),
-                            prefix=ArrowDownOutlined([]),
+                            prefix=ant_icons.ArrowDownOutlined([]),
                             suffix="%",
                         )
                     ),

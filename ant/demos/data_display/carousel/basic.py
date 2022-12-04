@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Carousel
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 contentStyle = {
     "height": "160px",
@@ -12,13 +12,12 @@ contentStyle = {
 
 
 def app():
-
-    return Carousel(
+    return antd.Carousel(
         [
-            div(h3("1", style=contentStyle)),
-            div(h3("2", style=contentStyle)),
-            div(h3("3", style=contentStyle)),
-            div(h3("4", style=contentStyle)),
+            html.div(html.h3("1", style=contentStyle)),
+            html.div(html.h3("2", style=contentStyle)),
+            html.div(html.h3("3", style=contentStyle)),
+            html.div(html.h3("4", style=contentStyle)),
         ],
-        afterChange=Callback(print),
+        afterChange=r.Callback(print),
     )

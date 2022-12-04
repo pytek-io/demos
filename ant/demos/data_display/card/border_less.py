@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Card
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
-        Card(
-            [p("Card content"), p("Card content"), p("Card content")],
+    return html.div(
+        antd.Card(
+            [html.p("Card content"), html.p("Card content"), html.p("Card content")],
             title="Card title",
             bordered=False,
             style=dict(width=300),

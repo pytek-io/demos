@@ -1,25 +1,17 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 columns = [
-    {
-        "title": "Name",
-        "dataIndex": "name",
-        "render": js("a"),
-    },
+    {"title": "Name", "dataIndex": "name", "render": r.js("a")},
     {
         "title": "Cash Assets",
         "className": "column-money",
         "dataIndex": "money",
         "align": "right",
     },
-    {
-        "title": "Address",
-        "dataIndex": "address",
-    },
+    {"title": "Address", "dataIndex": "address"},
 ]
-
 data = [
     {
         "key": "1",
@@ -43,10 +35,10 @@ data = [
 
 
 def app():
-    return Table(
+    return antd.Table(
         columns=columns,
         dataSource=data,
         bordered=True,
-        title=js("constant", "Header"),
-        footer=js("constant", "Footer"),
+        title=r.js("constant", "Header"),
+        footer=r.js("constant", "Footer"),
     )

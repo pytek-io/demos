@@ -1,7 +1,7 @@
-from reflect_html import *
-from reflect_antd import Collapse, Space
+import reflect_antd as antd
+import reflect_html as html
 
-Panel = Collapse.Panel
+Panel = antd.Collapse.Panel
 
 
 def app():
@@ -10,19 +10,19 @@ A dog is a type of domesticated animal.
 Known for its loyalty and faithfulness,
 it can be found as a welcome guest in many households across the world.
 """
-    return Space(
+    return antd.Space(
         [
-            Collapse(
+            antd.Collapse(
                 Panel(
-                    p(text),
+                    html.p(text),
                     header="This panel can only be collapsed by clicking text",
                     key="1",
                 ),
                 collapsible="header",
                 defaultActiveKey=["1"],
             ),
-            Collapse(
-                Panel(p(text), header="This panel can't be collapsed", key="1"),
+            antd.Collapse(
+                Panel(html.p(text), header="This panel can't be collapsed", key="1"),
                 collapsible="disabled",
             ),
         ],

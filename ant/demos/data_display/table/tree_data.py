@@ -1,14 +1,12 @@
-from reflect_html import *
-from reflect_antd import Table, Switch, Space
-from reflect import Callback
-
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 columns = [
     {"title": "Name", "dataIndex": "name", "key": "name"},
     {"title": "Age", "dataIndex": "age", "key": "age", "width": "12%"},
     {"title": "Address", "dataIndex": "address", "width": "30%", "key": "address"},
 ]
-
 data = [
     {
         "key": 1,
@@ -71,7 +69,7 @@ data = [
 
 
 def onChange(selectedRowKeys):
-    print(f"selectedRowKeys: {selectedRowKeys}")  # , "selectedRows: ", selectedRows)
+    print(f"selectedRowKeys: {selectedRowKeys}")
 
 
 def onSelect(key):
@@ -83,24 +81,21 @@ def onSelectAll(selected, selectedRows, changeRows):
 
 
 def app():
-    checkStrictly = Switch(defaultChecked=False)
-    return div(
+    checkStrictly = antd.Switch(defaultChecked=False)
+    return html.div(
         [
-            Space(
-                [
-                    "CheckStrictly:",
-                    checkStrictly,
-                ],
+            antd.Space(
+                ["CheckStrictly:", checkStrictly],
                 align="center",
                 style=dict(marginBottom=16),
             ),
-            Table(
+            antd.Table(
                 columns=columns,
                 rowSelection=dict(
                     checkStrictly=checkStrictly,
-                    onChange=Callback(onChange),
-                    onSelect=Callback(onSelect, args="key"),
-                    onSelectAll=Callback(onSelectAll),
+                    onChange=r.Callback(onChange),
+                    onSelect=r.Callback(onSelect, args="key"),
+                    onSelectAll=r.Callback(onSelectAll),
                 ),
                 dataSource=data,
             ),

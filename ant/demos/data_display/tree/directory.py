@@ -1,8 +1,7 @@
-from reflect_html import *
-from reflect_antd import Tree
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
 
-DirectoryTree = Tree.DirectoryTree
+DirectoryTree = antd.Tree.DirectoryTree
 
 
 def app():
@@ -24,15 +23,10 @@ def app():
             ],
         },
     ]
-
     return DirectoryTree(
         multiple=True,
         defaultExpandAll=True,
-        onSelect=Callback(
-            lambda keys: print("selected", keys)
-        ),
-        onExpand=Callback(
-            lambda keys: print("expanded", keys)
-        ),
+        onSelect=r.Callback(lambda keys: print("selected", keys)),
+        onExpand=r.Callback(lambda keys: print("expanded", keys)),
         treeData=treeData,
     )

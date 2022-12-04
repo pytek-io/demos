@@ -1,14 +1,23 @@
-from reflect_html import *
-from reflect_antd import Card, Col, Row
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
-        Row(
+    return html.div(
+        antd.Row(
             [
-                Col(Card("Card content", title="Card title", bordered=False), span=8),
-                Col(Card("Card content", title="Card title", bordered=False), span=8),
-                Col(Card("Card content", title="Card title", bordered=False), span=8),
+                antd.Col(
+                    antd.Card("Card content", title="Card title", bordered=False),
+                    span=8,
+                ),
+                antd.Col(
+                    antd.Card("Card content", title="Card title", bordered=False),
+                    span=8,
+                ),
+                antd.Col(
+                    antd.Card("Card content", title="Card title", bordered=False),
+                    span=8,
+                ),
             ],
             gutter=16,
         ),

@@ -1,21 +1,20 @@
-from reflect_html import *
-from reflect_antd import Popover, Button
-
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    content = div([p("Content"), p("Content")])
-    text = span("Title")
-    return div(
+    content = html.div([html.p("Content"), html.p("Content")])
+    text = html.span("Title")
+    return html.div(
         [
-            Popover(
-                Button("Align edge"),
+            antd.Popover(
+                antd.Button("Align edge"),
                 placement="topLeft",
                 title=text,
                 content=content,
             ),
-            Popover(
-                Button("Arrow points to center"),
+            antd.Popover(
+                antd.Button("Arrow points to center"),
                 placement="topLeft",
                 title=text,
                 content=content,

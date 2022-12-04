@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflect import js, Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
@@ -20,15 +20,15 @@ def app():
                     ],
                 },
             ],
-            "onFilter": js("column_filter"),
-            "sorter": js("substract_attributes", "name.length"),
+            "onFilter": r.js("column_filter"),
+            "sorter": r.js("substract_attributes", "name.length"),
             "sortDirections": ["descend"],
         },
         {
             "title": "Age",
             "dataIndex": "age",
             "defaultSortOrder": "descend",
-            "sorter": js("substract_attributes", "age"),
+            "sorter": r.js("substract_attributes", "age"),
         },
         {
             "title": "Address",
@@ -38,12 +38,11 @@ def app():
                 {"text": "New York", "value": "New York"},
             ],
             "filterMultiple": False,
-            "onFilter": js("column_filter"),
-            "sorter": js("substract_attributes", "address.length"),
+            "onFilter": r.js("column_filter"),
+            "sorter": r.js("substract_attributes", "address.length"),
             "sortDirections": ["descend", "ascend"],
         },
     ]
-
     data = [
         {
             "key": "1",
@@ -65,8 +64,8 @@ def app():
         },
         {"key": "4", "name": "Jim Red", "age": 32, "address": "London No. 2 Lake Park"},
     ]
-    return Table(
+    return antd.Table(
         columns=columns,
         dataSource=data,
-        onChange=Callback(lambda x: print("params", x)),
+        onChange=r.Callback(lambda x: print("params", x)),
     )

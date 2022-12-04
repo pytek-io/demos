@@ -1,9 +1,8 @@
-from reflect_html import *
-from reflect_antd import Tabs
-from reflect import Callback
-from reflect import create_observable
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-TabPane = Tabs.TabPane
+TabPane = antd.Tabs.TabPane
 
 
 def callback(key):
@@ -11,12 +10,12 @@ def callback(key):
 
 
 def app():
-    return Tabs(
+    return antd.Tabs(
         [
             TabPane("Content of Tab Pane 1", tab="Tab 1", key="1"),
             TabPane("Content of Tab Pane 2", tab="Tab 2", key="2"),
             TabPane("Content of Tab Pane 3", tab="Tab 3", key="3"),
         ],
-        onChange=Callback(callback),
+        onChange=r.Callback(callback),
         type="card",
     )

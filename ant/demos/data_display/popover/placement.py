@@ -1,31 +1,31 @@
-from reflect_html import *
-from reflect_antd import Popover, Button
+import reflect_antd as antd
+import reflect_html as html
+
 
 def app():
-    content = div([p("Content"), p("Content")])
-    text = span("Title")
+    content = html.div([html.p("Content"), html.p("Content")])
+    text = html.span("Title")
     buttonWidth = 70
-
-    return div(
+    return html.div(
         [
-            div(
+            html.div(
                 [
-                    Popover(
-                        Button("TL"),
+                    antd.Popover(
+                        antd.Button("TL"),
                         placement="topLeft",
                         title=text,
                         content=content,
                         trigger="click",
                     ),
-                    Popover(
-                        Button("Top"),
+                    antd.Popover(
+                        antd.Button("Top"),
                         placement="top",
                         title=text,
                         content=content,
                         trigger="click",
                     ),
-                    Popover(
-                        Button("TR"),
+                    antd.Popover(
+                        antd.Button("TR"),
                         placement="topRight",
                         title=text,
                         content=content,
@@ -34,24 +34,24 @@ def app():
                 ],
                 style=dict(marginLeft=buttonWidth, whiteSpace="nowrap"),
             ),
-            div(
+            html.div(
                 [
-                    Popover(
-                        Button("LT"),
+                    antd.Popover(
+                        antd.Button("LT"),
                         placement="leftTop",
                         title=text,
                         content=content,
                         trigger="click",
                     ),
-                    Popover(
-                        Button("Left"),
+                    antd.Popover(
+                        antd.Button("Left"),
                         placement="left",
                         title=text,
                         content=content,
                         trigger="click",
                     ),
-                    Popover(
-                        Button("LB"),
+                    antd.Popover(
+                        antd.Button("LB"),
                         placement="leftBottom",
                         title=text,
                         content=content,
@@ -60,24 +60,24 @@ def app():
                 ],
                 style=dict(width=buttonWidth, float="left"),
             ),
-            div(
+            html.div(
                 [
-                    Popover(
-                        Button("RT"),
+                    antd.Popover(
+                        antd.Button("RT"),
                         placement="rightTop",
                         title=text,
                         content=content,
                         trigger="click",
                     ),
-                    Popover(
-                        Button("Right"),
+                    antd.Popover(
+                        antd.Button("Right"),
                         placement="right",
                         title=text,
                         content=content,
                         trigger="click",
                     ),
-                    Popover(
-                        Button("RB"),
+                    antd.Popover(
+                        antd.Button("RB"),
                         placement="rightBottom",
                         title=text,
                         content=content,
@@ -86,24 +86,24 @@ def app():
                 ],
                 style=dict(width=buttonWidth, marginLeft=buttonWidth * 4 + 24),
             ),
-            div(
+            html.div(
                 [
-                    Popover(
-                        Button("BL"),
+                    antd.Popover(
+                        antd.Button("BL"),
                         placement="bottomLeft",
                         title=text,
                         content=content,
                         trigger="click",
                     ),
-                    Popover(
-                        Button("Bottom"),
+                    antd.Popover(
+                        antd.Button("Bottom"),
                         placement="bottom",
                         title=text,
                         content=content,
                         trigger="click",
                     ),
-                    Popover(
-                        Button("BR"),
+                    antd.Popover(
+                        antd.Button("BR"),
                         placement="bottomRight",
                         title=text,
                         content=content,

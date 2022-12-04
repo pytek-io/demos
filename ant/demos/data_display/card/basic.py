@@ -1,17 +1,19 @@
-from reflect_html import *
-from reflect_antd import Card
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
+    return html.div(
         [
-            Card("More", title="Default size card", extra=a(href=True)),
-            p("Card content"),
-            p("Card content"),
-            p("Card content"),
-            Card("More", size="small", title="Small size card", extra=a(href=True)),
-            p("Card content"),
-            p("Card content"),
-            p("Card content"),
+            antd.Card("More", title="Default size card", extra=html.a(href=True)),
+            html.p("Card content"),
+            html.p("Card content"),
+            html.p("Card content"),
+            antd.Card(
+                "More", size="small", title="Small size card", extra=html.a(href=True)
+            ),
+            html.p("Card content"),
+            html.p("Card content"),
+            html.p("Card content"),
         ]
     )

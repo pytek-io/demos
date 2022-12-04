@@ -1,35 +1,25 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflect import js, Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 columns = [
     {"title": "Name", "dataIndex": "name"},
     {
         "title": "Chinese Score",
         "dataIndex": "chinese",
-        "sorter": {
-            "compare": js("substract_attributes", "chinese"),
-            "multiple": 3,
-        },
+        "sorter": {"compare": r.js("substract_attributes", "chinese"), "multiple": 3},
     },
     {
         "title": "Math Score",
         "dataIndex": "math",
-        "sorter": {
-            "compare": js("substract_attributes", "math"),
-            "multiple": 2,
-        },
+        "sorter": {"compare": r.js("substract_attributes", "math"), "multiple": 2},
     },
     {
         "title": "English Score",
         "dataIndex": "english",
-        "sorter": {
-            "compare": js("substract_attributes", "english"),
-            "multiple": 1,
-        },
+        "sorter": {"compare": r.js("substract_attributes", "english"), "multiple": 1},
     },
 ]
-
 data = [
     {"key": "1", "name": "John Brown", "chinese": 98, "math": 60, "english": 70},
     {"key": "2", "name": "Jim Green", "chinese": 98, "math": 66, "english": 89},
@@ -39,8 +29,8 @@ data = [
 
 
 def app():
-    return Table(
+    return antd.Table(
         columns=columns,
         dataSource=data,
-        onChange=Callback(lambda x: print("params", x)),
+        onChange=r.Callback(lambda x: print("params", x)),
     )

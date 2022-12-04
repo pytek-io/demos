@@ -1,11 +1,11 @@
-from reflect_html import *
-from reflect_antd import Tabs
+import reflect_antd as antd
+import reflect_html as html
 
-TabPane = Tabs.TabPane
+TabPane = antd.Tabs.TabPane
 
 
 def app():
-    return Tabs(
+    return antd.Tabs(
         [
             TabPane("Tab 1 content", tab="Tab 1", key="1"),
             TabPane("Tab 2 content", tab="Tab 2", disabled=True, key="2"),

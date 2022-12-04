@@ -1,15 +1,15 @@
-from reflect_html import *
-from reflect_antd import Image
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Image.PreviewGroup(
+    return antd.Image.PreviewGroup(
         [
-            Image(
+            antd.Image(
                 width=200,
                 src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
             ),
-            Image(
+            antd.Image(
                 width=200,
                 src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg",
             ),

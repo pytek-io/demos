@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 data = [
     {
@@ -44,39 +44,20 @@ data = [
         "address": "Dublin No. 2 Lake Park",
     },
 ]
-
-render = js("merge_col", 4)
-
+render = r.js("merge_col", 4)
 columns = [
-    {
-        "title": "Name",
-        "dataIndex": "name",
-        "render": js("render_name"),
-    },
-    {
-        "title": "Age",
-        "dataIndex": "age",
-        "render": render,
-    },
+    {"title": "Name", "dataIndex": "name", "render": r.js("render_name")},
+    {"title": "Age", "dataIndex": "age", "render": render},
     {
         "title": "Home phone",
         "colSpan": 2,
         "dataIndex": "tel",
-        "render": js("render_home_phone", 4),
+        "render": r.js("render_home_phone", 4),
     },
-    {
-        "title": "Phone",
-        "colSpan": 0,
-        "dataIndex": "phone",
-        "render": render,
-    },
-    {
-        "title": "Address",
-        "dataIndex": "address",
-        "render": render,
-    },
+    {"title": "Phone", "colSpan": 0, "dataIndex": "phone", "render": render},
+    {"title": "Address", "dataIndex": "address", "render": render},
 ]
 
 
 def app():
-    return Table(columns=columns, dataSource=data, bordered=True)
+    return antd.Table(columns=columns, dataSource=data, bordered=True)

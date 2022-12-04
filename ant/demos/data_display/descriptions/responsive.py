@@ -1,29 +1,29 @@
-from reflect_html import *
-from reflect_antd import Descriptions
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return div(
-        Descriptions(
+    return html.div(
+        antd.Descriptions(
             [
-                Descriptions.Item("Cloud Database", label="Product"),
-                Descriptions.Item("Prepaid", label="Billing"),
-                Descriptions.Item("18:00:00", label="time"),
-                Descriptions.Item("$80.00", label="Amount"),
-                Descriptions.Item("$20.00", label="Discount"),
-                Descriptions.Item("$60.00", label="Official"),
-                Descriptions.Item(
+                antd.Descriptions.Item("Cloud Database", label="Product"),
+                antd.Descriptions.Item("Prepaid", label="Billing"),
+                antd.Descriptions.Item("18:00:00", label="time"),
+                antd.Descriptions.Item("$80.00", label="Amount"),
+                antd.Descriptions.Item("$20.00", label="Discount"),
+                antd.Descriptions.Item("$60.00", label="Official"),
+                antd.Descriptions.Item(
                     [
                         "Data disk type: MongoDB",
-                        br(),
+                        html.br(),
                         "Database version: 3.4",
-                        br(),
+                        html.br(),
                         "Package: dds.mongo.mid",
-                        br(),
+                        html.br(),
                         "Storage space: 10 GB",
-                        br(),
+                        html.br(),
                         "Replication factor: 3",
-                        br(),
+                        html.br(),
                         "Region: East China 1",
                     ],
                     label="Config Info",

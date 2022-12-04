@@ -1,18 +1,18 @@
-from reflect_html import *
-from reflect_antd import Descriptions, Divider
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
-    return Descriptions(
+    return antd.Descriptions(
         [
-            Descriptions.Item(
+            antd.Descriptions.Item(
                 "Cloud Database",
                 label="Product",
                 labelStyle=labelStyle,
                 contentStyle=contentStyle,
             ),
-            Descriptions.Item("Prepaid", label="Billing Mode"),
-            Descriptions.Item("YES", label="Automatic Renewal"),
+            antd.Descriptions.Item("Prepaid", label="Billing Mode"),
+            antd.Descriptions.Item("YES", label="Automatic Renewal"),
         ],
         title="User Info",
         bordered=bordered,
@@ -20,11 +20,11 @@ def app():
 
 
 def app():
-    return Descriptions(
+    return antd.Descriptions(
         [
-            Descriptions.Item("Cloud Database", label="Product"),
-            Descriptions.Item("Prepaid", label="Billing Mode"),
-            Descriptions.Item(
+            antd.Descriptions.Item("Cloud Database", label="Product"),
+            antd.Descriptions.Item("Prepaid", label="Billing Mode"),
+            antd.Descriptions.Item(
                 "YES",
                 label="Automatic Renewal",
                 labelStyle=dict(color="orange"),
@@ -39,4 +39,4 @@ def app():
 
 
 def app():
-    return Divider()
+    return antd.Divider()

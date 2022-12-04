@@ -1,38 +1,15 @@
-from reflect_antd import Table
-from reflect import js
+import reflect as r
+import reflect_antd as antd
 
 
 def app():
     columns = [
-        {
-            "title": "Name",
-            "dataIndex": "name",
-            "key": "name",
-            # "render": js("a"),
-        },
-        {
-            "title": "Age",
-            "dataIndex": "age",
-            "key": "age",
-        },
-        {
-            "title": "Address",
-            "dataIndex": "address",
-            "key": "address",
-        },
-        {
-            "title": "Tags",
-            "key": "tags",
-            "dataIndex": "tags",
-            # "render": js("render_tags"),
-        },
-        {
-            "title": "Action",
-            "key": "action",
-            # "render": js("render_action"),
-        },
+        {"title": "Name", "dataIndex": "name", "key": "name"},
+        {"title": "Age", "dataIndex": "age", "key": "age"},
+        {"title": "Address", "dataIndex": "address", "key": "address"},
+        {"title": "Tags", "key": "tags", "dataIndex": "tags"},
+        {"title": "Action", "key": "action"},
     ]
-
     data = [
         {
             "key": "1",
@@ -56,4 +33,4 @@ def app():
             "tags": ["cool", "teacher"],
         },
     ]
-    return Table(columns=columns, dataSource=data)
+    return antd.Table(columns=columns, dataSource=data)

@@ -1,8 +1,8 @@
-from reflect_html import *
-from reflect_antd import Collapse
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
-Panel = Collapse.Panel
+Panel = antd.Collapse.Panel
 
 
 def app():
@@ -11,18 +11,18 @@ A dog is a type of domesticated animal.
 Known for its loyalty and faithfulness,
 it can be found as a welcome guest in many households across the world.
 """
-    return Collapse(
+    return antd.Collapse(
         [
             Panel(
-                Collapse(
-                    Panel(p(text), header="This is panel nest panel", key="1"),
+                antd.Collapse(
+                    Panel(html.p(text), header="This is panel nest panel", key="1"),
                     defaultActiveKey="1",
                 ),
                 header="This is panel header 1",
                 key="1",
             ),
-            Panel(p(text), header="This is panel header 2", key="2"),
-            Panel(p(text), header="This is panel header 3", key="3"),
+            Panel(html.p(text), header="This is panel header 2", key="2"),
+            Panel(html.p(text), header="This is panel header 3", key="3"),
         ],
-        onChange=Callback(lambda key: print(f"{key} clicked")),
+        onChange=r.Callback(lambda key: print(f"{key} clicked")),
     )

@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Tree
+import reflect_antd as antd
+import reflect_html as html
 
 
 def dig(path="0", level=3):
@@ -15,4 +15,4 @@ def dig(path="0", level=3):
 
 def app():
     treeData = dig()
-    return Tree(treeData=treeData, height=233, defaultExpandAll=True)
+    return antd.Tree(treeData=treeData, height=233, defaultExpandAll=True)

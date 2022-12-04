@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflect import js
+import reflect as r
+import reflect_antd as antd
+import reflect_html as html
 
 
 def app():
@@ -32,23 +32,11 @@ def app():
             "key": "operation",
             "fixed": "right",
             "width": 100,
-            "render": js("constant", a("action")),
+            "render": r.js("constant", html.a("action")),
         },
     ]
-
     data = [
-        {
-            "key": "1",
-            "name": "John Brown",
-            "age": 32,
-            "address": "New York Park",
-        },
-        {
-            "key": "2",
-            "name": "Jim Green",
-            "age": 40,
-            "address": "London Park",
-        },
+        {"key": "1", "name": "John Brown", "age": 32, "address": "New York Park"},
+        {"key": "2", "name": "Jim Green", "age": 40, "address": "London Park"},
     ]
-
-    return Table(columns=columns, dataSource=data, scroll=dict(x=1300))
+    return antd.Table(columns=columns, dataSource=data, scroll=dict(x=1300))

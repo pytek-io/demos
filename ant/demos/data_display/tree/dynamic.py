@@ -1,7 +1,7 @@
-from asyncio import sleep
+import asyncio
 
-from reflect import Callback, create_observable
-from reflect_antd import Tree
+import reflect as r
+import reflect_antd as antd
 
 
 def app():
@@ -25,16 +25,16 @@ def app():
             node_id += 1
             yield data
 
-    treeData = create_observable(list(generate_nodes()))
+    treeData = r.create_observable(list(generate_nodes()))
 
     async def load_data(current_node_id):
-        await sleep(0.5)
+        await asyncio.sleep(0.5)
         nodes[current_node_id]["children"] = list(generate_nodes())
         treeData.touch()
 
-    return Tree(
+    return antd.Tree(
         style=dict(width="100%"),
-        loadData=Callback(load_data, args="id", is_promise=True),
+        loadData=r.Callback(load_data, args="id", is_promise=True),
         treeData=treeData,
-        onSelect=Callback(lambda x: print(x))
+        onSelect=r.Callback(lambda x: print(x)),
     )
