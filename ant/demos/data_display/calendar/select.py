@@ -4,7 +4,7 @@ import reflect_html as html
 
 
 def app():
-    selected_value = r.create_observable(None)
+    selected_value = r.ObservableValue()
 
     def selected_value_formatted():
         value = selected_value()

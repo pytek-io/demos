@@ -11,10 +11,10 @@ def app():
                 [
                     html.div(className="logo"),
                     antd.Menu(
-                        [
-                            antd.Menu.Item("nav 1", key="1"),
-                            antd.Menu.Item("nav 2", key="2"),
-                            antd.Menu.Item("nav 3", key="3"),
+                        items=[
+                            {"label": "nav 1", "key": "1"},
+                            {"label": "nav 2", "key": "2"},
+                            {"label": "nav 3", "key": "3"},
                         ],
                         theme="dark",
                         mode="horizontal",

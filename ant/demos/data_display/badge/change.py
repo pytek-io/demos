@@ -11,7 +11,7 @@ MAX_VALUE = 1000
 
 
 def app():
-    count = r.create_observable(5)
+    count = r.ObservableValue(5)
     show = antd.Switch(defaultChecked=True)
     return html.div(
         [

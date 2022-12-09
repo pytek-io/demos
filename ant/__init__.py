@@ -3,12 +3,13 @@ import pickle
 import re
 
 import mistletoe
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 import reflect_monaco as monaco
 import reflect_utils
 import yaml
+
+import reflect as r
 
 
 def is_header_two(token):
@@ -46,7 +47,7 @@ CSS = [
 ]
 JS_MODULES = ["ant_demo"]
 FAVICON = ANT_LOGO_ICON_PATH
-DISPLAY_DEMOS_ERRORS = False
+DISPLAY_DEMOS_ERRORS = True
 
 
 def create_code_editor(
@@ -90,18 +91,18 @@ def build_menu(root_directory):
             )[:2]
             COMPONENTS_PROPS[component_name] = nb_cols
             menuItems.append(
-                antd.Menu.Item(nice_component_name, key=f"{category}/{component_name}")
+                {"label": nice_component_name, "key": f"{category}/{component_name}"}
             )
         sub_menus.append(
-            antd.Menu.SubMenu(menuItems, title=nice_category_name, key=category)
+            {"children": menuItems, "label": nice_category_name, "key": category}
         )
-    first_item_key = sub_menus[0].children[0]._key
+    first_item_key = sub_menus[0]["children"][0]["key"]
     current_method = r.ObservableValue(first_item_key, key="first_item_key")
     return current_method, antd.Menu(
-        sub_menus,
+        items=sub_menus,
         mode="inline",
         defaultSelectedKeys=[first_item_key],
-        defaultOpenKeys=[sub_menus[0]._key],
+        defaultOpenKeys=[sub_menus[0]["key"]],
         onClick=r.Callback(current_method.set, args="key"),
     )
 

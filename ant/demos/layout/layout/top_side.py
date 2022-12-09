@@ -2,7 +2,6 @@ import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
 
-SubMenu = antd.Menu.SubMenu
 Header, Content, Footer, Sider = (
     antd.Layout.Header,
     antd.Layout.Content,
@@ -18,10 +17,10 @@ def app():
                 [
                     html.div(className="logo"),
                     antd.Menu(
-                        [
-                            antd.Menu.Item("nav 1", key="1"),
-                            antd.Menu.Item("nav 2", key="2"),
-                            antd.Menu.Item("nav 3", key="3"),
+                        items=[
+                            {"label": "nav 1", "key": "1"},
+                            {"label": "nav 2", "key": "2"},
+                            {"label": "nav 3", "key": "3"},
                         ],
                         theme="dark",
                         mode="horizontal",
@@ -44,40 +43,40 @@ def app():
                         [
                             Sider(
                                 antd.Menu(
-                                    [
-                                        SubMenu(
-                                            [
-                                                antd.Menu.Item("option1", key="1"),
-                                                antd.Menu.Item("option2", key="2"),
-                                                antd.Menu.Item("option3", key="3"),
-                                                antd.Menu.Item("option4", key="4"),
+                                    items=[
+                                        {
+                                            "children": [
+                                                {"label": "option1", "key": "1"},
+                                                {"label": "option2", "key": "2"},
+                                                {"label": "option3", "key": "3"},
+                                                {"label": "option4", "key": "4"},
                                             ],
-                                            key="sub1",
-                                            icon=ant_icons.UserOutlined([]),
-                                            title="subnav 1",
-                                        ),
-                                        SubMenu(
-                                            [
-                                                antd.Menu.Item("option5", key="5"),
-                                                antd.Menu.Item("option6", key="6"),
-                                                antd.Menu.Item("option7", key="7"),
-                                                antd.Menu.Item("option8", key="8"),
+                                            "key": "sub1",
+                                            "icon": ant_icons.UserOutlined([]),
+                                            "label": "subnav 1",
+                                        },
+                                        {
+                                            "children": [
+                                                {"label": "option5", "key": "5"},
+                                                {"label": "option6", "key": "6"},
+                                                {"label": "option7", "key": "7"},
+                                                {"label": "option8", "key": "8"},
                                             ],
-                                            key="sub2",
-                                            icon=ant_icons.LaptopOutlined([]),
-                                            title="subnav 2",
-                                        ),
-                                        SubMenu(
-                                            [
-                                                antd.Menu.Item("option9", key="9"),
-                                                antd.Menu.Item("option10", key="10"),
-                                                antd.Menu.Item("option11", key="11"),
-                                                antd.Menu.Item("option12", key="12"),
+                                            "key": "sub2",
+                                            "icon": ant_icons.LaptopOutlined([]),
+                                            "label": "subnav 2",
+                                        },
+                                        {
+                                            "children": [
+                                                {"label": "option9", "key": "9"},
+                                                {"label": "option10", "key": "10"},
+                                                {"label": "option11", "key": "11"},
+                                                {"label": "option12", "key": "12"},
                                             ],
-                                            key="sub3",
-                                            icon=ant_icons.NotificationOutlined([]),
-                                            title="subnav 3",
-                                        ),
+                                            "key": "sub3",
+                                            "icon": ant_icons.NotificationOutlined([]),
+                                            "label": "subnav 3",
+                                        },
                                     ],
                                     mode="inline",
                                     defaultSelectedKeys=["1"],

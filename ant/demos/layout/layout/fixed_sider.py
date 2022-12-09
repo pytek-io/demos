@@ -17,31 +17,47 @@ def app():
                 [
                     html.div(className="logo"),
                     antd.Menu(
-                        [
-                            antd.Menu.Item(
-                                "nav 1", key="1", icon=ant_icons.UserOutlined([])
-                            ),
-                            antd.Menu.Item(
-                                "nav 2", key="2", icon=ant_icons.VideoCameraOutlined([])
-                            ),
-                            antd.Menu.Item(
-                                "nav 3", key="3", icon=ant_icons.UploadOutlined([])
-                            ),
-                            antd.Menu.Item(
-                                "nav 4", key="4", icon=ant_icons.BarChartOutlined([])
-                            ),
-                            antd.Menu.Item(
-                                "nav 5", key="5", icon=ant_icons.CloudOutlined([])
-                            ),
-                            antd.Menu.Item(
-                                "nav 6", key="6", icon=ant_icons.AppstoreOutlined([])
-                            ),
-                            antd.Menu.Item(
-                                "nav 7", key="7", icon=ant_icons.TeamOutlined([])
-                            ),
-                            antd.Menu.Item(
-                                "nav 8", key="8", icon=ant_icons.ShopOutlined([])
-                            ),
+                        items=[
+                            {
+                                "label": "nav 1",
+                                "key": "1",
+                                "icon": ant_icons.UserOutlined([]),
+                            },
+                            {
+                                "label": "nav 2",
+                                "key": "2",
+                                "icon": ant_icons.VideoCameraOutlined([]),
+                            },
+                            {
+                                "label": "nav 3",
+                                "key": "3",
+                                "icon": ant_icons.UploadOutlined([]),
+                            },
+                            {
+                                "label": "nav 4",
+                                "key": "4",
+                                "icon": ant_icons.BarChartOutlined([]),
+                            },
+                            {
+                                "label": "nav 5",
+                                "key": "5",
+                                "icon": ant_icons.CloudOutlined([]),
+                            },
+                            {
+                                "label": "nav 6",
+                                "key": "6",
+                                "icon": ant_icons.AppstoreOutlined([]),
+                            },
+                            {
+                                "label": "nav 7",
+                                "key": "7",
+                                "icon": ant_icons.TeamOutlined([]),
+                            },
+                            {
+                                "label": "nav 8",
+                                "key": "8",
+                                "icon": ant_icons.ShopOutlined([]),
+                            },
                         ],
                         theme="dark",
                         mode="inline",

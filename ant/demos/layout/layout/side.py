@@ -1,7 +1,8 @@
-import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
+
+import reflect as r
 
 Header, Content, Footer, Sider = (
     antd.Layout.Header,
@@ -9,7 +10,6 @@ Header, Content, Footer, Sider = (
     antd.Layout.Footer,
     antd.Layout.Sider,
 )
-SubMenu = antd.Menu.SubMenu
 
 
 def app():
@@ -25,35 +25,41 @@ def app():
                 [
                     html.div(className="logo"),
                     antd.Menu(
-                        [
-                            antd.Menu.Item(
-                                "Option 1", key="1", icon=ant_icons.PieChartOutlined([])
-                            ),
-                            antd.Menu.Item(
-                                "Option 2", key="2", icon=ant_icons.DesktopOutlined([])
-                            ),
-                            SubMenu(
-                                [
-                                    antd.Menu.Item("Tom", key="3"),
-                                    antd.Menu.Item("Bill", key="4"),
-                                    antd.Menu.Item("Alex", key="5"),
+                        items=[
+                            {
+                                "label": "Option 1",
+                                "key": "1",
+                                "icon": ant_icons.PieChartOutlined([]),
+                            },
+                            {
+                                "label": "Option 2",
+                                "key": "2",
+                                "icon": ant_icons.DesktopOutlined([]),
+                            },
+                            {
+                                "children": [
+                                    {"label": "Tom", "key": "3"},
+                                    {"label": "Bill", "key": "4"},
+                                    {"label": "Alex", "key": "5"},
                                 ],
-                                key="sub1",
-                                icon=ant_icons.UserOutlined([]),
-                                title="User",
-                            ),
-                            SubMenu(
-                                [
-                                    antd.Menu.Item("Team 1", key="6"),
-                                    antd.Menu.Item("Team 2", key="8"),
+                                "key": "sub1",
+                                "icon": ant_icons.UserOutlined([]),
+                                "label": "User",
+                            },
+                            {
+                                "children": [
+                                    {"label": "Team 1", "key": "6"},
+                                    {"label": "Team 2", "key": "8"},
                                 ],
-                                key="sub2",
-                                icon=ant_icons.TeamOutlined([]),
-                                title="Team",
-                            ),
-                            antd.Menu.Item(
-                                "Files", key="9", icon=ant_icons.FileOutlined([])
-                            ),
+                                "key": "sub2",
+                                "icon": ant_icons.TeamOutlined([]),
+                                "label": "Team",
+                            },
+                            {
+                                "label": "Files",
+                                "key": "9",
+                                "icon": ant_icons.FileOutlined([]),
+                            },
                         ],
                         theme="dark",
                         defaultSelectedKeys=["1"],

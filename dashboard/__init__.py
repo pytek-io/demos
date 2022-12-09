@@ -1,4 +1,4 @@
-import reflect
+import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 import reflect_rcdock as rcdock
@@ -129,7 +129,7 @@ class Application:
         )
 
     def create_stock_history_app(self, ticker: str):
-        return StockHistoryApp(reflect.create_observable(ticker), False)
+        return StockHistoryApp(r.ObservableValue(ticker), False)
 
     async def add_StockHistoryApp(self):
         await self.dock_layout.insert_component(
