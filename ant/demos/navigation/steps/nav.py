@@ -1,8 +1,7 @@
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 
-Step = antd.Steps.Step
+import reflect as r
 
 
 def app():
@@ -15,25 +14,25 @@ def app():
     return html.div(
         [
             antd.Steps(
-                [
-                    Step(
-                        title="Step 1",
-                        subTitle="00:00:05",
-                        status="finish",
-                        description="This is a description.",
-                    ),
-                    Step(
-                        title="Step 2",
-                        subTitle="00:01:02",
-                        status="process",
-                        description="This is a description.",
-                    ),
-                    Step(
-                        title="Step 3",
-                        subTitle="waiting for longlong time",
-                        status="wait",
-                        description="This is a description.",
-                    ),
+                items=[
+                    {
+                        "label": "Step 1",
+                        "subTitle": "00:00:05",
+                        "status": "finish",
+                        "description": "This is a description.",
+                    },
+                    {
+                        "label": "Step 2",
+                        "subTitle": "00:01:02",
+                        "status": "process",
+                        "description": "This is a description.",
+                    },
+                    {
+                        "label": "Step 3",
+                        "subTitle": "waiting for longlong time",
+                        "status": "wait",
+                        "description": "This is a description.",
+                    },
                 ],
                 type="navigation",
                 size="small",
@@ -42,11 +41,11 @@ def app():
                 className="site-navigation-steps",
             ),
             antd.Steps(
-                [
-                    Step(status="finish", title="Step 1"),
-                    Step(status="process", title="Step 2"),
-                    Step(status="wait", title="Step 3"),
-                    Step(status="wait", title="Step 4"),
+                items=[
+                    {"status": "finish", "label": "Step 1"},
+                    {"status": "process", "label": "Step 2"},
+                    {"status": "wait", "label": "Step 3"},
+                    {"status": "wait", "label": "Step 4"},
                 ],
                 type="navigation",
                 current=current,
@@ -54,11 +53,11 @@ def app():
                 className="site-navigation-steps",
             ),
             antd.Steps(
-                [
-                    Step(status="finish", title="finish 1"),
-                    Step(status="finish", title="finish 2"),
-                    Step(status="process", title="current process"),
-                    Step(status="wait", title="wait", disabled=True),
+                items=[
+                    {"status": "finish", "label": "finish 1"},
+                    {"status": "finish", "label": "finish 2"},
+                    {"status": "process", "label": "current process"},
+                    {"status": "wait", "label": "wait", "disabled": True},
                 ],
                 type="navigation",
                 size="small",

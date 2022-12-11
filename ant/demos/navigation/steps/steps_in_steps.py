@@ -1,8 +1,6 @@
 import reflect_antd as antd
 import reflect_html as html
 
-Step = antd.Steps.Step
-
 
 def app():
     size = antd.Radio.Group(
@@ -13,10 +11,10 @@ def app():
     def horizontalSteps():
         antd.Card(
             antd.Steps(
-                [
-                    Step(title="Finished", description="This is a description."),
-                    Step(title="In Progress", description="This is a description."),
-                    Step(title="Waiting", description="This is a description."),
+                items=[
+                    {"label": "Finished", "description": "This is a description."},
+                    {"label": "In Progress", "description": "This is a description."},
+                    {"label": "Waiting", "description": "This is a description."},
                 ],
                 size=size,
             )
@@ -26,10 +24,10 @@ def app():
         [
             size,
             antd.Steps(
-                [
-                    Step(title="Finished", description=horizontalSteps),
-                    Step(title="In Progress", description="This is a description."),
-                    Step(title="Waiting", description="This is a description."),
+                items=[
+                    {"label": "Finished", "description": horizontalSteps},
+                    {"label": "In Progress", "description": "This is a description."},
+                    {"label": "Waiting", "description": "This is a description."},
                 ],
                 size=size,
                 direction="vertical",

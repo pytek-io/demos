@@ -2,30 +2,28 @@ import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
 
-menu = antd.Menu(
-    [
-        antd.Menu.Item(
-            html.a(
-                "1st menu item",
-                target="_blank",
-                rel="noopener noreferrer",
-                href="http://www.alipay.com/",
-            ),
-            key="0",
+items = [
+    {
+        "label": html.a(
+            "1st menu item",
+            target="_blank",
+            rel="noopener noreferrer",
+            href="http://www.alipay.com/",
         ),
-        antd.Menu.Item(
-            html.a(
-                "2nd menu item",
-                target="_blank",
-                rel="noopener noreferrer",
-                href="http://www.taobao.com/",
-            ),
-            key="1",
+        "key": "0",
+    },
+    {
+        "label": html.a(
+            "2nd menu item",
+            target="_blank",
+            rel="noopener noreferrer",
+            href="http://www.taobao.com/",
         ),
-        antd.Menu.Divider(),
-        antd.Menu.Item("3rd menu item（disabled）", key="3", disabled=True),
-    ]
-)
+        "key": "1",
+    },
+    {"type": "group"},
+    {"label": "3rd menu item（disabled）", "key": "3", "disabled": True},
+]
 
 
 def app():
@@ -35,5 +33,5 @@ def app():
             className="ant-dropdown-link",
             onClick=lambda e: e.preventDefault(),
         ),
-        overlay=menu,
+        menu={"items": items},
     )

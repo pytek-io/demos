@@ -1,8 +1,7 @@
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 
-Step = antd.Steps.Step
+import reflect as r
 
 
 def app():
@@ -15,20 +14,20 @@ def app():
     return html.div(
         [
             antd.Steps(
-                [
-                    Step(title="Step 1", description="This is a description."),
-                    Step(title="Step 2", description="This is a description."),
-                    Step(title="Step 3", description="This is a description."),
+                items=[
+                    {"label": "Step 1", "description": "This is a description."},
+                    {"label": "Step 2", "description": "This is a description."},
+                    {"label": "Step 3", "description": "This is a description."},
                 ],
                 current=current,
                 onChange=r.Callback(onChange),
             ),
             antd.Divider(),
             antd.Steps(
-                [
-                    Step(title="Step 1", description="This is a description."),
-                    Step(title="Step 2", description="This is a description."),
-                    Step(title="Step 3", description="This is a description."),
+                items=[
+                    {"label": "Step 1", "description": "This is a description."},
+                    {"label": "Step 2", "description": "This is a description."},
+                    {"label": "Step 3", "description": "This is a description."},
                 ],
                 current=current,
                 onChange=r.Callback(onChange),

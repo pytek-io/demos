@@ -1,13 +1,11 @@
 import reflect_antd as antd
 import reflect_html as html
 
-menu = antd.Menu(
-    [
-        antd.Menu.Item("1st menu item", key="1", onClick=lambda: print("hello")),
-        antd.Menu.Item("2nd menu item", key="2"),
-        antd.Menu.Item("3rd menu item", key="3"),
-    ]
-)
+items = [
+    {"label": "1st menu item", "key": "1", "onClick": lambda: print("hello")},
+    {"label": "2nd menu item", "key": "2"},
+    {"label": "3rd menu item", "key": "3"},
+]
 
 
 def app():
@@ -17,6 +15,6 @@ def app():
             className="site-dropdown-context-menu",
             style=dict(textAlign="center", height=200, lineHeight="200px"),
         ),
-        overlay=menu,
+        menu={"items": items},
         trigger=["contextMenu"],
     )

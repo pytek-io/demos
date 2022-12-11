@@ -1,6 +1,7 @@
-from reflect import autorun, create_observable
 from reflect_antd import Select, Space
 from reflect_html import *
+
+from reflect import autorun, create_observable
 
 
 def app():
@@ -17,10 +18,7 @@ def app():
         "maxTagCount": "responsive",
     }
     return Space(
-        [
-            Select(value=value,**selectProps),
-            Select(disabled=True, **selectProps),
-        ],
+        [Select(value=value, **selectProps), Select(disabled=True, **selectProps)],
         direction="vertical",
         style=dict(width="100%"),
     )

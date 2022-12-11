@@ -1,6 +1,6 @@
-import reflect as r
 import reflect_antd as antd
-import reflect_html as html
+
+import reflect as r
 
 Option = antd.Mentions.Option
 
@@ -11,10 +11,10 @@ def onSelect(value):
 
 def app():
     mentions = antd.Mentions(
-        [
-            Option("afc163", value="afc163"),
-            Option("zombieJ", value="zombieJ"),
-            Option("yesmeck", value="yesmeck"),
+        options=[
+            {"label": "afc163", "value": "afc163"},
+            {"label": "zombieJ", "value": "zombieJ"},
+            {"label": "yesmeck", "value": "yesmeck"},
         ],
         style=dict(width="100%"),
         onSelect=r.Callback(onSelect),

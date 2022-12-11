@@ -1,9 +1,9 @@
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 import reflect_utils
 
-Step = antd.Steps.Step
+import reflect as r
+
 steps = [
     {"title": "First", "content": "First-content"},
     {"title": "Second", "content": "Second-content"},
@@ -16,7 +16,9 @@ def app():
     return antd.Space(
         [
             antd.Steps(
-                [Step(key=item["title"], title=item["title"]) for item in steps],
+                items=[
+                    {"key": item["title"], "label": item["title"]} for item in steps
+                ],
                 current=current,
             ),
             html.div(lambda: steps[current()]["content"], className="steps-content"),

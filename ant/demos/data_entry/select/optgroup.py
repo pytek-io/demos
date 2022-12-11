@@ -1,18 +1,22 @@
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
+
+import reflect as r
 
 Option, OptGroup = antd.Select.Option, antd.Select.OptGroup
 
 
 def app():
     select = antd.Select(
-        [
+        options=[
             OptGroup(
-                [Option("Jack", value="jack"), Option("Lucy", value="lucy")],
+                [
+                    {"label": "Jack", "value": "jack"},
+                    {"label": "Lucy", "value": "lucy"},
+                ],
                 label="Manager",
             ),
-            OptGroup(Option("yiminghe", value="Yiminghe"), label="Engineer"),
+            OptGroup({"label": "yiminghe", "value": "Yiminghe"}, label="Engineer"),
         ],
         defaultValue="lucy",
         style=dict(width=200),

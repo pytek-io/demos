@@ -1,34 +1,33 @@
 import reflect_antd as antd
 import reflect_html as html
 
-menu = antd.Menu(
-    [
-        antd.Menu.Item(
-            html.a(
-                "1st menu item",
-                target="_blank",
-                rel="noopener noreferrer",
-                href="http://www.alipay.com/",
-            )
-        ),
-        antd.Menu.Item(
-            html.a(
-                "2nd menu item",
-                target="_blank",
-                rel="noopener noreferrer",
-                href="http://www.taobao.com/",
-            )
-        ),
-        antd.Menu.Item(
-            html.a(
-                "3rd menu item",
-                target="_blank",
-                rel="noopener noreferrer",
-                href="http://www.tmall.com/",
-            )
-        ),
-    ]
-)
+
+items = [
+    {
+        "label": html.a(
+            "1st menu item",
+            target="_blank",
+            rel="noopener noreferrer",
+            href="http://www.alipay.com/",
+        )
+    },
+    {
+        "label": html.a(
+            "2nd menu item",
+            target="_blank",
+            rel="noopener noreferrer",
+            href="http://www.taobao.com/",
+        )
+    },
+    {
+        "label": html.a(
+            "3rd menu item",
+            target="_blank",
+            rel="noopener noreferrer",
+            href="http://www.tmall.com/",
+        )
+    },
+]
 
 
 def app():
@@ -36,34 +35,40 @@ def app():
         [
             antd.Dropdown(
                 antd.Button("bottomLeft"),
-                overlay=menu,
+                menu={"items": items},
                 placement="bottomLeft",
                 arrow=True,
             ),
             antd.Dropdown(
                 antd.Button("bottomCenter"),
-                overlay=menu,
+                menu={"items": items},
                 placement="bottomCenter",
                 arrow=True,
             ),
             antd.Dropdown(
                 antd.Button("bottomRight"),
-                overlay=menu,
+                menu={"items": items},
                 placement="bottomRight",
                 arrow=True,
             ),
             html.br(),
             antd.Dropdown(
-                antd.Button("topLeft"), overlay=menu, placement="topLeft", arrow=True
+                antd.Button("topLeft"),
+                menu={"items": items},
+                placement="topLeft",
+                arrow=True,
             ),
             antd.Dropdown(
                 antd.Button("topCenter"),
-                overlay=menu,
+                menu={"items": items},
                 placement="topCenter",
                 arrow=True,
             ),
             antd.Dropdown(
-                antd.Button("topRight"), overlay=menu, placement="topRight", arrow=True
+                antd.Button("topRight"),
+                menu={"items": items},
+                placement="topRight",
+                arrow=True,
             ),
         ]
     )

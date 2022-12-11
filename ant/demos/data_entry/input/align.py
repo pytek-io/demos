@@ -2,7 +2,6 @@ import reflect_antd as antd
 import reflect_html as html
 
 Text = antd.Typography.Text
-Option = antd.Select.Option
 RangePicker = antd.DatePicker.RangePicker
 options = [
     {
@@ -34,7 +33,7 @@ narrowStyle = {"width": 50}
 def app():
     return html.div(
         [
-            antd.Mentions(style=dict(width=100), rows=1),
+            antd.Mentions(style=dict(width=100)),
             antd.Input.TextArea(rows=1, style=dict(width=100)),
             antd.Button("Button", type="primary"),
             antd.Input(style=dict(width=100)),
@@ -45,11 +44,11 @@ def app():
             antd.DatePicker(style=dict(width=100)),
             antd.TimePicker(style=dict(width=100)),
             antd.Select(
-                [
-                    Option("Jack", value="jack"),
-                    Option("Lucy", value="lucy"),
-                    Option("Disabled", value="disabled", disabled=True),
-                    Option("yiminghe", value="Yiminghe"),
+                options=[
+                    {"label": "Jack", "value": "jack"},
+                    {"label": "Lucy", "value": "lucy"},
+                    {"label": "Disabled", "value": "disabled", "disabled": True},
+                    {"label": "yiminghe", "value": "Yiminghe"},
                 ],
                 style=dict(width=100),
                 defaultValue="jack",

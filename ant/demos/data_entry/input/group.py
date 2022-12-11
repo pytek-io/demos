@@ -1,7 +1,6 @@
 import reflect_antd as antd
 import reflect_html as html
 
-Option = antd.Select.Option
 options = [
     {
         "value": "zhejiang",
@@ -53,9 +52,9 @@ def app():
             antd.Input.Group(
                 [
                     antd.Select(
-                        [
-                            Option("Zhejiang", value="Zhejiang"),
-                            Option("Jiangsu", value="Jiangsu"),
+                        options=[
+                            {"label": "Zhejiang", "value": "Zhejiang"},
+                            {"label": "Jiangsu", "value": "Jiangsu"},
                         ],
                         defaultValue="Zhejiang",
                     ),
@@ -95,9 +94,9 @@ def app():
             antd.Input.Group(
                 [
                     antd.Select(
-                        [
-                            Option("Option1", value="Option1"),
-                            Option("Option2", value="Option2"),
+                        options=[
+                            {"label": "Option1", "value": "Option1"},
+                            {"label": "Option2", "value": "Option2"},
                         ],
                         defaultValue="Option1",
                     ),
@@ -126,16 +125,16 @@ def app():
             antd.Input.Group(
                 [
                     antd.Select(
-                        [
-                            Option("Option1-1", value="Option1-1"),
-                            Option("Option1-2", value="Option1-2"),
+                        options=[
+                            {"label": "Option1-1", "value": "Option1-1"},
+                            {"label": "Option1-2", "value": "Option1-2"},
                         ],
                         defaultValue="Option1-1",
                     ),
                     antd.Select(
-                        [
-                            Option("Option2-1", value="Option2-1"),
-                            Option("Option2-2", value="Option2-2"),
+                        options=[
+                            {"label": "Option2-1", "value": "Option2-1"},
+                            {"label": "Option2-2", "value": "Option2-2"},
                         ],
                         defaultValue="Option2-2",
                     ),
@@ -146,7 +145,10 @@ def app():
             antd.Input.Group(
                 [
                     antd.Select(
-                        [Option("Between", value="1"), Option("Except", value="2")],
+                        options=[
+                            {"label": "Between", "value": "1"},
+                            {"label": "Except", "value": "2"},
+                        ],
                         defaultValue="1",
                     ),
                     antd.Input(
@@ -172,9 +174,9 @@ def app():
             antd.Input.Group(
                 [
                     antd.Select(
-                        [
-                            Option("Sign Up", value="Sign Up"),
-                            Option("Sign In", value="Sign In"),
+                        options=[
+                            {"label": "Sign Up", "value": "Sign Up"},
+                            {"label": "Sign In", "value": "Sign In"},
                         ],
                         defaultValue="Sign Up",
                         style=dict(width="30%"),
@@ -189,9 +191,9 @@ def app():
                     antd.Input.Group(
                         [
                             antd.Select(
-                                [
-                                    Option("Home", value="Home"),
-                                    Option("Company", value="Company"),
+                                options=[
+                                    {"label": "Home", "value": "Home"},
+                                    {"label": "Company", "value": "Company"},
                                 ],
                                 style=dict(width="30%"),
                                 defaultValue="Home",
