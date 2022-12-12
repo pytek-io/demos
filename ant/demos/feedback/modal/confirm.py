@@ -2,7 +2,6 @@ import asyncio
 
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
-import reflect_html as html
 
 confirm = antd.Modal.confirm
 JS_MODULES = ["ant_demo", "ant-icons"]
@@ -28,9 +27,10 @@ def showConfirm():
     )
 
 
-async def async_ok(argument):
+async def async_ok(*argument):
     await asyncio.sleep(1.0)
-    raise Exception("Oops something went wrong")
+    print("hello")
+    # raise Exception("Oops something went wrong")
 
 
 def showPromiseConfirm():

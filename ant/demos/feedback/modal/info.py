@@ -7,10 +7,10 @@ def info():
     antd.Modal.info(
         {
             "title": "This is a notification message",
-            "content": div(
+            "content": html.div(
                 [
-                    p("some messages...some messages..."),
-                    p("some messages...some messages..."),
+                    html.p("some messages...some messages..."),
+                    html.p("some messages...some messages..."),
                 ]
             ),
         }

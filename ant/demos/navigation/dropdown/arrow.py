@@ -40,9 +40,9 @@ def app():
                 arrow=True,
             ),
             antd.Dropdown(
-                antd.Button("bottomCenter"),
+                antd.Button("bottom"),
                 menu={"items": items},
-                placement="bottomCenter",
+                placement="bottom",
                 arrow=True,
             ),
             antd.Dropdown(
@@ -59,9 +59,9 @@ def app():
                 arrow=True,
             ),
             antd.Dropdown(
-                antd.Button("topCenter"),
+                antd.Button("top"),
                 menu={"items": items},
-                placement="topCenter",
+                placement="top",
                 arrow=True,
             ),
             antd.Dropdown(

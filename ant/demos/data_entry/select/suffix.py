@@ -24,7 +24,7 @@ def app():
         [
             select,
             antd.Select(
-                options={"label": "Lucy", "value": "lucy"},
+                options=[{"label": "Lucy", "value": "lucy"}],
                 suffixIcon=mehIcon,
                 defaultValue="lucy",
                 style=dict(width=120),

@@ -17,14 +17,14 @@ def confirm():
 
 
 def app():
-    visible = r.create_observable(False)
+    visible = r.ObservableValue(False)
     return antd.Space(
         [
             antd.Button("Modal", type="primary", onClick=lambda: visible.set(True)),
             antd.Modal(
                 [html.p("Bla bla ..."), html.p("Bla bla ..."), html.p("Bla bla ...")],
                 title="Modal",
-                visible=visible,
+                open=visible,
                 onOk=lambda: visible.set(False),
                 onCancel=lambda: visible.set(False),
                 okText="确认",

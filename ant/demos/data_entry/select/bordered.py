@@ -16,7 +16,7 @@ def app():
                 bordered=False,
             ),
             antd.Select(
-                options={"label": "Lucy", "value": "lucy"},
+                options=[{"label": "Lucy", "value": "lucy"}],
                 defaultValue="lucy",
                 style=dict(width=120),
                 disabled=True,

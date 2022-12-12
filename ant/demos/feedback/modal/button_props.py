@@ -19,7 +19,7 @@ def app():
                     html.p("Some contents..."),
                 ],
                 title="Basic Modal",
-                visible=is_modal_visible,
+                open=is_modal_visible,
                 onOk=lambda: is_modal_visible.set(False),
                 onCancel=lambda: is_modal_visible.set(False),
                 okButtonProps=dict(disabled=True),

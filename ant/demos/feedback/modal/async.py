@@ -6,9 +6,9 @@ import reflect_html as html
 
 
 def app():
-    visible = r.create_observable(False)
-    confirmLoading = r.create_observable(False)
-    modal_text = r.create_observable("Content of the modal")
+    visible = r.ObservableValue(False)
+    confirmLoading = r.ObservableValue(False)
+    modal_text = r.ObservableValue("Content of the modal")
 
     async def handleOk():
         modal_text.set("The modal will be closed after two seconds")
@@ -31,7 +31,7 @@ def app():
             antd.Modal(
                 html.p(modal_text),
                 title="Title",
-                visible=visible,
+                open=visible,
                 onOk=handleOk,
                 confirmLoading=confirmLoading,
                 onCancel=handleCancel,

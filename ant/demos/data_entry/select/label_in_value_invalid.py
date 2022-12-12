@@ -3,7 +3,6 @@ from reflect_html import *
 
 from reflect import autorun
 
-Option = Select.Option
 
 
 def app():

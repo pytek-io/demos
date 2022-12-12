@@ -20,7 +20,7 @@ def app():
                 ],
                 title="Modal 1000px width",
                 centered=True,
-                visible=is_modal_visible,
+                open=is_modal_visible,
                 onOk=lambda: is_modal_visible.set(False),
                 onCancel=lambda: is_modal_visible.set(False),
                 width=1000,

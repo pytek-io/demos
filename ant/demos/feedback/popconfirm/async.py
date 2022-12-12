@@ -1,11 +1,10 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 
 def app():
-    visible = r.create_observable(False)
-    confirmLoading = r.create_observable(False)
+    visible = r.ObservableValue(False)
+    confirmLoading = r.ObservableValue(False)
 
     def showPopconfirm():
         visible.set(True)
@@ -27,8 +26,8 @@ def app():
             "Open Popconfirm with async logic", type="primary", onClick=showPopconfirm
         ),
         title="Title",
-        visible=visible,
+        open=visible,
         onConfirm=handleOk,
-        okButtonProps=dict(loading=confirmLoading),
+        okButtonProps=lambda: {"loading":confirmLoading()},
         onCancel=handleCancel,
     )

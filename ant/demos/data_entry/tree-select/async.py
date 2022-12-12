@@ -1,5 +1,6 @@
 import asyncio
 import itertools
+import pprint
 
 import reflect as r
 import reflect_antd as antd
@@ -14,14 +15,13 @@ initialTreeData = [
 def app():
     counter = itertools.count(3)
     treeData = r.create_observable(initialTreeData, key="initialTreeData")
-    import pprint
 
     r.autorun(lambda: pprint.pprint(treeData()))
 
-    async def onLoadData(node_index):
+    async def onLoadData1(node_index):
         await asyncio.sleep(0.5)
         value = next(counter)
-        treeData()[node_index]["children"] = [
+        treeData()[node_index[0]]["children"] = [
             {
                 "id": 3,
                 "pId": 0,
@@ -37,6 +37,6 @@ def app():
         style=dict(width="100%"),
         dropdownStyle=dict(maxHeight=400, overflow="auto"),
         placeholder="Please select",
-        loadData=r.Callback(onLoadData, "id", is_promise=True),
+        loadData=r.Callback(onLoadData1, args=("id",), is_promise=True),
         treeData=treeData,
     )
