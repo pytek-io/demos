@@ -1,0 +1,1 @@
+Clicking on an anchor does not record history.

@@ -1,0 +1,1 @@
+You could pass `AutoComplete.Option` as children of `AutoComplete`, instead of using `options`。

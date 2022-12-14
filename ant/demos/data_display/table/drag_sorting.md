@@ -1,0 +1,1 @@
+By using custom components, we can integrate table with react-dnd to implement drag sorting.

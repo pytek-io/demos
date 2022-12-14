@@ -1,0 +1,1 @@
+Standalone badge with status.

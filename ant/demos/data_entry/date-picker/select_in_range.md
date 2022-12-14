@@ -1,0 +1,1 @@
+A example shows how to select a dynamic range by using `onCalendarChange` and `disabledDate`.

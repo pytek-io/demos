@@ -1,0 +1,1 @@
+Simple table with actions.

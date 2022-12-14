@@ -1,0 +1,1 @@
+`beforeUpload` only prevent upload behavior when return false or reject promise, the prevented file would still show in file list. Here is the example you can keep prevented files out of list by using `onChange`.

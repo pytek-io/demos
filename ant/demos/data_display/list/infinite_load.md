@@ -1,0 +1,1 @@
+The example of infinite load with [react-infinite-scroller](https://github.com/CassetteRocks/react-infinite-scroller).

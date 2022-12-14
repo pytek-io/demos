@@ -1,0 +1,1 @@
+The style and className are available to customize Notification.

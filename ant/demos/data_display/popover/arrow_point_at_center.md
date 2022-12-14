@@ -1,0 +1,1 @@
+The arrow points to the center of the target element, which set `arrowPointAtCenter`.

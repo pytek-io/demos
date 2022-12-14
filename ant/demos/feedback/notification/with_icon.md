@@ -1,0 +1,1 @@
+A notification box with a icon at the left side.

@@ -1,0 +1,1 @@
+Integrate virtual scroll with `react-window` to achieve a high performance table of 100,000 data.

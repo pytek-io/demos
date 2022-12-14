@@ -1,0 +1,1 @@
+By using `itemRender`, we can integrate upload with react-dnd to implement drag sorting of uploadList.

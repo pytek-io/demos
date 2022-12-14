@@ -1,0 +1,1 @@
+Mouse to click, focus and move in.

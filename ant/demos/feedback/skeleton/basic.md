@@ -1,0 +1,1 @@
+Simplest Skeleton usage.

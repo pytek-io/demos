@@ -1,0 +1,1 @@
+Divider and disabled menu item.

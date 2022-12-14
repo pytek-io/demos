@@ -1,0 +1,1 @@
+Use skeleton in list component.

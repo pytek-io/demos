@@ -1,0 +1,1 @@
+You can use `Card.Meta` to support more flexible content.

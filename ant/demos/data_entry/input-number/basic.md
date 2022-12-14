@@ -1,0 +1,1 @@
+Numeric-only input box.

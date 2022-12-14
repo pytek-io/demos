@@ -1,0 +1,1 @@
+Mark a pending state of switch.

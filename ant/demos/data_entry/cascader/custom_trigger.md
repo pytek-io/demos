@@ -1,0 +1,1 @@
+Separate trigger button and result.

@@ -1,0 +1,1 @@
+The separator can be customized by setting the separator property: `Breadcrumb.Separator`.

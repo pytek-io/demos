@@ -1,0 +1,1 @@
+Cards usually cooperate with grid column layout in overview page.

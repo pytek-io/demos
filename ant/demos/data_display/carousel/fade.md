@@ -1,0 +1,1 @@
+Slides use fade for transition.

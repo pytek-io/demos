@@ -1,0 +1,1 @@
+Divider is `horizontal` by default. You can add text within Divider.

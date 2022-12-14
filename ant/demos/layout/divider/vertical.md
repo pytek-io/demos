@@ -1,0 +1,1 @@
+Use `type="vertical"` make it vertical.

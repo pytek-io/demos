@@ -1,0 +1,2 @@
+1
+basic:Basic,disabled:Disabled,centered:Centered,icon:Icon,slide:Slide,extra:Extra content,size:Size,position:Position,card:Card type tab,editable_card:Add & close tab,card_top:Container of card type Tab,custom_add_trigger:Customized trigger of new tab,custom_tab_bar:Customized bar of tab,custom_tab_bar_node:Draggable Tabs,nest:Nest

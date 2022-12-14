@@ -1,0 +1,1 @@
+A button is on the left, and a related functional menu is on the right. You can set the icon property to modify the icon of right.

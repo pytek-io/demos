@@ -1,0 +1,1 @@
+The combination of radio button style.

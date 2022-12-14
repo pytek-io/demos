@@ -1,0 +1,1 @@
+In accordion mode, only one panel can be expanded at a time.

@@ -1,0 +1,2 @@
+2
+basic:Basic,colorful:Colorful Tag,colorful_inverse:Inverse Colorful Tag,control:Add & Remove Dynamically,checkable:Checkable,controlled:Controlled,animation:Animate,status:Status Tag,icon:Icon,customize:Customize close

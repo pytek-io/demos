@@ -1,0 +1,1 @@
+Switch required or optional style with `requiredMark`.

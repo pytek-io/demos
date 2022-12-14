@@ -1,0 +1,1 @@
+Customize Trigger Token by `prefix` props. Default to `@`, `Array<string>` also supported.

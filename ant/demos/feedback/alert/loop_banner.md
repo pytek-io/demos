@@ -1,0 +1,1 @@
+Show a loop banner by using with [react-text-loop](https://npmjs.com/package/react-text-loop).

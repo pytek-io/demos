@@ -1,0 +1,1 @@
+The default is to close the menu when you click on menu items, this feature can be turned off.

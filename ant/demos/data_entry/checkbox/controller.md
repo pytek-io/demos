@@ -1,0 +1,1 @@
+Communicated with other components.

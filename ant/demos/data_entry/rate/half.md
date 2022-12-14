@@ -1,0 +1,1 @@
+Support select half star.

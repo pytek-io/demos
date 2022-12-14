@@ -1,0 +1,1 @@
+Specify the trigger area of collapsible by `collapsible`.

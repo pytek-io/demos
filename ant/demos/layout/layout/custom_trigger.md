@@ -1,0 +1,1 @@
+If you want to use a customized trigger, you can hide the default one by setting `trigger={null}`.

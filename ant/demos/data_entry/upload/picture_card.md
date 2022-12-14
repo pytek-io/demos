@@ -1,0 +1,1 @@
+After users upload picture, the thumbnail will be shown in list. The upload button will disappear when count meets limitation.

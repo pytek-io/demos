@@ -1,0 +1,1 @@
+Set the `itemLayout` property to `vertical` to create a vertical list.

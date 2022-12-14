@@ -1,0 +1,1 @@
+Use ConfigProvider set global Empty style.

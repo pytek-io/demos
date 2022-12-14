@@ -1,0 +1,1 @@
+Hide default plus icon, and bind event for customized trigger.

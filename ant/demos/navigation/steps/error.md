@@ -1,0 +1,1 @@
+By using `status` of `Steps`, you can specify the state for current step.

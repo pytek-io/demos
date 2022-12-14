@@ -1,0 +1,1 @@
+Show the dynamic switching mode (between `inline` and `vertical`).

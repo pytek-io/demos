@@ -1,0 +1,1 @@
+Embedding content into `Spin` will set it into loading state.

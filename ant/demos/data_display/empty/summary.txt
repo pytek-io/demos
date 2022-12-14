@@ -1,0 +1,2 @@
+1
+basic:Basic,simple:Chose image,customize:Customize,config_provider:ConfigProvider,description:No description

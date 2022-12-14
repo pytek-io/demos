@@ -1,0 +1,1 @@
+Switch in different types of pickers by Select.

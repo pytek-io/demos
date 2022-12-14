@@ -1,0 +1,1 @@
+Search the options while expanded.

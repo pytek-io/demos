@@ -1,0 +1,1 @@
+Shows a loading indicator while the contents of the card is being fetched.

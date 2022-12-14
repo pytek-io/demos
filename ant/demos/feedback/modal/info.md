@@ -1,0 +1,1 @@
+In the various types of information modal dialog, only one button to close dialog is provided.

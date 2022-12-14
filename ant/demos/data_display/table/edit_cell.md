@@ -1,0 +1,1 @@
+Table with editable cells.

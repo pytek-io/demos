@@ -1,0 +1,2 @@
+1
+basic:Basic,text:border,border:border,size:Custom size,responsive:responsive,vertical:Vertical,vertical_border:Vertical border,style:Customize label & wrapper style

@@ -1,0 +1,1 @@
+Hide already selected options in the dropdown.

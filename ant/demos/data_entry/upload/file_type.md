@@ -1,0 +1,1 @@
+Displays the corresponding by default by type icon

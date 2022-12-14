@@ -1,0 +1,1 @@
+It can be placed inside the ordinary card to display the information of the multilevel structure.

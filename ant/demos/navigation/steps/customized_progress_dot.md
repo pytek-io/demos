@@ -1,0 +1,1 @@
+You can customize the display for Steps with progress dot style.

@@ -1,0 +1,1 @@
+The default trigger mode is `hover`, you can change it to `contextMenu`.

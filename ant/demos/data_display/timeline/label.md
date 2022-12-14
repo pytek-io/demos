@@ -1,0 +1,1 @@
+Use `label` show time alone.

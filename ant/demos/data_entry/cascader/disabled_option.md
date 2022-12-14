@@ -1,0 +1,1 @@
+Disable option by specifying the `disabled` property in `options`.

@@ -1,0 +1,1 @@
+A relevant icon makes information clearer and more friendly.

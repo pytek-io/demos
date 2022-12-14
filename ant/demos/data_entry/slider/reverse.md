@@ -1,0 +1,1 @@
+Using `reverse` to render slider reversely.

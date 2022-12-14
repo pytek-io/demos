@@ -1,0 +1,2 @@
+2
+basic:Basic,no_wrapper:Standalone,overflow:Overflow Count,dot:Red badge,link:Clickable,change:Dynamic,offset:Offset,status:Status,colorful:Colorful Badge,size:Size,ribbbon:Ribbon,title:Title

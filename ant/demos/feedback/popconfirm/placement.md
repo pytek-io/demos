@@ -1,0 +1,1 @@
+There are 12 `placement` options available. Use `arrowPointAtCenter` if you want the arrow to point at the center of target.

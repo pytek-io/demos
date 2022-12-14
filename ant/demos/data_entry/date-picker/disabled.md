@@ -1,0 +1,1 @@
+A disabled state of the `DatePicker`. You can also set as array to disable one of input.

@@ -1,0 +1,1 @@
+`ghost` property will make button's background transparent, it is commonly used in colored background.

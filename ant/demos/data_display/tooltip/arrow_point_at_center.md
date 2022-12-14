@@ -1,0 +1,1 @@
+By specifying `arrowPointAtCenter` prop, the arrow will point to the center of the target element.

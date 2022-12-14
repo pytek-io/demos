@@ -1,0 +1,1 @@
+Solid radio button style.

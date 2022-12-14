@@ -1,0 +1,1 @@
+Customize the anchor highlight.

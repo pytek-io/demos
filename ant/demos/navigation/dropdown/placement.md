@@ -1,0 +1,1 @@
+Support 6 placements.

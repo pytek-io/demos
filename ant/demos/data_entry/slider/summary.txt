@@ -1,0 +1,2 @@
+2
+basic:Basic,input_number:Slider with InputNumber,icon_slider:Slider with icon,tip_formatter:Customize tooltip,event:Event,mark:Graduated slider,vertical:Vertical,show_tooltip:Control visible of ToolTip,reverse:Reverse,dragabletrack:Draggable track

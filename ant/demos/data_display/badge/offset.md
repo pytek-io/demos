@@ -1,0 +1,1 @@
+Set offset of the badge dot, the format is `[left, top]`, which represents the offset of the status dot from the left and top of the default position.

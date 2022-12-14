@@ -1,0 +1,1 @@
+Specifies default value by an array.

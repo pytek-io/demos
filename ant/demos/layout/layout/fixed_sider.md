@@ -1,0 +1,1 @@
+When dealing with long content, a fixed sider can provide a better user experience.

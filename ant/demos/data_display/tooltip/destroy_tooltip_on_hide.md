@@ -1,0 +1,1 @@
+Setting `destroyTooltipOnHide` to control whether destroy dom node of tooltip when hidden.

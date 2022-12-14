@@ -1,0 +1,1 @@
+We recommend use `Form.useForm` to create data control. If you are using class component, you can get it by `ref`.

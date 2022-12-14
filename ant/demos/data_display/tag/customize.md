@@ -1,0 +1,1 @@
+The close icon can be customized using `closeIcon`.

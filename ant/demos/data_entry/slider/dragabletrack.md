@@ -1,0 +1,1 @@
+Make range track draggable when set `range.draggableTrack`.

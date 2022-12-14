@@ -1,0 +1,1 @@
+Only card type Tabs support adding & closable. +Use `closable={false}` to disable close.

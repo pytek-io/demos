@@ -1,0 +1,1 @@
+Avatar size can be automatically adjusted based on the screen size.

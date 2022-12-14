@@ -1,0 +1,1 @@
+Limit files with `maxCount`. Will replace current one when `maxCount` is `1`.

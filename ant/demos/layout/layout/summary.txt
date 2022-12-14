@@ -1,0 +1,2 @@
+1
+basic:Basic Structure,top:Header-Content-Footer,top_side:Header-Sider,top_side_2:Header Sider 2,side:Sider,custom_trigger:Custom trigger,responsive:Responsive,fixed:Fixed Header,fixed_sider:Fixed Sider

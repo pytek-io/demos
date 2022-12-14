@@ -1,0 +1,1 @@
+In order to fit in more tabs, they can slide left and right (or up and down).

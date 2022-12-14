@@ -1,0 +1,2 @@
+2
+basic:Basic,placement:Placement,arrow_point_at_center:Arrow pointing at the center,auto_adjust_overflow:Adjust placement automatically,destroy_tooltip_on_hide:Destroy tooltip when hidden,colorful:Colorful Tooltip

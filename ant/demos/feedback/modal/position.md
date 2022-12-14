@@ -1,0 +1,1 @@
+You can use `centered`,`style.top` or other styles to set position of modal dialog.

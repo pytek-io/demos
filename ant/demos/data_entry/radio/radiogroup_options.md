@@ -1,0 +1,1 @@
+Render radios by configuring `options`. Radio type can also be set through the `optionType` parameter.

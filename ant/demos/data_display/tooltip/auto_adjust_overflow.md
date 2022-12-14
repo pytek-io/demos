@@ -1,0 +1,1 @@
+Adjust placement automatically when tooltip is invisible.

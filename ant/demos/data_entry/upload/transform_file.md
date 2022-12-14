@@ -1,0 +1,1 @@
+Use `beforeUpload` for transform file before request such as add a watermark.

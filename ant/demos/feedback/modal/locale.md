@@ -1,0 +1,1 @@
+To customize the text of the buttons, you need to set `okText` and `cancelText` props.

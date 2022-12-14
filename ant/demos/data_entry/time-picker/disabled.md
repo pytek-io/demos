@@ -1,0 +1,1 @@
+A disabled state of the `TimePicker`.

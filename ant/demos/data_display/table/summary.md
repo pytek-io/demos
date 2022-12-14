@@ -1,0 +1,1 @@
+Set summary content by `summary` prop. Sync column fixed status with `Table.Summary.Cell`.

@@ -1,0 +1,2 @@
+1
+horizontal:Top Navigation,inline:Inline menu,sider_current:Open current submenu only,inline_collapsed:Collapsed inline menu,vertical:Vertical menu,theme:Menu Themes,switch_mode:Switch the menu type

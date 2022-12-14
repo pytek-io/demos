@@ -1,0 +1,1 @@
+Another type of Tabs, which doesn't support vertical mode.

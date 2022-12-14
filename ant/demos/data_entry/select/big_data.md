@@ -1,0 +1,1 @@
+Select use [virtual scroll](https://github.com/react-component/virtual-list) which get better performance [than 3.0](https://codesandbox.io/s/beautiful-banzai-m72lv).

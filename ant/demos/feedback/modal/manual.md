@@ -1,0 +1,1 @@
+Manually updating and destroying a modal from `Modal.method`.

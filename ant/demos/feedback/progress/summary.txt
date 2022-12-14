@@ -1,0 +1,2 @@
+2
+line:Progress bar,circle:Circular progress bar,line_mini:Mini size progress bar,circle_mini:Mini size circular progress bar,dynamic:Dynamic,format:Custom text format,dashboard:Dashboard,segment:Progress bar with success segment,linecap:Square linecaps,steps:Progress bar with steps,gradient_line:Custom line gradient

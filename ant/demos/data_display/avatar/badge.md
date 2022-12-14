@@ -1,0 +1,1 @@
+Usually used for reminders and notifications.

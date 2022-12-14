@@ -1,0 +1,1 @@
+Divider with inner title, set `orientation="left/right"` to align it.

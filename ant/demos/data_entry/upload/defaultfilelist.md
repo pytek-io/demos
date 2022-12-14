@@ -1,0 +1,1 @@
+Use `defaultFileList` for uploaded files when page init.

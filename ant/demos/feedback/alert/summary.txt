@@ -1,0 +1,2 @@
+2
+basic:Basic,style:More types,closable:Closable,description:Description,icon:Icon,close_text:Customized Close Text,banner:Banner,loop_banner:Loop Banner,smooth_closed:Smoothly Unmount,error_boundary:ErrorBoundary,custom_icon:Custom Icon,action:Custom action

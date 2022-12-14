@@ -1,0 +1,1 @@
+Tree with connected line between nodes, turn on by `showLine`, customize the preseted icon by `switcherIcon`.

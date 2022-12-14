@@ -1,0 +1,1 @@
+A standard progress bar. Doesn't support trail color when `type="circle|dashboard"`.

@@ -1,0 +1,1 @@
+Responsive grid list. The size property the is as same as [Layout Grid](/components/grid/#Col).

@@ -1,0 +1,1 @@
+Customize local preview. Can handle with non-image format files such as video.

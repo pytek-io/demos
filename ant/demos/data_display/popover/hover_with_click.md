@@ -1,0 +1,1 @@
+The following example shows how to create a popover which can be hovered and clicked.

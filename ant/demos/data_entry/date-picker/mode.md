@@ -1,0 +1,1 @@
+Determing which panel to show with `mode` and `onPanelChange`.

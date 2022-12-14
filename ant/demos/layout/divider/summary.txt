@@ -1,0 +1,2 @@
+2
+horizontal:Horizontal,with_text:Divider with title,plain:Text without heading style,vertical:Vertical,customize_style:Style Customization

@@ -1,0 +1,1 @@
+Custom the labels for select all checkboxs.

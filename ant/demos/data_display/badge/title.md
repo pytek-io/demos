@@ -1,0 +1,1 @@
+The badge will display `title` when hovered over, instead of `count`.

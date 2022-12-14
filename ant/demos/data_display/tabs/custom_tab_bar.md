@@ -1,0 +1,1 @@
+Use react-sticky.

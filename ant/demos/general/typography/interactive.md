@@ -1,0 +1,1 @@
+Provide additional interactive capacity of editable and copyable.

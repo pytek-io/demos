@@ -1,0 +1,2 @@
+2
+basic:Basic,duration:Duration after which the notification box is closed,with_icon:Notification with icon,with_btn:Custom close button,custom_icon:Customized Icon,placement:Placement,custom_style:Customized style,update:Update Message Content,hooks:Get context with hooks

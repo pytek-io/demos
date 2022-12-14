@@ -1,0 +1,1 @@
+Click the left and right switch buttons to preview multiple images.

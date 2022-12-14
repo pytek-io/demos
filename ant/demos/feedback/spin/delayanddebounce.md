@@ -1,0 +1,1 @@
+Specifies a delay for loading state. If `spinning` ends during delay, loading status won't appear.

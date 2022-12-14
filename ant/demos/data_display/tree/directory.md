@@ -1,0 +1,1 @@
+Built-in directory tree. `multiple` support `ctrl(Windows)` / `command(Mac)` selection.

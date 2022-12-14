@@ -1,0 +1,2 @@
+2
+basic:Basic,async:Asynchronous loading,form:With Form,prefix:Customize Trigger Token,readonly:disabled or readOnly,placement:Placement,autosize:autoSize

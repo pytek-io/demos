@@ -1,0 +1,2 @@
+2
+basic:Basic,half:Half star,text:Show copywriting,disabled:Read only,clear:Clear star,character:Other Character,character_function:Customize character

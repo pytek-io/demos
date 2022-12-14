@@ -1,0 +1,1 @@
+Set size of numeral Badge.

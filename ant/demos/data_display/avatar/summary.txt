@@ -1,0 +1,2 @@
+2
+basic:Basic,type:Type,dynamic:Autoset Font Size,badge:With Badge,group:Avatar.Group,responsive:Responsive Size,fallback:Fallback

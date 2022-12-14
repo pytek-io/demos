@@ -1,0 +1,1 @@
+Use `visible` prop to control the display of the card.

@@ -1,0 +1,1 @@
+Try to copy `Lucy,Jack` to the input. Only available in tags and multiple mode.

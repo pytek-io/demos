@@ -1,0 +1,1 @@
+Both the top navigation and the sidebar, commonly used in documentation site.

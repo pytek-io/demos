@@ -1,0 +1,1 @@
+Crowded components horizontal spacing.

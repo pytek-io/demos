@@ -1,0 +1,1 @@
+Input box with the remove icon, click the icon to delete everything.

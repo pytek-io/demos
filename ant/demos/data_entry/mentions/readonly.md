@@ -1,0 +1,1 @@
+Configurate `disabled` and `readOnly`.

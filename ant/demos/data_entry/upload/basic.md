@@ -1,0 +1,1 @@
+Classic mode. File selection dialog pops up when upload button is clicked.

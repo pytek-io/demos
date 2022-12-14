@@ -1,0 +1,1 @@
+add suffix ellipsis support.

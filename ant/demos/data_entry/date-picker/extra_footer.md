@@ -1,0 +1,1 @@
+Render extra footer in panel for customized requirements.

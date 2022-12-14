@@ -1,0 +1,1 @@
+Provides multiple types of text and link.

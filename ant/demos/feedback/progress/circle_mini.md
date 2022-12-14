@@ -1,0 +1,1 @@
+A smaller circular progress bar.

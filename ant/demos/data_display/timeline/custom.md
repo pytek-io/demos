@@ -1,0 +1,1 @@
+Set a node as an icon or other custom element.

@@ -1,0 +1,2 @@
+2
+basic:Basic Usage,fallback:Fault tolerant,placeholder:Progressive Loading,previewgroup:Multiple image preview,previewsrc:Custom preview image,preview_mask:Custom preview mask

@@ -1,0 +1,2 @@
+2
+basic:Basic,range_picker:Range Picker,switchable:Switchable picker,format:Date Format,time:Choose Time,disabled:Disabled,disabled_date:Disabled Date & Time,select_in_range:Select range dates in 7 days,presetted_ranges:Preset Ranges,extra_footer:Extra Footer,size:Three Sizes,date_render:Customized Date Rendering,bordered:Bordered-less,start_end:Customized Range Picker,mode:Controlled Panels,suffix:Suffix

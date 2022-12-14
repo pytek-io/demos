@@ -1,0 +1,1 @@
+You can set a custom text by setting the `format` prop.

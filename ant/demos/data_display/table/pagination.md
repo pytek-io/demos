@@ -1,0 +1,1 @@
+Table pagination settings.

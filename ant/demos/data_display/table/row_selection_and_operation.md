@@ -1,0 +1,1 @@
+To perform operations and clear selections after selecting some rows, use `rowSelection.selectedRowKeys` to control selected rows.

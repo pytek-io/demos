@@ -1,0 +1,1 @@
+While part of `format` is omitted, the corresponding column in panel will disappear, too.

@@ -1,0 +1,1 @@
+Used in standalone when children is empty.

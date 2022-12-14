@@ -1,0 +1,2 @@
+2
+basic:Type,icon:Icon,size:Size,disabled:Disabled,loading:Loading,multiple:Multiple Buttons,ghost:Ghost Button,danger:Danger Buttons,block:Block Button

@@ -1,0 +1,1 @@
+Add copywriting in rate components.

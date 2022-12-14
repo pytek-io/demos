@@ -1,0 +1,1 @@
+More than one panel can be expanded at a time, the first panel is initialized to be active in this case.

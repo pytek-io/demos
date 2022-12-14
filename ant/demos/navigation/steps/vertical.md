@@ -1,0 +1,1 @@
+A simple step bar in the vertical direction.

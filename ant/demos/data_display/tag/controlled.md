@@ -1,0 +1,1 @@
+By using the `visible` prop, you can control the close state of Tag.

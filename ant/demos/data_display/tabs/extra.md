@@ -1,0 +1,1 @@
+You can add extra actions to the right or left or even both side of Tabs.

@@ -1,0 +1,1 @@
+You can select and upload a whole directory.

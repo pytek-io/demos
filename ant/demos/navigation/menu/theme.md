@@ -1,0 +1,1 @@
+There are two built-in themes: `light` and `dark`. The default value is `light`.

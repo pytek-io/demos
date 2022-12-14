@@ -1,0 +1,1 @@
+We preset a series of colorful Tooltip styles for use in different situations.

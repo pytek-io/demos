@@ -1,0 +1,1 @@
+Use [antd-img-crop](https://github.com/nanxiaobei/antd-img-crop) to crop image before uploading.

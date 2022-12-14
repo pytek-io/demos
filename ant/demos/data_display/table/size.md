@@ -1,0 +1,1 @@
+There are two compacted table sizes: `middle` and `small`. The `small` size is used in Modals only.

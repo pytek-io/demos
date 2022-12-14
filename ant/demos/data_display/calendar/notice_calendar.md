@@ -1,0 +1,1 @@
+This component can be rendered by using `dateCellRender` and `monthCellRender` with the data you need.

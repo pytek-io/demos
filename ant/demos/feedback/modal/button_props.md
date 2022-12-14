@@ -1,0 +1,1 @@
+Passing `okButtonProps` and `cancelButtonProps` will customize the OK button and cancel button props.

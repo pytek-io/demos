@@ -1,0 +1,1 @@
+Click the menu and you will see that all the other menus gets collapsed to keep the entire menu compact.

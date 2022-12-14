@@ -1,0 +1,1 @@
+Internal inverse color tag

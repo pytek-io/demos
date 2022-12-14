@@ -1,0 +1,1 @@
+Skeleton contains sub component.

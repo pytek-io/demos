@@ -1,0 +1,1 @@
+A borderless style of Collapse.

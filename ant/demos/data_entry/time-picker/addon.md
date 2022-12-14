@@ -1,0 +1,1 @@
+Render addon contents to time picker panel's bottom.

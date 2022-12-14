@@ -1,0 +1,1 @@
+Mini size pagination.

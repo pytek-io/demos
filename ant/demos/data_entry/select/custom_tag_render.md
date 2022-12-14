@@ -1,0 +1,1 @@
+Allows for custom rendering of tags.

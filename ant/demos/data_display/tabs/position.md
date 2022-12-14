@@ -1,0 +1,1 @@
+Tab's position: left, right, top or bottom. Will auto switch to `top` in mobile.

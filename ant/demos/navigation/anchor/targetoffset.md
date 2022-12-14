@@ -1,0 +1,1 @@
+Anchor target scroll to screen center.

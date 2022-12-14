@@ -8,7 +8,7 @@ import reflect_html as html
 import reflect_monaco as monaco
 import reflect_utils
 import yaml
-
+import pathlib
 import reflect as r
 
 
@@ -79,19 +79,17 @@ def build_menu(root_directory):
         )
         menuItems = []
         for component_name in sorted(os.listdir(category_folder)):
-            component_folder = os.path.join(category_folder, component_name)
-            if not os.path.isdir(component_folder):
+            component_folder = pathlib.Path(category_folder, component_name)
+            if not component_folder.is_dir():
                 continue
-            summary_path = os.path.join(component_folder, "summary.pick")
-            if not os.path.exists(summary_path):
-                print("skipping", component_name, "no summary found")
-                continue
-            nice_component_name, nb_cols = pickle.loads(
-                open(summary_path, "rb").read()
-            )[:2]
+            nb_cols = int(
+                pathlib.Path(component_folder, "summary.txt")
+                .read_text()
+                .splitlines()[0]
+            )
             COMPONENTS_PROPS[component_name] = nb_cols
             menuItems.append(
-                {"label": nice_component_name, "key": f"{category}/{component_name}"}
+                {"label": component_name, "key": f"{category}/{component_name}"}
             )
         sub_menus.append(
             {"children": menuItems, "label": nice_category_name, "key": category}
@@ -209,23 +207,20 @@ def create_code_box(
 
 def demo_details(root_directory, category, component_name):
     default_folder = os.path.join(root_directory, "demos", category, component_name)
-    _nice_name, _nb_cols, demos = pickle.loads(
-        open(os.path.join(default_folder, "summary.pick"), "rb").read()
+    _nb_cols, demos = (
+        pathlib.Path(default_folder, "summary.txt").read_text().split("\n")
     )
-    for _order, module_name, js, description, demo_name in sorted(
-        demos, key=lambda x: x[0]
-    ):
-        module_path = os.path.join(default_folder, module_name + ".py")
-        if not os.path.exists(module_path):
+    for module_name, demo_name in (x.split(":") for x in demos.split(",")):
+        module_path = pathlib.Path(default_folder, module_name + ".py")
+        if not module_path.exists():
             continue
-        module_path = module_path[len(os.getcwd()) :]
         maybe_code_box = create_code_box(
-            module_path[1:] if module_path.startswith(os.path.sep) else module_path,
+            str(module_path.relative_to(os.getcwd())),
             component_name,
             module_name,
             demo_name,
-            description,
-            js,
+            pathlib.Path(default_folder, module_name + ".md").read_text(),
+            pathlib.Path(default_folder, module_name + ".jsx").read_text(),
         )
         if maybe_code_box:
             yield maybe_code_box

@@ -1,0 +1,1 @@
+We can set preset ranges to RangePicker to improve user experience.
