@@ -30,7 +30,7 @@ def app():
                 [
                     antd.Form.Item(antd.Input(), label="Input"),
                     antd.Form.Item(
-                        antd.Select(antd.Select.Option("Demo", value="demo")),
+                        antd.Select(options=[{"label": "Demo", "value": "demo"}]),
                         label="Select",
                     ),
                     antd.Form.Item(

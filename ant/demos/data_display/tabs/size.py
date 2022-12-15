@@ -1,8 +1,6 @@
 import reflect_antd as antd
 import reflect_html as html
 
-TabPane = antd.Tabs.TabPane
-
 
 def app():
     size = antd.Radio.Group(
@@ -18,20 +16,32 @@ def app():
         [
             size,
             antd.Tabs(
-                [
-                    TabPane("Content of tab 1", tab="Tab 1", key="1"),
-                    TabPane("Content of tab 2", tab="Tab 2", key="2"),
-                    TabPane("Content of tab 3", tab="Tab 3", key="3"),
+                items=[
+                    {"children": "Content of tab 1", "label": "Tab 1", "key": "1"},
+                    {"children": "Content of tab 2", "label": "Tab 2", "key": "2"},
+                    {"children": "Content of tab 3", "label": "Tab 3", "key": "3"},
                 ],
                 defaultActiveKey="1",
                 size=size,
                 style=dict(marginBottom=32),
             ),
             antd.Tabs(
-                [
-                    TabPane("Content of card tab 1", tab="Card Tab 1", key="1"),
-                    TabPane("Content of card tab 2", tab="Card Tab 2", key="2"),
-                    TabPane("Content of card tab 3", tab="Card Tab 3", key="3"),
+                items=[
+                    {
+                        "children": "Content of card tab 1",
+                        "label": "Card Tab 1",
+                        "key": "1",
+                    },
+                    {
+                        "children": "Content of card tab 2",
+                        "label": "Card Tab 2",
+                        "key": "2",
+                    },
+                    {
+                        "children": "Content of card tab 3",
+                        "label": "Card Tab 3",
+                        "key": "3",
+                    },
                 ],
                 defaultActiveKey="1",
                 type="card",

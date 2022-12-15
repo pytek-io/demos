@@ -220,7 +220,7 @@ def demo_details(root_directory, category, component_name):
             module_name,
             demo_name,
             pathlib.Path(default_folder, module_name + ".md").read_text(),
-            pathlib.Path(default_folder, module_name + ".jsx").read_text(),
+            pathlib.Path(default_folder, module_name + ".tsx").read_text(),
         )
         if maybe_code_box:
             yield maybe_code_box

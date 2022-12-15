@@ -1,8 +1,6 @@
 import reflect_antd as antd
 import reflect_html as html
 
-TabPane = antd.Tabs.TabPane
-
 
 def app():
     mode = antd.Radio.Group(
@@ -17,10 +15,13 @@ def app():
         [
             mode,
             antd.Tabs(
-                [
-                    TabPane(
-                        f"Content of tab {i}", tab=f"Tab-{i}", key=i, disabled=i == 28
-                    )
+                items=[
+                    {
+                        "children": f"Content of tab {i}",
+                        "label": f"Tab-{i}",
+                        "key": i,
+                        "disabled": i == 28,
+                    }
                     for i in range(1, 30)
                 ],
                 defaultActiveKey="3",

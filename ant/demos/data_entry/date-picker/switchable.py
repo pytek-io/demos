@@ -1,8 +1,6 @@
-import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
-Option = antd.Select.Option
+import reflect as r
 
 
 def picker_with_type(picker_type, onChange):
@@ -15,13 +13,13 @@ def picker_with_type(picker_type, onChange):
 
 def app():
     picker_type = antd.Select(
-        [
-            Option("Time", value="time"),
-            Option("Date", value="date"),
-            Option("Week", value="week"),
-            Option("Month", value="month"),
-            Option("Quarter", value="quarter"),
-            Option("Year", value="year"),
+        items=[
+            {"children": "Time", "value": "time"},
+            {"children": "Date", "value": "date"},
+            {"children": "Week", "value": "week"},
+            {"children": "Month", "value": "month"},
+            {"children": "Quarter", "value": "quarter"},
+            {"children": "Year", "value": "year"},
         ],
         defaultValue="time",
     )

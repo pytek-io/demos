@@ -6,7 +6,7 @@ import reflect_antd as antd
 from demos.ant.demos.utils import find_index
 
 JS_MODULES = ["ant_demo"]
-TabPane = antd.Tabs.TabPane
+
 initial_panes = [
     ({"tab": "Tab 1", "key": "1"}, "Content of Tab 1"),
     ({"tab": "Tab 2", "key": "2"}, "Content of Tab 2"),
@@ -31,7 +31,7 @@ def app():
             active_key.set(key)
 
     return antd.Tabs(
-        lambda: [TabPane(content, **pane) for pane, content in panes()],
+        lambda: [dict(children=content, **pane) for pane, content in panes()],
         type="editable-card",
         activeKey=active_key,
         onEdit=r.Callback(onEdit, "onEdit", args=None, multiple_results=True),

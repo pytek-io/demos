@@ -1,8 +1,5 @@
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
-
-TabPane = antd.Tabs.TabPane
 
 
 def app():
@@ -20,10 +17,10 @@ def app():
     return html.div(
         [
             antd.Tabs(
-                [
-                    TabPane("Content of tab 1", tab="Tab 1", key="1"),
-                    TabPane("Content of tab 2", tab="Tab 2", key="2"),
-                    TabPane("Content of tab 3", tab="Tab 3", key="3"),
+                items=[
+                    {"children": "Content of tab 1", "label": "Tab 1", "key": "1"},
+                    {"children": "Content of tab 2", "label": "Tab 2", "key": "2"},
+                    {"children": "Content of tab 3", "label": "Tab 3", "key": "3"},
                 ],
                 tabBarExtraContent=operations,
             ),
@@ -36,10 +33,10 @@ def app():
             html.br(),
             html.br(),
             antd.Tabs(
-                [
-                    TabPane("Content of tab 1", tab="Tab 1", key="1"),
-                    TabPane("Content of tab 2", tab="Tab 2", key="2"),
-                    TabPane("Content of tab 3", tab="Tab 3", key="3"),
+                items=[
+                    {"children": "Content of tab 1", "label": "Tab 1", "key": "1"},
+                    {"children": "Content of tab 2", "label": "Tab 2", "key": "2"},
+                    {"children": "Content of tab 3", "label": "Tab 3", "key": "3"},
                 ],
                 tabBarExtraContent=slot,
             ),

@@ -1,40 +1,38 @@
 import reflect_antd as antd
 import reflect_html as html
 
-TabPane = antd.Tabs.TabPane
-
 
 def app():
     return html.div(
         antd.Tabs(
-            [
-                TabPane(
-                    [
+            items=[
+                {
+                    "children": [
                         html.p("Content of Tab Pane 1"),
                         html.p("Content of Tab Pane 1"),
                         html.p("Content of Tab Pane 1"),
                     ],
-                    tab="Tab Title 1",
-                    key="1",
-                ),
-                TabPane(
-                    [
+                    "label": "Tab Title 1",
+                    "key": "1",
+                },
+                {
+                    "children": [
                         html.p("Content of Tab Pane 2"),
                         html.p("Content of Tab Pane 2"),
                         html.p("Content of Tab Pane 2"),
                     ],
-                    tab="Tab Title 2",
-                    key="2",
-                ),
-                TabPane(
-                    [
+                    "label": "Tab Title 2",
+                    "key": "2",
+                },
+                {
+                    "children": [
                         html.p("Content of Tab Pane 3"),
                         html.p("Content of Tab Pane 3"),
                         html.p("Content of Tab Pane 3"),
                     ],
-                    tab="Tab Title 3",
-                    key="3",
-                ),
+                    "label": "Tab Title 3",
+                    "key": "3",
+                },
             ],
             type="card",
         ),

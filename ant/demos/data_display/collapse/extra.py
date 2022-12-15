@@ -1,10 +1,10 @@
-import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
 
+import reflect as r
+
 Panel = antd.Collapse.Panel
-Option = antd.Select.Option
 
 
 def genExtra():
@@ -18,7 +18,10 @@ Known for its loyalty and faithfulness,
 it can be found as a welcome guest in many households across the world.
 """
     expandIconPosition = antd.Select(
-        [Option("left", value="left"), Option("right", value="right")],
+        items=[
+            {"children": "left", "value": "left"},
+            {"children": "right", "value": "right"},
+        ],
         defaultValue="left",
         style=dict(margin="0 8px"),
     )

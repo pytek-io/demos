@@ -1,8 +1,6 @@
 import reflect_antd as antd
 import reflect_html as html
 
-TabPane = antd.Tabs.TabPane
-
 
 def app():
     tabPosition = antd.Radio.Group(
@@ -18,10 +16,10 @@ def app():
         [
             antd.Space(["Tab position:", tabPosition], style=dict(marginBottom=24)),
             antd.Tabs(
-                [
-                    TabPane("Content of Tab 1", tab="Tab 1", key="1"),
-                    TabPane("Content of Tab 2", tab="Tab 2", key="2"),
-                    TabPane("Content of Tab 3", tab="Tab 3", key="3"),
+                items=[
+                    {"children": "Content of Tab 1", "label": "Tab 1", "key": "1"},
+                    {"children": "Content of Tab 2", "label": "Tab 2", "key": "2"},
+                    {"children": "Content of Tab 3", "label": "Tab 3", "key": "3"},
                 ],
                 tabPosition=tabPosition,
             ),

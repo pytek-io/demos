@@ -1,12 +1,6 @@
 import reflect as r
 import reflect_antd as antd
 
-TabPane = antd.Tabs.TabPane
-
-
-def callback(key):
-    print(key)
-
 
 items = [
     {"label": "Tab 1", "key": "item-1", "children": "Content 1"},
@@ -17,9 +11,7 @@ items = [
 def app():
     return antd.Tabs(
         items=items,
-        # onChange=r.Callback(callback),
-        # onTabChange=r.Callback(callback),
+        onChange=r.Callback(lambda key: print(key)),
         defaultActiveKey="item-2",
-        # type="card",
-        key="whatever"
+        type="card",
     )

@@ -3,8 +3,7 @@ import reflect_altair as altair
 import reflect_antd as antd
 import reflect_html as html
 import vega_datasets
-
-Option = antd.Select.Option
+import reflect as r
 DEFAULT_VALUES = ["Horsepower", "Miles_per_Gallon", "Origin"]
 TITLE = "Altair chart"
 
@@ -12,15 +11,18 @@ TITLE = "Altair chart"
 class App:
     def __init__(self):
         source = vega_datasets.data.cars()
-        options = [Option(name, value=name) for name in source.columns]
+        options = [{"label": name, "value": name} for name in source.columns]
         x, y, color = [
             antd.Select(
-                options,
+                options=options,
                 defaultValue=default_value,
                 style=dict(width=160, textAlign="right"),
             )
             for default_value in DEFAULT_VALUES
         ]
+        r.autoprint(x)
+        r.autoprint(y)
+        r.autoprint(color)
         self.settings = html.div(
             [
                 antd.Row(
