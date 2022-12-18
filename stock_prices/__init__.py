@@ -14,10 +14,10 @@ class App:
     def __init__(self, default="nasdaq"):
         controller = r.Controller()
         self.settings = antd.Select(
-            [
-                antd.Select.Option("Nasdaq", value="nasdaq"),
-                antd.Select.Option("Amex", value="amex"),
-                antd.Select.Option("NYSE", value="nyse"),
+            options=[
+                {"children": "Nasdaq", "value": "nasdaq"},
+                {"children": "Amex", "value": "amex"},
+                {"children": "NYSE", "value": "nyse"},
             ],
             defaultValue=default,
             style=dict(width=120),

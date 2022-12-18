@@ -62,7 +62,7 @@ def create_code_editor(
         readOnly=readOnly,
     )
     return monaco.Editor(
-        defaultValue="\n".join(content),
+        defaultValue=("\n" if language == "python" else "").join(content),
         options=options,
         defaultLanguage=language,
         height=height,
@@ -147,19 +147,19 @@ def code_box_bottom(description, js, py):
         if add_code:
             result.append(
                 antd.Tabs(
-                    [
-                        antd.Tabs.TabPane(
-                            create_code_editor(
+                    items=[
+                        dict(
+                            children=create_code_editor(
                                 "python", py, height=f"{len(py) * 18}px"
                             ),
-                            tab="Python",
+                            label="Python",
                             key="py",
                         ),
-                        antd.Tabs.TabPane(
-                            create_code_editor(
+                        dict(
+                            children=create_code_editor(
                                 "typescript", js, True, height=f"{len(js) * 18}px"
                             ),
-                            tab="JS",
+                            label="JS",
                             key="js",
                         ),
                     ],

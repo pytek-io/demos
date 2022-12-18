@@ -1,9 +1,10 @@
 import altair as alt
+import reflect as r
 import reflect_altair as altair
 import reflect_antd as antd
 import reflect_html as html
 import vega_datasets
-import reflect as r
+
 DEFAULT_VALUES = ["Horsepower", "Miles_per_Gallon", "Origin"]
 TITLE = "Altair chart"
 
@@ -12,14 +13,14 @@ class App:
     def __init__(self):
         source = vega_datasets.data.cars()
         options = [{"label": name, "value": name} for name in source.columns]
-        x, y, color = [
+        x, y, color = (
             antd.Select(
                 options=options,
                 defaultValue=default_value,
                 style=dict(width=160, textAlign="right"),
             )
             for default_value in DEFAULT_VALUES
-        ]
+        )
         r.autoprint(x)
         r.autoprint(y)
         r.autoprint(color)
@@ -42,17 +43,23 @@ class App:
             style={"marginLeft": 15, "flex": "0 1 auto"},
         )
         brush = alt.selection_interval()
-        self.content = altair.Chart(
-            spec=lambda: alt.Chart(source)
-            .mark_circle(size=60)
-            .encode(
-                x=x(),
-                y=y(),
-                color=alt.condition(brush, "Origin:N", alt.value("lightgray")),
-                tooltip=["Name", color(), x(), y()],
+
+        def spec():
+            return (
+                alt.Chart(source)
+                .mark_circle(size=60)
+                .encode(
+                    x=x(),
+                    y=y(),
+                    color=alt.condition(brush, "Origin:N", alt.value("lightgray")),
+                    tooltip=["Name", color(), x(), y()],
+                )
+                .add_selection(brush)
+                .properties(width="container", height="container")
             )
-            .add_selection(brush)
-            .properties(width="container", height="container"),
+
+        self.content = altair.Chart(
+            spec=spec,
             style={"height": "100%", "width": "100%"},
         )
         self.title = "Car data set"

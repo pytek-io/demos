@@ -6,15 +6,15 @@ import pathlib
 
 import httpx
 import pandas as pd
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 import reflect_plotly as plotly
 
+import reflect as r
+
 CANDLE_STICK_NAME = "candlestick"
 OHLC_NAME = "ohlc"
 MESSAGE_KEY = "key"
-
 YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
 TICKERS_PATH = "stock_prices/nasdaq/nasdaq.json"
 DEFAULT_SIGNAL_DEFINITION = {"nb_days": 2, "color": "red"}
@@ -29,10 +29,7 @@ def create_row_settings(elements):
     return antd.Row(
         [
             antd.Col(element, span=span)
-            for element, span in zip(
-                elements,
-                [5, 4, 10, 5],
-            )
+            for element, span in zip(elements, [5, 4, 10, 5])
         ],
         align="middle",
         style={"height": "100%", "marginTop": 10},
@@ -58,7 +55,6 @@ class App:
             filterOption=r.js("autoCompleteFilterOption"),
             allowClear=True,
         )
-
         start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))
         end_date = antd.DatePicker(defaultValue=today)
         graph_type = antd.Select(
@@ -83,9 +79,7 @@ class App:
         )
         signal_definitions = [DEFAULT_SIGNAL_DEFINITION.copy()]
         signal_definitions_obs = r.ObservableList(
-            signal_definitions,
-            key="signal_definitions_obs",
-            controller=self.controller,
+            signal_definitions, key="signal_definitions_obs", controller=self.controller
         )
         signal_definitions_obs_obs = r.Mapping(
             r.DictOfObservables, signal_definitions_obs
@@ -95,20 +89,18 @@ class App:
             settings_obs = r.DictOfObservables(settings)
             return create_row_settings(
                 [
-                    # we add a lambda to avoid recomputing the whole row when the number of days changes (this causes the focus to be lost on mobiles)
                     html.label(
                         lambda: signal_name(settings_obs), style={"textAlign": "right"}
                     ),
                     antd.InputNumber(
-                        value=settings_obs["nb_days"],
-                        style={"width": "100%"},
+                        value=settings_obs["nb_days"], style={"width": "100%"}
                     ),
                     antd.Select(
-                        [
-                            antd.Select.Option("Blue", value="blue"),
-                            antd.Select.Option("Red", value="red"),
-                            antd.Select.Option("Green", value="green"),
-                            antd.Select.Option("Yellow", value="yellow"),
+                        options=[
+                            {"children": "Blue", "value": "blue"},
+                            {"children": "Red", "value": "red"},
+                            {"children": "Green", "value": "green"},
+                            {"children": "Yellow", "value": "yellow"},
                         ],
                         value=settings_obs["color"],
                         style={"width": "100%", "textAlign": "right", "maxWidth": 80},
@@ -139,9 +131,8 @@ class App:
                         DEFAULT_SIGNAL_DEFINITION.copy()
                     ),
                 ),
-            ],
+            ]
         )
-
         yahoo_data = r.ObservableValue(pd.DataFrame())
 
         async def update_yahoo_data_async():
@@ -177,7 +168,7 @@ class App:
             evaluate_argument=True,
         )
 
-        def data():
+        def chart_data():
             df = yahoo_data()
             if df.empty:
                 return
@@ -206,23 +197,19 @@ class App:
                     "rangeslider": {"visible": range_slider()},
                     "type": "date",
                 },
-                "yaxis": {
-                    "autorange": True,
-                    "domain": [0, 1],
-                    "type": "linear",
-                },
+                "yaxis": {"autorange": True, "domain": [0, 1], "type": "linear"},
                 "autosize": True,
             }
 
         plot = plotly.Plot(
-            data=data,
+            data=chart_data,
             layout=layout,
             config={"responsive": True},
             useResizeHandler=True,
             style={
                 "height": "var(min(100%, 0.5 * vh))" if stand_alone else "100%",
                 "width": "100%",
-                "marginRight": 60,  # the graph looks at the right location when the icons are hidden...
+                "marginRight": 60,
             },
         )
         title = antd.Typography.Title(
@@ -234,8 +221,7 @@ class App:
             },
         )
         self.content = html.div(
-            [title, plot] if stand_alone else [plot],
-            style={"height": "100%"},
+            [title, plot] if stand_alone else [plot], style={"height": "100%"}
         )
 
     def settings(self):
@@ -279,20 +265,13 @@ def app(window: r.Window):
                             antd.Space(
                                 [
                                     antd.Button(
-                                        "Revert",
-                                        type="primary",
-                                        onClick=app.cancel,
+                                        "Revert", type="primary", onClick=app.cancel
                                     ),
                                     antd.Button(
-                                        "Update",
-                                        type="primary",
-                                        onClick=app.ok,
+                                        "Update", type="primary", onClick=app.ok
                                     ),
                                 ],
-                                style={
-                                    "marginTop": 20,
-                                    "marginBottom": 20,
-                                },
+                                style={"marginTop": 20, "marginBottom": 20},
                             )
                         ),
                         justify="center",
@@ -301,7 +280,7 @@ def app(window: r.Window):
                 key="settings",
                 xs=24,
                 md=12,
-                style={"maxWidth": 500}
+                style={"maxWidth": 500},
             ),
             antd.Col(app.content, xs=24, md=12, style={"maxWidth": 500}),
         ],
