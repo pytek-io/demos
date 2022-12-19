@@ -5,9 +5,10 @@ import pickle
 import time
 
 import anyio
-import reflect as r
 import reflect_utils
 import websockets
+
+import reflect as r
 
 from .analytics import compute_implied_vols, merge_data
 from .utils import to_timestamp

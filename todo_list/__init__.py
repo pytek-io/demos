@@ -84,8 +84,8 @@ class Application:
         r.autorun(on_change)
 
     def create_todo_item_row(self, item: Dict[str, Any]):
-        key = item_obs["key"]
         item_obs = r.DictOfObservables(item)
+        key = item_obs["key"]()
         return antd.List.Item(
             html.div(
                 antd.Tag(
@@ -131,10 +131,10 @@ class Application:
             self.todo_item_counter += 1
 
     def root(self):
-        title = antd.PageHeader(
-            title="Add Todo",
-            subTitle="To add a todo, just fill the form below and click in add todo or press enter.",
-        )
+        # title = antd.LayoutHeader(
+        #     title="Add Todo",
+        #     subTitle="To add a todo, just fill the form below and click in add todo or press enter.",
+        # )
         form = antd.Card(self.top_row, title="Create a new todo")
         todo_list = antd.Card(
             antd.List(
@@ -144,7 +144,7 @@ class Application:
         )
         components = [
             antd.Row(antd.Col(component, span=24), style={"paddingTop": 20})
-            for component in [title, form, todo_list]
+            for component in [form, todo_list]
         ]
         return antd.Col(
             components,

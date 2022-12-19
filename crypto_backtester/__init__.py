@@ -1,15 +1,15 @@
 import datetime
 
 import pandas as pd
-import reflect as r
 import reflect_altair as altair
 import reflect_antd as antd
 import reflect_html as html
 
+import reflect as r
+
 from .charts import create_performance_chart
 from .server import CURRENCIES, Server
 
-Option = antd.Select.Option
 TITLE = "Option backtester"
 
 
@@ -17,7 +17,7 @@ def create_cascading_selects(instruments):
     instruments = pd.DataFrame(instruments)
     select_style = dict(width=120, paddingTop=10)
     currency = antd.Select(
-        [Option(name, value=acronym) for name, acronym in CURRENCIES],
+        options=[{"label": name, "value": acronym} for name, acronym in CURRENCIES],
         defaultValue=CURRENCIES[0][1],
         style=select_style,
     )
@@ -30,11 +30,13 @@ def create_cascading_selects(instruments):
         return result
 
     expiry_timestamp_select = antd.Select(
-        lambda: [
-            Option(
-                datetime.datetime.fromtimestamp(value / 1000).strftime("%d/%m/%y"),
-                value=value,
-            )
+        options=lambda: [
+            {
+                "label": datetime.datetime.fromtimestamp(value / 1000).strftime(
+                    "%d/%m/%y"
+                ),
+                "value": value,
+            }
             for value in expiry_timestamp_values()
         ],
         defaultValue=expiry_timestamp_values()[2],
@@ -57,8 +59,8 @@ def create_cascading_selects(instruments):
         return sorted(set(instruments_for_expiry()["option_type"]))
 
     option_type = antd.Select(
-        lambda: [
-            Option(value[0].upper() + value[1:], value=value)
+        options=lambda: [
+            {"label": value[0].upper() + value[1:], "value": value}
             for value in option_types()
         ],
         style=select_style,
@@ -78,7 +80,9 @@ def create_cascading_selects(instruments):
         return sorted(set(instruments_for_expiry_and_type()["strike"]), reverse=True)
 
     strike = antd.Select(
-        lambda: [Option(f"{value:,.0f}", value=value) for value in strikes()],
+        options=lambda: [
+            {"label": f"{value:,.0f}", "value": value} for value in strikes()
+        ],
         style=select_style,
         defaultValue=strikes()[min(len(strikes()) - 1, int(len(strikes()) / 2) + 1)]
         if strikes()
