@@ -47,7 +47,7 @@ CSS = [
 ]
 JS_MODULES = ["ant_demo"]
 FAVICON = ANT_LOGO_ICON_PATH
-DISPLAY_DEMOS_ERRORS = True
+DISPLAY_DEMOS_ERRORS = False
 
 
 def create_code_editor(
