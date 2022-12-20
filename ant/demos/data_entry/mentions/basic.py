@@ -2,8 +2,6 @@ import reflect_antd as antd
 
 import reflect as r
 
-Option = antd.Mentions.Option
-
 
 def onSelect(value):
     print("selected", value)

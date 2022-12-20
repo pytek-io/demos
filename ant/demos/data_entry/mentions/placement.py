@@ -1,8 +1,6 @@
 import reflect_antd as antd
 import reflect_html as html
 
-Option = antd.Mentions.Option
-
 
 def app():
     return antd.Mentions(
