@@ -69,6 +69,10 @@ def create_code_editor(
     )
 
 
+def dash_separated_to_caml_case(name: str):
+    return "".join(sub[0].upper() + sub[1:] for sub in name.split("-"))
+
+
 def build_menu(root_directory):
     root_directory = root_directory + "/demos"
     sub_menus = []
@@ -80,7 +84,7 @@ def build_menu(root_directory):
         menuItems = []
         for component_name in sorted(os.listdir(category_folder)):
             component_folder = pathlib.Path(category_folder, component_name)
-            if not component_folder.is_dir():
+            if not component_folder.is_dir() or component_name == "cascader":
                 continue
             nb_cols = int(
                 pathlib.Path(component_folder, "summary.txt")
@@ -89,7 +93,10 @@ def build_menu(root_directory):
             )
             COMPONENTS_PROPS[component_name] = nb_cols
             menuItems.append(
-                {"label": component_name, "key": f"{category}/{component_name}"}
+                {
+                    "label": dash_separated_to_caml_case(component_name),
+                    "key": f"{category}/{component_name}",
+                }
             )
         sub_menus.append(
             {"children": menuItems, "label": nice_category_name, "key": category}
