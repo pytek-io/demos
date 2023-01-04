@@ -4,8 +4,8 @@ import reflect_html as html
 
 
 def app():
-    modal1Visible = r.create_observable(False)
-    modal2Visible = r.create_observable(False)
+    modal1Visible = r.ObservableValue(False)
+    modal2Visible = r.ObservableValue(False)
     return html.div(
         [
             antd.Button(

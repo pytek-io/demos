@@ -5,7 +5,7 @@ import reflect_utils
 
 
 def app():
-    disabled = r.create_observable(True)
+    disabled = r.ObservableValue(True)
     radio_group1 = antd.Radio("Disabled", defaultChecked=False, disabled=disabled)
     radio_group2 = antd.Radio("Disabled", defaultChecked=True, disabled=disabled)
     return html.div(

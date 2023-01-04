@@ -5,7 +5,7 @@ import reflect as r
 
 
 def app():
-    current = r.create_observable(0)
+    current = r.ObservableValue(0)
 
     def onChange(current_value):
         print("onChange:", current_value)

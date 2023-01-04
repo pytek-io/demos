@@ -5,7 +5,7 @@ import reflect_utils
 
 
 def app():
-    disabled = r.create_observable(True)
+    disabled = r.ObservableValue(True)
     return html.div(
         [
             antd.InputNumber(min=1, max=10, disabled=disabled, defaultValue=3),

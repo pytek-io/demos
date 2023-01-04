@@ -4,7 +4,7 @@ import reflect_html as html
 
 
 def app():
-    top = r.create_observable(10, key="test")
+    top = r.ObservableValue(10, key="test")
     return html.div(
         [
             html.div("Top"),

@@ -7,7 +7,7 @@ import reflect_html as html
 
 
 def app():
-    loadings = [r.create_observable(False) for i in range(3)]
+    loadings = [r.ObservableValue(False) for i in range(3)]
 
     def enter_loading(loading):
         async def result():

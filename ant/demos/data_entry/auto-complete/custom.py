@@ -37,5 +37,5 @@ def app():
         onSelect=r.Callback(onSelect),
         onSearch=r.Callback(handleSearch),
     )
-    r.autorun(lambda: print(result()))
+    r.autoprint(result)
     return result

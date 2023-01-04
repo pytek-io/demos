@@ -12,7 +12,7 @@ steps = [
 
 
 def app():
-    current = r.create_observable(0)
+    current = r.ObservableValue(0)
     return antd.Space(
         [
             antd.Steps(

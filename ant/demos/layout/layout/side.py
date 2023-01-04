@@ -13,7 +13,7 @@ Header, Content, Footer, Sider = (
 
 
 def app():
-    collapsed = r.create_observable(False)
+    collapsed = r.ObservableValue(False)
 
     def onCollapse(collapsed_value):
         print(collapsed_value)

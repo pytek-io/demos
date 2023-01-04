@@ -1,12 +1,9 @@
-import traceback
-
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 
 def app():
-    counters = [r.create_observable(value) for value in [1, 2]]
+    counters = [r.ObservableValue(value) for value in [1, 2]]
 
     def update_counters(value):
         counters[value] += 1
@@ -21,5 +18,5 @@ def app():
         buttonStyle="solid",
         onChange=update_counters,
     )
-    r.autorun(lambda: print(result()))
+    r.autoprint(result)
     return result

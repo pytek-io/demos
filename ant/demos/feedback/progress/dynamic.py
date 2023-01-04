@@ -6,7 +6,7 @@ import reflect_utils
 
 
 def app():
-    percent = r.create_observable(0)
+    percent = r.ObservableValue(0)
     r.autorun(lambda: print("percent", percent()))
     return html.div(
         [

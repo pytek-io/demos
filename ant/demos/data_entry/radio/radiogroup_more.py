@@ -1,6 +1,5 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 radioStyle = {"display": "block", "height": "30px", "lineHeight": "30px"}
 
@@ -10,7 +9,7 @@ def onChange(value):
 
 
 def app():
-    value = r.create_observable(1)
+    value = r.ObservableValue(1)
     return antd.Radio.Group(
         [
             antd.Radio("Option A", style=radioStyle, value=1),

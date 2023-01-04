@@ -4,7 +4,7 @@ import reflect_html as html
 
 
 def app():
-    is_modal_visible = r.create_observable(False)
+    is_modal_visible = r.ObservableValue(False)
     return html.div(
         [
             antd.Button(

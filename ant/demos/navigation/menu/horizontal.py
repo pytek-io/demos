@@ -5,7 +5,7 @@ import reflect_html as html
 
 
 def app():
-    current = r.create_observable("mail")
+    current = r.ObservableValue("mail")
 
     def handleClick(value):
         print(f"clicked {value}")

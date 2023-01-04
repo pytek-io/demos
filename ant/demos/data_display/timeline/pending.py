@@ -5,7 +5,7 @@ import reflect_utils
 
 
 def app():
-    reverse = r.create_observable(False)
+    reverse = r.ObservableValue(False)
     return html.div(
         [
             antd.Timeline(

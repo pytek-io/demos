@@ -12,8 +12,8 @@ def increment(value, increment):
 
 
 def app():
-    top = r.create_observable(10)
-    bottom = r.create_observable(10)
+    top = r.ObservableValue(10)
+    bottom = r.ObservableValue(10)
     return html.div(
         [
             antd.Affix(

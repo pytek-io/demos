@@ -6,8 +6,8 @@ import reflect as r
 
 
 def app():
-    disabled = r.create_observable(False)
-    checked = r.create_observable(True)
+    disabled = r.ObservableValue(False)
+    checked = r.ObservableValue(True)
     check_box = antd.Checkbox(
         lambda: f"{'Checked' if checked() else 'Unchecked'} - {'Disabled' if disabled() else 'Enabled'}",
         checked=checked,
