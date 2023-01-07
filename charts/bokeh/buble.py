@@ -1,4 +1,4 @@
-import bokeh
+import bokeh.plotting as bk
 import numpy as np
 import reflect_bokeh
 
@@ -15,7 +15,7 @@ def app():
     colors = [
         ("#%02x%02x%02x" % (255, int(round(value * 255 / 100)), 255)) for value in y
     ]
-    p = bokeh.plotting.figure(
+    p = bk.figure(
         title="Vectorized colors and radii example",
         sizing_mode="stretch_width",
         max_width=500,
