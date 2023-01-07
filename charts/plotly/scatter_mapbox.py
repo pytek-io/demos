@@ -1,9 +1,14 @@
+import pathlib
+
 import plotly.express as px
 import reflect_plotly as plotly
 
 
 def app():
-    px.set_mapbox_access_token(open(".mapbox_token").read())
+    print(pathlib.Path(__file__).parent)
+    px.set_mapbox_access_token(
+        pathlib.Path(pathlib.Path(__file__).parent, ".mapbox_token").read_text()
+    )
     return plotly.Graph(
         px.scatter_mapbox(
             px.data.carshare(),
