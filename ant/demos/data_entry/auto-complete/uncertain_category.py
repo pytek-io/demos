@@ -6,7 +6,7 @@ import random
 
 def create_result(query, engine):
     number = random.randint(10, 100)
-    category = f"{query}-{number}"
+    category = f"{query} {engine}({number})"
     return {
         "value": category,
         "label": html.div(
