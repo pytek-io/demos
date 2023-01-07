@@ -1,28 +1,37 @@
+
+input here
+Customized
+You could set custom Option label
+
+TypeScript
+JavaScript
 import React, { useState } from 'react';
 import { AutoComplete } from 'antd';
 
-const { Option } = AutoComplete;
+const App: React.FC = () => {
+  const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
 
-const Complete: React.FC = () => {
-  const [result, setResult] = useState<string[]>([]);
   const handleSearch = (value: string) => {
-    let res: string[] = [];
+    let res: { value: string; label: string }[] = [];
     if (!value || value.indexOf('@') >= 0) {
       res = [];
     } else {
-      res = ['gmail.com', '163.com', 'qq.com'].map(domain => `${value}@${domain}`);
+      res = ['gmail.com', '163.com', 'qq.com'].map((domain) => ({
+        value,
+        label: `${value}@${domain}`,
+      }));
     }
-    setResult(res);
+    setOptions(res);
   };
+
   return (
-    <AutoComplete style={{ width: 200 }} onSearch={handleSearch} placeholder="input here">
-      {result.map((email: string) => (
-        <Option key={email} value={email}>
-          {email}
-        </Option>
-      ))}
-    </AutoComplete>
+    <AutoComplete
+      style={{ width: 200 }}
+      onSearch={handleSearch}
+      placeholder="input here"
+      options={options}
+    />
   );
 };
 
-ReactDOM.render(<Complete />, mountNode);
+export default App;

@@ -37,6 +37,14 @@ def create_row_settings(elements):
     )
 
 
+filter_options = r.JSMethod(
+    "filter",
+    "return option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1",
+    "inputValue",
+    "option",
+)
+
+
 class App:
     def __init__(self, ticker, stand_alone=True):
         today = datetime.datetime.today()
@@ -52,7 +60,7 @@ class App:
             options=[{"value": ticker} for ticker in tickers],
             value=ticker,
             style={"textAlign": "right", "width": 100},
-            filterOption=r.js("autoCompleteFilterOption"),
+            filterOption=filter_options,
             allowClear=True,
         )
         start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))
