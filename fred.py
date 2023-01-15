@@ -1,8 +1,8 @@
 import httpx
 import json
 import pandas as pd
-from datetime import datetime, date
-
+from datetime import datetime
+from math import nan
 
 series_id = "SP500"
 root_url = "https://api.stlouisfed.org/fred/"
@@ -11,14 +11,14 @@ url = root_url + "/series/observations"
 url = root_url + "/series/search"
 
 
-date_converter = lambda s: datetime.strptime(s, "%Y-%M-%d").date()
+date_converter = lambda s: datetime.strptime(s, "%Y-%m-%d").date()
 CONVERTERS = {
     "realtime_start": date_converter,
     "realtime_end": date_converter,
     "observation_start": date_converter,
     "observation_end": date_converter,
     "date": date_converter,
-    "value": lambda s: float(s) if s != "." else 0.0,
+    "value": lambda s: float(s) if s != "." else nan,
 }
 
 
@@ -35,14 +35,20 @@ def query_fred_website(path, data_name, **params):
             f"Failed to retrieve data at {url}: {response.status_code}, {params}"
         )
     data = pd.DataFrame(json.loads(response.content.decode("UTF-8"))[data_name])
-    for column_name in set(data.columns).intersection(CONVERTERS):
+    for column_name in set(data.columns):
         data[column_name] = data[column_name].map(CONVERTERS[column_name])
     return data
 
 
-def get_fred_series_observations(series_id: str):
+def get_fred_series_observations(
+    series_id: str, observation_start: datetime.date, observation_end: datetime.date
+):
     return query_fred_website(
-        ["series", "observations"], "observations", series_id=series_id
+        ["series", "observations"],
+        "observations",
+        series_id=series_id,
+        observation_start=observation_start.strftime("%Y-%m-%d"),
+        observation_end=observation_end.strftime("%Y-%m-%d"),
     )
 
 

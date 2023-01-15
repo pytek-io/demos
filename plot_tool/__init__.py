@@ -8,13 +8,15 @@ from dataclasses import dataclass
 
 import httpx
 import pandas as pd
+import plotly.graph_objects as go
+import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 import reflect_monaco as monaco
 import reflect_plotly as plotly
-import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
-import reflect as r
+from ..fred import get_fred_series_observations
 
 YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
 TICKERS_PATH = "stock_prices/nasdaq/nasdaq.json"
@@ -34,11 +36,11 @@ tickers = {
 }
 
 
-def create_signal_settings_layout(*elements):
+def create_timeseries_settings_layout(*elements):
     return antd.Row(
         [
             antd.Col(element, span=span)
-            for element, span in zip(elements, [5, 4, 10, 5])
+            for element, span in zip(elements, [5, 4, 2, 8, 5])
         ],
         align="middle",
         style={"height": "100%", "marginTop": 10},
@@ -46,26 +48,48 @@ def create_signal_settings_layout(*elements):
     )
 
 
+def merge_dict(d1, d2):
+    result = d1
+    for k, v in d2.items():
+        if (
+            k in result
+            and isinstance(result[k], dict)
+            and isinstance(v, dict)
+        ):
+            merge_dict(result[k], v)
+        else:
+            result[k] = v
+    return result
+
+
 def input_panel(signal_definitions_obs):
     signal_count = itertools.count(1)
     add_signal = lambda: signal_definitions_obs.append(
-        {"ticker": "AAPL", "name": f"stock_{next(signal_count)}"}
+        {"ticker": "AAPL", "name": f"stock_{next(signal_count)}", "source": "yahoo"}
     )
     add_signal()
+    signal_definitions_obs.append(
+        {"ticker": "T5YIE", "name": f"stock_{next(signal_count)}", "source": "fred"}
+    )
 
-    def create_signal_row(signal_obs_dict):
+    def create_timeseries_row(signal_obs_dict):
         ticker = antd.AutoComplete(
-            options=[{"value": ticker} for ticker in tickers],
+            options=[],
+            # options=[{"value": ticker} for ticker in tickers],
             value=signal_obs_dict["ticker"],
             style={"textAlign": "right", "width": 100},
             filterOption=filter_options,
             allowClear=True,
         )
-        return create_signal_settings_layout(
+        return create_timeseries_settings_layout(
             antd.Input(value=signal_obs_dict["name"], style={"width": 100}),
             ticker,
+            antd.Select(
+                signal_obs_dict["source"],
+                options=[{"value": "yahoo"}, {"value": "fred"}],
+            ),
             antd.Typography(
-                lambda: tickers[ticker()],
+                lambda: tickers.get(ticker()),
                 style={
                     "width": 400,
                     "height": 30,
@@ -80,10 +104,10 @@ def input_panel(signal_definitions_obs):
             ),
         )
 
-    signal_definitions_rows = r.Mapping(create_signal_row, signal_definitions_obs)
+    signal_definitions_rows = r.Mapping(create_timeseries_row, signal_definitions_obs)
     return html.div(
         [
-            create_signal_settings_layout(
+            create_timeseries_settings_layout(
                 html.label("Name"),
                 html.label("Ticker"),
                 html.label("Actual name"),
@@ -107,6 +131,16 @@ editor_options = dict(
 )
 
 
+def get_yahoo_data(ticker, start, end):
+    url = f"{YAHOO_URL}{ticker}?period1={int(start.timestamp())}&period2={int(end.timestamp())}&interval=1d&events=history"
+    try:
+        return pd.read_csv(io.BytesIO(httpx.get(url).content))
+    except Exception as exception:
+        raise RuntimeError(
+            f"Failed to retrieve {ticker} data from yahoo: {exception}"
+        ) from exception
+
+
 @dataclass
 class TimeSeries:
     ticker: str
@@ -125,9 +159,10 @@ def app(_: r.Window):
         height=500,
         options=editor_options,
     )
-    update = antd.Button("update")
     range_slider = antd.Switch(defaultChecked=True)
     show_legends = antd.Switch(defaultChecked=True)
+    start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))
+    end_date = antd.DatePicker(defaultValue=today)
 
     def layout():
         return {
@@ -144,48 +179,44 @@ def app(_: r.Window):
             "autosize": True,
         }
 
-    start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))
-    end_date = antd.DatePicker(defaultValue=today)
-
-    def fetch_yahoo_data(signal_definition):
+    def fetch_timeseries(signal_definition):
         ticker = signal_definition["ticker"]()
         start, end = start_date(), end_date()
-        url = f"{YAHOO_URL}{ticker}?period1={int(start.timestamp())}&period2={int(end.timestamp())}&interval=1d&events=history"
-        with httpx.Client() as client:
-            try:
-                df = pd.read_csv(io.BytesIO(client.get(url).content))
-            except Exception as exception:
-                raise RuntimeError(
-                    f"Failed to retrieve {ticker} data from yahoo: {exception}"
-                ) from exception
-        return signal_definition["name"](), TimeSeries(ticker, tickers[ticker], df)
+        if signal_definition["source"]() == "yahoo":
+            data = get_yahoo_data(ticker, start, end)
+        else:
+            data = get_fred_series_observations(ticker, start, end)
+        return signal_definition["name"](), TimeSeries(
+            ticker, tickers.get(ticker), data
+        )
 
-    stock_timeseries = r.Mapping(fetch_yahoo_data, signal_definitions_obs)
+    stock_timeseries = r.Mapping(fetch_timeseries, signal_definitions_obs)
     chart_data = r.ObservableValue({})
 
     async def evaluate_script():
-        scripts_locals = dict(stock_timeseries, go=go, datetime=datetime)
+        scripts_locals = merge_dict(locals(), stock_timeseries)
         exec(await editor.getValue(), None, scripts_locals)
         chart_data.set(scripts_locals["figure"].to_dict())
 
-    def actual_layout():
-        result = layout().copy()
-        result.update(chart_data().get("layout", ()))
-        return result
-
     plot = plotly.Plot(
         data=lambda: chart_data().get("data"),
-        layout=actual_layout,
-        style={
-            "height": "100%",
-            "width": "100%",
-        },
+        layout=lambda: merge_dict(layout(), chart_data().get("layout", {})),
+        style={"height": "100%", "width": "100%"},
     )
     update = antd.Button("Update", onClick=evaluate_script)
+    settings = antd.create_form_layout(
+        [
+            ("Start", start_date),
+            ("End", end_date),
+            ("Range slider", range_slider),
+            ("Show legends", show_legends),
+            ("Update", update),
+        ]
+    )
     return antd.Col(
         [
             plot,
-            antd.Row([update, start_date, end_date], justify="center"),
+            settings,
             inputs,
             editor,
         ],
