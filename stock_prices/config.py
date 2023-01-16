@@ -24,70 +24,52 @@ def convert_to_integer(value):
 COLUMNS = (
     (
         "symbol",
-        (
-            identity,
-            dict(
-                headerName="Symbol",
-                width=90,
-                sortable=True,
-            ),
+        dict(
+            headerName="Symbol",
+            width=90,
+            sortable=True,
         ),
     ),
     (
         "lastsale",
-        (
-            parse_dollar_amount,
-            dict(
-                headerName="Last Sale",
-                width=100,
-                sortable=True,
-            ),
+        dict(
+            headerName="Last Sale",
+            width=100,
+            sortable=True,
         ),
     ),
     (
         "netchange",
-        (
-            identity,
-            dict(
-                headerName="Change",
-                width=100,
-                sortable=True,
-            ),
+        dict(
+            headerName="Change",
+            width=100,
+            sortable=True,
         ),
     ),
     (
         "pctchange",
-        (
-            parse_percentage,
-            dict(
-                headerName="% Change",
-                width=110,
-                sortable=True,
-                valueFormatter=round_value_to_2_digits_col,
-            ),
+        dict(
+            headerName="% Change",
+            width=110,
+            sortable=True,
+            valueFormatter=round_value_to_2_digits_col,
         ),
     ),
     (
         "marketCap",
-        (
-            convert_to_integer,
-            dict(
-                headerName="Mkt Cap",
-                width=140,
-                sortable=True,
-                valueValueFormatter=toLocaleString,
-            ),
+        dict(
+            headerName="Mkt Cap",
+            width=140,
+            sortable=True,
+            valueValueFormatter=toLocaleString,
         ),
     ),
     (
         "name",
-        (
-            identity,
-            dict(
-                headerName="Name",
-                width=300,
-                sortable=True,
-            ),
+        dict(
+            headerName="Name",
+            width=300,
+            sortable=True,
         ),
     ),
 )

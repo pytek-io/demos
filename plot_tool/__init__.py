@@ -2,24 +2,21 @@
 import datetime
 import io
 import itertools
-import json
 import pathlib
-from dataclasses import dataclass
 
 import httpx
 import pandas as pd
-import plotly.graph_objects as go
 import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 import reflect_monaco as monaco
 import reflect_plotly as plotly
-from plotly.subplots import make_subplots
 
 from ..fred import get_fred_series_observations
+from .common import TimeSeries
 
 YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
-TICKERS_PATH = "stock_prices/nasdaq/nasdaq.json"
+TICKERS_PATH = "stock_prices/nasdaq/nasdaq.pick"
 
 filter_options = r.JSMethod(
     "filter",
@@ -28,34 +25,28 @@ filter_options = r.JSMethod(
     "option",
 )
 
-tickers = {
-    record["symbol"]: record["name"]
-    for record in json.loads(
-        pathlib.Path(__file__).parent.parent.joinpath(TICKERS_PATH).read_text()
-    )["data"]["table"]["rows"]
-}
+NASDAQ_DATA = pd.read_pickle(
+    pathlib.Path(__file__).parent.parent.joinpath(TICKERS_PATH)
+)
+TICKERS = dict(zip(NASDAQ_DATA["symbol"], NASDAQ_DATA["name"]))
 
 
 def create_timeseries_settings_layout(*elements):
     return antd.Row(
         [
-            antd.Col(element, span=span)
-            for element, span in zip(elements, [5, 4, 2, 8, 5])
+            antd.Col(element, style={"width": width, "marginRight": 10})
+            for element, width in zip(elements, [100, 100, 100, 300, 50])
         ],
         align="middle",
-        style={"height": "100%", "marginTop": 10},
-        gutter={"xs": 8, "sm": 16, "md": 24, "lg": 32},
+        style={"height": "100%", "marginTop": 2},
+        justify="center",
     )
 
 
 def merge_dict(d1, d2):
     result = d1
     for k, v in d2.items():
-        if (
-            k in result
-            and isinstance(result[k], dict)
-            and isinstance(v, dict)
-        ):
+        if k in result and isinstance(result[k], dict) and isinstance(v, dict):
             merge_dict(result[k], v)
         else:
             result[k] = v
@@ -65,17 +56,22 @@ def merge_dict(d1, d2):
 def input_panel(signal_definitions_obs):
     signal_count = itertools.count(1)
     add_signal = lambda: signal_definitions_obs.append(
-        {"ticker": "AAPL", "name": f"stock_{next(signal_count)}", "source": "yahoo"}
+        {"ticker": "AAPL", "name": f"input_{next(signal_count)}", "source": "yahoo"}
     )
+    # adding two values to make the example more user friendly
     add_signal()
     signal_definitions_obs.append(
-        {"ticker": "T5YIE", "name": f"stock_{next(signal_count)}", "source": "fred"}
+        {"ticker": "T5YIE", "name": f"input_{next(signal_count)}", "source": "fred"}
     )
 
     def create_timeseries_row(signal_obs_dict):
         ticker = antd.AutoComplete(
-            options=[],
-            # options=[{"value": ticker} for ticker in tickers],
+            options=lambda: [
+                {"value": ticker}
+                for ticker in (
+                    TICKERS if signal_obs_dict["source"]() == "yahoo" else ["T5YIE"]
+                )
+            ],
             value=signal_obs_dict["ticker"],
             style={"textAlign": "right", "width": 100},
             filterOption=filter_options,
@@ -85,11 +81,16 @@ def input_panel(signal_definitions_obs):
             antd.Input(value=signal_obs_dict["name"], style={"width": 100}),
             ticker,
             antd.Select(
-                signal_obs_dict["source"],
+                value=signal_obs_dict["source"],
                 options=[{"value": "yahoo"}, {"value": "fred"}],
+                style={"width": 100},
             ),
             antd.Typography(
-                lambda: tickers.get(ticker()),
+                lambda: (
+                    TICKERS
+                    if signal_obs_dict["source"]() == "yahoo"
+                    else {"T5YIE": "5 Years swap rate"}
+                ).get(ticker(), "Unknown time series"),
                 style={
                     "width": 400,
                     "height": 30,
@@ -105,11 +106,12 @@ def input_panel(signal_definitions_obs):
         )
 
     signal_definitions_rows = r.Mapping(create_timeseries_row, signal_definitions_obs)
-    return html.div(
+    return antd.Col(
         [
             create_timeseries_settings_layout(
                 html.label("Name"),
                 html.label("Ticker"),
+                html.label("Source"),
                 html.label("Actual name"),
                 antd.Button(
                     "+",
@@ -117,8 +119,8 @@ def input_panel(signal_definitions_obs):
                     style={"width": 42},
                 ),
             ),
-            antd.Col(signal_definitions_rows),
-        ]
+            signal_definitions_rows,
+        ],
     )
 
 
@@ -141,12 +143,6 @@ def get_yahoo_data(ticker, start, end):
         ) from exception
 
 
-@dataclass
-class TimeSeries:
-    ticker: str
-    name: str
-    values: pd.DataFrame
-
 
 def app(_: r.Window):
     today = datetime.datetime.today()
@@ -159,8 +155,8 @@ def app(_: r.Window):
         height=500,
         options=editor_options,
     )
-    range_slider = antd.Switch(defaultChecked=True)
-    show_legends = antd.Switch(defaultChecked=True)
+    range_slider = antd.Switch(defaultChecked=True, style={"width": 30})
+    show_legends = antd.Switch(defaultChecked=True, style={"width": 30})
     start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))
     end_date = antd.DatePicker(defaultValue=today)
 
@@ -187,14 +183,14 @@ def app(_: r.Window):
         else:
             data = get_fred_series_observations(ticker, start, end)
         return signal_definition["name"](), TimeSeries(
-            ticker, tickers.get(ticker), data
+            ticker, TICKERS.get(ticker), data
         )
 
     stock_timeseries = r.Mapping(fetch_timeseries, signal_definitions_obs)
     chart_data = r.ObservableValue({})
 
     async def evaluate_script():
-        scripts_locals = merge_dict(locals(), stock_timeseries)
+        scripts_locals = merge_dict(locals(), dict(stock_timeseries))
         exec(await editor.getValue(), None, scripts_locals)
         chart_data.set(scripts_locals["figure"].to_dict())
 
@@ -203,7 +199,7 @@ def app(_: r.Window):
         layout=lambda: merge_dict(layout(), chart_data().get("layout", {})),
         style={"height": "100%", "width": "100%"},
     )
-    update = antd.Button("Update", onClick=evaluate_script)
+    update = antd.Button("Update", onClick=evaluate_script, type="primary")
     settings = antd.create_form_layout(
         [
             ("Start", start_date),
@@ -213,12 +209,7 @@ def app(_: r.Window):
             ("Update", update),
         ]
     )
-    return antd.Col(
-        [
-            plot,
-            settings,
-            inputs,
-            editor,
-        ],
+    return antd.div(
+        [inputs, plot, settings, editor],
         style={"paddingRight": 20, "paddingLeft": 20},
     )

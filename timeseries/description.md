@@ -5,5 +5,5 @@ Display stock prices for Nasdaq markets.
 - Use [AG Grid](https://www.ag-grid.com/) library
 
 - Update tab name according to inputs
-- Pass data as a pandas data frame
+- Define simple dynamic behaviour in functional style
 - Define app behaviour using a controller

@@ -28,7 +28,7 @@ def save_to_file(file, data):
 
 def load_from_file(file):
     try:
-        return json.loads( pathlib.Path(file).read_text())
+        return json.loads(pathlib.Path(file).read_text())
     except Exception as e:
         raise Exception(f"Failed to read {file}. {e}") from e
 
@@ -72,13 +72,12 @@ class Application:
             gutter=20,
         )
         file_name = file_path.name.split(".", 1)[0]
+
         def on_change():
             nb_completed = iterable_length(
                 filter(lambda item: item["completed"], self.items_obs)
             )
-            update_title(
-                f"({nb_completed}/{len(self.items_obs)}) {file_name}"
-            )
+            update_title(f"({nb_completed}/{len(self.items_obs)}) {file_name}")
             save_to_file(file_path, (self.items, self.todo_item_counter))
 
         r.autorun(on_change)
@@ -108,6 +107,7 @@ class Application:
                         checkedChildren=ant_icons.CheckOutlined(),
                         unCheckedChildren=ant_icons.CloseOutlined(),
                         checked=item_obs["completed"],
+                        style={"width": 30},
                     ),
                     title=lambda: "Mark as uncomplete"
                     if item_obs["completed"]()
