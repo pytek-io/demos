@@ -57,7 +57,7 @@ def create_code_editor(
         minimap={"enabled": False},
         lineNumbers=lineNumbers,
         glyphMargin=False,
-        wordWrap=True,
+        wordWrap=False,
         renderValidationDecorations="off" if relaxed else "on",
         readOnly=readOnly,
     )

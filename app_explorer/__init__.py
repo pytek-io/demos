@@ -77,7 +77,7 @@ def app(window: r.Window):
                         minimap={"enabled": False},
                         lineNumbers=True,
                         glyphMargin=False,
-                        wordWrap=True,
+                        wordWrap=False,
                         readOnly=True,
                     ),
                     defaultLanguage="python",

@@ -11,7 +11,7 @@ class TimeSeries:
 
 def scatter(timeseries, color):
     return go.Scatter(
-        name=timeseries.name,
+        name=timeseries.ticker,
         line={"color": color},
         x=timeseries.values["date"],
         y=timeseries.values["value"],

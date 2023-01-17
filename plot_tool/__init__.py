@@ -1,10 +1,8 @@
 """Fetch historical data from yahoo in real time, plot time series and signals using plotly."""
 import datetime
-import io
 import itertools
 import pathlib
 
-import httpx
 import pandas as pd
 import reflect as r
 import reflect_antd as antd
@@ -12,45 +10,38 @@ import reflect_html as html
 import reflect_monaco as monaco
 import reflect_plotly as plotly
 
-from ..fred import get_fred_series_observations
+from ..fred import get_fred_series_observations, get_yahoo_stock_history
+from ..utils import merge_dicts
 from .common import TimeSeries
 
-YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
-TICKERS_PATH = "stock_prices/nasdaq/nasdaq.pick"
+root = pathlib.Path(__file__).parent.parent
+YAHOO_DATA = pd.read_pickle(root.joinpath("stock_prices/nasdaq/nasdaq.pick"))
+FRED_DATA = pd.read_pickle(root.joinpath("fred.pick"))
+YAHOO_TICKERS = dict(zip(YAHOO_DATA["symbol"], YAHOO_DATA["name"]))
+FRED_TICKERS = dict(zip(FRED_DATA["id"], FRED_DATA["title"]))
+EDITOR_OPTIONS = {
+    "minimap": {"enabled": False},
+    "lineNumbers": False,
+    "glyphMargin": False,
+    "wordWrap": False,
+    "renderValidationDecorations": "off" if False else "on",
+}
+WIDTHS = [42, 100, 150, 80, 300]
+TITLES = ["Source", "Ticker", "Name", "Actual name - Description"]
 
-filter_options = r.JSMethod(
-    "filter",
-    "return option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1",
-    "inputValue",
-    "option",
-)
 
-NASDAQ_DATA = pd.read_pickle(
-    pathlib.Path(__file__).parent.parent.joinpath(TICKERS_PATH)
-)
-TICKERS = dict(zip(NASDAQ_DATA["symbol"], NASDAQ_DATA["name"]))
-
-
-def create_timeseries_settings_layout(*elements):
+def layout_timeseries_definition_row(
+    elements, widths=WIDTHS, separation=10, justify="left"
+):
     return antd.Row(
         [
-            antd.Col(element, style={"width": width, "marginRight": 10})
-            for element, width in zip(elements, [100, 100, 100, 300, 50])
+            antd.Col(element, style={"width": width, "marginRight": separation})
+            for element, width in zip(elements, widths)
         ],
         align="middle",
-        style={"height": "100%", "marginTop": 2},
-        justify="center",
+        style={"height": "100%", "marginTop": 4},
+        justify=justify,
     )
-
-
-def merge_dict(d1, d2):
-    result = d1
-    for k, v in d2.items():
-        if k in result and isinstance(result[k], dict) and isinstance(v, dict):
-            merge_dict(result[k], v)
-        else:
-            result[k] = v
-    return result
 
 
 def input_panel(signal_definitions_obs):
@@ -61,104 +52,114 @@ def input_panel(signal_definitions_obs):
     # adding two values to make the example more user friendly
     add_signal()
     signal_definitions_obs.append(
-        {"ticker": "T5YIE", "name": f"input_{next(signal_count)}", "source": "fred"}
+        {
+            "ticker": next(iter(FRED_TICKERS)),
+            "name": f"input_{next(signal_count)}",
+            "source": "fred",
+        }
     )
 
-    def create_timeseries_row(signal_obs_dict):
+    def create_timeseries_row(signal_obs_dict: r.DictOfObservables):
+        tickers = (
+            lambda: YAHOO_TICKERS
+            if signal_obs_dict["source"]() == "yahoo"
+            else FRED_TICKERS
+        )
         ticker = antd.AutoComplete(
-            options=lambda: [
-                {"value": ticker}
-                for ticker in (
-                    TICKERS if signal_obs_dict["source"]() == "yahoo" else ["T5YIE"]
-                )
-            ],
+            options=lambda: [{"value": ticker} for ticker in tickers()],
             value=signal_obs_dict["ticker"],
-            style={"textAlign": "right", "width": 100},
-            filterOption=filter_options,
+            style={"textAlign": "right", "width": "100%"},
+            filterOption=antd.AutoComplete.case_insensitive_filter_options(),
             allowClear=True,
         )
-        return create_timeseries_settings_layout(
-            antd.Input(value=signal_obs_dict["name"], style={"width": 100}),
-            ticker,
-            antd.Select(
-                value=signal_obs_dict["source"],
-                options=[{"value": "yahoo"}, {"value": "fred"}],
-                style={"width": 100},
-            ),
-            antd.Typography(
-                lambda: (
-                    TICKERS
-                    if signal_obs_dict["source"]() == "yahoo"
-                    else {"T5YIE": "5 Years swap rate"}
-                ).get(ticker(), "Unknown time series"),
-                style={
-                    "width": 400,
-                    "height": 30,
-                    "display": "flex",
-                    "alignItems": "center",
-                },
-            ),
-            antd.Button(
-                "-",
-                onClick=lambda: signal_definitions_obs.remove(signal_obs_dict),
-                style={"width": 42},
-            ),
+        return layout_timeseries_definition_row(
+            [
+                antd.Button(
+                    "-",
+                    onClick=lambda: signal_definitions_obs.remove(signal_obs_dict),
+                    style={"width": "100%"},
+                ),
+                antd.Select(
+                    value=signal_obs_dict["source"],
+                    options=[{"value": "yahoo"}, {"value": "fred"}],
+                    style={"width": "100%"},
+                ),
+                ticker,
+                antd.Input(value=signal_obs_dict["name"], style={"width": "100%"}),
+                antd.Typography(
+                    lambda: tickers().get(ticker(), "Unknown time series"),
+                    style={
+                        "width": "100%",
+                        "height": 30,
+                        "display": "flex",
+                        "alignItems": "center",
+                    },
+                ),
+            ]
         )
 
-    signal_definitions_rows = r.Mapping(create_timeseries_row, signal_definitions_obs)
     return antd.Col(
         [
-            create_timeseries_settings_layout(
-                html.label("Name"),
-                html.label("Ticker"),
-                html.label("Source"),
-                html.label("Actual name"),
-                antd.Button(
-                    "+",
-                    onClick=add_signal,
-                    style={"width": 42},
-                ),
+            layout_timeseries_definition_row(
+                [antd.Button("+", onClick=add_signal, style={"width": "100%"})]
+                + [
+                    antd.Typography.Title(title, level=5, style={"width": "100%"})
+                    for title in TITLES
+                ]
             ),
-            signal_definitions_rows,
+            r.Mapping(create_timeseries_row, signal_definitions_obs),
         ],
     )
 
 
-editor_options = dict(
-    minimap={"enabled": False},
-    lineNumbers=False,
-    glyphMargin=False,
-    wordWrap=True,
-    renderValidationDecorations="off" if False else "on",
-)
-
-
-def get_yahoo_data(ticker, start, end):
-    url = f"{YAHOO_URL}{ticker}?period1={int(start.timestamp())}&period2={int(end.timestamp())}&interval=1d&events=history"
-    try:
-        return pd.read_csv(io.BytesIO(httpx.get(url).content))
-    except Exception as exception:
-        raise RuntimeError(
-            f"Failed to retrieve {ticker} data from yahoo: {exception}"
-        ) from exception
-
-
-
-def app(_: r.Window):
+def plot_panel(editor, signal_definitions_obs):
     today = datetime.datetime.today()
-    signal_definitions_obs = r.ObservableList[r.DictOfObservables]()
-    inputs = input_panel(signal_definitions_obs)
-    editor = monaco.Editor(
-        defaultValue=pathlib.Path(
-            pathlib.Path(__file__).parent, "script.py"
-        ).read_text(),
-        height=500,
-        options=editor_options,
-    )
-    range_slider = antd.Switch(defaultChecked=True, style={"width": 30})
-    show_legends = antd.Switch(defaultChecked=True, style={"width": 30})
+    range_slider = antd.Switch(defaultChecked=False, style={"width": 30})
+    show_legends = antd.Switch(defaultChecked=False, style={"width": 30})
     start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))
     end_date = antd.DatePicker(defaultValue=today)
+    chart_data = r.ObservableValue({})
+
+    def fetch_timeseries(signal_definition):
+        ticker = signal_definition["ticker"]()
+        start, end = start_date(), end_date()
+        if signal_definition["source"]() == "yahoo":
+            data, tickers = get_yahoo_stock_history(ticker, start, end), YAHOO_TICKERS
+        else:
+            data, tickers = (
+                get_fred_series_observations(ticker, start, end),
+                FRED_TICKERS,
+            )
+        assert not data.empty, f"no data found for {ticker}"
+        return signal_definition["name"](), TimeSeries(
+            ticker, tickers.get(ticker), data
+        )
+
+    async def evaluate_script():
+        scripts_locals = merge_dicts(locals(), dict(stock_timeseries))
+        exec(await editor.getValue(), None, scripts_locals)
+        chart_data.set(scripts_locals["figure"].to_dict())
+
+    stock_timeseries = r.Mapping(fetch_timeseries, signal_definitions_obs)
+    update = antd.Button("Update", onClick=evaluate_script, type="primary")
+    settings = antd.Col(
+        [
+            layout_timeseries_definition_row(
+                [
+                    html.label("Start"),
+                    start_date,
+                    html.label("End"),
+                    end_date,
+                    html.label("Range slider"),
+                    range_slider,
+                    html.label("Show legends"),
+                    show_legends,
+                ],
+                [40, 140] * 2 + [100, 60] * 2,
+                2,
+            ),
+        ]
+    )
 
     def layout():
         return {
@@ -175,41 +176,44 @@ def app(_: r.Window):
             "autosize": True,
         }
 
-    def fetch_timeseries(signal_definition):
-        ticker = signal_definition["ticker"]()
-        start, end = start_date(), end_date()
-        if signal_definition["source"]() == "yahoo":
-            data = get_yahoo_data(ticker, start, end)
-        else:
-            data = get_fred_series_observations(ticker, start, end)
-        return signal_definition["name"](), TimeSeries(
-            ticker, TICKERS.get(ticker), data
-        )
-
-    stock_timeseries = r.Mapping(fetch_timeseries, signal_definitions_obs)
-    chart_data = r.ObservableValue({})
-
-    async def evaluate_script():
-        scripts_locals = merge_dict(locals(), dict(stock_timeseries))
-        exec(await editor.getValue(), None, scripts_locals)
-        chart_data.set(scripts_locals["figure"].to_dict())
-
-    plot = plotly.Plot(
-        data=lambda: chart_data().get("data"),
-        layout=lambda: merge_dict(layout(), chart_data().get("layout", {})),
-        style={"height": "100%", "width": "100%"},
+    return (
+        settings,
+        update,
+        plotly.Plot(
+            data=lambda: chart_data().get("data"),
+            layout=lambda: merge_dicts(layout(), chart_data().get("layout", {})),
+            style={"width": "100%"},
+            # style={"height": "100%", "width": "100%"},
+        ),
     )
-    update = antd.Button("Update", onClick=evaluate_script, type="primary")
-    settings = antd.create_form_layout(
-        [
-            ("Start", start_date),
-            ("End", end_date),
-            ("Range slider", range_slider),
-            ("Show legends", show_legends),
-            ("Update", update),
-        ]
+
+
+def app(_: r.Window):
+    signal_definitions_obs = r.ObservableList[r.DictOfObservables]()
+    inputs = input_panel(signal_definitions_obs)
+    editor = monaco.Editor(
+        defaultValue=pathlib.Path(
+            pathlib.Path(__file__).parent, "script.py"
+        ).read_text(),
+        height=500,
+        options=EDITOR_OPTIONS,
     )
-    return antd.div(
-        [inputs, plot, settings, editor],
-        style={"paddingRight": 20, "paddingLeft": 20},
+    settings, update, plot = plot_panel(editor, signal_definitions_obs)
+
+    return antd.Row(
+        antd.Col(
+            [
+                plot,
+                antd.Row(update, justify="center"),
+                antd.Divider("Settings", plain=True),
+                settings,
+                antd.Divider("Inputs", plain=True),
+                inputs,
+                antd.Divider("Script", plain=True),
+                html.div(editor, style={"borderColor": "grey", "borderStyle": "solid"}),
+            ],
+            style={"paddingRight": 20, "paddingLeft": 20},
+        ),
+        align="center",
+        style={"paddingTop": 20},
     )
