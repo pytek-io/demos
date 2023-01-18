@@ -63,6 +63,13 @@ def get_fred_series_search(search_text: str):
     return query_fred_website(["series", "search"], "seriess", search_text=search_text)
 
 
+def get_fred_series(series_id: str):
+    return query_fred_website(["series"], "seriess", series_id=series_id)
+
+def get_fred_category(category_id: int):
+    return query_fred_website(["category"], "categories", category_id=category_id)
+
+
 def get_yahoo_stock_history(ticker, start, end):
     url = f"{YAHOO_URL}{ticker}?period1={int(start.timestamp())}&period2={int(end.timestamp())}&interval=1d&events=history"
     try:
@@ -74,13 +81,24 @@ def get_yahoo_stock_history(ticker, start, end):
 
 
 if __name__ == "__main__":
-    df = get_fred_series_observations(
-        "PCESVA",
-        observation_start=datetime(2022, 6, 1).date(),
-        observation_end=datetime(2022, 6, 1).date(),
-    )
+    # df = get_fred_series_observations(
+    #     "PCESVA",
+    #     observation_start=datetime(2022, 6, 1).date(),
+    #     observation_end=datetime(2022, 6, 1).date(),
+    # )
+    import time
+    start = time.time()
+    results = []
+    for i in range(1, 4000):
+        try:
+            print(i)
+            results.append(get_fred_category(i))
+        except:
+            print("failed")
+    print(time.time() - start)
+    pd.concat(results).to_pickle("categories.pick")
     # df = get_fred_series_observations("T10Y20Y")
     # df = get_fred_series_search(["monetary", "service", "index"])
     # df.to_pickle("../fred.pick")
-    print(df)
+    # print(df)
     # r = get_fred_series_search("monetary+service+index")
