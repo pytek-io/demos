@@ -161,7 +161,7 @@ def app(window: r.Window):
                     antd.Modal(
                         [new_file_name_input],
                         title="Enter a file name",
-                        visible=create_file_visible,
+                        open=create_file_visible,
                         onOk=create_file,
                         onCancel=lambda: create_file_visible.set(False),
                         closable=True,
