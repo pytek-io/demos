@@ -180,7 +180,7 @@ def plot_panel(editor, signal_definitions_obs):
     )
 
 
-def app(_: r.Window):
+def app(_):
     signal_definitions_obs = r.ObservableList[r.DictOfObservables]()
     inputs = input_panel(signal_definitions_obs)
     editor = monaco.Editor(
