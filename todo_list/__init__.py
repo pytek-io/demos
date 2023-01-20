@@ -1,25 +1,19 @@
 """
     Simple todo application based on https://github.com/leonardopliski/react-antd-todo
 """
-import os
 import json
+import os
 import pathlib
 
+import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
+from more_itertools import ilen
 
-import reflect as r
-from typing import Dict, Any
-
-CSS = ["demos/todo_list.css"]
 FIRST_COL_BREAK_POINTS = dict(xs=24, sm=24, md=17, lg=19, xl=20)
 SECOND_COL_BREAK_POINTS = dict(xs=24, sm=24, md=7, lg=5, xl=4)
 DEFAULT_FILE_NAME = "default_todo_list.json"
-
-
-def iterable_length(iterable):
-    return sum(1 for _ in iterable)
 
 
 def save_to_file(file, data):
@@ -27,80 +21,58 @@ def save_to_file(file, data):
 
 
 def load_from_file(file):
-    try:
-        return json.loads(pathlib.Path(file).read_text())
-    except Exception as e:
-        raise Exception(f"Failed to read {file}. {e}") from e
+    return json.loads(pathlib.Path(file).read_text())
 
 
-class Application:
-    def __init__(self, file_path, update_title):
-        file_path = pathlib.Path(os.getcwd(), file_path)
-        if not "." in file_path.name:
-            file_path = file_path.with_name(file_path.name + ".json")
-        if file_path.exists():
-            self.items, self.todo_item_counter = load_from_file(file_path)
-        else:
-            self.items, self.todo_item_counter = [], 0
-        self.items_obs = r.ObservableList(self.items, key="self.items_obs")
-        self.todo_item_rows = r.Mapping(
-            self.create_todo_item_row,
-            self.items_obs,
-            key="self.todo_item_rows",
-            evaluate_argument=False,
-        )
+class App:
+    def __init__(self, window: r.Window):
+        if not window.hash():
+            window.hash.set("default_todo_list")
+        self.items_obs = r.ObservableList[r.DictOfObservables]([], key="self.items_obs")
         self.description = antd.Input(
             placeholder="What needs to be done?",
             onPressEnter=self.add_new_item,
             key="self.description",
         )
-        self.top_row = antd.Row(
-            [
-                antd.Col([self.description], key="col1", **FIRST_COL_BREAK_POINTS),
-                antd.Col(
-                    antd.Button(
-                        [ant_icons.PlusCircleFilled(), "Add todo"],
-                        type="primary",
-                        onClick=self.add_new_item,
-                        block=True,
-                    ),
-                    key="col2",
-                    **SECOND_COL_BREAK_POINTS,
-                ),
-            ],
-            key="row1",
-            gutter=20,
-        )
-        file_name = file_path.name.split(".", 1)[0]
 
-        def on_change():
-            nb_completed = iterable_length(
-                filter(lambda item: item["completed"], self.items_obs)
+        def on_save_file_update():
+            self.file_name = window.hash() or "default_todo_list"
+            if not self.file_name.endswith(".json"):
+                self.file_name += ".json"
+            file_path = pathlib.Path(os.getcwd(), self.file_name)
+            if file_path.exists():
+                items, self.todo_item_counter = load_from_file(file_path)
+            else:
+                items, self.todo_item_counter = [], 0
+            self.items_obs.set(items)
+
+        def on_list_update():
+            nb_completed = ilen(
+                None for item_obs in self.items_obs if item_obs["completed"]()
             )
-            update_title(f"({nb_completed}/{len(self.items_obs)}) {file_name}")
-            save_to_file(file_path, (self.items, self.todo_item_counter))
+            window.update_title(
+                f"({nb_completed}/{len(self.items_obs)}) {self.file_name}"
+            )
+            save_to_file(
+                self.file_name, (self.items_obs.actual_data, self.todo_item_counter)
+            )
 
-        r.autorun(on_change)
+        r.autorun(on_save_file_update)
+        r.autorun(on_list_update)
 
-    def create_todo_item_row(self, item: Dict[str, Any]):
-        item_obs = r.DictOfObservables(item)
-        key = item_obs["key"]()
+    def create_todo_item_row(self, item_obs: r.DictOfObservables):
         return antd.List.Item(
             html.div(
                 antd.Tag(
                     item_obs["description"],
                     color=lambda: "cyan" if item_obs["completed"]() else "red",
-                    className="todo-tag",
                 ),
-                className="todo-item",
             ),
             actions=[
                 antd.Popconfirm(
-                    antd.Button(
-                        "X", className="remove-todo-button", type="primary", danger=True
-                    ),
+                    antd.Button("X", type="primary", danger=True),
                     title="Are you sure you want to delete this item?",
-                    onConfirm=lambda: self.items_obs.remove(item),
+                    onConfirm=lambda: self.items_obs.remove(item_obs),
                 ),
                 antd.Tooltip(
                     antd.Switch(
@@ -114,8 +86,7 @@ class Application:
                     else "Mark as completed",
                 ),
             ],
-            className="list-item",
-            key=key,
+            key=item_obs["key"](),
         )
 
     def add_new_item(self):
@@ -130,34 +101,40 @@ class Application:
             self.description.set("")
             self.todo_item_counter += 1
 
-    def root(self):
-        # title = antd.LayoutHeader(
-        #     title="Add Todo",
-        #     subTitle="To add a todo, just fill the form below and click in add todo or press enter.",
-        # )
-        form = antd.Card(self.top_row, title="Create a new todo")
+    def content(self):
+        top_row = antd.Row(
+            [
+                antd.Col([self.description], key="col1", **FIRST_COL_BREAK_POINTS),
+                antd.Col(
+                    antd.Button(
+                        [ant_icons.PlusCircleFilled(), "Add todo"],
+                        type="primary",
+                        onClick=self.add_new_item,
+                        block=True,
+                    ),
+                    key="col2",
+                    **SECOND_COL_BREAK_POINTS,
+                ),
+            ],
+            key="top_row",
+            gutter=20,
+        )
+        form = antd.Card(top_row, title="Create a new todo")
         todo_list = antd.Card(
             antd.List(
-                html.div(self.todo_item_rows), locale={"emptyText": "Nothing to do."}
+                r.Mapping(
+                    self.create_todo_item_row,
+                    self.items_obs,
+                    key="todo_item_rows",
+                ),
+                locale={"emptyText": "Nothing to do."},
             ),
             title="Items",
         )
-        components = [
-            antd.Row(antd.Col(component, span=24), style={"paddingTop": 20})
-            for component in [form, todo_list]
-        ]
-        return antd.Col(
-            components,
-            style={"paddingLeft": 20, "paddingRight": 20},
-            className="todos-container",
+        return antd.Row(
+            antd.Col(
+                [form, todo_list],
+                style={"padding": 20, "maxWidth": 800, "width": "100%"},
+            ),
+            justify="center",
         )
-
-
-def app(window: r.Window):
-    # rmk: we define the whole content as a hash dependency
-    return html.div(
-        lambda: Application(
-            window.hash() or "default_todo_list",
-            window.update_title,
-        ).root()
-    )
