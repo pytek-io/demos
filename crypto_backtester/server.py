@@ -5,10 +5,9 @@ import pickle
 import time
 
 import anyio
+import reflect as r
 import reflect_utils
 import websockets
-
-import reflect as r
 
 from .analytics import compute_implied_vols, merge_data
 from .utils import to_timestamp
@@ -78,7 +77,12 @@ class Server:
         await self.connection_ready.wait()
         request_id = next(self.request_id)
         await self.derebit_connection.send(
-            dict(jsonrpc="2.0", id=request_id, method="public/" + method, params=params)
+            {
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "method": "public/" + method,
+                "params": params,
+            }
         )
         pending_result = self.pending_queries[request_id] = PendingResult()
         try:

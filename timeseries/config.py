@@ -21,27 +21,7 @@ def convert_to_integer(value):
     return int(parse_float(value)) if value != "NA" else 0
 
 
-COLUMNS = (
-    (
-        "date",
-        (
-            identity,
-            dict(
-                headerName="Date",
-                width=90,
-                sortable=True,
-            ),
-        ),
-    ),
-    (
-        "value",
-        (
-            identity,
-            dict(
-                headerName="Value",
-                width=100,
-                sortable=True,
-            ),
-        ),
-    )
+COLUMNS = ("date", (identity, {"headerName": "Date", "width": 90, "sortable": True})), (
+    "value",
+    (identity, {"headerName": "Value", "width": 100, "sortable": True}),
 )

@@ -1,12 +1,13 @@
 import asyncio
+from itertools import count
 from typing import Dict, List
 
+import pandas as pd
 import reflect as r
 import reflect_antd as antd
 import reflect_html as html
-import pandas as pd
+
 import demos.fred as fred
-from itertools import count
 
 
 def sort_nodes(categories):
@@ -20,7 +21,9 @@ def filter_category(row):
 def filter_series(row):
     return not any(word in row.title for word in ["(DISCONTINUED)"])
 
+
 COUNTRIES = [""]
+
 
 def app():
     node_id = 0
@@ -32,7 +35,7 @@ def app():
         children = [
             {
                 "id": f"{row.id}",
-                "key": f"{key_value}",  # {'s' if leaf else 'c'}
+                "key": f"{key_value}",
                 "title": formatter(row),
                 "isLeaf": leaf,
             }
@@ -68,18 +71,15 @@ def app():
 
     df = pd.read_pickle("demos/categories.pick")
     values = [
-        {
-            "title": name,
-            "id": f"{id}",
-            "key": f"{key_value}",
-            "isLeaf": False,
-        }
+        {"title": name, "id": f"{id}", "key": f"{key_value}", "isLeaf": False}
         for (id, name, parent_id), key_value in zip(
             ((row.id, row.name, row.parent_id) for row in df.itertuples()), key
         )
         if not any(word in name for word in ["County", "District", "(DISCONTINUED)"])
     ]
-    values = [{"title": "Prices", "id": "32455", "key": 32455, "isLeaf": False}] + sort_nodes((values))
+    values = [
+        {"title": "Prices", "id": "32455", "key": 32455, "isLeaf": False}
+    ] + sort_nodes(values)
     nodes_by_id.update((value["id"], value) for value in values)
     nodes_by_key.update((value["key"], value) for value in values)
     treeData = r.ObservableList(values)
@@ -95,15 +95,14 @@ def app():
         return current_node()
 
     us_regional = antd.Switch(False)
-
     return antd.Row(
         map(
-            lambda x: antd.Col(x, style=dict(width="50%")),
+            lambda x: antd.Col(x, style={"width": "50%"}),
             [
                 html.div(
                     antd.Tree(
                         style={"width": "100%", "maxHeight": "100%"},
-                        showLine=dict(showLeafIcon=False),
+                        showLine={"showLeafIcon": False},
                         loadData=load_data,
                         treeData=treeData,
                         onSelect=on_node_selected,
@@ -111,9 +110,7 @@ def app():
                     ),
                     style={"overflow": "auto", "maxHeight": "100%"},
                 ),
-                html.div(
-                    description,
-                ),
+                html.div(description),
             ],
         ),
         style={"height": "100%"},

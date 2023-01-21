@@ -119,13 +119,13 @@ class Application:
                 html.div(menu, style={"flexGrow": 1}),
                 html.div(self.dock_layout, style={"height": "100%", "width": "100%"}),
             ],
-            style=dict(
-                position="absolute",
-                height="100%",
-                width="100%",
-                display="flex",
-                flexFlow="column",
-            ),
+            style={
+                "position": "absolute",
+                "height": "100%",
+                "width": "100%",
+                "display": "flex",
+                "flexFlow": "column",
+            },
         )
 
     def create_stock_history_app(self, ticker: str):

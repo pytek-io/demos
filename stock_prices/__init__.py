@@ -1,11 +1,10 @@
 import pathlib
 
 import pandas as pd
+import reflect as r
 import reflect_aggrid as aggrid
 import reflect_antd as antd
 import reflect_html as html
-
-import reflect as r
 
 from .config import COLUMNS
 
@@ -20,7 +19,7 @@ class App:
                 {"children": "NYSE", "value": "nyse"},
             ],
             defaultValue=default,
-            style=dict(width=120),
+            style={"width": 120},
             controller=controller,
         )
 
@@ -37,9 +36,11 @@ class App:
                 rowData=get_stocks_close,
                 rowHeight=24,
                 className="ag-theme-balham",
-                defaultColDef=dict(
-                    resizable=True, filter=True, cellStyle={"textAlign": "right"}
-                ),
+                defaultColDef={
+                    "resizable": True,
+                    "filter": True,
+                    "cellStyle": {"textAlign": "right"},
+                },
             ),
             style={"height": "100%", "width": "100%"},
         )

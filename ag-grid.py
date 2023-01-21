@@ -37,7 +37,6 @@ def app():
         )
     )
 
-
     def update_values(update):
         index, value = update
         values[index][4] = value
@@ -80,9 +79,11 @@ def app():
         cols,
         rowData=rowData,
         rowHeight=24,
-        defaultColDef=dict(
-            resizable=True, filter=True, cellStyle={"textAlign": "right"}
-        ),
+        defaultColDef={
+            "resizable": True,
+            "filter": True,
+            "cellStyle": {"textAlign": "right"},
+        },
         onGridReady=lambda: grid.autoSizeColumns([col.field for col in cols]),
     )
-    return html.div(grid, style=dict(width="100%", height="50vh"))
+    return html.div(grid, style={"width": "100%", "height": "50vh"})

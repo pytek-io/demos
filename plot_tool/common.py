@@ -1,13 +1,16 @@
 from dataclasses import dataclass
+
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+
 
 @dataclass
 class TimeSeries:
     ticker: str
     name: str
     values: pd.DataFrame
+
 
 def scatter(timeseries, color):
     return go.Scatter(
@@ -40,4 +43,3 @@ def candle_stick(yahoo_timeseries: TimeSeries):
         low=yahoo_timeseries.values["Low"],
         high=yahoo_timeseries.values["High"],
     )
-

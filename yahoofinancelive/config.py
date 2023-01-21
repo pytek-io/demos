@@ -48,95 +48,101 @@ COLUMNS = [
         "id",
         (
             identity,
-            dict(
-                headerName="Symbol",
-                width=90,
-                sortable=True,
-                editable=True,
-                enableCellChangeFlash=True,
-                onCellValueChanged=r.Callback(
+            {
+                "headerName": "Symbol",
+                "width": 90,
+                "sortable": True,
+                "editable": True,
+                "enableCellChangeFlash": True,
+                "onCellValueChanged": r.Callback(
                     print, args=["data.id", "oldValue", "newValue"]
                 ),
-                singleClickEdit=True,
-            ),
+                "singleClickEdit": True,
+            },
         ),
     ),
     (
         "price",
         (
             identity,
-            dict(
-                headerName="Price",
-                width=90,
-                sortable=True,
-                valueNumberFormatter=MAX_5_DIGITS,
-                type="rightAligned",
-            ),
+            {
+                "headerName": "Price",
+                "width": 90,
+                "sortable": True,
+                "valueNumberFormatter": MAX_5_DIGITS,
+                "type": "rightAligned",
+            },
         ),
     ),
     (
         "change",
         (
             identity,
-            dict(
-                headerName="Change",
-                width=100,
-                sortable=True,
-                valueNumberFormatter=MAX_5_DIGITS,
-                type="rightAligned",
-                cellStyle=reflect_utils.colorCellNumber,
-            ),
+            {
+                "headerName": "Change",
+                "width": 100,
+                "sortable": True,
+                "valueNumberFormatter": MAX_5_DIGITS,
+                "type": "rightAligned",
+                "cellStyle": reflect_utils.colorCellNumber,
+            },
         ),
     ),
     (
         "changePercent",
         (
             identity,
-            dict(
-                headerName="Change %",
-                width=110,
-                sortable=True,
-                valueNumberFormatter=reflect_utils.round_value_to_2_digits,
-                type="rightAligned",
-                cellStyle=reflect_utils.colorCellNumber,
-            ),
+            {
+                "headerName": "Change %",
+                "width": 110,
+                "sortable": True,
+                "valueNumberFormatter": reflect_utils.round_value_to_2_digits,
+                "type": "rightAligned",
+                "cellStyle": reflect_utils.colorCellNumber,
+            },
         ),
     ),
     (
         "time",
         (
             identity,
-            dict(
-                headerName="Time",
-                width=90,
-                sortable=True,
-                valueValueFormatter=reflect_utils.compose(
+            {
+                "headerName": "Time",
+                "width": 90,
+                "sortable": True,
+                "valueValueFormatter": reflect_utils.compose(
                     reflect_utils.timeStampToJSDate, reflect_utils.toLocaleTimeString
                 ),
-                enableCellChangeFlash=True,
-            ),
+                "enableCellChangeFlash": True,
+            },
         ),
     ),
-    ("exchange", (identity, dict(headerName="Exchange", width=100, sortable=True))),
-    ("quoteType", (decode_quote, dict(headerName="Type", width=90, sortable=True))),
+    (
+        "exchange",
+        (identity, {"headerName": "Exchange", "width": 100, "sortable": True}),
+    ),
+    (
+        "quoteType",
+        (decode_quote, {"headerName": "Type", "width": 90, "sortable": True}),
+    ),
     (
         "marketHours",
         (
             decode_market_hours,
-            dict(headerName="Market Hours", width=120, sortable=True),
+            {"headerName": "Market Hours", "width": 120, "sortable": True},
         ),
     ),
     (
         "dayVolume",
         (
             identity,
-            dict(
-                headerName="Day Volume",
-                width=120,
-                sortable=True,
-                valueNumberFormatter=reflect_utils.toLocaleString,
-                type="rightAligned",
-            ),
+            {
+                "headerName": "Day Volume",
+                "width": 120,
+                "sortable": True,
+                "valueNumberFormatter": reflect_utils.toLocaleString,
+                "type": "rightAligned",
+            },
         ),
     ),
 ]

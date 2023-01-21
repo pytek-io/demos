@@ -5,11 +5,11 @@ import pathlib
 
 import pandas as pd
 import reflect as r
+import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
 import reflect_monaco as monaco
 import reflect_plotly as plotly
-import reflect_ant_icons as ant_icons
 
 from ..fred import get_fred_series_observations, get_yahoo_stock_history
 from ..utils import merge_dicts
@@ -50,7 +50,6 @@ def input_panel(signal_definitions_obs):
     add_signal = lambda: signal_definitions_obs.append(
         {"ticker": "AAPL", "name": f"input_{next(signal_count)}", "source": YAHOO}
     )
-    # adding two values to make the example more user friendly
     add_signal()
     signal_definitions_obs.append(
         {
@@ -99,7 +98,7 @@ def input_panel(signal_definitions_obs):
                 + [antd.Typography.Title(title, level=5) for title in TITLES]
             ),
             r.Mapping(create_timeseries_row, signal_definitions_obs),
-        ],
+        ]
     )
 
 
@@ -150,7 +149,7 @@ def plot_panel(editor, signal_definitions_obs):
                 ],
                 [40, 140] * 2 + [100, 60] * 2,
                 2,
-            ),
+            )
         ]
     )
 

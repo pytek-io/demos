@@ -1,11 +1,10 @@
 import datetime
 
 import pandas as pd
+import reflect as r
 import reflect_altair as altair
 import reflect_antd as antd
 import reflect_html as html
-
-import reflect as r
 
 from .charts import create_performance_chart
 from .server import CURRENCIES, Server
@@ -15,7 +14,7 @@ TITLE = "Option backtester"
 
 def create_cascading_selects(instruments):
     instruments = pd.DataFrame(instruments)
-    select_style = dict(width=120, paddingTop=10)
+    select_style = {"width": 120, "paddingTop": 10}
     currency = antd.Select(
         options=[{"label": name, "value": acronym} for name, acronym in CURRENCIES],
         defaultValue=CURRENCIES[0][1],
@@ -149,16 +148,16 @@ class App(Server):
         )
         self.root = html.div(
             [chart, side_bar],
-            style=dict(
-                position="absolute",
-                height="100%",
-                width="100%",
-                display="flex",
-                flexFlow="row",
-                paddingTop=30,
-                paddingBottom=30,
-                paddingRight=10,
-            ),
+            style={
+                "position": "absolute",
+                "height": "100%",
+                "width": "100%",
+                "display": "flex",
+                "flexFlow": "row",
+                "paddingTop": 30,
+                "paddingBottom": 30,
+                "paddingRight": 10,
+            },
         )
 
 

@@ -2,12 +2,11 @@
 import os
 import pathlib
 
+import reflect as r
 import reflect_html as html
 import reflect_monaco as monaco
 import reflect_rcdock as rcdock
 import reflect_utils
-
-import reflect as r
 
 TITLE = "App explorer"
 ALMOST_BLACK = "#0f1724"
@@ -28,6 +27,7 @@ def app(window: r.Window):
         base_path, folder_filter=filter_method, file_filter=filter_method
     )
     file_explorer.style.update({"paddingTop": 7, "paddingLeft": 10})
+
     def actual_path():
         if current_path():
             result = os.path.join(base_path, current_path())
@@ -73,13 +73,13 @@ def app(window: r.Window):
             try:
                 return monaco.Editor(
                     defaultValue=open(actual_path(), "r").read(),
-                    options=dict(
-                        minimap={"enabled": False},
-                        lineNumbers=True,
-                        glyphMargin=False,
-                        wordWrap=False,
-                        readOnly=True,
-                    ),
+                    options={
+                        "minimap": {"enabled": False},
+                        "lineNumbers": True,
+                        "glyphMargin": False,
+                        "wordWrap": False,
+                        "readOnly": True,
+                    },
                     defaultLanguage="python",
                     height="100%",
                 )
@@ -93,7 +93,11 @@ def app(window: r.Window):
                 {
                     "size": 1,
                     "tabs": [
-                        ({"title": base_path, "content": file_explorer, "closable": False})
+                        {
+                            "title": base_path,
+                            "content": file_explorer,
+                            "closable": False,
+                        }
                     ],
                 },
                 {

@@ -1,9 +1,11 @@
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
+
 from demos.charts.utils import matplotlib_to_svg
 
 matplotlib.use("Agg")
+
 
 def app():
     matplotlib.rcParams["font.size"] = 8.0

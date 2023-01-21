@@ -44,11 +44,6 @@ def app(window: r.Window):
     main, css, kwargs = arguments["main"], arguments.get("css", []), {}
     window.add_css(css)
     main, kwargs = reflect_utils.decode_url(main)
-    # if "#" in main:
-    #     main, kwargs = main.split("#")
-    #     kwargs = json.loads(kwargs)
-    #     kwargs = {}
-    # return html.div([window.hash(), main, kwargs])
     actual_file_path, language = reflect_utils.extract_file_path_and_language(main)
     editor = create_editor(actual_file_path, language, read_only=False)
 
@@ -61,7 +56,10 @@ def app(window: r.Window):
             if css:
                 window.add_css(css)
             component = html.section(
-                component, id="code-box-demo", className="code-box-demo", style={"height": "100%"}
+                component,
+                id="code-box-demo",
+                className="code-box-demo",
+                style={"height": "100%"},
             )
         else:
             component = reflect_utils.parse_md_doc(open(actual_file_path).read())
@@ -156,7 +154,7 @@ def app(window: r.Window):
                         ant_icons.CaretRightFilled(),
                         type="primary",
                         onClick=reload,
-                        style=dict(margin=10),
+                        style={"margin": 10},
                     ),
                     antd.Modal(
                         [new_file_name_input],

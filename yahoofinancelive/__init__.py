@@ -55,11 +55,13 @@ class YFLiveQuoteManager:
                     print("Yahoo connection has been reset, looping...")
 
 
-MENU_ITEMS = [dict(name="Remove", action_tag="remove quote")]
+MENU_ITEMS = [{"name": "Remove", "action_tag": "remove quote"}]
 
 
 class App:
-    def __init__(self, window: r.Window, initial_tickers: typing.List[str] = []) -> None:
+    def __init__(
+        self, window: r.Window, initial_tickers: typing.List[str] = []
+    ) -> None:
         self.initial_tickers = initial_tickers
         self.window = window
         self.quote_manager = YFLiveQuoteManager(self.window)
@@ -69,12 +71,12 @@ class App:
                 for field, (_formatter, args) in COLUMNS
             ],
             getRowNodeId=r.js("id"),
-            defaultColDef=dict(resizable=True),
+            defaultColDef={"resizable": True},
             componentDidMount=self.main,
             getContextMenuItems=r.js("createContextMenu", MENU_ITEMS),
         )
         self.settings = antd.Input(
-            placeholder="Enter ticker here", onPressEnter=self.ok, style=dict(width=120)
+            placeholder="Enter ticker here", onPressEnter=self.ok, style={"width": 120}
         )
         self.cancel = self.ok
         self.title = "Yahoo live quotes"
@@ -117,4 +119,4 @@ class App:
 def app(window: r.Window):
     hash_argument = window.hash()
     app = App(window, json.loads(hash_argument) if hash_argument else [])
-    return html.div([app.settings, app.content], style=dict(height="calc(100% - 35px)"))
+    return html.div([app.settings, app.content], style={"height": "calc(100% - 35px)"})

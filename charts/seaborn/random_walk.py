@@ -2,8 +2,9 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from demos.charts.utils import matplotlib_to_svg
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():

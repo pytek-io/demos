@@ -1,20 +1,19 @@
+import datetime
+
+import reflect as r
 import reflect_aggrid as aggrid
 import reflect_antd as antd
 import reflect_html as html
-import datetime
-import reflect as r
 
-from .config import COLUMNS
 from ..fred import get_fred_series_observations
+from .config import COLUMNS
 
 
 class App:
     def __init__(self, default="T10Y2Y"):
         controller = r.Controller()
         self.ticker = antd.Input(
-            defaultValue=default,
-            style=dict(width=120),
-            controller=controller,
+            defaultValue=default, style={"width": 120}, controller=controller
         )
         today = datetime.datetime.today()
         start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))
@@ -31,9 +30,11 @@ class App:
                 rowData=get_stocks_close,
                 rowHeight=24,
                 className="ag-theme-balham",
-                defaultColDef=dict(
-                    resizable=True, filter=True, cellStyle={"textAlign": "right"}
-                ),
+                defaultColDef={
+                    "resizable": True,
+                    "filter": True,
+                    "cellStyle": {"textAlign": "right"},
+                },
             ),
             style={"height": "100%", "width": "100%"},
         )

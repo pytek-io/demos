@@ -4,7 +4,6 @@ import os
 
 import reflect as r
 import reflect_html as html
-import reflect_swiper as swiper
 import yaml
 from website.common import BACKGROUND_COLOR, FONT_FAMILY, GREEN, LIGHT_BLUE
 from website.home import HIDE_SCROLL_BAR_STYLE, SLOGAN
@@ -263,7 +262,7 @@ def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
                     "pytek.io",
                     href="https://pytek.io",
                     target="_blank",
-                    style=dict(color=LIGHT_BLUE, fontSize="1.5rem"),
+                    style={"color": LIGHT_BLUE, "fontSize": "1.5rem"},
                 )
             ),
         ]
@@ -325,7 +324,7 @@ def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
 
     detail_level_icon = html.img(
         src=lambda: f"demos/presentations/menu-icon-{details_level() + 1}.svg",
-        style=dict(width="1.6vh", pointerEvents="all", cursor="pointer"),
+        style={"width": "1.6vh", "pointerEvents": "all", "cursor": "pointer"},
         onClick=lambda: details_level.set((details_level() + 1) % 3),
     )
     return generate_slides, detail_level_icon

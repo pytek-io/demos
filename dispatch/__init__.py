@@ -56,7 +56,7 @@ def create_grid(
     grid = aggrid.AgGridReact(
         columns,
         getRowNodeId=r.js("id"),
-        defaultColDef=dict(resizable=True),
+        defaultColDef={"resizable": True},
         getContextMenuItems=getContextMenuItems,
         className="ag-theme-balham",
         **extra_args,
@@ -96,7 +96,7 @@ def create_grid(
 
     content = html.div(
         grid,
-        style=dict(height=800, width=width + 200),
+        style={"height": 800, "width": width + 200},
         componentDidMount=on_didmount,
         componentWillUnmount=on_unmount,
     )
@@ -109,16 +109,16 @@ class Application:
         self.counter = itertools.count()
         self.nb_tabs_created = 0
         self.grids_ready = anyio.Event()
-        session_extra_arguments = dict(
-            autoGroupColumnDef={
+        session_extra_arguments = {
+            "autoGroupColumnDef": {
                 "headerName": "Priority Group / Session",
                 "cellRendererParams": {"suppressCount": True},
                 "minWidth": 220,
             },
-            groupDefaultExpanded=-1,
-            getDataPath=r.js("fetch_attribute", "priority_group_path"),
-            treeData=True,
-        )
+            "groupDefaultExpanded": -1,
+            "getDataPath": r.js("fetch_attribute", "priority_group_path"),
+            "treeData": True,
+        }
         self.updaters, self.main_grids = {}, {}
         for info_type, definition in DEFINITIONS.items():
             title, grid, updater = create_grid(

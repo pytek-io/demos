@@ -22,54 +22,26 @@ def convert_to_integer(value):
 
 
 COLUMNS = (
-    (
-        "symbol",
-        dict(
-            headerName="Symbol",
-            width=90,
-            sortable=True,
-        ),
-    ),
-    (
-        "lastsale",
-        dict(
-            headerName="Last Sale",
-            width=100,
-            sortable=True,
-        ),
-    ),
-    (
-        "netchange",
-        dict(
-            headerName="Change",
-            width=100,
-            sortable=True,
-        ),
-    ),
+    ("symbol", {"headerName": "Symbol", "width": 90, "sortable": True}),
+    ("lastsale", {"headerName": "Last Sale", "width": 100, "sortable": True}),
+    ("netchange", {"headerName": "Change", "width": 100, "sortable": True}),
     (
         "pctchange",
-        dict(
-            headerName="% Change",
-            width=110,
-            sortable=True,
-            valueFormatter=round_value_to_2_digits_col,
-        ),
+        {
+            "headerName": "% Change",
+            "width": 110,
+            "sortable": True,
+            "valueFormatter": round_value_to_2_digits_col,
+        },
     ),
     (
         "marketCap",
-        dict(
-            headerName="Mkt Cap",
-            width=140,
-            sortable=True,
-            valueValueFormatter=toLocaleString,
-        ),
+        {
+            "headerName": "Mkt Cap",
+            "width": 140,
+            "sortable": True,
+            "valueValueFormatter": toLocaleString,
+        },
     ),
-    (
-        "name",
-        dict(
-            headerName="Name",
-            width=300,
-            sortable=True,
-        ),
-    ),
+    ("name", {"headerName": "Name", "width": 300, "sortable": True}),
 )

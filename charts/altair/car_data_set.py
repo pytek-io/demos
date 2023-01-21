@@ -17,7 +17,7 @@ class App:
             antd.Select(
                 options=options,
                 defaultValue=default_value,
-                style=dict(width=160, textAlign="right"),
+                style={"width": 160, "textAlign": "right"},
             )
             for default_value in DEFAULT_VALUES
         )
@@ -30,13 +30,13 @@ class App:
                     [
                         antd.Col(
                             html.label(name),
-                            style=dict(width=60),
+                            style={"width": 60},
                             className="ant-form-item-label",
                         ),
                         antd.Col(element),
                     ],
                     gutter=10,
-                    style=dict(margin=10),
+                    style={"margin": 10},
                 )
                 for name, element in [("x", x), ("y", y), ("color", color)]
             ],
@@ -59,7 +59,6 @@ class App:
             )
 
         self.content = altair.Chart(
-            spec=spec,
-            style={"height": "100%", "width": "100%"},
+            spec=spec, style={"height": "100%", "width": "100%"}
         )
         self.title = "Car data set"

@@ -60,11 +60,11 @@ runningTasksColumnDefs = [
     },
 ]
 session_menu_items = [
-    dict(
-        name="Cancel",
-        confirmation="Are you sure you want to cancel this deployment?",
-        action_tag="DeleteDeployment",
-    )
+    {
+        "name": "Cancel",
+        "confirmation": "Are you sure you want to cancel this deployment?",
+        "action_tag": "DeleteDeployment",
+    }
 ]
 RUNNING_TASKS_DEF = {
     "name": "Sessions",
@@ -426,11 +426,11 @@ CLIENT_DEF = {
 }
 deployment_fields = ["description", "tags", "creation_time", "size"]
 deployment_menu_items = [
-    dict(
-        name="Delete",
-        confirmation="Are you sure you want to delete this deployment?",
-        action_tag="DeleteDeployment",
-    )
+    {
+        "name": "Delete",
+        "confirmation": "Are you sure you want to delete this deployment?",
+        "action_tag": "DeleteDeployment",
+    }
 ]
 DEPLOYMENT_DEF = {
     "name": "Deployments",
@@ -440,12 +440,12 @@ DEPLOYMENT_DEF = {
     "getContextMenuItems": deployment_menu_items,
 }
 session_menu_items = [
-    dict(
-        name="Cancel",
-        confirmation="Are you sure you want to cancel this session?",
-        action_tag="TerminateSession",
-    ),
-    dict(name="Display running tasks", action_tag="DisplayRunningTasks"),
+    {
+        "name": "Cancel",
+        "confirmation": "Are you sure you want to cancel this session?",
+        "action_tag": "TerminateSession",
+    },
+    {"name": "Display running tasks", "action_tag": "DisplayRunningTasks"},
 ]
 SESSION_DEF = {
     "name": "Sessions",

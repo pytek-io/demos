@@ -15,7 +15,6 @@ from demos.charts.utils import matplotlib_to_svg
 TITLE = "Matplotlib"
 
 
-
 def app():
     with r.Controller() as controller:
         period = antd.Slider(defaultValue=50, min=0, max=100)

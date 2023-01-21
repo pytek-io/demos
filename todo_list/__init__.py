@@ -11,8 +11,8 @@ import reflect_antd as antd
 import reflect_html as html
 from more_itertools import ilen
 
-FIRST_COL_BREAK_POINTS = dict(xs=24, sm=24, md=17, lg=19, xl=20)
-SECOND_COL_BREAK_POINTS = dict(xs=24, sm=24, md=7, lg=5, xl=4)
+FIRST_COL_BREAK_POINTS = {"xs": 24, "sm": 24, "md": 17, "lg": 19, "xl": 20}
+SECOND_COL_BREAK_POINTS = {"xs": 24, "sm": 24, "md": 7, "lg": 5, "xl": 4}
 DEFAULT_FILE_NAME = "default_todo_list.json"
 
 
@@ -66,7 +66,7 @@ class App:
                 antd.Tag(
                     item_obs["description"],
                     color=lambda: "cyan" if item_obs["completed"]() else "red",
-                ),
+                )
             ),
             actions=[
                 antd.Popconfirm(
@@ -123,9 +123,7 @@ class App:
         todo_list = antd.Card(
             antd.List(
                 r.Mapping(
-                    self.create_todo_item_row,
-                    self.items_obs,
-                    key="todo_item_rows",
+                    self.create_todo_item_row, self.items_obs, key="todo_item_rows"
                 ),
                 locale={"emptyText": "Nothing to do."},
             ),

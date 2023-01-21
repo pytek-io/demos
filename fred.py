@@ -10,8 +10,6 @@ import pandas as pd
 FRED_URL = "https://api.stlouisfed.org/fred/"
 FRED_API_KEY = "84997d88a66df47cf034dce9c084157d"
 YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
-
-
 date_converter = lambda s: datetime.strptime(s, "%Y-%m-%d").date()
 CONVERTERS = {
     "realtime_start": date_converter,
@@ -26,8 +24,7 @@ CONVERTERS = {
 def query_fred_website(path, data_name, **params):
     url = FRED_URL + "/".join(path)
     response = httpx.get(
-        url,
-        params=dict(api_key=FRED_API_KEY, file_type="json", **params),
+        url, params=dict(api_key=FRED_API_KEY, file_type="json", **params)
     )
     if response.status_code != 200:
         raise Exception(
@@ -53,9 +50,7 @@ def get_fred_series_observations(
 
 def get_fred_series_search(search_text: List[str]):
     return query_fred_website(
-        ["series", "search"],
-        "series",
-        search_text="+".join(search_text),
+        ["series", "search"], "series", search_text="+".join(search_text)
     )
 
 
@@ -76,6 +71,7 @@ def get_fred_category_children(category_id: int):
         ["category", "children"], "categories", category_id=category_id
     )
 
+
 def get_fred_category_series(category_id: int):
     return query_fred_website(
         ["category", "series"], "seriess", category_id=category_id
@@ -93,26 +89,4 @@ def get_yahoo_stock_history(ticker, start, end):
 
 
 if __name__ == "__main__":
-    # df = get_fred_series_observations(
-    #     "PCESVA",
-    #     observation_start=datetime(2022, 6, 1).date(),
-    #     observation_end=datetime(2022, 6, 1).date(),
-    # )
-    # import time
-
-    # start = time.time()
-    # results = []
-    # for i in range(1, 4000):
-    #     try:
-    #         print(i)
-    #         results.append(get_fred_category(i))
-    #     except:
-    #         print("failed")
-    # print(time.time() - start)
-    # pd.concat(results).to_pickle("categories.pick")
     print(get_fred_category_children(1))
-    # df = get_fred_series_observations("T10Y20Y")
-    # df = get_fred_series_search(["monetary", "service", "index"])
-    # df.to_pickle("../fred.pick")
-    # print(df)
-    # r = get_fred_series_search("monetary+service+index")
