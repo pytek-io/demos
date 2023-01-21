@@ -1,7 +1,6 @@
 import reflect_antd as antd
 import reflect_html as html
 
-
 items = [
     {
         "label": html.a(
@@ -59,10 +58,7 @@ def app():
                 arrow=True,
             ),
             antd.Dropdown(
-                antd.Button("top"),
-                menu={"items": items},
-                placement="top",
-                arrow=True,
+                antd.Button("top"), menu={"items": items}, placement="top", arrow=True
             ),
             antd.Dropdown(
                 antd.Button("topRight"),

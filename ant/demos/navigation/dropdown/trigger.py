@@ -1,8 +1,7 @@
+import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
-
-import reflect as r
 
 items = [
     {"label": html.a("1st menu item", href="http://www.google.com/"), "key": "0"},

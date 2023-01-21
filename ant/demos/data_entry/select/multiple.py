@@ -1,7 +1,6 @@
+import reflect as r
 import reflect_antd as antd
 import reflect_html as html
-
-import reflect as r
 
 
 def app():
@@ -13,7 +12,7 @@ def app():
         options=children,
         mode="multiple",
         allowClear=True,
-        style=dict(width="100%"),
+        style={"width": "100%"},
         placeholder="Please select",
         defaultValue=["a10", "c12"],
     )
@@ -21,7 +20,7 @@ def app():
         options=children,
         mode="multiple",
         disabled=True,
-        style=dict(width="100%"),
+        style={"width": "100%"},
         placeholder="Please select",
         defaultValue=["a10", "c12"],
     )

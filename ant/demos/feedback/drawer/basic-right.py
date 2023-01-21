@@ -17,7 +17,7 @@ def app():
                 title="Basic drawer",
                 placement="right",
                 onClose=lambda: open_obs.set(False),
-                open=open_obs
+                open=open_obs,
             ),
         ]
     )

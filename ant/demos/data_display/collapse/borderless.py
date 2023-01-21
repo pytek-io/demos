@@ -7,7 +7,7 @@ Panel = antd.Collapse.Panel
 def app():
     text = html.p(
         "A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found     as a welcome guest in many households across the world.",
-        style=dict(paddingLeft=24),
+        style={"paddingLeft": 24},
     )
     return antd.Collapse(
         [

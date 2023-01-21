@@ -14,7 +14,7 @@ def app():
     )
     return html.div(
         [
-            antd.Space(["Tab position:", tabPosition], style=dict(marginBottom=24)),
+            antd.Space(["Tab position:", tabPosition], style={"marginBottom": 24}),
             antd.Tabs(
                 items=[
                     {"children": "Content of Tab 1", "label": "Tab 1", "key": "1"},

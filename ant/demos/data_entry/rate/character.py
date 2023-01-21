@@ -8,7 +8,7 @@ def app():
         [
             antd.Rate(character=ant_icons.HeartOutlined([]), allowHalf=True),
             html.br(),
-            antd.Rate(character="A", allowHalf=True, style=dict(fontSize=36)),
+            antd.Rate(character="A", allowHalf=True, style={"fontSize": 36}),
             html.br(),
             antd.Rate(character="好", allowHalf=True),
         ]

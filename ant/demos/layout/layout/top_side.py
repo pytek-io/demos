@@ -37,7 +37,7 @@ def app():
                             antd.Breadcrumb.Item("List"),
                             antd.Breadcrumb.Item("App"),
                         ],
-                        style=dict(margin="16px 0"),
+                        style={"margin": "16px 0"},
                     ),
                     antd.Layout(
                         [
@@ -81,23 +81,23 @@ def app():
                                     mode="inline",
                                     defaultSelectedKeys=["1"],
                                     defaultOpenKeys=["sub1"],
-                                    style=dict(height="100%"),
+                                    style={"height": "100%"},
                                 ),
                                 className="site-layout-background",
                                 width=200,
                             ),
                             Content(
-                                "Content", style=dict(padding="0 24px", minHeight=280)
+                                "Content", style={"padding": "0 24px", "minHeight": 280}
                             ),
                         ],
                         className="site-layout-background",
-                        style=dict(padding="24px 0"),
+                        style={"padding": "24px 0"},
                     ),
                 ],
-                style=dict(padding="0 50px"),
+                style={"padding": "0 50px"},
             ),
             Footer(
-                "Ant Design ©2018 Created by Ant UED", style=dict(textAlign="center")
+                "Ant Design ©2018 Created by Ant UED", style={"textAlign": "center"}
             ),
         ]
     )

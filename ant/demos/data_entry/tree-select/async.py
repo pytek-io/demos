@@ -15,7 +15,6 @@ initialTreeData = [
 def app():
     counter = itertools.count(3)
     treeData = r.create_observable(initialTreeData, key="initialTreeData")
-
     r.autorun(lambda: pprint.pprint(treeData()))
 
     async def onLoadData1(node_index):
@@ -34,8 +33,8 @@ def app():
         treeData.touch()
 
     return antd.TreeSelect(
-        style=dict(width="100%"),
-        dropdownStyle=dict(maxHeight=400, overflow="auto"),
+        style={"width": "100%"},
+        dropdownStyle={"maxHeight": 400, "overflow": "auto"},
         placeholder="Please select",
         loadData=r.Callback(onLoadData1, args=("id",), is_promise=True),
         treeData=treeData,

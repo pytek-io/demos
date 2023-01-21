@@ -1,8 +1,7 @@
+import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
-
-import reflect as r
 
 
 def app():
@@ -61,6 +60,6 @@ def app():
             },
         ],
         onClick=r.Callback(lambda key: print(f"clicked {key}"), args="key"),
-        style=dict(width=256),
+        style={"width": 256},
         mode="vertical",
     )

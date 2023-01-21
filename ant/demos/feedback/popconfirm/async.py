@@ -28,6 +28,6 @@ def app():
         title="Title",
         open=visible,
         onConfirm=handleOk,
-        okButtonProps=lambda: {"loading":confirmLoading()},
+        okButtonProps=lambda: {"loading": confirmLoading()},
         onCancel=handleCancel,
     )

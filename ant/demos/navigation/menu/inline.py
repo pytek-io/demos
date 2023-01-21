@@ -59,7 +59,7 @@ def app():
             },
         ],
         onClick=r.Callback(lambda key: print(f"clicked option {key}"), args="key"),
-        style=dict(width=256),
+        style={"width": 256},
         defaultSelectedKeys=["1"],
         defaultOpenKeys=["sub1"],
         mode="inline",

@@ -1,15 +1,15 @@
 import os
+import pathlib
 import pickle
 import re
 
 import mistletoe
+import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 import reflect_monaco as monaco
 import reflect_utils
 import yaml
-import pathlib
-import reflect as r
 
 
 def is_header_two(token):
@@ -32,8 +32,8 @@ CATEGORIES = [
     "feedback",
     "other",
 ]
-MENU_COL_BREAK_POINTS = dict(xs=24, sm=24, md=6, lg=6, xl=5, xxl=4)
-MAIN_COL_BREAK_POINTS = dict(xs=24, sm=24, md=18, lg=18, xl=19, xxl=20)
+MENU_COL_BREAK_POINTS = {"xs": 24, "sm": 24, "md": 6, "lg": 6, "xl": 5, "xxl": 4}
+MAIN_COL_BREAK_POINTS = {"xs": 24, "sm": 24, "md": 18, "lg": 18, "xl": 19, "xxl": 20}
 ANT_LOGO_ICON_PATH = "website/static/ant_logo.svg"
 COLLAPSE_ICON_PATH = "website/static/collapse_icon.svg"
 EXPAND_ICON_PATH = "website/static/expand_icon.svg"
@@ -53,14 +53,14 @@ DISPLAY_DEMOS_ERRORS = False
 def create_code_editor(
     language, content, relaxed=False, height=None, lineNumbers=False, readOnly=True
 ):
-    options = dict(
-        minimap={"enabled": False},
-        lineNumbers=lineNumbers,
-        glyphMargin=False,
-        wordWrap=False,
-        renderValidationDecorations="off" if relaxed else "on",
-        readOnly=readOnly,
-    )
+    options = {
+        "minimap": {"enabled": False},
+        "lineNumbers": lineNumbers,
+        "glyphMargin": False,
+        "wordWrap": False,
+        "renderValidationDecorations": "off" if relaxed else "on",
+        "readOnly": readOnly,
+    }
     return monaco.Editor(
         defaultValue=("\n" if language == "python" else "").join(content),
         options=options,
@@ -155,20 +155,20 @@ def code_box_bottom(description, js, py):
             result.append(
                 antd.Tabs(
                     items=[
-                        dict(
-                            children=create_code_editor(
+                        {
+                            "children": create_code_editor(
                                 "python", py, height=f"{len(py) * 18}px"
                             ),
-                            label="Python",
-                            key="py",
-                        ),
-                        dict(
-                            children=create_code_editor(
+                            "label": "Python",
+                            "key": "py",
+                        },
+                        {
+                            "children": create_code_editor(
                                 "typescript", js, True, height=f"{len(js) * 18}px"
                             ),
-                            label="JS",
-                            key="js",
-                        ),
+                            "label": "JS",
+                            "key": "js",
+                        },
                     ],
                     centered=True,
                 )
@@ -208,7 +208,7 @@ def create_code_box(
         ],
         id=f"components-{component_name}-demo-{module_name}",
         className="code-box",
-        style={} if success else dict(borderColor="red", borderStyle="solid"),
+        style={} if success else {"borderColor": "red", "borderStyle": "solid"},
     )
 
 
@@ -280,7 +280,9 @@ def app():
         else:
             demos = [
                 antd.Col(
-                    elements, span=12, style=dict(paddingLeft="8px", paddingRight="8px")
+                    elements,
+                    span=12,
+                    style={"paddingLeft": "8px", "paddingRight": "8px"},
                 )
                 for elements in split_list(demos, 2)
             ]
@@ -290,14 +292,16 @@ def app():
         return html.section(
             antd.Row(
                 antd.Col(md_description + ([html.style(styles)] if styles else [])),
-                style=dict(marginLeft="-8px", marginRight="-8px", rowGap="0px"),
+                style={"marginLeft": "-8px", "marginRight": "-8px", "rowGap": "0px"},
             ),
             className="markdown",
         )
 
     menu_col = antd.Col([], **MENU_COL_BREAK_POINTS)
     main_col = antd.Col(
-        html.h1("Ant components explorer", style=dict(paddingLeft=200, paddingTop=10)),
+        html.h1(
+            "Ant components explorer", style={"paddingLeft": 200, "paddingTop": 10}
+        ),
         **MAIN_COL_BREAK_POINTS,
     )
     row = antd.Row(

@@ -17,7 +17,7 @@ def app():
                 "Toggle disabled",
                 type="primary",
                 onClick=reflect_utils.toggle_observable(disabled),
-                style=dict(marginTop=16),
+                style={"marginTop": 16},
             ),
         ]
     )

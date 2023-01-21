@@ -9,6 +9,6 @@ def app():
             {"label": "zombieJ", "value": "zombieJ"},
             {"label": "yesmeck", "value": "yesmeck"},
         ],
-        style=dict(width="100%"),
+        style={"width": "100%"},
         placement="top",
     )

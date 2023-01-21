@@ -94,5 +94,5 @@ def app():
         dataSource=data,
         bordered=True,
         size="middle",
-        scroll=dict(x="calc(700px + 50%)", y=240),
+        scroll={"x": "calc(700px + 50%)", "y": 240},
     )

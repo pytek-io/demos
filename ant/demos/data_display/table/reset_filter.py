@@ -1,5 +1,5 @@
+from reflect_antd import Button, Space, Table
 from reflect_html import *
-from reflect_antd import Table, Button, Space
 
 
 def app():
@@ -42,7 +42,6 @@ def app():
             "sortDirections": ["descend", "ascend"],
         },
     ]
-
     data = [
         {
             "key": "1",
@@ -71,7 +70,7 @@ def app():
                 Button("Clear filters", onClick=this.clearFilters),
                 Button("Clear filters and sorters", onClick=this.clearAll),
             ],
-            style=dict(marginBottom=16),
+            style={"marginBottom": 16},
         ),
         Table(columns=columns, dataSource=data, onChange=this.handleChange),
     ]

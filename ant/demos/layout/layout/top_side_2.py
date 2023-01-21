@@ -2,7 +2,6 @@ import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
 
-
 Header, Content, Sider = (antd.Layout.Header, antd.Layout.Content, antd.Layout.Sider)
 
 
@@ -67,7 +66,7 @@ def app():
                             mode="inline",
                             defaultSelectedKeys=["1"],
                             defaultOpenKeys=["sub1"],
-                            style=dict(height="100%", borderRight=0),
+                            style={"height": "100%", "borderRight": 0},
                         ),
                         width=200,
                         className="site-layout-background",
@@ -80,15 +79,15 @@ def app():
                                     antd.Breadcrumb.Item("List"),
                                     antd.Breadcrumb.Item("App"),
                                 ],
-                                style=dict(margin="16px 0"),
+                                style={"margin": "16px 0"},
                             ),
                             Content(
                                 "Content",
                                 className="site-layout-background",
-                                style=dict(padding=24, margin=0, minHeight=280),
+                                style={"padding": 24, "margin": 0, "minHeight": 280},
                             ),
                         ],
-                        style=dict(padding="0 24px 24px"),
+                        style={"padding": "0 24px 24px"},
                     ),
                 ]
             ),

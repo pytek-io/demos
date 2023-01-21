@@ -8,12 +8,12 @@ def app():
             antd.Card(
                 [html.p("Card content"), html.p("Card content")],
                 title="Card",
-                style=dict(width=300),
+                style={"width": 300},
             ),
             antd.Card(
                 [html.p("Card content"), html.p("Card content")],
                 title="Card",
-                style=dict(width=300),
+                style={"width": 300},
             ),
         ],
         direction="vertical",

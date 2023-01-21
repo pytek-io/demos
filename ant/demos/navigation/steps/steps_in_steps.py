@@ -5,7 +5,7 @@ import reflect_html as html
 def app():
     size = antd.Radio.Group(
         [antd.Radio("Small", value="small"), antd.Radio("Default", value="default")],
-        style=dict(marginBottom=16),
+        style={"marginBottom": 16},
     )
 
     def horizontalSteps():

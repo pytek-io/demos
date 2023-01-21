@@ -13,7 +13,7 @@ def app():
                             title="Active",
                             value=11.28,
                             precision=2,
-                            valueStyle=dict(color="#3f8600"),
+                            valueStyle={"color": "#3f8600"},
                             prefix=ant_icons.ArrowUpOutlined([]),
                             suffix="%",
                         )
@@ -26,7 +26,7 @@ def app():
                             title="Idle",
                             value=9.3,
                             precision=2,
-                            valueStyle=dict(color="#cf1322"),
+                            valueStyle={"color": "#cf1322"},
                             prefix=ant_icons.ArrowDownOutlined([]),
                             suffix="%",
                         )

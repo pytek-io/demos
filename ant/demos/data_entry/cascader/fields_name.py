@@ -30,7 +30,7 @@ options = [
 
 def app():
     cascader = antd.Cascader(
-        fieldNames=dict(label="name", value="code", children="items"),
+        fieldNames={"label": "name", "value": "code", "children": "items"},
         options=options,
         placeholder="Please select",
     )

@@ -1,30 +1,15 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflect import Callback
 import reflect as r
+from reflect import Callback
+from reflect_antd import Table
+from reflect_html import *
 
 columns = [
-    {
-        "title": "Name",
-        "dataIndex": "name",
-    },
-    {
-        "title": "Age",
-        "dataIndex": "age",
-    },
-    {
-        "title": "Address",
-        "dataIndex": "address",
-    },
+    {"title": "Name", "dataIndex": "name"},
+    {"title": "Age", "dataIndex": "age"},
+    {"title": "Address", "dataIndex": "address"},
 ]
-
 data = [
-    {
-        "key": i,
-        "name": f"Edward {i}",
-        "age": 32,
-        "address": f"London Park no. {i}",
-    }
+    {"key": i, "name": f"Edward {i}", "age": 32, "address": f"London Park no. {i}"}
     for i in range(46)
 ]
 

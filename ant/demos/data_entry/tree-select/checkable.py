@@ -29,7 +29,7 @@ def app():
         treeData=treeData,
         showCheckedStrategy=SHOW_PARENT,
         placeholder="Please select",
-        style=dict(width="100%"),
+        style={"width": "100%"},
     )
     r.autorun(lambda: print("selected", tree_select()))
     return tree_select

@@ -69,8 +69,6 @@ menu = {
         },
     ],
     "onClick": r.Callback(lambda x: print("clicked", x[0]), args=("key",)),
-    # "selectedKeys": ["1"],
-    # "openKeys": ["sub1"],
 }
 
 

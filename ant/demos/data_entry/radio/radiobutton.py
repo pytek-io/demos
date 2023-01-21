@@ -28,7 +28,7 @@ def app():
                 ],
                 onChange=onChange,
                 defaultValue="a",
-                style=dict(marginTop=16),
+                style={"marginTop": 16},
             ),
             antd.Radio.Group(
                 [
@@ -40,7 +40,7 @@ def app():
                 disabled=True,
                 onChange=onChange,
                 defaultValue="a",
-                style=dict(marginTop=16),
+                style={"marginTop": 16},
             ),
         ]
     )

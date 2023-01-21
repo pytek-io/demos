@@ -29,7 +29,7 @@ def app():
                 antd.Input(
                     addonBefore="http://", addonAfter=".com", defaultValue="mysite"
                 ),
-                style=dict(marginBottom=16),
+                style={"marginBottom": 16},
             ),
             html.div(
                 antd.Input(
@@ -37,17 +37,17 @@ def app():
                     addonAfter=selectAfter,
                     defaultValue="mysite",
                 ),
-                style=dict(marginBottom=16),
+                style={"marginBottom": 16},
             ),
             html.div(
                 antd.Input(
                     addonAfter=ant_icons.SettingOutlined([]), defaultValue="mysite"
                 ),
-                style=dict(marginBottom=16),
+                style={"marginBottom": 16},
             ),
             html.div(
                 antd.Input(addonBefore="http://", suffix=".com", defaultValue="mysite"),
-                style=dict(marginBottom=16),
+                style={"marginBottom": 16},
             ),
         ]
     )

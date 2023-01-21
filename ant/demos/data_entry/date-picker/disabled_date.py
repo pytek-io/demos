@@ -18,20 +18,20 @@ def app():
                 format="YYYY-MM-DD HH:mm:ss",
                 disabledDate=disabledDate,
                 disabledTime=disabledDateTime,
-                showTime=dict(defaultValue=datetime.datetime.now()),
+                showTime={"defaultValue": datetime.datetime.now()},
             ),
             antd.DatePicker(picker="month", disabledDate=disabledDate),
             RangePicker(disabledDate=disabledDate),
             RangePicker(
                 disabledDate=disabledDate,
                 disabledTime=disabledRangeTime,
-                showTime=dict(
-                    hideDisabledOptions=True,
-                    defaultValue=[
+                showTime={
+                    "hideDisabledOptions": True,
+                    "defaultValue": [
                         datetime.datetime.now(),
                         datetime.datetime.now() + datetime.timedelta(hours=12),
                     ],
-                ),
+                },
                 format="YYYY-MM-DD HH:mm:ss",
             ),
         ],

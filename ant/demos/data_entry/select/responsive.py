@@ -20,5 +20,5 @@ def app():
             antd.Select(disabled=True, **selectProps),
         ],
         direction="vertical",
-        style=dict(width="100%"),
+        style={"width": "100%"},
     )

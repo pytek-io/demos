@@ -1,8 +1,7 @@
+import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
-
-import reflect as r
 
 Panel = antd.Collapse.Panel
 
@@ -23,7 +22,7 @@ it can be found as a welcome guest in many households across the world.
             {"children": "right", "value": "right"},
         ],
         defaultValue="left",
-        style=dict(margin="0 8px"),
+        style={"margin": "0 8px"},
     )
     return html.div(
         [

@@ -66,7 +66,7 @@ def app():
                         "icon": ant_icons.LinkOutlined([]),
                     },
                 ],
-                style=dict(width=256),
+                style={"width": 256},
                 defaultSelectedKeys=["1"],
                 defaultOpenKeys=["sub1"],
                 mode=mode,

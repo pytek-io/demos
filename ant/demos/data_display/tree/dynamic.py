@@ -33,7 +33,7 @@ def app():
 
     treeData = r.ObservableList(generate_nodes())
     return antd.Tree(
-        style=dict(width="100%"),
+        style={"width": "100%"},
         loadData=r.Callback(load_data, args="id", is_promise=True),
         treeData=treeData,
         onSelect=r.Callback(print),

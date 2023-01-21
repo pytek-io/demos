@@ -11,7 +11,7 @@ def app():
                     antd.Statistic(
                         title="Account Balance (CNY)", value=112893, precision=2
                     ),
-                    antd.Button("Recharge", style=dict(marginTop=16), type="primary"),
+                    antd.Button("Recharge", style={"marginTop": 16}, type="primary"),
                 ],
                 span=12,
             ),

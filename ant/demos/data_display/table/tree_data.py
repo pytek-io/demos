@@ -87,16 +87,16 @@ def app():
             antd.Space(
                 ["CheckStrictly:", checkStrictly],
                 align="center",
-                style=dict(marginBottom=16),
+                style={"marginBottom": 16},
             ),
             antd.Table(
                 columns=columns,
-                rowSelection=dict(
-                    checkStrictly=checkStrictly,
-                    onChange=r.Callback(onChange),
-                    onSelect=r.Callback(onSelect, args="key"),
-                    onSelectAll=r.Callback(onSelectAll),
-                ),
+                rowSelection={
+                    "checkStrictly": checkStrictly,
+                    "onChange": r.Callback(onChange),
+                    "onSelect": r.Callback(onSelect, args="key"),
+                    "onSelectAll": r.Callback(onSelectAll),
+                },
                 dataSource=data,
             ),
         ]

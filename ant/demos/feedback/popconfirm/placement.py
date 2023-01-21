@@ -37,7 +37,7 @@ def app():
                         cancelText="No",
                     ),
                 ],
-                style=dict(marginLeft=70, whiteSpace="nowrap"),
+                style={"marginLeft": 70, "whiteSpace": "nowrap"},
             ),
             html.div(
                 [
@@ -66,7 +66,7 @@ def app():
                         cancelText="No",
                     ),
                 ],
-                style=dict(width=70, float="left"),
+                style={"width": 70, "float": "left"},
             ),
             html.div(
                 [
@@ -95,7 +95,7 @@ def app():
                         cancelText="No",
                     ),
                 ],
-                style=dict(width=70, marginLeft=304),
+                style={"width": 70, "marginLeft": 304},
             ),
             html.div(
                 [
@@ -124,7 +124,7 @@ def app():
                         cancelText="No",
                     ),
                 ],
-                style=dict(marginLeft=70, clear="both", whiteSpace="nowrap"),
+                style={"marginLeft": 70, "clear": "both", "whiteSpace": "nowrap"},
             ),
         ],
         className="demo",

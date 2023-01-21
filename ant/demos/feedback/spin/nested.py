@@ -15,6 +15,6 @@ def app():
                 ),
                 spinning=loading,
             ),
-            html.div(["Loading state：", loading], style=dict(marginTop=16)),
+            html.div(["Loading state：", loading], style={"marginTop": 16}),
         ]
     )

@@ -11,7 +11,7 @@ options = [
 
 def app():
     return antd.AutoComplete(
-        style=dict(width=200),
+        style={"width": 200},
         options=options,
         placeholder="try to type `b`",
         filterOption=r.js("autoCompleteFilterOption"),

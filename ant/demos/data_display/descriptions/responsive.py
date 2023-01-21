@@ -31,6 +31,6 @@ def app():
             ],
             title="Responsive Descriptions",
             bordered=True,
-            column=dict(xxl=4, xl=3, lg=3, md=3, sm=2, xs=1),
+            column={"xxl": 4, "xl": 3, "lg": 3, "md": 3, "sm": 2, "xs": 1},
         )
     )

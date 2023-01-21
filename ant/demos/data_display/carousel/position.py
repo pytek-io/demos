@@ -17,7 +17,7 @@ def app():
             antd.Radio.Button("Left", value="left"),
             antd.Radio.Button("Right", value="right"),
         ],
-        style=dict(marginBottom=8),
+        style={"marginBottom": 8},
     )
     return html.div(
         [

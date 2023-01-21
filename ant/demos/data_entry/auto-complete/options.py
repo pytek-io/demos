@@ -2,7 +2,6 @@ import reflect as r
 import reflect_antd as antd
 
 TextArea = antd.Input.TextArea
-
 domains = ["gmail.com", "163.com", "qq.com"]
 
 
@@ -18,9 +17,7 @@ def app():
         )
 
     result = antd.AutoComplete(
-        options=options_obs,
-        style=dict(width=200),
-        onSearch=r.Callback(handleSearch),
+        options=options_obs, style={"width": 200}, onSearch=r.Callback(handleSearch)
     )
     r.autoprint(result)
     return result

@@ -17,8 +17,8 @@ treeData = [
 
 def app():
     tree_select = antd.TreeSelect(
-        style=dict(width="100%"),
-        dropdownStyle=dict(maxHeight=400, overflow="auto"),
+        style={"width": "100%"},
+        dropdownStyle={"maxHeight": 400, "overflow": "auto"},
         treeData=treeData,
         placeholder="Please select",
         treeDefaultExpandAll=True,

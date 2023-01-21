@@ -13,7 +13,7 @@ def app():
         use12Hours=True,
         format="h:mm:ss A",
         defaultValue=datetime.datetime.now(),
-        style=dict(width=140),
+        style={"width": 140},
     )
     time_picker3 = antd.TimePicker(
         use12Hours=True, defaultValue=datetime.datetime.now(), format="h:mm a"

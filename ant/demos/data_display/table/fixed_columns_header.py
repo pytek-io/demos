@@ -39,4 +39,4 @@ def app():
         {"key": i, "name": f"Edward {i}", "age": 32, "address": f"London Park no. {i}"}
         for i in range(100)
     ]
-    return antd.Table(columns=columns, dataSource=data, scroll=dict(x=1500, y=300))
+    return antd.Table(columns=columns, dataSource=data, scroll={"x": 1500, "y": 300})

@@ -13,7 +13,7 @@ def app():
                     antd.Tooltip(antd.Button("Top"), placement="top", title=text),
                     antd.Tooltip(antd.Button("TR"), placement="topRight", title=text),
                 ],
-                style=dict(marginLeft=buttonWidth, whiteSpace="nowrap"),
+                style={"marginLeft": buttonWidth, "whiteSpace": "nowrap"},
             ),
             html.div(
                 [
@@ -21,7 +21,7 @@ def app():
                     antd.Tooltip(antd.Button("Left"), placement="left", title=text),
                     antd.Tooltip(antd.Button("LB"), placement="leftBottom", title=text),
                 ],
-                style=dict(width=buttonWidth, float="left"),
+                style={"width": buttonWidth, "float": "left"},
             ),
             html.div(
                 [
@@ -31,7 +31,7 @@ def app():
                         antd.Button("RB"), placement="rightBottom", title=text
                     ),
                 ],
-                style=dict(width=buttonWidth, marginLeft=buttonWidth * 4 + 24),
+                style={"width": buttonWidth, "marginLeft": buttonWidth * 4 + 24},
             ),
             html.div(
                 [
@@ -41,7 +41,11 @@ def app():
                         antd.Button("BR"), placement="bottomRight", title=text
                     ),
                 ],
-                style=dict(marginLeft=buttonWidth, clear="both", whiteSpace="nowrap"),
+                style={
+                    "marginLeft": buttonWidth,
+                    "clear": "both",
+                    "whiteSpace": "nowrap",
+                },
             ),
         ],
         className="demo",

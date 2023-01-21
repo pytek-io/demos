@@ -22,8 +22,8 @@ def app():
                 open=is_modal_visible,
                 onOk=lambda: is_modal_visible.set(False),
                 onCancel=lambda: is_modal_visible.set(False),
-                okButtonProps=dict(disabled=True),
-                cancelButtonProps=dict(disabled=True),
+                okButtonProps={"disabled": True},
+                cancelButtonProps={"disabled": True},
             ),
         ]
     )

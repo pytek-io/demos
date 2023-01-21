@@ -21,7 +21,7 @@ def app():
                         defaultSelectedKeys=["2"],
                     ),
                 ],
-                style=dict(position="fixed", zIndex=1, width="100%"),
+                style={"position": "fixed", "zIndex": 1, "width": "100%"},
             ),
             Content(
                 [
@@ -31,19 +31,19 @@ def app():
                             antd.Breadcrumb.Item("List"),
                             antd.Breadcrumb.Item("App"),
                         ],
-                        style=dict(margin="16px 0"),
+                        style={"margin": "16px 0"},
                     ),
                     html.div(
                         "Content",
                         className="site-layout-background",
-                        style=dict(padding=24, minHeight=380),
+                        style={"padding": 24, "minHeight": 380},
                     ),
                 ],
                 className="site-layout",
-                style=dict(padding="0 50px", marginTop=64),
+                style={"padding": "0 50px", "marginTop": 64},
             ),
             Footer(
-                "Ant Design ©2018 Created by Ant UED", style=dict(textAlign="center")
+                "Ant Design ©2018 Created by Ant UED", style={"textAlign": "center"}
             ),
         ]
     )

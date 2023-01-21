@@ -18,8 +18,7 @@ def app():
             html.div(
                 [
                     antd.Segmented(
-                        options=["Daily", "Weekly", "Monthly"],
-                        style={"marginRight": 6},
+                        options=["Daily", "Weekly", "Monthly"], style={"marginRight": 6}
                     ),
                     antd.Input(placeholder="default size", style={"width": 150}),
                 ]

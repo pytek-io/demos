@@ -40,7 +40,7 @@ def app():
             },
         ],
         mode="multiple",
-        style=dict(width="100%"),
+        style={"width": "100%"},
         placeholder="select one country",
         defaultValue=["china"],
         optionLabelProp="label",

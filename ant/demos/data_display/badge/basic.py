@@ -12,7 +12,7 @@ def app():
             ),
             antd.Badge(
                 html.a(href="#", className="head-example"),
-                count=ant_icons.ClockCircleOutlined(style=dict(color="#f5222d")),
+                count=ant_icons.ClockCircleOutlined(style={"color": "#f5222d"}),
             ),
         ]
     )

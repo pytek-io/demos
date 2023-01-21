@@ -27,7 +27,7 @@ def app():
             antd.Col(
                 Countdown(title="Day Level", value=deadline, format="D 天 H 时 m 分 s 秒"),
                 span=24,
-                style=dict(marginTop=32),
+                style={"marginTop": 32},
             ),
         ],
         gutter=16,

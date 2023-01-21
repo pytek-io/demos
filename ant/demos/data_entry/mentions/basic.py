@@ -1,6 +1,5 @@
-import reflect_antd as antd
-
 import reflect as r
+import reflect_antd as antd
 
 
 def onSelect(value):
@@ -14,7 +13,7 @@ def app():
             {"label": "zombieJ", "value": "zombieJ"},
             {"label": "yesmeck", "value": "yesmeck"},
         ],
-        style=dict(width="100%"),
+        style={"width": "100%"},
         onSelect=r.Callback(onSelect),
         defaultValue="@afc163",
     )

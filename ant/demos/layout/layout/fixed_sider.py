@@ -64,11 +64,16 @@ def app():
                         defaultSelectedKeys=["4"],
                     ),
                 ],
-                style=dict(overflow="auto", height="100vh", position="fixed", left=0),
+                style={
+                    "overflow": "auto",
+                    "height": "100vh",
+                    "position": "fixed",
+                    "left": 0,
+                },
             ),
             antd.Layout(
                 [
-                    Header(className="site-layout-background", style=dict(padding=0)),
+                    Header(className="site-layout-background", style={"padding": 0}),
                     Content(
                         html.div(
                             [
@@ -169,17 +174,17 @@ def app():
                                 "content",
                             ],
                             className="site-layout-background",
-                            style=dict(padding=24, textAlign="center"),
+                            style={"padding": 24, "textAlign": "center"},
                         ),
-                        style=dict(margin="24px 16px 0", overflow="initial"),
+                        style={"margin": "24px 16px 0", "overflow": "initial"},
                     ),
                     Footer(
                         "Ant Design ©2018 Created by Ant UED",
-                        style=dict(textAlign="center"),
+                        style={"textAlign": "center"},
                     ),
                 ],
                 className="site-layout",
-                style=dict(marginLeft=200),
+                style={"marginLeft": 200},
             ),
         ]
     )

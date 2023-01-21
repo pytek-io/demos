@@ -33,16 +33,16 @@ narrowStyle = {"width": 50}
 def app():
     return html.div(
         [
-            antd.Mentions(style=dict(width=100)),
-            antd.Input.TextArea(rows=1, style=dict(width=100)),
+            antd.Mentions(style={"width": 100}),
+            antd.Input.TextArea(rows=1, style={"width": 100}),
             antd.Button("Button", type="primary"),
-            antd.Input(style=dict(width=100)),
+            antd.Input(style={"width": 100}),
             Text("Ant Design", copyable=True),
-            antd.Input(prefix="1", suffix="2", style=dict(width=100)),
-            antd.Input(addonBefore="1", addonAfter="2", style=dict(width=100)),
-            antd.InputNumber(style=dict(width=100)),
-            antd.DatePicker(style=dict(width=100)),
-            antd.TimePicker(style=dict(width=100)),
+            antd.Input(prefix="1", suffix="2", style={"width": 100}),
+            antd.Input(addonBefore="1", addonAfter="2", style={"width": 100}),
+            antd.InputNumber(style={"width": 100}),
+            antd.DatePicker(style={"width": 100}),
+            antd.TimePicker(style={"width": 100}),
             antd.Select(
                 options=[
                     {"label": "Jack", "value": "jack"},
@@ -50,10 +50,10 @@ def app():
                     {"label": "Disabled", "value": "disabled", "disabled": True},
                     {"label": "yiminghe", "value": "Yiminghe"},
                 ],
-                style=dict(width=100),
+                style={"width": 100},
                 defaultValue="jack",
             ),
-            antd.TreeSelect(style=dict(width=100)),
+            antd.TreeSelect(style={"width": 100}),
             antd.Cascader(
                 defaultValue=["zhejiang", "hangzhou", "xihu"], options=options
             ),
@@ -66,7 +66,7 @@ def app():
                 ],
                 defaultValue="a",
             ),
-            antd.AutoComplete(style=dict(width=100), placeholder="input here"),
+            antd.AutoComplete(style={"width": 100}, placeholder="input here"),
             html.br(),
             antd.Input(
                 prefix="$",

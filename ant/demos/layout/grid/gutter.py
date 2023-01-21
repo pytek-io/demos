@@ -1,7 +1,7 @@
 import reflect_antd as antd
 import reflect_html as html
 
-style = dict(background="#0092ff", padding="8px 0")
+style = {"background": "#0092ff", "padding": "8px 0"}
 
 
 def app():
@@ -41,7 +41,7 @@ def app():
                         html.div("col-6", style=style), className="gutter-row", span=6
                     ),
                 ],
-                gutter=dict(xs=8, sm=16, md=24, lg=32),
+                gutter={"xs": 8, "sm": 16, "md": 24, "lg": 32},
             ),
             antd.Divider("Vertical", orientation="left"),
             antd.Row(

@@ -10,7 +10,7 @@ def app():
             antd.Radio("Alternate", value="alternate"),
         ],
         defaultValue="left",
-        style=dict(marginBottom=20),
+        style={"marginBottom": 20},
     )
     return html.div(
         [

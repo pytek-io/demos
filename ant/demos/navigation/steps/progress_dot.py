@@ -13,28 +13,6 @@ def app():
                 ],
                 progressDot=True,
                 current=1,
-            ),
-            # antd.Divider(),
-            # antd.Steps(
-            #     items=[
-            #         {
-            #             "label": "Finished",
-            #             "description": "This is a description. This is a description.",
-            #         },
-            #         {
-            #             "label": "Finished",
-            #             "description": "This is a description. This is a description.",
-            #         },
-            #         {
-            #             "label": "In Progress",
-            #             "description": "This is a description. This is a description.",
-            #         },
-            #         {"label": "Waiting", "description": "This is a description."},
-            #         {"label": "Waiting", "description": "This is a description."},
-            #     ],
-            #     progressDot=True,
-            #     current=1,
-            #     direction="vertical",
-            # ),
+            )
         ]
     )

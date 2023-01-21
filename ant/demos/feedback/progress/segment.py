@@ -6,15 +6,15 @@ def app():
     return html.div(
         [
             antd.Tooltip(
-                antd.Progress(percent=60, success=dict(percent=30)),
+                antd.Progress(percent=60, success={"percent": 30}),
                 title="3 done / 3 in progress / 4 to do",
             ),
             antd.Tooltip(
-                antd.Progress(percent=60, success=dict(percent=30), type="circle"),
+                antd.Progress(percent=60, success={"percent": 30}, type="circle"),
                 title="3 done / 3 in progress / 4 to do",
             ),
             antd.Tooltip(
-                antd.Progress(percent=60, success=dict(percent=30), type="dashboard"),
+                antd.Progress(percent=60, success={"percent": 30}, type="dashboard"),
                 title="3 done / 3 in progress / 4 to do",
             ),
         ]

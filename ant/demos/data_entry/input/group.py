@@ -43,8 +43,8 @@ def app():
             html.br(),
             antd.Input.Group(
                 [
-                    antd.Input(style=dict(width="20%"), defaultValue="0571"),
-                    antd.Input(style=dict(width="30%"), defaultValue="26888888"),
+                    antd.Input(style={"width": "20%"}, defaultValue="0571"),
+                    antd.Input(style={"width": "30%"}, defaultValue="26888888"),
                 ],
                 compact=True,
             ),
@@ -59,7 +59,7 @@ def app():
                         defaultValue="Zhejiang",
                     ),
                     antd.Input(
-                        style=dict(width="50%"), defaultValue="Xihu District, Hangzhou"
+                        style={"width": "50%"}, defaultValue="Xihu District, Hangzhou"
                     ),
                 ],
                 compact=True,
@@ -67,11 +67,9 @@ def app():
             html.br(),
             antd.Input.Group(
                 [
-                    antd.Input.Search(style=dict(width="40%"), defaultValue="0571"),
+                    antd.Input.Search(style={"width": "40%"}, defaultValue="0571"),
                     antd.Input.Search(
-                        allowClear=True,
-                        style=dict(width="40%"),
-                        defaultValue="26888888",
+                        allowClear=True, style={"width": "40%"}, defaultValue="26888888"
                     ),
                 ],
                 compact=True,
@@ -80,12 +78,10 @@ def app():
             antd.Input.Group(
                 [
                     antd.Input.Search(
-                        allowClear=True, style=dict(width="40%"), defaultValue="0571"
+                        allowClear=True, style={"width": "40%"}, defaultValue="0571"
                     ),
                     antd.Input.Search(
-                        allowClear=True,
-                        style=dict(width="40%"),
-                        defaultValue="26888888",
+                        allowClear=True, style={"width": "40%"}, defaultValue="26888888"
                     ),
                 ],
                 compact=True,
@@ -100,7 +96,7 @@ def app():
                         ],
                         defaultValue="Option1",
                     ),
-                    antd.Input(style=dict(width="50%"), defaultValue="input content"),
+                    antd.Input(style={"width": "50%"}, defaultValue="input content"),
                     antd.InputNumber(),
                 ],
                 compact=True,
@@ -108,16 +104,16 @@ def app():
             html.br(),
             antd.Input.Group(
                 [
-                    antd.Input(style=dict(width="50%"), defaultValue="input content"),
-                    antd.DatePicker(style=dict(width="50%")),
+                    antd.Input(style={"width": "50%"}, defaultValue="input content"),
+                    antd.DatePicker(style={"width": "50%"}),
                 ],
                 compact=True,
             ),
             html.br(),
             antd.Input.Group(
                 [
-                    antd.Input(style=dict(width="30%"), defaultValue="input content"),
-                    antd.DatePicker.RangePicker(style=dict(width="70%")),
+                    antd.Input(style={"width": "30%"}, defaultValue="input content"),
+                    antd.DatePicker.RangePicker(style={"width": "70%"}),
                 ],
                 compact=True,
             ),
@@ -152,19 +148,23 @@ def app():
                         defaultValue="1",
                     ),
                     antd.Input(
-                        style=dict(width=100, textAlign="center"), placeholder="Minimum"
+                        style={"width": 100, "textAlign": "center"},
+                        placeholder="Minimum",
                     ),
                     antd.Input(
                         className="site-input-split",
-                        style=dict(
-                            width=30, borderLeft=0, borderRight=0, pointerEvents="none"
-                        ),
+                        style={
+                            "width": 30,
+                            "borderLeft": 0,
+                            "borderRight": 0,
+                            "pointerEvents": "none",
+                        },
                         placeholder="~",
                         disabled=True,
                     ),
                     antd.Input(
                         className="site-input-right",
-                        style=dict(width=100, textAlign="center"),
+                        style={"width": 100, "textAlign": "center"},
                         placeholder="Maximum",
                     ),
                 ],
@@ -179,10 +179,10 @@ def app():
                             {"label": "Sign In", "value": "Sign In"},
                         ],
                         defaultValue="Sign Up",
-                        style=dict(width="30%"),
+                        style={"width": "30%"},
                     ),
                     antd.AutoComplete(
-                        style=dict(width="70%"),
+                        style={"width": "70%"},
                         placeholder="Email",
                         options=[{"value": "text 1"}, {"value": "text 2"}],
                         compact=True,
@@ -195,11 +195,11 @@ def app():
                                     {"label": "Home", "value": "Home"},
                                     {"label": "Company", "value": "Company"},
                                 ],
-                                style=dict(width="30%"),
+                                style={"width": "30%"},
                                 defaultValue="Home",
                             ),
                             antd.Cascader(
-                                style=dict(width="70%"),
+                                style={"width": "70%"},
                                 options=options,
                                 placeholder="Select Address",
                             ),

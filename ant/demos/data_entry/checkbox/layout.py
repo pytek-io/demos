@@ -1,6 +1,5 @@
-import reflect_antd as antd
-
 import reflect as r
+import reflect_antd as antd
 
 
 def app():
@@ -14,7 +13,7 @@ def app():
                 antd.Col(antd.Checkbox("E", key="E"), span=8),
             ]
         ),
-        style=dict(width="100%"),
+        style={"width": "100%"},
     )
     r.autorun(lambda: print("checked = ", check_box_group()))
     return check_box_group

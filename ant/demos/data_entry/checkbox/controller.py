@@ -1,8 +1,7 @@
+import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 import reflect_utils
-
-import reflect as r
 
 
 def app():
@@ -16,7 +15,7 @@ def app():
     r.autorun(lambda: print(f"{check_box()}"))
     return html.div(
         [
-            html.p(check_box, style=dict(marginBottom="20px")),
+            html.p(check_box, style={"marginBottom": "20px"}),
             html.p(
                 [
                     antd.Button(
@@ -27,7 +26,7 @@ def app():
                     ),
                     antd.Button(
                         lambda: "Enable" if disabled() else "Disable",
-                        style=dict(margin="0 10px"),
+                        style={"margin": "0 10px"},
                         type="primary",
                         size="small",
                         onClick=reflect_utils.toggle_observable(disabled),

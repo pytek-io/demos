@@ -1,6 +1,6 @@
-'''
+"""
 Showing how options can be dynamically populated according to the user input.
-'''
+"""
 import reflect as r
 import reflect_antd as antd
 
@@ -16,7 +16,7 @@ def app():
         options_obs.set(filtered_options)
 
     result = antd.AutoComplete(
-        defaultValue='',
+        defaultValue="",
         options=options_obs,
         style={"width": 200},
         onSearch=r.Callback(on_search),

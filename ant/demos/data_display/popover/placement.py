@@ -32,7 +32,7 @@ def app():
                         trigger="click",
                     ),
                 ],
-                style=dict(marginLeft=buttonWidth, whiteSpace="nowrap"),
+                style={"marginLeft": buttonWidth, "whiteSpace": "nowrap"},
             ),
             html.div(
                 [
@@ -58,7 +58,7 @@ def app():
                         trigger="click",
                     ),
                 ],
-                style=dict(width=buttonWidth, float="left"),
+                style={"width": buttonWidth, "float": "left"},
             ),
             html.div(
                 [
@@ -84,7 +84,7 @@ def app():
                         trigger="click",
                     ),
                 ],
-                style=dict(width=buttonWidth, marginLeft=buttonWidth * 4 + 24),
+                style={"width": buttonWidth, "marginLeft": buttonWidth * 4 + 24},
             ),
             html.div(
                 [
@@ -110,7 +110,11 @@ def app():
                         trigger="click",
                     ),
                 ],
-                style=dict(marginLeft=buttonWidth, clear="both", whiteSpace="nowrap"),
+                style={
+                    "marginLeft": buttonWidth,
+                    "clear": "both",
+                    "whiteSpace": "nowrap",
+                },
             ),
         ],
         className="demo",

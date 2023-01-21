@@ -8,7 +8,7 @@ def app():
             [html.p("Card content"), html.p("Card content"), html.p("Card content")],
             title="Card title",
             bordered=False,
-            style=dict(width=300),
+            style={"width": 300},
         ),
         className="site-card-border-less-wrapper",
     )

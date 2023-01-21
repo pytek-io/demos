@@ -15,7 +15,7 @@ def app():
             {"label": {"label": "yiminghe", "value": "Yiminghe"}, "label": "Engineer"},
         ],
         defaultValue="lucy",
-        style=dict(width=200),
+        style={"width": 200},
     )
     r.autorun(lambda: print(select()))
     return select

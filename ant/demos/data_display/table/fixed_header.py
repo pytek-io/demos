@@ -14,8 +14,5 @@ data = [
 
 def app():
     return antd.Table(
-        columns=columns,
-        dataSource=data,
-        pagination=dict(pageSize=50),
-        scroll=dict(y=240),
+        columns=columns, dataSource=data, pagination={"pageSize": 50}, scroll={"y": 240}
     )

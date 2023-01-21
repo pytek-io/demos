@@ -10,7 +10,7 @@ def app():
             antd.Radio.Button("Large", value="large"),
         ],
         defaultValue="small",
-        style=dict(marginBottom=16),
+        style={"marginBottom": 16},
     )
     return html.div(
         [
@@ -23,7 +23,7 @@ def app():
                 ],
                 defaultActiveKey="1",
                 size=size,
-                style=dict(marginBottom=32),
+                style={"marginBottom": 32},
             ),
             antd.Tabs(
                 items=[

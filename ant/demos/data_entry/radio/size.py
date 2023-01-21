@@ -23,7 +23,7 @@ def app():
                     antd.Radio.Button("Chengdu", value="d"),
                 ],
                 defaultValue="a",
-                style=dict(marginTop=16),
+                style={"marginTop": 16},
             ),
             antd.Radio.Group(
                 [
@@ -34,7 +34,7 @@ def app():
                 ],
                 defaultValue="a",
                 size="small",
-                style=dict(marginTop=16),
+                style={"marginTop": 16},
             ),
         ]
     )

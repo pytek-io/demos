@@ -1,6 +1,6 @@
-import reflect_html as html
-import reflect_antd as antd
 import reflect_ant_icons as ant_icons
+import reflect_antd as antd
+import reflect_html as html
 
 
 def render_title(title):
@@ -9,7 +9,7 @@ def render_title(title):
             title,
             html.a(
                 "more",
-                style=dict(float="right"),
+                style={"float": "right"},
                 href="https://www.google.com/search?q=antd",
                 target="_blank",
                 rel="noopener noreferrer",
@@ -23,10 +23,7 @@ def render_item(title: str, count: int):
         "value": title,
         "label": html.div(
             [title, html.span([ant_icons.UserOutlined(), count])],
-            style={
-                "display": "flex",
-                "justifyContent": "space-between",
-            },
+            style={"display": "flex", "justifyContent": "space-between"},
         ),
     }
 
@@ -57,6 +54,6 @@ def app():
     return antd.AutoComplete(
         antd.Input.Search(size="large", placeholder="input here"),
         dropdownMatchSelectWidth=500,
-        style=dict(width=250),
+        style={"width": 250},
         options=options,
     )

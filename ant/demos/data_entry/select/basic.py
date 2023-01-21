@@ -12,7 +12,7 @@ def app():
             {"label": "yiminghe", "value": "Yiminghe"},
         ],
         defaultValue="lucy",
-        style=dict(width=120),
+        style={"width": 120},
     )
     r.autorun(lambda: print("selected", select()))
     return html.div(
@@ -21,19 +21,19 @@ def app():
             antd.Select(
                 options=[{"label": "Lucy", "value": "lucy"}],
                 defaultValue="lucy",
-                style=dict(width=120),
+                style={"width": 120},
                 disabled=True,
             ),
             antd.Select(
                 options=[{"label": "Lucy", "value": "lucy"}],
                 defaultValue="lucy",
-                style=dict(width=120),
+                style={"width": 120},
                 loading=True,
             ),
             antd.Select(
                 options=[{"label": "Lucy", "value": "lucy"}],
                 defaultValue="lucy",
-                style=dict(width=120),
+                style={"width": 120},
                 allowClear=True,
             ),
         ]

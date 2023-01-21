@@ -27,8 +27,8 @@ def app():
             antd.Descriptions.Item(
                 "YES",
                 label="Automatic Renewal",
-                labelStyle=dict(color="orange"),
-                contentStyle=dict(color="blue"),
+                labelStyle={"color": "orange"},
+                contentStyle={"color": "blue"},
             ),
         ],
         title="Root style",

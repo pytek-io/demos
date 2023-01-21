@@ -10,5 +10,5 @@ def app():
             antd.Progress(percent=70, size="small", status="exception"),
             antd.Progress(percent=100, size="small"),
         ],
-        style=dict(width=170),
+        style={"width": 170},
     )

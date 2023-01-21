@@ -18,9 +18,7 @@ compare_dates = r.JSMethod(
 
 def app():
     start_value = r.ObservableValue(datetime.datetime.now())
-    end_value = r.ObservableValue(
-        datetime.datetime.now() + datetime.timedelta(days=15)
-    )
+    end_value = r.ObservableValue(datetime.datetime.now() + datetime.timedelta(days=15))
     return antd.Row(
         [
             antd.Col(

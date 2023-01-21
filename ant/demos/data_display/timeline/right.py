@@ -11,7 +11,7 @@ def app():
             antd.Timeline.Item(
                 "Technical testing 2015-09-01",
                 dot=ant_icons.ClockCircleOutlined(
-                    style=dict(fontSize="16px", color="red")
+                    style={"fontSize": "16px", "color": "red"}
                 ),
             ),
             antd.Timeline.Item("Network problems being solved 2015-09-01"),

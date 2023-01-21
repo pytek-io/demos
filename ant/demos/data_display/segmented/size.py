@@ -11,7 +11,7 @@ def app():
             ),
             html.br(),
             antd.Segmented(
-                options=["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"],
+                options=["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"]
             ),
             html.br(),
             antd.Segmented(

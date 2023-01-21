@@ -9,5 +9,5 @@ def app():
             {"label": "yesmeck", "value": "yesmeck"},
         ],
         autoSize=True,
-        style=dict(width="100%"),
+        style={"width": "100%"},
     )

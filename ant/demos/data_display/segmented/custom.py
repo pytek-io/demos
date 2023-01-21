@@ -1,7 +1,7 @@
 import reflect as r
+import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
-import reflect_ant_icons as ant_icons
 
 
 def app():
@@ -46,48 +46,30 @@ def app():
         options=[
             {
                 "label": html.div(
-                    [
-                        html.div("Spring"),
-                        html.div("Jan-Mar"),
-                    ],
-                    style={"padding": 4},
+                    [html.div("Spring"), html.div("Jan-Mar")], style={"padding": 4}
                 ),
                 "value": "spring",
             },
             {
                 "label": html.div(
-                    [
-                        html.div("Summer"),
-                        html.div("Apr-Jun"),
-                    ],
-                    style={"padding": 4},
+                    [html.div("Summer"), html.div("Apr-Jun")], style={"padding": 4}
                 ),
                 "value": "summer",
             },
             {
                 "label": html.div(
-                    [
-                        html.div("Autumn"),
-                        html.div("Jul-Sep"),
-                    ],
-                    style={"padding": 4},
+                    [html.div("Autumn"), html.div("Jul-Sep")], style={"padding": 4}
                 ),
                 "value": "autumn",
             },
             {
                 "label": html.div(
-                    [
-                        html.div("Winter"),
-                        html.div("Oct-dec"),
-                    ],
-                    style={"padding": 4},
+                    [html.div("Winter"), html.div("Oct-dec")], style={"padding": 4}
                 ),
                 "value": "winter",
             },
         ]
     )
-
-
     result = html.div([first, html.br(), second])
     r.autoprint(first)
     return result

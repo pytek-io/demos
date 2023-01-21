@@ -30,14 +30,14 @@ def app():
                             antd.Breadcrumb.Item("List"),
                             antd.Breadcrumb.Item("App"),
                         ],
-                        style=dict(margin="16px 0"),
+                        style={"margin": "16px 0"},
                     ),
                     html.div("Content", className="site-layout-content"),
                 ],
-                style=dict(padding="0 50px"),
+                style={"padding": "0 50px"},
             ),
             Footer(
-                "Ant Design ©2018 Created by Ant UED", style=dict(textAlign="center")
+                "Ant Design ©2018 Created by Ant UED", style={"textAlign": "center"}
             ),
         ],
         className="layout",

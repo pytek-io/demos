@@ -9,7 +9,7 @@ def app():
             antd.Radio.Button("Vertical", value="left"),
         ],
         defaultValue="top",
-        style=dict(marginBottom=8),
+        style={"marginBottom": 8},
     )
     return html.div(
         [
@@ -26,7 +26,7 @@ def app():
                 ],
                 defaultActiveKey="3",
                 tabPosition=mode,
-                style=dict(height=220),
+                style={"height": 220},
             ),
         ]
     )

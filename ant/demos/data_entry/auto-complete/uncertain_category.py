@@ -1,7 +1,8 @@
+import random
+
 import reflect as r
 import reflect_antd as antd
 import reflect_html as html
-import random
 
 
 def create_result(query, engine):
@@ -24,10 +25,7 @@ def create_result(query, engine):
                 ),
                 html.span(number),
             ],
-            style={
-                "display": "flex",
-                "justifyContent": "space-between",
-            },
+            style={"display": "flex", "justifyContent": "space-between"},
         ),
     }
 
@@ -37,12 +35,12 @@ def app():
 
     def on_search(query: str):
         options_obs.set(
-            [create_result(query, engine) for engine in ["google", "bing","yahoo"]]
+            [create_result(query, engine) for engine in ["google", "bing", "yahoo"]]
         )
 
     return antd.AutoComplete(
         dropdownMatchSelectWidth=252,
-        style=dict(width=300),
+        style={"width": 300},
         options=options_obs,
         onSearch=r.Callback(on_search),
     )

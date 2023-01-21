@@ -18,7 +18,7 @@ def app():
 
     date_picker = antd.DatePicker(showTime=True, onOk=r.Callback(onOk))
     range_picker = RangePicker(
-        showTime=dict(format="HH:mm"),
+        showTime={"format": "HH:mm"},
         format="YYYY-MM-DD HH:mm",
         onChange=onChange,
         onOk=r.Callback(onOk),

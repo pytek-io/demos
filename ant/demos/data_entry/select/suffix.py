@@ -1,8 +1,7 @@
+import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
-
-import reflect as r
 
 
 def app():
@@ -17,7 +16,7 @@ def app():
         ],
         suffixIcon=smileIcon,
         defaultValue="lucy",
-        style=dict(width=120),
+        style={"width": 120},
     )
     r.autorun(lambda: print("selected", select()))
     return html.div(
@@ -27,7 +26,7 @@ def app():
                 options=[{"label": "Lucy", "value": "lucy"}],
                 suffixIcon=mehIcon,
                 defaultValue="lucy",
-                style=dict(width=120),
+                style={"width": 120},
                 disabled=True,
             ),
         ]

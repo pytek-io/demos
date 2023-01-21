@@ -11,17 +11,17 @@ def app():
                     antd.Avatar(
                         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                     ),
-                    antd.Avatar("K", style=dict(backgroundColor="#f56a00")),
+                    antd.Avatar("K", style={"backgroundColor": "#f56a00"}),
                     antd.Tooltip(
                         antd.Avatar(
-                            style=dict(backgroundColor="#87d068"),
+                            style={"backgroundColor": "#87d068"},
                             icon=ant_icons.UserOutlined([]),
                         ),
                         title="Ant User",
                         placement="top",
                     ),
                     antd.Avatar(
-                        style=dict(backgroundColor="#1890ff"),
+                        style={"backgroundColor": "#1890ff"},
                         icon=ant_icons.AntDesignOutlined([]),
                     ),
                 ]
@@ -32,22 +32,22 @@ def app():
                     antd.Avatar(
                         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                     ),
-                    antd.Avatar("K", style=dict(backgroundColor="#f56a00")),
+                    antd.Avatar("K", style={"backgroundColor": "#f56a00"}),
                     antd.Tooltip(
                         antd.Avatar(
-                            style=dict(backgroundColor="#87d068"),
+                            style={"backgroundColor": "#87d068"},
                             icon=ant_icons.UserOutlined([]),
                         ),
                         title="Ant User",
                         placement="top",
                     ),
                     antd.Avatar(
-                        style=dict(backgroundColor="#1890ff"),
+                        style={"backgroundColor": "#1890ff"},
                         icon=ant_icons.AntDesignOutlined([]),
                     ),
                 ],
                 maxCount=2,
-                maxStyle=dict(color="#f56a00", backgroundColor="#fde3cf"),
+                maxStyle={"color": "#f56a00", "backgroundColor": "#fde3cf"},
             ),
             antd.Divider(),
             antd.Avatar.Group(
@@ -55,23 +55,23 @@ def app():
                     antd.Avatar(
                         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                     ),
-                    antd.Avatar("K", style=dict(backgroundColor="#f56a00")),
+                    antd.Avatar("K", style={"backgroundColor": "#f56a00"}),
                     antd.Tooltip(
                         antd.Avatar(
-                            style=dict(backgroundColor="#87d068"),
+                            style={"backgroundColor": "#87d068"},
                             icon=ant_icons.UserOutlined([]),
                         ),
                         title="Ant User",
                         placement="top",
                     ),
                     antd.Avatar(
-                        style=dict(backgroundColor="#1890ff"),
+                        style={"backgroundColor": "#1890ff"},
                         icon=ant_icons.AntDesignOutlined([]),
                     ),
                 ],
                 maxCount=2,
                 size="large",
-                maxStyle=dict(color="#f56a00", backgroundColor="#fde3cf"),
+                maxStyle={"color": "#f56a00", "backgroundColor": "#fde3cf"},
             ),
         ]
     )

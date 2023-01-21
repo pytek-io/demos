@@ -13,11 +13,11 @@ def app():
                     antd.Button(
                         "Affix top", type="primary", onClick=lambda: top.set(top() + 10)
                     ),
-                    style=dict(background="red"),
+                    style={"background": "red"},
                 ),
                 offsetTop=top,
             ),
             html.div("Bottom"),
         ],
-        style=dict(height=10000),
+        style={"height": 10000},
     )

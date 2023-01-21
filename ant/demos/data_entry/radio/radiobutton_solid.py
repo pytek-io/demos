@@ -24,7 +24,7 @@ def app():
                 ],
                 defaultValue="c",
                 buttonStyle="solid",
-                style=dict(marginTop=16),
+                style={"marginTop": 16},
             ),
         ]
     )

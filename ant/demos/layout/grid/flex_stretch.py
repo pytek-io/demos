@@ -21,7 +21,7 @@ def app():
             antd.Row(
                 [
                     antd.Col(
-                        html.div("none", style=dict(padding="0 16px")), flex="none"
+                        html.div("none", style={"padding": "0 16px"}), flex="none"
                     ),
                     antd.Col("auto with no-wrap", flex="auto"),
                 ],

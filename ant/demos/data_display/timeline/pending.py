@@ -20,7 +20,7 @@ def app():
             antd.Button(
                 "Toggle Reverse",
                 type="primary",
-                style=dict(marginTop=16),
+                style={"marginTop": 16},
                 onClick=reflect_utils.toggle_observable(reverse),
             ),
         ]

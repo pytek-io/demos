@@ -20,7 +20,7 @@ def app():
                     html.p("some contents..."),
                 ],
                 title="20px to Top",
-                style=dict(top=20),
+                style={"top": 20},
                 open=modal1Visible,
                 onOk=lambda: modal1Visible.set(False),
                 onCancel=lambda: modal1Visible.set(False),
