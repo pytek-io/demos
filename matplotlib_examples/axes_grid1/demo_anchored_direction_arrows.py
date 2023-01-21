@@ -6,21 +6,20 @@ Anchored Direction Arrow
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/demo_anchored_direction_arrows.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
+import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.axes_grid1.anchored_artists import AnchoredDirectionArrows
-import matplotlib.font_manager as fm
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     np.random.seed(19680801)
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.imshow(np.random.random((10, 10)))
     simple_arrow = AnchoredDirectionArrows(ax.transAxes, "X", "Y")
     ax.add_artist(simple_arrow)
@@ -57,7 +56,7 @@ def app():
         "A",
         "B",
         loc="lower center",
-        length=(-0.15),
+        length=-0.15,
         sep_x=0.03,
         sep_y=0.03,
         color="r",
@@ -68,9 +67,9 @@ def app():
         "A",
         " B",
         loc="lower left",
-        aspect_ratio=(-1),
+        aspect_ratio=-1,
         sep_x=0.01,
-        sep_y=(-0.02),
+        sep_y=-0.02,
         color="orange",
     )
     ax.add_artist(a2)
@@ -79,9 +78,9 @@ def app():
         " A",
         "B",
         loc="lower right",
-        length=(-0.15),
-        aspect_ratio=(-1),
-        sep_y=(-0.1),
+        length=-0.15,
+        aspect_ratio=-1,
+        sep_y=-0.1,
         sep_x=0.04,
         color="cyan",
     )

@@ -9,27 +9,26 @@ and nodes using the `~.path.Path`, `~.patches.PathPatch` and
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/shapes_and_collections/dolphin.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.patches import Circle, PathPatch
 from matplotlib.path import Path
 from matplotlib.transforms import Affine2D
-import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     np.random.seed(19680801)
     r = np.random.rand(50)
-    t = (np.random.rand(50) * np.pi) * 2.0
+    t = np.random.rand(50) * np.pi * 2.0
     x = r * np.cos(t)
     y = r * np.sin(t)
-    (fig, ax) = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=(6, 6))
     circle = Circle(
         (0, 0), 1, facecolor="none", edgecolor=(0, 0.8, 0.8), linewidth=3, alpha=0.5
     )
@@ -39,7 +38,7 @@ def app():
         origin="lower",
         cmap=cm.winter,
         interpolation="spline36",
-        extent=[(-1), 1, (-1), 1],
+        extent=[-1, 1, -1, 1],
     )
     im.set_clip_path(circle)
     plt.plot(x, y, "o", color=(0.9, 0.9, 1.0), alpha=0.8)
@@ -76,13 +75,11 @@ M -0.59739425,160.18173 C -0.62740401,160.18885 -0.57867129,160.11183
     while i < len(parts):
         path_code = code_map[parts[i]]
         npoints = Path.NUM_VERTICES_FOR_CODE[path_code]
-        codes.extend(([path_code] * npoints))
-        vertices.extend(
-            [[*map(float, y.split(","))] for y in parts[(i + 1) :][:npoints]]
-        )
+        codes.extend([path_code] * npoints)
+        vertices.extend([[*map(float, y.split(","))] for y in parts[i + 1 :][:npoints]])
         i += npoints + 1
     vertices = np.array(vertices)
-    vertices[:, 1] -= 160
+    vertices[:, (1)] -= 160
     dolphin_path = Path(vertices, codes)
     dolphin_patch = PathPatch(
         dolphin_path, facecolor=(0.6, 0.6, 0.6), edgecolor=(0.0, 0.0, 0.0)

@@ -33,22 +33,21 @@ their relative zorder.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/zorder_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     r = np.linspace(0.3, 1, 30)
-    theta = np.linspace(0, (4 * np.pi), 30)
+    theta = np.linspace(0, 4 * np.pi, 30)
     x = r * np.sin(theta)
     y = r * np.cos(theta)
-    (fig, (ax1, ax2)) = plt.subplots(1, 2, figsize=(6, 3.2))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6, 3.2))
     ax1.plot(x, y, "C3", lw=3)
     ax1.scatter(x, y, s=120)
     ax1.set_title("Lines on top of dots")
@@ -60,7 +59,7 @@ def app():
     plt.rcParams["lines.linewidth"] = 5
     plt.figure()
     plt.plot(x, np.sin(x), label="zorder=2", zorder=2)
-    plt.plot(x, np.sin((x + 0.5)), label="zorder=3", zorder=3)
+    plt.plot(x, np.sin(x + 0.5), label="zorder=3", zorder=3)
     plt.axhline(0, label="zorder=2.5", color="lightgrey", zorder=2.5)
     plt.title("Custom order of elements")
     l = plt.legend(loc="upper right")

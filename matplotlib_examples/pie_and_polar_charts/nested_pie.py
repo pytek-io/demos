@@ -9,48 +9,47 @@ in Matplotlib. Such charts are often referred to as donut charts.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/pie_and_polar_charts/nested_pie.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from demos.charts.utils import matplotlib_to_svg
+
 
 def app():
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     size = 0.3
     vals = np.array([[60.0, 32.0], [37.0, 40.0], [29.0, 10.0]])
     cmap = plt.colormaps["tab20c"]
-    outer_colors = cmap((np.arange(3) * 4))
+    outer_colors = cmap(np.arange(3) * 4)
     inner_colors = cmap([1, 2, 5, 6, 9, 10])
     ax.pie(
         vals.sum(axis=1),
         radius=1,
         colors=outer_colors,
-        wedgeprops=dict(width=size, edgecolor="w"),
+        wedgeprops={"width": size, "edgecolor": "w"},
     )
     ax.pie(
         vals.flatten(),
-        radius=(1 - size),
+        radius=1 - size,
         colors=inner_colors,
-        wedgeprops=dict(width=size, edgecolor="w"),
+        wedgeprops={"width": size, "edgecolor": "w"},
     )
     ax.set(aspect="equal", title="Pie plot with `ax.pie`")
-    (fig, ax) = plt.subplots(subplot_kw=dict(projection="polar"))
+    fig, ax = plt.subplots(subplot_kw={"projection": "polar"})
     size = 0.3
     vals = np.array([[60.0, 32.0], [37.0, 40.0], [29.0, 10.0]])
-    valsnorm = ((vals / np.sum(vals)) * 2) * np.pi
-    valsleft = np.cumsum(np.append(0, valsnorm.flatten()[:(-1)])).reshape(vals.shape)
+    valsnorm = vals / np.sum(vals) * 2 * np.pi
+    valsleft = np.cumsum(np.append(0, valsnorm.flatten()[:-1])).reshape(vals.shape)
     cmap = plt.colormaps["tab20c"]
-    outer_colors = cmap((np.arange(3) * 4))
+    outer_colors = cmap(np.arange(3) * 4)
     inner_colors = cmap([1, 2, 5, 6, 9, 10])
     ax.bar(
-        x=valsleft[:, 0],
+        x=valsleft[:, (0)],
         width=valsnorm.sum(axis=1),
-        bottom=(1 - size),
+        bottom=1 - size,
         height=size,
         color=outer_colors,
         edgecolor="w",
@@ -60,7 +59,7 @@ def app():
     ax.bar(
         x=valsleft.flatten(),
         width=valsnorm.flatten(),
-        bottom=(1 - (2 * size)),
+        bottom=1 - 2 * size,
         height=size,
         color=inner_colors,
         edgecolor="w",

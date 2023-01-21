@@ -7,20 +7,19 @@ Demonstrates a very basic plot of a 3D surface using a solid color.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/mplot3d/surface3d_2.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")
-    u = np.linspace(0, (2 * np.pi), 100)
+    u = np.linspace(0, 2 * np.pi, 100)
     v = np.linspace(0, np.pi, 100)
     x = 10 * np.outer(np.cos(u), np.sin(v))
     y = 10 * np.outer(np.sin(u), np.sin(v))

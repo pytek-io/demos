@@ -11,18 +11,17 @@ uses `.append_axes` to add colorbars next to axes.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/demo_colorbar_with_axes_divider.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1.axes_divider import make_axes_locatable
 
+from demos.charts.utils import matplotlib_to_svg
+
 
 def app():
-    (fig, (ax1, ax2)) = plt.subplots(1, 2)
+    fig, (ax1, ax2) = plt.subplots(1, 2)
     fig.subplots_adjust(wspace=0.5)
     im1 = ax1.imshow([[1, 2], [3, 4]])
     ax1_divider = make_axes_locatable(ax1)

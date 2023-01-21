@@ -35,23 +35,22 @@ its physical size and the value of the ``dpi`` parameter passed to
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/rasterization_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     d = np.arange(100).reshape(10, 10)
-    (x, y) = np.meshgrid(np.arange(11), np.arange(11))
+    x, y = np.meshgrid(np.arange(11), np.arange(11))
     theta = 0.25 * np.pi
-    xx = (x * np.cos(theta)) - (y * np.sin(theta))
-    yy = (x * np.sin(theta)) + (y * np.cos(theta))
-    (fig, ((ax1, ax2), (ax3, ax4))) = plt.subplots(2, 2, constrained_layout=True)
+    xx = x * np.cos(theta) - y * np.sin(theta)
+    yy = x * np.sin(theta) + y * np.cos(theta)
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, constrained_layout=True)
     ax1.set_aspect(1)
     ax1.pcolormesh(xx, yy, d)
     ax1.set_title("No Rasterization")
@@ -72,7 +71,7 @@ def app():
     )
     ax3.set_title("No Rasterization")
     ax4.set_aspect(1)
-    m = ax4.pcolormesh(xx, yy, d, zorder=(-10))
+    m = ax4.pcolormesh(xx, yy, d, zorder=-10)
     ax4.text(
         0.5,
         0.5,

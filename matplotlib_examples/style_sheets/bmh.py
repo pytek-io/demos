@@ -11,14 +11,13 @@ This example demonstrates the style used in the Bayesian Methods for Hackers
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/style_sheets/bmh.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 np.random.seed(19680801)
 plt.style.use("bmh")
@@ -35,7 +34,7 @@ def plot_beta_hist(ax, a, b):
 
 
 def app():
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     plot_beta_hist(ax, 10, 10)
     plot_beta_hist(ax, 4, 12)
     plot_beta_hist(ax, 50, 12)

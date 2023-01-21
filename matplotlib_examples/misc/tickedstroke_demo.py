@@ -21,33 +21,32 @@ See also the :doc:`contours in optimization example
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/tickedstroke_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.patches as patches
-from matplotlib.path import Path
-import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib.patheffects as patheffects
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.path import Path
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    (fig, ax) = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=(6, 6))
     path = Path.unit_circle()
     patch = patches.PathPatch(
         path,
         facecolor="none",
         lw=2,
-        path_effects=[patheffects.withTickedStroke(angle=(-90), spacing=10, length=1)],
+        path_effects=[patheffects.withTickedStroke(angle=-90, spacing=10, length=1)],
     )
     ax.add_patch(patch)
     ax.axis("equal")
-    ax.set_xlim((-2), 2)
-    ax.set_ylim((-2), 2)
-    (fig, ax) = plt.subplots(figsize=(6, 6))
+    ax.set_xlim(-2, 2)
+    ax.set_ylim(-2, 2)
+    fig, ax = plt.subplots(figsize=(6, 6))
     ax.plot(
         [0, 1],
         [0, 1],
@@ -56,19 +55,19 @@ def app():
     )
     nx = 101
     x = np.linspace(0.0, 1.0, nx)
-    y = (0.3 * np.sin((x * 8))) + 0.4
+    y = 0.3 * np.sin(x * 8) + 0.4
     ax.plot(x, y, label="Curve", path_effects=[patheffects.withTickedStroke()])
     ax.legend()
-    (fig, ax) = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=(6, 6))
     nx = 101
     ny = 105
     xvec = np.linspace(0.001, 4.0, nx)
     yvec = np.linspace(0.001, 4.0, ny)
-    (x1, x2) = np.meshgrid(xvec, yvec)
-    obj = ((((x1**2) + (x2**2)) - (2 * x1)) - (2 * x2)) + 2
-    g1 = -(((3 * x1) + x2) - 5.5)
-    g2 = -((x1 + (2 * x2)) - 4.5)
-    g3 = (0.8 + (x1 ** (-3))) - x2
+    x1, x2 = np.meshgrid(xvec, yvec)
+    obj = x1**2 + x2**2 - 2 * x1 - 2 * x2 + 2
+    g1 = -(3 * x1 + x2 - 5.5)
+    g2 = -(x1 + 2 * x2 - 4.5)
+    g3 = 0.8 + x1**-3 - x2
     cntr = ax.contour(x1, x2, obj, [0.01, 0.1, 0.5, 1, 2, 4, 8, 16], colors="black")
     ax.clabel(cntr, fmt="%2.1f", use_clabeltext=True)
     cg1 = ax.contour(x1, x2, g1, [0], colors="sandybrown")

@@ -10,16 +10,16 @@ support it.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/svg_filter_line.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import io
 import xml.etree.ElementTree as ET
+
 import matplotlib.pyplot as plt
 import matplotlib.transforms as mtransforms
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -37,12 +37,12 @@ def app():
         (shadow,) = ax.plot(xx, yy)
         shadow.update_from(l)
         shadow.set_color("0.2")
-        shadow.set_zorder((l.get_zorder() - 0.5))
+        shadow.set_zorder(l.get_zorder() - 0.5)
         transform = mtransforms.offset_copy(
-            l.get_transform(), fig, x=4.0, y=(-6.0), units="points"
+            l.get_transform(), fig, x=4.0, y=-6.0, units="points"
         )
         shadow.set_transform(transform)
-        shadow.set_gid((l.get_label() + "_shadow"))
+        shadow.set_gid(l.get_label() + "_shadow")
     ax.set_xlim(0.0, 1.0)
     ax.set_ylim(0.0, 1.0)
     f = io.BytesIO()
@@ -55,10 +55,10 @@ def app():
     </filter>
   </defs>
 """
-    (tree, xmlid) = ET.XMLID(f.getvalue())
+    tree, xmlid = ET.XMLID(f.getvalue())
     tree.insert(0, ET.XML(filter_def))
     for l in [l1, l2]:
-        shadow = xmlid[(l.get_label() + "_shadow")]
+        shadow = xmlid[l.get_label() + "_shadow"]
         shadow.set("filter", "url(#dropshadow)")
     fn = "svg_filter_line.svg"
     print(f"Saving '{fn}'")

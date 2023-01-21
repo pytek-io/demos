@@ -7,16 +7,15 @@ Using an `.HBoxDivider` to arrange subplots.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/demo_axes_hbox_divider.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1.axes_divider import HBoxDivider
 import mpl_toolkits.axes_grid1.axes_size as Size
+import numpy as np
+from mpl_toolkits.axes_grid1.axes_divider import HBoxDivider
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def make_heights_equal(fig, rect, ax1, ax2, pad):
@@ -33,16 +32,18 @@ def make_heights_equal(fig, rect, ax1, ax2, pad):
 def app():
     arr1 = np.arange(20).reshape((4, 5))
     arr2 = np.arange(20).reshape((5, 4))
-    (fig, (ax1, ax2)) = plt.subplots(1, 2)
+    fig, (ax1, ax2) = plt.subplots(1, 2)
     ax1.imshow(arr1)
     ax2.imshow(arr2)
     make_heights_equal(fig, 111, ax1, ax2, pad=0.5)
     fig.text(
         0.5,
         0.5,
-        "Both axes' location are adjusted\nso that they have equal heights\nwhile maintaining their aspect ratios",
+        """Both axes' location are adjusted
+so that they have equal heights
+while maintaining their aspect ratios""",
         va="center",
         ha="center",
-        bbox=dict(boxstyle="round, pad=1", facecolor="w"),
+        bbox={"boxstyle": "round, pad=1", "facecolor": "w"},
     )
     return matplotlib_to_svg(fig)

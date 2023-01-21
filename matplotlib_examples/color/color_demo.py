@@ -36,25 +36,24 @@ For more information on colors in matplotlib see
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/color/color_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     t = np.linspace(0.0, 2.0, 201)
-    s = np.sin(((2 * np.pi) * t))
-    (fig, ax) = plt.subplots(facecolor=(0.18, 0.31, 0.31))
+    s = np.sin(2 * np.pi * t)
+    fig, ax = plt.subplots(facecolor=(0.18, 0.31, 0.31))
     ax.set_facecolor("#eafff5")
     ax.set_title("Voltage vs. time chart", color="0.7")
     ax.set_xlabel("time (s)", color="c")
     ax.set_ylabel("voltage (mV)", color="peachpuff")
     ax.plot(t, s, "xkcd:crimson")
-    ax.plot(t, (0.7 * s), color="C4", linestyle="--")
+    ax.plot(t, 0.7 * s, color="C4", linestyle="--")
     ax.tick_params(labelcolor="tab:orange")
     return matplotlib_to_svg(fig)

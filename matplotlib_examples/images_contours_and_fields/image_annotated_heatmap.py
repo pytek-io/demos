@@ -17,15 +17,14 @@ universal function.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/image_annotated_heatmap.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 vegetables = ["cucumber", "tomato", "lettuce", "asparagus", "potato", "wheat", "barley"]
 farmers = [
@@ -48,14 +47,14 @@ harvest = np.array(
         [0.1, 2.0, 0.0, 1.4, 0.0, 1.9, 6.3],
     ]
 )
-(fig, ax) = plt.subplots()
+fig, ax = plt.subplots()
 im = ax.imshow(harvest)
 ax.set_xticks(np.arange(len(farmers)), labels=farmers)
 ax.set_yticks(np.arange(len(vegetables)), labels=vegetables)
 plt.setp(ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
 for i in range(len(vegetables)):
     for j in range(len(farmers)):
-        text = ax.text(j, i, harvest[(i, j)], ha="center", va="center", color="w")
+        text = ax.text(j, i, harvest[i, j], ha="center", va="center", color="w")
 ax.set_title("Harvest of local farmers (in tons/year)")
 fig.tight_layout()
 
@@ -90,17 +89,17 @@ def heatmap(
         cbar_kw = {}
     im = ax.imshow(data, **kwargs)
     cbar = ax.figure.colorbar(im, ax=ax, **cbar_kw)
-    cbar.ax.set_ylabel(cbarlabel, rotation=(-90), va="bottom")
+    cbar.ax.set_ylabel(cbarlabel, rotation=-90, va="bottom")
     ax.set_xticks(np.arange(data.shape[1]), labels=col_labels)
     ax.set_yticks(np.arange(data.shape[0]), labels=row_labels)
     ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
-    plt.setp(ax.get_xticklabels(), rotation=(-30), ha="right", rotation_mode="anchor")
+    plt.setp(ax.get_xticklabels(), rotation=-30, ha="right", rotation_mode="anchor")
     ax.spines[:].set_visible(False)
-    ax.set_xticks((np.arange((data.shape[1] + 1)) - 0.5), minor=True)
-    ax.set_yticks((np.arange((data.shape[0] + 1)) - 0.5), minor=True)
+    ax.set_xticks(np.arange(data.shape[1] + 1) - 0.5, minor=True)
+    ax.set_yticks(np.arange(data.shape[0] + 1) - 0.5, minor=True)
     ax.grid(which="minor", color="w", linestyle="-", linewidth=3)
     ax.tick_params(which="minor", bottom=False, left=False)
-    return (im, cbar)
+    return im, cbar
 
 
 def annotate_heatmap(
@@ -119,7 +118,7 @@ def annotate_heatmap(
     im
         The AxesImage to be labeled.
     data
-        Data used to annotate.  If None, the image\'s data is used.  Optional.
+        Data used to annotate.  If None, the image's data is used.  Optional.
     valfmt
         The format of the annotations inside the heatmap.  This should either
         use the string format method, e.g. "$ {x:.2f}", or be a
@@ -141,35 +140,35 @@ def annotate_heatmap(
         threshold = im.norm(threshold)
     else:
         threshold = im.norm(data.max()) / 2.0
-    kw = dict(horizontalalignment="center", verticalalignment="center")
+    kw = {"horizontalalignment": "center", "verticalalignment": "center"}
     kw.update(textkw)
     if isinstance(valfmt, str):
         valfmt = matplotlib.ticker.StrMethodFormatter(valfmt)
     texts = []
     for i in range(data.shape[0]):
         for j in range(data.shape[1]):
-            kw.update(color=textcolors[int((im.norm(data[(i, j)]) > threshold))])
-            text = im.axes.text(j, i, valfmt(data[(i, j)], None), **kw)
+            kw.update(color=textcolors[int(im.norm(data[i, j]) > threshold)])
+            text = im.axes.text(j, i, valfmt(data[i, j], None), **kw)
             texts.append(text)
     return texts
 
 
-(fig, ax) = plt.subplots()
-(im, cbar) = heatmap(
+fig, ax = plt.subplots()
+im, cbar = heatmap(
     harvest, vegetables, farmers, ax=ax, cmap="YlGn", cbarlabel="harvest [t/year]"
 )
 texts = annotate_heatmap(im, valfmt="{x:.1f} t")
 fig.tight_layout()
 np.random.seed(19680801)
-(fig, ((ax, ax2), (ax3, ax4))) = plt.subplots(2, 2, figsize=(8, 6))
-(im, _) = heatmap(
+fig, ((ax, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(8, 6))
+im, _ = heatmap(
     harvest, vegetables, farmers, ax=ax, cmap="Wistia", cbarlabel="harvest [t/year]"
 )
 annotate_heatmap(im, valfmt="{x:.1f}", size=7)
 data = np.random.randint(2, 100, size=(7, 7))
 y = ["Book {}".format(i) for i in range(1, 8)]
 x = ["Store {}".format(i) for i in list("ABCDEFG")]
-(im, _) = heatmap(
+im, _ = heatmap(
     data, y, x, ax=ax2, vmin=0, cmap="magma_r", cbarlabel="weekly sold copies"
 )
 annotate_heatmap(im, valfmt="{x:d}", size=7, threshold=20, textcolors=("red", "white"))
@@ -177,34 +176,29 @@ data = np.random.randn(6, 6)
 y = ["Prod. {}".format(i) for i in range(10, 70, 10)]
 x = ["Cycle {}".format(i) for i in range(1, 7)]
 qrates = list("ABCDEFG")
-norm = matplotlib.colors.BoundaryNorm(np.linspace((-3.5), 3.5, 8), 7)
-fmt = matplotlib.ticker.FuncFormatter((lambda x, pos: qrates[::(-1)][norm(x)]))
-(im, _) = heatmap(
+norm = matplotlib.colors.BoundaryNorm(np.linspace(-3.5, 3.5, 8), 7)
+fmt = matplotlib.ticker.FuncFormatter(lambda x, pos: qrates[::-1][norm(x)])
+im, _ = heatmap(
     data,
     y,
     x,
     ax=ax3,
     cmap=plt.get_cmap("PiYG", 7),
     norm=norm,
-    cbar_kw=dict(ticks=np.arange((-3), 4), format=fmt),
+    cbar_kw={"ticks": np.arange(-3, 4), "format": fmt},
     cbarlabel="Quality Rating",
 )
 annotate_heatmap(
-    im,
-    valfmt=fmt,
-    size=9,
-    fontweight="bold",
-    threshold=(-1),
-    textcolors=("red", "black"),
+    im, valfmt=fmt, size=9, fontweight="bold", threshold=-1, textcolors=("red", "black")
 )
 corr_matrix = np.corrcoef(harvest)
-(im, _) = heatmap(
+im, _ = heatmap(
     corr_matrix,
     vegetables,
     vegetables,
     ax=ax4,
     cmap="PuOr",
-    vmin=(-1),
+    vmin=-1,
     vmax=1,
     cbarlabel="correlation coeff.",
 )

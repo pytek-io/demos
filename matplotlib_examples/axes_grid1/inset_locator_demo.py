@@ -6,19 +6,18 @@ Inset Locator Demo
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/inset_locator_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from matplotlib.transforms import blended_transform_factory
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    (fig, (ax, ax2)) = plt.subplots(1, 2, figsize=[5.5, 2.8])
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=[5.5, 2.8])
     axins = inset_axes(ax, width=1.3, height=0.9)
     axins2 = inset_axes(ax, width="30%", height="40%", loc=3)
     axins3 = inset_axes(ax2, width="30%", height=1.0, loc=2)
@@ -78,7 +77,7 @@ def app():
     )
     ax2 = fig.add_subplot(133)
     ax2.set_xscale("log")
-    ax2.set(xlim=(1e-06, 1000000.0), ylim=((-2), 6))
+    ax2.set(xlim=(1e-06, 1000000.0), ylim=(-2, 6))
     axins3 = inset_axes(
         ax2,
         width="100%",

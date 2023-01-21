@@ -19,16 +19,16 @@ microseconds.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/date_precision_and_epochs.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import datetime
-import numpy as np
-import matplotlib.pyplot as plt
+
 import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def _reset_epoch_for_tutorial():
@@ -81,13 +81,13 @@ def app():
     y = np.arange(0, len(x))
     _reset_epoch_for_tutorial()
     mdates.set_epoch(new_epoch)
-    (fig, ax) = plt.subplots(constrained_layout=True)
+    fig, ax = plt.subplots(constrained_layout=True)
     ax.plot(xold, y)
-    ax.set_title(("Epoch: " + mdates.get_epoch()))
+    ax.set_title("Epoch: " + mdates.get_epoch())
     ax.xaxis.set_tick_params(rotation=40)
-    (fig, ax) = plt.subplots(constrained_layout=True)
+    fig, ax = plt.subplots(constrained_layout=True)
     ax.plot(x, y)
-    ax.set_title(("Epoch: " + mdates.get_epoch()))
+    ax.set_title("Epoch: " + mdates.get_epoch())
     ax.xaxis.set_tick_params(rotation=40)
     _reset_epoch_for_tutorial()
     return matplotlib_to_svg(fig)

@@ -29,16 +29,15 @@ the :ref:`angle-annotation-usage` section.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/text_labels_and_annotations/angle_annotation.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.patches import Arc
-from matplotlib.transforms import IdentityTransform, TransformedBbox, Bbox
+from matplotlib.transforms import Bbox, IdentityTransform, TransformedBbox
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 class AngleAnnotation(Arc):
@@ -88,7 +87,7 @@ class AngleAnnotation(Arc):
 
         textposition : {"inside", "outside", "edge"}
             Whether to show the text in- or outside the arc. "edge" can be used
-            for custom positions anchored at the arc\'s edge.
+            for custom positions anchored at the arc's edge.
 
         text_kw : dict
             Dictionary of arguments passed to the Annotation.
@@ -116,15 +115,15 @@ class AngleAnnotation(Arc):
         )
         self.set_transform(IdentityTransform())
         self.ax.add_patch(self)
-        self.kw = dict(
-            ha="center",
-            va="center",
-            xycoords=IdentityTransform(),
-            xytext=(0, 0),
-            textcoords="offset points",
-            annotation_clip=True,
-        )
-        self.kw.update((text_kw or {}))
+        self.kw = {
+            "ha": "center",
+            "va": "center",
+            "xycoords": IdentityTransform(),
+            "xytext": (0, 0),
+            "textcoords": "offset points",
+            "annotation_clip": True,
+        }
+        self.kw.update(text_kw or {})
         self.text = ax.annotate(text, xy=self._center, **self.kw)
 
     def get_size(self):
@@ -180,48 +179,40 @@ class AngleAnnotation(Arc):
         c = self._center
         s = self.get_size()
         angle_span = (self.theta2 - self.theta1) % 360
-        angle = np.deg2rad((self.theta1 + (angle_span / 2)))
+        angle = np.deg2rad(self.theta1 + angle_span / 2)
         r = s / 2
         if self.textposition == "inside":
             r = s / np.interp(angle_span, [60, 90, 135, 180], [3.3, 3.5, 3.8, 4])
-        self.text.xy = c + (r * np.array([np.cos(angle), np.sin(angle)]))
+        self.text.xy = c + r * np.array([np.cos(angle), np.sin(angle)])
         if self.textposition == "outside":
 
             def R90(a, r, w, h):
-                if a < np.arctan(((h / 2) / (r + (w / 2)))):
-                    return np.sqrt(
-                        (((r + (w / 2)) ** 2) + ((np.tan(a) * (r + (w / 2))) ** 2))
-                    )
+                if a < np.arctan(h / 2 / (r + w / 2)):
+                    return np.sqrt((r + w / 2) ** 2 + (np.tan(a) * (r + w / 2)) ** 2)
                 else:
-                    c = np.sqrt((((w / 2) ** 2) + ((h / 2) ** 2)))
-                    T = np.arcsin(
-                        (
-                            (c * np.cos((((np.pi / 2) - a) + np.arcsin(((h / 2) / c)))))
-                            / r
-                        )
-                    )
-                    xy = r * np.array([np.cos((a + T)), np.sin((a + T))])
-                    xy += np.array([(w / 2), (h / 2)])
-                    return np.sqrt(np.sum((xy**2)))
+                    c = np.sqrt((w / 2) ** 2 + (h / 2) ** 2)
+                    T = np.arcsin(c * np.cos(np.pi / 2 - a + np.arcsin(h / 2 / c)) / r)
+                    xy = r * np.array([np.cos(a + T), np.sin(a + T)])
+                    xy += np.array([w / 2, h / 2])
+                    return np.sqrt(np.sum(xy**2))
 
             def R(a, r, w, h):
-                aa = ((a % (np.pi / 4)) * ((a % (np.pi / 2)) <= (np.pi / 4))) + (
-                    ((np.pi / 4) - (a % (np.pi / 4)))
-                    * ((a % (np.pi / 2)) >= (np.pi / 4))
-                )
-                return R90(aa, r, *[w, h][:: int(np.sign(np.cos((2 * a))))])
+                aa = a % (np.pi / 4) * (a % (np.pi / 2) <= np.pi / 4) + (
+                    np.pi / 4 - a % (np.pi / 4)
+                ) * (a % (np.pi / 2) >= np.pi / 4)
+                return R90(aa, r, *[w, h][:: int(np.sign(np.cos(2 * a)))])
 
             bbox = self.text.get_window_extent()
             X = R(angle, r, bbox.width, bbox.height)
             trans = self.ax.figure.dpi_scale_trans.inverted()
-            offs = trans.transform(((X - (s / 2)), 0))[0] * 72
-            self.text.set_position([(offs * np.cos(angle)), (offs * np.sin(angle))])
+            offs = trans.transform((X - s / 2, 0))[0] * 72
+            self.text.set_position([offs * np.cos(angle), offs * np.sin(angle)])
 
 
-(fig, ax) = plt.subplots()
+fig, ax = plt.subplots()
 fig.canvas.draw()
 ax.set_title("AngleLabel example")
-center = (4.5, 650)
+center = 4.5, 650
 p1 = [(2.5, 710), (6.0, 605)]
 p2 = [(3.0, 275), (5.5, 900)]
 (line1,) = ax.plot(*zip(*p1))
@@ -243,24 +234,24 @@ am5 = AngleAnnotation(
     linestyle="--",
     color="gray",
     textposition="outside",
-    text_kw=dict(fontsize=16, color="gray"),
+    text_kw={"fontsize": 16, "color": "gray"},
 )
 
 
 def plot_angle(ax, pos, angle, length=0.95, acol="C0", **kwargs):
     vec2 = np.array([np.cos(np.deg2rad(angle)), np.sin(np.deg2rad(angle))])
-    xy = np.c_[([length, 0], [0, 0], (vec2 * length))].T + np.array(pos)
+    xy = np.c_[[length, 0], [0, 0], vec2 * length].T + np.array(pos)
     ax.plot(*xy.T, color=acol)
     return AngleAnnotation(pos, xy[0], xy[2], ax=ax, **kwargs)
 
 
 def app():
-    (fig, (ax1, ax2)) = plt.subplots(nrows=2, sharex=True)
+    fig, (ax1, ax2) = plt.subplots(nrows=2, sharex=True)
     fig.suptitle("AngleLabel keyword arguments")
     fig.canvas.draw()
     ax1.margins(y=0.4)
     ax1.set_title("textposition")
-    kw = dict(size=75, unit="points", text="$60°$")
+    kw = {"size": 75, "unit": "points", "text": "$60°$"}
     am6 = plot_angle(ax1, (2.0, 0), 60, textposition="inside", **kw)
     am7 = plot_angle(ax1, (3.5, 0), 60, textposition="outside", **kw)
     am8 = plot_angle(
@@ -268,7 +259,7 @@ def app():
         (5.0, 0),
         60,
         textposition="edge",
-        text_kw=dict(bbox=dict(boxstyle="round", fc="w")),
+        text_kw={"bbox": {"boxstyle": "round", "fc": "w"}},
         **kw
     )
     am9 = plot_angle(
@@ -276,13 +267,13 @@ def app():
         (6.5, 0),
         60,
         textposition="edge",
-        text_kw=dict(
-            xytext=(30, 20),
-            arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=-0.2"),
-        ),
+        text_kw={
+            "xytext": (30, 20),
+            "arrowprops": {"arrowstyle": "->", "connectionstyle": "arc3,rad=-0.2"},
+        },
         **kw
     )
-    for (x, text) in zip(
+    for x, text in zip(
         [2.0, 3.5, 5.0, 6.5],
         ['"inside"', '"outside"', '"edge"', '"edge", custom arrow'],
     ):
@@ -290,26 +281,26 @@ def app():
             text,
             xy=(x, 0),
             xycoords=ax1.get_xaxis_transform(),
-            bbox=dict(boxstyle="round", fc="w"),
+            bbox={"boxstyle": "round", "fc": "w"},
             ha="left",
             fontsize=8,
             annotation_clip=True,
         )
     ax2.margins(y=0.4)
     ax2.set_title("unit")
-    kw = dict(text="$60°$", textposition="outside")
+    kw = {"text": "$60°$", "textposition": "outside"}
     am10 = plot_angle(ax2, (2.0, 0), 60, size=50, unit="pixels", **kw)
     am11 = plot_angle(ax2, (3.5, 0), 60, size=50, unit="points", **kw)
     am12 = plot_angle(ax2, (5.0, 0), 60, size=0.25, unit="axes min", **kw)
     am13 = plot_angle(ax2, (6.5, 0), 60, size=0.25, unit="axes max", **kw)
-    for (x, text) in zip(
+    for x, text in zip(
         [2.0, 3.5, 5.0, 6.5], ['"pixels"', '"points"', '"axes min"', '"axes max"']
     ):
         ax2.annotate(
             text,
             xy=(x, 0),
             xycoords=ax2.get_xaxis_transform(),
-            bbox=dict(boxstyle="round", fc="w"),
+            bbox={"boxstyle": "round", "fc": "w"},
             ha="left",
             fontsize=8,
             annotation_clip=True,

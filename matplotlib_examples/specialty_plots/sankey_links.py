@@ -7,14 +7,13 @@ Demonstrate/test the Sankey class by producing a long chain of connections.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/specialty_plots/sankey_links.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.sankey import Sankey
+
+from demos.charts.utils import matplotlib_to_svg
 
 links_per_side = 6
 
@@ -22,20 +21,20 @@ links_per_side = 6
 def side(sankey, n=1):
     """Generate a side chain."""
     prior = len(sankey.diagrams)
-    for i in range(0, (2 * n), 2):
+    for i in range(0, 2 * n, 2):
         sankey.add(
-            flows=[1, (-1)],
-            orientations=[(-1), (-1)],
-            patchlabel=str((prior + i)),
-            prior=((prior + i) - 1),
+            flows=[1, -1],
+            orientations=[-1, -1],
+            patchlabel=str(prior + i),
+            prior=prior + i - 1,
             connect=(1, 0),
             alpha=0.5,
         )
         sankey.add(
-            flows=[1, (-1)],
+            flows=[1, -1],
             orientations=[1, 1],
-            patchlabel=str(((prior + i) + 1)),
-            prior=(prior + i),
+            patchlabel=str(prior + i + 1),
+            prior=prior + i,
             connect=(1, 0),
             alpha=0.5,
         )
@@ -45,11 +44,11 @@ def corner(sankey):
     """Generate a corner link."""
     prior = len(sankey.diagrams)
     sankey.add(
-        flows=[1, (-1)],
+        flows=[1, -1],
         orientations=[0, 1],
         patchlabel=str(prior),
         facecolor="k",
-        prior=(prior - 1),
+        prior=prior - 1,
         connect=(1, 0),
         alpha=0.5,
     )
@@ -63,11 +62,12 @@ def app():
         1,
         xticks=[],
         yticks=[],
-        title="Why would you want to do this?\n(But you could.)",
+        title="""Why would you want to do this?
+(But you could.)""",
     )
     sankey = Sankey(ax=ax, unit=None)
     sankey.add(
-        flows=[1, (-1)], orientations=[0, 1], patchlabel="0", facecolor="k", rotation=45
+        flows=[1, -1], orientations=[0, 1], patchlabel="0", facecolor="k", rotation=45
     )
     side(sankey, n=links_per_side)
     corner(sankey)

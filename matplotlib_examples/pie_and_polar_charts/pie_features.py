@@ -22,20 +22,19 @@ positive y-axis.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/pie_and_polar_charts/pie_features.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    labels = ("Frogs", "Hogs", "Dogs", "Logs")
+    labels = "Frogs", "Hogs", "Dogs", "Logs"
     sizes = [15, 30, 45, 10]
-    explode = (0, 0.1, 0, 0)
-    (fig, ax1) = plt.subplots()
+    explode = 0, 0.1, 0, 0
+    fig, ax1 = plt.subplots()
     ax1.pie(
         sizes,
         explode=explode,

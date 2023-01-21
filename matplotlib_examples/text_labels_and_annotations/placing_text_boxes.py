@@ -11,32 +11,31 @@ dictionary with keys that are Patch properties.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/text_labels_and_annotations/placing_text_boxes.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     np.random.seed(19680801)
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     x = 30 * np.random.randn(10000)
     mu = x.mean()
     median = np.median(x)
     sigma = x.std()
     textstr = "\n".join(
         (
-            ("$\\mu=%.2f$" % (mu,)),
-            ("$\\mathrm{median}=%.2f$" % (median,)),
-            ("$\\sigma=%.2f$" % (sigma,)),
+            "$\\mu=%.2f$" % (mu,),
+            "$\\mathrm{median}=%.2f$" % (median,),
+            "$\\sigma=%.2f$" % (sigma,),
         )
     )
     ax.hist(x, 50)
-    props = dict(boxstyle="round", facecolor="wheat", alpha=0.5)
+    props = {"boxstyle": "round", "facecolor": "wheat", "alpha": 0.5}
     ax.text(
         0.05,
         0.95,

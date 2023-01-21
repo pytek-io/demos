@@ -6,25 +6,24 @@ Patheffect Demo
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/patheffect_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib import patheffects
 import numpy as np
+from matplotlib import patheffects
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    (fig, (ax1, ax2, ax3)) = plt.subplots(1, 3, figsize=(8, 3))
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(8, 3))
     ax1.imshow([[1, 2], [2, 3]])
     txt = ax1.annotate(
         "test",
         (1.0, 1.0),
         (0.0, 0),
-        arrowprops=dict(arrowstyle="->", connectionstyle="angle3", lw=2),
+        arrowprops={"arrowstyle": "->", "connectionstyle": "angle3", "lw": 2},
         size=20,
         ha="center",
         path_effects=[patheffects.withStroke(linewidth=3, foreground="w")],

@@ -7,14 +7,13 @@ Adding lines to a figure without any axes.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/pyplots/fig_x.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import matplotlib.pyplot as plt
+matplotlib.use("Agg")
 import matplotlib.lines as lines
+import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():

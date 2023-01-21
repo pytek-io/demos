@@ -16,53 +16,52 @@ the input vectors.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/pcolormesh_grids.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from demos.charts.utils import matplotlib_to_svg
+
 
 def _annotate(ax, x, y, title):
-    (X, Y) = np.meshgrid(x, y)
+    X, Y = np.meshgrid(x, y)
     ax.plot(X.flat, Y.flat, "o", color="m")
-    ax.set_xlim((-0.7), 5.2)
-    ax.set_ylim((-0.7), 3.2)
+    ax.set_xlim(-0.7, 5.2)
+    ax.set_ylim(-0.7, 3.2)
     ax.set_title(title)
 
 
 def app():
     nrows = 3
     ncols = 5
-    Z = np.arange((nrows * ncols)).reshape(nrows, ncols)
-    x = np.arange((ncols + 1))
-    y = np.arange((nrows + 1))
-    (fig, ax) = plt.subplots()
+    Z = np.arange(nrows * ncols).reshape(nrows, ncols)
+    x = np.arange(ncols + 1)
+    y = np.arange(nrows + 1)
+    fig, ax = plt.subplots()
     ax.pcolormesh(x, y, Z, shading="flat", vmin=Z.min(), vmax=Z.max())
     _annotate(ax, x, y, "shading='flat'")
     x = np.arange(ncols)
     y = np.arange(nrows)
-    (fig, ax) = plt.subplots()
-    ax.pcolormesh(x, y, Z[:(-1), :(-1)], shading="flat", vmin=Z.min(), vmax=Z.max())
+    fig, ax = plt.subplots()
+    ax.pcolormesh(x, y, Z[:-1, :-1], shading="flat", vmin=Z.min(), vmax=Z.max())
     _annotate(ax, x, y, "shading='flat': X, Y, C same shape")
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.pcolormesh(x, y, Z, shading="nearest", vmin=Z.min(), vmax=Z.max())
     _annotate(ax, x, y, "shading='nearest'")
-    (fig, axs) = plt.subplots(2, 1, constrained_layout=True)
+    fig, axs = plt.subplots(2, 1, constrained_layout=True)
     ax = axs[0]
     x = np.arange(ncols)
     y = np.arange(nrows)
     ax.pcolormesh(x, y, Z, shading="auto", vmin=Z.min(), vmax=Z.max())
     _annotate(ax, x, y, "shading='auto'; X, Y, Z: same shape (nearest)")
     ax = axs[1]
-    x = np.arange((ncols + 1))
-    y = np.arange((nrows + 1))
+    x = np.arange(ncols + 1)
+    y = np.arange(nrows + 1)
     ax.pcolormesh(x, y, Z, shading="auto", vmin=Z.min(), vmax=Z.max())
     _annotate(ax, x, y, "shading='auto'; X, Y one larger than Z (flat)")
-    (fig, ax) = plt.subplots(constrained_layout=True)
+    fig, ax = plt.subplots(constrained_layout=True)
     x = np.arange(ncols)
     y = np.arange(nrows)
     ax.pcolormesh(x, y, Z, shading="gouraud", vmin=Z.min(), vmax=Z.max())

@@ -8,28 +8,25 @@ with `matplotlib.tri.UniformTriRefiner`.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/tricontour_smooth_user.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import matplotlib.tri as tri
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.tri as tri
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def function_z(x, y):
-    r1 = np.sqrt((((0.5 - x) ** 2) + ((0.5 - y) ** 2)))
-    theta1 = np.arctan2((0.5 - x), (0.5 - y))
-    r2 = np.sqrt(((((-x) - 0.2) ** 2) + (((-y) - 0.2) ** 2)))
-    theta2 = np.arctan2(((-x) - 0.2), ((-y) - 0.2))
+    r1 = np.sqrt((0.5 - x) ** 2 + (0.5 - y) ** 2)
+    theta1 = np.arctan2(0.5 - x, 0.5 - y)
+    r2 = np.sqrt((-x - 0.2) ** 2 + (-y - 0.2) ** 2)
+    theta2 = np.arctan2(-x - 0.2, -y - 0.2)
     z = -(
-        (
-            (((2 * (np.exp(((r1 / 10) ** 2)) - 1)) * 30.0) * np.cos((7.0 * theta1)))
-            + (((np.exp(((r2 / 10) ** 2)) - 1) * 30.0) * np.cos((11.0 * theta2)))
-        )
-        + (0.7 * ((x**2) + (y**2)))
+        2 * (np.exp((r1 / 10) ** 2) - 1) * 30.0 * np.cos(7.0 * theta1)
+        + (np.exp((r2 / 10) ** 2) - 1) * 30.0 * np.cos(11.0 * theta2)
+        + 0.7 * (x**2 + y**2)
     )
     return (np.max(z) - z) / (np.max(z) - np.min(z))
 
@@ -39,22 +36,20 @@ def app():
     n_radii = 10
     min_radius = 0.15
     radii = np.linspace(min_radius, 0.95, n_radii)
-    angles = np.linspace(0, (2 * np.pi), n_angles, endpoint=False)
-    angles = np.repeat(angles[(..., np.newaxis)], n_radii, axis=1)
+    angles = np.linspace(0, 2 * np.pi, n_angles, endpoint=False)
+    angles = np.repeat(angles[..., np.newaxis], n_radii, axis=1)
     angles[:, 1::2] += np.pi / n_angles
     x = (radii * np.cos(angles)).flatten()
     y = (radii * np.sin(angles)).flatten()
     z = function_z(x, y)
     triang = tri.Triangulation(x, y)
     triang.set_mask(
-        (
-            np.hypot(x[triang.triangles].mean(axis=1), y[triang.triangles].mean(axis=1))
-            < min_radius
-        )
+        np.hypot(x[triang.triangles].mean(axis=1), y[triang.triangles].mean(axis=1))
+        < min_radius
     )
     refiner = tri.UniformTriRefiner(triang)
-    (tri_refi, z_test_refi) = refiner.refine_field(z, subdiv=3)
-    (fig, ax) = plt.subplots()
+    tri_refi, z_test_refi = refiner.refine_field(z, subdiv=3)
+    fig, ax = plt.subplots()
     ax.set_aspect("equal")
     ax.triplot(triang, lw=0.5, color="white")
     levels = np.arange(0.0, 1.0, 0.025)

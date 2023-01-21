@@ -9,15 +9,14 @@ This example illustrates the usage and effect of the most common locators.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/tick-locators.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def setup(ax, title):
@@ -43,7 +42,7 @@ def setup(ax, title):
 
 
 def app():
-    (fig, axs) = plt.subplots(8, 1, figsize=(8, 6))
+    fig, axs = plt.subplots(8, 1, figsize=(8, 6))
     setup(axs[0], title="NullLocator()")
     axs[0].xaxis.set_major_locator(ticker.NullLocator())
     axs[0].xaxis.set_minor_locator(ticker.NullLocator())
@@ -57,7 +56,7 @@ def app():
     axs[3].xaxis.set_major_locator(ticker.LinearLocator(3))
     axs[3].xaxis.set_minor_locator(ticker.LinearLocator(31))
     setup(axs[4], title="IndexLocator(base=0.5, offset=0.25)")
-    axs[4].plot(range(0, 5), ([0] * 5), color="white")
+    axs[4].plot(range(0, 5), [0] * 5, color="white")
     axs[4].xaxis.set_major_locator(ticker.IndexLocator(base=0.5, offset=0.25))
     setup(axs[5], title="AutoLocator()")
     axs[5].xaxis.set_major_locator(ticker.AutoLocator())
@@ -66,7 +65,7 @@ def app():
     axs[6].xaxis.set_major_locator(ticker.MaxNLocator(4))
     axs[6].xaxis.set_minor_locator(ticker.MaxNLocator(40))
     setup(axs[7], title="LogLocator(base=10, numticks=15)")
-    axs[7].set_xlim((10**3), (10**10))
+    axs[7].set_xlim(10**3, 10**10)
     axs[7].set_xscale("log")
     axs[7].xaxis.set_major_locator(ticker.LogLocator(base=10, numticks=15))
     plt.tight_layout()

@@ -22,16 +22,15 @@ reveal the preferred pattern in writing functions for matplotlib:
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/errorbars_and_boxes.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.collections import PatchCollection
 from matplotlib.patches import Rectangle
+
+from demos.charts.utils import matplotlib_to_svg
 
 n = 5
 np.random.seed(19680801)
@@ -45,8 +44,8 @@ def make_error_boxes(
     ax, xdata, ydata, xerror, yerror, facecolor="r", edgecolor="none", alpha=0.5
 ):
     errorboxes = [
-        Rectangle(((x - xe[0]), (y - ye[0])), xe.sum(), ye.sum())
-        for (x, y, xe, ye) in zip(xdata, ydata, xerror.T, yerror.T)
+        Rectangle((x - xe[0], y - ye[0]), xe.sum(), ye.sum())
+        for x, y, xe, ye in zip(xdata, ydata, xerror.T, yerror.T)
     ]
     pc = PatchCollection(
         errorboxes, facecolor=facecolor, alpha=alpha, edgecolor=edgecolor
@@ -59,6 +58,6 @@ def make_error_boxes(
 
 
 def app():
-    (fig, ax) = plt.subplots(1)
+    fig, ax = plt.subplots(1)
     _ = make_error_boxes(ax, x, y, xerr, yerr)
     return matplotlib_to_svg(fig)

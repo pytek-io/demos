@@ -15,20 +15,19 @@ polygon is not aligned with the radial axes.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/specialty_plots/radar_chart.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.patches import Circle, RegularPolygon
 from matplotlib.path import Path
-from matplotlib.projections.polar import PolarAxes
 from matplotlib.projections import register_projection
+from matplotlib.projections.polar import PolarAxes
 from matplotlib.spines import Spine
 from matplotlib.transforms import Affine2D
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def radar_factory(num_vars, frame="circle"):
@@ -45,7 +44,7 @@ def radar_factory(num_vars, frame="circle"):
         Shape of frame surrounding axes.
 
     """
-    theta = np.linspace(0, (2 * np.pi), num_vars, endpoint=False)
+    theta = np.linspace(0, 2 * np.pi, num_vars, endpoint=False)
 
     class RadarTransform(PolarAxes.PolarTransform):
         def transform_path_non_affine(self, path):
@@ -72,8 +71,8 @@ def radar_factory(num_vars, frame="circle"):
                 self._close_line(line)
 
         def _close_line(self, line):
-            (x, y) = line.get_data()
-            if x[0] != x[(-1)]:
+            x, y = line.get_data()
+            if x[0] != x[-1]:
                 x = np.append(x, x[0])
                 y = np.append(y, y[0])
                 line.set_data(x, y)
@@ -87,7 +86,7 @@ def radar_factory(num_vars, frame="circle"):
             elif frame == "polygon":
                 return RegularPolygon((0.5, 0.5), num_vars, radius=0.5, edgecolor="k")
             else:
-                raise ValueError(("Unknown value for 'frame': %s" % frame))
+                raise ValueError("Unknown value for 'frame': %s" % frame)
 
         def _gen_axes_spines(self):
             if frame == "circle":
@@ -99,11 +98,11 @@ def radar_factory(num_vars, frame="circle"):
                     path=Path.unit_regular_polygon(num_vars),
                 )
                 spine.set_transform(
-                    (Affine2D().scale(0.5).translate(0.5, 0.5) + self.transAxes)
+                    Affine2D().scale(0.5).translate(0.5, 0.5) + self.transAxes
                 )
                 return {"polar": spine}
             else:
-                raise ValueError(("Unknown value for 'frame': %s" % frame))
+                raise ValueError("Unknown value for 'frame': %s" % frame)
 
     register_projection(RadarAxes)
     return theta
@@ -161,12 +160,12 @@ def app():
     theta = radar_factory(N, frame="polygon")
     data = example_data()
     spoke_labels = data.pop(0)
-    (fig, axs) = plt.subplots(
-        figsize=(9, 9), nrows=2, ncols=2, subplot_kw=dict(projection="radar")
+    fig, axs = plt.subplots(
+        figsize=(9, 9), nrows=2, ncols=2, subplot_kw={"projection": "radar"}
     )
     fig.subplots_adjust(wspace=0.25, hspace=0.2, top=0.85, bottom=0.05)
     colors = ["b", "r", "g", "m", "y"]
-    for (ax, (title, case_data)) in zip(axs.flat, data):
+    for ax, (title, case_data) in zip(axs.flat, data):
         ax.set_rgrids([0.2, 0.4, 0.6, 0.8])
         ax.set_title(
             title,
@@ -176,12 +175,12 @@ def app():
             horizontalalignment="center",
             verticalalignment="center",
         )
-        for (d, color) in zip(case_data, colors):
+        for d, color in zip(case_data, colors):
             ax.plot(theta, d, color=color)
             ax.fill(theta, d, facecolor=color, alpha=0.25, label="_nolegend_")
         ax.set_varlabels(spoke_labels)
-    labels = ("Factor 1", "Factor 2", "Factor 3", "Factor 4", "Factor 5")
-    legend = axs[(0, 0)].legend(
+    labels = "Factor 1", "Factor 2", "Factor 3", "Factor 4", "Factor 5"
+    legend = axs[0, 0].legend(
         labels, loc=(0.9, 0.95), labelspacing=0.1, fontsize="small"
     )
     fig.text(

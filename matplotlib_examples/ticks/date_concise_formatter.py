@@ -17,41 +17,40 @@ the strings used in those tick labels as much as possible.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/date_concise_formatter.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
+matplotlib.use("Agg")
+import datetime
 
-import datetime
-import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import numpy as np
+import matplotlib.pyplot as plt
 import matplotlib.units as munits
-import datetime
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     base = datetime.datetime(2005, 2, 1)
-    dates = [(base + datetime.timedelta(hours=(2 * i))) for i in range(732)]
+    dates = [(base + datetime.timedelta(hours=2 * i)) for i in range(732)]
     N = len(dates)
     np.random.seed(19680801)
     y = np.cumsum(np.random.randn(N))
-    (fig, axs) = plt.subplots(3, 1, constrained_layout=True, figsize=(6, 6))
+    fig, axs = plt.subplots(3, 1, constrained_layout=True, figsize=(6, 6))
     lims = [
         (np.datetime64("2005-02"), np.datetime64("2005-04")),
         (np.datetime64("2005-02-03"), np.datetime64("2005-02-15")),
         (np.datetime64("2005-02-03 11:00"), np.datetime64("2005-02-04 13:20")),
     ]
-    for (nn, ax) in enumerate(axs):
+    for nn, ax in enumerate(axs):
         ax.plot(dates, y)
         ax.set_xlim(lims[nn])
         for label in ax.get_xticklabels():
             label.set_rotation(40)
             label.set_horizontalalignment("right")
     axs[0].set_title("Default Date Formatter")
-    (fig, axs) = plt.subplots(3, 1, constrained_layout=True, figsize=(6, 6))
-    for (nn, ax) in enumerate(axs):
+    fig, axs = plt.subplots(3, 1, constrained_layout=True, figsize=(6, 6))
+    for nn, ax in enumerate(axs):
         locator = mdates.AutoDateLocator(minticks=3, maxticks=7)
         formatter = mdates.ConciseDateFormatter(locator)
         ax.xaxis.set_major_locator(locator)
@@ -63,17 +62,17 @@ def app():
     munits.registry[np.datetime64] = converter
     munits.registry[datetime.date] = converter
     munits.registry[datetime.datetime] = converter
-    (fig, axs) = plt.subplots(3, 1, figsize=(6, 6), constrained_layout=True)
-    for (nn, ax) in enumerate(axs):
+    fig, axs = plt.subplots(3, 1, figsize=(6, 6), constrained_layout=True)
+    for nn, ax in enumerate(axs):
         ax.plot(dates, y)
         ax.set_xlim(lims[nn])
     axs[0].set_title("Concise Date Formatter")
-    (fig, axs) = plt.subplots(3, 1, constrained_layout=True, figsize=(6, 6))
-    for (nn, ax) in enumerate(axs):
+    fig, axs = plt.subplots(3, 1, constrained_layout=True, figsize=(6, 6))
+    for nn, ax in enumerate(axs):
         locator = mdates.AutoDateLocator()
         formatter = mdates.ConciseDateFormatter(locator)
         formatter.formats = ["%y", "%b", "%d", "%H:%M", "%H:%M", "%S.%f"]
-        formatter.zero_formats = [""] + formatter.formats[:(-1)]
+        formatter.zero_formats = [""] + formatter.formats[:-1]
         formatter.zero_formats[3] = "%d-%b"
         formatter.offset_formats = [
             "",
@@ -89,7 +88,7 @@ def app():
         ax.set_xlim(lims[nn])
     axs[0].set_title("Concise Date Formatter")
     formats = ["%y", "%b", "%d", "%H:%M", "%H:%M", "%S.%f"]
-    zero_formats = [""] + formats[:(-1)]
+    zero_formats = [""] + formats[:-1]
     zero_formats[3] = "%d-%b"
     offset_formats = ["", "%Y", "%b %Y", "%d %b %Y", "%d %b %Y", "%d %b %Y %H:%M"]
     converter = mdates.ConciseDateConverter(
@@ -98,8 +97,8 @@ def app():
     munits.registry[np.datetime64] = converter
     munits.registry[datetime.date] = converter
     munits.registry[datetime.datetime] = converter
-    (fig, axs) = plt.subplots(3, 1, constrained_layout=True, figsize=(6, 6))
-    for (nn, ax) in enumerate(axs):
+    fig, axs = plt.subplots(3, 1, constrained_layout=True, figsize=(6, 6))
+    for nn, ax in enumerate(axs):
         ax.plot(dates, y)
         ax.set_xlim(lims[nn])
     axs[0].set_title("Concise Date Formatter registered non-default")

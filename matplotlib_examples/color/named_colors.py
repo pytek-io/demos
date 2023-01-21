@@ -18,15 +18,14 @@ on some common color categories.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/color/named_colors.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-from matplotlib.patches import Rectangle
-import matplotlib.pyplot as plt
+matplotlib.use("Agg")
 import matplotlib.colors as mcolors
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def plot_colortable(colors, sort_colors=True, emptycols=0):
@@ -36,38 +35,36 @@ def plot_colortable(colors, sort_colors=True, emptycols=0):
     margin = 12
     if sort_colors is True:
         by_hsv = sorted(
-            (
-                (tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(color))), name)
-                for (name, color) in colors.items()
-            )
+            (tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(color))), name)
+            for name, color in colors.items()
         )
-        names = [name for (hsv, name) in by_hsv]
+        names = [name for hsv, name in by_hsv]
     else:
         names = list(colors)
     n = len(names)
     ncols = 4 - emptycols
-    nrows = (n // ncols) + int(((n % ncols) > 0))
-    width = (cell_width * 4) + (2 * margin)
-    height = (cell_height * nrows) + (2 * margin)
+    nrows = n // ncols + int(n % ncols > 0)
+    width = cell_width * 4 + 2 * margin
+    height = cell_height * nrows + 2 * margin
     dpi = 72
-    (fig, ax) = plt.subplots(figsize=((width / dpi), (height / dpi)), dpi=dpi)
+    fig, ax = plt.subplots(figsize=(width / dpi, height / dpi), dpi=dpi)
     fig.subplots_adjust(
-        (margin / width),
-        (margin / height),
-        ((width - margin) / width),
-        ((height - margin) / height),
+        margin / width,
+        margin / height,
+        (width - margin) / width,
+        (height - margin) / height,
     )
-    ax.set_xlim(0, (cell_width * 4))
-    ax.set_ylim((cell_height * (nrows - 0.5)), ((-cell_height) / 2.0))
+    ax.set_xlim(0, cell_width * 4)
+    ax.set_ylim(cell_height * (nrows - 0.5), -cell_height / 2.0)
     ax.yaxis.set_visible(False)
     ax.xaxis.set_visible(False)
     ax.set_axis_off()
-    for (i, name) in enumerate(names):
+    for i, name in enumerate(names):
         row = i % nrows
         col = i // nrows
         y = row * cell_height
         swatch_start_x = cell_width * col
-        text_pos_x = ((cell_width * col) + swatch_width) + 7
+        text_pos_x = cell_width * col + swatch_width + 7
         ax.text(
             text_pos_x,
             y,
@@ -78,7 +75,7 @@ def plot_colortable(colors, sort_colors=True, emptycols=0):
         )
         ax.add_patch(
             Rectangle(
-                xy=(swatch_start_x, (y - 9)),
+                xy=(swatch_start_x, y - 9),
                 width=swatch_width,
                 height=18,
                 facecolor=colors[name],

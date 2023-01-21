@@ -7,18 +7,17 @@ This example shows a how to plot a 2D and 3D plot on the same figure.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/mplot3d/mixed_subplots.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from demos.charts.utils import matplotlib_to_svg
+
 
 def f(t):
-    return np.cos(((2 * np.pi) * t)) * np.exp((-t))
+    return np.cos(2 * np.pi * t) * np.exp(-t)
 
 
 def app():
@@ -32,13 +31,13 @@ def app():
     ax.grid(True)
     ax.set_ylabel("Damped oscillation")
     ax = fig.add_subplot(2, 1, 2, projection="3d")
-    X = np.arange((-5), 5, 0.25)
-    Y = np.arange((-5), 5, 0.25)
-    (X, Y) = np.meshgrid(X, Y)
-    R = np.sqrt(((X**2) + (Y**2)))
+    X = np.arange(-5, 5, 0.25)
+    Y = np.arange(-5, 5, 0.25)
+    X, Y = np.meshgrid(X, Y)
+    R = np.sqrt(X**2 + Y**2)
     Z = np.sin(R)
     surf = ax.plot_surface(
         X, Y, Z, rstride=1, cstride=1, linewidth=0, antialiased=False
     )
-    ax.set_zlim((-1), 1)
+    ax.set_zlim(-1, 1)
     return matplotlib_to_svg(fig)

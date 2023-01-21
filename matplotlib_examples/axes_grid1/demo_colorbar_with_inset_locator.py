@@ -13,18 +13,17 @@ work in the same way, and are also demonstrated here.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/demo_colorbar_with_inset_locator.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
+from demos.charts.utils import matplotlib_to_svg
+
 
 def app():
-    (fig, (ax1, ax2)) = plt.subplots(1, 2, figsize=[6, 3])
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=[6, 3])
     im1 = ax1.imshow([[1, 2], [2, 3]])
     axins1 = inset_axes(ax1, width="50%", height="5%", loc="upper right")
     axins1.xaxis.set_ticks_position("bottom")

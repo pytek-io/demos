@@ -10,17 +10,16 @@ out the :doc:`/gallery/spines/centered_spines_with_arrows` example.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/spines/spine_placement_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
+
 from demos.charts.utils import matplotlib_to_svg
 
-import numpy as np
-import matplotlib.pyplot as plt
-
 fig = plt.figure()
-x = np.linspace((-np.pi), np.pi, 100)
+x = np.linspace(-np.pi, np.pi, 100)
 y = 2 * np.sin(x)
 ax = fig.add_subplot(2, 2, 1)
 ax.set_title("centered spines")
@@ -61,7 +60,7 @@ ax.yaxis.set_ticks_position("left")
 
 
 def adjust_spines(ax, spines):
-    for (loc, spine) in ax.spines.items():
+    for loc, spine in ax.spines.items():
         if loc in spines:
             spine.set_position(("outward", 10))
         else:
@@ -78,7 +77,7 @@ def adjust_spines(ax, spines):
 
 def app():
     fig = plt.figure()
-    x = np.linspace(0, (2 * np.pi), 100)
+    x = np.linspace(0, 2 * np.pi, 100)
     y = 2 * np.sin(x)
     ax = fig.add_subplot(2, 2, 1)
     ax.plot(x, y, clip_on=False)

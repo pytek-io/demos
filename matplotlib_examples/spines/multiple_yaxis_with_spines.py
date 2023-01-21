@@ -8,23 +8,22 @@ a `~.axes.Axes.twinx` axes, turning all spines but the right one invisible
 and offset its position using `~.spines.Spine.set_position`.
 
 Note that this approach uses `matplotlib.axes.Axes` and their
-`~matplotlib.spines.Spine`\s. An alternative approach for parasite
+`~matplotlib.spines.Spine`\\s. An alternative approach for parasite
 axes is shown in the :doc:`/gallery/axisartist/demo_parasite_axes` and
 :doc:`/gallery/axisartist/demo_parasite_axes2` examples.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/spines/multiple_yaxis_with_spines.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     fig.subplots_adjust(right=0.75)
     twin1 = ax.twinx()
     twin2 = ax.twinx()
@@ -43,7 +42,7 @@ def app():
     ax.yaxis.label.set_color(p1.get_color())
     twin1.yaxis.label.set_color(p2.get_color())
     twin2.yaxis.label.set_color(p3.get_color())
-    tkw = dict(size=4, width=1.5)
+    tkw = {"size": 4, "width": 1.5}
     ax.tick_params(axis="y", colors=p1.get_color(), **tkw)
     twin1.tick_params(axis="y", colors=p2.get_color(), **tkw)
     twin2.tick_params(axis="y", colors=p3.get_color(), **tkw)

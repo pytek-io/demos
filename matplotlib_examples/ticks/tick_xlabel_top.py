@@ -23,17 +23,16 @@ and deactivate the bottom ticks::
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/tick_xlabel_top.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.plot(range(10))
     ax.tick_params(top=True, labeltop=True, bottom=False, labelbottom=False)
     ax.set_title("x-ticks moved to the top")

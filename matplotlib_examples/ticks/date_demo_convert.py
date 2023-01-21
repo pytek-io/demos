@@ -6,16 +6,16 @@ Date Demo Convert
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/date_demo_convert.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import datetime
+
 import matplotlib.pyplot as plt
-from matplotlib.dates import DayLocator, HourLocator, DateFormatter, drange
 import numpy as np
+from matplotlib.dates import DateFormatter, DayLocator, HourLocator, drange
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -24,9 +24,9 @@ def app():
     delta = datetime.timedelta(hours=6)
     dates = drange(date1, date2, delta)
     y = np.arange(len(dates))
-    (fig, ax) = plt.subplots()
-    ax.plot(dates, (y**2), "o")
-    ax.set_xlim(dates[0], dates[(-1)])
+    fig, ax = plt.subplots()
+    ax.plot(dates, y**2, "o")
+    ax.set_xlim(dates[0], dates[-1])
     ax.xaxis.set_major_locator(DayLocator())
     ax.xaxis.set_minor_locator(HourLocator(range(0, 25, 6)))
     ax.xaxis.set_major_formatter(DateFormatter("%Y-%m-%d"))

@@ -24,14 +24,13 @@ The solution below is modified from Paul Ivanov's original answer.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/text_labels_and_annotations/rainbow_text.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.transforms import Affine2D, offset_copy
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def rainbow_text(x, y, strings, colors, orientation="horizontal", ax=None, **kwargs):
@@ -62,8 +61,8 @@ def rainbow_text(x, y, strings, colors, orientation="horizontal", ax=None, **kwa
     assert orientation in ["horizontal", "vertical"]
     if orientation == "vertical":
         kwargs.update(rotation=90, verticalalignment="bottom")
-    for (s, c) in zip(strings, colors):
-        text = ax.text(x, y, (s + " "), color=c, transform=t, **kwargs)
+    for s, c in zip(strings, colors):
+        text = ax.text(x, y, s + " ", color=c, transform=t, **kwargs)
         text.draw(canvas.get_renderer())
         ex = text.get_window_extent()
         ex = fig.dpi_scale_trans.inverted().transform_bbox(ex)

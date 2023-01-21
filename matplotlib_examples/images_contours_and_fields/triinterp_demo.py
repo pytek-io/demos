@@ -7,15 +7,14 @@ Interpolation from triangular grid to quad grid.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/triinterp_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.tri as mtri
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -33,15 +32,15 @@ def app():
         [7, 8, 9],
     ]
     triang = mtri.Triangulation(x, y, triangles)
-    z = np.cos((1.5 * x)) * np.cos((1.5 * y))
-    (xi, yi) = np.meshgrid(np.linspace(0, 3, 20), np.linspace(0, 3, 20))
+    z = np.cos(1.5 * x) * np.cos(1.5 * y)
+    xi, yi = np.meshgrid(np.linspace(0, 3, 20), np.linspace(0, 3, 20))
     interp_lin = mtri.LinearTriInterpolator(triang, z)
     zi_lin = interp_lin(xi, yi)
     interp_cubic_geom = mtri.CubicTriInterpolator(triang, z, kind="geom")
     zi_cubic_geom = interp_cubic_geom(xi, yi)
     interp_cubic_min_E = mtri.CubicTriInterpolator(triang, z, kind="min_E")
     zi_cubic_min_E = interp_cubic_min_E(xi, yi)
-    (fig, axs) = plt.subplots(nrows=2, ncols=2)
+    fig, axs = plt.subplots(nrows=2, ncols=2)
     axs = axs.flatten()
     axs[0].tricontourf(triang, z)
     axs[0].triplot(triang, "ko-")

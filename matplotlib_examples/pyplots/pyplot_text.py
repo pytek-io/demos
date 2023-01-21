@@ -6,21 +6,20 @@ Pyplot Text
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/pyplots/pyplot_text.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     np.random.seed(19680801)
-    (mu, sigma) = (100, 15)
-    x = mu + (sigma * np.random.randn(10000))
-    (n, bins, patches) = plt.hist(x, 50, density=True, facecolor="g", alpha=0.75)
+    mu, sigma = 100, 15
+    x = mu + sigma * np.random.randn(10000)
+    n, bins, patches = plt.hist(x, 50, density=True, facecolor="g", alpha=0.75)
     fig = plt.figure()
     plt.xlabel("Smarts")
     plt.ylabel("Probability")

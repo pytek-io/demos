@@ -21,28 +21,27 @@ zero and 180 degrees.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/contours_in_optimization_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib import patheffects
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    (fig, ax) = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=(6, 6))
     nx = 101
     ny = 105
     xvec = np.linspace(0.001, 4.0, nx)
     yvec = np.linspace(0.001, 4.0, ny)
-    (x1, x2) = np.meshgrid(xvec, yvec)
-    obj = ((((x1**2) + (x2**2)) - (2 * x1)) - (2 * x2)) + 2
-    g1 = -(((3 * x1) + x2) - 5.5)
-    g2 = -((x1 + (2 * x2)) - 4.5)
-    g3 = (0.8 + (x1 ** (-3))) - x2
+    x1, x2 = np.meshgrid(xvec, yvec)
+    obj = x1**2 + x2**2 - 2 * x1 - 2 * x2 + 2
+    g1 = -(3 * x1 + x2 - 5.5)
+    g2 = -(x1 + 2 * x2 - 4.5)
+    g3 = 0.8 + x1**-3 - x2
     cntr = ax.contour(x1, x2, obj, [0.01, 0.1, 0.5, 1, 2, 4, 8, 16], colors="black")
     ax.clabel(cntr, fmt="%2.1f", use_clabeltext=True)
     cg1 = ax.contour(x1, x2, g1, [0], colors="sandybrown")

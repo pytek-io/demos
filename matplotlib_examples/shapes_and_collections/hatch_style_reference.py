@@ -15,34 +15,33 @@ an example using `~.Axes.contourf`, and
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/shapes_and_collections/hatch_style_reference.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def hatches_plot(ax, h):
     ax.add_patch(Rectangle((0, 0), 2, 2, fill=False, hatch=h))
-    ax.text(1, (-0.5), f"' {h} '", size=15, ha="center")
+    ax.text(1, -0.5, f"' {h} '", size=15, ha="center")
     ax.axis("equal")
     ax.axis("off")
 
 
 def app():
-    (fig, axs) = plt.subplots(2, 5, constrained_layout=True, figsize=(6.4, 3.2))
+    fig, axs = plt.subplots(2, 5, constrained_layout=True, figsize=(6.4, 3.2))
     hatches = ["/", "\\", "|", "-", "+", "x", "o", "O", ".", "*"]
-    for (ax, h) in zip(axs.flat, hatches):
+    for ax, h in zip(axs.flat, hatches):
         hatches_plot(ax, h)
-    (fig, axs) = plt.subplots(2, 5, constrained_layout=True, figsize=(6.4, 3.2))
+    fig, axs = plt.subplots(2, 5, constrained_layout=True, figsize=(6.4, 3.2))
     hatches = ["//", "\\\\", "||", "--", "++", "xx", "oo", "OO", "..", "**"]
-    for (ax, h) in zip(axs.flat, hatches):
+    for ax, h in zip(axs.flat, hatches):
         hatches_plot(ax, h)
-    (fig, axs) = plt.subplots(2, 5, constrained_layout=True, figsize=(6.4, 3.2))
+    fig, axs = plt.subplots(2, 5, constrained_layout=True, figsize=(6.4, 3.2))
     hatches = ["/o", "\\|", "|*", "-\\", "+o", "x*", "o-", "O|", "O.", "*-"]
-    for (ax, h) in zip(axs.flat, hatches):
+    for ax, h in zip(axs.flat, hatches):
         hatches_plot(ax, h)
     return matplotlib_to_svg(fig)

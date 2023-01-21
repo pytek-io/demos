@@ -10,13 +10,12 @@ can be found in :doc:`/gallery/misc/anchored_artists`.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/simple_anchored_artists.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def draw_text(ax):
@@ -26,13 +25,13 @@ def draw_text(ax):
     """
     from matplotlib.offsetbox import AnchoredText
 
-    at = AnchoredText("Figure 1a", loc="upper left", prop=dict(size=8), frameon=True)
+    at = AnchoredText("Figure 1a", loc="upper left", prop={"size": 8}, frameon=True)
     at.patch.set_boxstyle("round,pad=0.,rounding_size=0.2")
     ax.add_artist(at)
     at2 = AnchoredText(
         "Figure 1(b)",
         loc="lower left",
-        prop=dict(size=8),
+        prop={"size": 8},
         frameon=True,
         bbox_to_anchor=(0.0, 1.0),
         bbox_transform=ax.transAxes,
@@ -45,8 +44,8 @@ def draw_circle(ax):
     """
     Draw a circle in axis coordinates
     """
-    from mpl_toolkits.axes_grid1.anchored_artists import AnchoredDrawingArea
     from matplotlib.patches import Circle
+    from mpl_toolkits.axes_grid1.anchored_artists import AnchoredDrawingArea
 
     ada = AnchoredDrawingArea(20, 20, 0, 0, loc="upper right", pad=0.0, frameon=False)
     p = Circle((10, 10), 10)
@@ -94,7 +93,7 @@ def draw_sizebar(ax):
 
 
 def app():
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.set_aspect(1.0)
     draw_text(ax)
     draw_circle(ax)

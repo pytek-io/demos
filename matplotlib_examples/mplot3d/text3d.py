@@ -15,23 +15,22 @@ Functionality shown:
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/mplot3d/text3d.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")
-    zdirs = (None, "x", "y", "z", (1, 1, 0), (1, 1, 1))
-    xs = (1, 4, 4, 9, 4, 1)
-    ys = (2, 5, 8, 10, 1, 2)
-    zs = (10, 3, 8, 9, 1, 8)
-    for (zdir, x, y, z) in zip(zdirs, xs, ys, zs):
+    zdirs = None, "x", "y", "z", (1, 1, 0), (1, 1, 1)
+    xs = 1, 4, 4, 9, 4, 1
+    ys = 2, 5, 8, 10, 1, 2
+    zs = 10, 3, 8, 9, 1, 8
+    for zdir, x, y, z in zip(zdirs, xs, ys, zs):
         label = "(%d, %d, %d), dir=%s" % (x, y, z, zdir)
         ax.text(x, y, z, label, zdir)
     ax.text(9, 0, 0, "red", color="red")

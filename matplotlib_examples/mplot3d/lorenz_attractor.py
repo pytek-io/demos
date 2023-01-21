@@ -15,14 +15,13 @@ Flow"`_ in a 3-dimensional space using mplot3d.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/mplot3d/lorenz_attractor.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def lorenz(xyz, *, s=10, r=28, b=2.667):
@@ -39,20 +38,20 @@ def lorenz(xyz, *, s=10, r=28, b=2.667):
     xyz_dot : array, shape (3,)
        Values of the Lorenz attractor's partial derivatives at *xyz*.
     """
-    (x, y, z) = xyz
+    x, y, z = xyz
     x_dot = s * (y - x)
-    y_dot = ((r * x) - y) - (x * z)
-    z_dot = (x * y) - (b * z)
+    y_dot = r * x - y - x * z
+    z_dot = x * y - b * z
     return np.array([x_dot, y_dot, z_dot])
 
 
 def app():
     dt = 0.01
     num_steps = 10000
-    xyzs = np.empty(((num_steps + 1), 3))
-    xyzs[0] = (0.0, 1.0, 1.05)
+    xyzs = np.empty((num_steps + 1, 3))
+    xyzs[0] = 0.0, 1.0, 1.05
     for i in range(num_steps):
-        xyzs[(i + 1)] = xyzs[i] + (lorenz(xyzs[i]) * dt)
+        xyzs[i + 1] = xyzs[i] + lorenz(xyzs[i]) * dt
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")
     ax.plot(*xyzs.T, lw=0.5)

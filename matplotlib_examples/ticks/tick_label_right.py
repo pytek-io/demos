@@ -10,21 +10,20 @@ appear. These properties can also be set in ``.matplotlib/matplotlibrc``.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/tick_label_right.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     plt.rcParams["ytick.right"] = plt.rcParams["ytick.labelright"] = True
     plt.rcParams["ytick.left"] = plt.rcParams["ytick.labelleft"] = False
     x = np.arange(10)
-    (fig, (ax0, ax1)) = plt.subplots(2, 1, sharex=True, figsize=(6, 6))
+    fig, (ax0, ax1) = plt.subplots(2, 1, sharex=True, figsize=(6, 6))
     ax0.plot(x)
     ax0.yaxis.tick_left()
     ax1.plot(x)

@@ -22,21 +22,20 @@ scale with error bars.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/errorbar_features.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     x = np.arange(0.1, 4, 0.5)
-    y = np.exp((-x))
-    error = 0.1 + (0.2 * x)
-    (fig, (ax0, ax1)) = plt.subplots(nrows=2, sharex=True)
+    y = np.exp(-x)
+    error = 0.1 + 0.2 * x
+    fig, (ax0, ax1) = plt.subplots(nrows=2, sharex=True)
     ax0.errorbar(x, y, yerr=error, fmt="-o")
     ax0.set_title("variable, symmetric error")
     lower_error = 0.4 * error

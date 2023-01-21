@@ -11,27 +11,26 @@ is still useful to show how to customize the
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/image_zcoord.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 np.random.seed(19680801)
 X = 10 * np.random.rand(5, 3)
-(fig, ax) = plt.subplots()
+fig, ax = plt.subplots()
 ax.imshow(X)
-(numrows, numcols) = X.shape
+numrows, numcols = X.shape
 
 
 def format_coord(x, y):
-    col = int((x + 0.5))
-    row = int((y + 0.5))
-    if (0 <= col < numcols) and (0 <= row < numrows):
-        z = X[(row, col)]
+    col = int(x + 0.5)
+    row = int(y + 0.5)
+    if 0 <= col < numcols and 0 <= row < numrows:
+        z = X[row, col]
         return "x=%1.4f, y=%1.4f, z=%1.4f" % (x, y, z)
     else:
         return "x=%1.4f, y=%1.4f" % (x, y)

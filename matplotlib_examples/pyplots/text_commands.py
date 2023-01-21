@@ -7,13 +7,12 @@ Plotting text of many different kinds.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/pyplots/text_commands.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -48,7 +47,7 @@ def app():
         "annotate",
         xy=(2, 1),
         xytext=(3, 4),
-        arrowprops=dict(facecolor="black", shrink=0.05),
+        arrowprops={"facecolor": "black", "shrink": 0.05},
     )
     ax.set(xlim=(0, 10), ylim=(0, 10))
     return matplotlib_to_svg(fig)

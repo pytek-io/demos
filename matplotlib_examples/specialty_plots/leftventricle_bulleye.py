@@ -8,15 +8,14 @@ ventricle recommended by the American Heart Association (AHA).
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/specialty_plots/leftventricle_bulleye.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def bullseye_plot(ax, data, seg_bold=None, cmap=None, norm=None):
@@ -56,57 +55,57 @@ def bullseye_plot(ax, data, seg_bold=None, cmap=None, norm=None):
         cmap = plt.cm.viridis
     if norm is None:
         norm = mpl.colors.Normalize(vmin=data.min(), vmax=data.max())
-    theta = np.linspace(0, (2 * np.pi), 768)
+    theta = np.linspace(0, 2 * np.pi, 768)
     r = np.linspace(0.2, 1, 4)
     for i in range(r.shape[0]):
         ax.plot(theta, np.repeat(r[i], theta.shape), "-k", lw=linewidth)
     for i in range(6):
-        theta_i = np.deg2rad((i * 60))
+        theta_i = np.deg2rad(i * 60)
         ax.plot([theta_i, theta_i], [r[1], 1], "-k", lw=linewidth)
     for i in range(4):
-        theta_i = np.deg2rad(((i * 90) - 45))
+        theta_i = np.deg2rad(i * 90 - 45)
         ax.plot([theta_i, theta_i], [r[0], r[1]], "-k", lw=linewidth)
     r0 = r[2:4]
-    r0 = np.repeat(r0[:, np.newaxis], 128, axis=1).T
+    r0 = np.repeat(r0[:, (np.newaxis)], 128, axis=1).T
     for i in range(6):
-        theta0 = theta[(i * 128) : ((i * 128) + 128)] + np.deg2rad(60)
-        theta0 = np.repeat(theta0[:, np.newaxis], 2, axis=1)
+        theta0 = theta[i * 128 : i * 128 + 128] + np.deg2rad(60)
+        theta0 = np.repeat(theta0[:, (np.newaxis)], 2, axis=1)
         z = np.ones((128, 2)) * data[i]
         ax.pcolormesh(theta0, r0, z, cmap=cmap, norm=norm, shading="auto")
-        if (i + 1) in seg_bold:
-            ax.plot(theta0, r0, "-k", lw=(linewidth + 2))
-            ax.plot(theta0[0], [r[2], r[3]], "-k", lw=(linewidth + 1))
-            ax.plot(theta0[(-1)], [r[2], r[3]], "-k", lw=(linewidth + 1))
+        if i + 1 in seg_bold:
+            ax.plot(theta0, r0, "-k", lw=linewidth + 2)
+            ax.plot(theta0[0], [r[2], r[3]], "-k", lw=linewidth + 1)
+            ax.plot(theta0[-1], [r[2], r[3]], "-k", lw=linewidth + 1)
     r0 = r[1:3]
-    r0 = np.repeat(r0[:, np.newaxis], 128, axis=1).T
+    r0 = np.repeat(r0[:, (np.newaxis)], 128, axis=1).T
     for i in range(6):
-        theta0 = theta[(i * 128) : ((i * 128) + 128)] + np.deg2rad(60)
-        theta0 = np.repeat(theta0[:, np.newaxis], 2, axis=1)
-        z = np.ones((128, 2)) * data[(i + 6)]
+        theta0 = theta[i * 128 : i * 128 + 128] + np.deg2rad(60)
+        theta0 = np.repeat(theta0[:, (np.newaxis)], 2, axis=1)
+        z = np.ones((128, 2)) * data[i + 6]
         ax.pcolormesh(theta0, r0, z, cmap=cmap, norm=norm, shading="auto")
-        if (i + 7) in seg_bold:
-            ax.plot(theta0, r0, "-k", lw=(linewidth + 2))
-            ax.plot(theta0[0], [r[1], r[2]], "-k", lw=(linewidth + 1))
-            ax.plot(theta0[(-1)], [r[1], r[2]], "-k", lw=(linewidth + 1))
+        if i + 7 in seg_bold:
+            ax.plot(theta0, r0, "-k", lw=linewidth + 2)
+            ax.plot(theta0[0], [r[1], r[2]], "-k", lw=linewidth + 1)
+            ax.plot(theta0[-1], [r[1], r[2]], "-k", lw=linewidth + 1)
     r0 = r[0:2]
-    r0 = np.repeat(r0[:, np.newaxis], 192, axis=1).T
+    r0 = np.repeat(r0[:, (np.newaxis)], 192, axis=1).T
     for i in range(4):
-        theta0 = theta[(i * 192) : ((i * 192) + 192)] + np.deg2rad(45)
-        theta0 = np.repeat(theta0[:, np.newaxis], 2, axis=1)
-        z = np.ones((192, 2)) * data[(i + 12)]
+        theta0 = theta[i * 192 : i * 192 + 192] + np.deg2rad(45)
+        theta0 = np.repeat(theta0[:, (np.newaxis)], 2, axis=1)
+        z = np.ones((192, 2)) * data[i + 12]
         ax.pcolormesh(theta0, r0, z, cmap=cmap, norm=norm, shading="auto")
-        if (i + 13) in seg_bold:
-            ax.plot(theta0, r0, "-k", lw=(linewidth + 2))
-            ax.plot(theta0[0], [r[0], r[1]], "-k", lw=(linewidth + 1))
-            ax.plot(theta0[(-1)], [r[0], r[1]], "-k", lw=(linewidth + 1))
+        if i + 13 in seg_bold:
+            ax.plot(theta0, r0, "-k", lw=linewidth + 2)
+            ax.plot(theta0[0], [r[0], r[1]], "-k", lw=linewidth + 1)
+            ax.plot(theta0[-1], [r[0], r[1]], "-k", lw=linewidth + 1)
     if data.size == 17:
         r0 = np.array([0, r[0]])
-        r0 = np.repeat(r0[:, np.newaxis], theta.size, axis=1).T
-        theta0 = np.repeat(theta[:, np.newaxis], 2, axis=1)
+        r0 = np.repeat(r0[:, (np.newaxis)], theta.size, axis=1).T
+        theta0 = np.repeat(theta[:, (np.newaxis)], 2, axis=1)
         z = np.ones((theta.size, 2)) * data[16]
         ax.pcolormesh(theta0, r0, z, cmap=cmap, norm=norm, shading="auto")
         if 17 in seg_bold:
-            ax.plot(theta0, r0, "-k", lw=(linewidth + 2))
+            ax.plot(theta0, r0, "-k", lw=linewidth + 2)
     ax.set_ylim([0, 1])
     ax.set_yticklabels([])
     ax.set_xticklabels([])
@@ -114,8 +113,8 @@ def bullseye_plot(ax, data, seg_bold=None, cmap=None, norm=None):
 
 def app():
     data = np.arange(17) + 1
-    (fig, ax) = plt.subplots(
-        figsize=(12, 8), nrows=1, ncols=3, subplot_kw=dict(projection="polar")
+    fig, ax = plt.subplots(
+        figsize=(12, 8), nrows=1, ncols=3, subplot_kw={"projection": "polar"}
     )
     fig.canvas.manager.set_window_title("Left Ventricle Bulls Eyes (AHA)")
     axl = fig.add_axes([0.14, 0.15, 0.2, 0.05])

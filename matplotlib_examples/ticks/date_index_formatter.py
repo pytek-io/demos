@@ -14,27 +14,26 @@ The example shows how to use an 'index formatter' to achieve the desired plot.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/date_index_formatter.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
-import matplotlib.pyplot as plt
+matplotlib.use("Agg")
 import matplotlib.cbook as cbook
 import matplotlib.lines as ml
+import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.dates import DateFormatter, DayLocator
 from matplotlib.ticker import Formatter
 
+from demos.charts.utils import matplotlib_to_svg
+
 r = cbook.get_sample_data("goog.npz", np_load=True)["price_data"].view(np.recarray)
 r = r[:9]
-(fig, (ax1, ax2)) = plt.subplots(
+fig, (ax1, ax2) = plt.subplots(
     nrows=2, figsize=(6, 6), constrained_layout={"hspace": 0.15}
 )
 ax1.plot(r.date, r.adj_close, "o-")
-gaps = np.flatnonzero((np.diff(r.date) > np.timedelta64(1, "D")))
-for gap in r[["date", "adj_close"]][np.stack((gaps, (gaps + 1))).T]:
+gaps = np.flatnonzero(np.diff(r.date) > np.timedelta64(1, "D"))
+for gap in r[["date", "adj_close"]][np.stack((gaps, gaps + 1)).T]:
     ax1.plot(gap.date, gap.adj_close, "w--", lw=2)
 ax1.legend(handles=[ml.Line2D([], [], ls="--", label="Gaps in daily data")])
 ax1.set_title("Plot y at x Coordinates")

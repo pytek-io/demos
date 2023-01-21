@@ -28,14 +28,13 @@ Below each use case is presented in turn.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/shapes_and_collections/arrow_guide.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -45,7 +44,7 @@ def app():
     y_head = 0.8
     dx = x_head - x_tail
     dy = y_head - y_tail
-    (fig, axs) = plt.subplots(nrows=2)
+    fig, axs = plt.subplots(nrows=2)
     arrow = mpatches.FancyArrowPatch(
         (x_tail, y_tail), (x_head, y_head), mutation_scale=100
     )
@@ -55,7 +54,7 @@ def app():
     )
     axs[1].add_patch(arrow)
     axs[1].set(xlim=(0, 2), ylim=(0, 2))
-    (fig, axs) = plt.subplots(nrows=2)
+    fig, axs = plt.subplots(nrows=2)
     arrow = mpatches.FancyArrowPatch(
         (x_tail, y_tail),
         (x_head, y_head),
@@ -71,16 +70,16 @@ def app():
     )
     axs[1].add_patch(arrow)
     axs[1].set(xlim=(0, 2), ylim=(0, 2))
-    (fig, axs) = plt.subplots(nrows=2)
+    fig, axs = plt.subplots(nrows=2)
     arrow = mpatches.Arrow(x_tail, y_tail, dx, dy)
     axs[0].add_patch(arrow)
     arrow = mpatches.FancyArrow(
-        x_tail, (y_tail - 0.4), dx, dy, width=0.1, length_includes_head=True, color="C1"
+        x_tail, y_tail - 0.4, dx, dy, width=0.1, length_includes_head=True, color="C1"
     )
     axs[0].add_patch(arrow)
     axs[0].arrow(
-        (x_tail + 1),
-        (y_tail - 0.4),
+        x_tail + 1,
+        y_tail - 0.4,
         dx,
         dy,
         width=0.1,
@@ -90,12 +89,12 @@ def app():
     arrow = mpatches.Arrow(x_tail, y_tail, dx, dy)
     axs[1].add_patch(arrow)
     arrow = mpatches.FancyArrow(
-        x_tail, (y_tail - 0.4), dx, dy, width=0.1, length_includes_head=True, color="C1"
+        x_tail, y_tail - 0.4, dx, dy, width=0.1, length_includes_head=True, color="C1"
     )
     axs[1].add_patch(arrow)
     axs[1].arrow(
-        (x_tail + 1),
-        (y_tail - 0.4),
+        x_tail + 1,
+        y_tail - 0.4,
         dx,
         dy,
         width=0.1,

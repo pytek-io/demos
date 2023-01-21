@@ -10,26 +10,25 @@ lines on a figure. Below we show off some of its properties.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/shapes_and_collections/line_collection.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.collections import LineCollection
-from matplotlib import colors as mcolors
 import numpy as np
+from matplotlib import colors as mcolors
+from matplotlib.collections import LineCollection
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     x = np.arange(100)
-    ys = x[:50, np.newaxis] + x[np.newaxis, :]
+    ys = x[:50, (np.newaxis)] + x[(np.newaxis), :]
     segs = np.zeros((50, 100, 2))
-    segs[:, :, 1] = ys
-    segs[:, :, 0] = x
-    segs = np.ma.masked_where(((segs > 50) & (segs < 60)), segs)
-    (fig, ax) = plt.subplots()
+    segs[:, :, (1)] = ys
+    segs[:, :, (0)] = x
+    segs = np.ma.masked_where((segs > 50) & (segs < 60), segs)
+    fig, ax = plt.subplots()
     ax.set_xlim(x.min(), x.max())
     ax.set_ylim(ys.min(), ys.max())
     colors = [
@@ -43,7 +42,7 @@ def app():
     N = 50
     x = np.arange(N)
     ys = [(x + i) for i in x]
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.set_xlim(np.min(x), np.max(x))
     ax.set_ylim(np.min(ys), np.max(ys))
     line_segments = LineCollection(

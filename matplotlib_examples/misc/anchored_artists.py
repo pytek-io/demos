@@ -16,22 +16,16 @@ of additional toolkits.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/anchored_artists.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
+from matplotlib.offsetbox import (AnchoredOffsetbox, AuxTransformBox,
+                                  DrawingArea, TextArea, VPacker)
 from matplotlib.patches import Circle, Ellipse
-from matplotlib.offsetbox import (
-    AnchoredOffsetbox,
-    AuxTransformBox,
-    DrawingArea,
-    TextArea,
-    VPacker,
-)
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def draw_text(ax):
@@ -113,7 +107,7 @@ def draw_sizebar(ax):
 
 
 def app():
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.set_aspect(1)
     draw_text(ax)
     draw_circles(ax)

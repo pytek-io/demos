@@ -21,18 +21,17 @@ section: https://scikit-learn.org/stable/modules/density.html
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/boxplot_vs_violin.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from demos.charts.utils import matplotlib_to_svg
+
 
 def app():
-    (fig, axs) = plt.subplots(nrows=1, ncols=2, figsize=(9, 4))
+    fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(9, 4))
     np.random.seed(19680801)
     all_data = [np.random.normal(0, std, 100) for std in range(6, 10)]
     axs[0].violinplot(all_data, showmeans=False, showmedians=True)

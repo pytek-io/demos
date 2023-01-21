@@ -24,14 +24,13 @@ __ https://github.com/anntzer/mplcursors
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/cursor_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 class Cursor:
@@ -59,10 +58,10 @@ class Cursor:
                 self.ax.figure.canvas.draw()
         else:
             self.set_cross_hair_visible(True)
-            (x, y) = (event.xdata, event.ydata)
+            x, y = event.xdata, event.ydata
             self.horizontal_line.set_ydata(y)
             self.vertical_line.set_xdata(x)
-            self.text.set_text(("x=%1.2f, y=%1.2f" % (x, y)))
+            self.text.set_text("x=%1.2f, y=%1.2f" % (x, y))
             self.ax.figure.canvas.draw()
 
 
@@ -110,10 +109,10 @@ class BlittedCursor:
                 self.ax.figure.canvas.blit(self.ax.bbox)
         else:
             self.set_cross_hair_visible(True)
-            (x, y) = (event.xdata, event.ydata)
+            x, y = event.xdata, event.ydata
             self.horizontal_line.set_ydata(y)
             self.vertical_line.set_xdata(x)
-            self.text.set_text(("x=%1.2f, y=%1.2f" % (x, y)))
+            self.text.set_text("x=%1.2f, y=%1.2f" % (x, y))
             self.ax.figure.canvas.restore_region(self.background)
             self.ax.draw_artist(self.horizontal_line)
             self.ax.draw_artist(self.vertical_line)
@@ -133,7 +132,7 @@ class SnappingCursor:
         self.ax = ax
         self.horizontal_line = ax.axhline(color="k", lw=0.8, ls="--")
         self.vertical_line = ax.axvline(color="k", lw=0.8, ls="--")
-        (self.x, self.y) = line.get_data()
+        self.x, self.y = line.get_data()
         self._last_index = None
         self.text = ax.text(0.72, 0.9, "", transform=ax.transAxes)
 
@@ -152,8 +151,8 @@ class SnappingCursor:
                 self.ax.figure.canvas.draw()
         else:
             self.set_cross_hair_visible(True)
-            (x, y) = (event.xdata, event.ydata)
-            index = min(np.searchsorted(self.x, x), (len(self.x) - 1))
+            x, y = event.xdata, event.ydata
+            index = min(np.searchsorted(self.x, x), len(self.x) - 1)
             if index == self._last_index:
                 return
             self._last_index = index
@@ -161,28 +160,28 @@ class SnappingCursor:
             y = self.y[index]
             self.horizontal_line.set_ydata(y)
             self.vertical_line.set_xdata(x)
-            self.text.set_text(("x=%1.2f, y=%1.2f" % (x, y)))
+            self.text.set_text("x=%1.2f, y=%1.2f" % (x, y))
             self.ax.figure.canvas.draw()
 
 
 def app():
     x = np.arange(0, 1, 0.01)
-    y = np.sin((((2 * 2) * np.pi) * x))
-    (fig, ax) = plt.subplots()
+    y = np.sin(2 * 2 * np.pi * x)
+    fig, ax = plt.subplots()
     ax.set_title("Simple cursor")
     ax.plot(x, y, "o")
     cursor = Cursor(ax)
     fig.canvas.mpl_connect("motion_notify_event", cursor.on_mouse_move)
     x = np.arange(0, 1, 0.01)
-    y = np.sin((((2 * 2) * np.pi) * x))
-    (fig, ax) = plt.subplots()
+    y = np.sin(2 * 2 * np.pi * x)
+    fig, ax = plt.subplots()
     ax.set_title("Blitted cursor")
     ax.plot(x, y, "o")
     blitted_cursor = BlittedCursor(ax)
     fig.canvas.mpl_connect("motion_notify_event", blitted_cursor.on_mouse_move)
     x = np.arange(0, 1, 0.01)
-    y = np.sin((((2 * 2) * np.pi) * x))
-    (fig, ax) = plt.subplots()
+    y = np.sin(2 * 2 * np.pi * x)
+    fig, ax = plt.subplots()
     ax.set_title("Snapping cursor")
     (line,) = ax.plot(x, y, "o")
     snap_cursor = SnappingCursor(ax, line)

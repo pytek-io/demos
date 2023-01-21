@@ -16,23 +16,22 @@ in a 2D grid. One blob will be positive, and the other negative.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/image_transparency_blend.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.colors import Normalize
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def normal_pdf(x, mean, var):
-    return np.exp(((-((x - mean) ** 2)) / (2 * var)))
+    return np.exp(-((x - mean) ** 2) / (2 * var))
 
 
 def app():
-    (xmin, xmax, ymin, ymax) = (0, 100, 0, 100)
+    xmin, xmax, ymin, ymax = 0, 100, 0, 100
     n_bins = 100
     xx = np.linspace(xmin, xmax, n_bins)
     yy = np.linspace(ymin, ymax, n_bins)
@@ -48,27 +47,27 @@ def app():
     vmax = np.abs(weights).max()
     imshow_kwargs = {
         "vmax": vmax,
-        "vmin": (-vmax),
+        "vmin": -vmax,
         "cmap": "RdYlBu",
         "extent": (xmin, xmax, ymin, ymax),
     }
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.imshow(greys)
     ax.imshow(weights, **imshow_kwargs)
     ax.set_axis_off()
     alphas = np.ones(weights.shape)
     alphas[:, 30:] = np.linspace(1, 0, 70)
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.imshow(greys)
     ax.imshow(weights, alpha=alphas, **imshow_kwargs)
     ax.set_axis_off()
     alphas = Normalize(0, 0.3, clip=True)(np.abs(weights))
     alphas = np.clip(alphas, 0.4, 1)
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.imshow(greys)
     ax.imshow(weights, alpha=alphas, **imshow_kwargs)
-    ax.contour(weights[::(-1)], levels=[(-0.1), 0.1], colors="k", linestyles="-")
+    ax.contour(weights[::-1], levels=[-0.1, 0.1], colors="k", linestyles="-")
     ax.set_axis_off()
-    ax.contour(weights[::(-1)], levels=[(-0.0001), 0.0001], colors="k", linestyles="-")
+    ax.contour(weights[::-1], levels=[-0.0001, 0.0001], colors="k", linestyles="-")
     ax.set_axis_off()
     return matplotlib_to_svg(fig)

@@ -7,28 +7,27 @@ This example demonstrates how to use `.collections.PatchCollection`.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/shapes_and_collections/patch_collection.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
-from matplotlib.patches import Circle, Wedge, Polygon
-from matplotlib.collections import PatchCollection
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.collections import PatchCollection
+from matplotlib.patches import Circle, Polygon, Wedge
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     np.random.seed(19680801)
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     resolution = 50
     N = 3
     x = np.random.rand(N)
     y = np.random.rand(N)
     radii = 0.1 * np.random.rand(N)
     patches = []
-    for (x1, y1, r) in zip(x, y, radii):
+    for x1, y1, r in zip(x, y, radii):
         circle = Circle((x1, y1), r)
         patches.append(circle)
     x = np.random.rand(N)
@@ -36,7 +35,7 @@ def app():
     radii = 0.1 * np.random.rand(N)
     theta1 = 360.0 * np.random.rand(N)
     theta2 = 360.0 * np.random.rand(N)
-    for (x1, y1, r, t1, t2) in zip(x, y, radii, theta1, theta2):
+    for x1, y1, r, t1, t2 in zip(x, y, radii, theta1, theta2):
         wedge = Wedge((x1, y1), r, t1, t2)
         patches.append(wedge)
     patches += [

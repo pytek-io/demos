@@ -16,16 +16,15 @@ take integer values.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/tick_labels_from_values.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
-(fig, ax) = plt.subplots()
+from demos.charts.utils import matplotlib_to_svg
+
+fig, ax = plt.subplots()
 xs = range(26)
 ys = range(26)
 labels = list("abcdefghijklmnopqrstuvwxyz")

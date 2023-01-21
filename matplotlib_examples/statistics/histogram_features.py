@@ -18,27 +18,24 @@ parameters.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/histogram_features.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     np.random.seed(19680801)
     mu = 100
     sigma = 15
-    x = mu + (sigma * np.random.randn(437))
+    x = mu + sigma * np.random.randn(437)
     num_bins = 50
-    (fig, ax) = plt.subplots()
-    (n, bins, patches) = ax.hist(x, num_bins, density=True)
-    y = (1 / (np.sqrt((2 * np.pi)) * sigma)) * np.exp(
-        ((-0.5) * (((1 / sigma) * (bins - mu)) ** 2))
-    )
+    fig, ax = plt.subplots()
+    n, bins, patches = ax.hist(x, num_bins, density=True)
+    y = 1 / (np.sqrt(2 * np.pi) * sigma) * np.exp(-0.5 * (1 / sigma * (bins - mu)) ** 2)
     ax.plot(bins, y, "--")
     ax.set_xlabel("Smarts")
     ax.set_ylabel("Probability density")

@@ -13,14 +13,13 @@ colormaps, including colorblind-friendliness.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/color/colormap_reference.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 cmaps = [
     (
@@ -135,16 +134,14 @@ gradient = np.vstack((gradient, gradient))
 
 def plot_color_gradients(cmap_category, cmap_list):
     nrows = len(cmap_list)
-    figh = (0.35 + 0.15) + ((nrows + ((nrows - 1) * 0.1)) * 0.22)
-    (fig, axs) = plt.subplots(nrows=nrows, figsize=(6.4, figh))
-    fig.subplots_adjust(
-        top=(1 - (0.35 / figh)), bottom=(0.15 / figh), left=0.2, right=0.99
-    )
-    axs[0].set_title((cmap_category + " colormaps"), fontsize=14)
-    for (ax, cmap_name) in zip(axs, cmap_list):
+    figh = 0.35 + 0.15 + (nrows + (nrows - 1) * 0.1) * 0.22
+    fig, axs = plt.subplots(nrows=nrows, figsize=(6.4, figh))
+    fig.subplots_adjust(top=1 - 0.35 / figh, bottom=0.15 / figh, left=0.2, right=0.99)
+    axs[0].set_title(cmap_category + " colormaps", fontsize=14)
+    for ax, cmap_name in zip(axs, cmap_list):
         ax.imshow(gradient, aspect="auto", cmap=cmap_name)
         ax.text(
-            (-0.01),
+            -0.01,
             0.5,
             cmap_name,
             va="center",
@@ -158,7 +155,7 @@ def plot_color_gradients(cmap_category, cmap_list):
 
 
 def app():
-    for (cmap_category, cmap_list) in cmaps:
+    for cmap_category, cmap_list in cmaps:
         fig = plot_color_gradients(cmap_category, cmap_list)
         break
     return matplotlib_to_svg(fig)

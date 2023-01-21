@@ -7,18 +7,17 @@ Demonstrate using `.pathpatch_2d_to_3d` to 'draw' shapes and text on a 3D plot.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/mplot3d/pathpatch3d.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import mpl_toolkits.mplot3d.art3d as art3d
+import numpy as np
 from matplotlib.patches import Circle, PathPatch
 from matplotlib.text import TextPath
 from matplotlib.transforms import Affine2D
-import mpl_toolkits.mplot3d.art3d as art3d
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def text3d(ax, xyz, s, zdir="z", size=None, angle=0, usetex=False, **kwargs):
@@ -31,13 +30,13 @@ def text3d(ax, xyz, s, zdir="z", size=None, angle=0, usetex=False, **kwargs):
 
     Note: zdir affects the interpretation of xyz.
     """
-    (x, y, z) = xyz
+    x, y, z = xyz
     if zdir == "y":
-        (xy1, z1) = ((x, z), y)
+        xy1, z1 = (x, z), y
     elif zdir == "x":
-        (xy1, z1) = ((y, z), x)
+        xy1, z1 = (y, z), x
     else:
-        (xy1, z1) = ((x, y), z)
+        xy1, z1 = (x, y), z
     text_path = TextPath((0, 0), s, size=size, usetex=usetex)
     trans = Affine2D().rotate(angle).translate(xy1[0], xy1[1])
     p1 = PathPatch(trans.transform_path(text_path), **kwargs)
@@ -52,7 +51,7 @@ def app():
     ax.add_patch(p)
     art3d.pathpatch_2d_to_3d(p, z=0, zdir="x")
     text3d(
-        ax, (4, (-2), 0), "X-axis", zdir="z", size=0.5, usetex=False, ec="none", fc="k"
+        ax, (4, -2, 0), "X-axis", zdir="z", size=0.5, usetex=False, ec="none", fc="k"
     )
     text3d(
         ax,
@@ -61,7 +60,7 @@ def app():
         zdir="z",
         size=0.5,
         usetex=False,
-        angle=(np.pi / 2),
+        angle=np.pi / 2,
         ec="none",
         fc="k",
     )
@@ -72,7 +71,7 @@ def app():
         zdir="y",
         size=0.5,
         usetex=False,
-        angle=(np.pi / 2),
+        angle=np.pi / 2,
         ec="none",
         fc="k",
     )

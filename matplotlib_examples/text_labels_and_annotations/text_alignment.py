@@ -40,19 +40,18 @@ Texts are aligned relative to their anchor point depending on the properties
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/text_labels_and_annotations/text_alignment.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    (fig, ax) = plt.subplots()
-    (left, width) = (0.25, 0.5)
-    (bottom, height) = (0.25, 0.5)
+    fig, ax = plt.subplots()
+    left, width = 0.25, 0.5
+    bottom, height = 0.25, 0.5
     right = left + width
     top = bottom + height
     p = plt.Rectangle((left, bottom), width, height, fill=False)
@@ -101,7 +100,7 @@ def app():
     )
     ax.text(
         left,
-        (0.5 * (bottom + top)),
+        0.5 * (bottom + top),
         "right center",
         horizontalalignment="right",
         verticalalignment="center",
@@ -110,7 +109,7 @@ def app():
     )
     ax.text(
         left,
-        (0.5 * (bottom + top)),
+        0.5 * (bottom + top),
         "left center",
         horizontalalignment="left",
         verticalalignment="center",
@@ -118,8 +117,8 @@ def app():
         transform=ax.transAxes,
     )
     ax.text(
-        (0.5 * (left + right)),
-        (0.5 * (bottom + top)),
+        0.5 * (left + right),
+        0.5 * (bottom + top),
         "middle",
         horizontalalignment="center",
         verticalalignment="center",
@@ -127,7 +126,7 @@ def app():
     )
     ax.text(
         right,
-        (0.5 * (bottom + top)),
+        0.5 * (bottom + top),
         "centered",
         horizontalalignment="center",
         verticalalignment="center",

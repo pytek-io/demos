@@ -10,15 +10,14 @@ tricontourf3d_demo shows the filled version of this example.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/mplot3d/tricontour3d.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.tri as tri
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -26,18 +25,16 @@ def app():
     n_radii = 8
     min_radius = 0.25
     radii = np.linspace(min_radius, 0.95, n_radii)
-    angles = np.linspace(0, (2 * np.pi), n_angles, endpoint=False)
-    angles = np.repeat(angles[(..., np.newaxis)], n_radii, axis=1)
+    angles = np.linspace(0, 2 * np.pi, n_angles, endpoint=False)
+    angles = np.repeat(angles[..., np.newaxis], n_radii, axis=1)
     angles[:, 1::2] += np.pi / n_angles
     x = (radii * np.cos(angles)).flatten()
     y = (radii * np.sin(angles)).flatten()
-    z = (np.cos(radii) * np.cos((3 * angles))).flatten()
+    z = (np.cos(radii) * np.cos(3 * angles)).flatten()
     triang = tri.Triangulation(x, y)
     triang.set_mask(
-        (
-            np.hypot(x[triang.triangles].mean(axis=1), y[triang.triangles].mean(axis=1))
-            < min_radius
-        )
+        np.hypot(x[triang.triangles].mean(axis=1), y[triang.triangles].mean(axis=1))
+        < min_radius
     )
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")

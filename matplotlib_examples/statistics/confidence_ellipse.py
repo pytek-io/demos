@@ -17,16 +17,15 @@ pearson correlation coefficients and ones) is particularly easy to handle.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/confidence_ellipse.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Ellipse
 import matplotlib.transforms as transforms
+import numpy as np
+from matplotlib.patches import Ellipse
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def confidence_ellipse(x, y, ax, n_std=3.0, facecolor="none", **kwargs):
@@ -54,19 +53,19 @@ def confidence_ellipse(x, y, ax, n_std=3.0, facecolor="none", **kwargs):
     if x.size != y.size:
         raise ValueError("x and y must be the same size")
     cov = np.cov(x, y)
-    pearson = cov[(0, 1)] / np.sqrt((cov[(0, 0)] * cov[(1, 1)]))
-    ell_radius_x = np.sqrt((1 + pearson))
-    ell_radius_y = np.sqrt((1 - pearson))
+    pearson = cov[0, 1] / np.sqrt(cov[0, 0] * cov[1, 1])
+    ell_radius_x = np.sqrt(1 + pearson)
+    ell_radius_y = np.sqrt(1 - pearson)
     ellipse = Ellipse(
         (0, 0),
-        width=(ell_radius_x * 2),
-        height=(ell_radius_y * 2),
+        width=ell_radius_x * 2,
+        height=ell_radius_y * 2,
         facecolor=facecolor,
         **kwargs
     )
-    scale_x = np.sqrt(cov[(0, 0)]) * n_std
+    scale_x = np.sqrt(cov[0, 0]) * n_std
     mean_x = np.mean(x)
-    scale_y = np.sqrt(cov[(1, 1)]) * n_std
+    scale_y = np.sqrt(cov[1, 1]) * n_std
     mean_y = np.mean(y)
     transf = (
         transforms.Affine2D()
@@ -74,7 +73,7 @@ def confidence_ellipse(x, y, ax, n_std=3.0, facecolor="none", **kwargs):
         .scale(scale_x, scale_y)
         .translate(mean_x, mean_y)
     )
-    ellipse.set_transform((transf + ax.transData))
+    ellipse.set_transform(transf + ax.transData)
     return ax.add_patch(ellipse)
 
 
@@ -83,34 +82,34 @@ def get_correlated_dataset(n, dependency, mu, scale):
     dependent = latent.dot(dependency)
     scaled = dependent * scale
     scaled_with_offset = scaled + mu
-    return (scaled_with_offset[:, 0], scaled_with_offset[:, 1])
+    return scaled_with_offset[:, (0)], scaled_with_offset[:, (1)]
 
 
 def app():
     np.random.seed(0)
     PARAMETERS = {
-        "Positive correlation": [[0.85, 0.35], [0.15, (-0.65)]],
-        "Negative correlation": [[0.9, (-0.4)], [0.1, (-0.6)]],
+        "Positive correlation": [[0.85, 0.35], [0.15, -0.65]],
+        "Negative correlation": [[0.9, -0.4], [0.1, -0.6]],
         "Weak correlation": [[1, 0], [0, 1]],
     }
-    mu = (2, 4)
-    scale = (3, 5)
-    (fig, axs) = plt.subplots(1, 3, figsize=(9, 3))
-    for (ax, (title, dependency)) in zip(axs, PARAMETERS.items()):
-        (x, y) = get_correlated_dataset(800, dependency, mu, scale)
+    mu = 2, 4
+    scale = 3, 5
+    fig, axs = plt.subplots(1, 3, figsize=(9, 3))
+    for ax, (title, dependency) in zip(axs, PARAMETERS.items()):
+        x, y = get_correlated_dataset(800, dependency, mu, scale)
         ax.scatter(x, y, s=0.5)
         ax.axvline(c="grey", lw=1)
         ax.axhline(c="grey", lw=1)
         confidence_ellipse(x, y, ax, edgecolor="red")
         ax.scatter(mu[0], mu[1], c="red", s=3)
         ax.set_title(title)
-    (fig, ax_nstd) = plt.subplots(figsize=(6, 6))
-    dependency_nstd = [[0.8, 0.75], [(-0.2), 0.35]]
-    mu = (0, 0)
-    scale = (8, 5)
+    fig, ax_nstd = plt.subplots(figsize=(6, 6))
+    dependency_nstd = [[0.8, 0.75], [-0.2, 0.35]]
+    mu = 0, 0
+    scale = 8, 5
     ax_nstd.axvline(c="grey", lw=1)
     ax_nstd.axhline(c="grey", lw=1)
-    (x, y) = get_correlated_dataset(500, dependency_nstd, mu, scale)
+    x, y = get_correlated_dataset(500, dependency_nstd, mu, scale)
     ax_nstd.scatter(x, y, s=0.5)
     confidence_ellipse(
         x, y, ax_nstd, n_std=1, label="$1\\sigma$", edgecolor="firebrick"
@@ -124,13 +123,13 @@ def app():
     ax_nstd.scatter(mu[0], mu[1], c="red", s=3)
     ax_nstd.set_title("Different standard deviations")
     ax_nstd.legend()
-    (fig, ax_kwargs) = plt.subplots(figsize=(6, 6))
-    dependency_kwargs = [[(-0.8), 0.5], [(-0.2), 0.5]]
-    mu = (2, (-3))
-    scale = (6, 5)
+    fig, ax_kwargs = plt.subplots(figsize=(6, 6))
+    dependency_kwargs = [[-0.8, 0.5], [-0.2, 0.5]]
+    mu = 2, -3
+    scale = 6, 5
     ax_kwargs.axvline(c="grey", lw=1)
     ax_kwargs.axhline(c="grey", lw=1)
-    (x, y) = get_correlated_dataset(500, dependency_kwargs, mu, scale)
+    x, y = get_correlated_dataset(500, dependency_kwargs, mu, scale)
     confidence_ellipse(
         x, y, ax_kwargs, alpha=0.5, facecolor="pink", edgecolor="purple", zorder=0
     )

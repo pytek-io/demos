@@ -39,16 +39,15 @@ are updated and second draw is triggered.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/pyplots/auto_subplots_adjust.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.transforms as mtransforms
 
-(fig, ax) = plt.subplots()
+from demos.charts.utils import matplotlib_to_svg
+
+fig, ax = plt.subplots()
 ax.plot(range(10))
 ax.set_yticks([2, 5, 7], labels=["really, really, really", "long", "labels"])
 
@@ -61,7 +60,7 @@ def on_draw(event):
         bboxes.append(bbox_fig)
     bbox = mtransforms.Bbox.union(bboxes)
     if fig.subplotpars.left < bbox.width:
-        fig.subplots_adjust(left=(1.1 * bbox.width))
+        fig.subplots_adjust(left=1.1 * bbox.width)
         fig.canvas.draw()
 
 

@@ -9,16 +9,16 @@ of 'jagged stained glass' effect.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/mplot3d/polys3d.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-from matplotlib.collections import PolyCollection
-import matplotlib.pyplot as plt
+matplotlib.use("Agg")
 import math
+
+import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.collections import PolyCollection
+
+from demos.charts.utils import matplotlib_to_svg
 
 np.random.seed(19680801)
 
@@ -28,7 +28,7 @@ def polygon_under_graph(x, y):
     Construct the vertex list which defines the polygon filling the space under
     the (x, y) line graph. This assumes x is in ascending order.
     """
-    return [(x[0], 0.0), *zip(x, y), (x[(-1)], 0.0)]
+    return [(x[0], 0.0), *zip(x, y), (x[-1], 0.0)]
 
 
 def app():
@@ -38,8 +38,7 @@ def app():
     lambdas = range(1, 9)
     gamma = np.vectorize(math.gamma)
     verts = [
-        polygon_under_graph(x, (((l**x) * np.exp((-l))) / gamma((x + 1))))
-        for l in lambdas
+        polygon_under_graph(x, l**x * np.exp(-l) / gamma(x + 1)) for l in lambdas
     ]
     facecolors = plt.colormaps["viridis_r"](np.linspace(0, 1, len(verts)))
     poly = PolyCollection(verts, facecolors=facecolors, alpha=0.7)

@@ -8,20 +8,20 @@ Demonstrates computation of gradient with
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/trigradient_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-from matplotlib.tri import Triangulation, UniformTriRefiner, CubicTriInterpolator
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.tri import (CubicTriInterpolator, Triangulation,
+                            UniformTriRefiner)
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def dipole_potential(x, y):
     """The electric dipole potential V, at position *x*, *y*."""
-    r_sq = (x**2) + (y**2)
+    r_sq = x**2 + y**2
     theta = np.arctan2(y, x)
     z = np.cos(theta) / r_sq
     return (np.max(z) - z) / (np.max(z) - np.min(z))
@@ -32,25 +32,23 @@ def app():
     n_radii = 10
     min_radius = 0.2
     radii = np.linspace(min_radius, 0.95, n_radii)
-    angles = np.linspace(0, (2 * np.pi), n_angles, endpoint=False)
-    angles = np.repeat(angles[(..., np.newaxis)], n_radii, axis=1)
+    angles = np.linspace(0, 2 * np.pi, n_angles, endpoint=False)
+    angles = np.repeat(angles[..., np.newaxis], n_radii, axis=1)
     angles[:, 1::2] += np.pi / n_angles
     x = (radii * np.cos(angles)).flatten()
     y = (radii * np.sin(angles)).flatten()
     V = dipole_potential(x, y)
     triang = Triangulation(x, y)
     triang.set_mask(
-        (
-            np.hypot(x[triang.triangles].mean(axis=1), y[triang.triangles].mean(axis=1))
-            < min_radius
-        )
+        np.hypot(x[triang.triangles].mean(axis=1), y[triang.triangles].mean(axis=1))
+        < min_radius
     )
     refiner = UniformTriRefiner(triang)
-    (tri_refi, z_test_refi) = refiner.refine_field(V, subdiv=3)
-    tci = CubicTriInterpolator(triang, (-V))
-    (Ex, Ey) = tci.gradient(triang.x, triang.y)
-    E_norm = np.sqrt(((Ex**2) + (Ey**2)))
-    (fig, ax) = plt.subplots()
+    tri_refi, z_test_refi = refiner.refine_field(V, subdiv=3)
+    tci = CubicTriInterpolator(triang, -V)
+    Ex, Ey = tci.gradient(triang.x, triang.y)
+    E_norm = np.sqrt(Ex**2 + Ey**2)
+    fig, ax = plt.subplots()
     ax.set_aspect("equal")
     ax.use_sticky_edges = False
     ax.margins(0.07)
@@ -66,8 +64,8 @@ def app():
     ax.quiver(
         triang.x,
         triang.y,
-        (Ex / E_norm),
-        (Ey / E_norm),
+        Ex / E_norm,
+        Ey / E_norm,
         units="xy",
         scale=10.0,
         zorder=3,

@@ -15,20 +15,19 @@ can be determined automatically by setting the parameter
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/text_labels_and_annotations/text_rotation_relative_to_line.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from demos.charts.utils import matplotlib_to_svg
+
 
 def app():
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     h = ax.plot(range(0, 10), range(0, 10))
-    ax.set_xlim([(-10), 20])
+    ax.set_xlim([-10, 20])
     l1 = np.array((1, 1))
     l2 = np.array((5, 5))
     angle = 45

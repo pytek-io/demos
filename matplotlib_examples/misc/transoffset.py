@@ -19,15 +19,14 @@ offset.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/transoffset.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.transforms as mtransforms
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -38,17 +37,17 @@ def app():
     trans_offset = mtransforms.offset_copy(
         ax.transData, fig=fig, x=0.05, y=0.1, units="inches"
     )
-    for (x, y) in zip(xs, ys):
+    for x, y in zip(xs, ys):
         plt.plot(x, y, "ro")
-        plt.text(x, y, ("%d, %d" % (int(x), int(y))), transform=trans_offset)
+        plt.text(x, y, "%d, %d" % (int(x), int(y)), transform=trans_offset)
     ax = plt.subplot(2, 1, 2, projection="polar")
     trans_offset = mtransforms.offset_copy(ax.transData, fig=fig, y=6, units="dots")
-    for (x, y) in zip(xs, ys):
+    for x, y in zip(xs, ys):
         plt.polar(x, y, "ro")
         plt.text(
             x,
             y,
-            ("%d, %d" % (int(x), int(y))),
+            "%d, %d" % (int(x), int(y)),
             transform=trans_offset,
             horizontalalignment="center",
             verticalalignment="bottom",

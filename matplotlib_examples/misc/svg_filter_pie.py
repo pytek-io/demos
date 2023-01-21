@@ -11,32 +11,32 @@ support it.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/svg_filter_pie.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import io
 import xml.etree.ElementTree as ET
+
 import matplotlib.pyplot as plt
 from matplotlib.patches import Shadow
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     fig = plt.figure(figsize=(6, 6))
     ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-    labels = ("Frogs", "Hogs", "Dogs", "Logs")
+    labels = "Frogs", "Hogs", "Dogs", "Logs"
     fracs = [15, 30, 45, 10]
-    explode = (0, 0.05, 0, 0)
+    explode = 0, 0.05, 0, 0
     pies = ax.pie(fracs, explode=explode, labels=labels, autopct="%1.1f%%")
     for w in pies[0]:
         w.set_gid(w.get_label())
         w.set_edgecolor("none")
     for w in pies[0]:
-        s = Shadow(w, (-0.01), (-0.01))
-        s.set_gid((w.get_gid() + "_shadow"))
-        s.set_zorder((w.get_zorder() - 0.1))
+        s = Shadow(w, -0.01, -0.01)
+        s.set_gid(w.get_gid() + "_shadow")
+        s.set_zorder(w.get_zorder() - 0.1)
         ax.add_patch(s)
     f = io.BytesIO()
     plt.savefig(f, format="svg")
@@ -62,12 +62,12 @@ def app():
     </filter>
   </defs>
 """
-    (tree, xmlid) = ET.XMLID(f.getvalue())
+    tree, xmlid = ET.XMLID(f.getvalue())
     tree.insert(0, ET.XML(filter_def))
-    for (i, pie_name) in enumerate(labels):
+    for i, pie_name in enumerate(labels):
         pie = xmlid[pie_name]
         pie.set("filter", "url(#MyFilter)")
-        shadow = xmlid[(pie_name + "_shadow")]
+        shadow = xmlid[pie_name + "_shadow"]
         shadow.set("filter", "url(#dropshadow)")
     fn = "svg_filter_pie.svg"
     print(f"Saving '{fn}'")

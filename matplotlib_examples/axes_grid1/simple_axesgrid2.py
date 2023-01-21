@@ -8,15 +8,14 @@ Align multiple images of different sizes using
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/simple_axesgrid2.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-from matplotlib import cbook
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import cbook
 from mpl_toolkits.axes_grid1 import ImageGrid
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -26,7 +25,7 @@ def app():
     im1 = Z
     im2 = Z[:, :10]
     im3 = Z[:, 10:]
-    (vmin, vmax) = (Z.min(), Z.max())
-    for (ax, im) in zip(grid, [im1, im2, im3]):
+    vmin, vmax = Z.min(), Z.max()
+    for ax, im in zip(grid, [im1, im2, im3]):
         ax.imshow(im, origin="lower", vmin=vmin, vmax=vmax)
     return matplotlib_to_svg(fig)

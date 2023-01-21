@@ -5,15 +5,14 @@ Make room for ylabel using axes_grid
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/make_room_for_ylabel_using_axesgrid.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from mpl_toolkits.axes_grid1.axes_divider import make_axes_area_auto_adjustable
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():

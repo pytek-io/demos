@@ -17,31 +17,30 @@ will extend from the data towards decreasing y-values.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/errorbar_limits.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     x = np.array([0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0])
-    y = np.exp((-x))
+    y = np.exp(-x)
     xerr = 0.1
     yerr = 0.2
     lolims = np.array([0, 0, 1, 0, 1, 0, 0, 0, 1, 0], dtype=bool)
     uplims = np.array([0, 1, 0, 0, 0, 1, 0, 0, 0, 1], dtype=bool)
     ls = "dotted"
-    (fig, ax) = plt.subplots(figsize=(7, 4))
+    fig, ax = plt.subplots(figsize=(7, 4))
     ax.errorbar(x, y, xerr=xerr, yerr=yerr, linestyle=ls)
-    ax.errorbar(x, (y + 0.5), xerr=xerr, yerr=yerr, uplims=uplims, linestyle=ls)
-    ax.errorbar(x, (y + 1.0), xerr=xerr, yerr=yerr, lolims=lolims, linestyle=ls)
+    ax.errorbar(x, y + 0.5, xerr=xerr, yerr=yerr, uplims=uplims, linestyle=ls)
+    ax.errorbar(x, y + 1.0, xerr=xerr, yerr=yerr, lolims=lolims, linestyle=ls)
     ax.errorbar(
         x,
-        (y + 1.5),
+        y + 1.5,
         xerr=xerr,
         yerr=yerr,
         lolims=lolims,
@@ -61,7 +60,7 @@ def app():
     uplims[[3]] = True
     ax.errorbar(
         x,
-        (y + 2.1),
+        y + 2.1,
         xerr=xerr,
         yerr=yerr,
         xlolims=xlolims,

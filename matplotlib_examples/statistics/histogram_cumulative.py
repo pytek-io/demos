@@ -34,14 +34,13 @@ http://docs.astropy.org/en/stable/visualization/histogram.html
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/histogram_cumulative.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -50,22 +49,20 @@ def app():
     sigma = 25
     n_bins = 50
     x = np.random.normal(mu, sigma, size=100)
-    (fig, ax) = plt.subplots(figsize=(8, 4))
-    (n, bins, patches) = ax.hist(
+    fig, ax = plt.subplots(figsize=(8, 4))
+    n, bins, patches = ax.hist(
         x, n_bins, density=True, histtype="step", cumulative=True, label="Empirical"
     )
-    y = (1 / (np.sqrt((2 * np.pi)) * sigma)) * np.exp(
-        ((-0.5) * (((1 / sigma) * (bins - mu)) ** 2))
-    )
+    y = 1 / (np.sqrt(2 * np.pi) * sigma) * np.exp(-0.5 * (1 / sigma * (bins - mu)) ** 2)
     y = y.cumsum()
-    y /= y[(-1)]
+    y /= y[-1]
     ax.plot(bins, y, "k--", linewidth=1.5, label="Theoretical")
     ax.hist(
         x,
         bins=bins,
         density=True,
         histtype="step",
-        cumulative=(-1),
+        cumulative=-1,
         label="Reversed emp.",
     )
     ax.grid(True)

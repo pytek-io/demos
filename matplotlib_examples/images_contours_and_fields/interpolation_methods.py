@@ -19,14 +19,13 @@ discussion on the default ``interpolation='antialiased'`` option.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/interpolation_methods.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -52,10 +51,10 @@ def app():
     ]
     np.random.seed(19680801)
     grid = np.random.rand(4, 4)
-    (fig, axs) = plt.subplots(
+    fig, axs = plt.subplots(
         nrows=3, ncols=6, figsize=(9, 6), subplot_kw={"xticks": [], "yticks": []}
     )
-    for (ax, interp_method) in zip(axs.flat, methods):
+    for ax, interp_method in zip(axs.flat, methods):
         ax.imshow(grid, interpolation=interp_method, cmap="viridis")
         ax.set_title(str(interp_method))
     plt.tight_layout()

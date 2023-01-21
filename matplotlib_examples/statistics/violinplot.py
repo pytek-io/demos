@@ -17,14 +17,13 @@ have a great section: https://scikit-learn.org/stable/modules/density.html
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/violinplot.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -32,8 +31,8 @@ def app():
     fs = 10
     pos = [1, 2, 4, 5, 7, 8]
     data = [np.random.normal(0, std, size=100) for std in pos]
-    (fig, axs) = plt.subplots(nrows=2, ncols=5, figsize=(10, 6))
-    axs[(0, 0)].violinplot(
+    fig, axs = plt.subplots(nrows=2, ncols=5, figsize=(10, 6))
+    axs[0, 0].violinplot(
         data,
         pos,
         points=20,
@@ -42,8 +41,8 @@ def app():
         showextrema=True,
         showmedians=True,
     )
-    axs[(0, 0)].set_title("Custom violinplot 1", fontsize=fs)
-    axs[(0, 1)].violinplot(
+    axs[0, 0].set_title("Custom violinplot 1", fontsize=fs)
+    axs[0, 1].violinplot(
         data,
         pos,
         points=40,
@@ -53,8 +52,8 @@ def app():
         showmedians=True,
         bw_method="silverman",
     )
-    axs[(0, 1)].set_title("Custom violinplot 2", fontsize=fs)
-    axs[(0, 2)].violinplot(
+    axs[0, 1].set_title("Custom violinplot 2", fontsize=fs)
+    axs[0, 2].violinplot(
         data,
         pos,
         points=60,
@@ -64,8 +63,8 @@ def app():
         showmedians=True,
         bw_method=0.5,
     )
-    axs[(0, 2)].set_title("Custom violinplot 3", fontsize=fs)
-    axs[(0, 3)].violinplot(
+    axs[0, 2].set_title("Custom violinplot 3", fontsize=fs)
+    axs[0, 3].violinplot(
         data,
         pos,
         points=60,
@@ -76,10 +75,10 @@ def app():
         bw_method=0.5,
         quantiles=[[0.1], [], [], [0.175, 0.954], [0.75], [0.25]],
     )
-    axs[(0, 3)].set_title("Custom violinplot 4", fontsize=fs)
-    axs[(0, 4)].violinplot(
-        data[(-1):],
-        pos[(-1):],
+    axs[0, 3].set_title("Custom violinplot 4", fontsize=fs)
+    axs[0, 4].violinplot(
+        data[-1:],
+        pos[-1:],
         points=60,
         widths=0.7,
         showmeans=True,
@@ -88,8 +87,8 @@ def app():
         quantiles=[0.05, 0.1, 0.8, 0.9],
         bw_method=0.5,
     )
-    axs[(0, 4)].set_title("Custom violinplot 5", fontsize=fs)
-    axs[(1, 0)].violinplot(
+    axs[0, 4].set_title("Custom violinplot 5", fontsize=fs)
+    axs[1, 0].violinplot(
         data,
         pos,
         points=80,
@@ -99,8 +98,8 @@ def app():
         showextrema=True,
         showmedians=True,
     )
-    axs[(1, 0)].set_title("Custom violinplot 6", fontsize=fs)
-    axs[(1, 1)].violinplot(
+    axs[1, 0].set_title("Custom violinplot 6", fontsize=fs)
+    axs[1, 1].violinplot(
         data,
         pos,
         points=100,
@@ -111,8 +110,8 @@ def app():
         showmedians=True,
         bw_method="silverman",
     )
-    axs[(1, 1)].set_title("Custom violinplot 7", fontsize=fs)
-    axs[(1, 2)].violinplot(
+    axs[1, 1].set_title("Custom violinplot 7", fontsize=fs)
+    axs[1, 2].violinplot(
         data,
         pos,
         points=200,
@@ -123,8 +122,8 @@ def app():
         showmedians=True,
         bw_method=0.5,
     )
-    axs[(1, 2)].set_title("Custom violinplot 8", fontsize=fs)
-    axs[(1, 3)].violinplot(
+    axs[1, 2].set_title("Custom violinplot 8", fontsize=fs)
+    axs[1, 3].violinplot(
         data,
         pos,
         points=200,
@@ -136,10 +135,10 @@ def app():
         quantiles=[[0.1], [], [], [0.175, 0.954], [0.75], [0.25]],
         bw_method=0.5,
     )
-    axs[(1, 3)].set_title("Custom violinplot 9", fontsize=fs)
-    axs[(1, 4)].violinplot(
-        data[(-1):],
-        pos[(-1):],
+    axs[1, 3].set_title("Custom violinplot 9", fontsize=fs)
+    axs[1, 4].violinplot(
+        data[-1:],
+        pos[-1:],
         points=200,
         vert=False,
         widths=1.1,
@@ -149,7 +148,7 @@ def app():
         quantiles=[0.05, 0.1, 0.8, 0.9],
         bw_method=0.5,
     )
-    axs[(1, 4)].set_title("Custom violinplot 10", fontsize=fs)
+    axs[1, 4].set_title("Custom violinplot 10", fontsize=fs)
     for ax in axs.flat:
         ax.set_yticklabels([])
     fig.suptitle("Violin Plotting Examples")

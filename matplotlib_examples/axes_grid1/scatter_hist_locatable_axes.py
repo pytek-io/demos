@@ -16,22 +16,21 @@ If one wants to set axes sizes and pads relative to the main Figure, see the
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/scatter_hist_locatable_axes.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     np.random.seed(19680801)
     x = np.random.randn(1000)
     y = np.random.randn(1000)
-    (fig, ax) = plt.subplots(figsize=(5.5, 5.5))
+    fig, ax = plt.subplots(figsize=(5.5, 5.5))
     ax.scatter(x, y)
     ax.set_aspect(1.0)
     divider = make_axes_locatable(ax)
@@ -41,8 +40,8 @@ def app():
     ax_histy.yaxis.set_tick_params(labelleft=False)
     binwidth = 0.25
     xymax = max(np.max(np.abs(x)), np.max(np.abs(y)))
-    lim = (int((xymax / binwidth)) + 1) * binwidth
-    bins = np.arange((-lim), (lim + binwidth), binwidth)
+    lim = (int(xymax / binwidth) + 1) * binwidth
+    bins = np.arange(-lim, lim + binwidth, binwidth)
     ax_histx.hist(x, bins=bins)
     ax_histy.hist(y, bins=bins, orientation="horizontal")
     ax_histx.set_yticks([0, 50, 100])

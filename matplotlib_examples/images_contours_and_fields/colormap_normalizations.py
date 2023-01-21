@@ -9,15 +9,14 @@ Demonstration of using norm to map colormaps onto data in non-linear ways.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/colormap_normalizations.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
-import matplotlib.pyplot as plt
+matplotlib.use("Agg")
 import matplotlib.colors as colors
+import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 class MidpointNormalize(colors.Normalize):
@@ -26,17 +25,17 @@ class MidpointNormalize(colors.Normalize):
         super().__init__(vmin, vmax, clip)
 
     def __call__(self, value, clip=None):
-        (x, y) = ([self.vmin, self.midpoint, self.vmax], [0, 0.5, 1])
+        x, y = [self.vmin, self.midpoint, self.vmax], [0, 0.5, 1]
         return np.ma.masked_array(np.interp(value, x, y))
 
 
 def app():
     N = 100
-    (X, Y) = np.mgrid[(-3) : 3 : complex(0, N), (-2) : 2 : complex(0, N)]
-    Z1 = np.exp(((-(X**2)) - (Y**2)))
-    Z2 = np.exp(((-((X * 10) ** 2)) - ((Y * 10) ** 2)))
-    Z = Z1 + (50 * Z2)
-    (fig, ax) = plt.subplots(2, 1)
+    X, Y = np.mgrid[-3 : 3 : complex(0, N), -2 : 2 : complex(0, N)]
+    Z1 = np.exp(-(X**2) - Y**2)
+    Z2 = np.exp(-((X * 10) ** 2) - (Y * 10) ** 2)
+    Z = Z1 + 50 * Z2
+    fig, ax = plt.subplots(2, 1)
     pcm = ax[0].pcolor(
         X,
         Y,
@@ -48,63 +47,59 @@ def app():
     fig.colorbar(pcm, ax=ax[0], extend="max")
     pcm = ax[1].pcolor(X, Y, Z, cmap="PuBu_r", shading="nearest")
     fig.colorbar(pcm, ax=ax[1], extend="max")
-    (X, Y) = np.mgrid[0 : 3 : complex(0, N), 0 : 2 : complex(0, N)]
-    Z1 = (1 + np.sin((Y * 10.0))) * (X**2)
-    (fig, ax) = plt.subplots(2, 1)
+    X, Y = np.mgrid[0 : 3 : complex(0, N), 0 : 2 : complex(0, N)]
+    Z1 = (1 + np.sin(Y * 10.0)) * X**2
+    fig, ax = plt.subplots(2, 1)
     pcm = ax[0].pcolormesh(
         X,
         Y,
         Z1,
-        norm=colors.PowerNorm(gamma=(1.0 / 2.0)),
+        norm=colors.PowerNorm(gamma=1.0 / 2.0),
         cmap="PuBu_r",
         shading="nearest",
     )
     fig.colorbar(pcm, ax=ax[0], extend="max")
     pcm = ax[1].pcolormesh(X, Y, Z1, cmap="PuBu_r", shading="nearest")
     fig.colorbar(pcm, ax=ax[1], extend="max")
-    (X, Y) = np.mgrid[(-3) : 3 : complex(0, N), (-2) : 2 : complex(0, N)]
-    Z1 = 5 * np.exp(((-(X**2)) - (Y**2)))
-    Z2 = np.exp(((-((X - 1) ** 2)) - ((Y - 1) ** 2)))
+    X, Y = np.mgrid[-3 : 3 : complex(0, N), -2 : 2 : complex(0, N)]
+    Z1 = 5 * np.exp(-(X**2) - Y**2)
+    Z2 = np.exp(-((X - 1) ** 2) - (Y - 1) ** 2)
     Z = (Z1 - Z2) * 2
-    (fig, ax) = plt.subplots(2, 1)
+    fig, ax = plt.subplots(2, 1)
     pcm = ax[0].pcolormesh(
         X,
         Y,
         Z1,
         norm=colors.SymLogNorm(
-            linthresh=0.03, linscale=0.03, vmin=(-1.0), vmax=1.0, base=10
+            linthresh=0.03, linscale=0.03, vmin=-1.0, vmax=1.0, base=10
         ),
         cmap="RdBu_r",
         shading="nearest",
     )
     fig.colorbar(pcm, ax=ax[0], extend="both")
-    pcm = ax[1].pcolormesh(
-        X, Y, Z1, cmap="RdBu_r", vmin=(-np.max(Z1)), shading="nearest"
-    )
+    pcm = ax[1].pcolormesh(X, Y, Z1, cmap="RdBu_r", vmin=-np.max(Z1), shading="nearest")
     fig.colorbar(pcm, ax=ax[1], extend="both")
-    (X, Y) = np.mgrid[(-3) : 3 : complex(0, N), (-2) : 2 : complex(0, N)]
-    Z1 = np.exp(((-(X**2)) - (Y**2)))
-    Z2 = np.exp(((-((X - 1) ** 2)) - ((Y - 1) ** 2)))
+    X, Y = np.mgrid[-3 : 3 : complex(0, N), -2 : 2 : complex(0, N)]
+    Z1 = np.exp(-(X**2) - Y**2)
+    Z2 = np.exp(-((X - 1) ** 2) - (Y - 1) ** 2)
     Z = (Z1 - Z2) * 2
-    (fig, ax) = plt.subplots(2, 1)
+    fig, ax = plt.subplots(2, 1)
     pcm = ax[0].pcolormesh(
         X, Y, Z, norm=MidpointNormalize(midpoint=0.0), cmap="RdBu_r", shading="nearest"
     )
     fig.colorbar(pcm, ax=ax[0], extend="both")
-    pcm = ax[1].pcolormesh(X, Y, Z, cmap="RdBu_r", vmin=(-np.max(Z)), shading="nearest")
+    pcm = ax[1].pcolormesh(X, Y, Z, cmap="RdBu_r", vmin=-np.max(Z), shading="nearest")
     fig.colorbar(pcm, ax=ax[1], extend="both")
-    (fig, ax) = plt.subplots(3, 1, figsize=(8, 8))
+    fig, ax = plt.subplots(3, 1, figsize=(8, 8))
     ax = ax.flatten()
-    bounds = np.linspace((-1), 1, 10)
+    bounds = np.linspace(-1, 1, 10)
     norm = colors.BoundaryNorm(boundaries=bounds, ncolors=256)
     pcm = ax[0].pcolormesh(X, Y, Z, norm=norm, cmap="RdBu_r", shading="nearest")
     fig.colorbar(pcm, ax=ax[0], extend="both", orientation="vertical")
-    bounds = np.array([(-0.25), (-0.125), 0, 0.5, 1])
+    bounds = np.array([-0.25, -0.125, 0, 0.5, 1])
     norm = colors.BoundaryNorm(boundaries=bounds, ncolors=256)
     pcm = ax[1].pcolormesh(X, Y, Z, norm=norm, cmap="RdBu_r", shading="nearest")
     fig.colorbar(pcm, ax=ax[1], extend="both", orientation="vertical")
-    pcm = ax[2].pcolormesh(
-        X, Y, Z, cmap="RdBu_r", vmin=(-np.max(Z1)), shading="nearest"
-    )
+    pcm = ax[2].pcolormesh(X, Y, Z, cmap="RdBu_r", vmin=-np.max(Z1), shading="nearest")
     fig.colorbar(pcm, ax=ax[2], extend="both", orientation="vertical")
     return matplotlib_to_svg(fig)

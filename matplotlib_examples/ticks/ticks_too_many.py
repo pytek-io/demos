@@ -15,18 +15,17 @@ a numeric type as in the following examples.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/ticks_too_many.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from demos.charts.utils import matplotlib_to_svg
+
 
 def app():
-    (fig, ax) = plt.subplots(1, 2, constrained_layout=True, figsize=(6, 2.5))
+    fig, ax = plt.subplots(1, 2, constrained_layout=True, figsize=(6, 2.5))
     x = ["1", "5", "2", "3"]
     y = [1, 4, 2, 3]
     ax[0].plot(x, y, "d")
@@ -37,7 +36,7 @@ def app():
     ax[1].plot(x, y, "d")
     ax[1].set_xlabel("Floats")
     ax[1].set_title("Ticks as expected")
-    (fig, ax) = plt.subplots(1, 2, figsize=(6, 2.5))
+    fig, ax = plt.subplots(1, 2, figsize=(6, 2.5))
     x = [f"{xx}" for xx in np.arange(100)]
     y = np.arange(100)
     ax[0].plot(x, y)
@@ -47,7 +46,7 @@ def app():
     ax[1].plot(np.asarray(x, float), y)
     ax[1].set_title("x converted to numbers")
     ax[1].set_xlabel("Floats")
-    (fig, ax) = plt.subplots(1, 2, constrained_layout=True, figsize=(6, 2.75))
+    fig, ax = plt.subplots(1, 2, constrained_layout=True, figsize=(6, 2.75))
     x = ["2021-10-01", "2021-11-02", "2021-12-03", "2021-09-01"]
     y = [0, 2, 3, 1]
     ax[0].plot(x, y, "d")

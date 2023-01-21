@@ -13,17 +13,16 @@ See the last example in :doc:`/gallery/scales/scales`.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/scales/custom_scale.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import numpy as np
-from numpy import ma
 from matplotlib import scale as mscale
 from matplotlib import transforms as mtransforms
 from matplotlib.ticker import FixedLocator, FuncFormatter
+from numpy import ma
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 class MercatorLatitudeScale(mscale.ScaleBase):
@@ -54,7 +53,7 @@ class MercatorLatitudeScale(mscale.ScaleBase):
         thresh: The degree above which to crop the data.
         """
         super().__init__(axis)
-        if thresh >= (np.pi / 2):
+        if thresh >= np.pi / 2:
             raise ValueError("thresh must be less than pi/2")
         self.thresh = thresh
 
@@ -80,9 +79,9 @@ class MercatorLatitudeScale(mscale.ScaleBase):
         degrees and a custom formatter to convert the radians to degrees and
         put a degree symbol after the value.
         """
-        fmt = FuncFormatter((lambda x, pos=None: f"{np.degrees(x):.0f}°"))
+        fmt = FuncFormatter(lambda x, pos=None: f"{np.degrees(x):.0f}°")
         axis.set(
-            major_locator=FixedLocator(np.radians(range((-90), 90, 10))),
+            major_locator=FixedLocator(np.radians(range(-90, 90, 10))),
             major_formatter=fmt,
             minor_formatter=fmt,
         )
@@ -97,7 +96,7 @@ class MercatorLatitudeScale(mscale.ScaleBase):
         manually, determined automatically or changed through panning
         and zooming.
         """
-        return (max(vmin, (-self.thresh)), min(vmax, self.thresh))
+        return max(vmin, -self.thresh), min(vmax, self.thresh)
 
     class MercatorLatitudeTransform(mtransforms.Transform):
         input_dims = output_dims = 1
@@ -117,11 +116,11 @@ class MercatorLatitudeScale(mscale.ScaleBase):
             these values need to remain synchronized with values in the other
             dimension.
             """
-            masked = ma.masked_where(((a < (-self.thresh)) | (a > self.thresh)), a)
+            masked = ma.masked_where((a < -self.thresh) | (a > self.thresh), a)
             if masked.mask.any():
-                return ma.log(np.abs((ma.tan(masked) + (1 / ma.cos(masked)))))
+                return ma.log(np.abs(ma.tan(masked) + 1 / ma.cos(masked)))
             else:
-                return np.log(np.abs((np.tan(a) + (1 / np.cos(a)))))
+                return np.log(np.abs(np.tan(a) + 1 / np.cos(a)))
 
         def inverted(self):
             """
@@ -148,7 +147,7 @@ def app():
     mscale.register_scale(MercatorLatitudeScale)
     import matplotlib.pyplot as plt
 
-    t = np.arange((-180.0), 180.0, 0.1)
+    t = np.arange(-180.0, 180.0, 0.1)
     s = np.radians(t) / 2.0
     fig = plt.figure()
     plt.plot(t, s, "-", lw=2)

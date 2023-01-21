@@ -13,14 +13,13 @@ graphically and not only relying on basic statistic properties.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/specialty_plots/anscombe.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -31,7 +30,7 @@ def app():
     x4 = [8, 8, 8, 8, 8, 8, 8, 19, 8, 8, 8]
     y4 = [6.58, 5.76, 7.71, 8.84, 8.47, 7.04, 5.25, 12.5, 5.56, 7.91, 6.89]
     datasets = {"I": (x, y1), "II": (x, y2), "III": (x, y3), "IV": (x4, y4)}
-    (fig, axs) = plt.subplots(
+    fig, axs = plt.subplots(
         2,
         2,
         sharex=True,
@@ -39,18 +38,23 @@ def app():
         figsize=(6, 6),
         gridspec_kw={"wspace": 0.08, "hspace": 0.08},
     )
-    axs[(0, 0)].set(xlim=(0, 20), ylim=(2, 14))
-    axs[(0, 0)].set(xticks=(0, 10, 20), yticks=(4, 8, 12))
-    for (ax, (label, (x, y))) in zip(axs.flat, datasets.items()):
+    axs[0, 0].set(xlim=(0, 20), ylim=(2, 14))
+    axs[0, 0].set(xticks=(0, 10, 20), yticks=(4, 8, 12))
+    for ax, (label, (x, y)) in zip(axs.flat, datasets.items()):
         ax.text(0.1, 0.9, label, fontsize=20, transform=ax.transAxes, va="top")
         ax.tick_params(direction="in", top=True, right=True)
         ax.plot(x, y, "o")
-        (p1, p0) = np.polyfit(x, y, deg=1)
+        p1, p0 = np.polyfit(x, y, deg=1)
         ax.axline(xy1=(0, p0), slope=p1, color="r", lw=2)
-        stats = f"""$\mu$ = {np.mean(y):.2f}
-$\sigma$ = {np.std(y):.2f}
+        stats = f"""$\\mu$ = {np.mean(y):.2f}
+$\\sigma$ = {np.std(y):.2f}
 $r$ = {np.corrcoef(x, y)[0][1]:.2f}"""
-        bbox = dict(boxstyle="round", fc="blanchedalmond", ec="orange", alpha=0.5)
+        bbox = {
+            "boxstyle": "round",
+            "fc": "blanchedalmond",
+            "ec": "orange",
+            "alpha": 0.5,
+        }
         ax.text(
             0.95,
             0.07,

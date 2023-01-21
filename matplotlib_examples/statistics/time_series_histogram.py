@@ -25,48 +25,48 @@ histogram, with optional interpolation between data points, by using
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/time_series_histogram.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-from copy import copy
+matplotlib.use("Agg")
 import time
+from copy import copy
+
+import matplotlib.pyplot as plt
 import numpy as np
 import numpy.matlib
-import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    (fig, axes) = plt.subplots(nrows=3, figsize=(6, 8), constrained_layout=True)
+    fig, axes = plt.subplots(nrows=3, figsize=(6, 8), constrained_layout=True)
     num_series = 1000
     num_points = 100
     SNR = 0.1
-    x = np.linspace(0, (4 * np.pi), num_points)
-    Y = np.cumsum(np.random.randn(num_series, num_points), axis=(-1))
-    num_signal = int(round((SNR * num_series)))
-    phi = (np.pi / 8) * np.random.randn(num_signal, 1)
-    Y[(-num_signal):] = np.sqrt(np.arange(num_points))[None, :] * (
-        np.sin((x[None, :] - phi)) + (0.05 * np.random.randn(num_signal, num_points))
+    x = np.linspace(0, 4 * np.pi, num_points)
+    Y = np.cumsum(np.random.randn(num_series, num_points), axis=-1)
+    num_signal = int(round(SNR * num_series))
+    phi = np.pi / 8 * np.random.randn(num_signal, 1)
+    Y[-num_signal:] = np.sqrt(np.arange(num_points))[(None), :] * (
+        np.sin(x[(None), :] - phi) + 0.05 * np.random.randn(num_signal, num_points)
     )
     tic = time.time()
     axes[0].plot(x, Y.T, color="C0", alpha=0.1)
     toc = time.time()
     axes[0].set_title("Line plot with alpha")
-    print(f"{(toc - tic):.3f} sec. elapsed")
+    print(f"{toc - tic:.3f} sec. elapsed")
     tic = time.time()
     num_fine = 800
     x_fine = np.linspace(x.min(), x.max(), num_fine)
     y_fine = np.empty((num_series, num_fine), dtype=float)
     for i in range(num_series):
-        y_fine[i, :] = np.interp(x_fine, x, Y[i, :])
+        y_fine[(i), :] = np.interp(x_fine, x, Y[(i), :])
     y_fine = y_fine.flatten()
     x_fine = np.matlib.repmat(x_fine, num_series, 1).flatten()
     cmap = copy(plt.cm.plasma)
     cmap.set_bad(cmap(0))
-    (h, xedges, yedges) = np.histogram2d(x_fine, y_fine, bins=[400, 100])
+    h, xedges, yedges = np.histogram2d(x_fine, y_fine, bins=[400, 100])
     pcm = axes[1].pcolormesh(
         xedges, yedges, h.T, cmap=cmap, norm=LogNorm(vmax=150.0), rasterized=True
     )
@@ -78,5 +78,5 @@ def app():
     fig.colorbar(pcm, ax=axes[2], label="# points", pad=0)
     axes[2].set_title("2d histogram and linear color scale")
     toc = time.time()
-    print(f"{(toc - tic):.3f} sec. elapsed")
+    print(f"{toc - tic:.3f} sec. elapsed")
     return matplotlib_to_svg(fig)

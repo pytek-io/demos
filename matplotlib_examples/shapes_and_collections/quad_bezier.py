@@ -8,20 +8,19 @@ polycurve path patch.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/shapes_and_collections/quad_bezier.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import matplotlib.path as mpath
+matplotlib.use("Agg")
 import matplotlib.patches as mpatches
+import matplotlib.path as mpath
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     Path = mpath.Path
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     pp1 = mpatches.PathPatch(
         Path(
             [(0, 0), (1, 0), (1, 1), (0, 0)],

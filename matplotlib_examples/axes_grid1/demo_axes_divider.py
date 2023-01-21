@@ -8,30 +8,29 @@ create a divider for them using existing axes instances.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/demo_axes_divider.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-from matplotlib import cbook
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import cbook
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def get_demo_image():
     z = cbook.get_sample_data("axes_grid/bivariate_normal.npy", np_load=True)
-    return (z, ((-3), 4, (-4), 3))
+    return z, (-3, 4, -4, 3)
 
 
 def demo_simple_image(ax):
-    (Z, extent) = get_demo_image()
+    Z, extent = get_demo_image()
     im = ax.imshow(Z, extent=extent)
     cb = plt.colorbar(im)
     cb.ax.yaxis.set_tick_params(labelright=False)
 
 
 def demo_locatable_axes_hard(fig):
-    from mpl_toolkits.axes_grid1 import SubplotDivider, Size
+    from mpl_toolkits.axes_grid1 import Size, SubplotDivider
     from mpl_toolkits.axes_grid1.mpl_axes import Axes
 
     divider = SubplotDivider(fig, 2, 2, 2, aspect=True)
@@ -45,7 +44,7 @@ def demo_locatable_axes_hard(fig):
     ax_cb.set_axes_locator(divider.new_locator(nx=2, ny=0))
     ax_cb.axis["left"].toggle(all=False)
     ax_cb.axis["right"].toggle(ticks=True)
-    (Z, extent) = get_demo_image()
+    Z, extent = get_demo_image()
     im = ax.imshow(Z, extent=extent)
     plt.colorbar(im, cax=ax_cb)
     ax_cb.yaxis.set_tick_params(labelright=False)
@@ -58,7 +57,7 @@ def demo_locatable_axes_easy(ax):
     ax_cb = divider.append_axes("right", size="5%", pad=0.05)
     fig = ax.get_figure()
     fig.add_axes(ax_cb)
-    (Z, extent) = get_demo_image()
+    Z, extent = get_demo_image()
     im = ax.imshow(Z, extent=extent)
     plt.colorbar(im, cax=ax_cb)
     ax_cb.yaxis.tick_right()
@@ -69,7 +68,7 @@ def demo_images_side_by_side(ax):
     from mpl_toolkits.axes_grid1 import make_axes_locatable
 
     divider = make_axes_locatable(ax)
-    (Z, extent) = get_demo_image()
+    Z, extent = get_demo_image()
     ax2 = divider.append_axes("right", size="100%", pad=0.05)
     fig1 = ax.get_figure()
     fig1.add_axes(ax2)

@@ -18,23 +18,22 @@ Here is an example that labels the months, centered between the ticks.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/centered_ticklabels.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.cbook as cbook
 import matplotlib.dates as dates
-import matplotlib.ticker as ticker
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     r = cbook.get_sample_data("goog.npz", np_load=True)["price_data"].view(np.recarray)
-    r = r[(-250):]
-    (fig, ax) = plt.subplots()
+    r = r[-250:]
+    fig, ax = plt.subplots()
     ax.plot(r.date, r.adj_close)
     ax.xaxis.set_major_locator(dates.MonthLocator())
     ax.xaxis.set_minor_locator(dates.MonthLocator(bymonthday=16))

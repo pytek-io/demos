@@ -13,27 +13,26 @@ As a result, there may be no ticks on the edges of the plot.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/auto_ticks.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     np.random.seed(19680801)
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     dots = np.linspace(0.3, 1.2, 10)
-    (X, Y) = np.meshgrid(dots, dots)
-    (x, y) = (X.ravel(), Y.ravel())
-    ax.scatter(x, y, c=(x + y))
+    X, Y = np.meshgrid(dots, dots)
+    x, y = X.ravel(), Y.ravel()
+    ax.scatter(x, y, c=x + y)
     plt.rcParams["axes.autolimit_mode"] = "round_numbers"
-    (fig, ax) = plt.subplots()
-    ax.scatter(x, y, c=(x + y))
-    (fig, ax) = plt.subplots()
-    ax.scatter(x, y, c=(x + y))
+    fig, ax = plt.subplots()
+    ax.scatter(x, y, c=x + y)
+    fig, ax = plt.subplots()
+    ax.scatter(x, y, c=x + y)
     ax.set_xmargin(0.8)
     return matplotlib_to_svg(fig)

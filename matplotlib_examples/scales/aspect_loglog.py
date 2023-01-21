@@ -6,17 +6,16 @@ Loglog Aspect
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/scales/aspect_loglog.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
-    (fig, (ax1, ax2)) = plt.subplots(1, 2)
+    fig, (ax1, ax2) = plt.subplots(1, 2)
     ax1.set_xscale("log")
     ax1.set_yscale("log")
     ax1.set_xlim(10.0, 1000.0)

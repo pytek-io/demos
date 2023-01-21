@@ -7,20 +7,19 @@ Create text with different alignment and rotation.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/pyplots/text_layout.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import matplotlib.pyplot as plt
+matplotlib.use("Agg")
 import matplotlib.patches as patches
+import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     fig = plt.figure()
-    (left, width) = (0.25, 0.5)
-    (bottom, height) = (0.25, 0.5)
+    left, width = 0.25, 0.5
+    bottom, height = 0.25, 0.5
     right = left + width
     top = bottom + height
     p = patches.Rectangle((left, bottom), width, height, fill=False)
@@ -54,7 +53,7 @@ def app():
     )
     fig.text(
         left,
-        (0.5 * (bottom + top)),
+        0.5 * (bottom + top),
         "right center",
         horizontalalignment="right",
         verticalalignment="center",
@@ -62,15 +61,15 @@ def app():
     )
     fig.text(
         left,
-        (0.5 * (bottom + top)),
+        0.5 * (bottom + top),
         "left center",
         horizontalalignment="left",
         verticalalignment="center",
         rotation="vertical",
     )
     fig.text(
-        (0.5 * (left + right)),
-        (0.5 * (bottom + top)),
+        0.5 * (left + right),
+        0.5 * (bottom + top),
         "middle",
         horizontalalignment="center",
         verticalalignment="center",
@@ -79,7 +78,7 @@ def app():
     )
     fig.text(
         right,
-        (0.5 * (bottom + top)),
+        0.5 * (bottom + top),
         "centered",
         horizontalalignment="center",
         verticalalignment="center",

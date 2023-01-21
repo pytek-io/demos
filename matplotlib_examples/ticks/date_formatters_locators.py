@@ -8,39 +8,20 @@ formatters.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/date_formatters_locators.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-from matplotlib.dates import (
-    AutoDateLocator,
-    YearLocator,
-    MonthLocator,
-    DayLocator,
-    WeekdayLocator,
-    HourLocator,
-    MinuteLocator,
-    SecondLocator,
-    MicrosecondLocator,
-    RRuleLocator,
-    rrulewrapper,
-    MONTHLY,
-    MO,
-    TU,
-    WE,
-    TH,
-    FR,
-    SA,
-    SU,
-    DateFormatter,
-    AutoDateFormatter,
-    ConciseDateFormatter,
-)
+import numpy as np
+from matplotlib.dates import (FR, MO, MONTHLY, SA, SU, TH, TU, WE,
+                              AutoDateFormatter, AutoDateLocator,
+                              ConciseDateFormatter, DateFormatter, DayLocator,
+                              HourLocator, MicrosecondLocator, MinuteLocator,
+                              MonthLocator, RRuleLocator, SecondLocator,
+                              WeekdayLocator, YearLocator, rrulewrapper)
+
+from demos.charts.utils import matplotlib_to_svg
 
 locators = [
     ("AutoDateLocator(maxticks=8)", "2003-02-01", "%Y-%m"),
@@ -53,10 +34,9 @@ locators = [
     ("SecondLocator(bysecond=(0,30))", "2000-02-01 00:02", "%H:%M:%S"),
     ("MicrosecondLocator(interval=1000)", "2000-02-01 00:00:00.005", "%S.%f"),
     (
-        (
-            "RRuleLocator(rrulewrapper(freq=MONTHLY, \nbyweekday=(MO, TU, WE, TH,"
-            + " FR), bysetpos=-1))"
-        ),
+        """RRuleLocator(rrulewrapper(freq=MONTHLY, 
+byweekday=(MO, TU, WE, TH,"""
+        + " FR), bysetpos=-1))",
         "2000-07-01",
         "%Y-%m-%d",
     ),
@@ -85,7 +65,7 @@ def plot_axis(ax, locator=None, xmax="2002-02-01", fmt=None, formatter=None):
     ax.text(
         0.0,
         0.2,
-        (locator or formatter),
+        locator or formatter,
         transform=ax.transAxes,
         fontsize=14,
         fontname="Monospace",
@@ -94,16 +74,16 @@ def plot_axis(ax, locator=None, xmax="2002-02-01", fmt=None, formatter=None):
 
 
 def app():
-    (fig, ax) = plt.subplots(
-        len(locators), 1, figsize=(8, (len(locators) * 0.8)), layout="constrained"
+    fig, ax = plt.subplots(
+        len(locators), 1, figsize=(8, len(locators) * 0.8), layout="constrained"
     )
     fig.suptitle("Date Locators")
-    for (i, loc) in enumerate(locators):
+    for i, loc in enumerate(locators):
         plot_axis(ax[i], *loc)
-    (fig, ax) = plt.subplots(
-        len(formatters), 1, figsize=(8, (len(formatters) * 0.8)), layout="constrained"
+    fig, ax = plt.subplots(
+        len(formatters), 1, figsize=(8, len(formatters) * 0.8), layout="constrained"
     )
     fig.suptitle("Date Formatters")
-    for (i, fmt) in enumerate(formatters):
+    for i, fmt in enumerate(formatters):
         plot_axis(ax[i], formatter=fmt)
     return matplotlib_to_svg(fig)

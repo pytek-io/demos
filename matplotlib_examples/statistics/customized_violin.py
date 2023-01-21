@@ -14,36 +14,35 @@ section: https://scikit-learn.org/stable/modules/density.html
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/customized_violin.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+from demos.charts.utils import matplotlib_to_svg
+
 
 def adjacent_values(vals, q1, q3):
-    upper_adjacent_value = q3 + ((q3 - q1) * 1.5)
-    upper_adjacent_value = np.clip(upper_adjacent_value, q3, vals[(-1)])
-    lower_adjacent_value = q1 - ((q3 - q1) * 1.5)
+    upper_adjacent_value = q3 + (q3 - q1) * 1.5
+    upper_adjacent_value = np.clip(upper_adjacent_value, q3, vals[-1])
+    lower_adjacent_value = q1 - (q3 - q1) * 1.5
     lower_adjacent_value = np.clip(lower_adjacent_value, vals[0], q1)
-    return (lower_adjacent_value, upper_adjacent_value)
+    return lower_adjacent_value, upper_adjacent_value
 
 
 def set_axis_style(ax, labels):
     ax.xaxis.set_tick_params(direction="out")
     ax.xaxis.set_ticks_position("bottom")
-    ax.set_xticks(np.arange(1, (len(labels) + 1)), labels=labels)
-    ax.set_xlim(0.25, (len(labels) + 0.75))
+    ax.set_xticks(np.arange(1, len(labels) + 1), labels=labels)
+    ax.set_xlim(0.25, len(labels) + 0.75)
     ax.set_xlabel("Sample name")
 
 
 def app():
     np.random.seed(19680801)
     data = [sorted(np.random.normal(0, std, 100)) for std in range(1, 5)]
-    (fig, (ax1, ax2)) = plt.subplots(nrows=1, ncols=2, figsize=(9, 4), sharey=True)
+    fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(9, 4), sharey=True)
     ax1.set_title("Default violin plot")
     ax1.set_ylabel("Observed values")
     ax1.violinplot(data)
@@ -53,15 +52,15 @@ def app():
         pc.set_facecolor("#D43F3A")
         pc.set_edgecolor("black")
         pc.set_alpha(1)
-    (quartile1, medians, quartile3) = np.percentile(data, [25, 50, 75], axis=1)
+    quartile1, medians, quartile3 = np.percentile(data, [25, 50, 75], axis=1)
     whiskers = np.array(
         [
             adjacent_values(sorted_array, q1, q3)
-            for (sorted_array, q1, q3) in zip(data, quartile1, quartile3)
+            for sorted_array, q1, q3 in zip(data, quartile1, quartile3)
         ]
     )
-    (whiskers_min, whiskers_max) = (whiskers[:, 0], whiskers[:, 1])
-    inds = np.arange(1, (len(medians) + 1))
+    whiskers_min, whiskers_max = whiskers[:, (0)], whiskers[:, (1)]
+    inds = np.arange(1, len(medians) + 1)
     ax2.scatter(inds, medians, marker="o", color="white", s=30, zorder=3)
     ax2.vlines(inds, quartile1, quartile3, color="k", linestyle="-", lw=5)
     ax2.vlines(inds, whiskers_min, whiskers_max, color="k", linestyle="-", lw=1)

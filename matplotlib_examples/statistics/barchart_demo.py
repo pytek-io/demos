@@ -16,15 +16,15 @@ just make up some data for little Johnny Doe.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/statistics/barchart_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 from collections import namedtuple
-import numpy as np
+
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 Student = namedtuple("Student", ["name", "grade", "gender"])
 Score = namedtuple("Score", ["value", "unit", "percentile"])
@@ -34,14 +34,14 @@ def to_ordinal(num):
     """Convert an integer to an ordinal string, e.g. 2 -> '2nd'."""
     suffixes = {
         str(i): v
-        for (i, v) in enumerate(
+        for i, v in enumerate(
             ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"]
         )
     }
     v = str(num)
     if v in {"11", "12", "13"}:
         return v + "th"
-    return v + suffixes[v[(-1)]]
+    return v + suffixes[v[-1]]
 
 
 def format_score(score):
@@ -49,16 +49,11 @@ def format_score(score):
     Create score labels for the right y-axis as the test name followed by the
     measurement unit (if any), split over two lines.
     """
-    return (
-        f"""{score.value}
-{score.unit}"""
-        if score.unit
-        else str(score.value)
-    )
+    return f"{score.value}\n{score.unit}" if score.unit else str(score.value)
 
 
 def plot_student_results(student, scores_by_test, cohort_size):
-    (fig, ax1) = plt.subplots(figsize=(9, 7), constrained_layout=True)
+    fig, ax1 = plt.subplots(figsize=(9, 7), constrained_layout=True)
     fig.canvas.manager.set_window_title("Eldorado K-8 Fitness Chart")
     ax1.set_title(student.name)
     ax1.set_xlabel(
@@ -71,11 +66,11 @@ def plot_student_results(student, scores_by_test, cohort_size):
     test_names = list(scores_by_test.keys())
     percentiles = [score.percentile for score in scores_by_test.values()]
     rects = ax1.barh(test_names, percentiles, align="center", height=0.5)
-    large_percentiles = [(to_ordinal(p) if (p > 40) else "") for p in percentiles]
-    small_percentiles = [(to_ordinal(p) if (p <= 40) else "") for p in percentiles]
+    large_percentiles = [(to_ordinal(p) if p > 40 else "") for p in percentiles]
+    small_percentiles = [(to_ordinal(p) if p <= 40 else "") for p in percentiles]
     ax1.bar_label(rects, small_percentiles, padding=5, color="black", fontweight="bold")
     ax1.bar_label(
-        rects, large_percentiles, padding=(-32), color="white", fontweight="bold"
+        rects, large_percentiles, padding=-32, color="white", fontweight="bold"
     )
     ax1.set_xlim([0, 100])
     ax1.set_xticks([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])

@@ -10,15 +10,14 @@ This currently only works with the SVG backend.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/hyperlinks_sgskip.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
+import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -28,17 +27,13 @@ def app():
     fig.savefig("scatter.svg")
     fig = plt.figure()
     delta = 0.025
-    x = y = np.arange((-3.0), 3.0, delta)
-    (X, Y) = np.meshgrid(x, y)
-    Z1 = np.exp(((-(X**2)) - (Y**2)))
-    Z2 = np.exp(((-((X - 1) ** 2)) - ((Y - 1) ** 2)))
+    x = y = np.arange(-3.0, 3.0, delta)
+    X, Y = np.meshgrid(x, y)
+    Z1 = np.exp(-(X**2) - Y**2)
+    Z2 = np.exp(-((X - 1) ** 2) - (Y - 1) ** 2)
     Z = (Z1 - Z2) * 2
     im = plt.imshow(
-        Z,
-        interpolation="bilinear",
-        cmap=cm.gray,
-        origin="lower",
-        extent=[(-3), 3, (-3), 3],
+        Z, interpolation="bilinear", cmap=cm.gray, origin="lower", extent=[-3, 3, -3, 3]
     )
     im.set_url("https://www.google.com/")
     fig.savefig("image.svg")

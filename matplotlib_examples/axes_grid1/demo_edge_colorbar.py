@@ -8,20 +8,19 @@ of an image grid.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/demo_edge_colorbar.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-from matplotlib import cbook
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import cbook
 from mpl_toolkits.axes_grid1 import AxesGrid
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def get_demo_image():
     z = cbook.get_sample_data("axes_grid/bivariate_normal.npy", np_load=True)
-    return (z, ((-3), 4, (-4), 3))
+    return z, (-3, 4, -4, 3)
 
 
 def demo_bottom_cbar(fig):
@@ -41,17 +40,17 @@ def demo_bottom_cbar(fig):
         cbar_size="15%",
         direction="column",
     )
-    (Z, extent) = get_demo_image()
+    Z, extent = get_demo_image()
     cmaps = ["autumn", "summer"]
     for i in range(4):
-        im = grid[i].imshow(Z, extent=extent, cmap=cmaps[(i // 2)])
+        im = grid[i].imshow(Z, extent=extent, cmap=cmaps[i // 2])
         if i % 2:
-            grid.cbar_axes[(i // 2)].colorbar(im)
+            grid.cbar_axes[i // 2].colorbar(im)
     for cax in grid.cbar_axes:
         cax.toggle_label(True)
         cax.axis[cax.orientation].set_label("Bar")
-    grid.axes_llc.set_xticks([(-2), 0, 2])
-    grid.axes_llc.set_yticks([(-2), 0, 2])
+    grid.axes_llc.set_xticks([-2, 0, 2])
+    grid.axes_llc.set_yticks([-2, 0, 2])
 
 
 def demo_right_cbar(fig):
@@ -70,17 +69,17 @@ def demo_right_cbar(fig):
         cbar_size="7%",
         cbar_pad="2%",
     )
-    (Z, extent) = get_demo_image()
+    Z, extent = get_demo_image()
     cmaps = ["spring", "winter"]
     for i in range(4):
-        im = grid[i].imshow(Z, extent=extent, cmap=cmaps[(i // 2)])
+        im = grid[i].imshow(Z, extent=extent, cmap=cmaps[i // 2])
         if i % 2:
-            grid.cbar_axes[(i // 2)].colorbar(im)
+            grid.cbar_axes[i // 2].colorbar(im)
     for cax in grid.cbar_axes:
         cax.toggle_label(True)
         cax.axis[cax.orientation].set_label("Foo")
-    grid.axes_llc.set_xticks([(-2), 0, 2])
-    grid.axes_llc.set_yticks([(-2), 0, 2])
+    grid.axes_llc.set_xticks([-2, 0, 2])
+    grid.axes_llc.set_yticks([-2, 0, 2])
 
 
 def app():

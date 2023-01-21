@@ -9,23 +9,22 @@ are left as blue lines. This example showcases the `.intersects_bbox` function.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/bbox_intersect.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-import numpy as np
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.transforms import Bbox
+import numpy as np
 from matplotlib.path import Path
+from matplotlib.transforms import Bbox
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
     np.random.seed(19680801)
-    (left, bottom, width, height) = ((-1), (-1), 2, 2)
+    left, bottom, width, height = -1, -1, 2, 2
     rect = plt.Rectangle((left, bottom), width, height, facecolor="black", alpha=0.1)
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     ax.add_patch(rect)
     bbox = Bbox.from_bounds(left, bottom, width, height)
     for i in range(12):
@@ -35,5 +34,5 @@ def app():
             color = "r"
         else:
             color = "b"
-        ax.plot(vertices[:, 0], vertices[:, 1], color=color)
+        ax.plot(vertices[:, (0)], vertices[:, (1)], color=color)
     return matplotlib_to_svg(fig)

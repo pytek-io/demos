@@ -14,16 +14,17 @@ See https://dateutil.readthedocs.io/en/stable/rrule.html for help with rrules.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/ticks/date_demo_rrule.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
+matplotlib.use("Agg")
+import datetime
 
 import matplotlib.pyplot as plt
-from matplotlib.dates import YEARLY, DateFormatter, rrulewrapper, RRuleLocator, drange
 import numpy as np
-import datetime
+from matplotlib.dates import (YEARLY, DateFormatter, RRuleLocator, drange,
+                              rrulewrapper)
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -36,7 +37,7 @@ def app():
     delta = datetime.timedelta(days=100)
     dates = drange(date1, date2, delta)
     s = np.random.rand(len(dates))
-    (fig, ax) = plt.subplots()
+    fig, ax = plt.subplots()
     plt.plot(dates, s, "o")
     ax.xaxis.set_major_locator(loc)
     ax.xaxis.set_major_formatter(formatter)

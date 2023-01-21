@@ -12,16 +12,16 @@ This version however does not support `.attach_note`.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/misc/multipage_pdf.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import datetime
+
+import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_pdf import PdfPages
-import matplotlib.pyplot as plt
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -41,7 +41,7 @@ def app():
         plt.close()
         plt.rcParams["text.usetex"] = False
         fig = plt.figure(figsize=(4, 5))
-        plt.plot(x, (x**2), "ko")
+        plt.plot(x, x**2, "ko")
         plt.title("Page Three")
         pdf.savefig(fig)
         plt.close()

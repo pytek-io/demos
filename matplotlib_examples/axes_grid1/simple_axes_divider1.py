@@ -7,14 +7,13 @@ See also :doc:`/tutorials/toolkits/axes_grid`.
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/axes_grid1/simple_axes_divider1.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
-from mpl_toolkits.axes_grid1 import Size, Divider
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1 import Divider, Size
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def label_axes(ax, text):
@@ -35,7 +34,7 @@ def app():
     fig.suptitle("Fixed axes sizes, fixed paddings")
     horiz = [Size.Fixed(1.0), Size.Fixed(0.5), Size.Fixed(1.5), Size.Fixed(0.5)]
     vert = [Size.Fixed(1.5), Size.Fixed(0.5), Size.Fixed(1.0)]
-    rect = (0.1, 0.1, 0.8, 0.8)
+    rect = 0.1, 0.1, 0.8, 0.8
     div = Divider(fig, rect, horiz, vert, aspect=False)
     ax1 = fig.add_axes(rect, axes_locator=div.new_locator(nx=0, ny=0))
     label_axes(ax1, "nx=0, ny=0")
@@ -49,7 +48,7 @@ def app():
     fig.suptitle("Scalable axes sizes, fixed paddings")
     horiz = [Size.Scaled(1.5), Size.Fixed(0.5), Size.Scaled(1.0), Size.Scaled(0.5)]
     vert = [Size.Scaled(1.0), Size.Fixed(0.5), Size.Scaled(1.5)]
-    rect = (0.1, 0.1, 0.8, 0.8)
+    rect = 0.1, 0.1, 0.8, 0.8
     div = Divider(fig, rect, horiz, vert, aspect=False)
     ax1 = fig.add_axes(rect, axes_locator=div.new_locator(nx=0, ny=0))
     label_axes(ax1, "nx=0, ny=0")

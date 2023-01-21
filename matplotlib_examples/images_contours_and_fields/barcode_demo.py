@@ -18,14 +18,13 @@ The data itself is rendered with `~.Axes.imshow` using
 
 This example has been taken from https://github.com/matplotlib/matplotlib/blob/main/matplotlib/examples/images_contours_and_fields/barcode_demo.py.
 """
-
 import matplotlib
 
-matplotlib.use("Agg")  # this stops Python rocket from showing up in Mac Dock
-from demos.charts.utils import matplotlib_to_svg
-
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from demos.charts.utils import matplotlib_to_svg
 
 
 def app():
@@ -130,10 +129,10 @@ def app():
     )
     pixel_per_bar = 4
     dpi = 100
-    fig = plt.figure(figsize=(((len(code) * pixel_per_bar) / dpi), 2), dpi=dpi)
+    fig = plt.figure(figsize=(len(code) * pixel_per_bar / dpi, 2), dpi=dpi)
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_axis_off()
     ax.imshow(
-        code.reshape(1, (-1)), cmap="binary", aspect="auto", interpolation="nearest"
+        code.reshape(1, -1), cmap="binary", aspect="auto", interpolation="nearest"
     )
     return matplotlib_to_svg(fig)
