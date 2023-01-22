@@ -117,7 +117,7 @@ class Application:
             mode="horizontal",
             style={"height": "40px"},
         )
-        self.root = html.div(
+        self.content = html.div(
             [
                 html.div(menu, style={"flexGrow": 1}),
                 html.div(self.dock_layout, style={"height": "100%", "width": "100%"}),
@@ -138,7 +138,3 @@ class Application:
         await self.dock_layout.insert_component(
             self.create_stock_history_app("AAPL"), settings_visible=True
         )
-
-
-def app():
-    return Application().root
