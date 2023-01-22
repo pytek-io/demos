@@ -63,52 +63,55 @@ class Application:
             await self.dock_layout.insert_component(YahooFinanceApp(tickers))
 
         menu = antd.Menu(
-            [
-                antd.Menu.SubMenu(
-                    [
-                        antd.Menu.ItemGroup(
-                            [
-                                antd.Menu.Item(
-                                    "Stock history", onClick=self.add_StockHistoryApp
-                                ),
-                                antd.Menu.Item(
-                                    "Altair car dataset",
-                                    onClick=lambda: self.dock_layout.insert_component(
+            items=[
+                {
+                    "children": [
+                        {
+                            "type": "group",
+                            "children": [
+                                {
+                                    "label": "Stock history",
+                                    "onClick": self.add_StockHistoryApp,
+                                },
+                                {
+                                    "label": "Altair car dataset",
+                                    "onClick": lambda: self.dock_layout.insert_component(
                                         AltairApp()
                                     ),
-                                ),
+                                },
                             ],
-                            title="Plotting",
-                        ),
-                        antd.Menu.ItemGroup(
-                            [
-                                antd.Menu.Item(
-                                    "NYSE",
-                                    onClick=lambda: create_stocks_callback("nyse"),
-                                ),
-                                antd.Menu.Item(
-                                    "AMEX",
-                                    onClick=lambda: create_stocks_callback("amex"),
-                                ),
-                                antd.Menu.Item(
-                                    "NASDAQ",
-                                    onClick=lambda: create_stocks_callback("nasdaq"),
-                                ),
+                            "label": "Plotting",
+                        },
+                        {
+                            "type": "group",
+                            "children": [
+                                {
+                                    "label": "NYSE",
+                                    "onClick": lambda: create_stocks_callback("nyse"),
+                                },
+                                {
+                                    "label": "AMEX",
+                                    "onClick": lambda: create_stocks_callback("amex"),
+                                },
+                                {
+                                    "label": "NASDAQ",
+                                    "onClick": lambda: create_stocks_callback("nasdaq"),
+                                },
                             ],
-                            title="Stocks",
-                        ),
-                        antd.Menu.Item(
-                            "FX live quotes",
-                            onClick=lambda: create_live_quotes_callback(
+                            "label": "Stocks",
+                        },
+                        {
+                            "label": "FX live quotes",
+                            "onClick": lambda: create_live_quotes_callback(
                                 DEFAULT_LIVE_FX_TICKERS
                             ),
-                        ),
+                        },
                     ],
-                    key="SubMenu",
-                    icon=reflect_utils.create_icon(
+                    "key": "SubMenu",
+                    "icon": reflect_utils.create_icon(
                         MENU, style={"height": 30, "color": rcdock.LIGHT_GREY}
                     ),
-                )
+                }
             ],
             selectedKeys=lambda: [],
             mode="horizontal",
