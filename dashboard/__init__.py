@@ -32,8 +32,9 @@ DEFAULT_LIVE_FX_TICKERS = [
 MENU = "M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"
 
 
-class Application:
-    def __init__(self):
+class App:
+    def __init__(self, window: r.Window):
+        self.window = window
         defaultLayout = {
             "dockbox": {
                 "mode": "horizontal",
@@ -60,7 +61,7 @@ class Application:
             )
 
         async def create_live_quotes_callback(tickers):
-            await self.dock_layout.insert_component(YahooFinanceApp(tickers))
+            await self.dock_layout.insert_component(YahooFinanceApp(self.window, tickers))
 
         menu = antd.Menu(
             items=[
