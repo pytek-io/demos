@@ -8,4 +8,4 @@ simple:Simple mode
 controlled:Controlled
 total:Total number
 all:Show All
-itemrender:Prev and next
+itemrender:Prev and next 

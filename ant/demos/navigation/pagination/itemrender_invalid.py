@@ -1,21 +1,25 @@
-from reflect_html import *
-from reflect_antd import Pagination
-from reflect import Callback
+import reflect as r
+import reflect_antd as antd
 
-
-def itemRender(*args):
-    print(args)
-    current, type_, originalElement
-    if type_ == "prev":
-        return a("Previous")
-    if type_ == "next":
-        return a("Next")
-    return originalElement
+itemRender = r.JSMethod(
+    "itemRender",
+"""
+if (type === 'prev') {
+    return <a>Previous</a>;
+}
+if (type === 'next') {
+    return <a>Next</a>;
+}
+return originalElement;
+""",
+    "_",
+    "type",
+    "originalElement",
+)
 
 
 def app():
-    raise NotImplementedError()
-    return Pagination(
+    return antd.Pagination(
         total=500,
-        # itemRender=Callback(itemRender),
+        itemRender=itemRender,
     )
