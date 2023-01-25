@@ -9,6 +9,15 @@ steps = [
     {"title": "Last", "content": "Last-content"},
 ]
 
+content_style = {
+    "lineHeight": '260px',
+    "textAlign": 'center',
+    # "color": token.colorTextTertiary,
+    # "backgroundColor": token.colorFillAlter,
+    # "borderRadius": token.borderRadiusLG,
+    # "border": "`1px dashed ${token.colorBorder}`",
+    "marginTop": 16,
+  }
 
 def app():
     current = r.ObservableValue(0)
@@ -16,11 +25,11 @@ def app():
         [
             antd.Steps(
                 items=[
-                    {"key": item["title"], "label": item["title"]} for item in steps
+                    {"key": item["title"], "title": item["title"]} for item in steps
                 ],
                 current=current,
             ),
-            html.div(lambda: steps[current()]["content"], className="steps-content"),
+            html.div(lambda: steps[current()]["content"], className="steps-content", style=content_style),
             antd.Space(
                 [
                     antd.Button(
@@ -40,7 +49,7 @@ def app():
                     antd.Button(
                         "Done",
                         type="primary",
-                        onClick=lambda: print("Processing complete!"),
+                        onClick=lambda: antd.message.success("Processing complete!"),
                     ),
                 ],
                 className="steps-action",

@@ -6,17 +6,17 @@ import reflect_html as html
 def app():
     return antd.Steps(
         items=[
-            {"status": "finish", "label": "Login", "icon": ant_icons.UserOutlined([])},
+            {"status": "finish", "title": "Login", "icon": ant_icons.UserOutlined([])},
             {
                 "status": "finish",
-                "label": "Verification",
+                "title": "Verification",
                 "icon": ant_icons.SolutionOutlined([]),
             },
             {
                 "status": "process",
-                "label": "Pay",
+                "title": "Pay",
                 "icon": ant_icons.LoadingOutlined([]),
             },
-            {"status": "wait", "label": "Done", "icon": ant_icons.SmileOutlined([])},
+            {"status": "wait", "title": "Done", "icon": ant_icons.SmileOutlined([])},
         ]
     )

@@ -1,6 +1,5 @@
-import { Steps, Button, message } from 'antd';
-
-const { Step } = Steps;
+import React, { useState } from 'react';
+import { Button, message, Steps, theme } from 'antd';
 
 const steps = [
   {
@@ -17,8 +16,9 @@ const steps = [
   },
 ];
 
-const App = () => {
-  const [current, setCurrent] = React.useState(0);
+const App: React.FC = () => {
+  const { token } = theme.useToken();
+  const [current, setCurrent] = useState(0);
 
   const next = () => {
     setCurrent(current + 1);
@@ -28,15 +28,23 @@ const App = () => {
     setCurrent(current - 1);
   };
 
+  const items = steps.map((item) => ({ key: item.title, title: item.title }));
+
+  const contentStyle: React.CSSProperties = {
+    lineHeight: '260px',
+    textAlign: 'center',
+    color: token.colorTextTertiary,
+    backgroundColor: token.colorFillAlter,
+    borderRadius: token.borderRadiusLG,
+    border: `1px dashed ${token.colorBorder}`,
+    marginTop: 16,
+  };
+
   return (
     <>
-      <Steps current={current}>
-        {steps.map(item => (
-          <Step key={item.title} title={item.title} />
-        ))}
-      </Steps>
-      <div className="steps-content">{steps[current].content}</div>
-      <div className="steps-action">
+      <Steps current={current} items={items} />
+      <div style={contentStyle}>{steps[current].content}</div>
+      <div style={{ marginTop: 24 }}>
         {current < steps.length - 1 && (
           <Button type="primary" onClick={() => next()}>
             Next
@@ -57,4 +65,4 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, mountNode);
+export default App;

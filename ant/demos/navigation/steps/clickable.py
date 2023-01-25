@@ -14,9 +14,9 @@ def app():
         [
             antd.Steps(
                 items=[
-                    {"label": "Step 1", "description": "This is a description."},
-                    {"label": "Step 2", "description": "This is a description."},
-                    {"label": "Step 3", "description": "This is a description."},
+                    {"title": "Step 1", "description": "This is a description."},
+                    {"title": "Step 2", "description": "This is a description."},
+                    {"title": "Step 3", "description": "This is a description."},
                 ],
                 current=current,
                 onChange=r.Callback(onChange),
@@ -24,9 +24,9 @@ def app():
             antd.Divider(),
             antd.Steps(
                 items=[
-                    {"label": "Step 1", "description": "This is a description."},
-                    {"label": "Step 2", "description": "This is a description."},
-                    {"label": "Step 3", "description": "This is a description."},
+                    {"title": "Step 1", "description": "This is a description."},
+                    {"title": "Step 2", "description": "This is a description."},
+                    {"title": "Step 3", "description": "This is a description."},
                 ],
                 current=current,
                 onChange=r.Callback(onChange),

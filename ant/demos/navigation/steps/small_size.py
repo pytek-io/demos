@@ -4,7 +4,7 @@ import reflect_html as html
 
 def app():
     return antd.Steps(
-        items=[{"label": "Finished"}, {"label": "In Progress"}, {"label": "Waiting"}],
+        items=[{"title": "Finished"}, {"title": "In Progress"}, {"title": "Waiting"}],
         size="small",
         current=1,
     )

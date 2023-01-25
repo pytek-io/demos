@@ -7,9 +7,9 @@ def app():
         [
             antd.Steps(
                 items=[
-                    {"label": "Finished", "description": "This is a description."},
-                    {"label": "In Progress", "description": "This is a description."},
-                    {"label": "Waiting", "description": "This is a description."},
+                    {"title": "Finished", "description": "This is a description."},
+                    {"title": "In Progress", "description": "This is a description."},
+                    {"title": "Waiting", "description": "This is a description."},
                 ],
                 progressDot=True,
                 current=1,

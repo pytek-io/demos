@@ -12,9 +12,9 @@ def app():
         antd.Card(
             antd.Steps(
                 items=[
-                    {"label": "Finished", "description": "This is a description."},
-                    {"label": "In Progress", "description": "This is a description."},
-                    {"label": "Waiting", "description": "This is a description."},
+                    {"title": "Finished", "description": "This is a description."},
+                    {"title": "In Progress", "description": "This is a description."},
+                    {"title": "Waiting", "description": "This is a description."},
                 ],
                 size=size,
             )
@@ -25,9 +25,9 @@ def app():
             size,
             antd.Steps(
                 items=[
-                    {"label": "Finished", "description": horizontalSteps},
-                    {"label": "In Progress", "description": "This is a description."},
-                    {"label": "Waiting", "description": "This is a description."},
+                    {"title": "Finished", "description": horizontalSteps},
+                    {"title": "In Progress", "description": "This is a description."},
+                    {"title": "Waiting", "description": "This is a description."},
                 ],
                 size=size,
                 direction="vertical",

@@ -15,19 +15,19 @@ def app():
             antd.Steps(
                 items=[
                     {
-                        "label": "Step 1",
+                        "title": "Step 1",
                         "subTitle": "00:00:05",
                         "status": "finish",
                         "description": "This is a description.",
                     },
                     {
-                        "label": "Step 2",
+                        "title": "Step 2",
                         "subTitle": "00:01:02",
                         "status": "process",
                         "description": "This is a description.",
                     },
                     {
-                        "label": "Step 3",
+                        "title": "Step 3",
                         "subTitle": "waiting for a long long time",
                         "status": "wait",
                         "description": "This is a description.",
@@ -41,10 +41,10 @@ def app():
             ),
             antd.Steps(
                 items=[
-                    {"status": "finish", "label": "Step 1"},
-                    {"status": "process", "label": "Step 2"},
-                    {"status": "wait", "label": "Step 3"},
-                    {"status": "wait", "label": "Step 4"},
+                    {"status": "finish", "title": "Step 1"},
+                    {"status": "process", "title": "Step 2"},
+                    {"status": "wait", "title": "Step 3"},
+                    {"status": "wait", "title": "Step 4"},
                 ],
                 type="navigation",
                 current=current,
@@ -53,10 +53,10 @@ def app():
             ),
             antd.Steps(
                 items=[
-                    {"status": "finish", "label": "finish 1"},
-                    {"status": "finish", "label": "finish 2"},
-                    {"status": "process", "label": "current process"},
-                    {"status": "wait", "label": "wait", "disabled": True},
+                    {"status": "finish", "title": "finish 1"},
+                    {"status": "finish", "title": "finish 2"},
+                    {"status": "process", "title": "current process"},
+                    {"status": "wait", "title": "wait", "disabled": True},
                 ],
                 type="navigation",
                 size="small",
