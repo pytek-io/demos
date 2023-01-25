@@ -1,2 +1,13 @@
 2
-basic:Basic,value:Under Control,size:Three Sizes,disabled:disabled,hide_column:Hour and minute,interval_options:interval option,addon:Addon,12hours:12 hours,colored_popup:Colored Popup,range_picker:Range Picker,bordered:Bordered-less,suffix:Suffix
+basic:Basic
+value:Under Control
+size:Three Sizes
+disabled:disabled
+hide_column:Hour and minute
+interval_options:interval option
+addon:Addon
+12hours:12 hours
+colored_popup:Colored Popup
+range_picker:Range Picker
+bordered:Bordered-less
+suffix:Suffix

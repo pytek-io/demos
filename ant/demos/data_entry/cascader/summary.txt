@@ -1,2 +1,14 @@
 2
-basic:Basic,default_value:Default value,custom_trigger:Custom trigger,hover:Hover,disabled_option:Disabled option,change_on_select:Change on select,size:Size,custom_render:Custom render,search:Search,lazy:Load Options Lazily,fields_name:Custom Field Names,suffix:Custom Icons,custom_dropdown:Custom dropdown
+basic:Basic
+default_value:Default value
+custom_trigger:Custom trigger
+hover:Hover
+disabled_option:Disabled option
+change_on_select:Change on select
+size:Size
+custom_render:Custom render
+search:Search
+lazy:Load Options Lazily
+fields_name:Custom Field Names
+suffix:Custom Icons
+custom_dropdown:Custom dropdown

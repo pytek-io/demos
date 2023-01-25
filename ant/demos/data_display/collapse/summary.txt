@@ -1,2 +1,10 @@
 1
-basic:Collapse,accordion:Accordion,mix:Nested panel,borderless:Borderless,custom:Custom Panel,noarrow:No arrow,extra:Extra node,ghost:Ghost Collapse,collapsible:Collapsible
+basic:Collapse
+accordion:Accordion
+mix:Nested panel
+borderless:Borderless
+custom:Custom Panel
+noarrow:No arrow
+extra:Extra node
+ghost:Ghost Collapse
+collapsible:Collapsible

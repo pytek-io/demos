@@ -1,2 +1,18 @@
 2
-basic:Basic usage,size:Three sizes of Input,addon:Pre / Post tab,group:Input Group,search_input:Search box,search_input_loading:Search box with loading,textarea:TextArea,autosize_textarea:Autosizing the height to fit the content,tooltip:Format Tooltip Input,presuffix:prefix and suffix,password_input:Password box,allowclear:With clear icon,textarea_show_count:Textarea with character counting,borderless:Borderless,focus:Focus,align:Text Align,textarea_resize:TextArea
+basic:Basic usage
+size:Three sizes of Input
+addon:Pre / Post tab
+group:Input Group
+search_input:Search box
+search_input_loading:Search box with loading
+textarea:TextArea
+autosize_textarea:Autosizing the height to fit the content
+tooltip:Format Tooltip Input
+presuffix:prefix and suffix
+password_input:Password box
+allowclear:With clear icon
+textarea_show_count:Textarea with character counting
+borderless:Borderless
+focus:Focus
+align:Text Align
+textarea_resize:TextArea

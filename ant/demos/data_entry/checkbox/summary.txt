@@ -1,2 +1,7 @@
 2
-basic:Basic,disabled:Disabled,controller:Controlled Checkbox,group:Checkbox Group,check_all:Check all,layout:Use with Grid
+basic:Basic
+disabled:Disabled
+controller:Controlled Checkbox
+group:Checkbox Group
+check_all:Check all
+layout:Use with Grid

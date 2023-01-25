@@ -1,2 +1,11 @@
 1
-basic:Basic card,border_less:No border,simple:Simple card,flexible_content:Customized content,in_column:Card in column,loading:Loading card,grid_card:Grid card,inner:Inner card,tabs:With tabs,meta:Support more content configuration
+basic:Basic card
+border_less:No border
+simple:Simple card
+flexible_content:Customized content
+in_column:Card in column
+loading:Loading card
+grid_card:Grid card
+inner:Inner card
+tabs:With tabs
+meta:Support more content configuration

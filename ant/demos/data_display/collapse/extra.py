@@ -7,6 +7,7 @@ Panel = antd.Collapse.Panel
 
 
 def genExtra():
+    # not sure why we would want to set stop_propagation to True
     return ant_icons.SettingOutlined(onClick=r.Callback(stop_propagation=True))
 
 
@@ -17,11 +18,11 @@ Known for its loyalty and faithfulness,
 it can be found as a welcome guest in many households across the world.
 """
     expandIconPosition = antd.Select(
-        items=[
-            {"children": "left", "value": "left"},
-            {"children": "right", "value": "right"},
+        options=[
+            {"title": "Start", "value": "start"},
+            {"title": "End", "value": "end"},
         ],
-        defaultValue="left",
+        defaultValue="start",
         style={"margin": "0 8px"},
     )
     return html.div(

@@ -1,2 +1,7 @@
 2
-basic:Basic Usage,withicon:With an Icon,router_4:Other Router Integration,separator:Configuring the Separator,overlay:Bread crumbs with drop down menu,separator_indepent:Configuring the Separator
+basic:Basic Usage
+withicon:With an Icon
+router_4:Other Router Integration
+separator:Configuring the Separator
+overlay:Bread crumbs with drop down menu
+separator_indepent:Configuring the Separator

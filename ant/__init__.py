@@ -214,10 +214,9 @@ def create_code_box(
 
 def demo_details(root_directory, category, component_name):
     default_folder = os.path.join(root_directory, "demos", category, component_name)
-    _nb_cols, demos = (
-        pathlib.Path(default_folder, "summary.txt").read_text().split("\n")
-    )
-    for module_name, demo_name in (x.split(":") for x in demos.split(",")):
+    lines = iter(pathlib.Path(default_folder, "summary.txt").read_text().split("\n"))
+    _nb_cols = next(lines)
+    for module_name, demo_name in (x.split(":") for x in lines):
         module_path = pathlib.Path(default_folder, module_name + ".py")
         if not module_path.exists():
             continue

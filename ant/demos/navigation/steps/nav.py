@@ -28,7 +28,7 @@ def app():
                     },
                     {
                         "label": "Step 3",
-                        "subTitle": "waiting for longlong time",
+                        "subTitle": "waiting for a long long time",
                         "status": "wait",
                         "description": "This is a description.",
                     },

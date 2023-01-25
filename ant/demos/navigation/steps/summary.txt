@@ -1,2 +1,14 @@
 1
-simple:Basic,small_size:Mini version,icon:With icon,step_next:Switch Step,vertical:Vertical,vertical_small:Vertical mini version,error:Error status,progress_dot:Dot Style,customized_progress_dot:Customized Dot Style,clickable:Clickable,nav:Navigation Steps,progress:Steps with progress,steps_in_steps:Steps inside Steps
+simple:Basic
+small_size:Mini version
+icon:With icon
+step_next:Switch Step
+vertical:Vertical
+vertical_small:Vertical mini version
+error:Error status
+progress_dot:Dot Style
+customized_progress_dot:Customized Dot Style
+clickable:Clickable
+nav:Navigation Steps
+progress:Steps with progress
+steps_in_steps:Steps inside Steps

@@ -1,2 +1,8 @@
 2
-basic:basic Usage,size:Size,inside:Inside a container,nested:Embedded mode,tip:Customized description,delayanddebounce:delay,custom_indicator:Custom spinning indicator
+basic:basic Usage
+size:Size
+inside:Inside a container
+nested:Embedded mode
+tip:Customized description
+delayanddebounce:delay
+custom_indicator:Custom spinning indicator

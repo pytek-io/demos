@@ -1,2 +1,6 @@
 2
-basic:Basic,two_tone:Two-tone icon and colorful icon,custom:Custom Icon,iconfont:Use iconfont.cn,scripturl:Multiple resources from iconfont.cn
+basic:Basic
+two_tone:Two-tone icon and colorful icon
+custom:Custom Icon
+iconfont:Use iconfont.cn
+scripturl:Multiple resources from iconfont.cn

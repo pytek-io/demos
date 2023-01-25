@@ -19,7 +19,7 @@ def app():
             antd.Button("secondary"),
             antd.Dropdown.Button(
                 "Actions",
-                menu={"items": items, "onClick": r.Callback(handle_menu_click, "key")},
+                menu={"items": items, "onClick": r.Callback(handle_menu_click, args="key")},
             ),
         ]
     )

@@ -1,2 +1,7 @@
 2
-basic:Basic,locale:Locale text,placement:Placement,dynamic_trigger:Conditional trigger,icon:Customize icon,async:Asynchronously close
+basic:Basic
+locale:Locale text
+placement:Placement
+dynamic_trigger:Conditional trigger
+icon:Customize icon
+async:Asynchronously close

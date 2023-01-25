@@ -1,6 +1,5 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 Link = antd.Anchor.Link
 
@@ -9,20 +8,40 @@ def handleClick(link):
     print(link)
 
 
+items = [
+    {
+        "key": "1",
+        "href": "#components-anchor-demo-basic",
+        "title": "Basic demo",
+    },
+    {
+        "key": "2",
+        "href": "#components-anchor-demo-static",
+        "title": "Static demo",
+    },
+    {
+        "key": "3",
+        "href": "#api",
+        "title": "API",
+        "children": [
+            {
+                "key": "4",
+                "href": "#anchor-props",
+                "title": "Anchor Props",
+            },
+            {
+                "key": "5",
+                "href": "#link-props",
+                "title": "Link Props",
+            },
+        ],
+    },
+]
+
+
 def app():
     return antd.Anchor(
-        [
-            Link(href="#components-anchor-demo-basic", title="Basic demo"),
-            Link(href="#components-anchor-demo-static", title="Static demo"),
-            Link(
-                [
-                    Link(href="#Anchor-Props", title="Anchor Props"),
-                    Link(href="#Link-Props", title="Link Props"),
-                ],
-                href="#API",
-                title="API",
-            ),
-        ],
+        items=items,
         affix=False,
-        onClick=r.Callback(handleClick, is_synthetic_event=True),
+        onClick=handleClick,
     )

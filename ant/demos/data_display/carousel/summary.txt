@@ -1,2 +1,5 @@
 2
-basic:Basic,position:Position,fade:Fade in,autoplay:Scroll automatically
+basic:Basic
+position:Position
+fade:Fade in
+autoplay:Scroll automatically

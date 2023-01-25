@@ -1,2 +1,5 @@
 1
-basic:Basic,notice_calendar:Notice Calendar,card:Card,select:Selectable Calendar
+basic:Basic
+notice_calendar:Notice Calendar
+card:Card
+select:Selectable Calendar

@@ -1,2 +1,9 @@
 2
-info:Normal prompt,other:Other types of message,duration:Customize duration,loading:Message with loading indicator,thenable:Promise interface,update:Update Message Content,custom_style:Customized style,hooks:Get context with hooks (4.5.0+)
+info:Normal prompt
+other:Other types of message
+duration:Customize duration
+loading:Message with loading indicator
+thenable:Promise interface
+update:Update Message Content
+custom_style:Customized style
+hooks:Get context with hooks (4.5.0+)

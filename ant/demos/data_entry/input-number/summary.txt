@@ -1,2 +1,8 @@
 2
-basic:Basic,size:Sizes,disabled:Disabled,digit:Decimals,formatter:Formatter,keyboard:Keyboard,borderless:Borderless
+basic:Basic
+size:Sizes
+disabled:Disabled
+digit:Decimals
+formatter:Formatter
+keyboard:Keyboard
+borderless:Borderless

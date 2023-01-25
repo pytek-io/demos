@@ -1,2 +1,11 @@
 2
-basic:Basic,radiogroup:Radio Group,disabled:disabled,radiogroup_more:Vertical Radio.Group,radiogroup_options:Radio.Group group - optional,radiobutton:radio style,radiogroup_with_name:Radio.Group with name,size:Size,radiobutton_solid:Solid radio button,badge:测试 Badge 的样式
+basic:Basic
+radiogroup:Radio Group
+disabled:disabled
+radiogroup_more:Vertical Radio.Group
+radiogroup_options:Radio.Group group - optional
+radiobutton:radio style
+radiogroup_with_name:Radio.Group with name
+size:Size
+radiobutton_solid:Solid radio button
+badge:测试 Badge 的样式

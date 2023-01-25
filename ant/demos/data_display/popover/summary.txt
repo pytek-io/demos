@@ -1,2 +1,7 @@
 2
-basic:Basic,triggertype:Three ways to trigger,placement:Placement,control:Controlling the close of the dialog,arrow_point_at_center:Arrow pointing,hover_with_click:Hover with click popover
+basic:Basic
+triggertype:Three ways to trigger
+placement:Placement
+control:Controlling the close of the dialog
+arrow_point_at_center:Arrow pointing
+hover_with_click:Hover with click popover

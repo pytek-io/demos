@@ -1,2 +1,7 @@
 2
-basic:Basic Usage,options:Customized,non_case_sensitive:Non-case-sensitive AutoComplete,custom:Customize Input Component,certain_category:Lookup-Patterns - Certain Category,uncertain_category:Lookup-Patterns - Uncertain Category
+basic:Basic Usage
+options:Customized
+non_case_sensitive:Non-case-sensitive AutoComplete
+custom:Customize Input Component
+certain_category:Lookup-Patterns - Certain Category
+uncertain_category:Lookup-Patterns - Uncertain Category

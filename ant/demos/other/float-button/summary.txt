@@ -1,2 +1,3 @@
 2
-basic:Basic,custom:Custom style
+basic:Basic
+custom:Custom style

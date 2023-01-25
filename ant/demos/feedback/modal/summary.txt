@@ -1,2 +1,15 @@
 2
-basic:Basic,async:Asynchronously close,footer:Customized Footer,confirm:Confirmation modal dialog,info:Information modal dialog,locale:Internationalization,position:To customize the position of modal,manual:Manual to update destroy,confirm_router:destroy confirmation modal dialog,dark:Dark Bg,button_props:Customize footer buttons props,hooks:Use hooks to get context,width:To customize the width of modal,modal_render:Custom modal content render
+basic:Basic
+async:Asynchronously close
+footer:Customized Footer
+confirm:Confirmation modal dialog
+info:Information modal dialog
+locale:Internationalization
+position:To customize the position of modal
+manual:Manual to update destroy
+confirm_router:destroy confirmation modal dialog
+dark:Dark Bg
+button_props:Customize footer buttons props
+hooks:Use hooks to get context
+width:To customize the width of modal
+modal_render:Custom modal content render

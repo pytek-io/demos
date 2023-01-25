@@ -1,2 +1,12 @@
 2
-basic:Basic,basic_controlled:Controlled Tree,draggable:draggable,dynamic:load data asynchronously,search:Searchable,line:Tree with line,customized_icon:Customize Icon,directory:directory,switcher_icon:Customize collapse/expand icon,virtual_scroll:Virtual scroll,big_data:Big data
+basic:Basic
+basic_controlled:Controlled Tree
+draggable:draggable
+dynamic:load data asynchronously
+search:Searchable
+line:Tree with line
+customized_icon:Customize Icon
+directory:directory
+switcher_icon:Customize collapse/expand icon
+virtual_scroll:Virtual scroll
+big_data:Big data

@@ -1,2 +1,21 @@
 2
-basic:Basic Usage,search:Select with search field,multiple:multiple selection,size:Sizes,search_sort:Search with sort,option_label_prop:Custom selection render,tags:Tags,optgroup:Option Group,coordinate:coordinate,search_box:Search Box,label_in_value:Get value of selected item,automatic_tokenization:Automatic tokenization,select_users:Search and Select Users,suffix:Suffix,custom_dropdown_menu:Custom dropdown,hide_selected:Hide Already Selected,bordered:Bordered-less,responsive:Responsive maxTagCount,custom_tag_render:Custom Tag Render,big_data:Big Data
+basic:Basic Usage
+search:Select with search field
+multiple:multiple selection
+size:Sizes
+search_sort:Search with sort
+option_label_prop:Custom selection render
+tags:Tags
+optgroup:Option Group
+coordinate:coordinate
+search_box:Search Box
+label_in_value:Get value of selected item
+automatic_tokenization:Automatic tokenization
+select_users:Search and Select Users
+suffix:Suffix
+custom_dropdown_menu:Custom dropdown
+hide_selected:Hide Already Selected
+bordered:Bordered-less
+responsive:Responsive maxTagCount
+custom_tag_render:Custom Tag Render
+big_data:Big Data

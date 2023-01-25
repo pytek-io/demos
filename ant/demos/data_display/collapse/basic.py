@@ -17,6 +17,5 @@ it can be found as a welcome guest in many households across the world.
             Panel(html.p(text), header="This is panel header 2", key="2"),
             Panel(html.p(text), header="This is panel header 3", key="3"),
         ],
-        defaultActiveKey=["1"],
         onChange=r.Callback(lambda key: print(key)),
     )

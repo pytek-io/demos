@@ -1,2 +1,7 @@
 2
-basic:Basic,multiple:Multiple Selection,treedata:Generate from tree data,checkable:Checkable,async:Asynchronous loading,suffix:Suffix
+basic:Basic
+multiple:Multiple Selection
+treedata:Generate from tree data
+checkable:Checkable
+async:Asynchronous loading
+suffix:Suffix

@@ -1,2 +1,12 @@
 2
-basic:Basic,placement:Placement,item:Other elements,arrow:Arrow,trigger:Trigger mode,event:Click event,dropdown_button:Button with dropdown menu,sub_menu:Cascading menu,overlay_visible:The way of hiding menu.,context_menu:Context Menu,menu_full:Menu full styles
+basic:Basic
+placement:Placement
+item:Other elements
+arrow:Arrow
+trigger:Trigger mode
+event:Click event
+dropdown_button:Button with dropdown menu
+sub_menu:Cascading menu
+overlay_visible:The way of hiding menu.
+context_menu:Context Menu
+menu_full:Menu full styles

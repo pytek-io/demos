@@ -1,2 +1,7 @@
 2
-basic:Basic,static:Static Anchor,onclick:Customize the onClick event,customizehighlight:Customize the anchor highlight,targetoffset:Set Anchor scroll offset,onchange:Listening for anchor link change
+basic:Basic
+static:Static Anchor
+onclick:Customize the onClick event
+customizehighlight:Customize the anchor highlight
+targetoffset:Set Anchor scroll offset
+onchange:Listening for anchor link change
