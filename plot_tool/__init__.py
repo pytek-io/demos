@@ -27,21 +27,17 @@ EDITOR_OPTIONS = {
     "wordWrap": False,
     "renderValidationDecorations": "off" if False else "on",
 }
-WIDTHS = [42, 100, 150, 80, 300]
 TITLES = ["Source", "Ticker", "Name", "Description"]
 YAHOO = "yahoo"
 FRED = "fred"
 
 
-def layout_timeseries_definition_row(elements, widths=WIDTHS, gap=10, justify="left"):
+def layout_timeseries_definition_row(elements):
     return antd.Row(
-        [
-            antd.Col(element, style={"width": width, "marginRight": gap})
-            for element, width in zip(elements, widths)
-        ],
+        [antd.Col(element, style={"margin": 10}) for element in elements],
         align="middle",
-        style={"height": "100%", "marginTop": 4},
-        justify=justify,
+        style={"height": "100%", "width": "100%", "marginTop": 4},
+        justify="center",
     )
 
 
@@ -68,37 +64,38 @@ def input_panel(signal_definitions_obs):
         ticker = antd.AutoComplete(
             options=lambda: [{"value": ticker} for ticker in tickers()],
             value=signal_obs_dict["ticker"],
-            style={"textAlign": "right", "width": "100%"},
+            style={"textAlign": "right", "width": 120},
             filterOption=antd.AutoComplete.case_insensitive_filter_options(),
             allowClear=True,
         )
-        return layout_timeseries_definition_row(
-            [
-                antd.Button(
-                    "-",
-                    onClick=lambda: signal_definitions_obs.remove(signal_obs_dict),
-                    style={"width": "100%"},
-                ),
-                antd.Select(
-                    value=signal_obs_dict["source"],
-                    options=[{"value": YAHOO}, {"value": FRED}],
-                    style={"width": "100%"},
-                    onChange=lambda _: ticker.set(None),
-                ),
-                ticker,
-                antd.Input(value=signal_obs_dict["name"], style={"width": "100%"}),
-                antd.Typography(lambda: tickers().get(ticker(), "Unknown time series")),
-            ]
-        )
-
-    return antd.Col(
-        [
-            layout_timeseries_definition_row(
-                [antd.Button("+", onClick=add_signal, style={"width": "100%"})]
-                + [antd.Typography.Title(title, level=5) for title in TITLES]
+        return {
+            "key": next(signal_count),
+            "remove": antd.Button(
+                "-", onClick=lambda: signal_definitions_obs.remove(signal_obs_dict)
             ),
-            r.Mapping(create_timeseries_row, signal_definitions_obs),
+            "Source": antd.Select(
+                value=signal_obs_dict["source"],
+                options=[{"value": YAHOO}, {"value": FRED}],
+                onChange=lambda _: ticker.set(None),
+            ),
+            "Ticker": ticker,
+            "Name": antd.Input(value=signal_obs_dict["name"], style={"width": 150}),
+            "Description": antd.Typography(
+                lambda: tickers().get(ticker(), "Unknown time series")
+            ),
+        }
+
+    return antd.Table(
+        columns=[
+            {
+                "title": antd.Button("+", onClick=add_signal, style={"width": "100%"}),
+                "dataIndex": "remove",
+                "key": "remove",
+            }
         ]
+        + [{"title": name, "dataIndex": name, "key": name} for name in TITLES],
+        dataSource=r.Mapping(create_timeseries_row, signal_definitions_obs),
+        pagination=False,
     )
 
 
@@ -134,23 +131,17 @@ def plot_panel(editor, signal_definitions_obs):
     update = antd.Button(
         ["Update", ant_icons.ReloadOutlined()], onClick=evaluate_script, type="primary"
     )
-    settings = antd.Col(
+    settings = layout_timeseries_definition_row(
         [
-            layout_timeseries_definition_row(
-                [
-                    html.label("Start"),
-                    start_date,
-                    html.label("End"),
-                    end_date,
-                    html.label("Range slider"),
-                    range_slider,
-                    html.label("Show legends"),
-                    show_legends,
-                ],
-                [40, 140] * 2 + [100, 60] * 2,
-                2,
-            )
-        ]
+            html.label("Start"),
+            start_date,
+            html.label("End"),
+            end_date,
+            html.label("Range slider"),
+            range_slider,
+            html.label("Show legends"),
+            show_legends,
+        ],
     )
 
     def layout():
@@ -203,7 +194,7 @@ def app(_):
                 plot,
                 antd.Row(update, justify="center"),
                 antd.Divider(),
-                settings,
+                antd.Row(settings, justify="center", align="center"),
                 antd.Divider(),
                 inputs,
                 framed_editor,
