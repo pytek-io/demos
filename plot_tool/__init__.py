@@ -96,6 +96,7 @@ def input_panel(signal_definitions_obs):
         + [{"title": name, "dataIndex": name, "key": name} for name in TITLES],
         dataSource=r.Mapping(create_timeseries_row, signal_definitions_obs),
         pagination=False,
+        size="small",
     )
 
 
