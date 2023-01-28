@@ -84,7 +84,7 @@ def build_menu(root_directory):
         menuItems = []
         for component_name in sorted(os.listdir(category_folder)):
             component_folder = pathlib.Path(category_folder, component_name)
-            if not component_folder.is_dir() or component_name == "cascader":
+            if not component_folder.is_dir():
                 continue
             nb_cols = int(
                 pathlib.Path(component_folder, "summary.txt")
