@@ -60,14 +60,6 @@ def app(window: r.Window):
             else component_and_settings_value
         )
 
-    def settings():
-        component_and_settings_value = component_and_settings()
-        return (
-            call_if_callable(component_and_settings_value.settings)
-            if hasattr(component_and_settings_value, "settings")
-            else "No settings to show"
-        )
-
     def maybe_editor():
         if actual_path():
             try:
@@ -125,17 +117,6 @@ def app(window: r.Window):
                                             "width": "inherit",
                                             "padding": 20,
                                             "overflow": "scroll",
-                                        },
-                                    ),
-                                ),
-                                (
-                                    "Settings",
-                                    html.div(
-                                        settings,
-                                        style={
-                                            "height": "inherit",
-                                            "width": "inherit",
-                                            "padding": 20,
                                         },
                                     ),
                                 ),
