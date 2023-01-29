@@ -70,30 +70,32 @@ def input_panel(signal_definitions_obs):
         )
         return {
             "key": next(signal_count),
-            "remove": antd.Button(
-                "-", onClick=lambda: signal_definitions_obs.remove(signal_obs_dict)
-            ),
+            "Name": antd.Input(value=signal_obs_dict["name"], style={"width": 150}),
             "Source": antd.Select(
                 value=signal_obs_dict["source"],
                 options=[{"value": YAHOO}, {"value": FRED}],
                 onChange=lambda _: ticker.set(None),
             ),
             "Ticker": ticker,
-            "Name": antd.Input(value=signal_obs_dict["name"], style={"width": 150}),
             "Description": antd.Typography(
                 lambda: tickers().get(ticker(), "Unknown time series")
+            ),
+            "remove": html.a(
+                "delete",
+                onClick=lambda: signal_definitions_obs.remove(signal_obs_dict),
+                target="_blank",
             ),
         }
 
     return antd.Table(
-        columns=[
+        columns=[{"title": name, "dataIndex": name, "key": name} for name in TITLES]
+        + [
             {
-                "title": antd.Button("+", onClick=add_signal, style={"width": "100%"}),
+                "title": antd.Button("+", onClick=add_signal),
                 "dataIndex": "remove",
                 "key": "remove",
             }
-        ]
-        + [{"title": name, "dataIndex": name, "key": name} for name in TITLES],
+        ],
         dataSource=r.Mapping(create_timeseries_row, signal_definitions_obs),
         pagination=False,
         size="small",
