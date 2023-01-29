@@ -1,9 +1,8 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 columns = [
-    {"title": "Name", "dataIndex": "name", "render": r.js("a")},
+    {"title": "Name", "dataIndex": "name"},
     {
         "title": "Cash Assets",
         "className": "column-money",
@@ -39,6 +38,4 @@ def app():
         columns=columns,
         dataSource=data,
         bordered=True,
-        title=r.js("constant", "Header"),
-        footer=r.js("constant", "Footer"),
     )

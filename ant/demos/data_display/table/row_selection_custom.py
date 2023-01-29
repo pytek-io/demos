@@ -1,7 +1,6 @@
 import reflect as r
-from reflect import Callback
-from reflect_antd import Table
-from reflect_html import *
+import reflect_antd as antd
+import reflect_html as html
 
 columns = [
     {"title": "Name", "dataIndex": "name"},
@@ -26,7 +25,7 @@ def app():
         selected_row_keys.set(newSelectedRowKeys)
 
     def select_keys(selector):
-        return Callback(
+        return r.Callback(
             lambda selectable_keys: selected_row_keys.set(
                 [key for key in selectable_keys if selector(key)]
             )
@@ -35,22 +34,35 @@ def app():
     def rowSelection():
         return {
             "selectedRowKeys": selected_row_keys(),
-            "onChange": Callback(onChange),
+            "onChange": r.Callback(onChange),
             "selections": [
-                Table.SELECTION_ALL,
-                Table.SELECTION_INVERT,
-                Table.SELECTION_NONE,
+                antd.Table.SELECTION_ALL,
+                antd.Table.SELECTION_INVERT,
+                antd.Table.SELECTION_NONE,
                 {
                     "key": "odd",
                     "text": "Odd rows",
                     "onSelect": select_keys(lambda x: x % 2 == 1),
                 },
                 {
-                    "key": "odd",
+                    "key": "even",
                     "text": "Even rows",
                     "onSelect": select_keys(lambda x: x % 2 == 0),
                 },
             ],
+            "type": shape(),
         }
 
-    return Table(columns=columns, rowSelection=rowSelection, dataSource=data)
+    shape = antd.Radio.Group(
+        [
+            antd.Radio("Checkbox", value="checkbox"),
+            antd.Radio("Radio", value="radio"),
+        ]
+    )
+    return html.div(
+        [
+            shape,
+            antd.Divider(),
+            antd.Table(columns=columns, rowSelection=rowSelection, dataSource=data),
+        ]
+    )

@@ -1,6 +1,6 @@
-from reflect_antd import Button, Space, Table
-from reflect_html import *
-
+import reflect_antd as antd
+import reflect_html as html
+import reflect as r
 
 def app():
     columns = [
@@ -19,15 +19,15 @@ def app():
                     ],
                 },
             ],
-            "onFilter": js("column_filter"),
-            "sorter": js("substract_attributes", "name.length"),
+            "onFilter": r.js("column_filter"),
+            "sorter": r.js("substract_attributes", "name.length"),
             "sortDirections": ["descend"],
         },
         {
             "title": "Age",
             "dataIndex": "age",
             "defaultSortOrder": "descend",
-            "sorter": js("substract_attributes", "age"),
+            "sorter": r.js("substract_attributes", "age"),
         },
         {
             "title": "Address",
@@ -37,8 +37,8 @@ def app():
                 {"text": "New York", "value": "New York"},
             ],
             "filterMultiple": False,
-            "onFilter": js("column_filter"),
-            "sorter": js("substract_attributes", "address.length"),
+            "onFilter": r.js("column_filter"),
+            "sorter": r.js("substract_attributes", "address.length"),
             "sortDirections": ["descend", "ascend"],
         },
     ]
@@ -64,13 +64,13 @@ def app():
         {"key": "4", "name": "Jim Red", "age": 32, "address": "London No. 2 Lake Park"},
     ]
     return [
-        Space(
+        antd.Space(
             [
-                Button("Sort age", onClick=this.setAgeSort),
-                Button("Clear filters", onClick=this.clearFilters),
-                Button("Clear filters and sorters", onClick=this.clearAll),
+                antd.Button("Sort age", onClick=this.setAgeSort),
+                antd.Button("Clear filters", onClick=this.clearFilters),
+                antd.Button("Clear filters and sorters", onClick=this.clearAll),
             ],
             style={"marginBottom": 16},
         ),
-        Table(columns=columns, dataSource=data, onChange=this.handleChange),
+        antd.Table(columns=columns, dataSource=data, onChange=this.handleChange),
     ]
