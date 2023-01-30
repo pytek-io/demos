@@ -1,8 +1,19 @@
 import reflect as r
 import reflect_antd as antd
 import reflect_html as html
-
+import reflect_ant_icons as icons
 Panel = antd.Collapse.Panel
+
+
+collapse_expand_icon = r.JSMethod(
+    "collapse_renderer",
+    """
+    return createElement(
+      reflect_ant_icons.CaretRightOutlined, { rotate: (arg.isActive ? 90 : 0) }
+    );
+""",
+    "arg",
+)
 
 
 def app():
@@ -34,5 +45,5 @@ it can be found as a welcome guest in many households across the world.
         ],
         bordered=False,
         defaultActiveKey=["1"],
-        expandIcon=r.js("collapseExpandIcon"),
+        expandIcon=collapse_expand_icon,
     )

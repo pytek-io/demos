@@ -2,13 +2,18 @@ import datetime
 
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 RangePicker = antd.DatePicker.RangePicker
 dateFormat = "YYYY/MM/DD"
 monthFormat = "YYYY/MM"
 dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"]
-JS_MODULES = ["ant_demo"]
+
+
+datePickerFormatter = r.JSMethod(
+    "datePickerFormatter",
+    f"""return `custom format: ${{value.format('{dateFormat}')}}`""",
+    "value",
+)
 
 
 def app():
@@ -21,9 +26,7 @@ def app():
                 defaultValue=defaultValue, format=monthFormat, picker="month"
             ),
             RangePicker(defaultValue=[defaultValue, defaultValue], format=dateFormat),
-            antd.DatePicker(
-                defaultValue=defaultValue, format=r.js("datePickerFormatter")
-            ),
+            antd.DatePicker(defaultValue=defaultValue, format=datePickerFormatter),
         ],
         direction="vertical",
         size=12,

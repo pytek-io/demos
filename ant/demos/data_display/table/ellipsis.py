@@ -1,6 +1,12 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
+
+create_anchor = r.JSMethod(
+    "create_anchor",
+    """return createElement(reflect_html.a, {}, text)""",
+    "text",
+)
+
 
 columns = [
     {
@@ -8,7 +14,7 @@ columns = [
         "dataIndex": "name",
         "key": "name",
         "width": 150,
-        "render": r.js("a"),
+        "render": create_anchor,
     },
     {"title": "Age", "dataIndex": "age", "key": "age", "width": 80},
     {"title": "Address", "dataIndex": "address", "key": "address 1", "ellipsis": True},

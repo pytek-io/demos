@@ -1,8 +1,11 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 Link = antd.Anchor.Link
+
+getCurrentAnchor = r.JSMethod(
+    "getCurrentAnchor", "return '#components-anchor-demo-static'"
+)
 
 
 def app():
@@ -20,5 +23,5 @@ def app():
             ),
         ],
         affix=False,
-        getCurrentAnchor=r.js("constant", "#components-anchor-demo-static"),
+        getCurrentAnchor=getCurrentAnchor,
     )

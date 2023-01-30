@@ -1,6 +1,6 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
+
 
 options = [
     {
@@ -27,12 +27,24 @@ options = [
     },
 ]
 
+filterCascaderSearch = r.JSMethod(
+    "filterCascaderSearch",
+    """
+      return path.some(
+        (option) =>
+          option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+      );
+    """,
+    "inputValue",
+    "path",
+)
+
 
 def app():
     cascader = antd.Cascader(
         options=options,
         placeholder="Please select",
-        showSearch=r.js("filterCascaderSearch"),
+        showSearch=filterCascaderSearch,
     )
-    r.autorun(lambda: print(cascader()))
+    r.autoprint(cascader)
     return cascader

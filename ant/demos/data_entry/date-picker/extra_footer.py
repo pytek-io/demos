@@ -1,12 +1,14 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 RangePicker = antd.DatePicker.RangePicker
 
 
+def footer(content):
+    return r.JSMethod("constant", f"""return '{content}'""", "arg")
+
+
 def app():
-    footer = lambda content: r.js("constant", content)
     return antd.Space(
         [
             antd.DatePicker(renderExtraFooter=footer("Select date XYZ")),

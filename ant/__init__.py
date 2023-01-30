@@ -45,7 +45,6 @@ CSS = [
     "demos/ant_site_logo.css",
     "demos/ant/collated.css",
 ]
-JS_MODULES = ["ant_demo"]
 FAVICON = ANT_LOGO_ICON_PATH
 DISPLAY_DEMOS_ERRORS = False
 

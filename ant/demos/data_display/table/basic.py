@@ -1,4 +1,3 @@
-import reflect as r
 import reflect_antd as antd
 
 
@@ -7,7 +6,7 @@ def app():
         {"title": "Name", "dataIndex": "name", "key": "name"},
         {"title": "Age", "dataIndex": "age", "key": "age"},
         {"title": "Address", "dataIndex": "address", "key": "address"},
-        {"title": "Tags", "key": "tags", "dataIndex": "tags", "render": test},
+        {"title": "Tags", "key": "tags", "dataIndex": "tags"},
         {"title": "Action", "key": "action"},
     ]
     data = [

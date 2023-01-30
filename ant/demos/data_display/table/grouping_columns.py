@@ -1,6 +1,15 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
+from itertools import count
+
+def subtract_attributes(name):
+    return r.JSMethod(f"substract_{name}", f"return a.{name} - b.{name};", "a", "b")
+
+
+is_included = r.JSMethod(
+    "is_included", "return record.name.indexOf(value) === 0;", "value", "record"
+)
+
 
 columns = [
     {
@@ -10,7 +19,7 @@ columns = [
         "width": 100,
         "fixed": "left",
         "filters": [{"text": "Joe", "value": "Joe"}, {"text": "John", "value": "John"}],
-        "onFilter": r.js("column_filter"),
+        "onFilter": is_included,
     },
     {
         "title": "Other",
@@ -20,7 +29,7 @@ columns = [
                 "dataIndex": "age",
                 "key": "age",
                 "width": 150,
-                "sorter": r.js("substract_attributes", "age"),
+                "sorter": subtract_attributes("age"),
             },
             {
                 "title": "Address",
@@ -72,20 +81,23 @@ columns = [
         "fixed": "right",
     },
 ]
-data = [
-    {
-        "key": i,
-        "name": "John Brown",
-        "age": i + 1,
-        "street": "Lake Park",
-        "building": "C",
-        "number": 2035,
-        "companyAddress": "Lake Street 42",
-        "companyName": "SoftLake Co",
-        "gender": "M",
-    }
-    for i in range(100)
-]
+data = []
+key = count()
+for i in range(10):
+    for name in ["John Brown", "Joe Black"]:
+        data.append(
+            {
+                "key": next(key),
+                "name": name,
+                "age": i + 1,
+                "street": "Lake Park",
+                "building": "C",
+                "number": 2035,
+                "companyAddress": "Lake Street 42",
+                "companyName": "SoftLake Co",
+                "gender": "M",
+            }
+        )
 
 
 def app():

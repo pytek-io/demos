@@ -2,16 +2,46 @@ import datetime
 
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 RangePicker = antd.DatePicker.RangePicker
-JS_MODULES = ["ant_demo"]
+
+
+disabledDate = r.JSMethod(
+    "disabledDate", """return current && current < moment().endOf("day")""", "current"
+)
+
+disabledDateTime = r.JSMethod(
+    "disabledDateTime",
+    """return {
+        disabledHours: () => range(0, 24).splice(4, 20),
+        disabledMinutes: () => range(30, 60),
+        disabledSeconds: () => [55, 56],
+      };
+    }""",
+)
+
+datePickerDisableRangeTime = r.JSMethod(
+    "datePickerDisableRangeTime",
+    """return {
+
+    function disabledRangeTime(_, type) {
+      if (type === "start") {
+        return {
+          disabledHours: () => range(0, 60).splice(4, 20),
+          disabledMinutes: () => range(30, 60),
+          disabledSeconds: () => [55, 56],
+        };
+      }
+      return {
+        disabledHours: () => range(0, 60).splice(20, 4),
+        disabledMinutes: () => range(0, 31),
+        disabledSeconds: () => [55, 56],
+      };
+    }""",
+)
 
 
 def app():
-    disabledDate = r.js("datePickerDisableDate")
-    disabledDateTime = r.js("datePickerDisableDateTime")
-    disabledRangeTime = r.js("datePickerDisableRangeTime")
     return antd.Space(
         [
             antd.DatePicker(
@@ -24,7 +54,7 @@ def app():
             RangePicker(disabledDate=disabledDate),
             RangePicker(
                 disabledDate=disabledDate,
-                disabledTime=disabledRangeTime,
+                disabledTime=datePickerDisableRangeTime,
                 showTime={
                     "hideDisabledOptions": True,
                     "defaultValue": [

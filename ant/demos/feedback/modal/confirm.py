@@ -4,7 +4,6 @@ import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 
 confirm = antd.Modal.confirm
-JS_MODULES = ["ant_demo", "ant-icons"]
 
 
 def on_ok():

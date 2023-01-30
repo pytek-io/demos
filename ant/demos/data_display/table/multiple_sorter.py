@@ -1,23 +1,27 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
+
+def subtract_attributes(name):
+    return r.JSMethod(f"substract_{name}", f"return a.{name} - b.{name};", "a", "b")
+
+
 
 columns = [
     {"title": "Name", "dataIndex": "name"},
     {
         "title": "Chinese Score",
         "dataIndex": "chinese",
-        "sorter": {"compare": r.js("substract_attributes", "chinese"), "multiple": 3},
+        "sorter": {"compare": subtract_attributes("chinese"), "multiple": 3},
     },
     {
         "title": "Math Score",
         "dataIndex": "math",
-        "sorter": {"compare": r.js("substract_attributes", "math"), "multiple": 2},
+        "sorter": {"compare": subtract_attributes("math"), "multiple": 2},
     },
     {
         "title": "English Score",
         "dataIndex": "english",
-        "sorter": {"compare": r.js("substract_attributes", "english"), "multiple": 1},
+        "sorter": {"compare": subtract_attributes("english"), "multiple": 1},
     },
 ]
 data = [

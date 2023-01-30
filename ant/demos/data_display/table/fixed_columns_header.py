@@ -1,6 +1,11 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
+
+
+create_anchor = r.JSMethod(
+    "create_anchor",
+    """return createElement(reflect_html.a, {}, "action")""",
+)
 
 
 def app():
@@ -32,7 +37,7 @@ def app():
             "key": "operation",
             "fixed": "right",
             "width": 100,
-            "render": r.js("constant", html.a("action")),
+            "render": create_anchor,
         },
     ]
     data = [

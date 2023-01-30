@@ -1,6 +1,18 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
+
+create_anchor = r.JSMethod(
+    "create_anchor",
+    """return createElement(reflect_html.a, {}, text)""",
+    "text",
+)
+
+address_renderer = r.JSMethod(
+    "address_renderer",
+    """return createElement(reflect_ant.Tooltip, {placement: 'topLeft', title: address}, address)""",
+    "address",
+)
+
 
 columns = [
     {
@@ -8,36 +20,37 @@ columns = [
         "dataIndex": "name",
         "key": "name",
         "width": 150,
-        "render": r.js("a"),
+        "render": create_anchor,
     },
     {"title": "Age", "dataIndex": "age", "key": "age", "width": 80},
     {
         "title": "Address",
         "dataIndex": "address",
+        "width": 80,
         "key": "address 1",
         "ellipsis": {"showTitle": False},
-        "render": r.js("render_address"),
+        "render": address_renderer,
     },
     {
         "title": "Long Column Long Column Long Column",
         "dataIndex": "address",
         "key": "address 2",
         "ellipsis": {"showTitle": False},
-        "render": r.js("render_address"),
+        "render": address_renderer,
     },
     {
         "title": "Long Column Long Column",
         "dataIndex": "address",
         "key": "address 3",
         "ellipsis": {"showTitle": False},
-        "render": r.js("render_address"),
+        "render": address_renderer,
     },
     {
         "title": "Long Column",
         "dataIndex": "address",
         "key": "address 4",
         "ellipsis": {"showTitle": False},
-        "render": r.js("render_address"),
+        "render": address_renderer,
     },
 ]
 data = [

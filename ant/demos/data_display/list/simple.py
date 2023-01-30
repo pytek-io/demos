@@ -10,6 +10,25 @@ data = [
 ]
 
 
+list_item_renderer_highlight = r.JSMethod(
+    "list_item_renderer_highlight",
+    """
+return createElement(
+  reflect_ant.List.Item,
+  {},
+  createElement(reflect_ant.Typography.Text, { mark: true }, item)
+);
+""",
+    "item",
+)
+
+list_item_renderer = r.JSMethod(
+    "list_item_renderer",
+    """return createElement(reflect_ant.List.Item, {}, item);""",
+    "item",
+)
+
+
 def app():
     return html.div(
         [
@@ -19,7 +38,7 @@ def app():
                 footer=html.div("Footer"),
                 bordered=True,
                 dataSource=data,
-                renderItem=r.js("simple_list_renderer_1"),
+                renderItem=list_item_renderer_highlight,
             ),
             antd.Divider("Small Size", orientation="left"),
             antd.List(
@@ -28,7 +47,7 @@ def app():
                 footer=html.div("Footer"),
                 bordered=True,
                 dataSource=data,
-                renderItem=r.js("simple_list_renderer_2"),
+                renderItem=list_item_renderer,
             ),
             antd.Divider("Large Size", orientation="left"),
             antd.List(
@@ -37,7 +56,7 @@ def app():
                 footer=html.div("Footer"),
                 bordered=True,
                 dataSource=data,
-                renderItem=r.js("simple_list_renderer_2"),
+                renderItem=list_item_renderer,
             ),
         ]
     )

@@ -1,6 +1,5 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 options = [
     {
@@ -32,7 +31,6 @@ def app():
     cascader = antd.Cascader(
         options=options,
         expandTrigger="hover",
-        displayRender=r.js("cascaderHoverDisplayRender"),
     )
-    r.autorun(lambda: print(cascader()))
+    r.autoprint(cascader)
     return cascader

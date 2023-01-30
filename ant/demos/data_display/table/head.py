@@ -2,6 +2,21 @@ import reflect as r
 import reflect_antd as antd
 
 
+def subtract_attributes(name):
+    return r.JSMethod(f"substract_{name}", f"return a.{name} - b.{name};", "a", "b")
+
+
+def compare_length(name):
+    return r.JSMethod(
+        f"substract_{name}", f"return a.{name}.length - b.{name}.length;", "a", "b"
+    )
+
+
+is_included = r.JSMethod(
+    "is_included", "return record.name.indexOf(value) === 0;", "value", "record"
+)
+
+
 def app():
     columns = [
         {
@@ -10,24 +25,24 @@ def app():
             "filters": [
                 {"text": "Joe", "value": "Joe"},
                 {"text": "Jim", "value": "Jim"},
-                {
-                    "text": "Submenu",
-                    "value": "Submenu",
-                    "children": [
-                        {"text": "Green", "value": "Green"},
-                        {"text": "Black", "value": "Black"},
-                    ],
-                },
+                # {
+                #     "text": "Submenu",
+                #     "value": "Submenu",
+                #     "children": [
+                #         {"text": "Green", "value": "Green"},
+                #         {"text": "Black", "value": "Black"},
+                #     ],
+                # },
             ],
-            "onFilter": r.js("column_filter"),
-            "sorter": r.js("substract_attributes", "name.length"),
+            "onFilter": is_included,
+            "sorter": compare_length("name"),
             "sortDirections": ["descend"],
         },
         {
             "title": "Age",
             "dataIndex": "age",
             "defaultSortOrder": "descend",
-            "sorter": r.js("substract_attributes", "age"),
+            "sorter": subtract_attributes("age"),
         },
         {
             "title": "Address",
@@ -37,8 +52,8 @@ def app():
                 {"text": "New York", "value": "New York"},
             ],
             "filterMultiple": False,
-            "onFilter": r.js("column_filter"),
-            "sorter": r.js("substract_attributes", "address.length"),
+            "onFilter": is_included,
+            "sorter": compare_length("address"),
             "sortDirections": ["descend", "ascend"],
         },
     ]
