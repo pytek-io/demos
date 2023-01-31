@@ -10,7 +10,7 @@ from .config import COLUMNS
 
 
 class App:
-    def __init__(self, default="nasdaq"):
+    def __init__(self, window: r.Window, default="nasdaq"):
         controller = r.Controller()
         self.settings = antd.Select(
             options=[

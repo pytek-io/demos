@@ -2,10 +2,9 @@ import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 
-custom_icon = r.JSMethod(
+custom_icon = r.js_arrow(
     "custom_icon",
-    """return createElement(reflect_ant_icons[selected ? "FrownFilled" : "FrownOutlined"]);""",
-    "selected",
+    "selected => reflect_ant_icons[selected ? 'FrownFilled' : 'FrownOutlined']()",
 )
 
 

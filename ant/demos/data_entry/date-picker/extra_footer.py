@@ -5,7 +5,7 @@ RangePicker = antd.DatePicker.RangePicker
 
 
 def footer(content):
-    return r.JSMethod("constant", f"""return '{content}'""", "arg")
+    return r.js_arrow(f"constant_{content}", f"() => '{content}'")
 
 
 def app():
@@ -14,7 +14,7 @@ def app():
             antd.DatePicker(renderExtraFooter=footer("Select date XYZ")),
             antd.DatePicker(renderExtraFooter=footer("Select time XYZ"), showTime=True),
             RangePicker(renderExtraFooter=footer("Select date range XYZ")),
-            RangePicker(renderExtraFooter=footer("Select time XYZ"), showTime=True),
+            RangePicker(renderExtraFooter=footer("Select time range XYZ"), showTime=True),
             antd.DatePicker(
                 renderExtraFooter=footer("Select month XYZ"), picker="month"
             ),

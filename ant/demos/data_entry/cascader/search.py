@@ -27,16 +27,14 @@ options = [
     },
 ]
 
-filterCascaderSearch = r.JSMethod(
+filterCascaderSearch = r.js_arrow(
     "filterCascaderSearch",
     """
-      return path.some(
+      (inputValue, path) => path.some(
         (option) =>
           option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
       );
     """,
-    "inputValue",
-    "path",
 )
 
 

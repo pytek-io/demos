@@ -1,18 +1,14 @@
 import reflect as r
 import reflect_antd as antd
 import reflect_html as html
-import reflect_ant_icons as icons
+
 Panel = antd.Collapse.Panel
 
 
-collapse_expand_icon = r.JSMethod(
+collapse_expand_icon = r.js_arrow(
     "collapse_renderer",
-    """
-    return createElement(
-      reflect_ant_icons.CaretRightOutlined, { rotate: (arg.isActive ? 90 : 0) }
-    );
-""",
-    "arg",
+    "({isActive}) => reflect_ant_icons.CaretRightOutlined([], { rotate: (isActive ? 90 : 0)});",
+    ["reflect_ant_icons"]
 )
 
 

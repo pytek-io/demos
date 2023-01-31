@@ -1,9 +1,9 @@
 import reflect as r
 import reflect_antd as antd
 
-def subtract_attributes(name):
-    return r.JSMethod(f"substract_{name}", f"return a.{name} - b.{name};", "a", "b")
 
+def subtract_attributes(name):
+    return r.js_arrow(f"subtract_{name}", f"(a, b) => a.{name} - b.{name}")
 
 
 columns = [

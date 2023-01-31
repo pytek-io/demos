@@ -10,22 +10,13 @@ data = [
 ]
 
 
-list_item_renderer_highlight = r.JSMethod(
+list_item_renderer_highlight = r.js_arrow(
     "list_item_renderer_highlight",
-    """
-return createElement(
-  reflect_ant.List.Item,
-  {},
-  createElement(reflect_ant.Typography.Text, { mark: true }, item)
-);
-""",
-    "item",
+    "item => reflect_ant.List.Item([reflect_ant.Typography.Text([item], { mark: true })])",
 )
 
-list_item_renderer = r.JSMethod(
-    "list_item_renderer",
-    """return createElement(reflect_ant.List.Item, {}, item);""",
-    "item",
+list_item_renderer = r.js_arrow(
+    "list_item_renderer", "reflect_ant.List.Item"
 )
 
 

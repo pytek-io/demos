@@ -3,18 +3,16 @@ import reflect_antd as antd
 
 
 def subtract_attributes(name):
-    return r.JSMethod(f"substract_{name}", f"return a.{name} - b.{name};", "a", "b")
+    return r.js_arrow(f"subtract_{name}", f"(a, b) => a.{name} - b.{name}")
 
 
 def compare_length(name):
-    return r.JSMethod(
-        f"substract_{name}", f"return a.{name}.length - b.{name}.length;", "a", "b"
+    return r.js_arrow(
+        f"compare_{name}_length", f"(a, b) => a.{name}.length - b.{name}.length"
     )
 
 
-is_included = r.JSMethod(
-    "is_included", "return record.name.indexOf(value) === 0;", "value", "record"
-)
+is_included = r.js_arrow("is_included", "(value, {name}) => name.indexOf(value) === 0")
 
 
 def app():

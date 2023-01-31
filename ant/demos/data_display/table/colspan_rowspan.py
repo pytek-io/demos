@@ -3,16 +3,12 @@ import reflect_antd as antd
 
 # In the fifth row, other columns are merged into first column
 # by setting it's colSpan to be 0
-shared_on_cell = r.JSMethod(
-    "shared_on_cell", "return index === 1 ? { colSpan: 0 } : {};", "_", "index"
-)
-render_name = r.JSMethod(
-    "render_name", "return  { colSpan: index === 1 ? 5 :1 };", "_", "index"
-)
-
-render_phone_number = r.JSMethod(
+col_one = r.js_arrow("col_one", "(_, index) => index === 1 ? { colSpan: 0 } : {}")
+render_name = r.js_arrow("render_name", "(_, index) => {colSpan: index === 1 ? 5 :1}")
+render_phone_number = r.js_arrow(
     "render_phone_number",
     """
+    (_, index) => {
       if (index === 3) {
         return { rowSpan: 2 };
       }
@@ -24,9 +20,7 @@ render_phone_number = r.JSMethod(
         return { colSpan: 0 };
       }
       return {};
-""",
-    "_",
-    "index",
+    }""",
 )
 data = [
     {
@@ -73,15 +67,15 @@ data = [
 
 columns = [
     {"title": "Name", "dataIndex": "name", "onCell": render_name},
-    {"title": "Age", "dataIndex": "age", "onCell": shared_on_cell},
+    {"title": "Age", "dataIndex": "age", "onCell": col_one},
     {
         "title": "Home phone",
         "colSpan": 2,
         "dataIndex": "tel",
         "onCell": render_phone_number,
     },
-    {"title": "Phone", "colSpan": 0, "dataIndex": "phone", "onCell": shared_on_cell},
-    {"title": "Address", "dataIndex": "address", "onCell": shared_on_cell},
+    {"title": "Phone", "colSpan": 0, "dataIndex": "phone", "onCell": col_one},
+    {"title": "Address", "dataIndex": "address", "onCell": col_one},
 ]
 
 

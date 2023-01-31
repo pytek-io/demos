@@ -1,31 +1,32 @@
 import reflect as r
 import reflect_antd as antd
 import reflect_html as html
-import reflect_ant_icons as ant_icons
 
-index_plus_one = r.JSMethod("index_plus_one", "return index + 1;", "index")
+index_plus_one = r.js_arrow("index_plus_one", "({index}) => index + 1")
 
-custom_icons = r.JSMethod(
+custom_icons = r.js_arrow(
     "custom_icons",
-    """
-     const icon = [
-      reflect_ant_icons.FrownOutlined,
-      reflect_ant_icons.FrownOutlined,
-      reflect_ant_icons.MehOutlined,
-      reflect_ant_icons.SmileOutlined,
-      reflect_ant_icons.SmileOutlined,
-    ][arg.index];
-     return createElement(icon);
+    """({ index }) => {
+  icon = [
+    reflect_ant_icons.FrownOutlined,
+    reflect_ant_icons.FrownOutlined,
+    reflect_ant_icons.MehOutlined,
+    reflect_ant_icons.SmileOutlined,
+    reflect_ant_icons.SmileOutlined,
+  ][index];
+  return icon();
+};
 """,
-    "arg",
+    ["reflect_ant_icons"],
 )
 
 
 def app():
     return html.div(
         [
-            ant_icons.CaretRightFilled(),
-            # antd.Rate(defaultValue=2, character=index_plus_one),
+            antd.Rate(defaultValue=2),
+            html.br(),
+            antd.Rate(defaultValue=2, character=index_plus_one),
             html.br(),
             antd.Rate(defaultValue=3, character=custom_icons),
         ]

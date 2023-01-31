@@ -2,12 +2,11 @@ import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 
-amount_formatter = r.JSMethod(
+amount_formatter = r.js_arrow(
     "amount_formatter",
-    'return `$ ${value}`.replace(/\\B(?=(\\d{3})+(?!\\d))/g, ",")',
-    "value",
+    """(value) => `$ ${value}`.replace(/\\B(?=(\\d{3})+(?!\\d))/g, ",")""",
 )
-percent_formatter = r.JSMethod("percent_formatter", "return `${value}%`", "value")
+percent_formatter = r.js_arrow("percent_formatter", "(value) => `${value}%`")
 
 
 def app():

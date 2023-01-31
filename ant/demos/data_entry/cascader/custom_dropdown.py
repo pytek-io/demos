@@ -23,22 +23,21 @@ import reflect_antd as antd
 #     return <span key={option.value}>{label} / </span>;
 #   });
 
-render_selection = r.JSMethod(
+render_selection = r.js_arrow(
     "render_selection",
     """
-return labels.map((label, i) => {
-  const option = selectedOptions[i];
-  if (i === labels.length - 1) {
-    return createElement(
-      reflect_html.span,
-      { key: option.value }, 
-      createElement(reflect_html.a, option.code)
-    );
-  }
-  return createElement(reflect_html.span, { key: option.value }, label);
-});
+(labels, selectedOptions) => {
+  return labels.map((label, i) => {
+    const option = selectedOptions[i];
+    if (i === labels.length - 1) {
+      return reflect_html.span(reflect_html.a(option.code), {
+        key: option.value,
+      });
+    }
+    return reflect_html.span(label, { key: option.value });
+  });
+};
 """,
-    "labels", "selectedOptions"
 )
 
 options = [

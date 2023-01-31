@@ -36,16 +36,14 @@ def create_row_settings(elements):
     )
 
 
-filter_options = r.JSMethod(
+filter_options = r.js_arrow(
     "filter",
-    "return option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1",
-    "inputValue",
-    "option",
+    "(inputValue, {value}) => value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1",
 )
 
 
 class App:
-    def __init__(self, ticker, stand_alone=True):
+    def __init__(self, window: r.Window, ticker, stand_alone=True):
         today = datetime.datetime.today()
         self.title = ticker
         self.controller = r.Controller()
@@ -259,7 +257,7 @@ def content(ticker, stand_alone=True):
 
 
 def app(window: r.Window):
-    app = App(window.hash)
+    app = App(window, window.hash)
     window.set_title(app.title)
     return antd.Row(
         [

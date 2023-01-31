@@ -3,17 +3,8 @@ import datetime
 import reflect as r
 import reflect_antd as antd
 
-compare_dates = r.JSMethod(
-    "compare_dates",
-    """{
-        console.log(date1, date2)
-        let result = date2.getTime() > date1.getTime();
-        return greater ? result : !result;
-    }""",
-    "date1",
-    "greater",
-    "date2",
-)
+greater_dates = r.js_arrow("greater_dates", "(date1, date2) => date2 > date1")
+less_dates = r.js_arrow("lesser_dates", "(date1, date2) => date2 < date1")
 
 
 def app():
@@ -23,7 +14,7 @@ def app():
         [
             antd.Col(
                 antd.DatePicker(
-                    disabledDate=compare_dates(end_value(), True),
+                    disabledDate=greater_dates(end_value()),
                     format="YYYY-MM-DD",
                     value=start_value,
                     placeholder="Start",
@@ -31,7 +22,7 @@ def app():
             ),
             antd.Col(
                 antd.DatePicker(
-                    disabledDate=compare_dates(start_value(), False),
+                    disabledDate=less_dates(start_value()),
                     format="YYYY-MM-DD",
                     value=end_value,
                     placeholder="End",

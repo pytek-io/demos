@@ -2,13 +2,12 @@ import reflect as r
 import reflect_antd as antd
 from itertools import count
 
+
 def subtract_attributes(name):
-    return r.JSMethod(f"substract_{name}", f"return a.{name} - b.{name};", "a", "b")
+    return r.js_arrow(f"subtract_{name}", f"(a, b) => a.{name} - b.{name}")
 
 
-is_included = r.JSMethod(
-    "is_included", "return record.name.indexOf(value) === 0;", "value", "record"
-)
+is_included = r.js_arrow("is_included", "(value, {name}) => name.indexOf(value) === 0")
 
 
 columns = [

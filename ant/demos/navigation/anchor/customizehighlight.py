@@ -3,8 +3,8 @@ import reflect_antd as antd
 
 Link = antd.Anchor.Link
 
-getCurrentAnchor = r.JSMethod(
-    "getCurrentAnchor", "return '#components-anchor-demo-static'"
+getCurrentAnchor = r.js_arrow(
+    "getCurrentAnchor", "() => '#components-anchor-demo-static'"
 )
 
 

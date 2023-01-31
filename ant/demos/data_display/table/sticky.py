@@ -1,11 +1,7 @@
 import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
-create_anchor = r.JSMethod(
-    "create_anchor",
-    """return createElement(reflect_html.a, {}, "action")""",
-)
+create_anchor = r.js_arrow("create_anchor", "action => reflect_html.a(action)")
 
 
 def app():

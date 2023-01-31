@@ -9,10 +9,9 @@ monthFormat = "YYYY/MM"
 dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"]
 
 
-datePickerFormatter = r.JSMethod(
-    "datePickerFormatter",
-    f"""return `custom format: ${{value.format('{dateFormat}')}}`""",
-    "value",
+custom_date_formatter = r.js_arrow(
+    "custom_date_formatter",
+    f"value => `custom format: ${{value.format('{dateFormat}')}}`",
 )
 
 
@@ -26,7 +25,7 @@ def app():
                 defaultValue=defaultValue, format=monthFormat, picker="month"
             ),
             RangePicker(defaultValue=[defaultValue, defaultValue], format=dateFormat),
-            antd.DatePicker(defaultValue=defaultValue, format=datePickerFormatter),
+            antd.DatePicker(defaultValue=defaultValue, format=custom_date_formatter),
         ],
         direction="vertical",
         size=12,

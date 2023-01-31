@@ -1,11 +1,7 @@
 import reflect as r
 import reflect_antd as antd
 
-create_anchor = r.JSMethod(
-    "create_anchor",
-    """return createElement(reflect_html.a, {}, text)""",
-    "text",
-)
+create_anchor = r.js_arrow("create_anchor", "reflect_html.a")
 
 
 columns = [

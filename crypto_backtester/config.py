@@ -2,8 +2,8 @@ import pandas
 import reflect as r
 import reflect_aggrid as aggrid
 
-timeStampTimeFormatter = r.JSMethod(
-    "amount_formatter", "return new Date(value.value).toLocaleDateString()", "value"
+timeStampTimeFormatter = r.js_arrow(
+    "amount_formatter", "({value}) => new Date(value).toLocaleDateString()"
 )
 
 

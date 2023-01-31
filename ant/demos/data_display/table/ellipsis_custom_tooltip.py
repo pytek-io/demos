@@ -1,16 +1,11 @@
 import reflect as r
 import reflect_antd as antd
 
-create_anchor = r.JSMethod(
-    "create_anchor",
-    """return createElement(reflect_html.a, {}, text)""",
-    "text",
-)
+create_anchor = r.js_arrow("create_anchor", "text => reflect_html.a(text)")
 
-address_renderer = r.JSMethod(
+address_renderer = r.js_arrow(
     "address_renderer",
-    """return createElement(reflect_ant.Tooltip, {placement: 'topLeft', title: address}, address)""",
-    "address",
+    "address => reflect_ant.Tooltip(address, {placement: 'topLeft', title: address})",
 )
 
 
