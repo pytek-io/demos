@@ -8,6 +8,7 @@ from demos.charts.altair.car_data_set import App as AltairApp
 from demos.stock_prices import App as StockApp
 from demos.stocks_history import App as StockHistoryApp
 from demos.yahoofinancelive import App as YahooFinanceApp
+from demos.yahoo_trends import App as YahooTrendApp
 
 TITLE = "Dashboard"
 DEFAULT_TICKERS = ["AMZN"]
@@ -60,6 +61,11 @@ class App:
                 StockApp(market), settings_visible=False
             )
 
+        async def create_yahoo_trend_callback():
+            await self.dock_layout.insert_component(
+                YahooTrendApp(self.window), settings_visible=False
+            )
+
         async def create_live_quotes_callback(tickers):
             await self.dock_layout.insert_component(YahooFinanceApp(self.window, tickers))
 
@@ -102,10 +108,14 @@ class App:
                             "label": "Stocks",
                         },
                         {
-                            "label": "FX live quotes",
+                            "label": "Yahoo FX live quotes",
                             "onClick": lambda: create_live_quotes_callback(
                                 DEFAULT_LIVE_FX_TICKERS
                             ),
+                        },
+                        {
+                            "label": "Yahoo trends",
+                            "onClick": create_yahoo_trend_callback
                         },
                     ],
                     "key": "SubMenu",
@@ -133,7 +143,7 @@ class App:
         )
 
     def create_stock_history_app(self, ticker: str):
-        return StockHistoryApp(r.ObservableValue(ticker), False)
+        return StockHistoryApp(self.window, r.ObservableValue(ticker), False)
 
     async def add_StockHistoryApp(self):
         await self.dock_layout.insert_component(
