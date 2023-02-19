@@ -51,7 +51,7 @@ def app():
             headerName="String",
             cellStyle={"textAlign": "left"},
             editable=True,
-            onCellValueChanged=r.Callback(update_values, args=["data.id", "newValue"]),
+            onCellValueChanged=r.Callback(update_values, [[0, "data", "id"], [0, "newValue"]]),
             singleClickEdit=True,
         ),
         aggrid.AgGridColumn(

@@ -3,8 +3,6 @@ import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
 
-Panel = antd.Collapse.Panel
-
 
 def genExtra():
     # not sure why we would want to set stop_propagation to True
@@ -29,19 +27,19 @@ it can be found as a welcome guest in many households across the world.
         [
             antd.Collapse(
                 [
-                    Panel(
+                    antd.Collapse.Panel(
                         html.div(text),
                         header="This is panel header 1",
                         key="1",
                         extra=genExtra(),
                     ),
-                    Panel(
+                    antd.Collapse.Panel(
                         html.div(text),
                         header="This is panel header 2",
                         key="2",
                         extra=genExtra(),
                     ),
-                    Panel(
+                    antd.Collapse.Panel(
                         html.div(text),
                         header="This is panel header 3",
                         key="3",

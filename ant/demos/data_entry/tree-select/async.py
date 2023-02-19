@@ -1,41 +1,41 @@
 import asyncio
-import itertools
-import pprint
+from typing import Dict, List
 
 import reflect as r
 import reflect_antd as antd
 
-initialTreeData = [
-    {"id": 0, "pId": 0, "value": 0, "key": 0, "title": "Expand to load"},
-    {"id": 1, "pId": 0, "value": 1, "key": 1, "title": "Expand to load"},
-    {"id": 2, "pId": 0, "value": 2, "key": 2, "title": "Tree Node", "isLeaf": True},
-]
-
 
 def app():
-    counter = itertools.count(3)
-    treeData = r.create_observable(initialTreeData, key="initialTreeData")
-    r.autorun(lambda: pprint.pprint(treeData()))
+    node_id = 0
+    nodes = {}
 
-    async def onLoadData1(node_index):
-        await asyncio.sleep(0.5)
-        value = next(counter)
-        treeData()[node_index[0]]["children"] = [
-            {
-                "id": 3,
-                "pId": 0,
-                "value": f"child {value}",
-                "key": value,
-                "title": f"child {value}",
-                "isLeaf": True,
+    def generate_nodes() -> List[Dict]:
+        nonlocal node_id, nodes
+        result = []
+        for i in range(3):
+            is_leaf = i < 1
+            data = {
+                "value": f"{node_id}",
+                "key": f"{node_id}",
+                "title": "Tree Node" if is_leaf else "Expand to load",
+                "isLeaf": is_leaf,
             }
-        ]
+            nodes[f"{node_id}"] = data
+            node_id += 1
+            result.append(data)
+        return result
+
+    async def load_data(current_node_id: str):
+        await asyncio.sleep(0.5)
+        nodes[current_node_id]["children"] = generate_nodes()
         treeData.touch()
+
+    treeData = r.ObservableList(generate_nodes())
 
     return antd.TreeSelect(
         style={"width": "100%"},
         dropdownStyle={"maxHeight": 400, "overflow": "auto"},
         placeholder="Please select",
-        loadData=r.Callback(onLoadData1, args=("id",), is_promise=True),
+        loadData=load_data,
         treeData=treeData,
     )

@@ -1,4 +1,3 @@
-import reflect as r
 import reflect_antd as antd
 
 items = [
@@ -9,8 +8,5 @@ items = [
 
 def app():
     return antd.Tabs(
-        items=items,
-        onChange=r.Callback(lambda key: print(key)),
-        defaultActiveKey="item-2",
-        type="card",
+        items=items, onChange=print, defaultActiveKey="item-2", type="card"
     )

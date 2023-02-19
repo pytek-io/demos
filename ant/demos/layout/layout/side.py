@@ -67,7 +67,7 @@ def app():
                 ],
                 collapsible=True,
                 collapsed=collapsed,
-                onCollapse=r.Callback(onCollapse),
+                onCollapse=onCollapse,
             ),
             antd.Layout(
                 [

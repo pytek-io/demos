@@ -42,5 +42,5 @@ def app():
         dropdownMatchSelectWidth=252,
         style={"width": 300},
         options=options_obs,
-        onSearch=r.Callback(on_search),
+        onSearch=on_search,
     )

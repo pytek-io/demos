@@ -58,7 +58,7 @@ def app():
                 "label": "Navigation Three",
             },
         ],
-        onClick=r.Callback(lambda key: print(f"clicked option {key}"), args="key"),
+        onClick=lambda key: print(f"clicked option {key}"),
         style={"width": 256},
         defaultSelectedKeys=["1"],
         defaultOpenKeys=["sub1"],

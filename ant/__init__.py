@@ -107,7 +107,7 @@ def build_menu(root_directory):
         mode="inline",
         defaultSelectedKeys=[first_item_key],
         defaultOpenKeys=[sub_menus[0]["key"]],
-        onClick=r.Callback(current_method.set, args="key"),
+        onClick=current_method.set,
     )
 
 

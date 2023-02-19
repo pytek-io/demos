@@ -1,4 +1,3 @@
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 
@@ -19,5 +18,5 @@ def app():
             html.div(html.h3("3", style=contentStyle)),
             html.div(html.h3("4", style=contentStyle)),
         ],
-        afterChange=r.Callback(print),
+        afterChange=print,
     )

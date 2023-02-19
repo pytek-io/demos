@@ -8,13 +8,10 @@ def onAfterChange(value):
 
 
 def app():
-    slider1 = antd.Slider(defaultValue=30, onAfterChange=r.Callback(onAfterChange))
-    r.autorun(lambda: print("onChange", slider1()))
+    slider1 = antd.Slider(defaultValue=30, onAfterChange=onAfterChange)
+    r.autorun(lambda: print("slider1", slider1()))
     slider2 = antd.Slider(
-        range=True,
-        step=10,
-        defaultValue=[20, 50],
-        onAfterChange=r.Callback(onAfterChange),
+        range=True, step=10, defaultValue=[20, 50], onAfterChange=onAfterChange
     )
-    r.autorun(lambda: print("onChange", slider2()))
+    r.autorun(lambda: print("slider2", slider2()))
     return html.div([slider1, slider2])

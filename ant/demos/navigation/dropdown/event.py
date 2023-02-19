@@ -11,9 +11,9 @@ def onClick(key):
 def app():
     return antd.Dropdown(
         html.a(
-            ["Hover me, Click menu item", ant_icons.DownOutlined()],
+            antd.Space(["Hover me, Click menu item", ant_icons.DownOutlined()]),
             className="ant-dropdown-link",
-            onClick=lambda e: e.preventDefault(),
+            onClick=r.Callback(prevent_default=True),
         ),
         menu={
             "items": [
@@ -21,6 +21,6 @@ def app():
                 {"label": "2nd menu item", "key": "2"},
                 {"label": "3rd menu item", "key": "3"},
             ],
-            "onClick": r.Callback(onClick, args=("key",)),
+            "onClick": r.Callback(onClick, [[0, "key"]]),
         },
     )

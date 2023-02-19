@@ -1,7 +1,6 @@
-import reflect as r
-import reflect_antd as antd
+from functools import partial
 
-DirectoryTree = antd.Tree.DirectoryTree
+import reflect_antd as antd
 
 
 def app():
@@ -23,10 +22,10 @@ def app():
             ],
         },
     ]
-    return DirectoryTree(
+    return antd.Tree.DirectoryTree(
         multiple=True,
         defaultExpandAll=True,
-        onSelect=r.Callback(lambda keys: print("selected", keys)),
-        onExpand=r.Callback(lambda keys: print("expanded", keys)),
+        onSelect=partial(print, "selected"),
+        onExpand=partial(print, "expanded"),
         treeData=treeData,
     )

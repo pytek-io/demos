@@ -36,7 +36,7 @@ def app():
                 type="navigation",
                 size="small",
                 current=current,
-                onChange=r.Callback(onChange),
+                onChange=onChange,
                 className="site-navigation-steps",
             ),
             antd.Steps(
@@ -48,7 +48,7 @@ def app():
                 ],
                 type="navigation",
                 current=current,
-                onChange=r.Callback(onChange),
+                onChange=onChange,
                 className="site-navigation-steps",
             ),
             antd.Steps(
@@ -61,7 +61,7 @@ def app():
                 type="navigation",
                 size="small",
                 current=current,
-                onChange=r.Callback(onChange),
+                onChange=onChange,
                 className="site-navigation-steps",
             ),
         ]

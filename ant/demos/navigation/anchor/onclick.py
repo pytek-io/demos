@@ -1,12 +1,6 @@
 import reflect as r
 import reflect_antd as antd
 
-Link = antd.Anchor.Link
-
-
-def handleClick(link):
-    print(link)
-
 
 items = [
     {
@@ -40,8 +34,4 @@ items = [
 
 
 def app():
-    return antd.Anchor(
-        items=items,
-        affix=False,
-        onClick=handleClick,
-    )
+    return antd.Anchor(items=items, affix=False, onClick=print)

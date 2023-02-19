@@ -19,7 +19,7 @@ def app():
         defaultValue="",
         options=options_obs,
         style={"width": 200},
-        onSearch=r.Callback(on_search),
+        onSearch=on_search,
         placeholder="input here",
         onChange=lambda x: x.upper() if x else x,
         allowClear=True,

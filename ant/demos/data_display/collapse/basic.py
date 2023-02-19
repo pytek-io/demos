@@ -1,4 +1,3 @@
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 
@@ -17,5 +16,5 @@ it can be found as a welcome guest in many households across the world.
             Panel(html.p(text), header="This is panel header 2", key="2"),
             Panel(html.p(text), header="This is panel header 3", key="3"),
         ],
-        onChange=r.Callback(lambda key: print(key)),
+        onChange=print("changed"),
     )

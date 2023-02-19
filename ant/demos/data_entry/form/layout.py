@@ -1,4 +1,3 @@
-import reflect as r
 import reflect_antd as antd
 
 
@@ -37,9 +36,7 @@ def app():
                 ],
                 initialValues=initialValues,
                 layout=formLayout,
-                onValuesChange=r.Callback(
-                    lambda values: print("values changed to", values)
-                ),
+                onValuesChange=lambda values: print("values changed to", values),
             ),
         ],
         direction="vertical",

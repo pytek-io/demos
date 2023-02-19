@@ -1,6 +1,4 @@
-import reflect as r
 import reflect_antd as antd
-import reflect_html as html
 
 
 def app():
@@ -32,7 +30,7 @@ def app():
         defaultExpandedKeys=["0-0", "0-0-0", "0-0-0-0"],
         draggable=True,
         blockNode=True,
-        onDragEnter=r.Callback(lambda x: print("enter", x), args="node.key"),
-        onDrop=r.Callback(lambda x: print("drop", x), args="node.key"),
+        onDragEnter=lambda x: print("enter", x),
+        onDrop=lambda x: print("drop", x),
         treeData=gData,
     )

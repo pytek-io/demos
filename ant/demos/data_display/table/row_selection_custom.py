@@ -25,10 +25,8 @@ def app():
         selected_row_keys.set(newSelectedRowKeys)
 
     def select_keys(selector):
-        return r.Callback(
-            lambda selectable_keys: selected_row_keys.set(
-                [key for key in selectable_keys if selector(key)]
-            )
+        return lambda selectable_keys: selected_row_keys.set(
+            [key for key in selectable_keys if selector(key)]
         )
 
     def rowSelection():

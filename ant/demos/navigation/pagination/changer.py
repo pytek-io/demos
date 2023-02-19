@@ -1,4 +1,3 @@
-import reflect as r
 import reflect_antd as antd
 import reflect_html as html
 
@@ -12,14 +11,14 @@ def app():
         [
             antd.Pagination(
                 showSizeChanger=True,
-                onShowSizeChange=r.Callback(onShowSizeChange),
+                onShowSizeChange=onShowSizeChange,
                 defaultCurrent=3,
                 total=500,
             ),
             html.br(),
             antd.Pagination(
                 showSizeChanger=True,
-                onShowSizeChange=r.Callback(onShowSizeChange),
+                onShowSizeChange=onShowSizeChange,
                 defaultCurrent=3,
                 total=500,
                 disabled=True,

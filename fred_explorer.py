@@ -106,7 +106,7 @@ def app():
                         loadData=load_data,
                         treeData=treeData,
                         onSelect=on_node_selected,
-                        onRightClick=r.Callback(lambda: print("User right clicked!")),
+                        onRightClick=lambda: print("User right clicked!"),
                     ),
                     style={"overflow": "auto", "maxHeight": "100%"},
                 ),

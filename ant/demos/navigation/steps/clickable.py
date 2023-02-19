@@ -19,7 +19,7 @@ def app():
                     {"title": "Step 3", "description": "This is a description."},
                 ],
                 current=current,
-                onChange=r.Callback(onChange),
+                onChange=onChange,
             ),
             antd.Divider(),
             antd.Steps(
@@ -29,7 +29,7 @@ def app():
                     {"title": "Step 3", "description": "This is a description."},
                 ],
                 current=current,
-                onChange=r.Callback(onChange),
+                onChange=onChange,
                 direction="vertical",
             ),
         ]

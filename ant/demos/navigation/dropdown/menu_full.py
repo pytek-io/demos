@@ -68,7 +68,7 @@ menu = {
             "label": "Navigation Three",
         },
     ],
-    "onClick": r.Callback(lambda x: print("clicked", x[0]), args=("key",)),
+    "onClick": r.Callback(lambda x: print("clicked", x), [[0, "key"]]),
 }
 
 
@@ -77,7 +77,7 @@ def app():
         html.a(
             ["Hover to check menu style", ant_icons.DownOutlined()],
             className="ant-dropdown-link",
-            onClick=lambda e: e.preventDefault(),
+            onClick=r.Callback(None, prevent_default=True),
         ),
         menu=menu,
     )

@@ -61,7 +61,7 @@ def app():
                 ],
                 mode="inline",
                 openKeys=openKeys,
-                onOpenChange=r.Callback(onOpenChange),
+                onOpenChange=onOpenChange,
                 style=dict(width=256),
             )
         ]

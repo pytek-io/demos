@@ -1,4 +1,5 @@
-import reflect as r
+from functools import partial
+
 import reflect_antd as antd
 import reflect_html as html
 
@@ -36,7 +37,7 @@ def app():
         defaultExpandedKeys=["0-0-0", "0-0-1"],
         defaultSelectedKeys=["0-0-0", "0-0-1"],
         defaultCheckedKeys=["0-0-0", "0-0-1"],
-        onSelect=r.Callback(lambda keys: print("selected", keys)),
-        onCheck=r.Callback(lambda keys: print("checked", keys)),
+        onSelect=partial(print, "selected"),
+        onCheck=partial(print, "checked"),
         treeData=treeData,
     )

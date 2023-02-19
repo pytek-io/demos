@@ -55,7 +55,7 @@ COLUMNS = [
                 "editable": True,
                 "enableCellChangeFlash": True,
                 "onCellValueChanged": r.Callback(
-                    print, args=["data.id", "oldValue", "newValue"]
+                    print, [[0, "data", "id"], [0, "newValue"]]
                 ),
                 "singleClickEdit": True,
             },

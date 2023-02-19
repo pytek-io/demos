@@ -36,5 +36,5 @@ def app():
     return antd.Table(
         columns=columns,
         dataSource=data,
-        onChange=r.Callback(lambda x: print("params", x)),
+        onChange=lambda x: print("params", x),
     )

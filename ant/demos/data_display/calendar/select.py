@@ -8,11 +8,11 @@ def app():
 
     def selected_value_formatted():
         value = selected_value()
-        return value.strftime("%Y-%M-%D") if value else "nothing"
+        return value.strftime("%Y-%M-%d") if value else "nothing"
 
     return html.div(
         [
             antd.Alert(message=lambda: f"You selected {selected_value_formatted()}"),
-            antd.Calendar(onSelect=r.Callback(selected_value.set)),
+            antd.Calendar(onSelect=selected_value.set),
         ]
     )

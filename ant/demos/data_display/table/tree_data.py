@@ -93,9 +93,9 @@ def app():
                 columns=columns,
                 rowSelection={
                     "checkStrictly": checkStrictly,
-                    "onChange": r.Callback(onChange),
-                    "onSelect": r.Callback(onSelect, args="key"),
-                    "onSelectAll": r.Callback(onSelectAll),
+                    "onChange": onChange,
+                    "onSelect": onSelect,
+                    "onSelectAll": onSelectAll,
                 },
                 dataSource=data,
             ),

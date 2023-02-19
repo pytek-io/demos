@@ -1,9 +1,4 @@
-import reflect as r
 import reflect_antd as antd
-
-
-def callback(key):
-    print(key)
 
 
 def app():
@@ -14,5 +9,5 @@ def app():
             {"children": "Content of Tab Pane 3", "label": "Tab 3", "key": "3"},
         ],
         defaultActiveKey="1",
-        onChange=r.Callback(callback),
+        onChange=print,
     )

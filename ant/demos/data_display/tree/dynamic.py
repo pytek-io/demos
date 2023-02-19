@@ -15,8 +15,6 @@ def app():
         for i in range(3):
             is_leaf = i < 1
             data = {
-                "id": f"{node_id}",
-                "value": f"{i}",
                 "key": f"{node_id}",
                 "title": "Tree Node" if is_leaf else "Expand to load",
                 "isLeaf": is_leaf,

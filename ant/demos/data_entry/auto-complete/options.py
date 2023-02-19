@@ -17,7 +17,7 @@ def app():
         )
 
     result = antd.AutoComplete(
-        options=options_obs, style={"width": 200}, onSearch=r.Callback(handleSearch)
+        options=options_obs, style={"width": 200}, onSearch=handleSearch
     )
     r.autoprint(result)
     return result

@@ -27,7 +27,7 @@ def app():
                         "icon": ant_icons.SettingOutlined(),
                     },
                 ],
-                onClick=r.Callback(handleClick, args="key"),
+                onClick=handleClick,
             ),
             html.div(current),
         ]

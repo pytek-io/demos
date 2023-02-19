@@ -1,7 +1,6 @@
 import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
-import reflect_html as html
 
 
 def app():
@@ -59,7 +58,7 @@ def app():
                 "label": "Navigation Three",
             },
         ],
-        onClick=r.Callback(lambda key: print(f"clicked {key}"), args="key"),
+        onClick=lambda key: print(f"clicked {key}"),
         style={"width": 256},
         mode="vertical",
     )
