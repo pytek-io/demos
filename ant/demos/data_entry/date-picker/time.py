@@ -12,7 +12,7 @@ def app():
             [value.strftime("%Y-%M-%D %H:%m") for value in values],
         )
 
-    date_picker = antd.DatePicker(showTime=True, onOk=onOk)
+    date_picker = antd.DatePicker(showTime=True)
     range_picker = RangePicker(
         showTime={"format": "HH:mm"},
         format="YYYY-MM-DD HH:mm",
