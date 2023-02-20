@@ -30,9 +30,9 @@ def app():
         )
 
     def rowSelection():
-        return {
+        return antd.RowSelectionProps(**{
             "selectedRowKeys": selected_row_keys(),
-            "onChange": r.Callback(onChange),
+            "onChange": onChange,
             "selections": [
                 antd.Table.SELECTION_ALL,
                 antd.Table.SELECTION_INVERT,
@@ -49,7 +49,7 @@ def app():
                 },
             ],
             "type": shape(),
-        }
+        })
 
     shape = antd.Radio.Group(
         [

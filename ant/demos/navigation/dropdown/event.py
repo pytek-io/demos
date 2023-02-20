@@ -15,12 +15,12 @@ def app():
             className="ant-dropdown-link",
             onClick=r.Callback(prevent_default=True),
         ),
-        menu={
-            "items": [
+        menu=antd.MenuProps(
+            items=[
                 {"label": "1st menu item", "key": "1"},
                 {"label": "2nd menu item", "key": "2"},
                 {"label": "3rd menu item", "key": "3"},
             ],
-            "onClick": r.Callback(onClick, [[0, "key"]]),
-        },
+            onClick=onClick,
+        ),
     )

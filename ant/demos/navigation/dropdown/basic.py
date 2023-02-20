@@ -1,3 +1,4 @@
+import reflect as r
 import reflect_ant_icons as ant_icons
 import reflect_antd as antd
 import reflect_html as html
@@ -36,7 +37,7 @@ def app():
         html.a(
             ["Hover me", ant_icons.DownOutlined()],
             className="ant-dropdown-link",
-            onClick=lambda e: e.preventDefault(),
+            onClick=r.Callback(prevent_default=True),
         ),
         menu={"items": items},
     )

@@ -1,10 +1,4 @@
-import reflect as r
 import reflect_antd as antd
-import reflect_html as html
-
-
-def handle_menu_click(key):
-    print("click", key)
 
 
 def app():
@@ -13,16 +7,15 @@ def app():
         {"label": "2nd item", "key": "2"},
         {"label": "3rd item", "key": "3"},
     ]
-    return html.div(
+    return antd.Space(
         [
             antd.Button("primary", type="primary"),
             antd.Button("secondary"),
             antd.Dropdown.Button(
                 "Actions",
-                menu={
-                    "items": items,
-                    "onClick": r.Callback(handle_menu_click, [[0, "key"]]),
-                },
+                menu=antd.MenuProps(
+                    items=items, onClick=lambda key: print("click", key)
+                ),
             ),
         ]
     )
