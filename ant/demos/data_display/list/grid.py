@@ -14,5 +14,5 @@ def app():
         "Card content",
         grid=dict(gutter=16, column=4),
         dataSource=data,
-        renderItem= r.js_arrow("formatter", "item => reflect_ant.List.Item(reflect_ant.Card(null, {title:item.title}))")
+        renderItem= r.js_arrow("formatter", "item => reflect_ant.List.Item(reflect_ant.Card(null, item))")
     )
