@@ -1,10 +1,8 @@
-from reflect_html import *
-from reflect_antd import List
-from reflect import js
+import reflect as r
+import reflect_antd as antd
 
 
 def app():
-    raise NotImplementedError()
     data = [
         {
             "title": "Ant Design Title 1",
@@ -20,8 +18,16 @@ def app():
         },
     ]
 
-    return List(
+    render_item = """item => reflect_ant.List.Item(null,
+    reflect_ant.List.Item.Meta(null, {
+        avatar: reflect_ant.Avatar(null, { src: "https://joesch.moe/api/v1/random" }),
+        title: reflect_html.a(item.title, { ref: "https://ant.design" }),
+        description: "Ant Design, a design language for background applications, is refined by Ant UED Team",
+    })
+)"""
+
+    return antd.List(
         itemLayout="horizontal",
         dataSource=data,
-        renderItem=js("render_list_item"),
+        renderItem=r.js_arrow("render_item", render_item)
     )

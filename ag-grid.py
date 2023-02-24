@@ -7,13 +7,14 @@ import reflect as r
 import reflect_aggrid as aggrid
 import reflect_html as html
 import reflect_utils
+from reflect_utils.formatters import transform_if_number
 
 TITLE = "AG Grid Example"
 FAVICON = "website/static/ag-grid_favicon.png"
 NB_ROWS = 100
 
 
-def app():
+def app(window: r.Window):
     def create_line():
         index = itertools.count(0)
         while True:
@@ -37,42 +38,43 @@ def app():
         )
     )
 
-    def update_values(update):
-        index, value = update
+    def update_values(index, value):
         values[index][4] = value
 
     cols = [
         aggrid.AgGridColumn(field="id", headerName="id", hide=True),
         aggrid.AgGridColumn(
-            field="int", headerName="Integer", valueValueFormatter=reflect_utils.numeral
+            field="int",
+            headerName="Integer",
+            valueFormatter=transform_if_number(reflect_utils.numeral),
         ),
         aggrid.AgGridColumn(
             field="str",
             headerName="String",
             cellStyle={"textAlign": "left"},
             editable=True,
-            onCellValueChanged=r.Callback(update_values, [[0, "data", "id"], [0, "newValue"]]),
+            onCellValueChanged=update_values,
             singleClickEdit=True,
         ),
         aggrid.AgGridColumn(
             field="bool",
             headerName="Bool",
-            valueValueFormatter=reflect_utils.boolToString,
+            valueFormatter=transform_if_number(reflect_utils.boolToString),
         ),
         aggrid.AgGridColumn(
             field="float",
             headerName="Float",
-            valueNumberFormatter=reflect_utils.round_value_to_2_digits,
+            valueFormatter=transform_if_number(reflect_utils.round_value_to_2_digits),
         ),
         aggrid.AgGridColumn(
             field="date",
             headerName="Date",
-            valueValueFormatter=reflect_utils.toLocaleDateString,
+            valueFormatter=transform_if_number(reflect_utils.toLocaleDateString),
         ),
         aggrid.AgGridColumn(
             field="datetime",
             headerName="DateTime",
-            valueValueFormatter=reflect_utils.toLocaleDateString,
+            valueFormatter=transform_if_number(reflect_utils.toLocaleDateString),
         ),
     ]
     grid = aggrid.AgGridReact(

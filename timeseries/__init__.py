@@ -10,10 +10,10 @@ from .config import COLUMNS
 
 
 class App:
-    def __init__(self, default="T10Y2Y"):
+    def __init__(self, _window):
         controller = r.Controller()
         self.ticker = antd.Input(
-            defaultValue=default, style={"width": 120}, controller=controller
+            defaultValue="T10Y2Y", style={"width": 120}, controller=controller
         )
         today = datetime.datetime.today()
         start_date = antd.DatePicker(defaultValue=today - datetime.timedelta(days=365))

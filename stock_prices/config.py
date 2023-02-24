@@ -1,4 +1,8 @@
-from reflect_utils import round_value_to_2_digits_col, toLocaleString
+from reflect_utils import (
+    round_value_to_2_digits_col,
+    toLocaleString,
+    transform_if_number,
+)
 
 
 def identity(value):
@@ -40,7 +44,7 @@ COLUMNS = (
             "headerName": "Mkt Cap",
             "width": 140,
             "sortable": True,
-            "valueValueFormatter": toLocaleString,
+            "valueFormatter": transform_if_number(toLocaleString),
         },
     ),
     ("name", {"headerName": "Name", "width": 300, "sortable": True}),
