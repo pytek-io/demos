@@ -4,6 +4,6 @@ basic:Basic list
 loadmore:Load more
 vertical:Vertical
 grid:Grid
-resposive:Responsive grid list
+responsive:Responsive grid list
 infinite_load:Scrolling loaded
 infinite_virtualized_load:Infinite & virtualized
