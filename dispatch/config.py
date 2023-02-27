@@ -12,6 +12,8 @@ blank_infinity = reflect_utils.replace_value(reflect_utils.numeral, SAFE_MAX_INT
 pythonTimeStampFormatter = reflect_utils.compose(
     reflect_utils.pythonTimeStampToJSDate, reflect_utils.toLocaleTimeString
 )
+from reflect_utils.formatters import apply_to_value
+
 runningTasksColumnDefs = [
     {"headerName": "Uid", "field": "id", "width": 70, "sortable": True},
     {
@@ -19,12 +21,14 @@ runningTasksColumnDefs = [
         "field": "worker_id",
         "width": 70,
         "sortable": True,
-        "valueNumberFormatter": reflect_utils.hexadecimalFormatter,
+        "valueFormatter": reflect_utils.transform_if_number(
+            reflect_utils.hexadecimalFormatter
+        ),
     },
     {
         "headerName": "Start Time",
         "field": "start",
-        "valueValueFormatter": pythonTimeStampFormatter,
+        "valueFormatter": apply_to_value(pythonTimeStampFormatter),
         "width": 100,
         "sortable": True,
     },
@@ -34,14 +38,14 @@ runningTasksColumnDefs = [
         "width": 90,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": reflect_utils.durationFormatter,
+        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
     },
     {
         "headerName": "Overrun Tolerance (%)",
         "field": "overrun_tolerance",
         "width": 90,
         "cellStyle": {"textAlign": "right"},
-        "valueNumberFormatter": reflect_utils.percentage,
+        "valueFormatter": reflect_utils.transform_if_number(reflect_utils.percentage),
         "sortable": True,
     },
     {
@@ -49,7 +53,7 @@ runningTasksColumnDefs = [
         "field": "max_memory",
         "width": 90,
         "cellStyle": {"textAlign": "right"},
-        "valueNumberFormatter": reflect_utils.filesize,
+        "valueFormatter": reflect_utils.transform_if_number(reflect_utils.filesize),
         "sortable": True,
     },
     {
@@ -87,8 +91,10 @@ round_value_to_two_digits = reflect_utils.transform_if_number(
 creationDateTimeColumnDef = {
     "headerName": "Creation Date",
     "field": "creation_time",
-    "valueValueFormatter": reflect_utils.compose(
-        reflect_utils.pythonTimeStampToJSDate, reflect_utils.toLocaleDateString
+    "valueFormatter": apply_to_value(
+        reflect_utils.compose(
+            reflect_utils.pythonTimeStampToJSDate, reflect_utils.toLocaleDateString
+        )
     ),
     "width": 110,
     "sortable": True,
@@ -97,7 +103,7 @@ creationDateTimeColumnDef = {
 creationTimeColumnDef = {
     "headerName": "Creation Time",
     "field": "creation_time",
-    "valueValueFormatter": pythonTimeStampFormatter,
+    "valueFormatter": apply_to_value(pythonTimeStampFormatter),
     "width": 100,
     "sortable": True,
 }
@@ -107,7 +113,9 @@ deployments_columns = [
         "field": "id",
         "width": 90,
         "sortable": True,
-        "valueNumberFormatter": reflect_utils.hexadecimalFormatter,
+        "valueFormatter": reflect_utils.transform_if_number(
+            reflect_utils.hexadecimalFormatter
+        ),
     },
     creationDateTimeColumnDef,
     {
@@ -116,7 +124,7 @@ deployments_columns = [
         "width": 80,
         "sortable": True,
         "cellStyle": {"textAlign": "right"},
-        "valueNumberFormatter": reflect_utils.filesize,
+        "valueFormatter": reflect_utils.transform_if_number(reflect_utils.filesize),
     },
     {"headerName": "Tags", "field": "tags", "width": 110, "sortable": True},
     {
@@ -193,7 +201,9 @@ client_columns = [
         "headerName": "Uid",
         "field": "id",
         "width": 70,
-        "valueNumberFormatter": reflect_utils.hexadecimalFormatter,
+        "valueFormatter": reflect_utils.transform_if_number(
+            reflect_utils.hexadecimalFormatter
+        ),
     },
     {"headerName": "Host", "field": "host", "width": 200, "sortable": True},
     {"headerName": "User", "field": "user", "width": 200, "sortable": True},
@@ -211,16 +221,6 @@ client_columns = [
         "sortable": True,
     },
 ]
-editable = {
-    "editable": True,
-    "enableCellChangeFlash": True,
-    "onCellValueChanged": r.js("onDispatchCellValueChanged"),
-    "singleClickEdit": True,
-}
-
-
-def make_editable(definition):
-    return dict(definition.items(), **editable)
 
 
 tasks_counts = [
@@ -231,7 +231,7 @@ tasks_counts = [
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
         "enableCellChangeFlash": True,
-        "valueValueFormatter": blank_zeros,
+        "valueFormatter": apply_to_value(blank_zeros),
         "aggFunc": "sum",
     },
     {
@@ -241,7 +241,7 @@ tasks_counts = [
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
         "enableCellChangeFlash": True,
-        "valueValueFormatter": blank_zeros,
+        "valueFormatter": apply_to_value(blank_zeros),
         "aggFunc": "sum",
     },
     {
@@ -251,7 +251,7 @@ tasks_counts = [
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
         "enableCellChangeFlash": True,
-        "valueValueFormatter": blank_zeros,
+        "valueFormatter": apply_to_value(blank_zeros),
         "aggFunc": "sum",
     },
     {
@@ -261,7 +261,7 @@ tasks_counts = [
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
         "enableCellChangeFlash": True,
-        "valueValueFormatter": blank_zeros,
+        "valueFormatter": apply_to_value(blank_zeros),
         "aggFunc": "sum",
     },
 ]
@@ -273,7 +273,7 @@ tasks_durations = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": reflect_utils.durationFormatter,
+        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
         "aggFunc": "sum",
     },
     {
@@ -283,7 +283,7 @@ tasks_durations = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": reflect_utils.durationFormatter,
+        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
         "aggFunc": "sum",
     },
     {
@@ -293,7 +293,7 @@ tasks_durations = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": reflect_utils.durationFormatter,
+        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
         "aggFunc": "sum",
     },
     {
@@ -303,7 +303,7 @@ tasks_durations = [
         "width": 90,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueValueFormatter": reflect_utils.durationFormatter,
+        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
         "aggFunc": "sum",
     },
 ]
@@ -312,114 +312,134 @@ dataSizeColumn = {
     "cellStyle": {"textAlign": "right"},
     "sortable": True,
     "aggFunc": "sum",
-    "valueValueFormatter": reflect_utils.filesize,
+    "valueFormatter": apply_to_value(reflect_utils.filesize),
 }
 input_size = dict(dataSizeColumn, headerName="Input", field="input_size")
 output_size = dict(dataSizeColumn, headerName="Output", field="output_size")
-session_columns = [
-    make_editable(
+
+
+def session_columns_definition(on_cell_change):
+    def make_editable(definition):
+        return dict(
+            definition.items(),
+            onCellValueChanged=on_cell_change(definition["field"]),
+            editable=True,
+            enableCellChangeFlash=True,
+            singleClickEdit=True,
+        )
+
+    return [
+        make_editable(
+            {
+                "headerName": "Priority",
+                "field": "priority",
+                "width": 80,
+                "cellStyle": {"textAlign": "right"},
+                "sortable": True,
+                "valueFormatter": apply_to_value(blank_zeros),
+            }
+        ),
         {
-            "headerName": "Priority",
-            "field": "priority",
+            "headerName": "Slave Allocation",
+            "children": [
+                make_editable(
+                    {
+                        "headerName": "Min",
+                        "field": "min_slaves",
+                        "width": 110,
+                        "sortable": True,
+                        "valueFormatter": apply_to_value(blank_zeros),
+                    }
+                ),
+                make_editable(
+                    {
+                        "headerName": "Max",
+                        "field": "max_slaves",
+                        "width": 110,
+                        "sortable": True,
+                        "valueFormatter": apply_to_value(blank_infinity),
+                    }
+                ),
+            ],
+        },
+        {"headerName": "Task counts", "children": tasks_counts},
+        {"headerName": "Task durations", "children": tasks_durations},
+        {"headerName": "IO", "children": [input_size, output_size]},
+        creationTimeColumnDef,
+        {
+            "headerName": "ETA",
+            "field": "eta",
+            "valueFormatter": reflect_utils.transform_if_number(
+                pythonTimeStampFormatter
+            ),
+            "width": 100,
+            "sortable": True,
+        },
+        {
+            "headerName": "Context Size",
+            "field": "context_size",
             "width": 80,
             "cellStyle": {"textAlign": "right"},
             "sortable": True,
-            "valueValueFormatter": blank_zeros,
-        }
-    ),
-    {
-        "headerName": "Slave Allocation",
-        "children": [
-            make_editable(
+            "valueFormatter": reflect_utils.transform_if_number(reflect_utils.filesize),
+        },
+        {"headerName": "User", "field": "user", "width": 100, "sortable": True},
+        {
+            "headerName": "Deployment",
+            "children": [
                 {
-                    "headerName": "Min",
-                    "field": "min_slaves",
+                    "headerName": "Tag",
+                    "field": "deployment_tag",
                     "width": 110,
                     "sortable": True,
-                    "valueValueFormatter": blank_zeros,
-                }
-            ),
-            make_editable(
+                },
                 {
-                    "headerName": "Max",
-                    "field": "max_slaves",
+                    "headerName": "Uid",
+                    "field": "deployment_id",
+                    "valueFormatter": apply_to_value(
+                        reflect_utils.replace_value(reflect_utils.hexadecimalFormatter)
+                    ),
                     "width": 110,
                     "sortable": True,
-                    "valueValueFormatter": blank_infinity,
-                }
+                },
+            ],
+        },
+        {
+            "headerName": "Client Uid",
+            "field": "client_id",
+            "valueFormatter": reflect_utils.transform_if_number(
+                reflect_utils.hexadecimalFormatter
             ),
-        ],
-    },
-    {"headerName": "Task counts", "children": tasks_counts},
-    {"headerName": "Task durations", "children": tasks_durations},
-    {"headerName": "IO", "children": [input_size, output_size]},
-    creationTimeColumnDef,
-    {
-        "headerName": "ETA",
-        "field": "eta",
-        "valueNumberFormatter": pythonTimeStampFormatter,
-        "width": 100,
-        "sortable": True,
-    },
-    {
-        "headerName": "Context Size",
-        "field": "context_size",
-        "width": 80,
-        "cellStyle": {"textAlign": "right"},
-        "sortable": True,
-        "valueNumberFormatter": reflect_utils.filesize,
-    },
-    {"headerName": "User", "field": "user", "width": 100, "sortable": True},
-    {
-        "headerName": "Deployment",
-        "children": [
-            {
-                "headerName": "Tag",
-                "field": "deployment_tag",
-                "width": 110,
-                "sortable": True,
-            },
-            {
-                "headerName": "Uid",
-                "field": "deployment_id",
-                "valueValueFormatter": reflect_utils.replace_value(
-                    reflect_utils.hexadecimalFormatter
-                ),
-                "width": 110,
-                "sortable": True,
-            },
-        ],
-    },
-    {
-        "headerName": "Client Uid",
-        "field": "client_id",
-        "valueNumberFormatter": reflect_utils.hexadecimalFormatter,
-        "hide": True,
-    },
-    {
-        "headerName": "Uid",
-        "field": "id",
-        "width": 70,
-        "hide": False,
-        "valueFormatter": reflect_utils.replace_value(
-            reflect_utils.hexadecimalFormatter
-        ),
-    },
-    {
-        "headerName": "Description",
-        "field": "description",
-        "width": 140,
-        "sortable": True,
-    },
-]
+            "hide": True,
+        },
+        {
+            "headerName": "Uid",
+            "field": "id",
+            "width": 70,
+            "hide": False,
+            "valueFormatter": reflect_utils.replace_value(
+                reflect_utils.hexadecimalFormatter
+            ),
+        },
+        {
+            "headerName": "Description",
+            "field": "description",
+            "width": 140,
+            "sortable": True,
+        },
+    ]
+
+
 WORKER_DEF = {
     "name": "Workers",
+    "subject": WORKER,
     "static_fields": ["nb_cores", "nb_slaves", "host_name", "name", "pid"],
     "update_fields": ["nb_tasks", "loadavg_1", "loadavg_5", "loadavg_15"],
     "columns": worker_columns,
 }
 CLIENT_DEF = {
     "name": "Clients",
+    "subject": CLIENT,
     "static_fields": ["user", "host", "pid", "description"],
     "update_fields": [],
     "columns": client_columns,
@@ -434,6 +454,7 @@ deployment_menu_items = [
 ]
 DEPLOYMENT_DEF = {
     "name": "Deployments",
+    "subject": DEPLOYMENT,
     "static_fields": deployment_fields,
     "update_fields": deployment_fields,
     "columns": deployments_columns,
@@ -447,41 +468,39 @@ session_menu_items = [
     },
     {"name": "Display running tasks", "action_tag": "DisplayRunningTasks"},
 ]
-SESSION_DEF = {
-    "name": "Sessions",
-    "static_fields": [
-        "is_session",
-        "deployment_id",
-        "deployment_tag",
-        "description",
-        "user",
-        "client_id",
-        "priority_group_path",
-        "creation_time",
-        "context_size",
-    ],
-    "update_fields": [
-        "priority",
-        "nb_tasks_pending",
-        "nb_tasks_ready",
-        "nb_tasks_running",
-        "nb_tasks_complete",
-        "duration_pending",
-        "duration_ready",
-        "duration_running",
-        "duration_complete",
-        "output_size",
-        "input_size",
-        "min_slaves",
-        "max_slaves",
-        "eta",
-    ],
-    "columns": session_columns,
-    "getContextMenuItems": session_menu_items,
-}
-DEFINITIONS = {
-    WORKER: WORKER_DEF,
-    CLIENT: CLIENT_DEF,
-    DEPLOYMENT: DEPLOYMENT_DEF,
-    SESSION: SESSION_DEF,
-}
+
+
+def create_session_columns(on_cell_change):
+    return {
+        "name": "Sessions",
+        "subject": SESSION,
+        "static_fields": [
+            "is_session",
+            "deployment_id",
+            "deployment_tag",
+            "description",
+            "user",
+            "client_id",
+            "priority_group_path",
+            "creation_time",
+            "context_size",
+        ],
+        "update_fields": [
+            "priority",
+            "nb_tasks_pending",
+            "nb_tasks_ready",
+            "nb_tasks_running",
+            "nb_tasks_complete",
+            "duration_pending",
+            "duration_ready",
+            "duration_running",
+            "duration_complete",
+            "output_size",
+            "input_size",
+            "min_slaves",
+            "max_slaves",
+            "eta",
+        ],
+        "columns": session_columns_definition(on_cell_change),
+        "getContextMenuItems": session_menu_items,
+    }
