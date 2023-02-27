@@ -14,12 +14,12 @@ FAVICON = "website/static/ag-grid_favicon.png"
 NB_ROWS = 100
 
 
-def app(window: r.Window):
+def app(_window: r.Window):
     def create_line():
-        index = itertools.count(0)
+        index = 0
         while True:
-            index_value = next(index)
-            even_row = index_value == 0
+            index += 1
+            even_row = index % 2 == 0
             yield [
                 random.randrange(0, 100000),
                 random.randrange(0, 100000) if even_row else 0,
@@ -38,7 +38,7 @@ def app(window: r.Window):
         )
     )
 
-    def update_values(index, value):
+    def update_values(value, index):
         values[index][4] = value
 
     cols = [

@@ -1,4 +1,3 @@
-import reflect as r
 import reflect_utils
 
 
@@ -54,9 +53,7 @@ COLUMNS = [
                 "sortable": True,
                 "editable": True,
                 "enableCellChangeFlash": True,
-                "onCellValueChanged": r.Callback(
-                    print, [[0, "data", "id"], [0, "newValue"]]
-                ),
+                "onCellValueChanged": print,
                 "singleClickEdit": True,
             },
         ),
@@ -69,7 +66,7 @@ COLUMNS = [
                 "headerName": "Price",
                 "width": 90,
                 "sortable": True,
-                "valueNumberFormatter": MAX_5_DIGITS,
+                "valueFormatter": reflect_utils.transform_if_number(MAX_5_DIGITS),
                 "type": "rightAligned",
             },
         ),
@@ -82,7 +79,7 @@ COLUMNS = [
                 "headerName": "Change",
                 "width": 100,
                 "sortable": True,
-                "valueNumberFormatter": MAX_5_DIGITS,
+                "valueFormatter": reflect_utils.transform_if_number(MAX_5_DIGITS),
                 "type": "rightAligned",
                 "cellStyle": reflect_utils.colorCellNumber,
             },
@@ -96,7 +93,9 @@ COLUMNS = [
                 "headerName": "Change %",
                 "width": 110,
                 "sortable": True,
-                "valueNumberFormatter": reflect_utils.round_value_to_2_digits,
+                "valueFormatter": reflect_utils.transform_if_number(
+                    reflect_utils.round_value_to_2_digits
+                ),
                 "type": "rightAligned",
                 "cellStyle": reflect_utils.colorCellNumber,
             },
@@ -110,9 +109,9 @@ COLUMNS = [
                 "headerName": "Time",
                 "width": 90,
                 "sortable": True,
-                "valueValueFormatter": reflect_utils.compose(
+                "valueFormatter": reflect_utils.transform_if_number(reflect_utils.compose(
                     reflect_utils.timeStampToJSDate, reflect_utils.toLocaleTimeString
-                ),
+                )),
                 "enableCellChangeFlash": True,
             },
         ),
@@ -140,7 +139,9 @@ COLUMNS = [
                 "headerName": "Day Volume",
                 "width": 120,
                 "sortable": True,
-                "valueNumberFormatter": reflect_utils.toLocaleString,
+                "valueFormatter": reflect_utils.transform_if_number(
+                    reflect_utils.toLocaleString
+                ),
                 "type": "rightAligned",
             },
         ),
