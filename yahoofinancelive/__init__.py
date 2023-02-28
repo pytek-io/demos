@@ -55,7 +55,7 @@ class YFLiveQuoteManager:
                     print("Yahoo connection has been reset, looping...")
 
 
-MENU_ITEMS = [{"name": "Remove", "action_tag": "remove quote"}]
+MENU_ITEMS = [{"name": "Remove", "code": "remove quote"}]
 
 
 class App:

@@ -38,7 +38,7 @@ def app(_window: r.Window):
         )
     )
 
-    def update_values(value, index):
+    def update_values(index, value):
         values[index][4] = value
 
     cols = [

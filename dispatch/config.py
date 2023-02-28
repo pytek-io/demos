@@ -1,5 +1,6 @@
 import reflect as r
 import reflect_utils
+from functools import partial
 
 CLIENT = 1
 WORKER = 2
@@ -15,6 +16,7 @@ pythonTimeStampFormatter = reflect_utils.compose(
 from reflect_utils.formatters import apply_to_value
 
 runningTasksColumnDefs = [
+    {"headerName": "Uid", "field": "id", "width": 70, "sortable": True},
     {"headerName": "Uid", "field": "id", "width": 70, "sortable": True},
     {
         "headerName": "Worker Uid",
@@ -67,7 +69,7 @@ session_menu_items = [
     {
         "name": "Cancel",
         "confirmation": "Are you sure you want to cancel this deployment?",
-        "action_tag": "DeleteDeployment",
+        "code": "DeleteDeployment",
     }
 ]
 RUNNING_TASKS_DEF = {
@@ -83,7 +85,7 @@ RUNNING_TASKS_DEF = {
     ],
     "update_fields": [],
     "columns": runningTasksColumnDefs,
-    "getContextMenuItems": session_menu_items,
+    "context_menu_items": session_menu_items,
 }
 round_value_to_two_digits = reflect_utils.transform_if_number(
     reflect_utils.round_value(2)
@@ -98,7 +100,7 @@ creationDateTimeColumnDef = {
     ),
     "width": 110,
     "sortable": True,
-    "aggFunc": r.js("constant", None),
+    "aggFunc": reflect_utils.constant(None),
 }
 creationTimeColumnDef = {
     "headerName": "Creation Time",
@@ -322,7 +324,7 @@ def session_columns_definition(on_cell_change):
     def make_editable(definition):
         return dict(
             definition.items(),
-            onCellValueChanged=on_cell_change(definition["field"]),
+            onCellValueChanged=partial(on_cell_change, definition["field"]),
             editable=True,
             enableCellChangeFlash=True,
             singleClickEdit=True,
@@ -449,7 +451,7 @@ deployment_menu_items = [
     {
         "name": "Delete",
         "confirmation": "Are you sure you want to delete this deployment?",
-        "action_tag": "DeleteDeployment",
+        "code": "DeleteDeployment",
     }
 ]
 DEPLOYMENT_DEF = {
@@ -458,16 +460,19 @@ DEPLOYMENT_DEF = {
     "static_fields": deployment_fields,
     "update_fields": deployment_fields,
     "columns": deployments_columns,
-    "getContextMenuItems": deployment_menu_items,
+    "context_menu_items": deployment_menu_items,
 }
-session_menu_items = [
-    {
-        "name": "Cancel",
-        "confirmation": "Are you sure you want to cancel this session?",
-        "action_tag": "TerminateSession",
+
+session_extra_arguments = {
+    "autoGroupColumnDef": {
+        "headerName": "Priority Group / Session",
+        "cellRendererParams": {"suppressCount": True},
+        "minWidth": 220,
     },
-    {"name": "Display running tasks", "action_tag": "DisplayRunningTasks"},
-]
+    "groupDefaultExpanded": -1,
+    "getDataPath": reflect_utils.get_attribute('priority_group_path'),
+    "treeData": True,
+}
 
 
 def create_session_columns(on_cell_change):
@@ -502,5 +507,12 @@ def create_session_columns(on_cell_change):
             "eta",
         ],
         "columns": session_columns_definition(on_cell_change),
-        "getContextMenuItems": session_menu_items,
+        "context_menu_items": [
+            {
+                "name": "Cancel",
+                "confirmation": "Are you sure you want to cancel this session?",
+                "code": "TerminateSession",
+            },
+            {"name": "Display running tasks", "code": "DisplayRunningTasks"},
+        ],
     }

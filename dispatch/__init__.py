@@ -1,8 +1,8 @@
 import itertools
 import json
 import operator
-import anyio
 
+import anyio
 import reflect as r
 import reflect_aggrid as aggrid
 import reflect_antd as antd
@@ -11,14 +11,14 @@ import reflect_rcdock as rcdock
 import reflect_utils as utils
 
 from .config import (
-    create_session_columns,
-    session_menu_items,
     CLIENT_DEF,
     DEPLOYMENT_DEF,
-    RUNNING_TASKS_DEF,
-    WORKER_DEF,
-    SESSION,
     PRIORITY_GROUP,
+    RUNNING_TASKS_DEF,
+    SESSION,
+    WORKER_DEF,
+    session_extra_arguments,
+    create_session_columns,
 )
 from .utils import anext, dummy_connection, read_pickles, record_connection
 
@@ -26,6 +26,20 @@ TITLE = "Dispatch"
 CREATION = "C"
 UPDATE = "U"
 DELETE = "D"
+CREATE_CONTEXT_MENU_ITEMS_JS = """(callback_id, params, args) => {
+    if (!args.node) {
+        return [];
+    }
+    return params.map(({ name, confirmation, code }) => {
+        const action = () => {
+            return reflect.notify_event(callback_id, [code, args.node.id]);
+        };
+        // const action = confirmation
+        //     ? showConfirm(confirmation, actual_action)
+        //     : actual_action;
+        return { name, action };
+    });
+}"""
 
 
 def split_sequence(sequence, index):
@@ -41,9 +55,7 @@ def create_column(definition):
     elif definition.get("hide", False):
         width = 0
     else:
-        width = definition.get("width", None)
-        if width is None:
-            raise Exception(f"Missing width in column definition: {definition}")
+        width = definition["width"]
     return aggrid.AgGridColumn(**definition), width
 
 
@@ -52,71 +64,8 @@ def create_columns(definitions):
     return columns, sum(widths)
 
 
-test = """(callback_id, params) => {
-    var result = [
-        {
-            // custom item
-            name: 'Alert ' + params.value,
-            action: () => {
-                window.alert('Alerting about ' + params.value);
-            },
-            cssClasses: ['redFont', 'bold'],
-        },
-        {
-            // custom item
-            name: 'Always Disabled',
-            disabled: true,
-            tooltip:
-                'Very long tooltip, did I mention that I am very long, well I am! Long!  Very Long!',
-        },
-        {
-            name: 'Country',
-            subMenu: [
-                {
-                    name: 'Ireland',
-                    action: () => {
-                        window.reflect.notify_event(callback_id, [params.node.rowIndex]);
-                    },
-                },
-                {
-                    name: 'UK',
-                    action: () => {
-                        console.log(params);
-                    },
-                },
-                {
-                    name: 'France',
-                    action: () => {
-                        console.log('France was pressed');
-                    },
-                },
-            ],
-        },
-    ];
-    return result;
-}
-"""
-
-
-create_context_menu_js = """(callback_id, params, args) => {
-    if (!args.node) {
-        return [];
-    }
-    return params.map(({ name, confirmation, action_tag }) => {
-        const action = () => {
-            return reflect.notify_event(callback_id, [action_tag, args.node.id]);
-        };
-        // const action = confirmation
-        //     ? showConfirm(confirmation, actual_action)
-        //     : actual_action;
-        return { name, action };
-    });
-}"""
-
-
 class Application:
     def __init__(self, window: r.Window):
-        self.test = []
         self.window = window
         self.counter = itertools.count()
         self.updaters = {}
@@ -124,16 +73,9 @@ class Application:
         self.pending_grids = [
             grid_def["subject"] for grid_def in [WORKER_DEF, CLIENT_DEF, DEPLOYMENT_DEF]
         ] + [SESSION]
-        session_extra_arguments = {
-            "autoGroupColumnDef": {
-                "headerName": "Priority Group / Session",
-                "cellRendererParams": {"suppressCount": True},
-                "minWidth": 220,
-            },
-            "groupDefaultExpanded": -1,
-            "getDataPath": r.js("fetch_attribute", "priority_group_path"),
-            "treeData": True,
-        }
+        self.create_context_menu = r.js_arrow(
+            "context_menu_items", CREATE_CONTEXT_MENU_ITEMS_JS
+        )
         defaultLayout = {
             "dockbox": {
                 "mode": "vertical",
@@ -143,11 +85,11 @@ class Application:
                             self.create_tab(
                                 *self.create_grid(
                                     create_session_columns(
-                                        lambda *x: print("changed", x)
+                                        self.session_attributes_update
                                     ),
                                     is_leaf=operator.itemgetter("is_session"),
                                     extra_args=session_extra_arguments,
-                                    callbacks=session_menu_items,
+                                    context_menu_callback=self.session_context_menu,
                                 )
                             )
                         ]
@@ -157,7 +99,12 @@ class Application:
                         "children": [
                             {
                                 "tabs": [
-                                    self.create_tab(*self.create_grid(DEPLOYMENT_DEF))
+                                    self.create_tab(
+                                        *self.create_grid(
+                                            DEPLOYMENT_DEF,
+                                            context_menu_callback=self.deployment_context_menu,
+                                        )
+                                    )
                                 ]
                             },
                             {"tabs": [self.create_tab(*self.create_grid(WORKER_DEF))]},
@@ -178,6 +125,34 @@ class Application:
             },
         )
 
+    async def session_context_menu(self, code, session_id):
+        if code == "DisplayRunningTasks":
+            if session_id not in self.updaters:
+                await self.insert_panel(
+                    *self.create_grid(
+                        RUNNING_TASKS_DEF,
+                        name=f"Session{session_id}",
+                        subject=session_id,
+                    )
+                )
+        else:
+            if code == "TerminateSession":
+                message = [code, session_id, "Session terminated from web client"]
+            else:
+                message = [code, session_id]
+            await self.server_connection.send(["RequestToMaster", 0, message])
+
+    def deployment_context_menu(self, *args):
+        print(*args)
+
+    async def session_attributes_update(self, code, session_id):
+        print(code, session_id)
+        return
+        is_session, rest = split_sequence(args, 1)
+        record_type = SESSION if is_session[0] else PRIORITY_GROUP
+        message = [code, record_type] + rest
+        await self.server_connection.send(["RequestToMaster", 0, message])
+
     def create_mount_callback(self, subject, updater):
         def result():
             self.server_connection.send_nowait(
@@ -185,9 +160,10 @@ class Application:
             )
             if updater:
                 self.updaters[subject] = updater
-                self.pending_grids.remove(subject)
-                if not self.pending_grids:
-                    self.ready.set()
+                if subject in self.pending_grids:
+                    self.pending_grids.remove(subject)
+                    if not self.pending_grids:
+                        self.ready.set()
             else:
                 self.updaters.pop(subject)
 
@@ -200,29 +176,25 @@ class Application:
         extra_args=None,
         name=None,
         subject=None,
-        callbacks=None,
+        context_menu_callback=None,
     ):
         name = name or definition["name"]
         subject = subject or definition["subject"]
         columns, width = create_columns(definition["columns"])
-
-        def callback(action, row_id):
-            print(action, row_id)
-        getContextMenuItems = None
-        callbacks = getContextMenuItems or definition.get("getContextMenuItems")
-        if callbacks:
-            getContextMenuItems = r.js_arrow(
-                "test", create_context_menu_js
-            )(self.window.register_callback(callback), callbacks)
+        if context_menu_callback:
+            getContextMenuItems = self.create_context_menu(
+                self.window.register_callback(context_menu_callback, hard_ref=True),
+                definition["context_menu_items"],
+            )
+        else:
+            getContextMenuItems = None
         grid = aggrid.AgGridReact(
             columns,
-            getRowNodeId=r.js("id"),
+            getRowId=r.js_arrow("data.id", "({data}) => data.id"),
             defaultColDef={"resizable": True},
             getContextMenuItems=getContextMenuItems,
-            className="ag-theme-balham",
             **extra_args or {},
         )
-        self.test.append(callback)
         static_fields = definition.get("static_fields", None) or [
             column["field"] for column in definition["columns"]
         ]
