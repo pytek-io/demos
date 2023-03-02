@@ -26,24 +26,8 @@ TITLE = "Dispatch"
 CREATION = "C"
 UPDATE = "U"
 DELETE = "D"
-CREATE_CONTEXT_MENU_ITEMS_JS = """(callback_id, params, args) => {
-    if (!args.node) {
-        return [];
-    }
-    return params.map(({ name, confirmation, code }) => {
-        const action = () => {
-            return reflect.notify_event(callback_id, [code, args.node.id]);
-        };
-        // const action = confirmation
-        //     ? showConfirm(confirmation, actual_action)
-        //     : actual_action;
-        return { name, action };
-    });
-}"""
 
 
-def split_sequence(sequence, index):
-    return sequence[:index], sequence[index:]
 
 
 def create_column(definition):
@@ -73,8 +57,8 @@ class Application:
         self.pending_grids = [
             grid_def["subject"] for grid_def in [WORKER_DEF, CLIENT_DEF, DEPLOYMENT_DEF]
         ] + [SESSION]
-        self.create_context_menu = r.js_arrow(
-            "context_menu_items", CREATE_CONTEXT_MENU_ITEMS_JS
+        self.create_context_menu_items = r.js_arrow(
+            "context_menu_items", aggrid.CREATE_CONTEXT_MENU_ITEMS_JS
         )
         defaultLayout = {
             "dockbox": {
@@ -148,9 +132,6 @@ class Application:
     async def session_attributes_update(self, code, session_id):
         print(code, session_id)
         return
-        is_session, rest = split_sequence(args, 1)
-        record_type = SESSION if is_session[0] else PRIORITY_GROUP
-        message = [code, record_type] + rest
         await self.server_connection.send(["RequestToMaster", 0, message])
 
     def create_mount_callback(self, subject, updater):
@@ -182,7 +163,7 @@ class Application:
         subject = subject or definition["subject"]
         columns, width = create_columns(definition["columns"])
         if context_menu_callback:
-            getContextMenuItems = self.create_context_menu(
+            getContextMenuItems = self.create_context_menu_items(
                 self.window.register_callback(context_menu_callback, hard_ref=True),
                 definition["context_menu_items"],
             )
@@ -276,30 +257,6 @@ class Application:
             panel_id,
             rcdock.DropDirection.MIDDLE,
         )
-
-    async def process_client_messages(self):
-        async for code, args in self.window.client_connection:
-            if code == "DisplayRunningTasks":
-                session_id = args[0]
-                if session_id in self.updaters:
-                    continue
-                await self.insert_panel(
-                    *self.create_grid(
-                        RUNNING_TASKS_DEF,
-                        name=f"Session{session_id}",
-                        subject=session_id,
-                    )
-                )
-            else:
-                if code == "UpdateAttribute":
-                    is_session, rest = split_sequence(args, 1)
-                    record_type = SESSION if is_session[0] else PRIORITY_GROUP
-                    message = [code, record_type] + rest
-                elif code == "TerminateSession":
-                    message = [code, args[0], "Session terminated from web client"]
-                else:
-                    message = [code] + args
-                await self.server_connection.send(["RequestToMaster", 0, message])
 
 
 async def app(window: r.Window):

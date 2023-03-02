@@ -70,10 +70,15 @@ class App:
                 aggrid.AgGridColumn(field=field, **args)
                 for field, (_formatter, args) in COLUMNS
             ],
-            getRowNodeId=r.js("id"),
+            getRowId=r.js_arrow("data.id", "({data}) => data.id"),
             defaultColDef={"resizable": True},
             componentDidMount=self.main,
-            getContextMenuItems=r.js("createContextMenu", MENU_ITEMS),
+            getContextMenuItems=r.js_arrow(
+                "context_menu_items", aggrid.CREATE_CONTEXT_MENU_ITEMS_JS
+            )(
+                window.register_callback(self.context_menu_callback, hard_ref=True),
+                MENU_ITEMS,
+            ),
         )
         self.settings = antd.Input(
             placeholder="Enter ticker here", onPressEnter=self.ok, style={"width": 120}
@@ -93,15 +98,12 @@ class App:
         )
         self.quote_manager.add_tickers(tickers)
 
-    async def process_messages_from_client(self):
-        async for code, data in self.window.client_connection:
-            if code == "remove quote":
-                ticker = data[0]
-                await self.quote_manager.remove_ticker(ticker)
-                await self.content.applyTransactionAsync({"remove": [{"id": ticker}]})
+    async def context_menu_callback(self, code, ticker):
+        if code == "remove quote":
+            await self.quote_manager.remove_ticker(ticker)
+            await self.content.applyTransactionAsync({"remove": [{"id": ticker}]})
 
     async def main(self):
-        self.window.start_soon(self.process_messages_from_client)
         await self.add_tickers(self.initial_tickers)
         async for update in self.quote_manager.updates():
             await self.content.applyTransactionAsync(
