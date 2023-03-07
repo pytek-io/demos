@@ -1,6 +1,5 @@
 2
 basic:Basic
-value:Under Control
 size:Three Sizes
 disabled:disabled
 hide_column:Hour and minute
