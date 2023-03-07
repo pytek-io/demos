@@ -272,8 +272,10 @@ async def app(window: r.Window):
         )
         if archive:
             connection = record_connection(connection, open(archive, "wb"))
-    else:
+    elif archive:
         connection = dummy_connection(read_pickles(open(archive, "rb")))
+    else:
+        return antd.TypographyText("Either a connection or an archive path must be provided.")
     app = Application(window=window)
     window.start_soon(app.main, connection)
     return app.dock_layout
