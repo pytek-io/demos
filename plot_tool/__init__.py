@@ -19,7 +19,7 @@ ROOT = pathlib.Path(__file__).parent.parent
 STOCK_PRICES_PATH = ROOT.joinpath("stock_prices/nasdaq/nasdaq.json")
 data = json.loads((STOCK_PRICES_PATH.read_text()))["data"]["table"]
 YAHOO_DATA = pd.DataFrame(data["rows"], columns=data["headers"])
-FRED_DATA = pd.read_pickle(ROOT.joinpath("fred.pick"))
+FRED_DATA = pd.read_csv(ROOT.joinpath("fred.csv"))
 YAHOO_TICKERS = dict(zip(YAHOO_DATA["symbol"], YAHOO_DATA["name"]))
 FRED_TICKERS = dict(zip(FRED_DATA["id"], FRED_DATA["title"]))
 EDITOR_OPTIONS = {
