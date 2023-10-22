@@ -2,7 +2,7 @@
 import datetime
 import itertools
 import pathlib
-
+import json
 import pandas as pd
 import reflect as r
 import reflect_ant_icons as ant_icons
@@ -16,7 +16,9 @@ from ..utils import merge_dicts
 from .common import TimeSeries
 
 ROOT = pathlib.Path(__file__).parent.parent
-YAHOO_DATA = pd.read_pickle(ROOT.joinpath("stock_prices/nasdaq/nasdaq.pick"))
+STOCK_PRICES_PATH = ROOT.joinpath("stock_prices/nasdaq/nasdaq.json")
+data = json.loads((STOCK_PRICES_PATH.read_text()))["data"]["table"]
+YAHOO_DATA = pd.DataFrame(data["rows"], columns=data["headers"])
 FRED_DATA = pd.read_pickle(ROOT.joinpath("fred.pick"))
 YAHOO_TICKERS = dict(zip(YAHOO_DATA["symbol"], YAHOO_DATA["name"]))
 FRED_TICKERS = dict(zip(FRED_DATA["id"], FRED_DATA["title"]))
