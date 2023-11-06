@@ -7,14 +7,13 @@ index_plus_one = r.js_arrow("index_plus_one", "({index}) => index + 1")
 custom_icons = r.js_arrow(
     "custom_icons",
     """({ index }) => {
-  icon = [
+  return [
     reflect_ant_icons.FrownOutlined,
     reflect_ant_icons.FrownOutlined,
     reflect_ant_icons.MehOutlined,
     reflect_ant_icons.SmileOutlined,
     reflect_ant_icons.SmileOutlined,
-  ][index];
-  return icon();
+  ][index]();
 };
 """,
     ["reflect_ant_icons"],
