@@ -1,16 +1,28 @@
-import { Breadcrumb } from 'antd';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
+import React from 'react';
+import { Breadcrumb } from 'antd';
 
-ReactDOM.render(
-  <Breadcrumb>
-    <Breadcrumb.Item href="">
-      <HomeOutlined />
-    </Breadcrumb.Item>
-    <Breadcrumb.Item href="">
-      <UserOutlined />
-      <span>Application List</span>
-    </Breadcrumb.Item>
-    <Breadcrumb.Item>Application</Breadcrumb.Item>
-  </Breadcrumb>,
-  mountNode,
+const App: React.FC = () => (
+  <Breadcrumb
+    items={[
+      {
+        href: '',
+        title: <HomeOutlined />,
+      },
+      {
+        href: '',
+        title: (
+          <>
+            <UserOutlined />
+            <span>Application List</span>
+          </>
+        ),
+      },
+      {
+        title: 'Application',
+      },
+    ]}
+  />
 );
+
+export default App;

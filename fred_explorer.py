@@ -69,7 +69,7 @@ def app():
         nodes_by_id[current_node_id]["children"] = generate_nodes(current_node_id)
         treeData.touch()
 
-    df = pd.read_pickle("demos/categories.pick")
+    df = pd.read_pickle("demos/fred.pick")
     values = [
         {"title": name, "id": f"{id}", "key": f"{key_value}", "isLeaf": False}
         for (id, name, parent_id), key_value in zip(

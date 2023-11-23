@@ -5,11 +5,12 @@ import reflect_html as html
 
 def app():
     return antd.Breadcrumb(
-        [
-            antd.Breadcrumb.Item(ant_icons.HomeOutlined(), href=""),
-            antd.Breadcrumb.Item(
-                [ant_icons.UserOutlined(), html.span("Application List")], href=""
-            ),
-            antd.Breadcrumb.Item("Application"),
+        items=[
+            {"title": ant_icons.HomeOutlined(), "href": ""},
+            {
+                "title": [ant_icons.UserOutlined(), html.span("Application List")],
+                "href": "",
+            },
+            {"title": "Application"},
         ]
     )

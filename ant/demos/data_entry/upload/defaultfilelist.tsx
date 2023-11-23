@@ -1,8 +1,10 @@
-import { Upload, Button } from 'antd';
+import React from 'react';
 import { UploadOutlined } from '@ant-design/icons';
+import type { UploadProps } from 'antd';
+import { Button, Upload } from 'antd';
 
-const props = {
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+const props: UploadProps = {
+  action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
   onChange({ file, fileList }) {
     if (file.status !== 'uploading') {
       console.log(file, fileList);
@@ -12,9 +14,9 @@ const props = {
     {
       uid: '1',
       name: 'xxx.png',
-      status: 'done',
-      response: 'Server Error 500', // custom error message to show
+      status: 'uploading',
       url: 'http://www.baidu.com/xxx.png',
+      percent: 33,
     },
     {
       uid: '2',
@@ -32,9 +34,10 @@ const props = {
   ],
 };
 
-ReactDOM.render(
+const App: React.FC = () => (
   <Upload {...props}>
     <Button icon={<UploadOutlined />}>Upload</Button>
-  </Upload>,
-  mountNode,
+  </Upload>
 );
+
+export default App;

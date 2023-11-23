@@ -1,42 +1,56 @@
 import reflect_antd as antd
+import reflect_ant_icons as ant_icons
 import reflect_html as html
 
 
 def app():
     return antd.Timeline(
-        [
-            antd.Timeline.Item("Create a services site 2015-09-01", color="green"),
-            antd.Timeline.Item("Create a services site 2015-09-01", color="green"),
-            antd.Timeline.Item(
-                [
+        items=[
+            {
+                "color": "green",
+                "children": "Create a services site 2015-09-01",
+            },
+            {
+                "color": "green",
+                "children": "Create a services site 2015-09-01",
+            },
+            {
+                "color": "red",
+                "children": [
                     html.p("Solve initial network problems 1"),
                     html.p("Solve initial network problems 2"),
                     html.p("Solve initial network problems 3 2015-09-01"),
                 ],
-                color="red",
-            ),
-            antd.Timeline.Item(
-                [
+            },
+            {
+                "children": [
                     html.p("Technical testing 1"),
                     html.p("Technical testing 2"),
                     html.p("Technical testing 3 2015-09-01"),
                 ]
-            ),
-            antd.Timeline.Item(
-                [
+            },
+            {
+                "color": "gray",
+                "children": [
                     html.p("Technical testing 1"),
                     html.p("Technical testing 2"),
                     html.p("Technical testing 3 2015-09-01"),
                 ],
-                color="gray",
-            ),
-            antd.Timeline.Item(
-                [
+            },
+            {
+                "color": "gray",
+                "children": [
                     html.p("Technical testing 1"),
                     html.p("Technical testing 2"),
                     html.p("Technical testing 3 2015-09-01"),
                 ],
-                color="gray",
-            ),
+            },
+            {
+                "color": "#00CCFF",
+                "dot": ant_icons.SmileOutlined(),
+                "children": html.p(
+                    "Custom color testing",
+                ),
+            },
         ]
     )

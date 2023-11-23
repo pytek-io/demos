@@ -1,4 +1,5 @@
 import pathlib
+import json
 
 import pandas as pd
 import reflect as r
@@ -24,11 +25,11 @@ class App:
         )
 
         def get_stocks_close():
-            return pd.read_pickle(
-                pathlib.Path(__file__).parent.joinpath(
-                    "nasdaq", f"{self.settings()}.pick"
-                )
+            path = pathlib.Path(__file__).parent.joinpath(
+                "nasdaq", f"{self.settings()}.json"
             )
+            data = json.loads((path.read_text()))["data"]["table"]
+            return pd.DataFrame(data["rows"], columns=data["headers"])
 
         self.content = html.div(
             aggrid.AgGridReact(

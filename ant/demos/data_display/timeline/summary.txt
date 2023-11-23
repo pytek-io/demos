@@ -1,7 +1,7 @@
 2
 basic:Basic
 color:Color
-pending:Last node and Reversing
+reverse:Last node and Reversing
 alternate:Alternate
 custom:Custom
 right:Right alternate

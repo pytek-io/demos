@@ -1,0 +1,18 @@
+import reflect_antd as antd
+import reflect_html as html
+
+
+def app():
+    return html.div(
+        [
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            html.div("Scroll to bottom"),
+            antd.FloatButton.BackTop(),
+        ],
+        style={"height": "300vh", "padding": 10},
+    )

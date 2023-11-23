@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { Timeline, Radio } from 'antd';
+import React, { useState } from 'react';
+import type { RadioChangeEvent } from 'antd';
+import { Radio, Timeline } from 'antd';
 
-function TimelimeLabelDemo() {
-  const [mode, setMode] = useState('left');
+const App: React.FC = () => {
+  const [mode, setMode] = useState<'left' | 'alternate' | 'right'>('left');
 
-  const onChange = e => {
+  const onChange = (e: RadioChangeEvent) => {
     setMode(e.target.value);
   };
 
@@ -21,14 +22,28 @@ function TimelimeLabelDemo() {
         <Radio value="right">Right</Radio>
         <Radio value="alternate">Alternate</Radio>
       </Radio.Group>
-      <Timeline mode={mode}>
-        <Timeline.Item label="2015-09-01">Create a services</Timeline.Item>
-        <Timeline.Item label="2015-09-01 09:12:11">Solve initial network problems</Timeline.Item>
-        <Timeline.Item>Technical testing</Timeline.Item>
-        <Timeline.Item label="2015-09-01 09:12:11">Network problems being solved</Timeline.Item>
-      </Timeline>
+      <Timeline
+        mode={mode}
+        items={[
+          {
+            label: '2015-09-01',
+            children: 'Create a services',
+          },
+          {
+            label: '2015-09-01 09:12:11',
+            children: 'Solve initial network problems',
+          },
+          {
+            children: 'Technical testing',
+          },
+          {
+            label: '2015-09-01 09:12:11',
+            children: 'Network problems being solved',
+          },
+        ]}
+      />
     </>
   );
-}
+};
 
-ReactDOM.render(<TimelimeLabelDemo />, mountNode);
+export default App;

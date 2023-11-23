@@ -1,9 +1,11 @@
-import { Upload, message, Button } from 'antd';
+import React from 'react';
 import { UploadOutlined } from '@ant-design/icons';
+import type { UploadProps } from 'antd';
+import { Button, message, Upload } from 'antd';
 
-const props = {
+const props: UploadProps = {
   name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
   headers: {
     authorization: 'authorization-text',
   },
@@ -19,9 +21,10 @@ const props = {
   },
 };
 
-ReactDOM.render(
+const App: React.FC = () => (
   <Upload {...props}>
     <Button icon={<UploadOutlined />}>Click to Upload</Button>
-  </Upload>,
-  mountNode,
+  </Upload>
 );
+
+export default App;

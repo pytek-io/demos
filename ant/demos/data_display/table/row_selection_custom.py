@@ -30,7 +30,7 @@ def app():
         )
 
     def rowSelection():
-        return antd.RowSelectionProps(**{
+        return antd.RowSelection(**{
             "selectedRowKeys": selected_row_keys(),
             "onChange": onChange,
             "selections": [

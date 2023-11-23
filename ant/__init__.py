@@ -85,11 +85,10 @@ def build_menu(root_directory):
             component_folder = pathlib.Path(category_folder, component_name)
             if not component_folder.is_dir():
                 continue
-            nb_cols = int(
-                pathlib.Path(component_folder, "summary.txt")
-                .read_text()
-                .splitlines()[0]
-            )
+            summary_path = pathlib.Path(component_folder, "summary.txt")
+            if not summary_path.exists():
+                continue
+            nb_cols = int(summary_path.read_text().splitlines()[0])
             COMPONENTS_PROPS[component_name] = nb_cols
             menuItems.append(
                 {
@@ -188,6 +187,8 @@ def create_code_box(
     success, _css, _title, demo = reflect_utils.evaluate_demo_module(python_module_path)
     if not success and not DISPLAY_DEMOS_ERRORS:
         return None
+    if "## en-US" in description:
+        description = description.split("## en-US")[1]
     return html.section(
         [
             html.div(
@@ -214,8 +215,8 @@ def create_code_box(
 def demo_details(root_directory, category, component_name):
     default_folder = os.path.join(root_directory, "demos", category, component_name)
     lines = iter(pathlib.Path(default_folder, "summary.txt").read_text().split("\n"))
-    _nb_cols = next(lines)
-    for module_name, demo_name in (x.split(":") for x in lines):
+    next(lines)
+    for module_name, demo_name in (x.split(":") for x in lines if x):
         module_path = pathlib.Path(default_folder, module_name + ".py")
         if not module_path.exists():
             continue
@@ -241,6 +242,7 @@ def generate_top_level_components(source, demos):
                 row.content
                 for row in token.children
                 if not isinstance(row, mistletoe.span_token.LineBreak)
+                and hasattr(row, "content")
             )
             yield html.h1(yaml.safe_load(definitions)["title"])
         elif (
