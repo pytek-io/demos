@@ -1,36 +1,36 @@
 - - Who are we?
-  - A startup building a Python enterprise framework called Reflect
+  - A startup building a Python enterprise framework called Render
   - Francois du Vignaud and a few of his friends and ex-colleagues started work on the Pytek project in November 2021. Their aim is to build the next generation of software development tools for business.
 
 - - What do we mean by Python enterprise framework?
   - A solution that allows you to build professional web applications (aka web app) all in Python
-  - Reflect is a complete technical infrastructure which  allows developers to focus fully on delivering business functionality using state of the art tools in a fully automated environment.
+  - Render is a complete technical infrastructure which  allows developers to focus fully on delivering business functionality using state of the art tools in a fully automated environment.
 
 - - What is a web app?
   - "A web page which allows for user interaction (eg: web mail, social network pages, etc)"
-  - 'More specifically, it is a single web page whose display updates according to the user inputs, external information (eg: realtime updates), etc. Reflect provides high level abstractions making it easy to implement advanced dynamic behaviours.'
+  - 'More specifically, it is a single web page whose display updates according to the user inputs, external information (eg: realtime updates), etc. Render provides high level abstractions making it easy to implement advanced dynamic behaviours.'
 
-- - Which applications is Reflect best suited to?
-  - Reflect is ideal for building business apps. Those can range from simple apps, to large scale systems such as website back-ends, B2B portals, business intelligence, automation, monitoring, reporting tools, etc
-  - Given its user-friendliness, Reflect is well suited for organizations with limited IT resources. Reflect allows any Python developer to build professional web apps.
+- - Which applications is Render best suited to?
+  - Render is ideal for building business apps. Those can range from simple apps, to large scale systems such as website back-ends, B2B portals, business intelligence, automation, monitoring, reporting tools, etc
+  - Given its user-friendliness, Render is well suited for organizations with limited IT resources. Render allows any Python developer to build professional web apps.
 
-- - What are Reflect's advantages over existing solutions?
-  - Reflect is a turn-key solution ready to be used by developers of all levels
+- - What are Render's advantages over existing solutions?
+  - Render is a turn-key solution ready to be used by developers of all levels
   - "Equivalent technical infrastructures are not standardized. They usually comprise a JavaScript front-end part and a back-end part written in a different programming language. Building and maintaining these infrastructures is challenging and hardly relevant to the actual business needs. Comparable solutions exist on different platforms (eg: NodeJS, MS Blazor, Shiny). The ones available in Python have been built for rather specific use (eg: Plotly, Streamlit)"
 
-- - What are Reflect limitations compared to existing solutions?
-  - Reflect apps require a constant connection to the server and use React UI components exclusively.
+- - What are Render limitations compared to existing solutions?
+  - Render apps require a constant connection to the server and use React UI components exclusively.
   - React is by far the most popular UI framework currently in use. The only domain for which it is not suitable is highly bespoke user experiences such as games.
 
 
-- - Are there any examples of apps built on top of Reflect yet?
+- - Are there any examples of apps built on top of Render yet?
   - You can see a few in the website app demos section and we will publish many more in the near future
-  - Even our website and this very presentation are build with Reflect. As they say in the Valley, we eat our own dog food, and we love it! We are also building prototypes for a few startups already - some of them should be made public soon.
+  - Even our website and this very presentation are build with Render. As they say in the Valley, we eat our own dog food, and we love it! We are also building prototypes for a few startups already - some of them should be made public soon.
 
 - - "What's in it for me?"
-  - Become an Early Adopter if you have a project which is a good fit for Reflect. We will help you to make it a shared success story
-  - Reflect is free to use at the moment. Early Adopters will be able to keep using it for free indefinitely. Please feel to reach out to us and we will be more than happy to discuss with you whether Reflect is a good fit for your needs.
+  - Become an Early Adopter if you have a project which is a good fit for Render. We will help you to make it a shared success story
+  - Render is free to use at the moment. Early Adopters will be able to keep using it for free indefinitely. Please feel to reach out to us and we will be more than happy to discuss with you whether Render is a good fit for your needs.
 
-- - Can I use Reflect now?
-  - Absolutely! You can play with the app demos on the website, download Reflect and start using it immediately
-  - "Reflect is in beta, meaning we won't change its interface. We are aiming for the first prod release mid-year. We are also working hard on improving the tutorial and demos, so stay tuned."
+- - Can I use Render now?
+  - Absolutely! You can play with the app demos on the website, download Render and start using it immediately
+  - "Render is in beta, meaning we won't change its interface. We are aiming for the first prod release mid-year. We are also working hard on improving the tutorial and demos, so stay tuned."

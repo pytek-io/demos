@@ -1,10 +1,10 @@
-import reflect as r
-import reflect_ant_icons as ant_icons
-import reflect_antd as antd
+import render as r
+import render_ant_icons as ant_icons
+import render_antd as antd
 
 custom_icon = r.js_arrow(
     "custom_icon",
-    "selected => reflect_ant_icons[selected ? 'FrownFilled' : 'FrownOutlined']()",
+    "selected => render_ant_icons[selected ? 'FrownFilled' : 'FrownOutlined']()",
 )
 
 

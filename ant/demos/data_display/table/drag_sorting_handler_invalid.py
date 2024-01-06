@@ -1,7 +1,7 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflected.react.sortable.hoc import sortableContainer, sortableElement, sortableHandle
-from reflect_ant_icons import MenuOutlined
+from render_html import *
+from render_antd import Table
+from rendered.react.sortable.hoc import sortableContainer, sortableElement, sortableHandle
+from render_ant_icons import MenuOutlined
 dataSource = this.dataSource
 dataSource = this.dataSource
 dataSource = this.dataSource

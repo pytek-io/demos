@@ -1,5 +1,5 @@
-import reflect as r
-import reflect_antd as antd
+import render as r
+import render_antd as antd
 
 mockData = [{"key": i, "title": f"content{i + 1}"} for i in range(10)]
 

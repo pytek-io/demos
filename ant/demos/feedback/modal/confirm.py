@@ -1,7 +1,7 @@
 import asyncio
 
-import reflect_ant_icons as ant_icons
-import reflect_antd as antd
+import render_ant_icons as ant_icons
+import render_antd as antd
 
 confirm = antd.Modal.confirm
 

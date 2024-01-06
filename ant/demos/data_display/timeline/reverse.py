@@ -1,7 +1,7 @@
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
-import reflect_utils
+import render as r
+import render_antd as antd
+import render_html as html
+import render_utils
 
 
 def app():
@@ -27,7 +27,7 @@ def app():
                 "Toggle Reverse",
                 type="primary",
                 style={"marginTop": 16},
-                onClick=reflect_utils.toggle_observable(reverse),
+                onClick=render_utils.toggle_observable(reverse),
             ),
         ]
     )

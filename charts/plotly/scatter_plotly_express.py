@@ -1,5 +1,5 @@
 import plotly.express as px
-import reflect_plotly as plotly
+import render_plotly as plotly
 
 
 def app():

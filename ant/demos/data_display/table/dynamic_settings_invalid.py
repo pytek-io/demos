@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table, Switch, Radio, Form, Space
-from reflect_ant_icons import DownOutlined
+from render_html import *
+from render_antd import Table, Switch, Radio, Form, Space
+from render_ant_icons import DownOutlined
 expandable = dict(expandedRowRender=record => <p>{record.description}</p>)
 pagination = dict(position='bottom')
 scroll = dict()

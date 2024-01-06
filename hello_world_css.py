@@ -1,4 +1,4 @@
-import reflect_html as html
+import render_html as html
 
 CSS = ["demos/hello_world.css"]
 

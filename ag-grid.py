@@ -3,11 +3,11 @@ import itertools
 import random
 
 import lorem
-import reflect as r
-import reflect_aggrid as aggrid
-import reflect_html as html
-import reflect_utils
-from reflect_utils.formatters import transform_if_number
+import render as r
+import render_aggrid as aggrid
+import render_html as html
+import render_utils
+from render_utils.formatters import transform_if_number
 
 TITLE = "AG Grid Example"
 FAVICON = "website/static/ag-grid_favicon.png"
@@ -46,7 +46,7 @@ def app(_window: r.Window):
         aggrid.AgGridColumn(
             field="int",
             headerName="Integer",
-            valueFormatter=transform_if_number(reflect_utils.numeral),
+            valueFormatter=transform_if_number(render_utils.numeral),
         ),
         aggrid.AgGridColumn(
             field="str",
@@ -59,22 +59,22 @@ def app(_window: r.Window):
         aggrid.AgGridColumn(
             field="bool",
             headerName="Bool",
-            valueFormatter=transform_if_number(reflect_utils.boolToString),
+            valueFormatter=transform_if_number(render_utils.boolToString),
         ),
         aggrid.AgGridColumn(
             field="float",
             headerName="Float",
-            valueFormatter=transform_if_number(reflect_utils.round_value_to_2_digits),
+            valueFormatter=transform_if_number(render_utils.round_value_to_2_digits),
         ),
         aggrid.AgGridColumn(
             field="date",
             headerName="Date",
-            valueFormatter=transform_if_number(reflect_utils.toLocaleDateString),
+            valueFormatter=transform_if_number(render_utils.toLocaleDateString),
         ),
         aggrid.AgGridColumn(
             field="datetime",
             headerName="DateTime",
-            valueFormatter=transform_if_number(reflect_utils.toLocaleDateString),
+            valueFormatter=transform_if_number(render_utils.toLocaleDateString),
         ),
     ]
     grid = aggrid.AgGridReact(

@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import List
-from reflect import js
+from render_html import *
+from render_antd import List
+from render import js
 
 
 def app():

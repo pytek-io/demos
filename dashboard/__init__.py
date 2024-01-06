@@ -1,8 +1,8 @@
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
-import reflect_rcdock as rcdock
-import reflect_utils
+import render as r
+import render_antd as antd
+import render_html as html
+import render_rcdock as rcdock
+import render_utils
 
 from demos.charts.altair.car_data_set import App as AltairApp
 from demos.stock_prices import App as StockApp
@@ -52,7 +52,7 @@ class App:
                 ],
             }
         }
-        self.dock_layout = rcdock.DockLayoutReflect(
+        self.dock_layout = rcdock.DockLayoutRender(
             defaultLayout=defaultLayout, style={"height": "100%", "width": "100%"}
         )
 
@@ -119,7 +119,7 @@ class App:
                         },
                     ],
                     "key": "SubMenu",
-                    "icon": reflect_utils.create_icon(
+                    "icon": render_utils.create_icon(
                         MENU, style={"height": 30, "color": rcdock.LIGHT_GREY}
                     ),
                 }

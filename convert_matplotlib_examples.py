@@ -122,8 +122,8 @@ def purge_folder(path):
         os.mkdir(path)
 
 
-import reflect.common as r
-import reflect.controller as r
+import render.common as r
+import render.controller as r
 
 
 def main():

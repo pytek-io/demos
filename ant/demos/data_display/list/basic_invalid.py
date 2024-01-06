@@ -1,5 +1,5 @@
-import reflect as r
-import reflect_antd as antd
+import render as r
+import render_antd as antd
 
 
 def app():
@@ -18,10 +18,10 @@ def app():
         },
     ]
 
-    render_item = """item => reflect_ant.List.Item(null,
-    reflect_ant.List.Item.Meta(null, {
-        avatar: reflect_ant.Avatar(null, { src: "https://joesch.moe/api/v1/random" }),
-        title: reflect_html.a(item.title, { ref: "https://ant.design" }),
+    render_item = """item => render_ant.List.Item(null,
+    render_ant.List.Item.Meta(null, {
+        avatar: render_ant.Avatar(null, { src: "https://joesch.moe/api/v1/random" }),
+        title: render_html.a(item.title, { ref: "https://ant.design" }),
         description: "Ant Design, a design language for background applications, is refined by Ant UED Team",
     })
 )"""

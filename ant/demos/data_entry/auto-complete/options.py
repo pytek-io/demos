@@ -1,5 +1,5 @@
-import reflect as r
-import reflect_antd as antd
+import render as r
+import render_antd as antd
 
 TextArea = antd.Input.TextArea
 domains = ["gmail.com", "163.com", "qq.com"]

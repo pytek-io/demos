@@ -1,10 +1,10 @@
 import datetime
 
 import pandas as pd
-import reflect as r
-import reflect_altair as altair
-import reflect_antd as antd
-import reflect_html as html
+import render as r
+import render_altair as altair
+import render_antd as antd
+import render_html as html
 
 from .charts import create_performance_chart
 from .server import CURRENCIES, Server

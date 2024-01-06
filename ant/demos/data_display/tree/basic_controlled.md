@@ -1,1 +1,1 @@
-Controlled mode lets parent nodes reflect the status of child nodes more intelligently.
+Controlled mode lets parent nodes render the status of child nodes more intelligently.

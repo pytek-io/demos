@@ -5,8 +5,8 @@ import pickle
 import time
 
 import anyio
-import reflect as r
-import reflect_utils
+import render as r
+import render_utils
 import websockets
 
 from .analytics import compute_implied_vols, merge_data
@@ -50,7 +50,7 @@ class Server:
         last_connection_attempt = time.perf_counter()
         while True:
             try:
-                connection_manager = reflect_utils.ws_connection_manager(
+                connection_manager = render_utils.ws_connection_manager(
                     uri=URI,
                     task_group=self.window.task_group,
                     dumps=json.dumps,

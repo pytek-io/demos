@@ -1,6 +1,6 @@
 import bokeh.plotting as bk
 import numpy as np
-import reflect_bokeh
+import render_bokeh
 
 FAVICON = "https://static.bokeh.org/favicon/favicon-32x32.png"
 TITLE = "Bokeh example"
@@ -24,4 +24,4 @@ def app():
     p.circle(
         x, y, radius=radii, fill_color=colors, fill_alpha=0.6, line_color="lightgrey"
     )
-    return reflect_bokeh.Figure(p)
+    return render_bokeh.Figure(p)

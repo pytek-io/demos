@@ -1,6 +1,6 @@
 import pandas
-import reflect as r
-import reflect_aggrid as aggrid
+import render as r
+import render_aggrid as aggrid
 
 timeStampTimeFormatter = r.js_arrow(
     "amount_formatter", "({value}) => new Date(value).toLocaleDateString()"

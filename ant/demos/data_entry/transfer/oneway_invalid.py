@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Transfer, Switch
+from render_html import *
+from render_antd import Transfer, Switch
 targetKeys, selectedKeys, disabled = this.targetKeys, this.selectedKeys, this.disabled
 def app():
     return[

@@ -1,14 +1,14 @@
 """
-    Simple todo application based on https://github.com/leonardopliski/react-antd-todo
+    Simple todo application inspired from https://github.com/leonardopliski/react-antd-todo
 """
 import json
 import os
 import pathlib
 
-import reflect as r
-import reflect_ant_icons as ant_icons
-import reflect_antd as antd
-import reflect_html as html
+import render as r
+import render_ant_icons as ant_icons
+import render_antd as antd
+import render_html as html
 from more_itertools import ilen
 
 FIRST_COL_BREAK_POINTS = {"xs": 24, "sm": 24, "md": 17, "lg": 19, "xl": 20}
@@ -28,37 +28,40 @@ class App:
     def __init__(self, window: r.Window):
         if not window.hash():
             window.hash.set("default_todo_list")
-        self.items_obs = r.ObservableList[r.DictOfObservables]([], key="self.items_obs")
+        self.items_obs_actual = r.ObservableList([], key="items_obs")
+        self.items_obs = r.Mapping(
+            r.DictOfObservables, self.items_obs_actual, key="items_obs"
+        )
+        self.actual_items = []
         self.description = antd.Input(
             placeholder="What needs to be done?",
             onPressEnter=self.add_new_item,
             key="self.description",
         )
 
-        def on_save_file_update():
+        def on_file_name_update():
             self.file_name = window.hash() or "default_todo_list"
             if not self.file_name.endswith(".json"):
                 self.file_name += ".json"
             file_path = pathlib.Path(os.getcwd(), self.file_name)
             if file_path.exists():
-                items, self.todo_item_counter = load_from_file(file_path)
+                self.actual_items, self.todo_item_counter = load_from_file(file_path)
             else:
-                items, self.todo_item_counter = [], 0
-            self.items_obs.set(items)
+                self.actual_items, self.todo_item_counter = [], 0
+            self.items_obs_actual.set(self.actual_items)
 
         def on_list_update():
             nb_completed = ilen(
-                None for item_obs in self.items_obs if item_obs["completed"]()
+                None for item_obs in self.items_obs if item_obs["completed"]
             )
             window.update_title(
                 f"({nb_completed}/{len(self.items_obs)}) {self.file_name}"
             )
-            save_to_file(
-                self.file_name, (self.items_obs.actual_data, self.todo_item_counter)
-            )
+            print("Saving to file", self.actual_items, self.todo_item_counter)
+            save_to_file(self.file_name, (self.actual_items, self.todo_item_counter))
 
-        r.autorun(on_save_file_update)
-        r.autorun(on_list_update)
+        r.autorun(on_file_name_update, "on_save_file_update")
+        r.autorun(on_list_update, "on_list_update")
 
     def create_todo_item_row(self, item_obs: r.DictOfObservables):
         return antd.List.Item(
@@ -72,7 +75,9 @@ class App:
                 antd.Popconfirm(
                     antd.Button("X", type="primary", danger=True),
                     title="Are you sure you want to delete this item?",
-                    onConfirm=lambda: self.items_obs.remove(item_obs),
+                    onConfirm=lambda: self.items_obs_actual.remove(
+                        item_obs.back_reference()
+                    ),
                 ),
                 antd.Tooltip(
                     antd.Switch(
@@ -91,7 +96,7 @@ class App:
 
     def add_new_item(self):
         if self.description():
-            self.items_obs.append(
+            self.items_obs_actual.append(
                 {
                     "description": self.description(),
                     "completed": False,

@@ -5,7 +5,7 @@ import itertools
 
 import holoviews as hv
 import numpy as np
-import reflect_bokeh as bokeh
+import render_bokeh as bokeh
 
 hv.extension("bokeh")
 bounds = -2, -1.4, 0.8, 1.4

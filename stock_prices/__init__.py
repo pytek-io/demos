@@ -2,10 +2,10 @@ import pathlib
 import json
 
 import pandas as pd
-import reflect as r
-import reflect_aggrid as aggrid
-import reflect_antd as antd
-import reflect_html as html
+import render as r
+import render_aggrid as aggrid
+import render_antd as antd
+import render_html as html
 
 from .config import COLUMNS
 

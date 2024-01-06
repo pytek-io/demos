@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table
-from reflected.react.resizable import Resizable
+from render_html import *
+from render_antd import Table
+from rendered.react.resizable import Resizable
 onResize, width, ...restProps = props.onResize, props.width, props....restProps
 def app():
     return[

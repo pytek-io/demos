@@ -1,5 +1,5 @@
-from reflect_antd import Table
-from reflect_html import *
+from render_antd import Table
+from render_html import *
 
 
 def app():

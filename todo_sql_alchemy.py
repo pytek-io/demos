@@ -1,13 +1,13 @@
 """
-A Reflect version of an app created created using three different web frameworks ( 
+A Render version of an app created created using three different web frameworks ( 
 https://www.youtube.com/watch?v=3vfum74ggHE). The corresponding code can be found under(
 https://github.com/python-engineer/python-fun/tree/master/webapps). Note that the style is a bit 
 off as we use Ant components. It demonstrates how one can combine an ORM such as sql alchemy 
-with Reflect.
+with Render.
 """
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
+import render as r
+import render_antd as antd
+import render_html as html
 import sqlalchemy
 
 TITLE = "Todo App"

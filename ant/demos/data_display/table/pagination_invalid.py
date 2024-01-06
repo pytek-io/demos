@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Table, Tag, Radio, Space
+from render_html import *
+from render_antd import Table, Tag, Radio, Space
 def app():
     return Tag(""{tag.toUpperCase()}"", color=color, key=tag)
 def app():

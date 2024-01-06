@@ -1,4 +1,4 @@
-import reflect_utils
+import render_utils
 
 
 def identity(x):
@@ -41,7 +41,7 @@ MARKET_HOURS_TYPES = [
 ]
 URI = "wss://streamer.finance.yahoo.com/"
 DUMMY = "CgRNU0ZUFYVrMUMY0KLMjcNcKgNOTVMwCDgBRZ+B3L9IuPn8CVU0IjRDXYVrMUNlQApHwNgBBA=="
-MAX_5_DIGITS = reflect_utils.maximumSignificantDigits(5)
+MAX_5_DIGITS = render_utils.maximumSignificantDigits(5)
 COLUMNS = [
     (
         "id",
@@ -66,7 +66,7 @@ COLUMNS = [
                 "headerName": "Price",
                 "width": 90,
                 "sortable": True,
-                "valueFormatter": reflect_utils.transform_if_number(MAX_5_DIGITS),
+                "valueFormatter": render_utils.transform_if_number(MAX_5_DIGITS),
                 "type": "rightAligned",
             },
         ),
@@ -79,9 +79,9 @@ COLUMNS = [
                 "headerName": "Change",
                 "width": 100,
                 "sortable": True,
-                "valueFormatter": reflect_utils.transform_if_number(MAX_5_DIGITS),
+                "valueFormatter": render_utils.transform_if_number(MAX_5_DIGITS),
                 "type": "rightAligned",
-                "cellStyle": reflect_utils.colorCellNumber,
+                "cellStyle": render_utils.colorCellNumber,
             },
         ),
     ),
@@ -93,11 +93,11 @@ COLUMNS = [
                 "headerName": "Change %",
                 "width": 110,
                 "sortable": True,
-                "valueFormatter": reflect_utils.transform_if_number(
-                    reflect_utils.round_value_to_2_digits
+                "valueFormatter": render_utils.transform_if_number(
+                    render_utils.round_value_to_2_digits
                 ),
                 "type": "rightAligned",
-                "cellStyle": reflect_utils.colorCellNumber,
+                "cellStyle": render_utils.colorCellNumber,
             },
         ),
     ),
@@ -109,8 +109,8 @@ COLUMNS = [
                 "headerName": "Time",
                 "width": 90,
                 "sortable": True,
-                "valueFormatter": reflect_utils.transform_if_number(reflect_utils.compose(
-                    reflect_utils.timeStampToJSDate, reflect_utils.toLocaleTimeString
+                "valueFormatter": render_utils.transform_if_number(render_utils.compose(
+                    render_utils.timeStampToJSDate, render_utils.toLocaleTimeString
                 )),
                 "enableCellChangeFlash": True,
             },
@@ -139,8 +139,8 @@ COLUMNS = [
                 "headerName": "Day Volume",
                 "width": 120,
                 "sortable": True,
-                "valueFormatter": reflect_utils.transform_if_number(
-                    reflect_utils.toLocaleString
+                "valueFormatter": render_utils.transform_if_number(
+                    render_utils.toLocaleString
                 ),
                 "type": "rightAligned",
             },

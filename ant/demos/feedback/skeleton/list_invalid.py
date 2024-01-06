@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Skeleton, Switch, List, Avatar
-from reflect_ant_icons import StarOutlined, LikeOutlined, MessageOutlined
+from render_html import *
+from render_antd import Skeleton, Switch, List, Avatar
+from render_ant_icons import StarOutlined, LikeOutlined, MessageOutlined
 loading = this.loading
 IconText = span(""{React.createElement(icon, "{ style: "{ marginRight: 8 }" )}"     "{text}"")
 def app():

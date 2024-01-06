@@ -1,4 +1,4 @@
-import reflect_antd as antd
+import render_antd as antd
 
 items = [
     {"label": "Tab 1", "key": "item-1", "children": "Content 1"},

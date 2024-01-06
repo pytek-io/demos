@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Transfer, Switch, Table, Tag
+from render_html import *
+from render_antd import Transfer, Switch, Table, Tag
 targetKeys, disabled, showSearch = this.targetKeys, this.disabled, this.showSearch
 TableTransfer = Table(rowSelection=rowSelection, columns=columns, dataSource=filteredItems, size="small", style=dict(pointerEvents=listDisabled ? 'none' : null), onRow="{( key, disabled: itemDisabled ) => (             onClick: lambda :", {=True, if=True, (itemDisabled=True, ||=True, listDisabled)=True, return;=True, onItemSelect(key,=True, !listSelectedKeys.includes(key));=True, }",=True, )}"=True)
 def app():

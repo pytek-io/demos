@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Select, Radio
+from render_html import *
+from render_antd import Select, Radio
 Option = Select.Option
 SelectSizesDemo = Radio.Group([Radio.Button("Large", value="large"), Radio.Button("Default", value="default"), Radio.Button("Small", value="small")], value=size, onChange=handleSizeChange)
 SelectSizesDemo = br()

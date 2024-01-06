@@ -1,7 +1,7 @@
-from reflect_html import *
-from reflect_antd import Tag, Input
-from reflected.rc.tween.one import TweenOneGroup
-from reflect_ant_icons import PlusOutlined
+from render_html import *
+from render_antd import Tag, Input
+from rendered.rc.tween.one import TweenOneGroup
+from render_ant_icons import PlusOutlined
 inputValue = this.inputValue
 tags, inputVisible, inputValue = this.tags, this.inputVisible, this.inputValue
 tagElem = Tag(""{tag}"", closable=True, onClose="{lambda e:", {=True, e.preventDefault();=True, this.handleClose(tag);=True, !}"=True)

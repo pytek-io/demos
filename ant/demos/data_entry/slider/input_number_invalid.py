@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Slider, InputNumber, Row, Col
+from render_html import *
+from render_antd import Slider, InputNumber, Row, Col
 inputValue = this.inputValue
 inputValue = this.inputValue
 def app():

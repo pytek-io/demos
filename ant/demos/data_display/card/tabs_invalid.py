@@ -1,4 +1,4 @@
-from reflect_antd import Card
+from render_antd import Card
 
 def app():
     return[

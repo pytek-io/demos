@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Skeleton, Space, Divider, Switch, Form, Radio
+from render_html import *
+from render_antd import Skeleton, Space, Divider, Switch, Form, Radio
 
 active, size, buttonShape, avatarShape = (
     this.active,

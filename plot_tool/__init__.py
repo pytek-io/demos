@@ -4,12 +4,12 @@ import itertools
 import pathlib
 import json
 import pandas as pd
-import reflect as r
-import reflect_ant_icons as ant_icons
-import reflect_antd as antd
-import reflect_html as html
-import reflect_monaco as monaco
-import reflect_plotly as plotly
+import render as r
+import render_ant_icons as ant_icons
+import render_antd as antd
+import render_html as html
+import render_monaco as monaco
+import render_plotly as plotly
 
 from ..fred import get_fred_series_observations, get_yahoo_stock_history
 from ..utils import merge_dicts

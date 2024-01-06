@@ -1,6 +1,6 @@
 from functools import partial
 
-import reflect_antd as antd
+import render_antd as antd
 
 
 def app():

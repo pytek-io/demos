@@ -1,8 +1,8 @@
-from reflect_html import *
-from reflect_antd import Menu, Dropdown
-from reflect_ant_icons import DownOutlined
-from reflect import create_observable
-from reflect import Callback
+from render_html import *
+from render_antd import Menu, Dropdown
+from render_ant_icons import DownOutlined
+from render import create_observable
+from render import Callback
 
 
 def app():

@@ -1,5 +1,5 @@
 import altair as alt
-import reflect_altair as altair
+import render_altair as altair
 import vega_datasets
 
 TITLE = "US airports"

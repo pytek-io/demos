@@ -1,6 +1,6 @@
 import numpy as np
 import plotly.figure_factory as ff
-import reflect_plotly as plotly
+import render_plotly as plotly
 
 
 def app():

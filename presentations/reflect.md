@@ -1,11 +1,11 @@
-# What functionality does Reflect provide?
-Reflect can be used to build either stand alone web apps or dynamic content embedded in existing webpages. 
+# What functionality does Render provide?
+Render can be used to build either stand alone web apps or dynamic content embedded in existing webpages. 
 
 In both cases users load a generic JavaScript client app that will be driven from a Python process on the server side.
 
-# How does Reflect relates to No/Low Code solutions?
+# How does Render relates to No/Low Code solutions?
 Low/No code solutions generally comes with a powerful UI allowing to extract and publish data and define actions either through a UI interface or short code.
-Reflect offers level framework which requires to write short Python script.
+Render offers level framework which requires to write short Python script.
 
 # What problem are we solving?
 
@@ -50,7 +50,7 @@ Over the last decade many solution have been developed to harness the power of w
 - Cons: Mostly suited for JavaScript development although other languages can be used although not straight out of the box [Python + Electron](https://medium.com/@abulka/electron-python-4e8c807bfa5e)). Similarly to native applications, apps run on end users machines.
 
 ## Web app servers
-Another increasingly popular approach to take advantage of Web UI technology is to create frameworks that can run applications processes on the server side while rendering them in a browser on the client side (spoiler: this Reflect architecture). This has many compelling advantages, starting from the fact they can target any programming language, apps can deployed instantly on server side. They require to expose a Web UI API to the targeted programming language, they also require a powerful server application which can manage app sub processes and their communication with client web browsers. This approach has been followed by Microsoft backed [Blazor](https://stackoverflow.blog/2020/02/26/whats-behind-the-hype-about-blazor/) project. It has also been implemented in R with [Shiny](https://www.dominodatalab.com/data-science-dictionary/shiny-in-r) and Python (eg: Plotly, Streamlit, PyWebIO, etc). 
+Another increasingly popular approach to take advantage of Web UI technology is to create frameworks that can run applications processes on the server side while rendering them in a browser on the client side (spoiler: this Render architecture). This has many compelling advantages, starting from the fact they can target any programming language, apps can deployed instantly on server side. They require to expose a Web UI API to the targeted programming language, they also require a powerful server application which can manage app sub processes and their communication with client web browsers. This approach has been followed by Microsoft backed [Blazor](https://stackoverflow.blog/2020/02/26/whats-behind-the-hype-about-blazor/) project. It has also been implemented in R with [Shiny](https://www.dominodatalab.com/data-science-dictionary/shiny-in-r) and Python (eg: Plotly, Streamlit, PyWebIO, etc). 
     - Pros: Allows very fast development cycles of business apps, low maintenance and operation cost thanks to its server based architecture.
     - Cons: Incur a higher initial loading time, which can be noticeable on mobile networks, does not work offline, slightly less customizable than custom build JavaScript clients.
 
@@ -84,7 +84,7 @@ A massive productivity boost in software development.
 
 How does it integrate with existing systems?
 
-- Reflect has been specifically designed to allow for a smooth adoption and integration. You can start building simple applications immediately, and migrate 
+- Render has been specifically designed to allow for a smooth adoption and integration. You can start building simple applications immediately, and migrate 
 
 
 overlap with any part of existing systems. In particular it does not come with any database integration, user management, analytics, IDE, etc. This should allow to easily integrate it with your existing systems.  

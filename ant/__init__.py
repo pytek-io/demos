@@ -4,11 +4,11 @@ import pickle
 import re
 
 import mistletoe
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
-import reflect_monaco as monaco
-import reflect_utils
+import render as r
+import render_antd as antd
+import render_html as html
+import render_monaco as monaco
+import render_utils
 import yaml
 
 
@@ -146,7 +146,7 @@ def code_box_bottom(description, js, py):
             html.div(
                 [html.span(img_, className="code-expand-icon code-box-code-action")],
                 className="code-box-actions",
-                onClick=reflect_utils.toggle_observable(show_code_editor),
+                onClick=render_utils.toggle_observable(show_code_editor),
             )
         ]
         if add_code:
@@ -183,8 +183,8 @@ def code_box_bottom(description, js, py):
 def create_code_box(
     module_path, component_name, module_name, demo_name, description, js_code
 ):
-    python_module_path = reflect_utils.get_module_name(module_path)
-    success, _css, _title, demo = reflect_utils.evaluate_demo_module(python_module_path)
+    python_module_path = render_utils.get_module_name(module_path)
+    success, _css, _title, demo = render_utils.evaluate_demo_module(python_module_path)
     if not success and not DISPLAY_DEMOS_ERRORS:
         return None
     if "## en-US" in description:
@@ -195,7 +195,7 @@ def create_code_box(
                 [
                     demo_name,
                     html.span(
-                        reflect_utils.create_edit_link(
+                        render_utils.create_edit_link(
                             module_path, __file__, css=["/demos/ant_demo_extra.css"]
                         ),
                         className="anticon anticon-edit",
@@ -235,7 +235,7 @@ def demo_details(root_directory, category, component_name):
 def generate_top_level_components(source, demos):
     yielded_demos = False
     for token in mistletoe.Document(
-        reflect_utils.replace_weird_escaped_pipes(source)
+        render_utils.replace_weird_escaped_pipes(source)
     ).children:
         if isinstance(token, mistletoe.block_token.SetextHeading):
             definitions = "\n".join(
@@ -259,11 +259,11 @@ def generate_top_level_components(source, demos):
             yield from [
                 html.h2("Examples"),
                 antd.Row(demos),
-                reflect_utils.render_node(token),
+                render_utils.render_node(token),
             ]
             yielded_demos = True
         else:
-            component = reflect_utils.render_node(token)
+            component = render_utils.render_node(token)
             if component:
                 yield component
 
@@ -287,7 +287,7 @@ def app():
                 for elements in split_list(demos, 2)
             ]
         s = open(f"demos/ant/definitions/{component_name}.md").read()
-        styles, content = reflect_utils.extract_style_definitions(s)
+        styles, content = render_utils.extract_style_definitions(s)
         md_description = list(generate_top_level_components(content, demos))
         return html.section(
             antd.Row(

@@ -1,7 +1,7 @@
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
-import reflect_utils
+import render as r
+import render_antd as antd
+import render_html as html
+import render_utils
 
 
 def app():
@@ -22,14 +22,14 @@ def app():
                         lambda: "Check" if checked() else "Uncheck",
                         type="primary",
                         size="small",
-                        onClick=reflect_utils.toggle_observable(checked),
+                        onClick=render_utils.toggle_observable(checked),
                     ),
                     antd.Button(
                         lambda: "Enable" if disabled() else "Disable",
                         style={"margin": "0 10px"},
                         type="primary",
                         size="small",
-                        onClick=reflect_utils.toggle_observable(disabled),
+                        onClick=render_utils.toggle_observable(disabled),
                     ),
                 ]
             ),

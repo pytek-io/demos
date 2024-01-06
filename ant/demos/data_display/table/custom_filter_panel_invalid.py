@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table, Input, Button, Space
-from reflect_ant_icons import SearchOutlined
+from render_html import *
+from render_antd import Table, Input, Button, Space
+from render_ant_icons import SearchOutlined
 
 data = [
     {

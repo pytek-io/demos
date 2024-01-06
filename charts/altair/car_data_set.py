@@ -1,8 +1,8 @@
 import altair as alt
-import reflect as r
-import reflect_altair as altair
-import reflect_antd as antd
-import reflect_html as html
+import render as r
+import render_altair as altair
+import render_antd as antd
+import render_html as html
 import vega_datasets
 
 DEFAULT_VALUES = ["Horsepower", "Miles_per_Gallon", "Origin"]

@@ -1,5 +1,5 @@
-import reflect as r
-import reflect_utils
+import render as r
+import render_utils
 from functools import partial
 
 CLIENT = 1
@@ -8,12 +8,12 @@ PRIORITY_GROUP = 3
 DEPLOYMENT = 4
 SESSION = 5
 SAFE_MAX_INTEGER = 4503599627370495
-blank_zeros = reflect_utils.replace_value(reflect_utils.numeral)
-blank_infinity = reflect_utils.replace_value(reflect_utils.numeral, SAFE_MAX_INTEGER)
-pythonTimeStampFormatter = reflect_utils.compose(
-    reflect_utils.pythonTimeStampToJSDate, reflect_utils.toLocaleTimeString
+blank_zeros = render_utils.replace_value(render_utils.numeral)
+blank_infinity = render_utils.replace_value(render_utils.numeral, SAFE_MAX_INTEGER)
+pythonTimeStampFormatter = render_utils.compose(
+    render_utils.pythonTimeStampToJSDate, render_utils.toLocaleTimeString
 )
-from reflect_utils.formatters import apply_to_value
+from render_utils.formatters import apply_to_value
 
 runningTasksColumnDefs = [
     {"headerName": "Uid", "field": "id", "width": 70, "sortable": True},
@@ -23,8 +23,8 @@ runningTasksColumnDefs = [
         "field": "worker_id",
         "width": 70,
         "sortable": True,
-        "valueFormatter": reflect_utils.transform_if_number(
-            reflect_utils.hexadecimalFormatter
+        "valueFormatter": render_utils.transform_if_number(
+            render_utils.hexadecimalFormatter
         ),
     },
     {
@@ -40,14 +40,14 @@ runningTasksColumnDefs = [
         "width": 90,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
+        "valueFormatter": apply_to_value(render_utils.durationFormatter),
     },
     {
         "headerName": "Overrun Tolerance (%)",
         "field": "overrun_tolerance",
         "width": 90,
         "cellStyle": {"textAlign": "right"},
-        "valueFormatter": reflect_utils.transform_if_number(reflect_utils.percentage),
+        "valueFormatter": render_utils.transform_if_number(render_utils.percentage),
         "sortable": True,
     },
     {
@@ -55,7 +55,7 @@ runningTasksColumnDefs = [
         "field": "max_memory",
         "width": 90,
         "cellStyle": {"textAlign": "right"},
-        "valueFormatter": reflect_utils.transform_if_number(reflect_utils.filesize),
+        "valueFormatter": render_utils.transform_if_number(render_utils.filesize),
         "sortable": True,
     },
     {
@@ -87,20 +87,20 @@ RUNNING_TASKS_DEF = {
     "columns": runningTasksColumnDefs,
     "context_menu_items": session_menu_items,
 }
-round_value_to_two_digits = reflect_utils.transform_if_number(
-    reflect_utils.round_value(2)
+round_value_to_two_digits = render_utils.transform_if_number(
+    render_utils.round_value(2)
 )
 creationDateTimeColumnDef = {
     "headerName": "Creation Date",
     "field": "creation_time",
     "valueFormatter": apply_to_value(
-        reflect_utils.compose(
-            reflect_utils.pythonTimeStampToJSDate, reflect_utils.toLocaleDateString
+        render_utils.compose(
+            render_utils.pythonTimeStampToJSDate, render_utils.toLocaleDateString
         )
     ),
     "width": 110,
     "sortable": True,
-    "aggFunc": reflect_utils.constant(None),
+    "aggFunc": render_utils.constant(None),
 }
 creationTimeColumnDef = {
     "headerName": "Creation Time",
@@ -115,8 +115,8 @@ deployments_columns = [
         "field": "id",
         "width": 90,
         "sortable": True,
-        "valueFormatter": reflect_utils.transform_if_number(
-            reflect_utils.hexadecimalFormatter
+        "valueFormatter": render_utils.transform_if_number(
+            render_utils.hexadecimalFormatter
         ),
     },
     creationDateTimeColumnDef,
@@ -126,7 +126,7 @@ deployments_columns = [
         "width": 80,
         "sortable": True,
         "cellStyle": {"textAlign": "right"},
-        "valueFormatter": reflect_utils.transform_if_number(reflect_utils.filesize),
+        "valueFormatter": render_utils.transform_if_number(render_utils.filesize),
     },
     {"headerName": "Tags", "field": "tags", "width": 110, "sortable": True},
     {
@@ -203,8 +203,8 @@ client_columns = [
         "headerName": "Uid",
         "field": "id",
         "width": 70,
-        "valueFormatter": reflect_utils.transform_if_number(
-            reflect_utils.hexadecimalFormatter
+        "valueFormatter": render_utils.transform_if_number(
+            render_utils.hexadecimalFormatter
         ),
     },
     {"headerName": "Host", "field": "host", "width": 200, "sortable": True},
@@ -275,7 +275,7 @@ tasks_durations = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
+        "valueFormatter": apply_to_value(render_utils.durationFormatter),
         "aggFunc": "sum",
     },
     {
@@ -285,7 +285,7 @@ tasks_durations = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
+        "valueFormatter": apply_to_value(render_utils.durationFormatter),
         "aggFunc": "sum",
     },
     {
@@ -295,7 +295,7 @@ tasks_durations = [
         "width": 80,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
+        "valueFormatter": apply_to_value(render_utils.durationFormatter),
         "aggFunc": "sum",
     },
     {
@@ -305,7 +305,7 @@ tasks_durations = [
         "width": 90,
         "cellStyle": {"textAlign": "right"},
         "sortable": True,
-        "valueFormatter": apply_to_value(reflect_utils.durationFormatter),
+        "valueFormatter": apply_to_value(render_utils.durationFormatter),
         "aggFunc": "sum",
     },
 ]
@@ -314,7 +314,7 @@ dataSizeColumn = {
     "cellStyle": {"textAlign": "right"},
     "sortable": True,
     "aggFunc": "sum",
-    "valueFormatter": apply_to_value(reflect_utils.filesize),
+    "valueFormatter": apply_to_value(render_utils.filesize),
 }
 input_size = dict(dataSizeColumn, headerName="Input", field="input_size")
 output_size = dict(dataSizeColumn, headerName="Output", field="output_size")
@@ -371,7 +371,7 @@ def session_columns_definition(on_cell_change):
         {
             "headerName": "ETA",
             "field": "eta",
-            "valueFormatter": reflect_utils.transform_if_number(
+            "valueFormatter": render_utils.transform_if_number(
                 pythonTimeStampFormatter
             ),
             "width": 100,
@@ -383,7 +383,7 @@ def session_columns_definition(on_cell_change):
             "width": 80,
             "cellStyle": {"textAlign": "right"},
             "sortable": True,
-            "valueFormatter": reflect_utils.transform_if_number(reflect_utils.filesize),
+            "valueFormatter": render_utils.transform_if_number(render_utils.filesize),
         },
         {"headerName": "User", "field": "user", "width": 100, "sortable": True},
         {
@@ -399,7 +399,7 @@ def session_columns_definition(on_cell_change):
                     "headerName": "Uid",
                     "field": "deployment_id",
                     "valueFormatter": apply_to_value(
-                        reflect_utils.replace_value(reflect_utils.hexadecimalFormatter)
+                        render_utils.replace_value(render_utils.hexadecimalFormatter)
                     ),
                     "width": 110,
                     "sortable": True,
@@ -409,8 +409,8 @@ def session_columns_definition(on_cell_change):
         {
             "headerName": "Client Uid",
             "field": "client_id",
-            "valueFormatter": reflect_utils.transform_if_number(
-                reflect_utils.hexadecimalFormatter
+            "valueFormatter": render_utils.transform_if_number(
+                render_utils.hexadecimalFormatter
             ),
             "hide": True,
         },
@@ -419,8 +419,8 @@ def session_columns_definition(on_cell_change):
             "field": "id",
             "width": 70,
             "hide": False,
-            "valueFormatter": reflect_utils.replace_value(
-                reflect_utils.hexadecimalFormatter
+            "valueFormatter": render_utils.replace_value(
+                render_utils.hexadecimalFormatter
             ),
         },
         {
@@ -470,7 +470,7 @@ session_extra_arguments = {
         "minWidth": 220,
     },
     "groupDefaultExpanded": -1,
-    "getDataPath": reflect_utils.get_attribute('priority_group_path'),
+    "getDataPath": render_utils.get_attribute('priority_group_path'),
     "treeData": True,
 }
 

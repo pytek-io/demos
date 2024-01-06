@@ -1,6 +1,6 @@
-import reflect_html as html
-import reflect_antd as antd
-import reflect as r
+import render_html as html
+import render_antd as antd
+import render as r
 
 
 def app():
@@ -14,5 +14,5 @@ def app():
         "Card content",
         grid=dict(gutter=16, column=4),
         dataSource=data,
-        renderItem= r.js_arrow("formatter", "item => reflect_ant.List.Item(reflect_ant.Card(null, item))")
+        renderItem= r.js_arrow("formatter", "item => render_ant.List.Item(render_ant.Card(null, item))")
     )

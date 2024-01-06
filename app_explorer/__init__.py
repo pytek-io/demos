@@ -2,11 +2,11 @@
 import os
 import pathlib
 
-import reflect as r
-import reflect_html as html
-import reflect_monaco as monaco
-import reflect_rcdock as rcdock
-import reflect_utils
+import render as r
+import render_html as html
+import render_monaco as monaco
+import render_rcdock as rcdock
+import render_utils
 
 TITLE = "App explorer"
 ALMOST_BLACK = "#0f1724"
@@ -23,7 +23,7 @@ def app(window: r.Window):
     filter_method = (
         lambda p: any(p.startswith(s) for s in ["__", "."]) and not p == "__init__.py"
     )
-    current_path, file_explorer = reflect_utils.create_file_explorer(
+    current_path, file_explorer = render_utils.create_file_explorer(
         base_path, folder_filter=filter_method, file_filter=filter_method
     )
     file_explorer.style.update({"paddingTop": 7, "paddingLeft": 10})
@@ -41,14 +41,14 @@ def app(window: r.Window):
         if actual_path_value:
             extension = actual_path_value.rsplit(".", 1)[-1]
             if extension == "py":
-                _success, _css, _title, component = reflect_utils.evaluate_demo_module(
-                    reflect_utils.get_module_name(actual_path()), ""
+                _success, _css, _title, component = render_utils.evaluate_demo_module(
+                    render_utils.get_module_name(actual_path()), ""
                 )
                 return component
             elif extension in ["svg", "png", "gif"]:
                 return html.img(src=actual_path_value)
             elif extension in ["md", "mdx"]:
-                return reflect_utils.parse_md_doc(open(actual_path_value, "r").read())
+                return render_utils.parse_md_doc(open(actual_path_value, "r").read())
             else:
                 return html.div(None)
 
@@ -173,7 +173,7 @@ def app(window: r.Window):
                     "alignItems": "center",
                 },
             ),
-            rcdock.DockLayoutReflect(defaultLayout=defaultLayout, style={"flex": 2}),
+            rcdock.DockLayoutRender(defaultLayout=defaultLayout, style={"flex": 2}),
         ],
         style={"display": "flex", "flexDirection": "column", "minHeight": "100%"},
     )

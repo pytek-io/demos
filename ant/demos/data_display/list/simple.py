@@ -1,6 +1,6 @@
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
+import render as r
+import render_antd as antd
+import render_html as html
 
 data = [
     "Magna officia mollit commodo occaecat esse id.",
@@ -12,11 +12,11 @@ data = [
 
 list_item_renderer_highlight = r.js_arrow(
     "list_item_renderer_highlight",
-    "item => reflect_ant.List.Item([reflect_ant.Typography.Text([item], { mark: true })])",
+    "item => render_ant.List.Item([render_ant.Typography.Text([item], { mark: true })])",
 )
 
 list_item_renderer = r.js_arrow(
-    "list_item_renderer", "reflect_ant.List.Item"
+    "list_item_renderer", "render_ant.List.Item"
 )
 
 

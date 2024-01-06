@@ -1,10 +1,10 @@
-import reflect as r
-import reflect_antd as antd
+import render as r
+import render_antd as antd
 
 
 renderer = """item => (
-    reflect_ant.List.Item(
-        reflect_ant.Card("Card content", { title: item.title })
+    render_ant.List.Item(
+        render_ant.Card("Card content", { title: item.title })
     )
 )"""
 

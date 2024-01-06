@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Table, Typography
+from render_html import *
+from render_antd import Table, Typography
 Text = Typography.Text
 def app():
     return[

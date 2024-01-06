@@ -1,6 +1,6 @@
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
+import render as r
+import render_antd as antd
+import render_html as html
 
 index_plus_one = r.js_arrow("index_plus_one", "({index}) => index + 1")
 
@@ -8,15 +8,15 @@ custom_icons = r.js_arrow(
     "custom_icons",
     """({ index }) => {
   return [
-    reflect_ant_icons.FrownOutlined,
-    reflect_ant_icons.FrownOutlined,
-    reflect_ant_icons.MehOutlined,
-    reflect_ant_icons.SmileOutlined,
-    reflect_ant_icons.SmileOutlined,
+    render_ant_icons.FrownOutlined,
+    render_ant_icons.FrownOutlined,
+    render_ant_icons.MehOutlined,
+    render_ant_icons.SmileOutlined,
+    render_ant_icons.SmileOutlined,
   ][index]();
 };
 """,
-    ["reflect_ant_icons"],
+    ["render_ant_icons"],
 )
 
 

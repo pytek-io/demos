@@ -1,7 +1,7 @@
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
-import reflect_utils
+import render as r
+import render_antd as antd
+import render_html as html
+import render_utils
 
 steps = [
     {"title": "First", "content": "First-content"},
@@ -35,14 +35,14 @@ def app():
                     antd.Button(
                         "Previous",
                         type="primary",
-                        onClick=reflect_utils.increment_observable_bounded(
+                        onClick=render_utils.increment_observable_bounded(
                             current, 0, len(steps) - 1, -1
                         ),
                     ),
                     antd.Button(
                         "Next",
                         type="primary",
-                        onClick=reflect_utils.increment_observable_bounded(
+                        onClick=render_utils.increment_observable_bounded(
                             current, 0, len(steps) - 1, 1
                         ),
                     ),

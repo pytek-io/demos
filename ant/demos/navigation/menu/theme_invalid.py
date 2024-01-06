@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Menu, Switch
-from reflect_ant_icons import MailOutlined, AppstoreOutlined, SettingOutlined
+from render_html import *
+from render_antd import Menu, Switch
+from render_ant_icons import MailOutlined, AppstoreOutlined, SettingOutlined
 SubMenu = Menu.SubMenu
 def app():
     return[

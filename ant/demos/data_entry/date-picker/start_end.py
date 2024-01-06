@@ -1,7 +1,7 @@
 import datetime
 
-import reflect as r
-import reflect_antd as antd
+import render as r
+import render_antd as antd
 
 greater_dates = r.js_arrow("greater_dates", "(date1, date2) => date2 > date1")
 less_dates = r.js_arrow("lesser_dates", "(date1, date2) => date2 < date1")

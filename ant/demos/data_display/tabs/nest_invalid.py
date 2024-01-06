@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Tabs, Select
+from render_html import *
+from render_antd import Tabs, Select
 TabPane = Tabs.TabPane
 Option = Select.Option
 parentPos, childPos, parentType, childType = this.parentPos, this.childPos, this.parentType, this.childType

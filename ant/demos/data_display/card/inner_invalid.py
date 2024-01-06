@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Card
+from render_html import *
+from render_antd import Card
 def app():
     return[
  Card([Card("More", type="inner", title="Inner Card title", extra="{a(href=", #"=True), "}">       Inner Card content"], title="Card title"),

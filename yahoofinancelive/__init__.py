@@ -2,11 +2,11 @@ import base64
 import json
 import typing
 
-import reflect as r
-import reflect_aggrid as aggrid
-import reflect_antd as antd
-import reflect_html as html
-import reflect_utils
+import render as r
+import render_aggrid as aggrid
+import render_antd as antd
+import render_html as html
+import render_utils
 import websockets
 
 from .config import COLUMNS, URI
@@ -38,7 +38,7 @@ class YFLiveQuoteManager:
 
     async def updates(self):
         while True:
-            connection_manager = reflect_utils.ws_connection_manager(
+            connection_manager = render_utils.ws_connection_manager(
                 URI,
                 self.window.task_group,
                 number_messages=False,

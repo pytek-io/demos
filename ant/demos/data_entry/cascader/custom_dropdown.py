@@ -1,5 +1,5 @@
-import reflect as r
-import reflect_antd as antd
+import render as r
+import render_antd as antd
 
 # const handleAreaClick = (
 #   e: React.MouseEvent<HTMLAnchorElement>,
@@ -30,11 +30,11 @@ render_selection = r.js_arrow(
   return labels.map((label, i) => {
     const option = selectedOptions[i];
     if (i === labels.length - 1) {
-      return reflect_html.span(reflect_html.a(option.code), {
+      return render_html.span(render_html.a(option.code), {
         key: option.value,
       });
     }
-    return reflect_html.span(label, { key: option.value });
+    return render_html.span(label, { key: option.value });
   });
 };
 """,

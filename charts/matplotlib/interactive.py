@@ -5,9 +5,9 @@ import importlib
 
 import matplotlib.pyplot as plt
 import numpy as np
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
+import render as r
+import render_antd as antd
+import render_html as html
 
 import demos.charts.matplotlib.methods as methods
 from demos.charts.utils import matplotlib_to_svg

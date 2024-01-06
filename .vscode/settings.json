@@ -1,6 +1,6 @@
 {
   "python.formatting.provider": "black",
-  "python.analysis.extraPaths": [".", "..", "../reflect/reflect"],
+  "python.analysis.extraPaths": [".", "..", "../render/render"],
   "cSpell.words": [
     "anticon",
     "derebit",

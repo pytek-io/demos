@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Avatar, Image
-from reflect_ant_icons import UserOutlined
+from render_html import *
+from render_antd import Avatar, Image
+from render_ant_icons import UserOutlined
 def app():
     return[
  Avatar(icon=UserOutlined([])),

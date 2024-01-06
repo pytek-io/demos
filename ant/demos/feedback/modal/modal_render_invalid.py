@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Modal, Button
+from render_html import *
+from render_antd import Modal, Button
 clientWidth, clientHeight = window.clientWidth, window.clientHeight
 bounds, disabled, visible = this.bounds, this.disabled, this.visible
 def app():

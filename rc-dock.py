@@ -1,7 +1,7 @@
 import itertools
 
-import reflect_html as html
-import reflect_rcdock as rcdock
+import render_html as html
+import render_rcdock as rcdock
 
 
 def create_content(file_name):

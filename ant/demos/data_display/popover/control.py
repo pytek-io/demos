@@ -1,5 +1,5 @@
-import reflect_antd as antd
-import reflect as r
+import render_antd as antd
+import render as r
 
 
 def app():

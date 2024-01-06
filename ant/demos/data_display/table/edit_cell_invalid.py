@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Table, Input, Button, Popconfirm, Form
-from reflect_antd.lib.form import FormInstance
+from render_html import *
+from render_antd import Table, Input, Button, Popconfirm, Form
+from render_antd.lib.form import FormInstance
 count, dataSource = this.count, this.dataSource
 dataSource = this.dataSource
 def app():

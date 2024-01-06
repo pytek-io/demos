@@ -1,5 +1,5 @@
-import reflect as r
-import reflect_antd as antd
+import render as r
+import render_antd as antd
 
 # In the fifth row, other columns are merged into first column
 # by setting it's colSpan to be 0

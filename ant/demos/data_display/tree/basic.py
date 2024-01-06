@@ -1,7 +1,7 @@
 from functools import partial
 
-import reflect_antd as antd
-import reflect_html as html
+import render_antd as antd
+import render_html as html
 
 
 def app():

@@ -6,10 +6,10 @@ import pathlib
 
 import httpx
 import pandas as pd
-import reflect as r
-import reflect_antd as antd
-import reflect_html as html
-import reflect_plotly as plotly
+import render as r
+import render_antd as antd
+import render_html as html
+import render_plotly as plotly
 
 CANDLE_STICK_NAME = "candlestick"
 OHLC_NAME = "ohlc"

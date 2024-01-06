@@ -1,4 +1,4 @@
-import reflect_antd as antd
+import render_antd as antd
 
 baseStyle = {"width": "25%", "height": 54}
 

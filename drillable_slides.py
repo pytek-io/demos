@@ -2,13 +2,21 @@ import functools
 import math
 import os
 
-import reflect as r
-import reflect_html as html
-import yaml
-from website.common import BACKGROUND_COLOR, FONT_FAMILY, GREEN, LIGHT_BLUE
-from website.home import HIDE_SCROLL_BAR_STYLE, SLOGAN
-from website.reflect.gallery import MENU as GALLERY_MENU
+import render as r
+import render_html as html
+import render_swiper as swiper
 
+import yaml
+from website.common import BACKGROUND_COLOR, GREEN, LIGHT_BLUE
+from website.render.gallery import MENU as GALLERY_MENU
+
+SLOGAN = "Early adopters presentation"
+# this is to hide scroll bar on Chrome
+HIDE_SCROLL_BAR_STYLE = """
+::-webkit-scrollbar {
+  width: 0px;
+}
+"""
 TITLE = "Early adopters presentation"
 BODY_STYLE = {"backgroundColor": "rgb" + str(BACKGROUND_COLOR), "fontSize": 10}
 CSS = ["demos/presentation.css"]
@@ -28,9 +36,21 @@ ANSWER_REM = 1.5
 MARGIN_TOP_LOGO = 1
 maximize = "M396.795 396.8H320V448h128V320h-51.205zM396.8 115.205V192H448V64H320v51.205zM115.205 115.2H192V64H64v128h51.205zM115.2 396.795V320H64v128h128v-51.205z"
 minimize = "M64 371.2h76.795V448H192V320H64v51.2zm76.795-230.4H64V192h128V64h-51.205v76.8zM320 448h51.2v-76.8H448V320H320v128zm51.2-307.2V64H320v128h128v-51.2h-76.8z"
+FONT_FAMILY = "Nanum Pen Script, cursive"
+FONT_FAMILY = "Permanent Marker, cursive"
+
+STYLE = {"position": "absolute", "bottom": "10px"}
+BULLET_STYLE = {
+    "width": "11px",
+    "height": "11px",
+    "display": "inline-block",
+    "marginRight": "3.33333px",
+    "pointerEvents": "all",
+    "cursor": "pointer",
+}
 
 
-def select_file_extension(file_path):
+def select_image_file(file_path):
     for extension in ["gif", "png", "svg", "jpg"]:
         maybe_path = f"{file_path}.{extension}"
         if os.path.exists(maybe_path):
@@ -42,19 +62,12 @@ def title(content, color=LIGHT_BLUE, fontSize="2rem"):
         content,
         style={
             "color": color,
-            "fontFamily": FONT_FAMILY,
+            # "fontFamily": FONT_FAMILY,
             "fontSize": fontSize,
             "textAlign": "center",
             "margin": fontSize,
         },
     )
-
-
-def add_dicts(*dicts):
-    result = {}
-    for d in dicts:
-        result.update(d.items())
-    return result
 
 
 def roman_numeral(number):
@@ -75,12 +88,9 @@ def create_icon(
         width=width,
         height=height,
         fill=fill,
-        style=html.style,
+        style=style,
         onClick=onClick,
     )
-
-
-STYLE = {"position": "absolute", "bottom": "10px"}
 
 
 def left_center_right(left, center, right):
@@ -94,16 +104,6 @@ def left_center_right(left, center, right):
             html.div(center, style={"margin": "0 auto", "width": "fit-content"})
         )
     return html.div(content, style={"width": "100%"})
-
-
-BULLET_STYLE = {
-    "width": "11px",
-    "height": "11px",
-    "display": "inline-block",
-    "marginRight": "3.33333px",
-    "pointerEvents": "all",
-    "cursor": "pointer",
-}
 
 
 def create_bullet(color="white", transparent=True, onClick=None):
@@ -122,7 +122,9 @@ def create_bullet(color="white", transparent=True, onClick=None):
 
 
 def create_answer_box(answer, details, detail_level):
-    update_detail_level = lambda: detail_level.set(1 if detail_level() == 2 else 2)
+    def update_detail_level():
+        detail_level.set(1 if detail_level() == 2 else 2)
+
     return html.div(
         html.div(
             [
@@ -179,7 +181,7 @@ def create_question_and_answer(
                 question,
                 onClick=drill,
                 style={
-                    "fontFamily": FONT_FAMILY,
+                    # "fontFamily": FONT_FAMILY,
                     "color": GREEN,
                     "fontSize": f"{QUESTION_REM}rem",
                     "padding": 0,
@@ -228,12 +230,12 @@ def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
             title("Early adopters presentation", color=GREEN, fontSize="1.5rem"),
         ]
     )
-    swiper = swiper.Swiper(
+    slide_show = swiper.Swiper(
         [
             swiper.SwiperSlide(
                 [
                     html.img(
-                        dataSrc=select_file_extension(
+                        dataSrc=select_image_file(
                             os.path.join(
                                 app_path.split("#")[0].replace(".", os.path.sep),
                                 "default",
@@ -251,11 +253,14 @@ def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
         navigation=True,
         style={"width": "calc(min(100%, 70vh))", "margin": "0 auto"},
     )
-    current_demo_name = lambda: GALLERY_MENU[swiper() or 0][0]
+
+    def current_demo_name():
+        return GALLERY_MENU[slide_show() or 0][0]
+
     last_page = html.div(
         [
             title("A few examples...", LIGHT_BLUE, fontSize="2rem"),
-            html.div(swiper, custom_attributes={"data-swipe-ignore": True}),
+            html.div(slide_show, custom_attributes={"data-swipe-ignore": True}),
             title(current_demo_name, color=GREEN, fontSize="1.5rem"),
             title(
                 html.a(
@@ -273,7 +278,7 @@ def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
         font_size = 16
         if resolution > 800:
             font_size = 24
-        window.update_tag_style([(f"font-size", f"{font_size}px")], "html")
+        window.update_tag_style([("font-size", f"{font_size}px")], "html")
         details_level_value, width_value, margin_value = (
             details_level(),
             window.width(),
@@ -332,7 +337,7 @@ def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
 
 def app(window: r.Window):
     file_name = (window.hash() or "early_adopters").split("/")[0]
-    is_touch_device = window.browser_details["is_touch_device"]
+    is_touch_device = False  # window.browser_details["is_touch_device"]
     full_screen = r.ObservableValue(False)
     margin = r.ResponsiveValue(xs=3, sm=10, md=10, lg=15, xl=None, xxl=30)
 
@@ -343,7 +348,7 @@ def app(window: r.Window):
         )
 
     def set_page_index(index):
-        window.hash.set(f"{file_name}/{index}")
+        window.update_hash(f"{file_name}/{index}")
 
     def safe_increment(increment):
         nonlocal page_index, set_page_index
@@ -354,23 +359,23 @@ def app(window: r.Window):
         elif page_index_value > 0:
             set_page_index(page_index_value - 1)
 
-    window.add_event_listener(
-        "fullscreenchange",
-        None,
-        callback_name=None,
-        method=lambda: full_screen.set(not full_screen()),
-    )
-    window.add_event_listener(
-        "swiped",
-        "detail.dir",
-        lambda d: safe_increment(d == "left") if d in ["left", "right"] else None,
-    )
-    window.add_event_listener(
-        "keydown",
-        "keyCode",
-        lambda k: k in (RIGHT_ARROW, LEFT_ARROW, SPACE_BAR)
-        and safe_increment(k != LEFT_ARROW),
-    )
+    # window.add_event_listener(
+    #     "fullscreenchange",
+    #     None,
+    #     callback_name=None,
+    #     method=lambda: full_screen.set(not full_screen()),
+    # )
+    # window.add_event_listener(
+    #     "swiped",
+    #     "detail.dir",
+    #     lambda d: safe_increment(d == "left") if d in ["left", "right"] else None,
+    # )
+    window.test = lambda k: k in (
+        RIGHT_ARROW,
+        LEFT_ARROW,
+        SPACE_BAR,
+    ) and safe_increment(k != LEFT_ARROW)
+    window.add_event_listener("keydown", window.test, r.js_arrow("keyCode", "(event) => event.keyCode"))
     slides, detail_level_icon = slides_and_left_icon(
         window, file_name, is_touch_device, margin
     )
@@ -428,17 +433,15 @@ def app(window: r.Window):
     def responsive_margins(content, style):
         return html.div(
             content,
-            style=lambda: add_dicts(
-                html.style,
-                {"paddingLeft": f"{margin()}vh", "paddingRight": f"{margin()}vh"},
+            style=lambda: dict(
+                style,
+                **{"paddingLeft": f"{margin()}vh", "paddingRight": f"{margin()}vh"},
             ),
         )
 
     logo_style = {"height": f"calc({LOGO_HEIGHT}px + {MARGIN_TOP_LOGO}rem"}
     if is_touch_device:
         logo_style.update(marginLeft="auto", marginRight="auto")
-    import inspect
-
     return html.div(
         [
             html.style(HIDE_SCROLL_BAR_STYLE),

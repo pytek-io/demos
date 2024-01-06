@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Modal, Button
-from reflect_ant_icons import ExclamationCircleOutlined
+from render_html import *
+from render_antd import Modal, Button
+from render_ant_icons import ExclamationCircleOutlined
 
 confirm = Modal.confirm
 

@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Form, Input, Button, Radio
-from reflect_ant_icons import InfoCircleOutlined
+from render_html import *
+from render_antd import Form, Input, Button, Radio
+from render_ant_icons import InfoCircleOutlined
 
 
 def app():

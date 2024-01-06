@@ -2,5 +2,5 @@ Generic demo application allowing to plot data from Yahoo and FRED apis using Pl
 
 ### Featured libraries
 
-- [Plotly](internal:website.reflect.libraries/plotly.md)
-- [Ant Design](internal:website.reflect.libraries/antd.md)
+- [Plotly](internal:website.render.libraries/plotly.md)
+- [Ant Design](internal:website.render.libraries/antd.md)

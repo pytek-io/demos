@@ -1,11 +1,11 @@
-import reflect as r
-import reflect_antd as antd
+import render as r
+import render_antd as antd
 
-create_anchor = r.js_arrow("create_anchor", "text => reflect_html.a(text)")
+create_anchor = r.js_arrow("create_anchor", "text => render_html.a(text)")
 
 address_renderer = r.js_arrow(
     "address_renderer",
-    "address => reflect_ant.Tooltip(address, {placement: 'topLeft', title: address})",
+    "address => render_ant.Tooltip(address, {placement: 'topLeft', title: address})",
 )
 
 

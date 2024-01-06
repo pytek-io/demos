@@ -1,5 +1,5 @@
-from reflect_html import *
-from reflect_antd import Progress
+from render_html import *
+from render_antd import Progress
 def app():
     return[
  Progress(strokeColor=dict('0%'='#108ee9', '100%'='#87d068'), percent=99.9),

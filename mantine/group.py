@@ -1,4 +1,4 @@
-from reflect_mantine import Button, Group
+from render_mantine import Button, Group
 
 
 def app():

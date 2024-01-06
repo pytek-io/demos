@@ -1,5 +1,5 @@
 """Formula as a lambda expression"""
-import reflect_mantine as mantine
+import render_mantine as mantine
 
 
 def app():

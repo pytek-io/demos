@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Result, Button, Typography
-from reflect_ant_icons import CloseCircleOutlined
+from render_html import *
+from render_antd import Result, Button, Typography
+from render_ant_icons import CloseCircleOutlined
 
 Paragraph, Text = Typography.Paragraph, Typography.Text
 

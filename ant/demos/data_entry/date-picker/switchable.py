@@ -1,4 +1,4 @@
-import reflect_antd as antd
+import render_antd as antd
 
 
 def picker_with_type(picker_type, onChange):

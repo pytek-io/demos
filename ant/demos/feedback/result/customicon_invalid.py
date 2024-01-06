@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Result, Button
-from reflect_ant_icons import SmileOutlined
+from render_html import *
+from render_antd import Result, Button
+from render_ant_icons import SmileOutlined
 
 
 def app():

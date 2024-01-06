@@ -1,6 +1,6 @@
 """Formula as a lambda expression"""
-import reflect_mantine as mantine
-import reflect_tabler_icons as tabler_icons
+import render_mantine as mantine
+import render_tabler_icons as tabler_icons
 
 def app():
     name = mantine.Tabs(

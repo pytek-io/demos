@@ -1,8 +1,8 @@
-from reflect_html import *
-from reflect_antd import Upload, Button, Tooltip
-from reflected.react.dnd import DndProvider, useDrag, useDrop, createDndContext
-from reflected.react.dnd.html5.backend import HTML5Backend
-from reflect_ant_icons import UploadOutlined
+from render_html import *
+from render_antd import Upload, Button, Tooltip
+from rendered.react.dnd import DndProvider, useDrag, useDrop, createDndContext
+from rendered.react.dnd.html5.backend import HTML5Backend
+from render_ant_icons import UploadOutlined
 index: dragIndex = monitor.index: dragIndex
 errorNode = Tooltip(""{originNode.props.children}"", title="Upload Error", getPopupContainer=lambda :document.body)
 def app():

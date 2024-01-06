@@ -1,6 +1,6 @@
-from reflect_html import *
-from reflect_antd import Tabs
-from reflected.react.sticky import StickyContainer, Sticky
+from render_html import *
+from render_antd import Tabs
+from rendered.react.sticky import StickyContainer, Sticky
 TabPane = Tabs.TabPane
 renderTabBar = Sticky([""{( style ) => (", DefaultTabBar("{...props}"=True, className="site-custom-tab-bar", style=dict()), ")}""], bottomOffset=80)
 def app():
