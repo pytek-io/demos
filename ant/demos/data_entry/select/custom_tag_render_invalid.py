@@ -1,5 +1,6 @@
-from render_html import *
 from render_antd import Select, Tag
+from render_html import *
+
 label, value, closable, onClose = props.label, props.value, props.closable, props.onClose
 def app():
     return Tag(""{label}"", color=value, closable=closable, onClose=onClose, style=dict(marginRight=3))

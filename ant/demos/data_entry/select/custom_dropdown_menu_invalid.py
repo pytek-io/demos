@@ -1,6 +1,7 @@
-from render_html import *
-from render_antd import Select, Divider, Input
 from render_ant_icons import PlusOutlined
+from render_antd import Divider, Input, Select
+from render_html import *
+
 Option = Select.Option
 items, name = this.items, this.name
 items, name = this.items, this.name

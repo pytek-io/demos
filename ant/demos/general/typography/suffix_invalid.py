@@ -1,5 +1,6 @@
+from render_antd import Slider, Typography
 from render_html import *
-from render_antd import Typography, Slider
+
 Paragraph = Typography.Paragraph
 rows = this.rows
 def app():

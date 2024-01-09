@@ -1,5 +1,7 @@
+from render_antd import Form, Input, InputNumber, Popconfirm, Table, Typography
 from render_html import *
-from render_antd import Table, Input, InputNumber, Popconfirm, Form, Typography
+
+
 def app():
     return td([""{editing ? (", Form.Item(""{inputNode}"", name=dataIndex, style=dict(margin=0), rules="{[             ", {=True, required:=True, true,=True, message:=True, `Please=True, Input=True, $"{title}"!`,=True, }",=True, ]}"=True), ") : (         children       )}""], "{...restProps}"=True)
 row = span([a("Save", href="javascript:;", onClick=lambda :save(record.key), style=dict(marginRight=8)), Popconfirm(a("Cancel"), title="Sure to cancel?", onConfirm=cancel)])

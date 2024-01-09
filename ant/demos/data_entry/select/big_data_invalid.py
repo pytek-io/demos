@@ -1,5 +1,6 @@
+from render_antd import Divider, Select, Typography
 from render_html import *
-from render_antd import Select, Typography, Divider
+
 Title = Typography.Title
 def app():
     return[

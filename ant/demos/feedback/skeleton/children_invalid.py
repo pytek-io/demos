@@ -1,5 +1,5 @@
+from render_antd import Button, Skeleton
 from render_html import *
-from render_antd import Skeleton, Button
 
 
 def app():

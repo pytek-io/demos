@@ -1,7 +1,6 @@
 import render as r
 import render_antd as antd
 
-
 getCurrentAnchor = r.js_arrow(
     "getCurrentAnchor", "() => '#components-anchor-demo-static'"
 )

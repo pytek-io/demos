@@ -1,6 +1,6 @@
-from render_html import *
-from render_antd import List
 from render import js
+from render_antd import List
+from render_html import *
 
 
 def app():

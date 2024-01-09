@@ -1,5 +1,5 @@
+from render_antd import Button, Modal
 from render_html import *
-from render_antd import Modal, Button
 
 visible, loading = this.visible, this.loading
 

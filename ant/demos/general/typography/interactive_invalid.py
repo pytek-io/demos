@@ -1,6 +1,7 @@
-from render_html import *
+from render_ant_icons import HighlightOutlined, SmileFilled, SmileOutlined
 from render_antd import Typography
-from render_ant_icons import HighlightOutlined, SmileOutlined, SmileFilled
+from render_html import *
+
 Paragraph = Typography.Paragraph
 def app():
     return[

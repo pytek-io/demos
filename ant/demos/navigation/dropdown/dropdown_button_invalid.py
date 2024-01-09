@@ -1,6 +1,7 @@
-from render_html import *
-from render_antd import Menu, Dropdown, Button, message, Space, Tooltip
 from render_ant_icons import DownOutlined, UserOutlined
+from render_antd import Button, Dropdown, Menu, Space, Tooltip, message
+from render_html import *
+
 menu = Menu([Menu.Item("1st menu item", key="1", icon=UserOutlined([])), Menu.Item("2nd menu item", key="2", icon=UserOutlined([])), Menu.Item("3rd menu item", key="3", icon=UserOutlined([]))], onClick=handleMenuClick)
 def app():
     return[

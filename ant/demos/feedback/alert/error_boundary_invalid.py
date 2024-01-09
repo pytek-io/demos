@@ -1,6 +1,6 @@
-from render_html import *
-from render_antd import Alert
 from render import Component
+from render_antd import Alert
+from render_html import *
 
 ErrorBoundary = Alert.ErrorBoundary
 

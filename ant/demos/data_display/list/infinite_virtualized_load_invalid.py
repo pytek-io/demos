@@ -1,5 +1,6 @@
+from render_antd import Avatar, List, Spin, message
 from render_html import *
-from render_antd import List, message, Avatar, Spin
+
 data = this.data
 data = this.data
 def app():

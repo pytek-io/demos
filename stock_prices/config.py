@@ -1,8 +1,5 @@
-from render_utils import (
-    round_value_to_2_digits_col,
-    toLocaleString,
-    transform_if_number,
-)
+from render_utils import (round_value_to_2_digits_col, toLocaleString,
+                          transform_if_number)
 
 
 def identity(value):

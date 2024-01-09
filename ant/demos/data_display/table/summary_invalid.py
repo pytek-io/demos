@@ -1,5 +1,6 @@
-from render_html import *
 from render_antd import Table, Typography
+from render_html import *
+
 Text = Typography.Text
 def app():
     return[

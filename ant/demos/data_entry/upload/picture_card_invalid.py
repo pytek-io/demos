@@ -1,6 +1,7 @@
-from render_html import *
-from render_antd import Upload, Modal
 from render_ant_icons import PlusOutlined
+from render_antd import Modal, Upload
+from render_html import *
+
 previewVisible, previewImage, fileList, previewTitle = this.previewVisible, this.previewImage, this.fileList, this.previewTitle
 uploadButton = div([PlusOutlined(), div("Upload", style=dict(marginTop=8))])
 def app():

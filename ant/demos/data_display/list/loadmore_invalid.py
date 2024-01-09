@@ -1,5 +1,5 @@
+from render_antd import Avatar, Button, Divider, List, Skeleton
 from render_html import *
-from render_antd import List, Avatar, Button, Skeleton, Divider
 
 
 def app():

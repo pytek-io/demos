@@ -1,6 +1,6 @@
-from render_html import *
-from render_antd import Form, Upload, message, Button
 from render_ant_icons import UploadOutlined
+from render_antd import Button, Form, Upload, message
+from render_html import *
 
 onChange = this.onChange
 value, onChange = this.value, this.onChange

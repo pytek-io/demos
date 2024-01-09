@@ -1,9 +1,8 @@
 from functools import partial
 
+import render as r
 import render_antd as antd
 import render_html as html
-
-import render as r
 
 
 def app():

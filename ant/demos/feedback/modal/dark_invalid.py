@@ -1,5 +1,6 @@
+from render_ant_icons import ClockCircleOutlined, DownOutlined
 from render_html import *
-from render_ant_icons import DownOutlined, ClockCircleOutlined
+
 Panel = Collapse.Panel
 TreeNode = Tree.TreeNode
 TabPane = Tabs.TabPane

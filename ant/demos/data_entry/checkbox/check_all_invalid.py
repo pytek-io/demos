@@ -1,7 +1,6 @@
+import render as r
 import render_antd as antd
 import render_html as html
-
-import render as r
 
 PLAIN_OPTIONS = ["Apple", "Pear", "Orange"]
 DEFAULT_CHECKED_LIST = ["Apple", "Orange"]

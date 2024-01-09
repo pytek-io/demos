@@ -1,6 +1,7 @@
+from render_antd import Table
 from render_html import *
 from rendered.react.window import VariableSizeGrid as Grid
-from render_antd import Table
+
 obj = dict()
 columns, scroll = props.columns, props.scroll
 width = mergedColumns.width

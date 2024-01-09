@@ -1,6 +1,7 @@
-from render_html import *
-from render_antd import Card, Avatar
 from render_ant_icons import EditOutlined, EllipsisOutlined, SettingOutlined
+from render_antd import Avatar, Card
+from render_html import *
+
 Meta = Card.Meta
 def app():
     return[

@@ -1,5 +1,5 @@
-from render_html import *
 from render_antd import Collapse
+from render_html import *
 
 Panel = Collapse.Panel
 

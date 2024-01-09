@@ -10,16 +10,9 @@ import render_html as html
 import render_rcdock as rcdock
 import render_utils as utils
 
-from .config import (
-    CLIENT_DEF,
-    DEPLOYMENT_DEF,
-    PRIORITY_GROUP,
-    RUNNING_TASKS_DEF,
-    SESSION,
-    WORKER_DEF,
-    session_extra_arguments,
-    create_session_columns,
-)
+from .config import (CLIENT_DEF, DEPLOYMENT_DEF, PRIORITY_GROUP,
+                     RUNNING_TASKS_DEF, SESSION, WORKER_DEF,
+                     create_session_columns, session_extra_arguments)
 from .utils import anext, dummy_connection, read_pickles, record_connection
 
 TITLE = "Dispatch"

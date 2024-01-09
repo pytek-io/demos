@@ -1,7 +1,6 @@
 import render as r
 import render_antd as antd
 
-
 renderer = """item => (
     render_ant.List.Item(
         render_ant.Card("Card content", { title: item.title })

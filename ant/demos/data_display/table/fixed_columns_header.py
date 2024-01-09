@@ -1,7 +1,6 @@
 import render as r
 import render_antd as antd
 
-
 create_anchor = r.js_arrow("create_anchor", "render_html.a")
 
 

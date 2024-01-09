@@ -1,7 +1,8 @@
-from render_html import *
 from render_antd import Tabs
+from render_html import *
 from rendered.react.dnd import DndProvider, DragSource, DropTarget
 from rendered.react.dnd.html5.backend import HTML5Backend
+
 TabPane = Tabs.TabPane
 connectDragSource, connectDropTarget, children = this.connectDragSource, this.connectDropTarget, this.children
 children = this.children

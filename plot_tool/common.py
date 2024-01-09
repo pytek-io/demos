@@ -12,7 +12,7 @@ class TimeSeries:
     values: pd.DataFrame
 
 
-def scatter(timeseries, color):
+def scatter(timeseries: pd.DataFrame, color: str):
     return go.Scatter(
         name=timeseries.ticker,
         line={"color": color},
@@ -25,8 +25,8 @@ def moving_average(stock: TimeSeries, nb_days: int, color: str):
     return go.Scatter(
         name=f"MVA {stock.ticker} {nb_days} days",
         line={"color": color},
-        x=stock.values["Date"],
-        y=stock.values["Close"].rolling(nb_days).mean(),
+        x=stock.values["date"],
+        y=stock.values["value"].rolling(nb_days).mean(),
     )
 
 

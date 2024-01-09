@@ -1,8 +1,6 @@
+from render import autorun
 from render_antd import Select
 from render_html import *
-
-from render import autorun
-
 
 
 def app():

@@ -1,5 +1,6 @@
-from render_html import *
 from render_antd import Tag
+from render_html import *
+
 CheckableTag = Tag.CheckableTag
 selectedTags = this.selectedTags
 selectedTags = this.selectedTags

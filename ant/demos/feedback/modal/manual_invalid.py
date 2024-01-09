@@ -1,7 +1,8 @@
+import 'antd'
+import Button }
+import { Modal
+from render_antd import Button, Modal
 from render_html import *
-from render_antd import Modal, Button
-
-import { Modal, Button } from 'antd';
 
 # def countDown():
 #   secondsToGo = 5;

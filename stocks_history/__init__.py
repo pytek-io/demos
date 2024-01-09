@@ -84,7 +84,8 @@ class App:
         )
         signal_definitions = [DEFAULT_SIGNAL_DEFINITION.copy()]
         signal_definitions_obs = r.ObservableList(
-            signal_definitions, key="signal_definitions_obs", controller=self.controller
+            signal_definitions, key="signal_definitions_obs", 
+            # controller=self.controller
         )
         signal_definitions_obs_obs = r.Mapping(
             r.DictOfObservables, signal_definitions_obs
@@ -122,7 +123,7 @@ class App:
             create_signal_settings_row,
             signal_definitions_obs,
             key="signals_settings",
-            controller=self.controller,
+            # controller=self.controller,
             evaluate_argument=False,
         )
         self.signal_setting_labels = create_row_settings(
@@ -238,7 +239,7 @@ class App:
                 self.signal_setting_labels,
                 self.signals_settings,
             ],
-            controller=self.controller,
+            # controller=self.controller,
         )
 
     def ok(self):

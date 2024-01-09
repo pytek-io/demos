@@ -1,5 +1,6 @@
+from render_antd import Button, Modal
 from render_html import *
-from render_antd import Modal, Button
+
 clientWidth, clientHeight = window.clientWidth, window.clientHeight
 bounds, disabled, visible = this.bounds, this.disabled, this.visible
 def app():

@@ -1,5 +1,7 @@
+from render_antd import Button, Tag
 from render_html import *
-from render_antd import Tag, Button
+
+
 def app():
     return[
  Tag("Movies", closable=True, visible=this.state.visible, onClose=lambda :this.setState( visible: false )),

@@ -1,7 +1,6 @@
 import render as r
 import render_antd as antd
 
-
 options = [
     {
         "value": "zhejiang",

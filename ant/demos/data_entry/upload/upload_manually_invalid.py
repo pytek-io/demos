@@ -1,6 +1,7 @@
-from render_html import *
-from render_antd import Upload, Button, message
 from render_ant_icons import UploadOutlined
+from render_antd import Button, Upload, message
+from render_html import *
+
 fileList = this.fileList
 uploading, fileList = this.uploading, this.fileList
 def app():

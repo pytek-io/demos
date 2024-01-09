@@ -7,8 +7,8 @@ import render_aggrid as aggrid
 import render_antd as antd
 import render_html as html
 
-from .screeners import SCREENERS
 from .cols import FIELDS
+from .screeners import SCREENERS
 
 URL = "https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved"
 PARAMS = {

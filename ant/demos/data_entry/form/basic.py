@@ -1,5 +1,7 @@
-import render_antd as antd
 from functools import partial
+
+import render_antd as antd
+
 
 def app():
     return antd.Form(

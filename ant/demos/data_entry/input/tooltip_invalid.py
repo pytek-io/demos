@@ -1,7 +1,6 @@
-from render_html import *
+from render import create_observable, js
 from render_antd import Input, Tooltip
-from render import js
-from render import create_observable
+from render_html import *
 
 value = e.value
 value, onBlur, onChange = this.value, this.onBlur, this.onChange

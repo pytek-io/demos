@@ -1,5 +1,6 @@
+from render_antd import Button, Input
 from render_html import *
-from render_antd import Input, Button
+
 TextArea = Input.TextArea
 autoResize = this.autoResize
 def app():

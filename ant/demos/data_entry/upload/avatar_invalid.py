@@ -1,6 +1,7 @@
-from render_html import *
-from render_antd import Upload, message
 from render_ant_icons import LoadingOutlined, PlusOutlined
+from render_antd import Upload, message
+from render_html import *
+
 loading, imageUrl = this.loading, this.imageUrl
 uploadButton = div([""{loading ?", LoadingOutlined(), ":", PlusOutlined(), "}"", div("Upload", style=dict(marginTop=8))])
 def app():

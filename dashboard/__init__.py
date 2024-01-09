@@ -7,8 +7,8 @@ import render_utils
 from demos.charts.altair.car_data_set import App as AltairApp
 from demos.stock_prices import App as StockApp
 from demos.stocks_history import App as StockHistoryApp
-from demos.yahoofinancelive import App as YahooFinanceApp
 from demos.yahoo_trends import App as YahooTrendApp
+from demos.yahoofinancelive import App as YahooFinanceApp
 
 TITLE = "Dashboard"
 DEFAULT_TICKERS = ["AMZN"]

@@ -1,8 +1,9 @@
 """Fetch historical data from yahoo in real time, plot time series and signals using plotly."""
 import datetime
 import itertools
-import pathlib
 import json
+import pathlib
+
 import pandas as pd
 import render as r
 import render_ant_icons as ant_icons
@@ -43,26 +44,23 @@ def layout_timeseries_definition_row(elements):
     )
 
 
-def input_panel(signal_definitions_obs):
+def input_panel(signal_definitions):
+    signal_definitions_obs = r.Mapping(
+        r.DictOfObservables, signal_definitions, key="items_obs"
+    )
     signal_count = itertools.count(1)
-    add_signal = lambda: signal_definitions_obs.append(
-        {"ticker": "AAPL", "name": f"input_{next(signal_count)}", "source": YAHOO}
-    )
-    add_signal()
-    signal_definitions_obs.append(
-        {
-            "ticker": next(iter(FRED_TICKERS)),
-            "name": f"input_{next(signal_count)}",
-            "source": FRED,
-        }
-    )
+
+    def add_signal(ticker="AAPL"):
+        signal_definitions.append(
+            {"ticker": ticker, "name": f"input_{next(signal_count)}", "source": YAHOO}
+        )
 
     def create_timeseries_row(signal_obs_dict: r.DictOfObservables):
-        tickers = (
-            lambda: YAHOO_TICKERS
-            if signal_obs_dict["source"]() == YAHOO
-            else FRED_TICKERS
-        )
+        def tickers():
+            return (
+                YAHOO_TICKERS if signal_obs_dict["source"]() == YAHOO else FRED_TICKERS
+            )
+
         ticker = antd.AutoComplete(
             options=lambda: [{"value": ticker} for ticker in tickers()],
             value=signal_obs_dict["ticker"],
@@ -84,12 +82,14 @@ def input_panel(signal_definitions_obs):
             ),
             "remove": html.a(
                 "delete",
-                onClick=lambda: signal_definitions_obs.remove(signal_obs_dict),
+                onClick=lambda: signal_definitions.remove(signal_obs_dict),
                 target="_blank",
             ),
         }
 
-    return antd.Table(
+    add_signal("AAPL")
+    add_signal("GOOG")
+    return signal_definitions_obs, antd.Table(
         columns=[{"title": name, "dataIndex": name, "key": name} for name in TITLES]
         + [
             {
@@ -176,13 +176,13 @@ def plot_panel(editor, signal_definitions_obs):
 
 
 def app(_):
-    signal_definitions_obs = r.ObservableList[r.DictOfObservables]()
-    inputs = input_panel(signal_definitions_obs)
+    signal_definitions = r.ObservableList()
     editor = monaco.Editor(
         defaultValue=ROOT.joinpath("plot_tool", "script.py").read_text(),
         height=500,
         options=EDITOR_OPTIONS,
     )
+    signal_definitions_obs, inputs = input_panel(signal_definitions)
     settings, update, plot = plot_panel(editor, signal_definitions_obs)
     framed_editor = html.div(
         editor,

@@ -1,5 +1,6 @@
+from render_antd import Col, Row, Slider
 from render_html import *
-from render_antd import Row, Col, Slider
+
 gutters = dict()
 vgutters = dict()
 colCounts = dict()

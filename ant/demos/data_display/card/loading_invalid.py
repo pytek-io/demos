@@ -1,6 +1,7 @@
-from render_html import *
-from render_antd import Skeleton, Switch, Card, Avatar
 from render_ant_icons import EditOutlined, EllipsisOutlined, SettingOutlined
+from render_antd import Avatar, Card, Skeleton, Switch
+from render_html import *
+
 Meta = Card.Meta
 loading = this.loading
 def app():

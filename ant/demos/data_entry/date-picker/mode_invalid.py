@@ -1,7 +1,6 @@
-from render_html import *
+from render import Callback, create_observable
 from render_antd import DatePicker, Space
-from render import create_observable
-from render import Callback
+from render_html import *
 
 RangePicker = DatePicker.RangePicker
 

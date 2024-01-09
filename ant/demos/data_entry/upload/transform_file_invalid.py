@@ -1,6 +1,6 @@
-from render_html import *
-from render_antd import Upload, Button
 from render_ant_icons import UploadOutlined
+from render_antd import Button, Upload
+from render_html import *
 
 
 def app():

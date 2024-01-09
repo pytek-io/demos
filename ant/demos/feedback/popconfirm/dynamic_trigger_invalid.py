@@ -1,6 +1,7 @@
-from render_html import *
-from render_antd import Popconfirm, Switch, message
 from render import create_observable
+from render_antd import Popconfirm, Switch, message
+from render_html import *
+
 
 def app():
     raise NotImplementedError("not supported")

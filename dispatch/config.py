@@ -1,6 +1,7 @@
+from functools import partial
+
 import render as r
 import render_utils
-from functools import partial
 
 CLIENT = 1
 WORKER = 2

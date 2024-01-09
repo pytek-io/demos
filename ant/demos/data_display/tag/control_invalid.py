@@ -1,6 +1,7 @@
-from render_html import *
-from render_antd import Tag, Input, Tooltip
 from render_ant_icons import PlusOutlined
+from render_antd import Input, Tag, Tooltip
+from render_html import *
+
 inputValue = this.inputValue
 tags, inputVisible, inputValue, editInputIndex, editInputValue = this.tags, this.inputVisible, this.inputValue, this.editInputIndex, this.editInputValue
 def app():

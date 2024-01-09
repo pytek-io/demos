@@ -1,5 +1,6 @@
+from render_antd import Select, Tabs
 from render_html import *
-from render_antd import Tabs, Select
+
 TabPane = Tabs.TabPane
 Option = Select.Option
 parentPos, childPos, parentType, childType = this.parentPos, this.childPos, this.parentType, this.childType

@@ -1,5 +1,7 @@
+from render_antd import Button, Slider, Space
 from render_html import *
-from render_antd import Space, Slider, Button
+
+
 def app():
     return[
  Slider(value=size, onChange=valulambda e:setSize(value)),

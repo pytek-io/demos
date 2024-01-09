@@ -1,8 +1,7 @@
-from render_html import *
-from render_antd import Menu, Dropdown
+from render import Callback, create_observable
 from render_ant_icons import DownOutlined
-from render import create_observable
-from render import Callback
+from render_antd import Dropdown, Menu
+from render_html import *
 
 
 def app():
