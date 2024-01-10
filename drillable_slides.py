@@ -226,8 +226,9 @@ def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
     content = yaml.safe_load(open(f"demos/presentations/{file_name}.yaml", "r").read())
     main_page = html.div(
         [
-            title(SLOGAN, LIGHT_BLUE, fontSize="2.5rem"),
-            title("Early adopters presentation", color=GREEN, fontSize="1.5rem"),
+            title(SLOGAN, LIGHT_BLUE, fontSize="3.5rem"),
+            title("Francois du Vignaud, francois@pytek.io", color=LIGHT_BLUE),
+            title("https://github.com/pytek-io", color=GREEN, fontSize="1.5rem"),
         ]
     )
     slide_show = swiper.Swiper(
@@ -325,7 +326,7 @@ def slides_and_left_icon(window: r.Window, file_name, is_touch_device, margin):
             current_page.append((question, answer, details))
             current_height += content_height
         slides.append(create_page(current_page, details_level(), is_touch_device))
-        return [main_page] + slides + [last_page]
+        return [main_page, *slides, last_page]
 
     detail_level_icon = html.img(
         src=lambda: f"demos/presentations/menu-icon-{details_level() + 1}.svg",
@@ -359,23 +360,31 @@ def app(window: r.Window):
         elif page_index_value > 0:
             set_page_index(page_index_value - 1)
 
-    # window.add_event_listener(
-    #     "fullscreenchange",
-    #     None,
-    #     callback_name=None,
-    #     method=lambda: full_screen.set(not full_screen()),
-    # )
-    # window.add_event_listener(
-    #     "swiped",
-    #     "detail.dir",
-    #     lambda d: safe_increment(d == "left") if d in ["left", "right"] else None,
-    # )
-    window.test = lambda k: k in (
-        RIGHT_ARROW,
-        LEFT_ARROW,
-        SPACE_BAR,
-    ) and safe_increment(k != LEFT_ARROW)
-    window.add_event_listener("keydown", window.test, r.js_arrow("keyCode", "(event) => event.keyCode"))
+    def toggle_full_screen():
+        window.update_full_screen(not full_screen())
+
+    def on_swipe(direction: str):
+        if direction in ["left", "right"]:
+            safe_increment(direction != "left")
+
+    def on_key_pressed(key: str):
+        if key in [RIGHT_ARROW, LEFT_ARROW, SPACE_BAR]:
+            safe_increment(key != LEFT_ARROW)
+
+    # holding callbacks prevent them from being garbage collected
+    window.user_data["callbacks"] = [on_key_pressed, on_swipe, toggle_full_screen]
+    window.add_event_listener(
+        "keydown", on_key_pressed, r.js_arrow("keyCode", "(event) => event.keyCode")
+    )
+    window.add_event_listener(
+        "swiped",
+        on_swipe,
+        r.js_arrow("keyCode", "(event) => event.detail.dir"),
+    )
+    window.add_event_listener(
+        "fullscreenchange",
+        toggle_full_screen,
+    )
     slides, detail_level_icon = slides_and_left_icon(
         window, file_name, is_touch_device, margin
     )
