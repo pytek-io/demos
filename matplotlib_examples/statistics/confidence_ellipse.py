@@ -85,7 +85,7 @@ def get_correlated_dataset(n, dependency, mu, scale):
     return scaled_with_offset[:, (0)], scaled_with_offset[:, (1)]
 
 
-def app():
+def app(_):
     np.random.seed(0)
     PARAMETERS = {
         "Positive correlation": [[0.85, 0.35], [0.15, -0.65]],

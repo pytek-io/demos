@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     input1 = antd.InputNumber(size="large", min=1, max=100000, defaultValue=3)
     input2 = antd.InputNumber(min=1, max=100000, defaultValue=3)
     input3 = antd.InputNumber(size="small", min=1, max=100000, defaultValue=3)

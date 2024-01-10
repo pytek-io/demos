@@ -9,7 +9,7 @@ OSSData = this.OSSData
 value = this.value
 
 
-def app():
+def app(_):
     return Upload(Button("Click to Upload", icon=UploadOutlined([])), "{...props}"=True)
 
 
@@ -18,5 +18,5 @@ FormPage = Form(
 )
 
 
-def app():
+def app(_):
     return FormPage()

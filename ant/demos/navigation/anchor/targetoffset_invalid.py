@@ -4,7 +4,7 @@ from render_html import *
 Link = Anchor.Link
 
 
-def app():
+def app(_):
     raise NotImplementedError("useEffect hook not supported yet")
     return Anchor(
         [

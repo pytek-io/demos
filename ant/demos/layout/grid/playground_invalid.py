@@ -5,7 +5,7 @@ gutters = dict()
 vgutters = dict()
 colCounts = dict()
 gutterKey, vgutterKey, colCountKey = this.gutterKey, this.vgutterKey, this.colCountKey
-def app():
+def app(_):
     return[
  span("Horizontal Gutter (px):"),
  div(Slider(min=0, max=Object.keys(gutters).length - 1, value=gutterKey, onChange=this.onGutterChange, marks=gutters, step=null, tipFormatter=valulambda e:gutters[value]), style=dict(width='50%')),
@@ -18,5 +18,5 @@ def app():
  pre([""{`", Row("\n$"{colCode}"\n$"{colCode}"", gutter="{[$", {gutters[gutterKey]}",=True, $"{vgutters[vgutterKey]}"]}"=True), "`}""], className="demo-code"),
  pre([""{`", Row("\n$"{colCode}"", gutter="{[$", {gutters[gutterKey]}",=True, $"{vgutters[vgutterKey]}"]}"=True), "`}""], className="demo-code"),
 ]
-def app():
+def app(_):
     return App()

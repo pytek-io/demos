@@ -9,7 +9,7 @@ def genExtra():
     return ant_icons.SettingOutlined(onClick=r.Callback(stop_propagation=True))
 
 
-def app():
+def app(_):
     text = """
 A dog is a type of domesticated animal.
 Known for its loyalty and faithfulness,

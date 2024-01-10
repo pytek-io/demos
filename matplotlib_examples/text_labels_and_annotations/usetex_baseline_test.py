@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     plt.rcParams.update({"mathtext.fontset": "cm", "mathtext.rm": "serif"})
     fig = plt.figure(figsize=(2 * 3, 6.5))
     axs = fig.subplots(1, 2)

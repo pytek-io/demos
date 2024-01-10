@@ -24,7 +24,7 @@ def midpoints(x):
     return x
 
 
-def app():
+def app(_):
     r, g, b = np.indices((17, 17, 17)) / 16.0
     rc = midpoints(r)
     gc = midpoints(g)

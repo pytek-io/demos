@@ -8,7 +8,7 @@ def onClick(key):
     antd.message.info(f"Click on item {key[0]}")
 
 
-def app():
+def app(_):
     return antd.Dropdown(
         html.a(
             antd.Space(["Hover me, Click menu item", ant_icons.DownOutlined()]),

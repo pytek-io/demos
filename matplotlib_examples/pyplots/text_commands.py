@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     fig.suptitle("bold figure suptitle", fontsize=14, fontweight="bold")
     ax = fig.add_subplot()

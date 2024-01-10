@@ -8,7 +8,7 @@ items = [
 ]
 
 
-def app():
+def app(_):
     return antd.Dropdown(
         html.div(
             "Right Click on here",

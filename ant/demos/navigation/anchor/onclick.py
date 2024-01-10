@@ -32,5 +32,5 @@ items = [
 ]
 
 
-def app():
+def app(_):
     return antd.Anchor(items=items, affix=False, onClick=print)

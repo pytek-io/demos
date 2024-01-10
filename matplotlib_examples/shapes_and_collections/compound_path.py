@@ -19,7 +19,7 @@ from matplotlib.path import Path
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     vertices = []
     codes = []
     codes = [Path.MOVETO] + [Path.LINETO] * 3 + [Path.CLOSEPOLY]

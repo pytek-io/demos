@@ -13,7 +13,7 @@ filterOption = r.js_arrow(
 )
 
 
-def app():
+def app(_):
     return antd.AutoComplete(
         style={"width": 200},
         options=options,

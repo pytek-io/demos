@@ -2,7 +2,7 @@ import render as r
 import render_antd as antd
 
 
-def app():
+def app(_):
     counters = [r.ObservableValue(value) for value in [1, 2]]
 
     def update_counters(value):

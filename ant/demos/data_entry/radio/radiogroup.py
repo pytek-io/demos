@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     result = antd.Radio.Group(
         [
             antd.Radio("A", value=1),

@@ -15,7 +15,7 @@ from demos.charts.utils import matplotlib_to_svg
 """
 
 
-app_template = """def app():
+app_template = """def app(_):
     return matplotlib_to_svg(fig)"""
 
 

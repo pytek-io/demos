@@ -22,7 +22,7 @@ class Todo(Base):
     complete = sqlalchemy.Column(sqlalchemy.Boolean)
 
 
-def app():
+def app(_):
     def add_todo():
         todo = Todo(title=title(), complete=False)
         session.add(todo)

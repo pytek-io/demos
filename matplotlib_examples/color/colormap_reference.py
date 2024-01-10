@@ -154,7 +154,7 @@ def plot_color_gradients(cmap_category, cmap_list):
     return fig
 
 
-def app():
+def app(_):
     for cmap_category, cmap_list in cmaps:
         fig = plot_color_gradients(cmap_category, cmap_list)
         break

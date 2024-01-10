@@ -5,7 +5,7 @@ from render_html import *
 RangePicker = DatePicker.RangePicker
 
 
-def app():
+def app(_):
     raise NotImplementedError("low level effect not supported")
     value = create_observable()
     dates = create_observable([])

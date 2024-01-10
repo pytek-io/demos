@@ -4,7 +4,7 @@ import render_html as html
 import render_utils
 
 
-def app():
+def app(_):
     reverse = r.ObservableValue(False)
     return html.div(
         [

@@ -14,7 +14,7 @@ initial_panes = [
 ]
 
 
-def app():
+def app(_):
     panes = r.create_observable(initial_panes, key="panes")
     active_key = r.create_observable(0, key="active_key")
     r.autoprint(active_key)

@@ -20,7 +20,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     t = np.arange(0.0, 5.0, 0.01)
     s = np.cos(2 * np.pi * t)

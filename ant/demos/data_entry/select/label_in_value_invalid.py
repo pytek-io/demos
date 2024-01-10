@@ -3,7 +3,7 @@ from render_antd import Select
 from render_html import *
 
 
-def app():
+def app(_):
     raise Exception("not implemented")
     select = Select(
         [

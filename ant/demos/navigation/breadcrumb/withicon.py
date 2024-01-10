@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     return antd.Breadcrumb(
         items=[
             {"title": ant_icons.HomeOutlined(), "href": ""},

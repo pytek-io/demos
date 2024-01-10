@@ -86,7 +86,7 @@ def plot_student_results(student, scores_by_test, cohort_size):
     return fig
 
 
-def app():
+def app(_):
     student = Student(name="Johnny Doe", grade=2, gender="Boy")
     scores_by_test = {
         "Pacer Test": Score(7, "laps", percentile=37),

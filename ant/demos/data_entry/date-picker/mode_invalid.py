@@ -23,7 +23,7 @@ def controlled_date_picker():
     )
 
 
-# def app():
+# def app(_):
 #     return RangePicker(
 #         placeholder=["Start month", "End month"],
 #         format="YYYY-MM",
@@ -34,6 +34,6 @@ def controlled_date_picker():
 #     )
 
 
-def app():
+def app(_):
     raise NotImplementedError("Low level state management not supported")
     return Space([controlled_date_picker()], direction="vertical", size=12)

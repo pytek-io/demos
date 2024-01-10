@@ -20,7 +20,7 @@ def openNotification():
     )
 
 
-def app():
+def app(_):
     return antd.Button(
         "Open the notification box", type="primary", onClick=openNotification
     )

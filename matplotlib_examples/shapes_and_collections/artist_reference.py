@@ -30,7 +30,7 @@ def label(xy, text):
     plt.text(xy[0], y, text, ha="center", family="sans-serif", size=14)
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     grid = np.mgrid[0.2:0.8:3.0j, 0.2:0.8:3.0j].reshape(2, -1).T
     patches = []

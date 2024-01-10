@@ -5,7 +5,7 @@ import render as r
 import render_antd as antd
 
 
-def app():
+def app(_):
     node_id = 0
     nodes = {}
 

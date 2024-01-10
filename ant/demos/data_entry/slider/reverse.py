@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     reverse_switch = antd.Switch(size="small")
     return html.div(
         [

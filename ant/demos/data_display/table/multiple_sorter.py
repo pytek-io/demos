@@ -32,7 +32,7 @@ data = [
 ]
 
 
-def app():
+def app(_):
     return antd.Table(
         columns=columns,
         dataSource=data,

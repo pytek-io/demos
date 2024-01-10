@@ -24,7 +24,7 @@ def millions(x, pos):
     return "${:1.1f}M".format(x * 1e-06)
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     ax.yaxis.set_major_formatter(millions)
     money = [150000.0, 2500000.0, 5500000.0, 20000000.0]

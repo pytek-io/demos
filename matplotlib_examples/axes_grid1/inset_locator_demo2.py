@@ -49,7 +49,7 @@ def add_sizebar(ax, size):
     ax.add_artist(asb)
 
 
-def app():
+def app(_):
     add_sizebar(ax, 0.5)
     add_sizebar(axins, 0.5)
     Z, extent = get_demo_image()

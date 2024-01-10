@@ -18,7 +18,7 @@ from mpl_toolkits.axes_grid1 import ImageGrid
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(5.5, 3.5))
     grid = ImageGrid(fig, 111, nrows_ncols=(1, 3), axes_pad=0.1, label_mode="L")
     Z = cbook.get_sample_data("axes_grid/bivariate_normal.npy", np_load=True)

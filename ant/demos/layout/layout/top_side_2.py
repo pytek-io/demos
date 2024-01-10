@@ -5,7 +5,7 @@ import render_html as html
 Header, Content, Sider = (antd.Layout.Header, antd.Layout.Content, antd.Layout.Sider)
 
 
-def app():
+def app(_):
     return antd.Layout(
         [
             Header(

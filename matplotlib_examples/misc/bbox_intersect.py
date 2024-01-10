@@ -20,7 +20,7 @@ from matplotlib.transforms import Bbox
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     left, bottom, width, height = -1, -1, 2, 2
     rect = plt.Rectangle((left, bottom), width, height, facecolor="black", alpha=0.1)

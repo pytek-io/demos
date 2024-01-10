@@ -20,7 +20,7 @@ def func3(x, y):
     return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2 + y**2))
 
 
-def app():
+def app(_):
     dx, dy = 0.05, 0.05
     x = np.arange(-3.0, 3.0, dx)
     y = np.arange(-3.0, 3.0, dy)

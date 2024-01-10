@@ -73,7 +73,7 @@ def showPropsConfirm():
     )
 
 
-def app():
+def app(_):
     return antd.Space(
         [
             antd.Button("Confirm", onClick=showConfirm),

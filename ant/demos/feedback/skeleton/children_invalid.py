@@ -2,7 +2,7 @@ from render_antd import Button, Skeleton
 from render_html import *
 
 
-def app():
+def app(_):
     return div(
         [
             Skeleton(
@@ -24,5 +24,5 @@ def app():
     )
 
 
-def app():
+def app(_):
     return Demo()

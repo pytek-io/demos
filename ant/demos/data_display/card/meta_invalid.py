@@ -3,7 +3,7 @@ from render_antd import Avatar, Card
 from render_html import *
 
 Meta = Card.Meta
-def app():
+def app(_):
     return[
  Card(style=dict(width=300), cover="{       <img         alt=", example"=True, src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"),
  SettingOutlined(key="setting"),

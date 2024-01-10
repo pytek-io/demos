@@ -16,7 +16,7 @@ from matplotlib import patheffects
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(8, 3))
     ax1.imshow([[1, 2], [2, 3]])
     txt = ax1.annotate(

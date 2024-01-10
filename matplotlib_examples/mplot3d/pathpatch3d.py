@@ -44,7 +44,7 @@ def text3d(ax, xyz, s, zdir="z", size=None, angle=0, usetex=False, **kwargs):
     art3d.pathpatch_2d_to_3d(p1, z=z1, zdir=zdir)
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")
     p = Circle((5, 5), 3)

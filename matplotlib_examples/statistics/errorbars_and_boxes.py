@@ -57,7 +57,7 @@ def make_error_boxes(
     return artists
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots(1)
     _ = make_error_boxes(ax, x, y, xerr, yerr)
     return matplotlib_to_svg(fig)

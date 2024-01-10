@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     fig, axs = plt.subplots(2, 2)
     ax1 = axs[0, 0]

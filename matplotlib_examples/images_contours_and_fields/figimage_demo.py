@@ -17,7 +17,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     Z = np.arange(10000).reshape((100, 100))
     Z[:, 50:] = 1

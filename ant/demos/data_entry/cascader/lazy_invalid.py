@@ -7,7 +7,7 @@ optionLists = [
 ]
 
 
-def app():
+def app(_):
     options = r.create_observable(optionLists, key="optionLists")
 
     def load_data(selected_options):

@@ -4,7 +4,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     openKeys = r.ObservableList(["sub1"])
 
     def onOpenChange(keys):

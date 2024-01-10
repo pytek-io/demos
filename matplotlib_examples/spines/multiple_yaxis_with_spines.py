@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     fig.subplots_adjust(right=0.75)
     twin1 = ax.twinx()

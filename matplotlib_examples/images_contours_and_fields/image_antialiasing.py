@@ -35,7 +35,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     N = 450
     x = np.arange(N) / N - 0.5
     y = np.arange(N) / N - 0.5

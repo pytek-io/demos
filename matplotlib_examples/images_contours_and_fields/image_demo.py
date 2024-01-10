@@ -24,7 +24,7 @@ from matplotlib.path import Path
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     delta = 0.025
     x = y = np.arange(-3.0, 3.0, delta)

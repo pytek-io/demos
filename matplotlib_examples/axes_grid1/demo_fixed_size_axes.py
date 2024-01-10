@@ -14,7 +14,7 @@ from mpl_toolkits.axes_grid1 import Divider, Size
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(6, 6))
     h = [Size.Fixed(1.0), Size.Fixed(4.5)]
     v = [Size.Fixed(0.7), Size.Fixed(5.0)]

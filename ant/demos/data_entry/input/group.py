@@ -27,7 +27,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Input.Group(

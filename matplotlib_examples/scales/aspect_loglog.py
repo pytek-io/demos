@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, (ax1, ax2) = plt.subplots(1, 2)
     ax1.set_xscale("log")
     ax1.set_yscale("log")

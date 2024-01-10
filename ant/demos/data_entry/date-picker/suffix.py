@@ -6,7 +6,7 @@ import render_html as html
 RangePicker = antd.DatePicker.RangePicker
 
 
-def app():
+def app(_):
     smileIcon = ant_icons.SmileOutlined()
     picker1 = antd.DatePicker(suffixIcon=smileIcon)
     picker2 = antd.DatePicker(suffixIcon=smileIcon, picker="month")

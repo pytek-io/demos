@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     modal1Visible = r.ObservableValue(False)
     modal2Visible = r.ObservableValue(False)
     return html.div(

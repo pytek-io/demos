@@ -134,7 +134,7 @@ class BubbleChart:
             )
 
 
-def app():
+def app(_):
     browser_market_share = {
         "browsers": ["firefox", "chrome", "safari", "edge", "ie", "opera"],
         "market_share": [8.61, 69.55, 8.36, 4.12, 2.76, 2.43],

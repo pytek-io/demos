@@ -26,7 +26,7 @@ items = [
 ]
 
 
-def app():
+def app(_):
     return antd.Dropdown(
         html.a(
             ["Hover me", ant_icons.DownOutlined()],

@@ -27,7 +27,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     result = antd.Cascader(options=options, placeholder="Please select")
     r.autorun(lambda: print("changed", result()))
     return result

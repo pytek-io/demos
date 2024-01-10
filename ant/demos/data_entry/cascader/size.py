@@ -28,7 +28,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     cascader1 = antd.Cascader(size="large", options=options)
     cascader2 = antd.Cascader(options=options)
     cascader3 = antd.Cascader(size="small", options=options)

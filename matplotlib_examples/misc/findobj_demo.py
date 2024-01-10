@@ -38,7 +38,7 @@ def myfunc(x):
     return hasattr(x, "set_color") and not hasattr(x, "set_facecolor")
 
 
-def app():
+def app(_):
     for o in fig.findobj(myfunc):
         o.set_color("blue")
     for o in fig.findobj(text.Text):

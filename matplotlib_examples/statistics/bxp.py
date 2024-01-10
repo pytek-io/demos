@@ -25,7 +25,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     data = np.random.lognormal(size=(37, 4), mean=1.5, sigma=1.75)
     labels = list("ABCD")

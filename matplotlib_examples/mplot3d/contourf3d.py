@@ -21,7 +21,7 @@ from mpl_toolkits.mplot3d import axes3d
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")
     X, Y, Z = axes3d.get_test_data(0.05)

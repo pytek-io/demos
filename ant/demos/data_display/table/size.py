@@ -19,7 +19,7 @@ data = [
 ]
 
 
-def app():
+def app(_):
     return html.div(
         [
             html.h4("Middle size table"),

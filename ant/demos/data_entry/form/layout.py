@@ -1,7 +1,7 @@
 import render_antd as antd
 
 
-def app():
+def app(_):
     formLayout = antd.Radio.Group(
         [
             antd.Radio.Button("Horizontal", value="horizontal"),

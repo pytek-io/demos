@@ -5,7 +5,7 @@ cardStyle = {"width": 620}
 imgStyle = {"display": "block", "width": 273}
 
 
-def app():
+def app(_):
     return antd.Card(
         [
             antd.Flex(

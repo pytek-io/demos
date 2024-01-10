@@ -23,6 +23,6 @@ from render_html import *
 # }
 
 # ReactDOM.render(<Button onClick={countDown}>Open modal to close in 5s</Button>, mountNode);
-def app():
+def app(_):
     return Button("Open modal to close in 5s", 
     onClick=countDown)

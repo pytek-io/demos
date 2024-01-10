@@ -18,7 +18,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     with cbook.get_sample_data("logo2.png") as file:
         im = image.imread(file)
     fig, ax = plt.subplots()

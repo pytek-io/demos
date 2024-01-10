@@ -73,7 +73,7 @@ def plot_axis(ax, locator=None, xmax="2002-02-01", fmt=None, formatter=None):
     )
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots(
         len(locators), 1, figsize=(8, len(locators) * 0.8), layout="constrained"
     )

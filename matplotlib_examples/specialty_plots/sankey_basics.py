@@ -16,7 +16,7 @@ from matplotlib.sankey import Sankey
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     Sankey(
         flows=[0.25, 0.15, 0.6, -0.2, -0.15, -0.05, -0.5, -0.1],
         labels=["", "", "", "First", "Second", "Third", "Fourth", "Fifth"],

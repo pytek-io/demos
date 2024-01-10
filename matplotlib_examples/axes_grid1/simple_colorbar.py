@@ -16,7 +16,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     im = ax.imshow(np.arange(100).reshape((10, 10)))
     divider = make_axes_locatable(ax)

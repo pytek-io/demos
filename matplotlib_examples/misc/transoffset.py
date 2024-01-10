@@ -29,7 +29,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     xs = np.arange(7)
     ys = xs**2
     fig = plt.figure(figsize=(5, 10))

@@ -23,7 +23,7 @@ def explode(data):
     return data_e
 
 
-def app():
+def app(_):
     n_voxels = np.zeros((4, 3, 4), dtype=bool)
     n_voxels[(0), (0), :] = True
     n_voxels[(-1), (0), :] = True

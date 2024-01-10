@@ -127,7 +127,7 @@ class App(Server):
                 self.window.update_title(selected_instrument())
                 chart_data.set([df, strike])
             else:
-                chart_data.set(None)
+                chart_data.set([])
 
         def chart():
             data = chart_data()

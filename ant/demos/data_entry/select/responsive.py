@@ -2,7 +2,7 @@ import render as r
 import render_antd as antd
 
 
-def app():
+def app(_):
     value = r.ObservableList(["a10", "c12", "h17", "j19", "k20"])
     r.autorun(lambda: print(value()))
     selectProps = {

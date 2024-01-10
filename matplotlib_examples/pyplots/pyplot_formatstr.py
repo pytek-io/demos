@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     plt.plot([1, 2, 3, 4], [1, 4, 9, 16], "ro")
     return matplotlib_to_svg(fig)

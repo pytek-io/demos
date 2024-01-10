@@ -7,7 +7,7 @@ from rendered.react.sortable.hoc import (sortableContainer, sortableElement,
 dataSource = this.dataSource
 dataSource = this.dataSource
 dataSource = this.dataSource
-def app():
+def app(_):
     return Table(pagination=False, dataSource=dataSource, columns=columns, rowKey="index", components="{!           body: ", {=True, wrapper:=True, this.DraggableContainer,=True, row:=True, this.DraggableBodyRow,=True, }",=True, !}"=True)
-def app():
+def app(_):
     return SortableTable()

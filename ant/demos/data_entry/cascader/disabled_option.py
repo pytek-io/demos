@@ -29,7 +29,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     result = antd.Cascader(options=options)
     r.autorun(lambda: print(result()))
     return result

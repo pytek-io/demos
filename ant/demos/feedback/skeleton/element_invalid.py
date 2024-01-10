@@ -9,7 +9,7 @@ active, size, buttonShape, avatarShape = (
 )
 
 
-def app():
+def app(_):
     return [
         Space(
             [
@@ -71,5 +71,5 @@ def app():
     ]
 
 
-def app():
+def app(_):
     return Demo()

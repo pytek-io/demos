@@ -25,8 +25,7 @@ def filter_series(row):
 COUNTRIES = [""]
 
 
-def app():
-    node_id = 0
+def app(_):
     nodes_by_id = {}
     nodes_by_key = {}
     key = count()

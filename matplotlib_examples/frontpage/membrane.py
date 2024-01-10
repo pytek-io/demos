@@ -17,7 +17,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     with cbook.get_sample_data("membrane.dat") as datafile:
         x = np.fromfile(datafile, np.float32)
     fig, ax = plt.subplots()

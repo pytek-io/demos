@@ -20,7 +20,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x = np.linspace(0, 2 * np.pi, 100)
     y = 2 * np.sin(x)
     fig, (ax0, ax1, ax2) = plt.subplots(nrows=3, constrained_layout=True)

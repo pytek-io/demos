@@ -78,7 +78,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     x = np.arange(0, 1.0, 0.01)
     y1 = np.sin(2 * np.pi * x)

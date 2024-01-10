@@ -29,7 +29,7 @@ def label_axes(ax, text):
     ax.tick_params(bottom=False, labelbottom=False, left=False, labelleft=False)
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(6, 6))
     fig.suptitle("Fixed axes sizes, fixed paddings")
     horiz = [Size.Fixed(1.0), Size.Fixed(0.5), Size.Fixed(1.5), Size.Fixed(0.5)]

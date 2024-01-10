@@ -11,7 +11,7 @@ Header, Content, Footer, Sider = (
 )
 
 
-def app():
+def app(_):
     collapsed = r.ObservableValue(False)
 
     def onCollapse(collapsed_value):

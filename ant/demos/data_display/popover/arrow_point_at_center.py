@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     content = html.div([html.p("Content"), html.p("Content")])
     text = html.span("Title")
     return html.div(

@@ -19,7 +19,7 @@ from numpy.random import multivariate_normal
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     data = np.vstack(
         [

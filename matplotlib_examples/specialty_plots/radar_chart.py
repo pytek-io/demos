@@ -155,7 +155,7 @@ def example_data():
     return data
 
 
-def app():
+def app(_):
     N = 9
     theta = radar_factory(N, frame="polygon")
     data = example_data()

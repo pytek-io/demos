@@ -2,7 +2,7 @@ from render_antd import Badge, Descriptions, Table
 from render_html import *
 
 
-def app():
+def app(_):
     return[
  Descriptions([Descriptions.Item("Cloud Database", label="Product"), Descriptions.Item("Billing Mode", label="{div(style=", {!=True, display:=True, 'flex'=True, !}"=True), "}">       Prepaid"], title="User Info", column=2),
  Descriptions.Item("YES", label="Automatic Renewal"),

@@ -82,7 +82,7 @@ def demo_right_cbar(fig):
     grid.axes_llc.set_yticks([-2, 0, 2])
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(5.5, 2.5))
     fig.subplots_adjust(left=0.05, right=0.93)
     demo_bottom_cbar(fig)

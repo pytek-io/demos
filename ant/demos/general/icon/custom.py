@@ -11,7 +11,7 @@ def PandaIcon(**props):
     return antd.Icon(component=PandaSvg, **props)
 
 
-def app():
+def app(_):
     PandaSvg = html.svg(
         [
             html.path(

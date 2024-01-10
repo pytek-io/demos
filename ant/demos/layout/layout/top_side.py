@@ -10,7 +10,7 @@ Header, Content, Footer, Sider = (
 )
 
 
-def app():
+def app(_):
     return antd.Layout(
         [
             Header(

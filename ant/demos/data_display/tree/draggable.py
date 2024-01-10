@@ -1,7 +1,7 @@
 import render_antd as antd
 
 
-def app():
+def app(_):
     x = 3
     y = 2
     z = 1

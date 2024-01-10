@@ -13,6 +13,6 @@ def dig(path="0", level=3):
     return result
 
 
-def app():
+def app(_):
     treeData = dig()
     return antd.Tree(treeData=treeData, height=233, defaultExpandAll=True)

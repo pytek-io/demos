@@ -15,7 +15,7 @@ treeData = [
 ]
 
 
-def app():
+def app(_):
     tree_select = antd.TreeSelect(
         style={"width": "100%"},
         dropdownStyle={"maxHeight": 400, "overflow": "auto"},

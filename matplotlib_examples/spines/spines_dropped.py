@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     fig, ax = plt.subplots()
     image = np.random.uniform(size=(10, 10))

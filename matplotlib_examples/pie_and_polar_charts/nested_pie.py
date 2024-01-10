@@ -18,7 +18,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     size = 0.3
     vals = np.array([[60.0, 32.0], [37.0, 40.0], [29.0, 10.0]])

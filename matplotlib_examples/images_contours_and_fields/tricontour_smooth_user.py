@@ -31,7 +31,7 @@ def function_z(x, y):
     return (np.max(z) - z) / (np.max(z) - np.min(z))
 
 
-def app():
+def app(_):
     n_angles = 20
     n_radii = 10
     min_radius = 0.15

@@ -7,7 +7,7 @@ percent_formatter = r.js_arrow(
 )
 
 
-def app():
+def app(_):
     return html.div(
         [antd.Slider(formatter=percent_formatter, defaultValue=0), antd.Slider()]
     )

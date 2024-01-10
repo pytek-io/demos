@@ -23,5 +23,5 @@ async def openMessage():
     )
 
 
-def app():
+def app(_):
     return antd.Button("Display sequential messages", onClick=openMessage)

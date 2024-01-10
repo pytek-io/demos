@@ -5,7 +5,7 @@ import render_html as html
 TextArea = antd.Input.TextArea
 
 
-def app():
+def app(_):
     text_area = TextArea(
         placeholder="Controlled autosize", autoSize={"minRows": 3, "maxRows": 5}
     )

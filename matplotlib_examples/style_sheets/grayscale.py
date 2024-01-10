@@ -35,7 +35,7 @@ def image_and_patch_example(ax):
     ax.add_patch(c)
 
 
-def app():
+def app(_):
     plt.style.use("grayscale")
     fig, (ax1, ax2) = plt.subplots(ncols=2)
     fig.suptitle("'grayscale' style sheet")

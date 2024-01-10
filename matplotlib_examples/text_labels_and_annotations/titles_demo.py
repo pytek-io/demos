@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     plt.plot(range(10))
     plt.title("Center Title")
     plt.title("Left Title", loc="left")

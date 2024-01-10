@@ -36,7 +36,7 @@ def fmt_cb(x):
     return f"{s} \\%" if plt.rcParams["text.usetex"] else f"{s} %"
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     CS = ax.contour(X, Y, Z)
     ax.clabel(CS, CS.levels, inline=True, fmt=fmt_cb, fontsize=10)

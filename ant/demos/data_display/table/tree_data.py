@@ -80,7 +80,7 @@ def onSelectAll(selected, selectedRows, changeRows):
     print(selected, selectedRows, changeRows)
 
 
-def app():
+def app(_):
     checkStrictly = antd.Switch(defaultChecked=False)
     return html.div(
         [

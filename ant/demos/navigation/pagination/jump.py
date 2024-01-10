@@ -7,7 +7,7 @@ def onChange(pageNumber):
     print("Page: ", pageNumber)
 
 
-def app():
+def app(_):
     pagination1 = antd.Pagination(showQuickJumper=True, defaultCurrent=2, total=500)
     r.autorun(lambda: print("Page: ", pagination1()))
     pagination2 = antd.Pagination(

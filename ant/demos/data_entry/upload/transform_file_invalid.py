@@ -3,5 +3,5 @@ from render_antd import Button, Upload
 from render_html import *
 
 
-def app():
+def app(_):
     return Upload(Button("Upload", icon=UploadOutlined([])), "{...props}"=True)

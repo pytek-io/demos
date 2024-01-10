@@ -29,7 +29,7 @@ def generate(X, Y, phi):
     return np.cos(2 * np.pi * X + phi) * R
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")
     xs = np.linspace(-1, 1, 50)

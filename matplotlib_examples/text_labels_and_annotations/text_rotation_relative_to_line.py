@@ -24,7 +24,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     h = ax.plot(range(0, 10), range(0, 10))
     ax.set_xlim([-10, 20])

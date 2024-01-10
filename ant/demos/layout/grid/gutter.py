@@ -4,7 +4,7 @@ import render_html as html
 style = {"background": "#0092ff", "padding": "8px 0"}
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Divider("Horizontal", orientation="left"),

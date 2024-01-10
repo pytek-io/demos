@@ -1,7 +1,7 @@
 import render_antd as antd
 
 
-def app():
+def app(_):
     items = [
         {"href": "#components-anchor-demo-basic", "title": "Basic demo", "key": "1"},
         {"href": "#components-anchor-demo-static", "title": "Static demo", "key": "2"},

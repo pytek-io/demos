@@ -81,7 +81,7 @@ from matplotlib.colors import LinearSegmentedColormap
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x = np.arange(0, np.pi, 0.1)
     y = np.arange(0, 2 * np.pi, 0.1)
     X, Y = np.meshgrid(x, y)

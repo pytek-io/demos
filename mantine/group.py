@@ -1,7 +1,7 @@
 from render_mantine import Button, Group
 
 
-def app():
+def app(_):
     return Group(
         [
             Button(1, variant="outline"),

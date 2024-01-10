@@ -15,7 +15,7 @@ custom_date_formatter = r.js_arrow(
 )
 
 
-def app():
+def app(_):
     defaultValue = datetime.datetime(2015, 1, 1)
     return antd.Space(
         [

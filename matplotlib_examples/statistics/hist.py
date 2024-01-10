@@ -18,7 +18,7 @@ from matplotlib.ticker import PercentFormatter
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     rng = np.random.default_rng(19680801)
     N_points = 100000
     n_bins = 20

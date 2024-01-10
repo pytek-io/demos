@@ -9,5 +9,5 @@ class ThrowError(Component):
     pass
 
 
-def app():
+def app(_):
     return ThrowError()

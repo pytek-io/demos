@@ -2,7 +2,7 @@ from render_antd import Alert
 from render_html import *
 
 
-def app():
+def app(_):
     raise NotImplementedError("react-text-lopp not exposed")
     return Alert(
         banner=True,

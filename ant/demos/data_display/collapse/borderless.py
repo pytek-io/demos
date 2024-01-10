@@ -4,7 +4,7 @@ import render_html as html
 Panel = antd.Collapse.Panel
 
 
-def app():
+def app(_):
     text = html.p(
         "A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found     as a welcome guest in many households across the world.",
         style={"paddingLeft": 24},

@@ -17,7 +17,7 @@ def selectedRowKeys(keys):
     print("selected", keys)
 
 
-def app():
+def app(_):
     selected_row_keys = r.ObservableList([])
 
     def onChange(newSelectedRowKeys):

@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     OperationsSlot = {
         "left": antd.Button("Left Extra Action", className="tabs-extra-demo-button"),
         "right": antd.Button("Right Extra Action"),

@@ -4,7 +4,7 @@ import render_html as html
 Title = antd.Typography.Title
 
 
-def app():
+def app(_):
     return html.div(
         [
             Title("h1. Ant Design"),

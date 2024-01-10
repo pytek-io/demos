@@ -21,7 +21,7 @@ from matplotlib.ticker import MultipleLocator
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure("MRI_with_EEG")
     with cbook.get_sample_data("s1045.ima.gz") as dfile:
         im = np.frombuffer(dfile.read(), np.uint16).reshape((256, 256))

@@ -39,7 +39,7 @@ def _reset_epoch_for_tutorial():
     mdates._reset_epoch_test_example()
 
 
-def app():
+def app(_):
     old_epoch = "0000-12-31T00:00:00"
     new_epoch = "1970-01-01T00:00:00"
     _reset_epoch_for_tutorial()

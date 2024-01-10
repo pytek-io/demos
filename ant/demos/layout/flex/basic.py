@@ -4,7 +4,7 @@ import render_html as html
 baseStyle = {"width": "25%", "height": 54}
 
 
-def app():
+def app(_):
     orientation = antd.Radio.Group(
         [
             antd.Radio("horizontal", value=False),

@@ -46,7 +46,7 @@ def do_plot(ax, Z, transform):
     ax.set_ylim(-4, 4)
 
 
-def app():
+def app(_):
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
     Z = get_image()
     do_plot(ax1, Z, mtransforms.Affine2D().rotate_deg(30))

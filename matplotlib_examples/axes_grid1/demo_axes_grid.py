@@ -110,7 +110,7 @@ def demo_grid_with_each_cbar_labelled(fig):
     grid.axes_llc.set_yticks([-2, 0, 2])
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(10.5, 2.5))
     fig.subplots_adjust(left=0.05, right=0.95)
     demo_simple_grid(fig)

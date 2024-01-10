@@ -18,5 +18,5 @@ def icon_slider(min_value, max_value):
     )
 
 
-def app():
+def app(_):
     return icon_slider(min_value=0, max_value=20)

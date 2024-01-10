@@ -4,7 +4,7 @@ import render_html as html
 RangePicker = antd.DatePicker.RangePicker
 
 
-def app():
+def app(_):
     return antd.Space(
         [
             antd.DatePicker(bordered=False),

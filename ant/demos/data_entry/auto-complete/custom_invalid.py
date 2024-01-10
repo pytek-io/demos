@@ -4,7 +4,7 @@ import render_antd as antd
 TextArea = antd.Input.TextArea
 
 
-def app():
+def app(_):
     options = r.create_observable([])
 
     def handleSearch(value: str):

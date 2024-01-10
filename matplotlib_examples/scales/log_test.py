@@ -17,7 +17,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     dt = 0.01
     t = np.arange(dt, 20.0, dt)

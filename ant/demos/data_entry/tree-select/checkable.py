@@ -23,7 +23,7 @@ treeData = [
 ]
 
 
-def app():
+def app(_):
     tree_select = antd.TreeSelect(
         treeCheckable=True,
         treeData=treeData,

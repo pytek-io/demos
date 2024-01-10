@@ -37,7 +37,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x_tail = 0.1
     y_tail = 0.5
     x_head = 0.9

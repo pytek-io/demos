@@ -12,5 +12,5 @@ def success():
     )
 
 
-def app():
+def app(_):
     return antd.Button("Customized style", onClick=success)

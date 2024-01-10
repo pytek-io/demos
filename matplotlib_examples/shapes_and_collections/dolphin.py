@@ -22,7 +22,7 @@ from matplotlib.transforms import Affine2D
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     r = np.random.rand(50)
     t = np.random.rand(50) * np.pi * 2.0

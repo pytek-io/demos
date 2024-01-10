@@ -29,7 +29,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     cascader1 = antd.Cascader(
         suffixIcon=ant_icons.SmileOutlined([]),
         options=options,

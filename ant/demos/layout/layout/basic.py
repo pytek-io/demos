@@ -9,7 +9,7 @@ Header, Footer, Sider, Content = (
 )
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Layout([Header("Header"), Content("Content"), Footer("Footer")]),

@@ -21,7 +21,7 @@ from matplotlib.collections import LineCollection
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x = np.arange(100)
     ys = x[:50, (np.newaxis)] + x[(np.newaxis), :]
     segs = np.zeros((50, 100, 2))

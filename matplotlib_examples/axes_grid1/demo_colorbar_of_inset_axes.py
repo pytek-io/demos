@@ -15,7 +15,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes, zoomed_inset_axes
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots(figsize=[5, 4])
     ax.set(aspect=1, xlim=(-15, 15), ylim=(-20, 5))
     Z = cbook.get_sample_data("axes_grid/bivariate_normal.npy", np_load=True)

@@ -20,7 +20,7 @@ from matplotlib.transforms import Bbox, TransformedBbox
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, (ax1, ax2) = plt.subplots(ncols=2)
     txt = ax1.text(0.5, 0.5, "test", size=30, ha="center", color="w")
     kwargs = {}

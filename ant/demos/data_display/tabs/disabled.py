@@ -1,7 +1,7 @@
 import render_antd as antd
 
 
-def app():
+def app(_):
     return antd.Tabs(
         items=[
             {"children": "Tab 1 content", "label": "Tab 1", "key": "1"},

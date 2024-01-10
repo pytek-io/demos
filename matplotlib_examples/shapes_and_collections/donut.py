@@ -34,7 +34,7 @@ def make_circle(r):
     return np.hstack((x, y))
 
 
-def app():
+def app(_):
     Path = mpath.Path
     fig, ax = plt.subplots()
     inside_vertices = make_circle(0.5)

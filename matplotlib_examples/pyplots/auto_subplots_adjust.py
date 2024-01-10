@@ -64,6 +64,6 @@ def on_draw(event):
         fig.canvas.draw()
 
 
-def app():
+def app(_):
     fig.canvas.mpl_connect("draw_event", on_draw)
     return matplotlib_to_svg(fig)

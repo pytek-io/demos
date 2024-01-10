@@ -29,7 +29,7 @@ class MidpointNormalize(colors.Normalize):
         return np.ma.masked_array(np.interp(value, x, y))
 
 
-def app():
+def app(_):
     N = 100
     X, Y = np.mgrid[-3 : 3 : complex(0, N), -2 : 2 : complex(0, N)]
     Z1 = np.exp(-(X**2) - Y**2)

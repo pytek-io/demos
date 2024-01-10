@@ -42,7 +42,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     r = np.linspace(0.3, 1, 30)
     theta = np.linspace(0, 4 * np.pi, 30)
     x = r * np.sin(theta)

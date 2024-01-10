@@ -7,7 +7,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     plt.clf()
     rng = np.random.RandomState(0)
     x = np.linspace(0, 10, 500)

@@ -15,7 +15,7 @@ options_with_disabled = [
 ]
 
 
-def app():
+def app(_):
     radio_group1 = antd.Radio.Group(options=plain_options, defaultValue="Apple")
     radio_group2 = antd.Radio.Group(options=options_with_disabled, defaultValue="Apple")
     radio_group3 = antd.Radio.Group(

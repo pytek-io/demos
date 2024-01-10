@@ -17,7 +17,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     plt.style.use("fivethirtyeight")
     x = np.linspace(0, 10)
     np.random.seed(19680801)

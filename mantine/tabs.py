@@ -3,7 +3,7 @@ import render_mantine as mantine
 import render_tabler_icons as tabler_icons
 
 
-def app():
+def app(_):
     name = mantine.Tabs(
         mantine.Tabs.List()
     )

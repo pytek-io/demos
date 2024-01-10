@@ -33,7 +33,7 @@ from matplotlib.path import Path
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots(figsize=(6, 6))
     path = Path.unit_circle()
     patch = patches.PathPatch(

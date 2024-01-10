@@ -25,7 +25,7 @@ def headerRender(value, type, onChange, onTypeChange):
         options.push(Select.Option(i, key=i, value=i, className="year-item"))
 
 
-def app():
+def app(_):
     return (
         div(
             [

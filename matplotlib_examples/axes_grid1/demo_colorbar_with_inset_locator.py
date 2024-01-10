@@ -22,7 +22,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=[6, 3])
     im1 = ax1.imshow([[1, 2], [2, 3]])
     axins1 = inset_axes(ax1, width="50%", height="5%", loc="upper right")

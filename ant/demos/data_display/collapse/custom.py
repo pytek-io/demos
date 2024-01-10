@@ -12,7 +12,7 @@ collapse_expand_icon = r.js_arrow(
 )
 
 
-def app():
+def app(_):
     text = """
 A dog is a type of domesticated animal.
 Known for its loyalty and faithfulness,

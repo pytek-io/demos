@@ -4,7 +4,7 @@ from render_antd import Dropdown, Menu
 from render_html import *
 
 
-def app():
+def app(_):
     raise NotImplementedError()
     visible = create_observable(False)
 

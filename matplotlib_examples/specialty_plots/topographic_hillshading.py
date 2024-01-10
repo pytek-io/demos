@@ -29,7 +29,7 @@ from matplotlib.colors import LightSource
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     dem = get_sample_data("jacksboro_fault_dem.npz", np_load=True)
     z = dem["elevation"]
     dx, dy = dem["dx"], dem["dy"]

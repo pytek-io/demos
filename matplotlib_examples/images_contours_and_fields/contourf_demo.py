@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     origin = "lower"
     delta = 0.025
     x = y = np.arange(-3.0, 3.01, delta)

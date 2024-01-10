@@ -8,7 +8,7 @@ def footer(content):
     return r.js_arrow(f"constant_{content}", f"() => '{content}'")
 
 
-def app():
+def app(_):
     return antd.Space(
         [
             antd.DatePicker(renderExtraFooter=footer("Select date XYZ")),

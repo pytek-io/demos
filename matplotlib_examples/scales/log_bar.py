@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     data = (3, 1000), (10, 3), (100, 30), (500, 800), (50, 1)
     dim = len(data[0])
     w = 0.75

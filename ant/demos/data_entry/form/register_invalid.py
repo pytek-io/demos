@@ -11,5 +11,5 @@ onWebsiteChange = Form.Item(AutoComplete(Input(), options=websiteOptions, onChan
 onWebsiteChange = Form.Item(Row([Col(Form.Item(Input(), name="captcha", noStyle=True, rules="{[", {=True, required:=True, true,=True, message:=True, 'Please=True, input=True, the=True, captcha=True, you=True, got!'=True, }"]}"=True), span=12), Col(Button("Get captcha"), span=12)], gutter=8), label="Captcha", extra="We must make sure that your are a human.")
 onWebsiteChange = Form.Item(["value ? Promise.resolve() : Promise.reject('Should accept agreement'),           }",         ]}"         "{...tailFormItemLayout}"       >", Checkbox(["I have read the", a("agreement", href="")])], name="agreement", valuePropName="checked", rules="{[           ", {=True, validator:=True, (_,=True, value)="")
 onWebsiteChange = Form.Item(Button("Register", type="primary", htmlType="submit"), "{...tailFormItemLayout}"=True)
-def app():
+def app(_):
     return RegistrationForm()

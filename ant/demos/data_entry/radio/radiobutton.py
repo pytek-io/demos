@@ -6,7 +6,7 @@ def onChange(value):
     print(f"radio checked:{value}")
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Radio.Group(

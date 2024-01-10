@@ -5,7 +5,7 @@ import pathlib
 import render as r
 import render_html as html
 import render_monaco as monaco
-import render_rcdock as rcdock
+import render_rcdock.utils as rcdock_utils
 import render_utils
 
 TITLE = "App explorer"
@@ -173,7 +173,7 @@ def app(window: r.Window):
                     "alignItems": "center",
                 },
             ),
-            rcdock.DockLayoutRender(defaultLayout=defaultLayout, style={"flex": 2}),
+            rcdock_utils.DockLayoutRender(defaultLayout=defaultLayout, style={"flex": 2}),
         ],
         style={"display": "flex", "flexDirection": "column", "minHeight": "100%"},
     )

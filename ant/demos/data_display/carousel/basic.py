@@ -10,7 +10,7 @@ contentStyle = {
 }
 
 
-def app():
+def app(_):
     return antd.Carousel(
         [
             html.div(html.h3("1", style=contentStyle)),

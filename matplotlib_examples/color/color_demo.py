@@ -45,7 +45,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     t = np.linspace(0.0, 2.0, 201)
     s = np.sin(2 * np.pi * t)
     fig, ax = plt.subplots(facecolor=(0.18, 0.31, 0.31))

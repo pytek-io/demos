@@ -24,7 +24,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots(1, 2, constrained_layout=True, figsize=(6, 2.5))
     x = ["1", "5", "2", "3"]
     y = [1, 4, 2, 3]

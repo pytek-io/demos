@@ -20,7 +20,7 @@ def create_content(file_name):
     }
 
 
-def app():
+def app(_):
     counter = itertools.count(1)
     defaultLayout = {
         "dockbox": {

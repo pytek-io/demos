@@ -5,7 +5,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     time_picker1 = antd.TimePicker(
         use12Hours=True, defaultValue=datetime.datetime.now()
     )

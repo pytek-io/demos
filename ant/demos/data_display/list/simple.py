@@ -20,7 +20,7 @@ list_item_renderer = r.js_arrow(
 )
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Divider("Default Size", orientation="left"),

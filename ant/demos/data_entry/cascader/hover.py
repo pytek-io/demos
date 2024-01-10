@@ -27,7 +27,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     cascader = antd.Cascader(
         options=options,
         expandTrigger="hover",

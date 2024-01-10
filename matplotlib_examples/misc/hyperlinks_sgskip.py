@@ -20,7 +20,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     s = plt.scatter([1, 2, 3], [4, 5, 6])
     s.set_urls(["https://www.bbc.co.uk/news", "https://www.google.com/", None])

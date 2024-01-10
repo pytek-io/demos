@@ -17,7 +17,7 @@ from mpl_toolkits.axes_grid1.anchored_artists import AnchoredDirectionArrows
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     fig, ax = plt.subplots()
     ax.imshow(np.random.random((10, 10)))

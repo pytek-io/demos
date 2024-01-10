@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     a = np.diag(range(15))
     fig = plt.matshow(a).figure
     return matplotlib_to_svg(fig)

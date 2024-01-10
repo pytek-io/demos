@@ -3,5 +3,5 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     return antd.Upload(antd.Button("Upload", icon=ant_icons.UploadOutlined([])))

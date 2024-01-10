@@ -2,7 +2,7 @@ import plotly.express as px
 import render_plotly as plotly
 
 
-def app():
+def app(_):
     return plotly.Graph(
         px.scatter(
             px.data.iris(),

@@ -8,7 +8,7 @@ def onChange(value):
     print("radio checked", value)
 
 
-def app():
+def app(_):
     value = r.ObservableValue(1)
     return antd.Radio.Group(
         [

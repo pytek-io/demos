@@ -25,7 +25,7 @@ def midpoints(x):
     return x
 
 
-def app():
+def app(_):
     r, theta, z = np.mgrid[0:1:11.0j, 0 : np.pi * 2 : 25.0j, -0.5:0.5:11.0j]
     x = r * np.cos(theta)
     y = r * np.sin(theta)

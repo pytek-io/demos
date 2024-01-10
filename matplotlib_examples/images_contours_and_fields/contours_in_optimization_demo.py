@@ -31,7 +31,7 @@ from matplotlib import patheffects
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots(figsize=(6, 6))
     nx = 101
     ny = 105

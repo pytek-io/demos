@@ -21,7 +21,7 @@ def millions(x):
     return "$%1.1fM" % (x * 1e-06)
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     x = np.random.rand(20)
     y = 10000000.0 * np.random.rand(20)

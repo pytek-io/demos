@@ -10,5 +10,5 @@ SelectSizesDemo = br()
 SelectSizesDemo = Select(""{children}"", mode="multiple", size=size, placeholder="Please select", defaultValue=['a10', 'c12'], onChange=handleChange, style=dict(width='100%'))
 SelectSizesDemo = br()
 SelectSizesDemo = Select(""{children}"", mode="tags", size=size, placeholder="Please select", defaultValue=['a10', 'c12'], onChange=handleChange, style=dict(width='100%'))
-def app():
+def app(_):
     return SelectSizesDemo()

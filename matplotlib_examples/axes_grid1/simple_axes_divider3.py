@@ -17,7 +17,7 @@ from mpl_toolkits.axes_grid1 import Divider
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(5.5, 4))
     rect = 0.1, 0.1, 0.8, 0.8
     ax = [fig.add_axes(rect, label="%d" % i) for i in range(4)]

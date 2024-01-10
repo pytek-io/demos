@@ -6,7 +6,7 @@ def onShowSizeChange(current, pageSize):
     print(current, pageSize)
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Pagination(

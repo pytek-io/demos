@@ -18,7 +18,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     ax.spines[["left", "bottom"]].set_position(("data", 0))
     ax.spines[["top", "right"]].set_visible(False)

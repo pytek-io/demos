@@ -5,7 +5,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     visible = r.ObservableValue(False)
     confirmLoading = r.ObservableValue(False)
     modal_text = r.ObservableValue("Content of the modal")

@@ -5,7 +5,7 @@ import render_html as html
 import render_utils
 
 
-def app():
+def app(_):
     percent = r.ObservableValue(0)
     r.autorun(lambda: print("percent", percent()))
     return html.div(

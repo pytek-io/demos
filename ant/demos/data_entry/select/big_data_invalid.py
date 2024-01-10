@@ -2,7 +2,7 @@ from render_antd import Divider, Select, Typography
 from render_html import *
 
 Title = Typography.Title
-def app():
+def app(_):
     return[
  Title("Ant Design 4.0", level=3),
  Title(""{options.length}" Items", level=4),

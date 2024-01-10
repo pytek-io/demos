@@ -17,7 +17,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     prop_cycle = plt.rcParams["axes.prop_cycle"]
     colors = prop_cycle.by_key()["color"]
     lwbase = plt.rcParams["lines.linewidth"]

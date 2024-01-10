@@ -22,7 +22,7 @@ import matplotlib.transforms as mtransforms
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
     (l1,) = ax.plot(

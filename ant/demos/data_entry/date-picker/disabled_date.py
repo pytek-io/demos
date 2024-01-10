@@ -55,7 +55,7 @@ disabledRangeTime = r.js_arrow(
 )
 
 
-def app():
+def app(_):
     return antd.Space(
         [
             antd.DatePicker(

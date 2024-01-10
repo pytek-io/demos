@@ -208,7 +208,7 @@ def func(x, pos):
     return "{:.2f}".format(x).replace("0.", ".").replace("1.00", "")
 
 
-def app():
+def app(_):
     annotate_heatmap(im, valfmt=matplotlib.ticker.FuncFormatter(func), size=7)
     plt.tight_layout()
     return matplotlib_to_svg(fig)

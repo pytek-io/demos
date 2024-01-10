@@ -9,7 +9,7 @@ class DemoBox(html.p):
         super().__init__(children, *arg)
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Divider("Align Top", orientation="left"),

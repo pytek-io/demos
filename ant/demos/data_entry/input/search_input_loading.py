@@ -4,7 +4,7 @@ import render_html as html
 Search = antd.Input.Search
 
 
-def app():
+def app(_):
     return html.div(
         [
             Search(placeholder="input search loading default", loading=True),

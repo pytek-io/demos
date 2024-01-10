@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     data = [
         [66386, 174296, 75131, 577908, 32015],
         [58230, 381139, 78045, 99308, 160454],

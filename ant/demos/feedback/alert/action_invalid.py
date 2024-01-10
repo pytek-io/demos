@@ -2,7 +2,7 @@ from render_antd import Alert, Button, Space
 from render_html import *
 
 
-def app():
+def app(_):
     return[
  Alert("UNDO", message="Success Tips", type="success", showIcon=True, action="{         <Button size=", small"=True, type="text"),
  Alert("Detail", message="Error Text", showIcon=True, description="Error Description Error Description Error Description Error Description", type="error", action="{         <Button size=", small"=True, danger=True),

@@ -18,7 +18,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     xmax = 10
     x = np.linspace(-xmax, xmax, 10000)
     cdf_norm = [(math.erf(w / np.sqrt(2)) / 2 + 1 / 2) for w in x]

@@ -3,7 +3,7 @@ from render_antd import Popconfirm, Switch, message
 from render_html import *
 
 
-def app():
+def app(_):
     raise NotImplementedError("not supported")
 #     changeCondition = value => {
 #     this.setState({ condition: value });

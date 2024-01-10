@@ -2,7 +2,7 @@ from render_antd import Button, Input, Space, Switch
 from render_html import *
 
 
-def app():
+def app(_):
     raise Exception()
     return Space(
         [

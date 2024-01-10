@@ -21,7 +21,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     t = np.linspace(-10, 10, 100)
     sig = 1 / (1 + np.exp(-t))
     fig = plt.figure()

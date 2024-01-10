@@ -4,5 +4,5 @@ import render_html as html
 RangePicker = antd.TimePicker.RangePicker
 
 
-def app():
+def app(_):
     return RangePicker()

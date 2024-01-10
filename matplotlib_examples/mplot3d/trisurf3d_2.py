@@ -21,7 +21,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=plt.figaspect(0.5))
     u = np.linspace(0, 2.0 * np.pi, endpoint=True, num=50)
     v = np.linspace(-0.5, 0.5, endpoint=True, num=10)

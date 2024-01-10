@@ -4,7 +4,7 @@ import render_antd as antd
 create_anchor = r.js_arrow("create_anchor", "action => render_html.a(action)")
 
 
-def app():
+def app(_):
     columns = [
         {
             "title": "Full Name",

@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x, y, z = np.indices((8, 8, 8))
     cube1 = (x < 3) & (y < 3) & (z < 3)
     cube2 = (x >= 5) & (y >= 5) & (z >= 5)

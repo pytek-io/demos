@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     t = np.arange(0.0, 2.0, 0.01)
     s = np.sin(2 * np.pi * t)
     upper = 0.77

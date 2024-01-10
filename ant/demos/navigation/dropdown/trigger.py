@@ -11,7 +11,7 @@ items = [
 ]
 
 
-def app():
+def app(_):
     return antd.Dropdown(
         html.a(
             ["Click me", ant_icons.DownOutlined()],

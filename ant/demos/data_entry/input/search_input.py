@@ -5,7 +5,7 @@ from render_html import *
 Search = Input.Search
 
 
-def app():
+def app(_):
     suffix = AudioOutlined(style={"fontSize": 16, "color": "#1890ff"})
     onSearch = lambda v: print("searching", v)
     return Space(

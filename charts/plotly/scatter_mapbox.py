@@ -4,7 +4,7 @@ import plotly.express as px
 import render_plotly as plotly
 
 
-def app():
+def app(_):
     print(pathlib.Path(__file__).parent)
     px.set_mapbox_access_token(
         pathlib.Path(pathlib.Path(__file__).parent, ".mapbox_token").read_text()

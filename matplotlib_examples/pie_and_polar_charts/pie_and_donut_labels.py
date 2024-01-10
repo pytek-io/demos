@@ -24,7 +24,7 @@ def func(pct, allvals):
     return "{:.1f}%\n({:d} g)".format(pct, absolute)
 
 
-def app():
+def app(_):
     recipe = ["375 g flour", "75 g sugar", "250 g butter", "300 g berries"]
     data = [float(x.split()[0]) for x in recipe]
     ingredients = [x.split()[-1] for x in recipe]

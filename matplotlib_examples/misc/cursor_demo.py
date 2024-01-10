@@ -164,7 +164,7 @@ class SnappingCursor:
             self.ax.figure.canvas.draw()
 
 
-def app():
+def app(_):
     x = np.arange(0, 1, 0.01)
     y = np.sin(2 * 2 * np.pi * x)
     fig, ax = plt.subplots()

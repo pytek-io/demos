@@ -3,7 +3,7 @@ from render_antd import Typography
 from render_html import *
 
 Paragraph = Typography.Paragraph
-def app():
+def app(_):
     return[
  Paragraph(""{editableStr}"", editable=dict(onChange=setEditableStr)),
  Paragraph(""{customIconStr}"", editable=dict(icon=<HighlightOutlined />, tooltip='click to edit text', onChange=setCustomIconStr)),
@@ -15,5 +15,5 @@ def app():
  SmileFilled(key="copied-icon"),
  Paragraph("Hide Copy tooltips.", copyable=dict(tooltips=false)),
 ]
-def app():
+def app(_):
     return Demo()

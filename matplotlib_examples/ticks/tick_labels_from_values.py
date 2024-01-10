@@ -37,7 +37,7 @@ def format_fn(tick_val, tick_pos):
         return ""
 
 
-def app():
+def app(_):
     ax.xaxis.set_major_formatter(format_fn)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax.plot(xs, ys)

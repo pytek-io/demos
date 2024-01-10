@@ -15,7 +15,7 @@ def compare_length(name):
 is_included = r.js_arrow("is_included", "(value, {name}) => name.indexOf(value) === 0")
 
 
-def app():
+def app(_):
     columns = [
         {
             "title": "Name",

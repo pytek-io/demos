@@ -18,7 +18,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     N = 37
     x, y = np.mgrid[:N, :N]
     Z = np.cos(x * 0.2) + np.sin(y * 0.3)

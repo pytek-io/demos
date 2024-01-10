@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     fig.add_artist(lines.Line2D([0, 1], [0, 1]))
     fig.add_artist(lines.Line2D([0, 1], [1, 0]))

@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     rect = fig.patch
     rect.set_facecolor("lightgoldenrodyellow")

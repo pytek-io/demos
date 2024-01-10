@@ -29,7 +29,7 @@ items = [
 ]
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Dropdown(

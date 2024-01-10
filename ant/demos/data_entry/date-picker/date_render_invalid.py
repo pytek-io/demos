@@ -3,7 +3,7 @@ from render_html import *
 
 style = dict()
 RangePicker = DatePicker.RangePicker
-def app():
+def app(_):
     return div(""{current.date()}"", className="ant-picker-cell-inner", style=style)
-def app():
+def app(_):
     return div(""{current.date()}"", className="ant-picker-cell-inner", style=style)

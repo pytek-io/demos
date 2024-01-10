@@ -4,7 +4,7 @@ import render_html as html
 content = html.div([html.p("Content"), html.p("Content")])
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Popover(

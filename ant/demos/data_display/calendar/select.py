@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     selected_value = r.ObservableValue()
 
     def selected_value_formatted():

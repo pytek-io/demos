@@ -7,6 +7,7 @@ import render_ant_icons as ant_icons
 import render_antd as antd
 import render_html as html
 import render_rcdock as rcdock
+import render_rcdock.utils as rcdock_utils
 import render_utils
 
 from demos.ant import create_code_editor
@@ -33,7 +34,7 @@ def create_editor(file, language, read_only):
         robust_open_file(file),
         lineNumbers=True,
         readOnly=read_only,
-        height=600,
+        height="100%",
     )
 
 
@@ -59,7 +60,7 @@ def app(window: r.Window):
                 component,
                 id="code-box-demo",
                 className="code-box-demo",
-                style={"height": "100%"},
+                style={"height": "inherit", "width": "inherit"},
             )
         else:
             component = render_utils.parse_md_doc(open(actual_file_path).read())
@@ -71,10 +72,10 @@ def app(window: r.Window):
         "dockbox": {
             "mode": "vertical",
             "children": [
-                {"tabs": [rcdock.create_tab(file_name, editor)]},
+                {"tabs": [rcdock_utils.create_tab(file_name, editor)]},
                 {
                     "tabs": [
-                        rcdock.create_tab(
+                        rcdock_utils.create_tab(
                             title or file_name.split(".")[0],
                             html.div(
                                 delayed_component,
@@ -94,7 +95,7 @@ def app(window: r.Window):
         defaultLayout=defaultLayout,
         style={"position": "absolute", "left": 0, "top": 50, "right": 0, "bottom": 0},
     )
-    insert_tab = rcdock.create_tab_inserter(dock_layout)
+    insert_tab = rcdock_utils.create_tab_inserter(dock_layout)
     create_file_visible = r.ObservableValue(False, key="create_file_visible")
 
     async def open_file(file):

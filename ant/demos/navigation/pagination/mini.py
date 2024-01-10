@@ -6,7 +6,7 @@ def showTotal():
     return f"Total {total} items"
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Pagination(size="small", total=50),

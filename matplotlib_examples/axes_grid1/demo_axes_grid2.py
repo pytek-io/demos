@@ -34,7 +34,7 @@ def add_inner_title(ax, title, loc, **kwargs):
     return at
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(6, 6))
     Z = cbook.get_sample_data("axes_grid/bivariate_normal.npy", np_load=True)
     extent = -3, 4, -4, 3

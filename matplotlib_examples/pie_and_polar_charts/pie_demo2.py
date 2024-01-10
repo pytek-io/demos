@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     labels = "Frogs", "Hogs", "Dogs", "Logs"
     fracs = [15, 30, 45, 10]
     fig, axs = plt.subplots(2, 2)

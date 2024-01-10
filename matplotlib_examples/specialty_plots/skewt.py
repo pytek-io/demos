@@ -121,7 +121,7 @@ class SkewXAxes(Axes):
         return self.transDataToAxes.inverted().transform(pts)[:, (0)]
 
 
-def app():
+def app(_):
     register_projection(SkewXAxes)
     from io import StringIO
 

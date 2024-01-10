@@ -11,7 +11,7 @@ initial_panes = [
 ]
 
 
-def app():
+def app(_):
     panes = r.create_observable(initial_panes.copy(), key="panes")
     active_key = r.create_observable(initial_panes[0]["key"], key="active_key")
     r.autorun(lambda: print(active_key()))

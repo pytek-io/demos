@@ -23,7 +23,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")
     X, Y = np.mgrid[0 : 6 * np.pi : 0.25, 0 : 4 * np.pi : 0.25]

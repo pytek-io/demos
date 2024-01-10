@@ -142,7 +142,7 @@ def plot_figure(style_label=""):
     return fig
 
 
-def app():
+def app(_):
     style_list = ["default", "classic"] + sorted(
         style
         for style in plt.style.available

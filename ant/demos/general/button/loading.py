@@ -6,7 +6,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     loadings = [r.ObservableValue(False) for i in range(3)]
 
     def enter_loading(loading):

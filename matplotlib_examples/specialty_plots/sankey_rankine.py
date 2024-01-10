@@ -16,7 +16,7 @@ from matplotlib.sankey import Sankey
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(8, 9))
     ax = fig.add_subplot(
         1,

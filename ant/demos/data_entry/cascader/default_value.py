@@ -28,7 +28,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     cascader = antd.Cascader(
         defaultValue=["zhejiang", "hangzhou", "xihu"], options=options
     )

@@ -11,6 +11,6 @@ async def success():
     hide()
 
 
-def app():
+def app(_):
     raise not NotImplementedError()
     return Button("Display a loading indicator", onClick=success)

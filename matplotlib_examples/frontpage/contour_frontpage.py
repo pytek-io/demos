@@ -17,7 +17,7 @@ from matplotlib import cm
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     extent = -3, 3, -3, 3
     delta = 0.5
     x = np.arange(-3.0, 4.001, delta)

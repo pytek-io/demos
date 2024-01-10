@@ -7,7 +7,7 @@ from demos.charts.utils import matplotlib_to_svg
 matplotlib.use("Agg")
 
 
-def app():
+def app(_):
     plt.clf()
     x = np.linspace(0, 2 * np.pi, 400)
     y = np.sin(x**2 / 50)

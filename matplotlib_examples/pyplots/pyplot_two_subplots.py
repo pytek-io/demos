@@ -20,7 +20,7 @@ def f(t):
     return np.exp(-t) * np.cos(2 * np.pi * t)
 
 
-def app():
+def app(_):
     t1 = np.arange(0.0, 5.0, 0.1)
     t2 = np.arange(0.0, 5.0, 0.02)
     fig = plt.figure()

@@ -50,7 +50,7 @@ def experiment_res(x, y):
     return (np.max(z) - z) / (np.max(z) - np.min(z))
 
 
-def app():
+def app(_):
     n_test = 200
     subdiv = 3
     init_mask_frac = 0.0

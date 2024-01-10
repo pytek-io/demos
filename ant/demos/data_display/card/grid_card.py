@@ -1,7 +1,7 @@
 import render_antd as antd
 
 
-def app():
+def app(_):
     gridStyle = {"width": "25%", "textAlign": "center"}
     return antd.Card(
         [

@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x = [1, 2, 3, 4]
     y = [1, 4, 9, 6]
     labels = ["Frogs", "Hogs", "Bogs", "Slogs"]

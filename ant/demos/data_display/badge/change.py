@@ -10,7 +10,7 @@ MIN_VALUE = 0
 MAX_VALUE = 1000
 
 
-def app():
+def app(_):
     count = r.ObservableValue(5)
     show = antd.Switch(defaultChecked=True)
     return html.div(

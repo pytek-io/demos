@@ -20,7 +20,7 @@ from matplotlib.ticker import MaxNLocator
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     Z = np.random.rand(6, 10)
     x = np.arange(-0.5, 10, 1)

@@ -45,7 +45,7 @@ def update(changed_image):
             im.set_clim(changed_image.get_clim())
 
 
-def app():
+def app(_):
     for im in images:
         im.callbacks.connect("changed", update)
     return matplotlib_to_svg(fig)

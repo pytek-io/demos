@@ -1,7 +1,7 @@
 import render_antd as antd
 
 
-def app():
+def app(_):
     columns = [
         {"title": "Name", "dataIndex": "name", "key": "name"},
         {"title": "Age", "dataIndex": "age", "key": "age"},

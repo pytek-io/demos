@@ -37,7 +37,7 @@ filterCascaderSearch = r.js_arrow(
 )
 
 
-def app():
+def app(_):
     cascader = antd.Cascader(
         options=options,
         placeholder="Please select",

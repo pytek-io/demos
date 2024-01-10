@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     x = np.linspace(0, 2 * np.pi, 50)
     y = np.sin(x)

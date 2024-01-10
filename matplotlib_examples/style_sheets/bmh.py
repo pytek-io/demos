@@ -33,7 +33,7 @@ def plot_beta_hist(ax, a, b):
     )
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     plot_beta_hist(ax, 10, 10)
     plot_beta_hist(ax, 4, 12)

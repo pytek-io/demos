@@ -8,7 +8,7 @@ custom_icon = r.js_arrow(
 )
 
 
-def app():
+def app(_):
     treeData = [
         {
             "title": "parent 1",

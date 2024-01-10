@@ -74,7 +74,7 @@ def rainbow_text(x, y, strings, colors, orientation="horizontal", ax=None, **kwa
             )
 
 
-def app():
+def app(_):
     words = "all unicorns poop rainbows ! ! !".split()
     colors = [
         "red",

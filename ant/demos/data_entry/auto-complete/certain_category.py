@@ -50,7 +50,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     return antd.AutoComplete(
         antd.Input.Search(size="large", placeholder="input here"),
         dropdownMatchSelectWidth=500,

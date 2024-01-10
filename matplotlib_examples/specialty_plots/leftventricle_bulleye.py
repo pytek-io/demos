@@ -111,7 +111,7 @@ def bullseye_plot(ax, data, seg_bold=None, cmap=None, norm=None):
     ax.set_xticklabels([])
 
 
-def app():
+def app(_):
     data = np.arange(17) + 1
     fig, ax = plt.subplots(
         figsize=(12, 8), nrows=1, ncols=3, subplot_kw={"projection": "polar"}

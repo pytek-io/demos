@@ -18,7 +18,7 @@ from matplotlib.dates import DateFormatter, DayLocator, HourLocator, drange
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     date1 = datetime.datetime(2000, 3, 2)
     date2 = datetime.datetime(2000, 3, 6)
     delta = datetime.timedelta(hours=6)

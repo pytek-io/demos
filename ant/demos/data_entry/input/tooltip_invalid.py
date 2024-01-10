@@ -11,7 +11,7 @@ def format_number(value):
     pass
 
 
-def app():
+def app(_):
     value = create_observable(0)
 
     def result():
@@ -37,7 +37,7 @@ def app():
         )
 
 
-def app():
+def app(_):
     return NumericInput(
         style=dict(width=120), value=this.state.value, onChange=this.onChange
     )

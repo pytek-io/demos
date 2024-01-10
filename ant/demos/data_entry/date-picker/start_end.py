@@ -7,7 +7,7 @@ greater_dates = r.js_arrow("greater_dates", "(date1, date2) => date2 > date1")
 less_dates = r.js_arrow("lesser_dates", "(date1, date2) => date2 < date1")
 
 
-def app():
+def app(_):
     start_value = r.ObservableValue(datetime.datetime.now())
     end_value = r.ObservableValue(datetime.datetime.now() + datetime.timedelta(days=15))
     return antd.Row(

@@ -2,7 +2,7 @@ import render as r
 import render_antd as antd
 
 
-def app():
+def app(_):
     visible = r.ObservableValue(False)
     confirmLoading = r.ObservableValue(False)
 

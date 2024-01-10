@@ -61,7 +61,7 @@ class MyFormatter(Formatter):
             pass
 
 
-def app():
+def app(_):
     ax2.plot(r.adj_close, "o-")
     ax2.set_title("Plot y at Index Coordinates Using Custom Formatter")
     ax2.xaxis.set_major_formatter(format_date)

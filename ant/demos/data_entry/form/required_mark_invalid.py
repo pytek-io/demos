@@ -3,7 +3,7 @@ from render_antd import Button, Form, Input, Radio
 from render_html import *
 
 
-def app():
+def app(_):
     return Form(
         [
             Form.Item(

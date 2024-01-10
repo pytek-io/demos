@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     fig.subplots_adjust(top=0.8)
     ax1 = fig.add_subplot(211)

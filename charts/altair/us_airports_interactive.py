@@ -5,7 +5,7 @@ import vega_datasets
 TITLE = "US airports"
 
 
-def app():
+def app(_):
     airports = vega_datasets.data.airports.url
     flights_airport = vega_datasets.data.flights_airport.url
     states = alt.topo_feature(vega_datasets.data.us_10m.url, feature="states")

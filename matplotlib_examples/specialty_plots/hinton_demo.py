@@ -43,7 +43,7 @@ def hinton(matrix, max_weight=None, ax=None):
     return fig
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     fig = hinton(np.random.rand(20, 20) - 0.5)
     return matplotlib_to_svg(fig)

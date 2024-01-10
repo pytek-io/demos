@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     Path = mpath.Path
     fig, ax = plt.subplots()
     pp1 = mpatches.PathPatch(

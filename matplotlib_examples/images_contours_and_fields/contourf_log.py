@@ -18,7 +18,7 @@ from numpy import ma
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     N = 100
     x = np.linspace(-3.0, 3.0, N)
     y = np.linspace(-2.0, 2.0, N)

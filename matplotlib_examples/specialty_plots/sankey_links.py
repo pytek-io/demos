@@ -54,7 +54,7 @@ def corner(sankey):
     )
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_subplot(
         1,

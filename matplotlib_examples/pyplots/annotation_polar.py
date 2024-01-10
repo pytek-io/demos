@@ -19,7 +19,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_subplot(projection="polar")
     r = np.arange(0, 1, 0.001)

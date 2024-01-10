@@ -75,7 +75,7 @@ def adjust_spines(ax, spines):
         ax.xaxis.set_ticks([])
 
 
-def app():
+def app(_):
     fig = plt.figure()
     x = np.linspace(0, 2 * np.pi, 100)
     y = 2 * np.sin(x)

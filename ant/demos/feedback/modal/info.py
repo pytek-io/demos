@@ -39,7 +39,7 @@ def warning():
     )
 
 
-def app():
+def app(_):
     return antd.Space(
         [
             antd.Button("Info", onClick=info),

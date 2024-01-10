@@ -9,10 +9,10 @@ Link = Anchor.Link
 Text = Typography.Text
 disabled, selectedKeys, targetKeys, showSearch = this.disabled, this.selectedKeys, this.targetKeys, this.showSearch
 TableTransfer = Table(id="components-transfer-table", rowSelection=rowSelection, columns=columns, dataSource=filteredItems, size="small", style=dict(pointerEvents=listDisabled ? 'none' : null), onRow="{( key, disabled: itemDisabled ) => (             onClick: lambda :", {=True, if=True, (itemDisabled=True, ||=True, listDisabled)=True, return;=True, onItemSelect(key,=True, !listSelectedKeys.includes(key));=True, }",=True, )}"=True)
-def app():
+def app(_):
     return[
  tr([th("Total"), td(Text(""{totalBorrow}"", type="danger")), td(Text(""{totalRepayment}""))]),
  tr([th("Balance"), td(Text(""{totalBorrow - totalRepayment}"", type="danger"), colSpan=2)]),
 ]
-def app():
+def app(_):
     return App()

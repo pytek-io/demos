@@ -3,7 +3,7 @@ from render_antd import List
 from render_html import *
 
 
-def app():
+def app(_):
     raise NotImplementedError()
     listData = [
         {

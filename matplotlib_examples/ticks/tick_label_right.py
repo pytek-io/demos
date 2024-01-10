@@ -19,7 +19,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     plt.rcParams["ytick.right"] = plt.rcParams["ytick.labelright"] = True
     plt.rcParams["ytick.left"] = plt.rcParams["ytick.labelleft"] = False
     x = np.arange(10)

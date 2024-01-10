@@ -245,7 +245,7 @@ def plot_angle(ax, pos, angle, length=0.95, acol="C0", **kwargs):
     return AngleAnnotation(pos, xy[0], xy[2], ax=ax, **kwargs)
 
 
-def app():
+def app(_):
     fig, (ax1, ax2) = plt.subplots(nrows=2, sharex=True)
     fig.suptitle("AngleLabel keyword arguments")
     fig.canvas.draw()

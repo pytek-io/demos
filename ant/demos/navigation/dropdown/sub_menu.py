@@ -20,7 +20,7 @@ items = [
 ]
 
 
-def app():
+def app(_):
     return antd.Dropdown(
         html.a(
             ["Cascading menu", ant_icons.DownOutlined()],

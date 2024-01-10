@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     top = r.ObservableValue(10, key="test")
     return html.div(
         [

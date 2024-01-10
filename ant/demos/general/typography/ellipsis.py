@@ -5,7 +5,7 @@ import render_html as html
 Paragraph, Text = antd.Typography.Paragraph, antd.Typography.Text
 
 
-def app():
+def app(_):
     ellipsis = antd.Switch(defaultChecked=True)
     return html.div(
         [

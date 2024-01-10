@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     children = [
         {"label": key, "key": key}
         for key in (f"{chr(i + ord('a'))}{i}" for i in range(10, 36))

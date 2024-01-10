@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x = np.linspace(-3, 5, 150).reshape(1, -1)
     y = np.linspace(-3, 5, 120).reshape(-1, 1)
     z = np.cos(x) + np.sin(y)

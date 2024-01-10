@@ -39,7 +39,7 @@ from matplotlib.colors import LogNorm
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, axes = plt.subplots(nrows=3, figsize=(6, 8), constrained_layout=True)
     num_series = 1000
     num_points = 100

@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     return antd.Descriptions(
         [
             antd.Descriptions.Item("Cloud Database", label="Product"),

@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     disable_switch = antd.Switch(size="small")
     slider1 = antd.Slider(defaultValue=30, disabled=disable_switch)
     slider2 = antd.Slider(range=True, defaultValue=[20, 50], disabled=disable_switch)

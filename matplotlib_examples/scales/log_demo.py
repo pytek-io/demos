@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     t = np.arange(0.01, 20.0, 0.01)
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
     ax1.semilogy(t, np.exp(-t / 5.0))

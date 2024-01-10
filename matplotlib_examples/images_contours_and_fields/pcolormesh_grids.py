@@ -33,7 +33,7 @@ def _annotate(ax, x, y, title):
     ax.set_title(title)
 
 
-def app():
+def app(_):
     nrows = 3
     ncols = 5
     Z = np.arange(nrows * ncols).reshape(nrows, ncols)

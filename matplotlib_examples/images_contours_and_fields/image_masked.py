@@ -20,7 +20,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x0, x1 = -5, 5
     y0, y1 = -3, 3
     x = np.linspace(x0, x1, 500)

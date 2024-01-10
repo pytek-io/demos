@@ -143,7 +143,7 @@ class MercatorLatitudeScale(mscale.ScaleBase):
             return MercatorLatitudeScale.MercatorLatitudeTransform(self.thresh)
 
 
-def app():
+def app(_):
     mscale.register_scale(MercatorLatitudeScale)
     import matplotlib.pyplot as plt
 

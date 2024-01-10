@@ -7,7 +7,7 @@ from demos.charts.utils import matplotlib_to_svg
 sns.set_theme(style="ticks")
 
 
-def app():
+def app(_):
     os.environ["SEABORN_DATA"] = os.path.split(__file__)[0]
     penguins = sns.load_dataset("penguins")
     fig = sns.jointplot(

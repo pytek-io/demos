@@ -10,7 +10,7 @@ marks = {
 }
 
 
-def app():
+def app(_):
     return html.div(
         [
             html.div(antd.Slider(vertical=True, defaultValue=30), style=style),

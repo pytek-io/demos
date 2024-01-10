@@ -2,7 +2,7 @@ from render_antd import Avatar, Button, Divider, List, Skeleton
 from render_html import *
 
 
-def app():
+def app(_):
     raise NotImplementedError("low level effect not supported")
     return [
         Divider("Default Size", orientation="left"),

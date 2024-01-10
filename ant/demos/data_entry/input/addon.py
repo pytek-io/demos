@@ -22,7 +22,7 @@ selectAfter = antd.Select(
 )
 
 
-def app():
+def app(_):
     return html.div(
         [
             html.div(

@@ -5,7 +5,7 @@ import render_html as html
 TextArea = antd.Input.TextArea
 
 
-def app():
+def app(_):
     input_ = antd.Input(placeholder="input with clear icon", allowClear=True)
     text_area = TextArea(placeholder="textarea with clear icon", allowClear=True)
     r.autorun(lambda: print(input_()))

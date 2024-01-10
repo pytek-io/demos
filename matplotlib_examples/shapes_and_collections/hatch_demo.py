@@ -26,7 +26,7 @@ from matplotlib.patches import Ellipse, Polygon
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x = np.arange(1, 5)
     y1 = np.arange(1, 5)
     y2 = np.ones(y1.shape) * 4

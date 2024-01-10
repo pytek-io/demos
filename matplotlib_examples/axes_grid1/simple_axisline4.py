@@ -16,7 +16,7 @@ from mpl_toolkits.axes_grid1 import host_subplot
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = host_subplot(111, figure=fig)
     xx = np.arange(0, 2 * np.pi, 0.01)

@@ -4,7 +4,7 @@ import render_html as html
 Text, Link = antd.Typography.Text, antd.Typography.Link
 
 
-def app():
+def app(_):
     return antd.Space(
         [
             Text("Ant Design (default)"),

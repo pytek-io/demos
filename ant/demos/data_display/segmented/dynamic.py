@@ -5,7 +5,7 @@ import render_html as html
 default_options = ["Daily", "Weekly", "Monthly"]
 
 
-def app():
+def app(_):
     options = r.ObservableList(default_options.copy())
 
     def handle_click():

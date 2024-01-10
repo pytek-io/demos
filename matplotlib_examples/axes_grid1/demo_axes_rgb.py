@@ -42,7 +42,7 @@ def make_cube(r, g, b):
     return R, G, B, RGB
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = RGBAxes(fig, [0.1, 0.1, 0.8, 0.8], pad=0.0)
     r, g, b = get_rgb()

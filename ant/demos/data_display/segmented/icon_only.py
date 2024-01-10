@@ -2,7 +2,7 @@ import render_ant_icons as ant_icons
 import render_antd as antd
 
 
-def app():
+def app(_):
     return antd.Segmented(
         options=[
             {"icon": ant_icons.BarsOutlined(), "value": "List"},

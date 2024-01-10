@@ -5,7 +5,7 @@ TextArea = antd.Input.TextArea
 domains = ["gmail.com", "163.com", "qq.com"]
 
 
-def app():
+def app(_):
     options_obs = r.ObservableList()
 
     def handleSearch(value: str):

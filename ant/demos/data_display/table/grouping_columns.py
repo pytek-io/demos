@@ -100,7 +100,7 @@ for i in range(10):
         )
 
 
-def app():
+def app(_):
     return antd.Table(
         columns=columns,
         dataSource=data,

@@ -20,7 +20,7 @@ from mpl_toolkits.axes_grid1.axes_divider import make_axes_locatable
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, (ax1, ax2) = plt.subplots(1, 2)
     fig.subplots_adjust(wspace=0.5)
     im1 = ax1.imshow([[1, 2], [3, 4]])

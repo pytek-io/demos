@@ -15,5 +15,5 @@ data = [
 ]
     
 
-def app():
+def app(_):
     return App()

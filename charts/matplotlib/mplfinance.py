@@ -34,7 +34,7 @@ def percentB_belowzero(percentB, price):
     return signal
 
 
-def app():
+def app(_):
     file_name = "demos/charts/data/SPY_20110701_20120630_Bollinger.csv"
     df = pd.read_csv(file_name, index_col=0, parse_dates=True)
     low_signal = percentB_belowzero(df["PercentB"], df["Close"])

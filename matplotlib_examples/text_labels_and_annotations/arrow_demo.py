@@ -156,7 +156,7 @@ def make_arrow_graph(
         )
 
 
-def app():
+def app(_):
     data = {
         "A": 0.4,
         "T": 0.3,

@@ -13,7 +13,7 @@ IMAGE_STYLE = {
 }
 
 
-def app():
+def app(_):
     loading = r.ObservableValue(False)
     options = r.ObservableList([])
 

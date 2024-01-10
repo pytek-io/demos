@@ -77,7 +77,7 @@ def demo_images_side_by_side(ax):
     ax2.yaxis.set_tick_params(labelleft=False)
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(6, 6))
     ax = fig.add_subplot(2, 2, 1)
     demo_simple_image(ax)

@@ -24,7 +24,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     with PdfPages("multipage_pdf.pdf") as pdf:
         plt.figure(figsize=(3, 3))
         plt.plot(range(7), [3, 1, 4, 1, 5, 9, 2], "r-o")

@@ -23,7 +23,7 @@ from matplotlib.patches import Shadow
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(6, 6))
     ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
     labels = "Frogs", "Hogs", "Dogs", "Logs"

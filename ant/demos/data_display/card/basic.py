@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Card("More", title="Default size card", extra=html.a(href=True)),

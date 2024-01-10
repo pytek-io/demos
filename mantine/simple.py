@@ -2,7 +2,7 @@
 import render_mantine as mantine
 
 
-def app():
+def app(_):
     name = mantine.TextInput(defaultValue="John")
     greeting = lambda: f"Hello {name()}"
     greeting_component = mantine.Text(greeting)

@@ -16,7 +16,7 @@ def confirm():
     )
 
 
-def app():
+def app(_):
     visible = r.ObservableValue(False)
     return antd.Space(
         [

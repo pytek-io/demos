@@ -12,5 +12,5 @@ async def openMessage():
     antd.message.success({"content": "Loaded!", "key": key, "duration": 2})
 
 
-def app():
+def app(_):
     return antd.Button("Open the message box", type="primary", onClick=openMessage)

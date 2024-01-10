@@ -16,7 +16,7 @@ from mpl_toolkits.axes_grid1.parasite_axes import HostAxes
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     obs = [
         ["01_S1", 3.88, 0.14, 1970, 63],
         ["01_S4", 5.6, 0.82, 1622, 150],

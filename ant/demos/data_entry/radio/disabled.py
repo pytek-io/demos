@@ -4,7 +4,7 @@ import render_html as html
 import render_utils
 
 
-def app():
+def app(_):
     disabled = r.ObservableValue(True)
     radio_group1 = antd.Radio("Disabled", defaultChecked=False, disabled=disabled)
     radio_group2 = antd.Radio("Disabled", defaultChecked=True, disabled=disabled)

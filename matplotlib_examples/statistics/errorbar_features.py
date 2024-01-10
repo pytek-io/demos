@@ -31,7 +31,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x = np.arange(0.1, 4, 0.5)
     y = np.exp(-x)
     error = 0.1 + 0.2 * x

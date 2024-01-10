@@ -19,7 +19,7 @@ from matplotlib.collections import EllipseCollection
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x = np.arange(10)
     y = np.arange(15)
     X, Y = np.meshgrid(x, y)

@@ -1,7 +1,7 @@
 import render_antd as antd
 
 
-def app():
+def app(_):
     items = [
         {"label": "1st item", "key": "1"},
         {"label": "2nd item", "key": "2"},

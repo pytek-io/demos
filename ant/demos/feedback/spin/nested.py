@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     loading = antd.Switch(defaultChecked=False)
     return html.div(
         [

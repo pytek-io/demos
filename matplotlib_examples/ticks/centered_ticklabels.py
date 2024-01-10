@@ -30,7 +30,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     r = cbook.get_sample_data("goog.npz", np_load=True)["price_data"].view(np.recarray)
     r = r[-250:]
     fig, ax = plt.subplots()

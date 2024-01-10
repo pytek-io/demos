@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     left, width = 0.25, 0.5
     bottom, height = 0.25, 0.5

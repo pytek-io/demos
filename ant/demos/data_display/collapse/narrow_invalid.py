@@ -4,7 +4,7 @@ from render_html import *
 Panel = Collapse.Panel
 
 
-def app():
+def app(_):
     return Collapse(
         [
             Panel(p(text), header="This is panel header with arrow icon", key="1"),

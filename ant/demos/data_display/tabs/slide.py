@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     mode = antd.Radio.Group(
         [
             antd.Radio.Button("Horizontal", value="top"),

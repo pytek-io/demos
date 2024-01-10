@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     n_radii = 8
     n_angles = 36
     radii = np.linspace(0.125, 1.0, n_radii)

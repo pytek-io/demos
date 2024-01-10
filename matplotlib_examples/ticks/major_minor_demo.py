@@ -42,7 +42,7 @@ from matplotlib.ticker import AutoMinorLocator, MultipleLocator
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     t = np.arange(0.0, 100.0, 0.1)
     s = np.sin(0.1 * np.pi * t) * np.exp(-t * 0.01)
     fig, ax = plt.subplots()

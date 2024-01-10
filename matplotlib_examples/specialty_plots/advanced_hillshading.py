@@ -49,7 +49,7 @@ def avoid_outliers():
     fig.suptitle("Avoiding Outliers in Shaded Plots", size="x-large")
 
 
-def app():
+def app(_):
     """Demonstrates displaying different variables through shade and color."""
     y, x = np.mgrid[-4:2:200.0j, -4:2:200.0j]
     z1 = np.sin(x**2)

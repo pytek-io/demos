@@ -7,7 +7,7 @@ def onAfterChange(value):
     print("onAfterChange", value)
 
 
-def app():
+def app(_):
     slider1 = antd.Slider(defaultValue=30, onAfterChange=onAfterChange)
     r.autorun(lambda: print("slider1", slider1()))
     slider2 = antd.Slider(

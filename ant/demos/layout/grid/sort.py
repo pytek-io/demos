@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     return antd.Row(
         [
             antd.Col("col-18 col-push-6", span=18, push=6),

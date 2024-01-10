@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     preventDefault = r.Callback(lambda: print("hi"), prevent_default=True)
     return html.div(
         [

@@ -15,7 +15,7 @@ OPTIONS_WITH_DISABLED = [
 ]
 
 
-def app():
+def app(_):
     check_box1 = antd.Checkbox.Group(options=PLAIN_OPTIONS, defaultValue=["Apple"])
     check_box2 = antd.Checkbox.Group(options=OPTIONS, defaultValue=["Pear"])
     check_box3 = antd.Checkbox.Group(

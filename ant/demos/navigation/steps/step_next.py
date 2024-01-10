@@ -19,7 +19,7 @@ content_style = {
     "marginTop": 16,
   }
 
-def app():
+def app(_):
     current = r.ObservableValue(0)
     return antd.Space(
         [

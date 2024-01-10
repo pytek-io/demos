@@ -10,7 +10,7 @@ from .config import COLUMNS
 
 
 class App:
-    def __init__(self, _window):
+    def __init__(self, _: r.Window):
         controller = r.Controller()
         self.ticker = antd.Input(
             defaultValue="T10Y2Y", style={"width": 120}, controller=controller

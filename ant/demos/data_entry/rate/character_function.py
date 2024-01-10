@@ -20,7 +20,7 @@ custom_icons = r.js_arrow(
 )
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Rate(defaultValue=2),

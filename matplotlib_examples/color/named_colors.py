@@ -85,7 +85,7 @@ def plot_colortable(colors, sort_colors=True, emptycols=0):
     return fig
 
 
-def app():
+def app(_):
     plot_colortable(mcolors.BASE_COLORS, sort_colors=False, emptycols=1)
     plot_colortable(mcolors.TABLEAU_COLORS, sort_colors=False, emptycols=2)
     fig = plot_colortable(mcolors.CSS4_COLORS)

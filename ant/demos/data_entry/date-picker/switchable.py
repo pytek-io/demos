@@ -9,7 +9,7 @@ def picker_with_type(picker_type, onChange):
     return antd.DatePicker(picker=picker_type, onChange=onChange)
 
 
-def app():
+def app(_):
     picker_type = antd.Select(
         options=[
             {"label": "Time", "value": "time"},

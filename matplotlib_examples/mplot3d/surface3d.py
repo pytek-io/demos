@@ -22,7 +22,7 @@ from matplotlib.ticker import LinearLocator
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
     X = np.arange(-5, 5, 0.25)
     Y = np.arange(-5, 5, 0.25)

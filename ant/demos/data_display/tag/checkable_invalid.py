@@ -4,10 +4,10 @@ from render_html import *
 CheckableTag = Tag.CheckableTag
 selectedTags = this.selectedTags
 selectedTags = this.selectedTags
-def app():
+def app(_):
     return[
  span("Categories:", style=dict(marginRight=8)),
  CheckableTag(""{tag}"", key=tag, checked=selectedTags.indexOf(tag) > -1, onChange=checked => this.handleChange(tag, checked)),
 ]
-def app():
+def app(_):
     return HotTags()

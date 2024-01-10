@@ -26,7 +26,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     x = np.random.randn(1000)
     y = np.random.randn(1000)

@@ -19,7 +19,7 @@ from matplotlib import pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     n = 12
     x = np.linspace(-1.5, 1.5, n)
     y = np.linspace(-1.5, 1.5, n * 2)

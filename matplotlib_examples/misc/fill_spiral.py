@@ -15,7 +15,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     theta = np.arange(0, 8 * np.pi, 0.1)
     a = 1

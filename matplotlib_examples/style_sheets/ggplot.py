@@ -25,7 +25,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     plt.style.use("ggplot")
     np.random.seed(19680801)
     fig, axs = plt.subplots(ncols=2, nrows=2)

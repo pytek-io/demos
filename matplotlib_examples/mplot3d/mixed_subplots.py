@@ -20,7 +20,7 @@ def f(t):
     return np.cos(2 * np.pi * t) * np.exp(-t)
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=plt.figaspect(2.0))
     fig.suptitle("A tale of 2 subplots")
     ax = fig.add_subplot(2, 1, 1)

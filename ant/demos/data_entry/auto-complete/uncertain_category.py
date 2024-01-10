@@ -30,7 +30,7 @@ def create_result(query, engine):
     }
 
 
-def app():
+def app(_):
     options_obs = r.ObservableList()
 
     def on_search(query: str):

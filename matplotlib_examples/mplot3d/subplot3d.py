@@ -18,7 +18,7 @@ from mpl_toolkits.mplot3d.axes3d import get_test_data
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=plt.figaspect(0.5))
     ax = fig.add_subplot(1, 2, 1, projection="3d")
     X = np.arange(-5, 5, 0.25)

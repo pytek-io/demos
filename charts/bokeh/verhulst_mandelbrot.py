@@ -48,7 +48,7 @@ def logistic_map(gens=20, init=0.5, growth=0.5):
     return population
 
 
-def app():
+def app(_):
     bifurcation_diagram = hv.Points(
         [
             (mapping(rate), pop)

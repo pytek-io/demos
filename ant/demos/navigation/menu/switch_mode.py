@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     switch_mode = antd.Switch("vertical mode", defaultChecked=False)
     switch_theme = antd.Switch("dark theme", defaultChecked=False)
     mode = lambda: "vertical" if switch_mode() else "inline"

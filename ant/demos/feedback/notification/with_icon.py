@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     args = {
         "message": "Notification Title",
         "description": "This is the content of the notification. This is the content of the notification. This is the content of the notification.",

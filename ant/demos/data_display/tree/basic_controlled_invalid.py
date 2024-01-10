@@ -14,5 +14,5 @@ onSelect = Tree(
 )
 
 
-def app():
+def app(_):
     return Demo()

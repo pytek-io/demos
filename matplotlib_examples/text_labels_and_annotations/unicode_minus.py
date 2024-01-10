@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure(figsize=(4, 2))
     fig.text(0.15, 0.6, "Unicode minus:", fontsize=20)
     fig.text(0.85, 0.6, "−1", ha="right", fontsize=20)

@@ -9,7 +9,7 @@ marks = {
 }
 
 
-def app():
+def app(_):
     return html.div(
         [
             html.h4("included=true"),

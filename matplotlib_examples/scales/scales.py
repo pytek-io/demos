@@ -74,7 +74,7 @@ def inverse(a):
     return np.rad2deg(np.arctan(np.sinh(a)))
 
 
-def app():
+def app(_):
     ax = axs[2, 1]
     t = np.arange(0, 170.0, 0.1)
     s = t / 2.0

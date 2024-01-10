@@ -41,7 +41,7 @@ def setup(ax, title):
     )
 
 
-def app():
+def app(_):
     fig, axs = plt.subplots(8, 1, figsize=(8, 6))
     setup(axs[0], title="NullLocator()")
     axs[0].xaxis.set_major_locator(ticker.NullLocator())

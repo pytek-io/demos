@@ -30,7 +30,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     labels = "Frogs", "Hogs", "Dogs", "Logs"
     sizes = [15, 30, 45, 10]
     explode = 0, 0.1, 0, 0

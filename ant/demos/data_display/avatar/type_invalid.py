@@ -3,7 +3,7 @@ from render_antd import Avatar, Image
 from render_html import *
 
 
-def app():
+def app(_):
     return[
  Avatar(icon=UserOutlined([])),
  Avatar("U"),

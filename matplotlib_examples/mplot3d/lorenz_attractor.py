@@ -45,7 +45,7 @@ def lorenz(xyz, *, s=10, r=28, b=2.667):
     return np.array([x_dot, y_dot, z_dot])
 
 
-def app():
+def app(_):
     dt = 0.01
     num_steps = 10000
     xyzs = np.empty((num_steps + 1, 3))

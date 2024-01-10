@@ -30,7 +30,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     base = datetime.datetime(2005, 2, 1)
     dates = [(base + datetime.timedelta(hours=2 * i)) for i in range(732)]
     N = len(dates)

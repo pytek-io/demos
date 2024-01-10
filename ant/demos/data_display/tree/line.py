@@ -92,7 +92,7 @@ treeData = [
 ]
 
 
-def app():
+def app(_):
     show_line = antd.Switch()
     show_icon = antd.Switch()
     return html.div(

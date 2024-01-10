@@ -17,7 +17,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     x, y = np.meshgrid(np.arange(7), np.arange(10))
     z = np.sin(0.5 * x) * np.cos(0.52 * y)
     mask = np.zeros_like(z, dtype=bool)

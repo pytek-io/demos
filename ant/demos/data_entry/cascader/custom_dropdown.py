@@ -66,7 +66,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     return antd.Cascader(
         options=options,
         displayRender=render_selection,

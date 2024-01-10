@@ -29,7 +29,7 @@ def make_heights_equal(fig, rect, ax1, ax2, pad):
     ax2.set_axes_locator(divider.new_locator(2))
 
 
-def app():
+def app(_):
     arr1 = np.arange(20).reshape((4, 5))
     arr2 = np.arange(20).reshape((5, 4))
     fig, (ax1, ax2) = plt.subplots(1, 2)

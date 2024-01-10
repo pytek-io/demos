@@ -8,5 +8,5 @@ def success():
     )
 
 
-def app():
+def app(_):
     return antd.Button("Customized display duration", onClick=success)

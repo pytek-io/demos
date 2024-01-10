@@ -2,7 +2,7 @@ from render_ant_icons import createFromIconfontCN
 from render_html import *
 
 
-def app():
+def app(_):
     return div(
         [
             IconFont(type="icon-javascript"),

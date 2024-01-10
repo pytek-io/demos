@@ -7,7 +7,7 @@ TITLE = "Bokeh example"
 DESCRIPTION = "Simple Bokeh plot"
 
 
-def app():
+def app(_):
     N = 100
     x = np.random.random(size=N) * 100
     y = np.random.random(size=N) * 100

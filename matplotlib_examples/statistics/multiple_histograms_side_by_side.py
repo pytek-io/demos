@@ -31,7 +31,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     number_of_bins = 20
     number_of_data_points = 387

@@ -3,7 +3,7 @@ import render_antd as antd
 baseStyle = {"width": "25%", "height": 54}
 
 
-def app():
+def app(_):
     gap = antd.Radio.Group(
         [
             antd.Radio(value, value=value) for value in ['small', 'middle', 'large', 'customize']

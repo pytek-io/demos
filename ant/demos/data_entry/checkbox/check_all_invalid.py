@@ -6,7 +6,7 @@ PLAIN_OPTIONS = ["Apple", "Pear", "Orange"]
 DEFAULT_CHECKED_LIST = ["Apple", "Orange"]
 
 
-def app():
+def app(_):
     checked = r.ObservableValue(False)
     def check_all(args):
         print(args)

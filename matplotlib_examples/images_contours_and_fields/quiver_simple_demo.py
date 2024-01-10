@@ -19,7 +19,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     X = np.arange(-10, 10, 1)
     Y = np.arange(-10, 10, 1)
     U, V = np.meshgrid(X, Y)

@@ -4,7 +4,7 @@ import render_antd as antd
 RangePicker = antd.DatePicker.RangePicker
 
 
-def app():
+def app(_):
     def onChange(values):
         print("Selected Time: ", values)
         print(

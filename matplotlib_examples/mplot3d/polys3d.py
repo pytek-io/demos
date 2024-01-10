@@ -31,7 +31,7 @@ def polygon_under_graph(x, y):
     return [(x[0], 0.0), *zip(x, y), (x[-1], 0.0)]
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")
     x = np.linspace(0.0, 10.0, 31)

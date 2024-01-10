@@ -5,7 +5,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     time_picker = antd.TimePicker()
     r.autorun(lambda: print("changed", time_picker()))
     return time_picker

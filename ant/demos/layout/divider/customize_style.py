@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     return html.div(
         [
             antd.Divider(style={"borderWidth": 2, "borderColor": "#7cb305"}),

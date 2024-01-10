@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots(figsize=(6, 5))
     ax.plot(range(11), color="0.9")
     msg = "Normal Text. $Text\\ in\\ math\\ mode:\\ \\int_{0}^{\\infty } x^2 dx$"

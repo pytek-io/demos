@@ -20,7 +20,7 @@ from matplotlib.image import NonUniformImage
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     interp = "nearest"
     x = np.linspace(-4, 4, 9)
     x2 = x**3

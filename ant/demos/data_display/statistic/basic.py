@@ -2,7 +2,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     return antd.Row(
         [
             antd.Col(antd.Statistic(title="Active Users", value=112893), span=12),

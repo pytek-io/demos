@@ -5,5 +5,5 @@ from render_html import *
 Uploader = Upload(Button("Upload png only", icon=UploadOutlined([])))
 
 
-def app():
+def app(_):
     return Uploader()

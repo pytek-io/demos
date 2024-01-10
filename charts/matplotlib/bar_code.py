@@ -7,7 +7,7 @@ from demos.charts.utils import matplotlib_to_svg
 matplotlib.use("Agg")
 
 
-def app():
+def app(_):
     matplotlib.rcParams["font.size"] = 8.0
     np.random.seed(19680801)
     data1 = np.random.random([6, 50])

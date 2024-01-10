@@ -39,7 +39,7 @@ def make_plot(axs):
     ax4.set_ylabel("aligned 2", bbox=box)
 
 
-def app():
+def app(_):
     fig, axs = plt.subplots(2, 2)
     fig.subplots_adjust(left=0.2, wspace=0.6)
     make_plot(axs)

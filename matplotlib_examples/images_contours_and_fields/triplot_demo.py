@@ -17,7 +17,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     n_angles = 36
     n_radii = 8
     min_radius = 0.25

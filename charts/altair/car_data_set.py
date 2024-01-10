@@ -2,6 +2,7 @@ import altair as alt
 import render as r
 import render_altair as altair
 import render_antd as antd
+import render_antd.utils as antd_utils
 import render_html as html
 import vega_datasets
 
@@ -62,3 +63,6 @@ class App:
             spec=spec, style={"height": "100%", "width": "100%"}
         )
         self.title = "Car data set"
+
+
+app = antd_utils.create_app(App)

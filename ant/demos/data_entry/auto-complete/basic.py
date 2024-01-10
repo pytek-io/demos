@@ -5,7 +5,7 @@ import render as r
 import render_antd as antd
 
 
-def app():
+def app(_):
     options_obs = r.ObservableList()
 
     def on_search(search_text: str):

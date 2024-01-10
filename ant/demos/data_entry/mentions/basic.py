@@ -2,7 +2,7 @@ import render as r
 import render_antd as antd
 
 
-def app():
+def app(_):
     mentions = antd.Mentions(
         options=[
             {"label": "afc163", "value": "afc163", "key": 0},

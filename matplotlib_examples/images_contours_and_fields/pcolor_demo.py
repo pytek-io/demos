@@ -20,7 +20,7 @@ from matplotlib.colors import LogNorm
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     Z = np.random.rand(6, 10)
     fig, (ax0, ax1) = plt.subplots(2, 1)

@@ -1,7 +1,8 @@
 import render as r
 import render_antd as antd
+import render_antd.utils as antd_utils
 import render_html as html
-import render_rcdock as rcdock
+import render_rcdock.utils as rcdock_utils
 import render_utils
 
 from demos.charts.altair.car_data_set import App as AltairApp
@@ -52,7 +53,7 @@ class App:
                 ],
             }
         }
-        self.dock_layout = rcdock.DockLayoutRender(
+        self.dock_layout = rcdock_utils.DockLayoutRender(
             defaultLayout=defaultLayout, style={"height": "100%", "width": "100%"}
         )
 
@@ -67,7 +68,9 @@ class App:
             )
 
         async def create_live_quotes_callback(tickers):
-            await self.dock_layout.insert_component(YahooFinanceApp(self.window, tickers))
+            await self.dock_layout.insert_component(
+                YahooFinanceApp(self.window, tickers)
+            )
 
         menu = antd.Menu(
             items=[
@@ -115,12 +118,12 @@ class App:
                         },
                         {
                             "label": "Yahoo trends",
-                            "onClick": create_yahoo_trend_callback
+                            "onClick": create_yahoo_trend_callback,
                         },
                     ],
                     "key": "SubMenu",
                     "icon": render_utils.create_icon(
-                        MENU, style={"height": 30, "color": rcdock.LIGHT_GREY}
+                        MENU, style={"height": 30, "color": rcdock_utils.LIGHT_GREY}
                     ),
                 }
             ],
@@ -149,3 +152,6 @@ class App:
         await self.dock_layout.insert_component(
             self.create_stock_history_app("AAPL"), settings_visible=True
         )
+
+
+app = antd_utils.create_app(App)

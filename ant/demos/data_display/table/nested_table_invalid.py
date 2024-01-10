@@ -11,5 +11,5 @@ expandedRowRender = Table(
 )
 
 
-def app():
+def app(_):
     return NestedTable()

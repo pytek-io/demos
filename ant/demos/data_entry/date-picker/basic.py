@@ -5,7 +5,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     date_picker1 = antd.DatePicker(
         defaultValue=datetime.datetime.now() + datetime.timedelta(days=7)
     )

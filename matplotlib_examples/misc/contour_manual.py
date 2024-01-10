@@ -17,7 +17,7 @@ from matplotlib.contour import ContourSet
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     lines0 = [[[0, 0], [0, 4]]]
     lines1 = [[[2, 0], [1, 2], [1, 3]]]
     lines2 = [[[3, 0], [3, 2]], [[3, 3], [3, 4]]]

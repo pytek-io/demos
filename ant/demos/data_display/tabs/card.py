@@ -6,7 +6,7 @@ items = [
 ]
 
 
-def app():
+def app(_):
     return antd.Tabs(
         items=items, onChange=print, defaultActiveKey="item-2", type="card"
     )

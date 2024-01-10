@@ -5,7 +5,7 @@ from render_html import *
 Dragger = Upload.Dragger
 
 
-def app():
+def app(_):
     return Dragger(
         [
             p(InboxOutlined(), className="ant-upload-drag-icon"),

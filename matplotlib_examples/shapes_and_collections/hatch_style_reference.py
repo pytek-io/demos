@@ -31,7 +31,7 @@ def hatches_plot(ax, h):
     ax.axis("off")
 
 
-def app():
+def app(_):
     fig, axs = plt.subplots(2, 5, constrained_layout=True, figsize=(6.4, 3.2))
     hatches = ["/", "\\", "|", "-", "+", "x", "o", "O", ".", "*"]
     for ax, h in zip(axs.flat, hatches):

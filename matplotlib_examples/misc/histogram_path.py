@@ -26,7 +26,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, ax = plt.subplots()
     np.random.seed(19680801)
     data = np.random.randn(1000)

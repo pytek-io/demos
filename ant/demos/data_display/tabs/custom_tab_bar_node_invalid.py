@@ -8,7 +8,7 @@ connectDragSource, connectDropTarget, children = this.connectDragSource, this.co
 children = this.children
 order = this.order
 children = this.children
-def app():
+def app(_):
     return DndProvider(Tabs(""{orderTabs}"", renderTabBar=this.renderTabBar, "{...this.props}"=True), backend=HTML5Backend)
-def app():
+def app(_):
     return DraggableTabs([TabPane("Content of Tab Pane 1", tab="tab 1", key="1"), TabPane("Content of Tab Pane 2", tab="tab 2", key="2"), TabPane("Content of Tab Pane 3", tab="tab 3", key="3")])

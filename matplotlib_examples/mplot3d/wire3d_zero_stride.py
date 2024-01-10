@@ -17,7 +17,7 @@ from mpl_toolkits.mplot3d import axes3d
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, (ax1, ax2) = plt.subplots(
         2, 1, figsize=(8, 12), subplot_kw={"projection": "3d"}
     )

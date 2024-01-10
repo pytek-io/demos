@@ -18,7 +18,7 @@ return originalElement;
 )
 
 
-def app():
+def app(_):
     return antd.Pagination(
         total=500,
         itemRender=itemRender,

@@ -26,7 +26,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     n_bins = 10
     x = np.random.randn(1000, 3)

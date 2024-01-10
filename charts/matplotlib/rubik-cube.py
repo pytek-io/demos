@@ -15,7 +15,7 @@ def midpoints(x):
     return x
 
 
-def app():
+def app(_):
     N = 3
     volume = np.random.rand(N, N, N)
     filled = np.ones((N, N, N))

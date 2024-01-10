@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     r = np.arange(0, 2, 0.01)
     theta = 2 * np.pi * r
     fig, ax = plt.subplots(subplot_kw={"projection": "polar"})

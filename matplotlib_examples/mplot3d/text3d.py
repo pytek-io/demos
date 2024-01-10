@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_subplot(projection="3d")
     zdirs = None, "x", "y", "z", (1, 1, 0), (1, 1, 1)

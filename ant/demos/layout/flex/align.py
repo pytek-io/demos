@@ -19,7 +19,7 @@ boxStyle = {
 }
 
 
-def app():
+def app(_):
     justify = antd.Segmented(options=justifyOptions)
     align = antd.Segmented(options=alignOptions)
     return antd.Flex(

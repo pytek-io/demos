@@ -83,7 +83,7 @@ def draw_control_points_for_patches(ax):
         patch.axes.plot(*patch.get_path().vertices.T, ".", c=patch.get_edgecolor())
 
 
-def app():
+def app(_):
     fig, axs = plt.subplots(2, 2, figsize=(8, 8))
     bb = mtransforms.Bbox([[0.3, 0.4], [0.7, 0.6]])
     ax = axs[0, 0]

@@ -21,7 +21,7 @@ from matplotlib.patches import ConnectionPatch
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 5))
     fig.subplots_adjust(wspace=0)
     overall_ratios = [0.27, 0.56, 0.17]

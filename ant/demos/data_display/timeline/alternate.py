@@ -2,7 +2,7 @@ import render_ant_icons as ant_icons
 import render_antd as antd
 
 
-def app():
+def app(_):
     return antd.Timeline(
         items=[
             {"children": "Create a services site 2015-09-01"},

@@ -18,7 +18,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     with cbook.get_sample_data("s1045.ima.gz") as dfile:
         im = np.frombuffer(dfile.read(), np.uint16).reshape((256, 256))
     fig, ax = plt.subplots(num="MRI_demo")

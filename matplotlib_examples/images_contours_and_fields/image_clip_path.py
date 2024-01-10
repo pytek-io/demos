@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     with cbook.get_sample_data("grace_hopper.jpg") as image_file:
         image = plt.imread(image_file)
     fig, ax = plt.subplots()

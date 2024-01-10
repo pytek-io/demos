@@ -36,6 +36,6 @@ def format_coord(x, y):
         return "x=%1.4f, y=%1.4f" % (x, y)
 
 
-def app():
+def app(_):
     ax.format_coord = format_coord
     return matplotlib_to_svg(fig)

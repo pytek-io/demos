@@ -17,7 +17,7 @@ from mpl_toolkits.axes_grid1 import ImageGrid
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     im1 = np.arange(100).reshape((10, 10))
     im2 = im1.T
     im3 = np.flipud(im1)

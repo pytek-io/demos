@@ -4,7 +4,7 @@ from render_html import *
 visible, loading = this.visible, this.loading
 
 
-def app():
+def app(_):
     return [
         Button(
             "Open Modal with customized footer", type="primary", onClick=this.showModal

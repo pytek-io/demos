@@ -27,7 +27,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     code = np.array(
         [
             1,

@@ -44,7 +44,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     d = np.arange(100).reshape(10, 10)
     x, y = np.meshgrid(np.arange(11), np.arange(11))
     theta = 0.25 * np.pi

@@ -27,7 +27,7 @@ def dipole_potential(x, y):
     return (np.max(z) - z) / (np.max(z) - np.min(z))
 
 
-def app():
+def app(_):
     n_angles = 30
     n_radii = 10
     min_radius = 0.2

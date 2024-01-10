@@ -5,5 +5,5 @@ from render_html import *
 confirm = Modal.confirm
 
 
-def app():
+def app(_):
     return Button("Confirm", onClick=showConfirm)

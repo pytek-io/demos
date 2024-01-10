@@ -6,6 +6,7 @@ import re
 import mistletoe
 import render as r
 import render_antd as antd
+import render_antd.utils as antd_utils
 import render_html as html
 import render_monaco as monaco
 import render_utils
@@ -195,7 +196,7 @@ def create_code_box(
                 [
                     demo_name,
                     html.span(
-                        render_utils.create_edit_link(
+                        antd_utils.create_edit_link(
                             module_path, __file__, css=["/demos/ant_demo_extra.css"]
                         ),
                         className="anticon anticon-edit",
@@ -268,7 +269,7 @@ def generate_top_level_components(source, demos):
                 yield component
 
 
-def app():
+def app(_):
     root_directory, _ = os.path.split(__file__)
     current_demo_path, menu = build_menu(root_directory)
 

@@ -3,7 +3,7 @@ import render_antd as antd
 import render_html as html
 
 
-def app():
+def app(_):
     percent = r.create_observable(0, key="percent")
     current = r.create_observable(1, key="current")
     status = r.create_observable("process", key="status")

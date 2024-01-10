@@ -27,7 +27,7 @@ from matplotlib.dates import (YEARLY, DateFormatter, RRuleLocator, drange,
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     np.random.seed(19680801)
     rule = rrulewrapper(YEARLY, byeaster=1, interval=5)
     loc = RRuleLocator(rule)

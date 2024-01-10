@@ -5,7 +5,7 @@ from render_html import *
 Paragraph, Text = Typography.Paragraph, Typography.Text
 
 
-def app():
+def app(_):
     return [
         Result(
             "Go Console",

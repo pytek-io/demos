@@ -7,7 +7,7 @@ Countdown = antd.Statistic.Countdown
 deadline = datetime.datetime.now() + datetime.timedelta(days=2, seconds=30)
 
 
-def app():
+def app(_):
     return antd.Row(
         [
             antd.Col(

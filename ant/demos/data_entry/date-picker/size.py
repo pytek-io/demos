@@ -4,7 +4,7 @@ import render_html as html
 RangePicker = antd.DatePicker.RangePicker
 
 
-def app():
+def app(_):
     radio_group_size = antd.Radio.Group(
         [
             antd.Radio.Button("Large", value="large"),

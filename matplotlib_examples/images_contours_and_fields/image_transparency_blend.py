@@ -30,7 +30,7 @@ def normal_pdf(x, mean, var):
     return np.exp(-((x - mean) ** 2) / (2 * var))
 
 
-def app():
+def app(_):
     xmin, xmax, ymin, ymax = 0, 100, 0, 100
     n_bins = 100
     xx = np.linspace(xmin, xmax, n_bins)

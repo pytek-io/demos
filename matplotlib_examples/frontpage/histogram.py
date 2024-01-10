@@ -16,7 +16,7 @@ import numpy as np
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     random_state = np.random.RandomState(19680801)
     X = random_state.randn(10000)
     fig, ax = plt.subplots()

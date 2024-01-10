@@ -15,7 +15,7 @@ from mpl_toolkits.axes_grid1.axes_divider import make_axes_area_auto_adjustable
 from demos.charts.utils import matplotlib_to_svg
 
 
-def app():
+def app(_):
     fig = plt.figure()
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_yticks([0.5], labels=["very long label"])

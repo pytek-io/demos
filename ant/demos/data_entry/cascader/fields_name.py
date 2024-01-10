@@ -28,7 +28,7 @@ options = [
 ]
 
 
-def app():
+def app(_):
     cascader = antd.Cascader(
         fieldNames={"label": "name", "value": "code", "children": "items"},
         options=options,

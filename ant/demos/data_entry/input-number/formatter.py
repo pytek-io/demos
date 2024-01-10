@@ -9,7 +9,7 @@ amount_formatter = r.js_arrow(
 percent_formatter = r.js_arrow("percent_formatter", "(value) => `${value}%`")
 
 
-def app():
+def app(_):
     amount_input = antd.InputNumber(defaultValue=1000, formatter=amount_formatter)
     percent_input = antd.InputNumber(
         defaultValue=100, min=0, max=100, formatter=percent_formatter
