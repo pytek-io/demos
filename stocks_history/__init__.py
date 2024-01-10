@@ -82,50 +82,21 @@ class App:
                 ("Show legends", show_legends),
             ]
         )
-        signal_definitions = [DEFAULT_SIGNAL_DEFINITION.copy()]
-        signal_definitions_obs = r.ObservableList(
-            signal_definitions, key="signal_definitions_obs", 
-            # controller=self.controller
-        )
-        signal_definitions_obs_obs = r.Mapping(
-            r.DictOfObservables, signal_definitions_obs
-        )
-
-        def create_signal_settings_row(settings):
-            settings_obs = r.DictOfObservables(settings)
-            return create_row_settings(
-                [
-                    html.label(
-                        lambda: signal_name(settings_obs), style={"textAlign": "right"}
-                    ),
-                    antd.InputNumber(
-                        value=settings_obs["nb_days"], style={"width": "100%"}
-                    ),
-                    antd.Select(
-                        options=[
-                            {"children": "Blue", "value": "blue"},
-                            {"children": "Red", "value": "red"},
-                            {"children": "Green", "value": "green"},
-                            {"children": "Yellow", "value": "yellow"},
-                        ],
-                        value=settings_obs["color"],
-                        style={"width": "100%", "textAlign": "right", "maxWidth": 80},
-                    ),
-                    antd.Button(
-                        "-",
-                        onClick=lambda: signal_definitions_obs.remove(settings),
-                        style={"width": 42},
-                    ),
-                ]
+        with self.controller:
+            self.signal_definitions = [DEFAULT_SIGNAL_DEFINITION.copy()]
+            self.signal_definitions_obs = r.ObservableList(
+                self.signal_definitions, key="signal_definitions_obs"
             )
-
-        self.signals_settings = r.Mapping(
-            create_signal_settings_row,
-            signal_definitions_obs,
-            key="signals_settings",
-            # controller=self.controller,
-            evaluate_argument=False,
-        )
+            self.signal_definitions_obs_obs = r.Mapping(
+                lambda x: r.DictOfObservables(x, controller=self.controller),
+                self.signal_definitions_obs,
+            )
+            self.signals_settings = r.Mapping(
+                self.create_signal_settings_row,
+                self.signal_definitions_obs_obs,
+                key="signals_settings",
+                evaluate_argument=False,
+            )
         self.signal_setting_labels = create_row_settings(
             [
                 None,
@@ -133,13 +104,13 @@ class App:
                 html.label("color"),
                 antd.Button(
                     "+",
-                    onClick=lambda: signal_definitions_obs.append(
+                    onClick=lambda: self.signal_definitions_obs.append(
                         DEFAULT_SIGNAL_DEFINITION.copy()
                     ),
                 ),
             ]
         )
-        yahoo_data = r.ObservableValue(pd.DataFrame())
+        yahoo_data = r.ObservableValue(pd.DataFrame(), key="yahoo_data")
 
         async def update_yahoo_data_async():
             if not self.ticker_autocomplete():
@@ -157,8 +128,10 @@ class App:
 
         r.autorun(update_yahoo_data_async)
 
-        def generate_signal(settings):
+        def compute_signal(settings: r.DictOfObservables):
             df = yahoo_data()
+            if df.empty:
+                return {}
             return {
                 "name": signal_name(settings),
                 "type": "scatter",
@@ -168,10 +141,10 @@ class App:
             }
 
         signals_obs = r.Mapping(
-            generate_signal,
-            signal_definitions_obs_obs,
-            key="signal_definitions",
-            evaluate_argument=True,
+            compute_signal,
+            self.signal_definitions_obs_obs,
+            key="signal_obs",
+            evaluate_argument=False,
         )
 
         def chart_data():
@@ -230,6 +203,34 @@ class App:
             [title, plot] if stand_alone else [plot], style={"height": "100%"}
         )
 
+    def create_signal_settings_row(self, settings: r.DictOfObservables):
+        with self.controller:
+            return create_row_settings(
+                [
+                    html.label(
+                        lambda: signal_name(settings), style={"textAlign": "right"}
+                    ),
+                    antd.InputNumber(
+                        value=settings["nb_days"], style={"width": "100%"}
+                    ),
+                    antd.Select(
+                        options=[
+                            {"children": "Blue", "value": "blue"},
+                            {"children": "Red", "value": "red"},
+                            {"children": "Green", "value": "green"},
+                            {"children": "Yellow", "value": "yellow"},
+                        ],
+                        value=settings["color"],
+                        style={"width": "100%", "textAlign": "right", "maxWidth": 80},
+                    ),
+                    antd.Button(
+                        "-",
+                        onClick=lambda: self.signal_definitions_obs.remove(settings),
+                        style={"width": 42},
+                    ),
+                ]
+            )
+
     def settings(self):
         return antd.Col(
             [
@@ -239,14 +240,11 @@ class App:
                 self.signal_setting_labels,
                 self.signals_settings,
             ],
-            # controller=self.controller,
+            controller=self.controller,
         )
 
-    def ok(self):
+    def udpate(self):
         self.controller.commit()
-
-    def cancel(self):
-        self.controller.revert()
 
 
 def content(ticker, stand_alone=True):
@@ -258,7 +256,9 @@ def content(ticker, stand_alone=True):
 
 
 def app(window: r.Window):
-    app = App(window, window.hash)
+    # TODO: use window.hash to store the ticker
+    ticker = r.ObservableValue("AAPL", key="ticker")
+    app = App(window, ticker)
     window.set_title(app.title)
     return antd.Row(
         [
@@ -268,17 +268,7 @@ def app(window: r.Window):
                     antd.Divider(),
                     antd.Row(
                         antd.Col(
-                            antd.Space(
-                                [
-                                    antd.Button(
-                                        "Revert", type="primary", onClick=app.cancel
-                                    ),
-                                    antd.Button(
-                                        "Update", type="primary", onClick=app.ok
-                                    ),
-                                ],
-                                style={"marginTop": 20, "marginBottom": 20},
-                            )
+                            antd.Button("Update", type="primary", onClick=app.udpate),
                         ),
                         justify="center",
                     ),

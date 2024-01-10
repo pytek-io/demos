@@ -8,6 +8,7 @@ import pathlib
 import render as r
 import render_ant_icons as ant_icons
 import render_antd as antd
+import render_antd.utils as antd_utils
 import render_html as html
 from more_itertools import ilen
 
@@ -141,3 +142,6 @@ class App:
             ),
             justify="center",
         )
+
+
+app = antd_utils.create_app(App)
