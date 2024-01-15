@@ -6,8 +6,9 @@ import render as r
 import render_aggrid as aggrid
 import render_antd as antd
 import render_html as html
-import render_utils
 import websockets
+
+from demos.connection import ws_connection_manager
 
 from .config import COLUMNS, URI
 from .yaticker_pb2 import yaticker
@@ -38,7 +39,7 @@ class YFLiveQuoteManager:
 
     async def updates(self):
         while True:
-            connection_manager = render_utils.ws_connection_manager(
+            connection_manager = ws_connection_manager(
                 URI,
                 self.window.task_group,
                 number_messages=False,

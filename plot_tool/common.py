@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 import pandas as pd
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 
 
 @dataclass
@@ -16,17 +15,17 @@ def scatter(timeseries: pd.DataFrame, color: str):
     return go.Scatter(
         name=timeseries.ticker,
         line={"color": color},
-        x=timeseries.values["date"],
-        y=timeseries.values["value"],
+        x=timeseries.values["date" if "date" in timeseries.values else "Date"],
+        y=timeseries.values["value" if "value" in timeseries.values else "Close"],
     )
 
 
-def moving_average(stock: TimeSeries, nb_days: int, color: str):
+def moving_average(timeseries: TimeSeries, nb_days: int, color: str):
     return go.Scatter(
-        name=f"MVA {stock.ticker} {nb_days} days",
+        name=f"MVA {timeseries.ticker} {nb_days} days",
         line={"color": color},
-        x=stock.values["date"],
-        y=stock.values["value"].rolling(nb_days).mean(),
+        x=timeseries.values["date" if "date" in timeseries.values else "Date"],
+        y=timeseries.values["value" if "value" in timeseries.values else "Close"].rolling(nb_days).mean(),
     )
 
 

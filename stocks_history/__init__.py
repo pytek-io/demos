@@ -8,6 +8,7 @@ import httpx
 import pandas as pd
 import render as r
 import render_antd as antd
+import render_antd.utils as antd_utils
 import render_html as html
 import render_plotly as plotly
 
@@ -283,3 +284,5 @@ def app(window: r.Window):
         justify="center",
         style={"padding": 5, "width": "100%"},
     )
+
+app = antd_utils.create_app(App)

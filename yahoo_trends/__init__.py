@@ -5,6 +5,7 @@ import pandas as pd
 import render as r
 import render_aggrid as aggrid
 import render_antd as antd
+import render_antd.utils as antd_utils
 import render_html as html
 
 from .cols import FIELDS
@@ -61,3 +62,6 @@ class App:
         self.title = lambda: SCREENERS[self.settings()]["title"]
         self.ok = controller.commit
         self.cancel = controller.revert
+
+
+app = antd_utils.create_app(App)

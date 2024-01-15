@@ -75,8 +75,3 @@ def read_pickles(archive):
             yield pickle.load(archive)
     except EOFError:
         pass
-
-
-async def anext(async_generator):
-    """async next version"""
-    return await async_generator.__anext__()

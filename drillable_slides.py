@@ -6,7 +6,6 @@ import render as r
 import render_html as html
 import render_swiper as swiper
 import yaml
-
 from website.common import BACKGROUND_COLOR, GREEN, LIGHT_BLUE
 from website.render.gallery import MENU as GALLERY_MENU
 

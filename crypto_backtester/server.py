@@ -6,8 +6,9 @@ import time
 
 import anyio
 import render as r
-import render_utils
 import websockets
+
+from demos.connection import ws_connection_manager
 
 from .analytics import compute_implied_vols, merge_data
 from .utils import to_timestamp
@@ -50,7 +51,7 @@ class Server:
         last_connection_attempt = time.perf_counter()
         while True:
             try:
-                connection_manager = render_utils.ws_connection_manager(
+                connection_manager = ws_connection_manager(
                     uri=URI,
                     task_group=self.window.task_group,
                     dumps=json.dumps,

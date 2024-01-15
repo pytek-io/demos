@@ -8,19 +8,19 @@ import render_aggrid as aggrid
 import render_antd as antd
 import render_html as html
 import render_rcdock as rcdock
-import render_utils as utils
+from asyncstdlib.builtins import anext
 
-from .config import (CLIENT_DEF, DEPLOYMENT_DEF, PRIORITY_GROUP,
-                     RUNNING_TASKS_DEF, SESSION, WORKER_DEF,
-                     create_session_columns, session_extra_arguments)
-from .utils import anext, dummy_connection, read_pickles, record_connection
+from demos.connection import ws_connection_manager
+
+from .config import (CLIENT_DEF, DEPLOYMENT_DEF, RUNNING_TASKS_DEF, SESSION,
+                     WORKER_DEF, create_session_columns,
+                     session_extra_arguments)
+from .utils import dummy_connection, read_pickles, record_connection
 
 TITLE = "Dispatch"
 CREATION = "C"
 UPDATE = "U"
 DELETE = "D"
-
-
 
 
 def create_column(definition):
@@ -239,10 +239,6 @@ class Application:
                 else:
                     print("ignoring", msg)
 
-    async def main(self, connection_manager):
-        async with connection_manager as self.server_connection:
-            self.window.start_soon(self.process_server_messages)
-
     async def insert_panel(self, title, component):
         panel_id = (await self.dock_layout.saveLayout())["dockbox"]["children"][0]["id"]
         await self.dock_layout.dockMove(
@@ -252,23 +248,32 @@ class Application:
         )
 
 
+async def main(app: Application, connection_manager):
+    async with connection_manager as app.server_connection:
+        app.window.start_soon(app.process_server_messages)
+
+
 async def app(window: r.Window):
     arguments = json.loads(window.hash()) if window.hash() else {}
     archive = arguments.get("archive", None)
     server_connection_host = arguments.get("server", None)
     http_port = arguments.get("port", None)
     if server_connection_host and http_port:
-        connection = utils.ws_connection_manager(
+        connection_manager = ws_connection_manager(
             uri=f"ws://{server_connection_host}:{http_port}/ws",
             task_group=window.task_group,
             number_messages=True,
         )
         if archive:
-            connection = record_connection(connection, open(archive, "wb"))
+            connection_manager = record_connection(
+                connection_manager, open(archive, "wb")
+            )
     elif archive:
-        connection = dummy_connection(read_pickles(open(archive, "rb")))
+        connection_manager = dummy_connection(read_pickles(open(archive, "rb")))
     else:
-        return antd.TypographyText("Either a connection or an archive path must be provided.")
-    app = Application(window=window)
-    window.start_soon(app.main, connection)
+        return antd.TypographyText(
+            "Either a connection or an archive path must be provided."
+        )
+    app = Application(window)
+    window.start_soon(main, app, connection_manager)
     return app.dock_layout

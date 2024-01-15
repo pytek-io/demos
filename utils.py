@@ -6,4 +6,3 @@ def merge_dicts(d1, d2):
         else:
             result[k] = v
     return result
-

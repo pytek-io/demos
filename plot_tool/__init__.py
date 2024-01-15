@@ -12,8 +12,8 @@ import render_html as html
 import render_monaco as monaco
 import render_plotly as plotly
 
-from ..fred import get_fred_series_observations, get_yahoo_stock_history
-from ..utils import merge_dicts
+from demos.fred import get_fred_series_observations, get_yahoo_stock_history
+from demos.utils import merge_dicts
 from .common import TimeSeries
 
 ROOT = pathlib.Path(__file__).parent.parent
