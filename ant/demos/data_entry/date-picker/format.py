@@ -16,7 +16,7 @@ custom_date_formatter = r.js_arrow(
 
 
 def app(_):
-    defaultValue = datetime.datetime(2015, 1, 1)
+    defaultValue = datetime.datetime.today()
     return antd.Space(
         [
             antd.DatePicker(defaultValue=defaultValue, format=dateFormat),
@@ -24,7 +24,10 @@ def app(_):
             antd.DatePicker(
                 defaultValue=defaultValue, format=monthFormat, picker="month"
             ),
-            RangePicker(defaultValue=[defaultValue, defaultValue], format=dateFormat),
+            RangePicker(
+                defaultValue=[defaultValue, defaultValue + datetime.timedelta(days=7)],
+                format=dateFormat,
+            ),
             antd.DatePicker(defaultValue=defaultValue, format=custom_date_formatter),
         ],
         direction="vertical",
