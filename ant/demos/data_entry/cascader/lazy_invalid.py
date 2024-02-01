@@ -16,7 +16,7 @@ def app(_):
             option for option in options() if option["label"] == target_label
         )
         target_option["loading"] = True
-        options.touch()
+        options.notify()
 
         def update():
             print("updated tree values")
@@ -25,7 +25,7 @@ def app(_):
                 {"label": f"{target_option['label']} Dynamic 1", "value": "dynamic1"},
                 {"label": f"{target_option['label']} Dynamic 2", "value": "dynamic2"},
             ]
-            options.touch()
+            options.notify()
 
         r.schedule_callback(1.0, update)
 

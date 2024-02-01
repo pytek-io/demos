@@ -45,7 +45,7 @@ def app(_):
     title = antd.Input(
         placeholder="Enter Todo...", onPressEnter=add_todo, style={"marginBottom": 12}
     )
-    todos = r.create_observable(session.query(Todo).all(), depth=3)
+    todos = r.ObservableList(session.query(Todo).all(), depth=3)
 
     def create_todo_row(todo):
         return html.div(

@@ -27,7 +27,7 @@ def app(_):
     async def load_data(current_node_id: str):
         await asyncio.sleep(0.5)
         nodes[current_node_id]["children"] = generate_nodes()
-        treeData.touch()
+        treeData.notify()
 
     treeData = r.ObservableList(generate_nodes())
     return antd.Tree(

@@ -66,7 +66,7 @@ def app(_):
 
     async def load_data(current_node_id: str):
         nodes_by_id[current_node_id]["children"] = generate_nodes(current_node_id)
-        treeData.touch()
+        treeData.notify()
 
     df = pd.read_pickle("demos/fred.pick")
     values = [
