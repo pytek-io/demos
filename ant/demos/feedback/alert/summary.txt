@@ -4,7 +4,6 @@ style:More types
 closable:Closable
 description:Description
 icon:Icon
-close_text:Customized Close Text
 banner:Banner
 loop_banner:Loop Banner
 smooth_closed:Smoothly Unmount

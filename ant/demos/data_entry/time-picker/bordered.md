@@ -1,1 +1,0 @@
-Bordered-less style component.

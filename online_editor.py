@@ -152,7 +152,7 @@ def app(window: r.Window):
             html.div(
                 [
                     antd.Button(
-                        ant_icons.CaretRightFilled(),
+                        icon=ant_icons.CaretRightFilled(),
                         type="primary",
                         onClick=reload,
                         style={"margin": 10},
@@ -165,7 +165,7 @@ def app(window: r.Window):
                         onCancel=lambda: create_file_visible.set(False),
                     ),
                     antd.Button(
-                        ant_icons.FolderOpenFilled(),
+                        icon=ant_icons.FolderOpenFilled(),
                         type="primary",
                         onClick=show_file_selection_window,
                     ),

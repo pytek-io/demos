@@ -5,7 +5,6 @@ import render_antd as antd
 
 from demos.ant.demos.utils import find_index
 
-JS_MODULES = ["ant_demo"]
 
 initial_panes = [
     ({"tab": "Tab 1", "key": "1"}, "Content of Tab 1"),

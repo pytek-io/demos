@@ -11,7 +11,6 @@ presetted_ranges:Preset Ranges
 extra_footer:Extra Footer
 size:Three Sizes
 date_render:Customized Date Rendering
-bordered:Bordered-less
 start_end:Customized Range Picker
 mode:Controlled Panels
 suffix:Suffix

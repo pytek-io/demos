@@ -1,1 +1,1 @@
-You can choose another style of `image` by setting image to `Empty.PRESENTED_IMAGE_SIMPLE`.
+You can choose another style of `image` by setting image to a an image path.

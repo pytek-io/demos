@@ -9,7 +9,7 @@ def app(_):
     }
     operations = antd.Button("Extra Action")
     options = ["left", "right"]
-    position = antd.CheckboxGroup(options=options, defaultValue=options)
+    position = antd.Checkbox.Group(options=options, defaultValue=options)
 
     def slot():
         return {direction: OperationsSlot[direction] for direction in position()} or []

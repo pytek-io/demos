@@ -3,4 +3,4 @@ import render_html as html
 
 
 def app(_):
-    return antd.Empty(image=antd.Empty.PRESENTED_IMAGE_SIMPLE)
+    return antd.Empty(image="PRESENTED_IMAGE_SIMPLE")

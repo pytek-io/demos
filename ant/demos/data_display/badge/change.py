@@ -18,27 +18,27 @@ def app(_):
             html.div(
                 [
                     antd.Badge(html.a(href="#", className="head-example"), count=count),
-                    antd.Button.Group(
+                    antd.Space(
                         [
                             antd.Button(
-                                ant_icons.MinusOutlined(),
+                                icon=ant_icons.MinusOutlined(),
                                 onClick=render_utils.increment_observable_bounded(
                                     count, MIN_VALUE, MAX_VALUE, -1
                                 ),
                             ),
                             antd.Button(
-                                ant_icons.PlusOutlined(),
+                                icon=ant_icons.PlusOutlined(),
                                 onClick=render_utils.increment_observable_bounded(
                                     count, MIN_VALUE, MAX_VALUE, 1
                                 ),
                             ),
                             antd.Button(
-                                ant_icons.QuestionOutlined(),
+                                icon=ant_icons.QuestionOutlined(),
                                 onClick=lambda: count.set(
                                     random.randint(MIN_VALUE, MAX_VALUE)
                                 ),
                             ),
-                        ]
+                        ],
                     ),
                 ]
             ),

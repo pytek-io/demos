@@ -26,10 +26,10 @@ def app(_):
             Content(
                 [
                     antd.Breadcrumb(
-                        [
-                            antd.Breadcrumb.Item("Home"),
-                            antd.Breadcrumb.Item("List"),
-                            antd.Breadcrumb.Item("App"),
+                        items=[
+                            {"title": "Home"},
+                            {"title": "List"},
+                            {"title": "App"},
                         ],
                         style={"margin": "16px 0"},
                     ),

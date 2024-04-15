@@ -1,2 +1,2 @@
 1
-basic-right:Basic,extra,Extra
+basic_right:Basic,extra,Extra

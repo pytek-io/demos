@@ -25,16 +25,10 @@ def app(_):
             Content(
                 [
                     antd.Breadcrumb(
-                        [
-                            antd.Breadcrumb.Item("Home"),
-                            antd.Breadcrumb.Item("List"),
-                            antd.Breadcrumb.Item("App"),
-                        ],
-                        style={"margin": "16px 0"},
+                        items=[{"title": "Home"}, {"title": "List"}, {"title": "App"}],
                     ),
                     html.div("Content", className="site-layout-content"),
                 ],
-                style={"padding": "0 50px"},
             ),
             Footer(
                 "Ant Design ©2018 Created by Ant UED", style={"textAlign": "center"}

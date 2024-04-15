@@ -1,7 +1,7 @@
 import render as r
 import render_antd as antd
 
-create_anchor = r.js_arrow("create_anchor", "action => render_html.a(action)")
+create_anchor = r.js_arrow("create_anchor", "(action) => render_html.a('action')")
 
 
 def app(_):

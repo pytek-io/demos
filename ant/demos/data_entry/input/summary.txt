@@ -12,7 +12,6 @@ presuffix:prefix and suffix
 password_input:Password box
 allowclear:With clear icon
 textarea_show_count:Textarea with character counting
-borderless:Borderless
 focus:Focus
 align:Text Align
 textarea_resize:TextArea

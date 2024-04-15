@@ -20,9 +20,9 @@ def selectedRowKeys(keys):
 def app(_):
     selected_row_keys = r.ObservableList([])
 
-    def onChange(newSelectedRowKeys):
-        print(f"selectedRowKeys: {newSelectedRowKeys}")
-        selected_row_keys.set(newSelectedRowKeys)
+    def onChange(newSelectedRows):
+        print(f"selectedRowKeys: {newSelectedRows}")
+        selected_row_keys.set([row["key"] for row in newSelectedRows])
 
     def select_keys(selector):
         return lambda selectable_keys: selected_row_keys.set(
@@ -30,13 +30,13 @@ def app(_):
         )
 
     def rowSelection():
-        return antd.RowSelection(**{
+        return {
             "selectedRowKeys": selected_row_keys(),
-            "onChange": onChange,
+            "onChange": r.Callback(onChange, data_paths=[[1]]),
             "selections": [
-                antd.Table.SELECTION_ALL,
-                antd.Table.SELECTION_INVERT,
-                antd.Table.SELECTION_NONE,
+                # antd.Table.SELECTION_ALL,
+                # antd.Table.SELECTION_INVERT,
+                # antd.Table.SELECTION_NONE,
                 {
                     "key": "odd",
                     "text": "Odd rows",
@@ -49,7 +49,7 @@ def app(_):
                 },
             ],
             "type": shape(),
-        })
+        }
 
     shape = antd.Radio.Group(
         [

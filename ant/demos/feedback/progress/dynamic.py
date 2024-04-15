@@ -8,7 +8,7 @@ import render_utils
 def app(_):
     percent = r.ObservableValue(0)
     r.autorun(lambda: print("percent", percent()))
-    return html.div(
+    return antd.Flex(
         [
             antd.Progress(type="circle", percent=percent),
             antd.Button.Group(
@@ -27,5 +27,7 @@ def app(_):
                     ),
                 ]
             ),
-        ]
+        ],
+        vertical=True,
+        gap="small",
     )

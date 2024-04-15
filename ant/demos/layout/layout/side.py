@@ -75,10 +75,7 @@ def app(_):
                     Content(
                         [
                             antd.Breadcrumb(
-                                [
-                                    antd.Breadcrumb.Item("User"),
-                                    antd.Breadcrumb.Item("Bill"),
-                                ],
+                                [{"title": "User"}, {"title": "Bill"}],
                                 style={"margin": "16px 0"},
                             ),
                             html.div(

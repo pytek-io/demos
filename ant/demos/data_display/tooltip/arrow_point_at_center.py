@@ -14,7 +14,7 @@ def app(_):
                 antd.Button("Arrow points to center / 箭头指向中心"),
                 placement="topLeft",
                 title="Prompt Text",
-                arrowPointAtCenter=True,
+                arrow={"pointAtCenter": True},
             ),
         ]
     )

@@ -31,10 +31,10 @@ items = [
 
 def app(_):
     return antd.Breadcrumb(
-        [
-            antd.Breadcrumb.Item("Ant Design"),
-            antd.Breadcrumb.Item(html.a("Component", href="")),
-            antd.Breadcrumb.Item(html.a("General", href=""), menu={"items": items}),
-            antd.Breadcrumb.Item("Button"),
-        ]
+        items=[
+            {"title": "Ant Design"},
+            {"label": html.a("Component", href="")},
+            {"title": html.a("General", href="")},
+            {"title": "Button"},
+        ],
     )

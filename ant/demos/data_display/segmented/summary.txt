@@ -1,2 +1,10 @@
 2
-basic:Basic,block:Block Segmented,disabled:Basic,controlled:Controlled mode,custom:Custom Render,dynamic:Dynamic,size:Three sizes of Segmented,with-icon:With Icon,icon-only:With Icon only
+basic:Basic
+block:Block Segmented
+disabled:Basic
+controlled:Controlled mode
+custom:Custom Render
+dynamic:Dynamic
+size:Three sizes of Segmented
+with-icon:With Icon
+icon-only:With Icon only

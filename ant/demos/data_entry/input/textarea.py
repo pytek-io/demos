@@ -4,4 +4,4 @@ TextArea = antd.Input.TextArea
 
 
 def app(_):
-    return TextArea(rows=4)
+    return TextArea(autoSize={"minRows": 4, "maxRows": 6}, defaultValue="Hello\nWorld")

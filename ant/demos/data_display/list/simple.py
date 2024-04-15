@@ -12,11 +12,11 @@ data = [
 
 list_item_renderer_highlight = r.js_arrow(
     "list_item_renderer_highlight",
-    "item => render_ant.List.Item([render_ant.Typography.Text([item], { mark: true })])",
+    "item => get_component('antd', 'List.Item')([get_component('antd', 'Typography.Text')([item], { mark: true })])",
 )
 
 list_item_renderer = r.js_arrow(
-    "list_item_renderer", "render_ant.List.Item"
+    "list_item_renderer", "get_component('antd', 'List.Item')"
 )
 
 

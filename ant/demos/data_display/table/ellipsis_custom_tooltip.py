@@ -5,7 +5,7 @@ create_anchor = r.js_arrow("create_anchor", "text => render_html.a(text)")
 
 address_renderer = r.js_arrow(
     "address_renderer",
-    "address => render_ant.Tooltip(address, {placement: 'topLeft', title: address})",
+    "address => render_antd.Tooltip(address, {placement: 'topLeft', title: address})",
 )
 
 

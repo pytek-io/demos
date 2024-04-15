@@ -185,7 +185,6 @@ def app(_):
                         style={"width": "70%"},
                         placeholder="Email",
                         options=[{"value": "text 1"}, {"value": "text 2"}],
-                        compact=True,
                     ),
                     html.br(),
                     antd.Input.Group(

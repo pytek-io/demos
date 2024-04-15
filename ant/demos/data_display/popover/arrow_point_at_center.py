@@ -18,7 +18,7 @@ def app(_):
                 placement="topLeft",
                 title=text,
                 content=content,
-                arrowPointAtCenter=True,
+                arrow={"pointAtCenter": True},
             ),
         ]
     )

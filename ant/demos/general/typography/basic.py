@@ -11,7 +11,7 @@ blockContent = "AntV 是蚂蚁金服全新一代数据可视化解决方案，�
 
 
 def app(_):
-    return antd.Typography(
+    return html.div(
         [
             Title("Introduction"),
             Paragraph(

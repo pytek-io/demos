@@ -1,1 +1,0 @@
-Replace the default icon with customized text.

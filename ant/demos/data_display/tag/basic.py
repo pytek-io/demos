@@ -13,7 +13,7 @@ def app(_):
                     "Link", href="https://github.com/ant-design/ant-design/issues/1862"
                 )
             ),
-            antd.Tag("Tag 2", closable=True, onClose=lambda: print("closed")),
-            antd.Tag("Prevent Default", closable=True, onClose=preventDefault),
+            antd.Tag("Tag 2", closeIcon=True, onClose=lambda: print("closed")),
+            antd.Tag("Prevent Default", closeIcon=True, onClose=preventDefault),
         ]
     )

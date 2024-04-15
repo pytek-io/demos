@@ -2,7 +2,6 @@ import render as r
 import render_antd as antd
 import render_html as html
 
-SHOW_PARENT = antd.TreeSelect.SHOW_PARENT
 treeData = [
     {
         "title": "Node1",
@@ -27,7 +26,6 @@ def app(_):
     tree_select = antd.TreeSelect(
         treeCheckable=True,
         treeData=treeData,
-        showCheckedStrategy=SHOW_PARENT,
         placeholder="Please select",
         style={"width": "100%"},
     )

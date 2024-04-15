@@ -1,14 +1,16 @@
 import render_antd as antd
-import render_html as html
 
 
 def app(_):
     return antd.Breadcrumb(
-        [
-            antd.Breadcrumb.Item("Home"),
-            antd.Breadcrumb.Item("Application Center", href=""),
-            antd.Breadcrumb.Item("Application List", href=""),
-            antd.Breadcrumb.Item("An Application"),
+        items=[
+            {"title": "Home"},
+            {"type": "separator", "separator": ":"},
+            {"title": "Application Center", "href": ""},
+            {"type": "separator"},
+            {"title": "Application List", "href": ""},
+            {"type": "separator"},
+            {"title": "An Application"},
         ],
         separator=">",
     )

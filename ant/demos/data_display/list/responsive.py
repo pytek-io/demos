@@ -2,8 +2,8 @@ import render as r
 import render_antd as antd
 
 renderer = """item => (
-    render_ant.List.Item(
-        render_ant.Card("Card content", { title: item.title })
+    get_component('antd', 'List.Item')(
+        get_component('antd', 'Card')("Card content", { title: item.title })
     )
 )"""
 

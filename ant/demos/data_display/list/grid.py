@@ -1,6 +1,5 @@
 import render as r
 import render_antd as antd
-import render_html as html
 
 
 def app(_):
@@ -14,5 +13,8 @@ def app(_):
         "Card content",
         grid=dict(gutter=16, column=4),
         dataSource=data,
-        renderItem= r.js_arrow("formatter", "item => render_ant.List.Item(render_ant.Card(null, item))")
+        renderItem=r.js_arrow(
+            "formatter",
+            "item => render_antd', 'List.Item')([get_component('antd', 'Card')('Card Content', {title: item.title})])",
+        ),
     )

@@ -47,7 +47,7 @@ CSS = [
     "demos/ant/collated.css",
 ]
 FAVICON = ANT_LOGO_ICON_PATH
-DISPLAY_DEMOS_ERRORS = False
+DISPLAY_DEMOS_ERRORS = True
 
 
 def create_code_editor(

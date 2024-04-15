@@ -1,9 +1,19 @@
-"""Formula as a lambda expression"""
-import render_mantine as mantine
-
+import render as r
+import render_antd as antd
+import render_html as html
 
 def app(_):
-    name = mantine.TextInput(defaultValue="John")
-    greeting = lambda: f"Hello {name()}"
-    greeting_component = mantine.Text(greeting)
-    return mantine.Group([name, greeting_component])
+    # return html.pre("hello")
+    value = r.ObservableValue(0, key="value")
+
+    def increment(increment):
+        nonlocal value
+        value.set(value() + increment)
+
+    return antd.Space(
+        [
+            antd.Button("+", onClick=lambda: increment(1)),
+            antd.Button("-", onClick=lambda: increment(-1)),
+            antd.Badge(count=value),
+        ]
+    )

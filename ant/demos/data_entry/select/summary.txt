@@ -15,7 +15,6 @@ select_users:Search and Select Users
 suffix:Suffix
 custom_dropdown_menu:Custom dropdown
 hide_selected:Hide Already Selected
-bordered:Bordered-less
 responsive:Responsive maxTagCount
 custom_tag_render:Custom Tag Render
 big_data:Big Data

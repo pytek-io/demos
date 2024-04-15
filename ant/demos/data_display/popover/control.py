@@ -7,5 +7,5 @@ def app(_):
     return antd.Popover(
         antd.Button("Click me", type="primary", onClick=visible.toggle),
         title="Title",
-        visible=visible,
+        open=visible,
     )

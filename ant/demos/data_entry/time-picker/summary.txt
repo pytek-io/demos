@@ -8,5 +8,4 @@ addon:Addon
 12hours:12 hours
 colored_popup:Colored Popup
 range_picker:Range Picker
-bordered:Bordered-less
 suffix:Suffix
