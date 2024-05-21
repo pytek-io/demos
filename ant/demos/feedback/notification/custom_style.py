@@ -1,8 +1,7 @@
 import render_antd as antd
-import render_html as html
 
 
-def app(_):
+def app(window):
     def onClick():
         antd.notification.open(
             {

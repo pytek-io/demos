@@ -19,7 +19,9 @@ content_style = {
     "marginTop": 16,
   }
 
-def app(_):
+message_success = r.js_arrow("message_success", "render_antd.message.success")
+
+def app(window: r.Window):
     current = r.ObservableValue(0)
     return antd.Space(
         [
@@ -49,7 +51,7 @@ def app(_):
                     antd.Button(
                         "Done",
                         type="primary",
-                        onClick=lambda: antd.message.success("Processing complete!"),
+                        onClick=lambda: window.call_js_method(message_success({"content": "Processing complete!"}),
                     ),
                 ],
                 className="steps-action",

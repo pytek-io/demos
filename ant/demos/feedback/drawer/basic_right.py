@@ -4,10 +4,10 @@ import render_html as html
 
 
 def app(_):
-    open_obs = r.ObservableValue(True)
+    open_obs = r.ObservableValue(False)
     return html.div(
         [
-            antd.Button("Open", type="primary"),
+            antd.Button("Open", type="primary", onClick=lambda: open_obs.set(True)),
             antd.Drawer(
                 [
                     html.p("Some content..."),

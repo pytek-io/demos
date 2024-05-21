@@ -12,15 +12,24 @@ from asyncstdlib.builtins import anext
 
 from demos.connection import ws_connection_manager
 
-from .config import (CLIENT_DEF, DEPLOYMENT_DEF, RUNNING_TASKS_DEF, SESSION,
-                     WORKER_DEF, create_session_columns,
-                     session_extra_arguments)
+from .config import (
+    CLIENT_DEF,
+    DEPLOYMENT_DEF,
+    RUNNING_TASKS_DEF,
+    SESSION,
+    WORKER_DEF,
+    create_session_columns,
+    session_extra_arguments,
+)
 from .utils import dummy_connection, read_pickles, record_connection
 
 TITLE = "Dispatch"
 CREATION = "C"
 UPDATE = "U"
 DELETE = "D"
+
+message_success = r.js_arrow("message_success", "render_antd.message.success")
+message_error = r.js_arrow("message_error", "render_antd.message.error")
 
 
 def create_column(definition):
@@ -156,8 +165,9 @@ class Application:
         subject = subject or definition["subject"]
         columns, width = create_columns(definition["columns"])
         if context_menu_callback:
+            self.window.user_data["context_menu_callback"] = context_menu_callback
             getContextMenuItems = self.create_context_menu_items(
-                self.window.register_callback(context_menu_callback, hard_ref=True),
+                context_menu_callback,
                 definition["context_menu_items"],
             )
         else:
@@ -233,9 +243,9 @@ class Application:
             elif len(msg) == 3:
                 code, success, description = msg
                 if code == "R":
-                    (antd.message.success if success else antd.message.error)(
-                        description
-                    )
+                    self.window.call_js_method(
+                        message_success if success else message_error
+                    )(description)
                 else:
                     print("ignoring", msg)
 

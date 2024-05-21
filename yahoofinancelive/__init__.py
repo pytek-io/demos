@@ -66,6 +66,7 @@ class App:
         self.initial_tickers = initial_tickers
         self.window = window
         self.quote_manager = YFLiveQuoteManager(self.window)
+        window.user_data["context_menu_callback"] = self.context_menu_callback
         self.content = aggrid.AgGridReact(
             [
                 aggrid.AgGridColumn(field=field, **args)
@@ -77,7 +78,7 @@ class App:
             getContextMenuItems=r.js_arrow(
                 "context_menu_items", aggrid.CREATE_CONTEXT_MENU_ITEMS_JS
             )(
-                window.register_callback(self.context_menu_callback, hard_ref=True),
+                self.context_menu_callback,
                 MENU_ITEMS,
             ),
         )

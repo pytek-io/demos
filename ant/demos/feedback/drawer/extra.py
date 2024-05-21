@@ -4,7 +4,7 @@ import render_html as html
 
 
 def app(_):
-    open_obs = r.ObservableValue(True)
+    open_obs = r.ObservableValue(False)
     close = lambda: open_obs.set(False)
     placement = antd.Radio.Group(
         options=[

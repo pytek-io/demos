@@ -10,7 +10,7 @@ def app(_):
         "Confirm",
         type="primary",
         size="small",
-        onClick=lambda: antd.notification.close(key),
+        onClick=lambda: antd.notification.destroy(key),
     )
 
     def onClick():

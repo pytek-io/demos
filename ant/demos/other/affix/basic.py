@@ -19,7 +19,7 @@ def app(_):
             html.br(),
             antd.Affix(
                 antd.Button(
-                    "Affix bottom", type="primary", onClick=partial(bottom.__iadd__, 10)
+                    "Affix bottom", type="primary", onClick=partial(bottom.__isub__, 10)
                 ),
                 offsetBottom=bottom,
             ),

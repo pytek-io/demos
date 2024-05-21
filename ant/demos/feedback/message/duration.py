@@ -1,12 +1,20 @@
 import render_antd as antd
-import render_html as html
+import render as r
+
+message_success = r.js_arrow("message_success", "render_antd.message.success")
 
 
-def success():
-    antd.message.success(
-        "This is a prompt message for success, and it will disappear in 10 seconds", 10
-    )
+def success(window: r.Window):
+    def result():
+        window.call_js_method(
+            message_success(
+                "This is a prompt message for success, and it will disappear in 10 seconds",
+                10,
+            )
+        )
+
+    return result
 
 
-def app(_):
-    return antd.Button("Customized display duration", onClick=success)
+def app(window: r.Window):
+    return antd.Button("Customized display duration", onClick=success(window))

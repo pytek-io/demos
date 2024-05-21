@@ -1,5 +1,4 @@
 import render_antd as antd
-import render_html as html
 
 
 def app(_):
@@ -12,7 +11,7 @@ def app(_):
         antd.message.error("Clicked on No")
 
     return antd.Popconfirm(
-        html.a("Delete", href="#"),
+        antd.Button("Delete"),
         title="Are you sure to delete this task?",
         onConfirm=confirm,
         onCancel=cancel,

@@ -1,10 +1,16 @@
 import render_antd as antd
-import render_html as html
+import render as r
 
 
-def info():
-    antd.message.info("This is a normal message")
+message_success = r.js_arrow("message_success", "render_antd.message.success")
 
 
-def app(_):
-    return antd.Button("Display normal message", type="primary", onClick=info)
+def info(window: r.Window):
+    def result():
+        window.call_js_method(message_success(("This is a normal message")))
+
+    return result
+
+
+def app(window: r.Window):
+    return antd.Button("Display normal message", type="primary", onClick=info(window))

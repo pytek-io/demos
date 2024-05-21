@@ -2,11 +2,14 @@ import render_antd as antd
 import render_html as html
 
 
-def app(_):
+message_info = r.js_arrow("message_info", "render_antd.message.info")
+
+
+def app(window: r.Window):
     text = "Are you sure to delete this task?"
 
     def confirm():
-        antd.message.info("Clicked on Yes.")
+        window.call_js_method(message_info("Clicked on Yes."))
 
     return html.div(
         [

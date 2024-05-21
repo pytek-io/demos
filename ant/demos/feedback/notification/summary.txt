@@ -8,3 +8,4 @@ placement:Placement
 custom_style:Customized style
 update:Update Message Content
 hooks:Get context with hooks
+stack:Stack

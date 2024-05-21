@@ -1,9 +1,15 @@
 import render_ant_icons as ant_icons
 import render_antd as antd
-import render_html as html
+import render as r
 
 
 def app(_):
-    return antd.Upload(
-        antd.Button("Click to Upload", icon=ant_icons.UploadOutlined([]))
+    result = antd.Upload(
+        antd.Button(
+            "Click to Upload",
+            icon=ant_icons.UploadOutlined([]),
+        ),
+        name="file",
     )
+    r.autoprint(result)
+    return result
