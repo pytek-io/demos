@@ -12,6 +12,7 @@ from render_utils.formatters import transform_if_number
 TITLE = "AG Grid Example"
 FAVICON = "website/static/ag-grid_favicon.png"
 NB_ROWS = 100
+HEADERS = ["int", "int_blank", "bool", "float", "str", "date", "datetime"]
 
 
 def app(_window: r.Window):
@@ -31,18 +32,12 @@ def app(_window: r.Window):
             ]
 
     values = list(itertools.islice(create_line(), 0, NB_ROWS))
-    rowData = dict(
-        zip(
-            ["id", "int", "int_blank", "bool", "float", "str", "date", "datetime"],
-            [list(range(NB_ROWS))] + list(zip(*values)),
-        )
-    )
+    rowData = [dict(zip(HEADERS, row)) for row in values]
 
     def update_values(index, value):
         values[index][4] = value
 
     cols = [
-        aggrid.AgGridColumn(field="id", headerName="id", hide=True),
         aggrid.AgGridColumn(
             field="int",
             headerName="Integer",

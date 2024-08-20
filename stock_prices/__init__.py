@@ -30,7 +30,7 @@ class App:
                 "nasdaq", f"{self.settings()}.json"
             )
             data = json.loads((path.read_text()))["data"]["table"]
-            return pd.DataFrame(data["rows"], columns=data["headers"])
+            return data["rows"]
 
         self.content = html.div(
             aggrid.AgGridReact(
