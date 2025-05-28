@@ -281,7 +281,7 @@ async def app(window: r.Window):
     elif archive:
         connection_manager = dummy_connection(read_pickles(open(archive, "rb")))
     else:
-        return antd.TypographyText(
+        return antd.Typography.Text(
             "Either a connection or an archive path must be provided."
         )
     app = Application(window)

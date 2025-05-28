@@ -1,4 +1,5 @@
 """Fetch historical data from yahoo in real time, plot time series and signals using plotly."""
+
 import datetime
 import io
 import json
@@ -14,7 +15,7 @@ import render_plotly as plotly
 CANDLE_STICK_NAME = "candlestick"
 OHLC_NAME = "ohlc"
 MESSAGE_KEY = "key"
-YAHOO_URL = "https://query1.finance.yahoo.com/v7/finance/download/"
+YAHOO_URL = "https://query1.finance.yahoo.com/v8/finance/chart/"
 TICKERS_PATH = "stock_prices/nasdaq/nasdaq.json"
 DEFAULT_SIGNAL_DEFINITION = {"nb_days": 2, "color": "red"}
 
@@ -113,18 +114,24 @@ class App:
         yahoo_data = r.ObservableValue(pd.DataFrame(), key="yahoo_data")
 
         async def update_yahoo_data_async():
+            print("Updating yahoo data")
             if not self.ticker_autocomplete():
                 return
             start, end = start_date(), end_date()
             url = f"{YAHOO_URL}{self.ticker_autocomplete()}?period1={int(start.timestamp())}&period2={int(end.timestamp())}&interval=1d&events=history"
-            async with httpx.AsyncClient() as client:
+            async with httpx.AsyncClient(headers={"User-Agent": "Mozilla/5.0"}) as client:
                 try:
                     data = await client.get(url)
                 except Exception as exception:
                     raise RuntimeError(
                         f"Failed to retrieve data from yahoo: {exception}"
                     ) from exception
-                yahoo_data.set(pd.read_csv(io.BytesIO(data.content)))
+                if data.status_code != 200:
+                    raise RuntimeError(
+                        f"Failed to retrieve data from yahoo: {data.status_code} {data.text}"
+                    )
+                result = json.loads(data.content.decode())["chart"]["result"][0]
+                yahoo_data.set(pd.DataFrame({"x": result["timestamp"], **result["indicators"]["quote"][0]}))
 
         r.autorun(update_yahoo_data_async)
 
@@ -136,8 +143,8 @@ class App:
                 "name": signal_name(settings),
                 "type": "scatter",
                 "line": {"color": settings["color"]()},
-                "x": df.Date,
-                "y": df.Close.rolling(settings["nb_days"]()).mean(),
+                "x": df.x,
+                "y": df.close.rolling(settings["nb_days"]()).mean(),
             }
 
         signals_obs = r.Mapping(
@@ -152,17 +159,14 @@ class App:
             if df.empty:
                 return
             history = {
-                "x": df.Date,
                 "decreasing": {"line": {"color": "cyan"}},
                 "increasing": {"line": {"color": "gray"}},
                 "type": graph_type(),
                 "xaxis": "x",
                 "yaxis": "y",
                 "name": "Daily changes",
+                **df.to_dict(orient="list"),
             }
-            history.update(
-                {name.lower(): df[name] for name in ["Open", "Close", "Low", "High"]}
-            )
             return [history] + list(signals_obs())
 
         def layout():
@@ -243,7 +247,7 @@ class App:
             controller=self.controller,
         )
 
-    def udpate(self):
+    def update(self):
         self.controller.commit()
 
 
@@ -268,7 +272,7 @@ def app(window: r.Window):
                     antd.Divider(),
                     antd.Row(
                         antd.Col(
-                            antd.Button("Update", type="primary", onClick=app.udpate),
+                            antd.Button("Update", type="primary", onClick=app.update),
                         ),
                         justify="center",
                     ),

@@ -91,6 +91,7 @@ def app(window: r.Window):
             ],
         }
     }
+    
     dock_layout = rcdock.DockLayout(
         defaultLayout=defaultLayout,
         style={"position": "absolute", "left": 0, "top": 50, "right": 0, "bottom": 0},
