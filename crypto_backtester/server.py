@@ -1,45 +1,32 @@
+import asyncio
 import datetime
 import itertools
 import json
 import pickle
 import time
+from typing import Dict
 
 import anyio
-import render as r
 import websockets
-
 from demos.connection import ws_connection_manager
+
+import render as r
 
 from .analytics import compute_implied_vols, merge_data
 from .utils import to_timestamp
 
 URI = "wss://test.deribit.com/ws/api/v2"
-CURRENCIES = [("Bit Coin", "BTC"), ("Etherum", "ETH")]
-
-
-class PendingResult:
-    def __init__(self) -> None:
-        self.ready = anyio.Event()
-        self.result = None
-        self.is_error = True
-
-    async def wait(self):
-        await self.ready.wait()
-        if self.is_error:
-            raise Exception(self.result)
-        return self.result
-
-    def set(self, result, is_error):
-        self.is_error = is_error
-        self.result = result
-        self.ready.set()
+CURRENCIES = [
+    ("Etherum", "ETH"),
+    # ("Bit Coin", "BTC"),  # BTC is crashing the server, so we disable it for now
+]
 
 
 class Server:
     def __init__(self, window: r.Window, debug=False):
         self.window = window
-        self.request_id = itertools.count()
-        self.pending_queries = {}
+        self.request_id = itertools.count(2)
+        self.pending_queries: Dict[int, asyncio.Future] = {}
         self.connection_ready = anyio.Event()
         self.default_start_date = datetime.datetime(2015, 1, 1)
         self.default_end_date = datetime.datetime.today()
@@ -62,10 +49,11 @@ class Server:
                     self.connection_ready.set()
                     async for response in self.derebit_connection:
                         if "id" in response:
-                            is_error = "error" in response
-                            self.pending_queries.pop(response["id"]).set(
-                                response["error" if is_error else "result"], is_error
-                            )
+                            pending_result = self.pending_queries.pop(response["id"])
+                            if "error" in response:
+                                pending_result.set_exception(response["error"])
+                            else:
+                                pending_result.set_result(response["result"])
                         else:
                             print(response)
             except websockets.ConnectionClosed as e:
@@ -77,6 +65,7 @@ class Server:
     async def query_derebit(self, method, params={}):
         await self.connection_ready.wait()
         request_id = next(self.request_id)
+
         await self.derebit_connection.send(
             {
                 "jsonrpc": "2.0",
@@ -85,9 +74,9 @@ class Server:
                 "params": params,
             }
         )
-        pending_result = self.pending_queries[request_id] = PendingResult()
+        pending_result = self.pending_queries[request_id] = asyncio.Future()
         try:
-            return await pending_result.wait()
+            return await pending_result
         except Exception as e:
             raise Exception(f"An error has occurred while querying derebit {e}")
 

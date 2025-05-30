@@ -32,8 +32,10 @@ class Connection:
         try:
             while True:
                 yield await self.recv()
-        except (ConnectionClosedError, ConnectionClosedOK):
-            pass
+        except ConnectionClosedError as exc:
+            print(f"Connection closed with error: {exc}")
+        except ConnectionClosedOK:
+                pass
 
     async def send(self, message):
         try:
