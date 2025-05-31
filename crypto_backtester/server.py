@@ -16,10 +16,7 @@ from .analytics import compute_implied_vols, merge_data
 from .utils import to_timestamp
 
 URI = "wss://test.deribit.com/ws/api/v2"
-CURRENCIES = [
-    ("Etherum", "ETH"),
-    # ("Bit Coin", "BTC"),  # BTC is crashing the server, so we disable it for now
-]
+CURRENCIES = [("Bit Coin", "BTC"), ("Etherum", "ETH")]
 
 
 class Server:
